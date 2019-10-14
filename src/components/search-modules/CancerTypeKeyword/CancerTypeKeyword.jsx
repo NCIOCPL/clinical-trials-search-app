@@ -36,11 +36,11 @@ const CancerTypeKeyword = ({ handleUpdate }) => {
         onChange={(event, value) => {
           setCancerType({ value });
           handleUpdate('keywordPhrases', value);
-          handleUpdate('typeCode', []);
+          handleUpdate('typeCode', {});
         }}
         onSelect={(value, item) => {
           setCancerType({ value });
-          handleUpdate('typeCode', item.codes);
+          handleUpdate('typeCode', item);
           handleUpdate('keywordPhrases', value);
         }}
         renderMenu={children => (
@@ -53,7 +53,7 @@ const CancerTypeKeyword = ({ handleUpdate }) => {
             }`}
             key={item.codes[0]}
           >
-            {item.name}
+            {item.name} {item.ancestor_ids} {item.parent_ids} {item.type}
           </div>
         )}
       />
