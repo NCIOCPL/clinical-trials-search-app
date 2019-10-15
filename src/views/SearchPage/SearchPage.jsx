@@ -15,7 +15,7 @@ import {
   TrialType,
   ZipCode,
 } from '../../components/search-modules';
-import { updateForm } from '../../store/actions';
+import { updateForm, searchTrials } from '../../store/actions';
 
 //Module groups in arrays will be placed side-by-side in the form
 const basicFormModules = [CancerTypeKeyword, [Age, ZipCode]];
@@ -121,6 +121,8 @@ const SearchPage = (form) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+      dispatch(searchTrials()
+    );
   }
 
   return (
@@ -166,7 +168,7 @@ const SearchPage = (form) => {
                 }
               })}
 
-              <StickySubmitBlock sentinel={sentinelRef} />
+              <StickySubmitBlock sentinel={sentinelRef} onSubmit={handleSubmit} />
             </form>
             <aside className="search-page__aside">{renderDelighters()}</aside>
           </div>
