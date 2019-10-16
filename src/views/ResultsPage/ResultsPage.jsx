@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import {
   Delighter,
   Checkbox,
@@ -17,6 +16,8 @@ const ResultsPage = ({ results }) => {
   const [paginatedResults, setPaginatedResults] = useState([]);
   const [pagerPage, setPagerPage] = useState(0);
   const [selectedResults, setSelectedResults] = useState([]);
+
+
 
   // scroll to top on mount
   useEffect(() => {
@@ -185,12 +186,5 @@ const ResultsPage = ({ results }) => {
   );
 };
 
-ResultsPage.propTypes = {
-  results: PropTypes.array,
-};
-
-ResultsPage.defaultProps = {
-  results: [],
-};
 
 export default ResultsPage;

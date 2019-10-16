@@ -18,8 +18,6 @@ const CancerTypeCondition = ({ handleUpdate }) => {
   const [subtype, setSubtype] = useState({ value: '' });
   const [stage, setStage] = useState({ value: '' });
   const [sideEffects, setSideEffects] = useState({ value: '' });
-
-
   const [ctMenuOpen, setCtMenuOpen] = useState(false);
 
   const {
@@ -106,6 +104,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
         <InputLabel label="Primary Cancer Type/Condition" htmlFor="ct" />
         <button
           id="ct-btn"
+          type="button"
           className="ct-select__button faux-select"
           onClick={handleCTSelectToggle}
           aria-label="Click to select specific cancer type"

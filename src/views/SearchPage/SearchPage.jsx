@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Delighter, StickySubmitBlock } from '../../components/atomic';
+import {history} from '../../services/history.service';
 import {
   Age,
   CancerTypeCondition,
@@ -34,12 +35,13 @@ const advancedFormModules = [
 const SearchPage = () => {
   const dispatch = useDispatch();
   const sentinelRef = useRef(null);
-  const formType = useSelector( store => store.form.formType );
+  const formType = useSelector(store => store.form.formType);
 
   // scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
 
   const handleUpdate = (field, value) => {
     dispatch(
@@ -49,6 +51,7 @@ const SearchPage = () => {
       })
     );
   };
+
 
   const renderDelighters = () => (
     <div className="cts-delighter-container">
@@ -119,11 +122,13 @@ const SearchPage = () => {
   let formModules =
     formType === 'advanced' ? advancedFormModules : basicFormModules;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
-      dispatch(searchTrials()
-    );
-  }
+    dispatch(searchTrials());
+    console.log('handleSubmit')
+    history.push('/r');
+  };
+
 
   return (
     <div className="general-page-body-container main-content">
@@ -168,7 +173,10 @@ const SearchPage = () => {
                 }
               })}
 
-              <StickySubmitBlock sentinel={sentinelRef} onSubmit={handleSubmit} />
+              <StickySubmitBlock
+                sentinel={sentinelRef}
+                onSubmit={handleSubmit}
+              />
             </form>
             <aside className="search-page__aside">{renderDelighters()}</aside>
           </div>
