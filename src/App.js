@@ -4,6 +4,7 @@ import './styles/main.scss';
 
 import SearchPage from './views/SearchPage';
 import ResultsPage from './views/ResultsPage';
+import ProtocolPage from './views/ProtocolPage';
 
 import mockResults from './mocks/mock-results.json';
 
@@ -17,6 +18,7 @@ function App() {
           path="/r"
           render={() => <ResultsPage results={mockResults} />}
         />
+        <Route path="/v" component={ProtocolPage} />
       </Switch>
     </Fragment>
   );
