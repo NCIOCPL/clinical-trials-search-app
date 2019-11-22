@@ -7,7 +7,7 @@ import {
   formatTrialSearchQuery,
   buildQueryString,
 } from '../../utilities/utilities';
-import { useModal } from '../../utilities/hooks';
+import { useModal, useQueryToBuildStore } from '../../utilities/hooks';
 import ResultsPageHeader from './ResultsPageHeader';
 import ResultsList from './ResultsList';
 import { searchTrials } from '../../store/actions';
@@ -21,38 +21,66 @@ const ResultsPage = ({ location }) => {
   const [selectAll, setSelectAll] = useState(false);
   const [pagerPage, setPagerPage] = useState(0);
   const [selectedResults, setSelectedResults] = useState([]);
+  const [pageIsLoading, setPageIsLoading] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [trialResults, setTrialResults] = useState([]);
   const [resultsCount, setResultsCount] = useState(0);
-
   const formSnapshot = useSelector(store => store.form);
-  const [formData, setFormData] = useState(formSnapshot);
-
-  const qs = queryString.stringify(buildQueryString(formSnapshot));
-  const [query, setQuery] = useState(qs);
-
   const cache = useSelector(store => store.cache);
-  var cacheLookup = cache[query];
+  const locsearch = location.search;
+  const [formData, setFormData] = useState(formSnapshot);
+  const [qs, setQs] = useState(
+    queryString.stringify(buildQueryString(formSnapshot))
+  );
+  var cacheLookup = cache[qs];
+  const [storeRehydrated, setStoreRehydrated] = useState(false);
+  const [currCacheKey, setCurrCacheKey] = useState('');
+
+  const handleUpdate = (field, value) => {
+    dispatch(
+      updateForm({
+        field,
+        value,
+      })
+    );
+  };
+
+  const [{ buildStoreFromQuery }] = useQueryToBuildStore(
+    locsearch,
+    handleUpdate,
+    setStoreRehydrated
+  );
 
   // scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
     if (trialResults && trialResults.total >= 0) {
       initData();
+    } else if (locsearch !== '') {
+      // hydrate the query
+      buildStoreFromQuery(locsearch);
     } else if (!formSnapshot.hasInvalidZip) {
       //data isn't there, fetch it
       fetchTrials(qs);
     } else {
+      setPageIsLoading(false);
       setIsLoading(false);
     }
   }, []);
 
+  useEffect(() => {
+    if (storeRehydrated) {
+      fetchTrials(locsearch);
+      setStoreRehydrated(false);
+    }
+  }, [storeRehydrated]);
+
   //when trial results come in, open up shop
   useEffect(() => {
-    if (isLoading && cacheLookup && cacheLookup.total >= 0) {
+    if (isLoading && cache[currCacheKey] && cache[currCacheKey].total >= 0) {
       initData();
     }
-  }, [cacheLookup]);
+  }, [cache[currCacheKey]]);
 
   //track usage of selected results for print
   useEffect(() => {
@@ -64,18 +92,21 @@ const ResultsPage = ({ location }) => {
   const initData = () => {
     window.scrollTo(0, 0);
     setSelectAll(false);
+    setPageIsLoading(false);
     setIsLoading(false);
-    setTrialResults(cacheLookup);
-    setResultsCount(cacheLookup.total);
+    setTrialResults(cache[currCacheKey]);
+    setResultsCount(cache[currCacheKey].total);
   };
 
   const fetchTrials = queryKey => {
     setIsLoading(true);
     history.replace({
       path: '/about-cancer/treatment/clinical-trials/search/r',
-      search: qs,
+      search: locsearch !== '' ? locsearch : qs,
     });
+
     cacheLookup = cache[queryKey];
+    setCurrCacheKey(queryKey);
     dispatch(
       searchTrials({
         cacheKey: queryKey,
@@ -103,15 +134,6 @@ const ResultsPage = ({ location }) => {
     dispatch(clearForm());
   };
 
-  const handleUpdate = (field, value) => {
-    dispatch(
-      updateForm({
-        field,
-        value,
-      })
-    );
-  };
-
   // setup print Modal
   const { isShowing, toggleModal } = useModal();
   const printSelectedBtn = useRef(null);
@@ -127,7 +149,7 @@ const ResultsPage = ({ location }) => {
       const parsed = queryString.parse(location.search);
       parsed.pn = currentPage + 1;
       let newqs = queryString.stringify(parsed);
-      setQuery(newqs);
+      setQs(newqs);
       history.push({
         search: newqs,
       });

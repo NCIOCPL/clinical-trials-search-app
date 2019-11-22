@@ -26,7 +26,6 @@ const ZipCode = ({ handleUpdate }) => {
         handleUpdate('zip', zipInput);
         handleUpdate('location', 'search-location-zip');
       } else {
-        handleUpdate('hasInvalidZip', true);
         handleUpdate('zip', '');
         setErrorMsg(`Please enter a 5 digit U.S. zip code`);
       }

@@ -83,7 +83,7 @@ const ResultsPageHeader = ({
           </strong>
         </div>
       )}
-      <SearchCriteriaTable handleRefine={handleRefineSearch} />
+      <SearchCriteriaTable handleRefine={handleRefineSearch} handleReset={handleReset}/>
     </div>
   );
 };

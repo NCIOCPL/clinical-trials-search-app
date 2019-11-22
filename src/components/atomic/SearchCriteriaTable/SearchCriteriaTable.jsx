@@ -5,7 +5,11 @@ import { Accordion, AccordionItem, Table } from '../../atomic';
 import { updateForm } from '../../../store/actions';
 import './SearchCriteriaTable.scss';
 
-const SearchCriteriaTable = ({ placement, handleReset, handleRefine }) => {
+const SearchCriteriaTable = ({
+  placement = 'results',
+  handleReset,
+  handleRefine,
+}) => {
   const dispatch = useDispatch();
 
   //store vals
@@ -212,24 +216,25 @@ const SearchCriteriaTable = ({ placement, handleReset, handleRefine }) => {
     }
 
     if (drugs && drugs.length > 0) {
-      let joinedVals = '';
+      let joinedVals = [];
+
       drugs.forEach(function(drug) {
-        joinedVals += drug.name + ', ';
+        joinedVals.push(drug.name);
       });
       criteria.push({
         category: 'Drug/Drug Family',
-        selection: joinedVals,
+        selection: joinedVals.join(', ')
       });
     }
 
     if (treatments && treatments.length > 0) {
-      let joinedVals = '';
+      let joinedVals = [];
       treatments.forEach(function(treatment) {
-        joinedVals += treatment.name + ', ';
+        joinedVals.push(treatment.name);
       });
       criteria.push({
         category: 'Other Treatments',
-        selection: joinedVals,
+        selection: joinedVals.join(', ')
       });
     }
 
@@ -269,7 +274,6 @@ const SearchCriteriaTable = ({ placement, handleReset, handleRefine }) => {
     setCriterion([...criteria]);
   };
 
-  console.log('placement: ' + placement);
   return criterion.length > 0 ? (
     <>
       {placement === 'trial' ? (

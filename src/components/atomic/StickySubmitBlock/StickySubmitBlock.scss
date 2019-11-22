@@ -45,7 +45,8 @@ $cts-purple: #82368c;
     margin: 0 0 5px;
   }
 
-  .faux-btn-submit {
+  .faux-btn-submit, 
+  .clear-form {
     background-color: #620788;
     border-color: #3f0557;
     color: #fff;
@@ -54,7 +55,7 @@ $cts-purple: #82368c;
     transition: background-color 0.3s ease-out;
     cursor: pointer;
     font-family: 'Montserrat', 'Avant Garde', Arial, sans-serif;
-    font-weight: 700;
+    font-weight: 500;
     line-height: normal;
     position: relative;
     text-decoration: none;
@@ -65,9 +66,19 @@ $cts-purple: #82368c;
     min-height: 39px;
     line-height: 2;
     margin-bottom: 5px;
+    margin-right: 5px;
+    margin-left: 5px;
     &:hover {
       text-decoration: none;
       background-color: #3f0557;
+    }
+  }
+  .clear-form {
+    background-color: transparent;
+    color: #2b7bba;
+    &:hover {
+      background: transparent;
+      text-decoration: underline;
     }
   }
 }

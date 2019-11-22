@@ -296,10 +296,10 @@ export const buildQueryString = formStore => {
     }
 
     if (drugs.length > 0) {
-      searchValues.dt = [...new Set(drugs.map(item => item.codes[0]))];
+      searchValues.d = [...new Set(drugs.map(item => item.codes[0]))];
     }
     if (treatments > 0) {
-      searchValues.ti = [...new Set(treatments.map(item => item.codes[0]))];
+      searchValues.i = [...new Set(treatments.map(item => item.codes[0]))];
     }
     if (trialId !== '') {
       searchValues.tid = trialId;
@@ -556,4 +556,10 @@ export const listSitesWithinRadius = (originCoords, sitesArr, radius = 100) => {
     isWithinRadius(originCoords, item.coordinates, radius)
   );
   return nearbySites;
+};
+
+export const isEmptyObj = objToCheck => {
+  return (
+    Object.entries(objToCheck).length === 0 && objToCheck.constructor === Object
+  );
 };
