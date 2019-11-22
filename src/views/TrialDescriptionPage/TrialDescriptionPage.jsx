@@ -70,6 +70,30 @@ const TrialDescriptionPage = ({ location }) => {
   const renderDelighters = () => {
     return (
       <>
+      <div className="delighter cts-share">
+          <div className="share-text">
+            Share this clinical trial with your doctor:
+          </div>
+          <div className="share-btn-container">
+            <button
+              className="share-btn cts-share-print"
+              type="button"
+              onClick={handlePrintTrial}
+            >
+              <span className="icon icon-print" aria-hidden="true"></span>
+              Print
+              <span className="show-for-sr"> this trial</span>
+            </button>
+            <button
+              className="share-btn cts-share-email"
+              type="button"
+              onClick={handleEmailTrial}
+            >
+              <span className="icon icon-email" aria-hidden="true"></span>
+              Email <span className="show-for-sr">this trial</span>
+            </button>
+          </div>
+        </div>
         <div className="cts-delighter-container">
           <Delighter
             classes="cts-livehelp"
@@ -102,30 +126,7 @@ const TrialDescriptionPage = ({ location }) => {
             </p>
           </Delighter>
         </div>
-        <div className="delighter cts-share">
-          <div className="share-text">
-            Share this clinical trial with your doctor:
-          </div>
-          <div className="share-btn-container">
-            <button
-              className="share-btn cts-share-print"
-              type="button"
-              onClick={handlePrintTrial}
-            >
-              <span className="icon icon-print" aria-hidden="true"></span>
-              Print
-              <span className="show-for-sr"> this trial</span>
-            </button>
-            <button
-              className="share-btn cts-share-email"
-              type="button"
-              onClick={handleEmailTrial}
-            >
-              <span className="icon icon-email" aria-hidden="true"></span>
-              Email <span className="show-for-sr">this trial</span>
-            </button>
-          </div>
-        </div>
+        
       </>
     );
   };

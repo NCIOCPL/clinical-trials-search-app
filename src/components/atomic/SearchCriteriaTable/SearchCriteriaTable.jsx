@@ -216,24 +216,25 @@ const SearchCriteriaTable = ({
     }
 
     if (drugs && drugs.length > 0) {
-      let joinedVals = '';
+      let joinedVals = [];
+
       drugs.forEach(function(drug) {
-        joinedVals += drug.name + ', ';
+        joinedVals.push(drug.name);
       });
       criteria.push({
         category: 'Drug/Drug Family',
-        selection: joinedVals,
+        selection: joinedVals.join(', ')
       });
     }
 
     if (treatments && treatments.length > 0) {
-      let joinedVals = '';
+      let joinedVals = [];
       treatments.forEach(function(treatment) {
-        joinedVals += treatment.name + ', ';
+        joinedVals.push(treatment.name);
       });
       criteria.push({
         category: 'Other Treatments',
-        selection: joinedVals,
+        selection: joinedVals.join(', ')
       });
     }
 

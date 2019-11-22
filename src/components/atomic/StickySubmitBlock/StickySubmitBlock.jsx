@@ -1,8 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
+import {useDispatch} from 'react-redux';
+import { clearForm } from '../../../store/actions';
 import PropTypes from 'prop-types';
 import './StickySubmitBlock.scss';
 
 const StickySubmitBlock = ({ sentinelRef, onSubmit }) => {
+  const dispatch = useDispatch();
   const stickyEl = useRef(null);
 
   useEffect(() => {
@@ -28,18 +31,31 @@ const StickySubmitBlock = ({ sentinelRef, onSubmit }) => {
     onSubmit(e);
   };
 
+  const handleClearForm = e => {
+    dispatch(clearForm());
+    window.location.reload();
+  }
+
   const intObserver = new IntersectionObserver(callback, options);
 
   return (
     <div id="stickyAnchor" ref={stickyEl} className="sticky-block__anchor">
       <div className="sticky-block">
         <button
-          type="button"
+          type="submit"
           className="btn-submit faux-btn-submit"
           onClick={handleClick}
         >
           Find Trials
         </button>
+        <button
+          type="button"
+          className="btn-submit clear-form"
+          onClick={handleClearForm}
+        >
+          Clear Form
+        </button>
+
         <div className="helper-text">Start your search at any time.</div>
       </div>
     </div>

@@ -121,8 +121,10 @@
     font-size: 14px;
     font-weight: bold;
     border: 0 none;
-    width: 47%;
     cursor: pointer;
+    @media screen and (min-width: 1025px) {
+      width: 47%;
+    }
   }
   .cts-share-email {
     background-color: #14819b;
