@@ -5,7 +5,11 @@ import { Accordion, AccordionItem, Table } from '../../atomic';
 import { updateForm } from '../../../store/actions';
 import './SearchCriteriaTable.scss';
 
-const SearchCriteriaTable = ({ placement, handleReset, handleRefine }) => {
+const SearchCriteriaTable = ({
+  placement = 'results',
+  handleReset,
+  handleRefine,
+}) => {
   const dispatch = useDispatch();
 
   //store vals
@@ -269,7 +273,6 @@ const SearchCriteriaTable = ({ placement, handleReset, handleRefine }) => {
     setCriterion([...criteria]);
   };
 
-  console.log('placement: ' + placement);
   return criterion.length > 0 ? (
     <>
       {placement === 'trial' ? (
