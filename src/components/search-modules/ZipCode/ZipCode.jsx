@@ -7,7 +7,7 @@ const ZipCode = ({ handleUpdate }) => {
   const { zip } = useSelector(store => store.form);
   const [errorMsg, setErrorMsg] = useState('');
   const [inputtedZip, setInputtedZip] = useState('');
-  const [{ getZipCoords }] = useZipConversion(inputtedZip, handleUpdate);
+  const [{ getZipCoords }] = useZipConversion(handleUpdate);
 
   useEffect(() => {
     if(inputtedZip !== ''){

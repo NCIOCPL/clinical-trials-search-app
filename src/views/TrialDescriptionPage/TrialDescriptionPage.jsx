@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateForm, clearForm } from '../../store/actions';
 import { history } from '../../services/history.service';
 import { getTrial } from '../../store/actions';
+import { useQueryToBuildStore } from '../../utilities/hooks';
 import {
   Accordion,
   AccordionItem,
@@ -17,9 +18,26 @@ const queryString = require('query-string');
 const TrialDescriptionPage = ({ location }) => {
   const dispatch = useDispatch();
   const [isTrialLoading, setIsTrialLoading] = useState(true);
-  const qs = location.search;
+  const [qs, setQs] = useState(location.search);
+  const { isDirty } = useSelector(store => store.form);
   const parsed = queryString.parse(qs);
   const currId = parsed.id;
+  const [storeRehydrated, setStoreRehydrated] = useState(false);
+
+  const handleUpdate = (field, value) => {
+    dispatch(
+      updateForm({
+        field,
+        value,
+      })
+    );
+  };
+
+  const [{ buildStoreFromQuery }] = useQueryToBuildStore(
+    qs,
+    handleUpdate,
+    setStoreRehydrated
+  );
 
   const trial = useSelector(store => store.cache[currId]);
 
@@ -32,30 +50,30 @@ const TrialDescriptionPage = ({ location }) => {
     }
   }, [trial]);
 
+  useEffect(() => {
+    if (storeRehydrated) {
+      dispatch(getTrial({ trialId: currId }));
+    }
+  }, [storeRehydrated]);
+
   // scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
     if (trial && trial.briefTitle) {
       initTrialData();
+    } else if (!isDirty) {
+      //need to hydrate store from query
+      buildStoreFromQuery(qs);
     } else {
       dispatch(getTrial({ trialId: currId }));
     }
   }, []);
 
-  const handleUpdate = (field, value) => {
-    dispatch(
-      updateForm({
-        field,
-        value,
-      })
-    );
-  };
-
   const initTrialData = () => {
     setIsTrialLoading(false);
   };
+
   const handleStartOver = () => {
-    
     dispatch(clearForm());
   };
 
@@ -70,7 +88,7 @@ const TrialDescriptionPage = ({ location }) => {
   const renderDelighters = () => {
     return (
       <>
-      <div className="delighter cts-share">
+        <div className="delighter cts-share">
           <div className="share-text">
             Share this clinical trial with your doctor:
           </div>
@@ -126,7 +144,6 @@ const TrialDescriptionPage = ({ location }) => {
             </p>
           </Delighter>
         </div>
-        
       </>
     );
   };
@@ -135,9 +152,11 @@ const TrialDescriptionPage = ({ location }) => {
     return (
       <div className="trial-description-page__header">
         <div className="back-to-search btnAsLink">
-          <span onClick={() => history.goBack()}>
-            &lt; Back to search results
-          </span>
+          {isDirty && (
+            <span onClick={() => history.goBack()}>
+              &lt; Back to search results
+            </span>
+          )}
         </div>
         <SearchCriteriaTable handleReset={handleStartOver} placement="trial" />
       </div>
@@ -255,10 +274,12 @@ const TrialDescriptionPage = ({ location }) => {
                   )}
                 </AccordionItem>
                 <AccordionItem titleCollapsed="Trial Objectives and Outline">
-                  <div
-                    className="trial-objectives-outline"
-                    dangerouslySetInnerHTML={prettifyDescription()}
-                  />
+                  {trial.detailedDescription && (
+                    <div
+                      className="trial-objectives-outline"
+                      dangerouslySetInnerHTML={prettifyDescription()}
+                    />
+                  )}
                 </AccordionItem>
                 <AccordionItem titleCollapsed="Trial Phase &amp; Type">
                   <>

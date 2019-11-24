@@ -42,6 +42,7 @@ export const defaultState = {
   trialId: '', // (tid) Trial ID,
   investigator: { term: '', termKey: '' }, // (in) Trial investigators ('in' is legacy but is a keyword and does not work well as a key name; be ready to handle both in query string)
   leadOrg: { term: '', termKey: '' }, // (lo) Lead Organization
+  resultsPage: 0,
   
   formType: 'basic', // (basic (default) | advanced)
   isDirty: false, // only updated after submission of either form

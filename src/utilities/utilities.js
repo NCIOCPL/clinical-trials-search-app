@@ -318,22 +318,15 @@ export const buildQueryString = formStore => {
   }
 };
 
-
 /**
  * Collapses a list of thesaurus concepts (diseases, drugs and other interventions
  * into a collection of ids.
  * @param array typesList the list of diseases
  */
 const collapseConcepts = typesList => {
-  const ids = typesList.reduce(
-    (ac, type) => {
-      return [
-        ...ac,
-        ...type.codes
-      ]
-    },
-    []
-  );
+  const ids = typesList.reduce((ac, type) => {
+    return [...ac, ...type.codes];
+  }, []);
   return [...new Set(ids)];
 };
 
@@ -342,7 +335,7 @@ export const formatTrialSearchQuery = form => {
 
   //diseases
   if (form.cancerType.codes.length > 0) {
-    filterCriteria._maintypes = form.cancerType.codes
+    filterCriteria._maintypes = form.cancerType.codes;
   }
 
   // Reduce the subtypes into a list of ids.
@@ -360,18 +353,11 @@ export const formatTrialSearchQuery = form => {
 
   //Drugs and Treatments
   if (form.drugs.length > 0 || form.treatments.length > 0) {
-
-    const drugIds = form.drugs.length > 0 ? 
-      collapseConcepts(form.drugs) :
-      [];
-    const otherIds = form.treatments.length > 0 ?
-      collapseConcepts(form.treatments) :
-      [];
+    const drugIds = form.drugs.length > 0 ? collapseConcepts(form.drugs) : [];
+    const otherIds =
+      form.treatments.length > 0 ? collapseConcepts(form.treatments) : [];
     filterCriteria['arms.interventions.intervention_code'] = [
-      ...new Set([
-        ...drugIds,
-        ...otherIds,
-      ])
+      ...new Set([...drugIds, ...otherIds]),
     ];
   }
 
@@ -441,9 +427,7 @@ export const formatTrialSearchQuery = form => {
   //trial ids
   if (form.trialId !== '') {
     // Split up the ids on a comma, trimming the items.
-    filterCriteria._trialids = form.trialId
-      .split(',')
-      .map(s => s.trim());
+    filterCriteria._trialids = form.trialId.split(',').map(s => s.trim());
   }
 
   // VA only
@@ -487,8 +471,7 @@ export const formatTrialSearchQuery = form => {
 
   // Adds criteria to only match locations that are actively recruiting sites. (CTSConstants.ActiveRecruitmentStatuses)
   // But only do it if we are doing a location search.
-  if (form.location !== "search-location-all" || form.vaOnly) {
-
+  if (form.location !== 'search-location-all' || form.vaOnly) {
     filterCriteria['sites.recruitment_status'] = [
       'active',
       'approved',
