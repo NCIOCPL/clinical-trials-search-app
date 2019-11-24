@@ -234,6 +234,9 @@ export const useQueryToBuildStore = (baseQuery, handleUpdate, setStoreRehydrated
   const [drugs, setDrugs] = useState([]);
   const [treatments, setTreatments] = useState([]);
 
+  const [inputtedZip, setInputtedZip] = useState('');
+  const [{ getZipCoords }] = useZipConversion(inputtedZip, handleUpdate);
+
   const cache = useSelector(store => store.cache);
 
   useEffect(() => {
@@ -252,6 +255,12 @@ export const useQueryToBuildStore = (baseQuery, handleUpdate, setStoreRehydrated
       }
     }
   }, [maintypeOptions, cancerCode]);
+
+  useEffect(() => {
+    if(inputtedZip !== ''){
+      getZipCoords(inputtedZip);
+    }
+  }, [inputtedZip]);
 
   useEffect(() => {
     getInterventionByCode(drugs);
@@ -326,6 +335,7 @@ export const useQueryToBuildStore = (baseQuery, handleUpdate, setStoreRehydrated
         //zip
         if (storeObj.z && storeObj.z !== '') {
           handleUpdate('zip', storeObj.z);
+          setInputtedZip(storeObj.z);
         }
         // cancerType
         if (storeObj.t && storeObj.t !== '') {
@@ -473,6 +483,7 @@ export const useQueryToBuildStore = (baseQuery, handleUpdate, setStoreRehydrated
               //zip
               if (storeObj.z && storeObj.z !== '') {
                 handleUpdate('zip', storeObj.z);
+                setInputtedZip(storeObj.z);
               }
               //zip Radius
               if (storeObj.zp && storeObj.zp !== 100) {
