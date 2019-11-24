@@ -76,7 +76,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
     if (maintypeOptions.length > 0 && refineSearch) {
       initRefineSearch();
     }
-  }, [maintypeOptions]);
+  }, []);
 
   const retrieveDescendents = (cacheKey, diseaseCodes) => {
     dispatch(

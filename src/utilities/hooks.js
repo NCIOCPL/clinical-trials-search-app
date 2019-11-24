@@ -240,7 +240,7 @@ export const useQueryToBuildStore = (
 ) => {
   const dispatch = useDispatch();
   const [storeObj, setStoreObj] = useState({});
-  const { trialPhases, trialTypes } = useSelector(store => store.form);
+  const { trialPhases, trialTypes, zipCoords, hasInvalidZip } = useSelector(store => store.form);
 
   const { maintypeOptions = [] } = useCachedValues(['maintypeOptions']);
   const [{ getBasicDiseaseFromCode, ctObj }] = useDiseaseLookup();
@@ -252,6 +252,8 @@ export const useQueryToBuildStore = (
   const [checksComplete, setChecksComplete] = useState(false);
 
   const [{ getZipCoords }] = useZipConversion(handleUpdate);
+  const [zipCoordsRetrieved, setZipCoordsRetrieved] = useState(false);
+
   const [{ getInterventionByCode }] = useInterventionLookup(handleUpdate);
   const [{ getTreatmentByCode }] = useTreatmentLookup(handleUpdate);
   const [drugs, setDrugs] = useState([]);
@@ -290,10 +292,10 @@ export const useQueryToBuildStore = (
   }, [treatments]);
 
   useEffect(() => {
-    if (descendentsPopulated && checksComplete) {
+    if (descendentsPopulated && checksComplete && zipCoordsRetrieved) {
       setStoreRehydrated(true);
     }
-  }, [descendentsPopulated, checksComplete]);
+  }, [descendentsPopulated, checksComplete, zipCoordsRetrieved]);
 
   const populateDescendents = () => {
     const cacheSnapshot = cache[cancerCode];
@@ -317,6 +319,12 @@ export const useQueryToBuildStore = (
     }
     setDescendentsPopulated(true);
   };
+
+  useEffect(() => {
+    if(zipCoords.lat !== '' || hasInvalidZip){
+      setZipCoordsRetrieved(true);
+    }
+  }, [zipCoords, hasInvalidZip])
 
   useEffect(() => {
     if (cache[cancerCode]) {
@@ -368,7 +376,10 @@ export const useQueryToBuildStore = (
         if (storeObj.z && storeObj.z !== '') {
           handleUpdate('zip', storeObj.z);
           getZipCoords(storeObj.z);
+        }else{
+          setZipCoordsRetrieved(true);
         }
+
         // cancerType
         if (storeObj.t && storeObj.t !== '') {
           setCancerCode(storeObj.t);
@@ -522,7 +533,10 @@ export const useQueryToBuildStore = (
               if (storeObj.z && storeObj.z !== '') {
                 handleUpdate('zip', storeObj.z);
                 getZipCoords(storeObj.z);
+              } else {
+                  setZipCoordsRetrieved(true);
               }
+
               //zip Radius
               if (storeObj.zp && storeObj.zp !== 100) {
                 handleUpdate('zipRadius', storeObj.zp);

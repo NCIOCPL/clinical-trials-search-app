@@ -17,7 +17,8 @@ const ZipCode = ({ handleUpdate }) => {
 
   const handleZipUpdate = e => {
     const zipInput = e.target.value;
-
+    handleUpdate('hasInvalidZip', false);
+    
     if(zipInput.length === 5){
       // test that all characters are numbers
       if(/^[0-9]+$/.test(zipInput)){
