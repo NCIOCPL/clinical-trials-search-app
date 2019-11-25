@@ -22,11 +22,7 @@ const PrintModalContent = ({ selectedList = [], handleClose = () => {} }) => {
   useEffect(() => {
     if (!isLoading && data.printID) {
       //success
-      closeModal();
-      history.push({
-        pathname: 'https://www.cancer.gov/CTS.Print/Display',
-        search: '?printid=' + data.printID,
-      });
+      window.location.href = `https://www.cancer.gov/CTS.Print/Display?printid=${data.printID}`;
     }
   }, [isLoading, isError, data]);
 

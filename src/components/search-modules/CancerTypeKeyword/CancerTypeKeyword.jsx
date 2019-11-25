@@ -27,6 +27,7 @@ const CancerTypeKeyword = ({ handleUpdate }) => {
       <Autocomplete
         id="ctk"
         label="Cancer Type/Keyword"
+        labelHidden
         value={CTK.value}
         inputProps={{ placeholder: 'Start typing to select a cancer type or keyword' }}
         wrapperStyle={{ position: 'relative', display: 'inline-block' }}

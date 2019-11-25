@@ -12,13 +12,13 @@ const CancerTypeCondition = ({ handleUpdate }) => {
 
   //store values
   const {
-    cancerType,
+    cancerType = {codes: []},
     cancerTypeModified,
-    subtypes,
+    subtypes = [],
     subtypeModified,
-    stages,
+    stages = [],
     stagesModified,
-    findings,
+    findings = [],
     refineSearch,
   } = useSelector(store => store.form);
   //typeahead states
@@ -29,6 +29,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
   const [subtypeOptions, setSubtypeOptions] = useState([]);
   const [stageOptions, setStageOptions] = useState([]);
   const [findingsOptions, setFindingsOptions] = useState([]);
+
 
   const {
     maintypeOptions = []
@@ -76,7 +77,14 @@ const CancerTypeCondition = ({ handleUpdate }) => {
     if (maintypeOptions.length > 0 && refineSearch) {
       initRefineSearch();
     }
-  }, [maintypeOptions]);
+  }, []);
+
+  // in case it hasn't come back by this time
+  useEffect(()=> {
+    if (cache['maintypeOptions'] && cache['maintypeOptions'].length > 0 && refineSearch) {
+      initRefineSearch();
+    }
+  }, [cache['maintypeOptions']])
 
   const retrieveDescendents = (cacheKey, diseaseCodes) => {
     dispatch(
@@ -89,15 +97,20 @@ const CancerTypeCondition = ({ handleUpdate }) => {
 
   const initRefineSearch = () => {
     if(cancerTypeModified) {
+
       if (cancerType.type.length > 0 && cancerType.type.includes('maintype')) {
         //if it has a maintype, primary is already set!
         // just retrieve descendents
+        //switch off refineSearch
+        handleUpdate('refineSearch', false);
         retrieveDescendents(cancerType.name, cancerType.codes);
       } else {
         // use the parentDisease ID to select the primary cancer type
-        let parentCancer = maintypeOptions.find(
+        console.log(maintypeOptions);
+        let parentCancer = cache['maintypeOptions'].find(
           ({ codes }) => codes[0] === cancerType.parentDiseaseID[0]
         );
+
         if (parentCancer) {
           retrieveDescendents(parentCancer.codes[0], parentCancer.codes);
         } else {
@@ -118,10 +131,10 @@ const CancerTypeCondition = ({ handleUpdate }) => {
         handleUpdate('cancerType', parentCancer);
       }
     }
-
-    //switch off refineSearch
-    handleUpdate('refineSearch', false);
   };
+
+
+
 
   const matchItemToTerm = (item, value) => {
     return item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1;

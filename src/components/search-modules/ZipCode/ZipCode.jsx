@@ -7,7 +7,7 @@ const ZipCode = ({ handleUpdate }) => {
   const { zip } = useSelector(store => store.form);
   const [errorMsg, setErrorMsg] = useState('');
   const [inputtedZip, setInputtedZip] = useState('');
-  const [{ getZipCoords }] = useZipConversion(inputtedZip, handleUpdate);
+  const [{ getZipCoords }] = useZipConversion(handleUpdate);
 
   useEffect(() => {
     if(inputtedZip !== ''){
@@ -17,7 +17,8 @@ const ZipCode = ({ handleUpdate }) => {
 
   const handleZipUpdate = e => {
     const zipInput = e.target.value;
-
+    handleUpdate('hasInvalidZip', false);
+    
     if(zipInput.length === 5){
       // test that all characters are numbers
       if(/^[0-9]+$/.test(zipInput)){
@@ -26,7 +27,6 @@ const ZipCode = ({ handleUpdate }) => {
         handleUpdate('zip', zipInput);
         handleUpdate('location', 'search-location-zip');
       } else {
-        handleUpdate('hasInvalidZip', true);
         handleUpdate('zip', '');
         setErrorMsg(`Please enter a 5 digit U.S. zip code`);
       }

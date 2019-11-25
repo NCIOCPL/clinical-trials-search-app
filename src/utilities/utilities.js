@@ -296,10 +296,10 @@ export const buildQueryString = formStore => {
     }
 
     if (drugs.length > 0) {
-      searchValues.dt = [...new Set(drugs.map(item => item.codes[0]))];
+      searchValues.d = [...new Set(drugs.map(item => item.codes[0]))];
     }
     if (treatments > 0) {
-      searchValues.ti = [...new Set(treatments.map(item => item.codes[0]))];
+      searchValues.i = [...new Set(treatments.map(item => item.codes[0]))];
     }
     if (trialId !== '') {
       searchValues.tid = trialId;
@@ -318,37 +318,46 @@ export const buildQueryString = formStore => {
   }
 };
 
+/**
+ * Collapses a list of thesaurus concepts (diseases, drugs and other interventions
+ * into a collection of ids.
+ * @param array typesList the list of diseases
+ */
+const collapseConcepts = typesList => {
+  const ids = typesList.reduce((ac, type) => {
+    return [...ac, ...type.codes];
+  }, []);
+  return [...new Set(ids)];
+};
+
 export const formatTrialSearchQuery = form => {
   let filterCriteria = {};
 
   //diseases
   if (form.cancerType.codes.length > 0) {
-    filterCriteria._maintypes = form.cancerType.codes[0];
+    filterCriteria._maintypes = form.cancerType.codes;
   }
 
-  if (form.subtypes.codes && form.subtypes.codes.length > 0) {
-    filterCriteria._subtypes = form.subtypes.codes;
+  // Reduce the subtypes into a list of ids.
+  if (form.subtypes.length > 0) {
+    filterCriteria._subtypes = collapseConcepts(form.subtypes);
   }
 
-  if (form.stages.codes && form.stages.codes.length > 0) {
-    filterCriteria._stages = form.stages.codes;
+  if (form.stages.length > 0) {
+    filterCriteria._stages = collapseConcepts(form.stages);
   }
 
-  if (form.findings.codes && form.findings.codes.length > 0) {
-    filterCriteria._findings = form.findings;
+  if (form.findings.length > 0) {
+    filterCriteria._findings = collapseConcepts(form.findings);
   }
 
   //Drugs and Treatments
   if (form.drugs.length > 0 || form.treatments.length > 0) {
-    let drugAndTrialIds = [];
-    if (form.drugs.length > 0) {
-      drugAndTrialIds = [...form.drugs];
-    }
-    if (form.treatments.length > 0) {
-      drugAndTrialIds = [...drugAndTrialIds, ...form.treatments];
-    }
+    const drugIds = form.drugs.length > 0 ? collapseConcepts(form.drugs) : [];
+    const otherIds =
+      form.treatments.length > 0 ? collapseConcepts(form.treatments) : [];
     filterCriteria['arms.interventions.intervention_code'] = [
-      ...new Set(drugAndTrialIds.map(item => item.codes[0])),
+      ...new Set([...drugIds, ...otherIds]),
     ];
   }
 
@@ -417,7 +426,8 @@ export const formatTrialSearchQuery = form => {
 
   //trial ids
   if (form.trialId !== '') {
-    filterCriteria._trialids = form.trialId;
+    // Split up the ids on a comma, trimming the items.
+    filterCriteria._trialids = form.trialId.split(',').map(s => s.trim());
   }
 
   // VA only
@@ -435,7 +445,7 @@ export const formatTrialSearchQuery = form => {
       filterCriteria['sites.org_name_fulltext'] = form.hospital.term;
       break;
     case 'search-location-country':
-      filterCriteria['sites.org_country._raw'] = form.country;
+      filterCriteria['sites.org_country'] = form.country;
       if (form.city !== '') {
         filterCriteria['sites.org_city'] = form.city;
       }
@@ -460,19 +470,22 @@ export const formatTrialSearchQuery = form => {
   }
 
   // Adds criteria to only match locations that are actively recruiting sites. (CTSConstants.ActiveRecruitmentStatuses)
-  // filterCriteria['sites.recruitment_status'] = [
-  //   'active',
-  //   'approved',
-  //   'enrolling_by_invitation',
-  //   'in_review',
-  //   'temporarily_closed_to_accrual',
-  //   // These statuses DO NOT appear in results:
-  //   /// "closed_to_accrual",
-  //   /// "completed",
-  //   /// "administratively_complete",
-  //   /// "closed_to_accrual_and_intervention",
-  //   /// "withdrawn"
-  // ];
+  // But only do it if we are doing a location search.
+  if (form.location !== 'search-location-all' || form.vaOnly) {
+    filterCriteria['sites.recruitment_status'] = [
+      'active',
+      'approved',
+      'enrolling_by_invitation',
+      'in_review',
+      'temporarily_closed_to_accrual',
+      // These statuses DO NOT appear in results:
+      /// "closed_to_accrual",
+      /// "completed",
+      /// "administratively_complete",
+      /// "closed_to_accrual_and_intervention",
+      /// "withdrawn"
+    ];
+  }
 
   // This is searching only for open trials (CTSConstants.ActiveTrialStatuses)
   filterCriteria.current_trial_status = [
@@ -556,4 +569,10 @@ export const listSitesWithinRadius = (originCoords, sitesArr, radius = 100) => {
     isWithinRadius(originCoords, item.coordinates, radius)
   );
   return nearbySites;
+};
+
+export const isEmptyObj = objToCheck => {
+  return (
+    Object.entries(objToCheck).length === 0 && objToCheck.constructor === Object
+  );
 };

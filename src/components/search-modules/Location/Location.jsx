@@ -10,7 +10,7 @@ import {
 } from '../../atomic';
 import { getCountries, searchHospital } from '../../../store/actions';
 import { matchItemToTerm, sortItems } from '../../../utilities/utilities';
-import {useZipConversion} from '../../../utilities/hooks';
+import { useZipConversion } from '../../../utilities/hooks';
 import './Location.scss';
 
 import {
@@ -22,7 +22,7 @@ const Location = ({ handleUpdate }) => {
   //Hooks must always be rendered in same order.
   const dispatch = useDispatch();
   const [inputtedZip, setInputtedZip] = useState('');
-  const [{ getZipCoords }] = useZipConversion(inputtedZip, handleUpdate);
+  const [{ getZipCoords }] = useZipConversion(handleUpdate);
   const { countries = [], hospitals = [] } = useSelector(store => store.cache);
   const {
     location,
@@ -49,7 +49,7 @@ const Location = ({ handleUpdate }) => {
   const stateOptions = getStates();
 
   useEffect(() => {
-    if(inputtedZip !== ''){
+    if (inputtedZip !== '') {
       getZipCoords(inputtedZip);
     }
   }, [inputtedZip]);
@@ -66,9 +66,9 @@ const Location = ({ handleUpdate }) => {
     }
   }, [activeRadio, dispatch]);
 
-  const updateStore = (locRadio) => {
+  const updateStore = locRadio => {
     handleUpdate('location', locRadio);
-    handleUpdate('nihOnly', (locRadio === 'search-location-nih'));
+    handleUpdate('nihOnly', locRadio === 'search-location-nih');
   };
 
   const handleToggleChange = () => {
@@ -106,22 +106,23 @@ const Location = ({ handleUpdate }) => {
     }
   };
 
-  const handleZipUpdate = (e) => {
+  const handleZipUpdate = e => {
     const zipInput = e.target.value;
-    if(zipInput.length === 5){
+    handleUpdate('hasInvalidZip', false);
+    if (zipInput.length === 5) {
       console.log('valid!');
-      if(/^[0-9]+$/.test(zipInput)){
+      if (/^[0-9]+$/.test(zipInput)) {
         setZipErrorMsg('');
         setInputtedZip(zipInput);
         handleUpdate(e.target.id, zipInput);
         handleUpdate('location', 'search-location-zip');
       } else {
         handleUpdate('zip', '');
-        handleUpdate('zipCoords', {lat: '', long: ''});
+        handleUpdate('zipCoords', { lat: '', long: '' });
         setZipErrorMsg(`Please enter a 5 digit U.S. zip code`);
       }
     }
-  }
+  };
 
   return (
     <Fieldset

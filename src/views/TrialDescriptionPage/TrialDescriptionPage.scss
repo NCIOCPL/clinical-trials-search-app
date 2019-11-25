@@ -61,14 +61,6 @@
       }
     }
   }
-
-  .cts-table {
-    width: 100%;
-    th,
-    td {
-      text-align: center;
-    }
-  }
 }
 .field-label {
   display: inline-block;
@@ -121,8 +113,10 @@
     font-size: 14px;
     font-weight: bold;
     border: 0 none;
-    width: 47%;
     cursor: pointer;
+    @media screen and (min-width: 1025px) {
+      width: 47%;
+    }
   }
   .cts-share-email {
     background-color: #14819b;
@@ -159,7 +153,7 @@
         content: '\2022';
         display: inline;
         position: absolute;
-        left: -.75em;
+        left: -0.75em;
         top: 0.25em;
         margin: 0;
         font-size: 1.1em;
@@ -179,4 +173,9 @@
   &::first-letter {
     text-transform: uppercase;
   }
+}
+
+.sites-nearby,
+.sites-all {
+  margin-top: 1em;
 }

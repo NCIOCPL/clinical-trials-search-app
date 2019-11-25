@@ -4,13 +4,11 @@ import { Link } from 'react-router-dom';
 import { updateForm, clearForm } from '../../store/actions';
 import { Delighter, Checkbox, Modal, Pager } from '../../components/atomic';
 import {
-  formatTrialSearchQuery,
   buildQueryString,
 } from '../../utilities/utilities';
-import { useModal } from '../../utilities/hooks';
+import { useModal, useQueryToBuildStore, useStoreToFindTrials } from '../../utilities/hooks';
 import ResultsPageHeader from './ResultsPageHeader';
 import ResultsList from './ResultsList';
-import { searchTrials } from '../../store/actions';
 import { history } from '../../services/history.service';
 import PrintModalContent from './PrintModalContent';
 import './ResultsPage.scss';
@@ -21,38 +19,73 @@ const ResultsPage = ({ location }) => {
   const [selectAll, setSelectAll] = useState(false);
   const [pagerPage, setPagerPage] = useState(0);
   const [selectedResults, setSelectedResults] = useState([]);
+  const [pageIsLoading, setPageIsLoading] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [trialResults, setTrialResults] = useState([]);
   const [resultsCount, setResultsCount] = useState(0);
-
   const formSnapshot = useSelector(store => store.form);
-  const [formData, setFormData] = useState(formSnapshot);
-
-  const qs = queryString.stringify(buildQueryString(formSnapshot));
-  const [query, setQuery] = useState(qs);
-
+  const {resultsPage} = useSelector(store => store.form);
   const cache = useSelector(store => store.cache);
-  var cacheLookup = cache[query];
+  const locsearch = location.search;
+  const [formData, setFormData] = useState(formSnapshot);
+  const [qs, setQs] = useState(
+    queryString.stringify(buildQueryString(formSnapshot))
+  );
+  const [storeRehydrated, setStoreRehydrated] = useState(false);
+  const [currCacheKey, setCurrCacheKey] = useState('');
+
+  const [{fetchTrials}] = useStoreToFindTrials();
+
+  const handleUpdate = (field, value) => {
+    dispatch(
+      updateForm({
+        field,
+        value,
+      })
+    );
+  };
+
+  const [{ buildStoreFromQuery }] = useQueryToBuildStore(
+    locsearch,
+    handleUpdate,
+    setStoreRehydrated
+  );
 
   // scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
     if (trialResults && trialResults.total >= 0) {
       initData();
+    } else if (locsearch !== '') {
+      // hydrate the query, it's been pasted in
+      buildStoreFromQuery(locsearch);
     } else if (!formSnapshot.hasInvalidZip) {
-      //data isn't there, fetch it
+      // data is in the store
+      setCurrCacheKey(qs);
       fetchTrials(qs);
     } else {
+      //something went wrog
+      setPageIsLoading(false);
       setIsLoading(false);
     }
   }, []);
 
+  useEffect(() => {
+    if (storeRehydrated) {
+      setIsLoading(true);
+      setCurrCacheKey(locsearch);
+      fetchTrials(locsearch);
+      setStoreRehydrated(false);
+    }
+  }, [storeRehydrated]);
+  
+
   //when trial results come in, open up shop
   useEffect(() => {
-    if (isLoading && cacheLookup && cacheLookup.total >= 0) {
+    if (isLoading && cache[currCacheKey] && cache[currCacheKey].total >= 0) {
       initData();
     }
-  }, [cacheLookup]);
+  }, [cache[currCacheKey]]);
 
   //track usage of selected results for print
   useEffect(() => {
@@ -64,24 +97,10 @@ const ResultsPage = ({ location }) => {
   const initData = () => {
     window.scrollTo(0, 0);
     setSelectAll(false);
+    setPageIsLoading(false);
     setIsLoading(false);
-    setTrialResults(cacheLookup);
-    setResultsCount(cacheLookup.total);
-  };
-
-  const fetchTrials = queryKey => {
-    setIsLoading(true);
-    history.replace({
-      path: '/about-cancer/treatment/clinical-trials/search/r',
-      search: qs,
-    });
-    cacheLookup = cache[queryKey];
-    dispatch(
-      searchTrials({
-        cacheKey: queryKey,
-        data: formatTrialSearchQuery(formData),
-      })
-    );
+    setTrialResults(cache[currCacheKey]);
+    setResultsCount(cache[currCacheKey].total);
   };
 
   const handleSelectAll = () => {
@@ -103,31 +122,23 @@ const ResultsPage = ({ location }) => {
     dispatch(clearForm());
   };
 
-  const handleUpdate = (field, value) => {
-    dispatch(
-      updateForm({
-        field,
-        value,
-      })
-    );
-  };
-
   // setup print Modal
   const { isShowing, toggleModal } = useModal();
   const printSelectedBtn = useRef(null);
 
   const handlePagination = currentPage => {
     if (currentPage !== pagerPage) {
+      setIsLoading(true);
       // set currentPage and kick off fetch
       setPagerPage(currentPage);
-      let tmpForm = formData;
-      tmpForm.resultsPage = parseInt(currentPage);
-      setFormData(tmpForm);
+      handleUpdate('resultsPage', currentPage);
+
       // update qs
       const parsed = queryString.parse(location.search);
       parsed.pn = currentPage + 1;
       let newqs = queryString.stringify(parsed);
-      setQuery(newqs);
+      setQs(newqs);
+      setCurrCacheKey(newqs);
       history.push({
         search: newqs,
       });
@@ -201,7 +212,7 @@ const ResultsPage = ({ location }) => {
                 <Pager
                   data={trialResults.trials}
                   callback={handlePagination}
-                  startFromPage={pagerPage}
+                  startFromPage={resultsPage}
                   totalItems={trialResults.total}
                 />
               )}
@@ -286,7 +297,7 @@ const ResultsPage = ({ location }) => {
           <>
             <ResultsPageHeader
               resultsCount={resultsCount}
-              pageNum={pagerPage}
+              pageNum={resultsPage}
               handleUpdate={handleUpdate}
               handleReset={handleStartOver}
             />
@@ -297,6 +308,7 @@ const ResultsPage = ({ location }) => {
                   <>{renderNoResults()}</>
                 ) : (
                   <ResultsList
+                    queryParams={currCacheKey}
                     results={trialResults.trials}
                     selectedResults={selectedResults}
                     setSelectedResults={setSelectedResults}
