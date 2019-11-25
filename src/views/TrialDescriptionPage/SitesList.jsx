@@ -62,20 +62,19 @@ const SitesList = sites => {
   };
 
   useEffect(() => {
-    if(sites.sites.length > 0){
+    if (sites.sites.length > 0) {
       if (countries.length === 0) {
         buildCountriesList(sites.sites);
-      }
-      if (states.length === 0) {
         buildUSStatesList(sites.sites);
       }
     }
-    
   }, []);
 
   useEffect(() => {
-    constructFilterableArray(sites.sites, setLocArray, countries, true);
-    buildNearbySites(sites.sites);
+    if (countries.length > 0) {
+      constructFilterableArray(sites.sites, setLocArray, countries, true);
+      buildNearbySites(sites.sites);
+    }
   }, [countries]);
 
   useEffect(() => {
@@ -84,9 +83,13 @@ const SitesList = sites => {
 
   useEffect(() => {
     if (nearbySites.length > 0) {
-        let nearbyCountries = [...new Set(nearbySites.map(item => item.country))];
-        nearbyCountries.sort((a, b) => (a > b ? 1 : -1));
-      constructFilterableArray(nearbySites, setFilteredNearbySites, nearbyCountries);
+      let nearbyCountries = [...new Set(nearbySites.map(item => item.country))];
+      nearbyCountries.sort((a, b) => (a > b ? 1 : -1));
+      constructFilterableArray(
+        nearbySites,
+        setFilteredNearbySites,
+        nearbyCountries
+      );
       setShowNearbySites(true);
     }
   }, [nearbySites]);
@@ -96,7 +99,12 @@ const SitesList = sites => {
   };
 
   //output location
-  const constructFilterableArray = (parentArray, stateMethod, representedCountries = [], isAllSites = false) => {
+  const constructFilterableArray = (
+    parentArray,
+    stateMethod,
+    representedCountries = [],
+    isAllSites = false
+  ) => {
     let masterArray = [];
     representedCountries.forEach(countryName => {
       let c = { country: countryName };
@@ -117,7 +125,7 @@ const SitesList = sites => {
           };
           c.states.push(s);
         });
-        if(isAllSites){
+        if (isAllSites) {
           setStatesItems(c);
         }
         masterArray.unshift(c);
@@ -163,30 +171,35 @@ const SitesList = sites => {
     if (location === 'search-location-country') {
       if (country === 'United States') {
         if (states.length > 0) {
+          let nearbyStates = [...new Set(states.map(item => item.abbr))];
+
           if (city !== '') {
             setNearbySites(
               siteArr.filter(
                 site =>
-                  states.includes(site.stateOrProvinceAbbreviation) &&
+                  nearbyStates.includes(site.stateOrProvinceAbbreviation) &&
                   site.city === city
               )
             );
+          } else {
+            setNearbySites(
+              siteArr.filter(site =>
+                nearbyStates.includes(site.stateOrProvinceAbbreviation)
+              )
+            );
           }
-          setNearbySites(
-            siteArr.filter(site =>
-              states.includes(site.stateOrProvinceAbbreviation)
-            )
-          );
+        } else {
+          if (city !== '') {
+            setNearbySites(
+              siteArr.filter(
+                site => site.country === country && site.city === city
+              )
+            );
+          } else {
+            // just looking for US sites
+            setNearbySites(siteArr.filter(site => site.country === country));
+          }
         }
-        if (city !== '') {
-          setNearbySites(
-            siteArr.filter(
-              site => site.country === country && site.city === city
-            )
-          );
-        }
-        // just looking for US sites
-        setNearbySites(siteArr.filter(site => site.country === country));
       } else {
         if (city !== '') {
           setNearbySites(
@@ -245,9 +258,7 @@ const SitesList = sites => {
     let filtered = [];
     const targetVal = e.target.value;
     if (targetVal !== '' && targetVal !== 'all') {
-      filtered = statesItems.states.filter(
-        item => item.state === targetVal
-      );
+      filtered = statesItems.states.filter(item => item.state === targetVal);
     } else {
       filtered = locArray;
     }

@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Checkbox from '../../components/atomic/Checkbox';
 import { isWithinRadius } from '../../utilities/utilities';
+const queryString = require('query-string');
 
-const ResultsListItem = ({ id, item, isChecked, onCheckChange }) => {
+const ResultsListItem = ({ id, item, isChecked, onCheckChange, queryParams }) => {
   const {
     zip,
     zipCoords,
@@ -15,6 +16,10 @@ const ResultsListItem = ({ id, item, isChecked, onCheckChange }) => {
     states,
     city,
   } = useSelector(store => store.form);
+
+  const qsQbj = queryString.parse(queryParams);
+  qsQbj.id = item.nciID;
+  const itemQueryString = queryString.stringify(qsQbj);
 
   //compare site values against user criteria
    const isLocationParamMatch = siteObj => {
@@ -139,6 +144,7 @@ const ResultsListItem = ({ id, item, isChecked, onCheckChange }) => {
     return `${item.sites.length} location${item.sites.length === 1 ? '' : 's'}`;
   };
 
+
   return (
     <div className="results-list-item results-list__item">
       <div className="results-list-item__checkbox">
@@ -154,7 +160,7 @@ const ResultsListItem = ({ id, item, isChecked, onCheckChange }) => {
       <div className="results-list-item__contents">
         <div className="results-list-item__title">
           <Link
-            to={`/about-cancer/treatment/clinical-trials/search/v?id=${item.nciID}`}
+            to={`/about-cancer/treatment/clinical-trials/search/v?${itemQueryString}`}
           >
             {item.briefTitle}
           </Link>
