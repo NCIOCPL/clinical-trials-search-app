@@ -1,5 +1,5 @@
 import {defaultState} from '../../store/reducers/form';
-import { formatTrialSearchQuery } from '../utilities';
+import { formatTrialSearchQuery } from '../formatTrialSearchQuery';
 
 /**
  * This file contains tests for the formatTrialSearchQuery
