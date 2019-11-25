@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Helmet } from 'react-helmet';
 import { Delighter, StickySubmitBlock } from '../../components/atomic';
 import {
   Age,
@@ -155,14 +156,46 @@ const SearchPage = ({ formInit = 'basic' }) => {
 
   return (
     <article className="search-page">
+      <Helmet>
+        <title>
+          Find NCI-Supported Clinical Trials - National Cancer Institute
+        </title>
+        <link
+          rel="canonical"
+          href={`https://www.cancer.gov/about-cancer/treatment/clinical-trials/search${
+            formFactor === 'basic' ? '' : 'advanced'
+          }`}
+        />
+        <meta
+          name="description"
+          content="Find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one."
+        />
+        <meta
+          property="og:title"
+          content="Find NCI-Supported Clinical Trials"
+        />
+        <meta
+          property="og:url"
+          content={`https://www.cancer.gov/about-cancer/treatment/clinical-trials/search${
+            formFactor === 'basic' ? '' : 'advanced'
+          }`}
+        />
+        <meta
+          property="og:description"
+          content="Find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one."
+        />
+      </Helmet>
       <div ref={sentinelRef} className="search-page__sentinel"></div>
       <h1>Find NCI-Supported Clinical Trials</h1>
       <div className="search-page__header">
         <p>
           NCI-supported clinical trials are those sponsored or otherwise
           financially supported by NCI. See our guide,{' '}
-          <a href="/about-cancer/treatment/clinical-trials/search/trial-guide">Steps to Find a Clinical Trial</a>, to learn
-          about options for finding trials not included in NCI's collection.
+          <a href="https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/trial-guide">
+            Steps to Find a Clinical Trial
+          </a>
+          , to learn about options for finding trials not included in NCI's
+          collection.
         </p>
         {renderSearchTip()}
       </div>
