@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import scrollIntoView from 'dom-scroll-into-view';
 import { InputLabel, RemovableTag } from '../../atomic';
-import Utilities from '../../../utilities/utilities';
+import {uniqueIdForComponent} from '../../../utilities';
 import './Autocomplete.scss';
 
 const IMPERATIVE_API = [
@@ -232,7 +232,7 @@ class Autocomplete extends React.Component {
     this.maybeAutoCompleteText = this.maybeAutoCompleteText.bind(this);
 
     // Generate an HTML ID if one was not provided
-    this.id = this.props.id || Utilities.uniqueIdForComponent();
+    this.id = this.props.id || uniqueIdForComponent();
   }
 
   componentWillMount() {

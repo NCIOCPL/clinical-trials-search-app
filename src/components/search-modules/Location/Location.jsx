@@ -9,7 +9,7 @@ import {
   Autocomplete,
 } from '../../atomic';
 import { getCountries, searchHospital } from '../../../store/actions';
-import { matchItemToTerm, sortItems } from '../../../utilities/utilities';
+import { matchItemToTerm, sortItems } from '../../../utilities';
 import { useZipConversion } from '../../../utilities/hooks';
 import './Location.scss';
 

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Checkbox from '../../components/atomic/Checkbox';
-import { isWithinRadius } from '../../utilities/utilities';
+import { isWithinRadius } from '../../utilities';
 const queryString = require('query-string');
 
 const ResultsListItem = ({ id, item, isChecked, onCheckChange, queryParams }) => {

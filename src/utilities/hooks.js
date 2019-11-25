@@ -5,7 +5,7 @@ import {
   getStateNameFromAbbr,
   isEmptyObj,
   formatTrialSearchQuery,
-} from './utilities';
+} from '../utilities';
 import {
   getMainType,
   getCancerTypeDescendents,

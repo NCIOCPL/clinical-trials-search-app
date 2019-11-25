@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Utilities from '../../../utilities/utilities';
-
+import {uniqueIdForComponent} from '../../../utilities';
 import './Radio.scss';
 
 const Radio = ({ id, label, className, disabled, value, ...otherProps }) => (
@@ -34,7 +33,7 @@ Radio.propTypes = {
 };
 
 Radio.defaultProps = {
-  id: Utilities.uniqueIdForComponent(),
+  id: uniqueIdForComponent(),
   name: 'radios',
   disabled: false,
   className: '',
