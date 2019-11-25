@@ -5,7 +5,7 @@ import { updateForm, clearForm } from '../../store/actions';
 import { Delighter, Checkbox, Modal, Pager } from '../../components/atomic';
 import {
   buildQueryString,
-} from '../../utilities/utilities';
+} from '../../utilities';
 import { useModal, useQueryToBuildStore, useStoreToFindTrials } from '../../utilities/hooks';
 import ResultsPageHeader from './ResultsPageHeader';
 import ResultsList from './ResultsList';

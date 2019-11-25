@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Fieldset, Autocomplete } from '../../atomic';
 import { searchTrialInvestigators } from '../../../store/actions';
-import { matchItemToTerm, sortItems } from '../../../utilities/utilities';
+import { matchItemToTerm, sortItems } from '../../../utilities';
 
 const TrialInvestigators = ({ handleUpdate }) => {
   const dispatch = useDispatch();

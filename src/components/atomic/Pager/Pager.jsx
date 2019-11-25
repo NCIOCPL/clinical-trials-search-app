@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Utilities from '../../../utilities/utilities';
+import {keyHandler} from '../../../utilities';
 import './Pager.scss';
 
 const Pager = ({ data, totalItems, startFromPage, numberToShow, callback }) => {
@@ -76,7 +76,7 @@ const Pager = ({ data, totalItems, startFromPage, numberToShow, callback }) => {
             tabIndex="0"
             className={`pager__num ${isCurrent ? 'pager__num--active' : ''}`}
             onClick={!isCurrent ? () => determineResults(currentStep) : null}
-            onKeyPress={Utilities.keyHandler({
+            onKeyPress={keyHandler({
               fn: !isCurrent ? () => determineResults(currentStep) : null,
             })}
           >
@@ -99,7 +99,7 @@ const Pager = ({ data, totalItems, startFromPage, numberToShow, callback }) => {
               className="pager__arrow"
               tabIndex="0"
               onClick={() => determineResults(currentPage - 1)}
-              onKeyPress={Utilities.keyHandler({
+              onKeyPress={keyHandler({
                 fn: () => determineResults(currentPage - 1),
               })}
             >
@@ -112,7 +112,7 @@ const Pager = ({ data, totalItems, startFromPage, numberToShow, callback }) => {
               className="pager__arrow"
               tabIndex="0"
               onClick={() => determineResults(currentPage + 1)}
-              onKeyPress={Utilities.keyHandler({
+              onKeyPress={keyHandler({
                 fn: () => determineResults(currentPage + 1),
               })}
             >

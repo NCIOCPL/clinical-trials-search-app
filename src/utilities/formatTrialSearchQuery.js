@@ -1,0 +1,187 @@
+import {collapseConcepts} from './collapseConcepts';
+
+export const formatTrialSearchQuery = form => {
+  let filterCriteria = {};
+
+  //diseases
+  if (form.cancerType.codes.length > 0) {
+    filterCriteria._maintypes = form.cancerType.codes;
+  }
+
+  // Reduce the subtypes into a list of ids.
+  if (form.subtypes.length > 0) {
+    filterCriteria._subtypes = collapseConcepts(form.subtypes);
+  }
+
+  if (form.stages.length > 0) {
+    filterCriteria._stages = collapseConcepts(form.stages);
+  }
+
+  if (form.findings.length > 0) {
+    filterCriteria._findings = collapseConcepts(form.findings);
+  }
+
+  //Drugs and Treatments
+  if (form.drugs.length > 0 || form.treatments.length > 0) {
+    const drugIds = form.drugs.length > 0 ? collapseConcepts(form.drugs) : [];
+    const otherIds =
+      form.treatments.length > 0 ? collapseConcepts(form.treatments) : [];
+    filterCriteria['arms.interventions.intervention_code'] = [
+      ...new Set([...drugIds, ...otherIds]),
+    ];
+  }
+
+  //Add Age filter
+  if (form.age !== '') {
+    filterCriteria['eligibility.structured.max_age_in_years_gte'] = form.age;
+    filterCriteria['eligibility.structured.min_age_in_years_lte'] = form.age;
+  }
+
+  // keywords
+  if (form.keywordPhrases !== '') {
+    filterCriteria._fulltext = form.keywordPhrases;
+  }
+
+  // trialTypes
+  let trialTypesChecked = form.trialTypes.filter(item => item.checked);
+  //check if any are selected, none being the same as all
+  if (trialTypesChecked.length) {
+    filterCriteria['primary_purpose.primary_purpose_code'] = [
+      ...new Set(trialTypesChecked.map(item => item.value)),
+    ];
+  }
+
+  // trialPhases
+  //need to add overlapping phases to the array before passing it
+  let checkedPhases = form.trialPhases.filter(item => item.checked);
+  if (checkedPhases.length > 0) {
+    let phaseList = [...new Set(checkedPhases.map(item => item.value))];
+
+    if (phaseList.includes('i')) {
+      phaseList.push('i_ii');
+    }
+    if (phaseList.includes('iii')) {
+      phaseList.push('ii_iii');
+    }
+    if (phaseList.includes('ii')) {
+      if (!phaseList.includes('i_ii')) {
+        phaseList.push('i_ii');
+      }
+      if (!phaseList.includes('ii_iii')) {
+        phaseList.push('ii_iii');
+      }
+    }
+    if (phaseList.length > 0) {
+      filterCriteria['phase.phase'] = phaseList;
+    }
+  }
+
+  // investigator
+  if (form.investigator.term !== '') {
+    filterCriteria.principal_investigator_fulltext = form.investigator.term;
+  }
+
+  // leadOrg
+  if (form.leadOrg.term !== '') {
+    filterCriteria.lead_org_fulltext = form.leadOrg.term;
+  }
+
+  // add healthy volunteers filter
+  if (form.healthyVolunteers) {
+    filterCriteria.accepts_healthy_volunteers_indicator = 'YES';
+  }
+
+  //gender filter goes here but it is not set within our app
+  // filterCriteria['eligibility.structured.gender']
+
+  //trial ids
+  if (form.trialId !== '') {
+    // Split up the ids on a comma, trimming the items.
+    filterCriteria._trialids = form.trialId.split(',').map(s => s.trim());
+  }
+
+  // VA only
+  if (form.vaOnly) {
+    filterCriteria['sites.org_va'] = true;
+  }
+
+  // location
+  switch (form.location) {
+    case 'search-location-nih':
+      //NIH has their own postal code, so this means @NIH
+      filterCriteria['sites.org_postal_code'] = '20892';
+      break;
+    case 'search-location-hospital':
+      filterCriteria['sites.org_name_fulltext'] = form.hospital.term;
+      break;
+    case 'search-location-country':
+      filterCriteria['sites.org_country'] = form.country;
+      if (form.city !== '') {
+        filterCriteria['sites.org_city'] = form.city;
+      }
+      //
+      let statesList = [...new Set(form.states.map(item => item.abbr))];
+      if (form.country === 'United States' && statesList.length > 0) {
+        filterCriteria['sites.org_state_or_province'] = statesList;
+      }
+      break;
+    case 'search-location-zip':
+      if (form.zipCoords.lat !== '' && form.zipCoords.long !== '') {
+        filterCriteria['sites.org_coordinates_lat'] = form.zipCoords.lat;
+        filterCriteria['sites.org_coordinates_lon'] = form.zipCoords.long;
+        filterCriteria['sites.org_coordinates_dist'] = form.zipRadius + 'mi';
+      }
+      break;
+    default:
+  }
+
+  if (form.resultsPage > 0) {
+    filterCriteria.from = form.resultsPage * 10;
+  }
+
+  // Adds criteria to only match locations that are actively recruiting sites. (CTSConstants.ActiveRecruitmentStatuses)
+  // But only do it if we are doing a location search.
+  if (form.location !== 'search-location-all' || form.vaOnly) {
+    filterCriteria['sites.recruitment_status'] = [
+      'active',
+      'approved',
+      'enrolling_by_invitation',
+      'in_review',
+      'temporarily_closed_to_accrual',
+      // These statuses DO NOT appear in results:
+      /// "closed_to_accrual",
+      /// "completed",
+      /// "administratively_complete",
+      /// "closed_to_accrual_and_intervention",
+      /// "withdrawn"
+    ];
+  }
+
+  // This is searching only for open trials (CTSConstants.ActiveTrialStatuses)
+  filterCriteria.current_trial_status = [
+    'Active',
+    'Approved',
+    'Enrolling by Invitation',
+    'In Review',
+    'Temporarily Closed to Accrual',
+    'Temporarily Closed to Accrual and Intervention',
+  ];
+
+  filterCriteria.include = [
+    'nci_id',
+    'brief_title',
+    'sites.org_name',
+    'sites.org_postal_code',
+    'eligibility.structured',
+    'current_trial_status',
+    'sites.org_va',
+    'sites.org_country',
+    'sites.org_state_or_province',
+    'sites.org_city',
+    'sites.org_coordinates',
+    'sites.recruitment_status',
+    'diseases',
+  ];
+
+  return filterCriteria;
+};

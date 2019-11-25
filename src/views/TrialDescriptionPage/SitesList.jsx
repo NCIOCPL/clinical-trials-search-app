@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Dropdown } from '../../components/atomic';
-import { getStateNameFromAbbr } from '../../utilities/utilities';
-import { isWithinRadius } from '../../utilities/utilities';
+import { getStateNameFromAbbr } from '../../utilities/';
+import { isWithinRadius } from '../../utilities';
 
 const SitesList = sites => {
   const [locArray, setLocArray] = useState([]);

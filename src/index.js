@@ -10,7 +10,7 @@ import * as reducers from './store/reducers';
 import {
   loadStateFromSessionStorage,
   saveStatetoSessionStorage,
-} from './utilities/utilities';
+} from './utilities';
 import './index.css';
 import createCTSMiddleware from './middleware/CTSMiddleware';
 import cacheMiddleware from './middleware/cacheMiddleware';

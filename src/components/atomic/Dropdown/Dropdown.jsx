@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import InputLabel from '../InputLabel';
-import utils from '../../../utilities/utilities';
+import {uniqueIdForComponent} from '../../../utilities';
 import './Dropdown.scss';
 
 //  Class representing a dropdown
@@ -60,7 +60,7 @@ export default class Dropdown extends React.Component {
 
   // check to see if an Id was passed in, if not generate one.
   componentWillMount() {
-    this.id = this.props.id ? this.props.id : utils.uniqueIdForComponent(this);
+    this.id = this.props.id ? this.props.id : uniqueIdForComponent(this);
   }
 
   //  Update the state when user selects a new option
