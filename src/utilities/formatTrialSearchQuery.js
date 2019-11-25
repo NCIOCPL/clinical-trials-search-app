@@ -1,4 +1,9 @@
-import {collapseConcepts} from './collapseConcepts';
+import { collapseConcepts } from './collapseConcepts';
+import {
+  ACTIVE_TRIAL_STATUSES,
+  ACTIVE_RECRUITMENT_STATUSES,
+  SEARCH_RETURNS_FIELDS,
+} from '../constants';
 
 export const formatTrialSearchQuery = form => {
   let filterCriteria = {};
@@ -142,46 +147,13 @@ export const formatTrialSearchQuery = form => {
   // Adds criteria to only match locations that are actively recruiting sites. (CTSConstants.ActiveRecruitmentStatuses)
   // But only do it if we are doing a location search.
   if (form.location !== 'search-location-all' || form.vaOnly) {
-    filterCriteria['sites.recruitment_status'] = [
-      'active',
-      'approved',
-      'enrolling_by_invitation',
-      'in_review',
-      'temporarily_closed_to_accrual',
-      // These statuses DO NOT appear in results:
-      /// "closed_to_accrual",
-      /// "completed",
-      /// "administratively_complete",
-      /// "closed_to_accrual_and_intervention",
-      /// "withdrawn"
-    ];
+    filterCriteria['sites.recruitment_status'] = ACTIVE_RECRUITMENT_STATUSES;
   }
 
   // This is searching only for open trials (CTSConstants.ActiveTrialStatuses)
-  filterCriteria.current_trial_status = [
-    'Active',
-    'Approved',
-    'Enrolling by Invitation',
-    'In Review',
-    'Temporarily Closed to Accrual',
-    'Temporarily Closed to Accrual and Intervention',
-  ];
+  filterCriteria.current_trial_status = ACTIVE_TRIAL_STATUSES;
 
-  filterCriteria.include = [
-    'nci_id',
-    'brief_title',
-    'sites.org_name',
-    'sites.org_postal_code',
-    'eligibility.structured',
-    'current_trial_status',
-    'sites.org_va',
-    'sites.org_country',
-    'sites.org_state_or_province',
-    'sites.org_city',
-    'sites.org_coordinates',
-    'sites.recruitment_status',
-    'diseases',
-  ];
+  filterCriteria.include = SEARCH_RETURNS_FIELDS;
 
   return filterCriteria;
 };
