@@ -261,6 +261,9 @@ export const useQueryToBuildStore = (
   const [drugs, setDrugs] = useState([]);
   const [treatments, setTreatments] = useState([]);
 
+  const [inputtedZip, setInputtedZip] = useState('');
+  const [{ getZipCoords }] = useZipConversion(inputtedZip, handleUpdate);
+
   const cache = useSelector(store => store.cache);
 
   useEffect(() => {
@@ -284,6 +287,12 @@ export const useQueryToBuildStore = (
       }
     }
   }, [maintypeOptions, cancerCode]);
+
+  useEffect(() => {
+    if(inputtedZip !== ''){
+      getZipCoords(inputtedZip);
+    }
+  }, [inputtedZip]);
 
   useEffect(() => {
     getInterventionByCode(drugs);
