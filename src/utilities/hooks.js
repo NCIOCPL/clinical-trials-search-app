@@ -262,7 +262,6 @@ export const useQueryToBuildStore = (
   const [treatments, setTreatments] = useState([]);
 
   const [inputtedZip, setInputtedZip] = useState('');
-  const [{ getZipCoords }] = useZipConversion(inputtedZip, handleUpdate);
 
   const cache = useSelector(store => store.cache);
 
