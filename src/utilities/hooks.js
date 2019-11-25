@@ -240,7 +240,9 @@ export const useQueryToBuildStore = (
 ) => {
   const dispatch = useDispatch();
   const [storeObj, setStoreObj] = useState({});
-  const { trialPhases, trialTypes, zipCoords, hasInvalidZip } = useSelector(store => store.form);
+  const { trialPhases, trialTypes, zipCoords, hasInvalidZip } = useSelector(
+    store => store.form
+  );
 
   const { maintypeOptions = [] } = useCachedValues(['maintypeOptions']);
   const [{ getBasicDiseaseFromCode, ctObj }] = useDiseaseLookup();
@@ -292,6 +294,7 @@ export const useQueryToBuildStore = (
   }, [treatments]);
 
   useEffect(() => {
+    // console.log('rehydrating: ' + descendentsPopulated + ' : ' + checksComplete + ' : ' + zipCoordsRetrieved );
     if (descendentsPopulated && checksComplete && zipCoordsRetrieved) {
       setStoreRehydrated(true);
     }
@@ -321,10 +324,10 @@ export const useQueryToBuildStore = (
   };
 
   useEffect(() => {
-    if(zipCoords.lat !== '' || hasInvalidZip){
+    if (zipCoords.lat !== '' || hasInvalidZip) {
       setZipCoordsRetrieved(true);
     }
-  }, [zipCoords, hasInvalidZip])
+  }, [zipCoords, hasInvalidZip]);
 
   useEffect(() => {
     if (cache[cancerCode]) {
@@ -376,7 +379,7 @@ export const useQueryToBuildStore = (
         if (storeObj.z && storeObj.z !== '') {
           handleUpdate('zip', storeObj.z);
           getZipCoords(storeObj.z);
-        }else{
+        } else {
           setZipCoordsRetrieved(true);
         }
 
@@ -452,11 +455,23 @@ export const useQueryToBuildStore = (
         }
 
         if (storeObj.d && storeObj.d.length > 0) {
-          setDrugs(storeObj.d);
+          if (Array.isArray(storeObj.d)) {
+            setDrugs([...storeObj.d]);
+          } else {
+            let y = [];
+            y.push(storeObj.d);
+            setDrugs(y);
+          }
         }
 
         if (storeObj.i && storeObj.i.length) {
-          setTreatments(storeObj.i);
+          if (Array.isArray(storeObj.i)) {
+            setTreatments([...storeObj.i]);
+          } else {
+            let y = [];
+            y.push(storeObj.i);
+            setTreatments(y);
+          }
         }
 
         //trialPhases
@@ -495,6 +510,7 @@ export const useQueryToBuildStore = (
           switch (parseInt(storeObj.loc)) {
             case 4:
               loc = 'search-location-nih';
+              setZipCoordsRetrieved(true);
               break;
             case 3:
               loc = 'search-location-hospital';
@@ -502,6 +518,7 @@ export const useQueryToBuildStore = (
               if (storeObj.hos && storeObj.hos !== '') {
                 handleUpdate('hospital', { term: storeObj.hos });
               }
+              setZipCoordsRetrieved(true);
               break;
             case 2:
               loc = 'search-location-country';
@@ -515,17 +532,23 @@ export const useQueryToBuildStore = (
               }
               //states
               if (storeObj.lst && storeObj.lst.length > 0) {
+                let statesArr = [];
+                if (Array.isArray(storeObj.lst)) {
+                  statesArr = [...storeObj.lst];
+                } else {
+                  statesArr.push(storeObj.lst);
+                }
                 let s = [];
-                storeObj.lst.forEach(st => {
+                statesArr.forEach(st => {
                   let newState = {
                     abbr: st,
                     name: getStateNameFromAbbr(st),
                   };
                   s.push(newState);
                 });
-
                 handleUpdate('states', [...s]);
               }
+              setZipCoordsRetrieved(true);
               break;
             case 1:
               loc = 'search-location-zip';
@@ -534,7 +557,7 @@ export const useQueryToBuildStore = (
                 handleUpdate('zip', storeObj.z);
                 getZipCoords(storeObj.z);
               } else {
-                  setZipCoordsRetrieved(true);
+                setZipCoordsRetrieved(true);
               }
 
               //zip Radius
@@ -545,6 +568,7 @@ export const useQueryToBuildStore = (
             case 0:
             default:
               loc = 'search-location-all';
+              setZipCoordsRetrieved(true);
           }
           handleUpdate('location', loc);
         }

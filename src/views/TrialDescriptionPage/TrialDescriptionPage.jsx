@@ -256,6 +256,7 @@ const TrialDescriptionPage = ({ location }) => {
                 </AccordionItem>
                 <AccordionItem titleCollapsed="Locations &amp; Contacts">
                   {trial.sites && trial.sites.length > 0 ? (
+
                     <SitesList sites={trial.sites} />
                   ) : noLocInfo.includes(trial.currentTrialStatus.toLower()) ? (
                     <p>Location information is not yet available.</p>
