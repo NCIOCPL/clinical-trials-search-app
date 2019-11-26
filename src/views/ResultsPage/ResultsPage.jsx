@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { updateForm, clearForm } from '../../store/actions';
+import { updateFormField, clearForm } from '../../store/actions';
 import { Delighter, Checkbox, Modal, Pager } from '../../components/atomic';
 import { buildQueryString } from '../../utilities';
 import {
   useModal,
   useQueryToBuildStore,
   useStoreToFindTrials,
-} from '../../utilities/hooks';
+} from '../../hooks';
 import ResultsPageHeader from './ResultsPageHeader';
 import ResultsList from './ResultsList';
 import { history } from '../../services/history.service';
@@ -40,7 +40,7 @@ const ResultsPage = ({ location }) => {
 
   const handleUpdate = (field, value) => {
     dispatch(
-      updateForm({
+      updateFormField({
         field,
         value,
       })
@@ -70,6 +70,12 @@ const ResultsPage = ({ location }) => {
       setPageIsLoading(false);
       setIsLoading(false);
     }
+    dispatch({
+      type: 'LOAD_GLOBAL',
+      payload: {
+        appHasBeenVisited: true
+      },
+    });
   }, []);
 
   useEffect(() => {

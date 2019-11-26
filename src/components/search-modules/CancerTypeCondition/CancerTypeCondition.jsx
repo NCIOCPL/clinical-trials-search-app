@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Fieldset, Autocomplete, InputLabel } from '../../atomic';
 import { getMainType, getCancerTypeDescendents } from '../../../store/actions';
-import { useCachedValues } from '../../../utilities/hooks';
+import { useCachedValues } from '../../../hooks';
 import './CancerTypeCondition.scss';
 require('../../../polyfills/closest');
 

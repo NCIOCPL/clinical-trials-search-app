@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateForm, clearForm } from '../../store/actions';
+import { updateFormField, clearForm } from '../../store/actions';
 import { history } from '../../services/history.service';
 import { getTrial } from '../../store/actions';
-import { useQueryToBuildStore } from '../../utilities/hooks';
+import { useQueryToBuildStore } from '../../hooks';
 import {
   Accordion,
   AccordionItem,
@@ -31,7 +31,7 @@ const TrialDescriptionPage = ({ location }) => {
 
   const handleUpdate = (field, value) => {
     dispatch(
-      updateForm({
+      updateFormField({
         field,
         value,
       })
@@ -72,6 +72,12 @@ const TrialDescriptionPage = ({ location }) => {
     } else {
       dispatch(getTrial({ trialId: currId }));
     }
+    dispatch({
+      type: 'LOAD_GLOBAL',
+      payload: {
+        appHasBeenVisited: true
+      },
+    });
   }, []);
 
   const initTrialData = () => {
