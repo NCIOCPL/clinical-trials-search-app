@@ -14,7 +14,7 @@ const KeywordsPhrases = ({ handleUpdate }) => {
     <Fieldset
       id="keyword"
       legend="Keywords/Phrases"
-      helpUrl="https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/help#keywords"
+      helpUrl="/help#keywords"
     >
       <TextInput
         action={handleKeywordUpdate}

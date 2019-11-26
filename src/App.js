@@ -10,13 +10,10 @@ function App() {
   return (
     <Fragment>
       <Switch>
-        <Route
-          path="/about-cancer/treatment/clinical-trials/search/r"
-          component={ResultsPage}
-        />
-        <Route path="/about-cancer/treatment/clinical-trials/search/v" component={TrialDescriptionPage} />
-        <Route exact path="/about-cancer/treatment/clinical-trials/search/advanced" render={() => <SearchPage formInit="advanced" />} />
-        <Route path="/about-cancer/treatment/clinical-trials/search" component={SearchPage} />
+        <Route path="/r" component={ResultsPage}/>
+        <Route path="/v" component={TrialDescriptionPage} />
+        <Route exact path="/advanced" render={() => <SearchPage formInit="advanced" />} />
+        <Route path="/" component={SearchPage} />
       </Switch>
     </Fragment>
   );

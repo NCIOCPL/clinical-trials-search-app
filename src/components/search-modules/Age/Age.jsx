@@ -26,7 +26,7 @@ const Age = ({ handleUpdate }) => {
     <Fieldset
       id="age"
       legend="Age"
-      helpUrl="https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/help#basicsearch"
+      helpUrl="/help#basicsearch"
     >
       <TextInput
         action={e => handleUpdate(e.target.id, e.target.value)}

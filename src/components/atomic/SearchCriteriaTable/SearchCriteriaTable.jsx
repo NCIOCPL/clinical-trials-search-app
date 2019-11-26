@@ -298,9 +298,7 @@ const SearchCriteriaTable = ({
       </Accordion>
       {placement === 'trial' ? (
         <Link
-          to={`/about-cancer/treatment/clinical-trials/search${
-            formType === 'basic' ? '' : '/advanced'
-          }`}
+          to={`${formType === 'basic' ? '/' : '/advanced'}`}
           onClick={handleReset}
         >
           <strong>Start Over</strong>
@@ -308,9 +306,7 @@ const SearchCriteriaTable = ({
       ) : (
         <div className="reset-form">
           <Link
-            to={`/about-cancer/treatment/clinical-trials/search${
-              formType === 'basic' ? '' : '/advanced'
-            }`}
+            to={`${formType === 'basic' ? '/' : '/advanced'}`}
             onClick={handleReset}
           >
             Start Over
@@ -330,9 +326,7 @@ const SearchCriteriaTable = ({
         <>
           <strong>This clinical trial matches: "all trials"</strong> |{' '}
           <Link
-            to={`/about-cancer/treatment/clinical-trials/search${
-              formType === 'basic' ? '' : '/advanced'
-            }`}
+            to={`${formType === 'basic' ? '/' : '/advanced'}`}
             onClick={handleReset}
           >
             <strong>Start Over</strong>

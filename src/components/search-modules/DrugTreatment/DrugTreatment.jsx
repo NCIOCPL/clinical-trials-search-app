@@ -60,7 +60,7 @@ const DrugTreatment = ({ handleUpdate, useValue }) => {
     <Fieldset
       id="drug-trtmt"
       legend="Drug/Treatment"
-      helpUrl="https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/help#drugtreatment"
+      helpUrl="/help#drugtreatment"
     >
       <p>Search for a specific drug or intervention.</p>
 

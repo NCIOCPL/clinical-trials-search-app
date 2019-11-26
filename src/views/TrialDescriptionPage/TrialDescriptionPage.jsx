@@ -135,7 +135,7 @@ const TrialDescriptionPage = ({ location }) => {
 
           <Delighter
             classes="cts-which"
-            url="/about-cancer/treatment/clinical-trials/search/trial-guide"
+            url="/trial-guide"
             titleText={<>Which trials are right for you?</>}
           >
             <p>
@@ -234,6 +234,28 @@ const TrialDescriptionPage = ({ location }) => {
     return { __html: formattedStr };
   };
 
+  const toggleAccordionSection = (scope, value) => {
+    let x = scope.querySelector('.cts-accordion__button');
+    let y = scope.nextElementSibling;
+    scope.setAttribute('aria-expanded', value);
+    x.setAttribute('aria-expanded', value);
+    y.setAttribute('aria-hidden', !value);
+  };
+
+  const handleExpandAllSections = () => {
+    let sections = document.querySelectorAll('h2');
+    sections.forEach(item => {
+      toggleAccordionSection(item, true);
+    });
+  };
+
+  const handleHideAllSections = () => {
+    let sections = document.querySelectorAll('h2');
+    sections.forEach(item => {
+      toggleAccordionSection(item, false);
+    });
+  };
+
   return (
     <>
       {isTrialLoading ? (
@@ -244,9 +266,30 @@ const TrialDescriptionPage = ({ location }) => {
           {renderTrialDescriptionHeader()}
           <div className="trial-description-page__description">
             <div className="trial-description-page__content">
-              <TrialStatusIndicator
-                status={trial.currentTrialStatus.toLowerCase()}
-              />
+              <div className="trial-content-header">
+                <TrialStatusIndicator
+                  status={trial.currentTrialStatus.toLowerCase()}
+                />
+                <div className="accordion-control__wrapper">
+                  <button
+                    type="button"
+                    className="accordion-control__button open"
+                    onClick={handleExpandAllSections}
+                  >
+                    <span className="icon expand"></span> Open all{' '}
+                    <span className="show-for-sr">sections</span>
+                  </button>
+                  <button
+                    type="button"
+                    className="accordion-control__button close"
+                    onClick={handleHideAllSections}
+                  >
+                    <span className="icon contract"></span> Close all{' '}
+                    <span className="show-for-sr">sections</span>
+                  </button>
+                </div>
+              </div>
+
               <Accordion>
                 <AccordionItem titleCollapsed="Description" expanded>
                   <p>{trial.briefSummary}</p>
@@ -256,7 +299,6 @@ const TrialDescriptionPage = ({ location }) => {
                 </AccordionItem>
                 <AccordionItem titleCollapsed="Locations &amp; Contacts">
                   {trial.sites && trial.sites.length > 0 ? (
-
                     <SitesList sites={trial.sites} />
                   ) : noLocInfo.includes(trial.currentTrialStatus.toLower()) ? (
                     <p>Location information is not yet available.</p>

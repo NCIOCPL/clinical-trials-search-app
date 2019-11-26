@@ -63,7 +63,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    history.push('/about-cancer/treatment/clinical-trials/search/r');
+    history.push('/r');
   };
 
   const renderDelighters = () => (
@@ -90,7 +90,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
 
       <Delighter
         classes="cts-what"
-        url="/about-cancer/treatment/clinical-trials/what-are-trials"
+        url="/what-are-trials"
         titleText={<>What Are Cancer Clinical Trials?</>}
       >
         <p>Learn what they are and what you should know about them.</p>
@@ -98,7 +98,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
 
       <Delighter
         classes="cts-which"
-        url="/about-cancer/treatment/clinical-trials/search/trial-guide"
+        url="/trial-guide"
         titleText={<>Which trials are right for you?</>}
       >
         <p>
@@ -109,11 +109,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
   );
 
   const toggleForm = () => {
-    history.push(
-      `/about-cancer/treatment/clinical-trials/search${
-        formFactor === 'basic' ? '/advanced' : ''
-      }`
-    );
+    history.push(`${formFactor === 'basic' ? '/advanced' : '/'}`);
     let newState = formFactor === 'basic' ? 'advanced' : 'basic';
     handleUpdate('formType', newState);
     setFormFactor(newState);
@@ -146,7 +142,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
       <div className="search-page__header">
         <p>
           NCI-supported clinical trials are those sponsored or otherwise
-          financially supported by NCI. See our guide, <a href="https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/trial-guide">Steps to Find a Clinical
+          financially supported by NCI. See our guide, <a href="/trial-guide">Steps to Find a Clinical
           Trial</a>, to learn about options for finding trials not included in NCI's
           collection.
         </p>
