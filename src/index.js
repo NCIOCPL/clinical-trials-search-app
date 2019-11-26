@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { BrowserRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import { history } from './services/history.service';
 import * as reducers from './store/reducers';
 import {
@@ -74,18 +74,18 @@ const initialize = ({
   if (isRehydrating) {
     ReactDOM.hydrate(
       <Provider store={store}>
-        <BrowserRouter history={history} basename="/about-cancer/treatment/clinical-trials/search">
+        <Router history={history} basename="/about-cancer/treatment/clinical-trials/search">
           <App />
-        </BrowserRouter>
+        </Router>
       </Provider>,
       appRootDOMNode
     );
   } else {
     ReactDOM.render(
       <Provider store={store}>
-        <BrowserRouter history={history} basename="/about-cancer/treatment/clinical-trials/search">
+        <Router history={history} basename="/about-cancer/treatment/clinical-trials/search">
           <App />
-        </BrowserRouter>
+        </Router>
       </Provider>,
       appRootDOMNode
     );
