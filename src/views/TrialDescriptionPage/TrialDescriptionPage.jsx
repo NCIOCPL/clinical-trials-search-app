@@ -135,7 +135,7 @@ const TrialDescriptionPage = ({ location }) => {
 
           <Delighter
             classes="cts-which"
-            url="/about-cancer/treatment/clinical-trials/search/trial-guide"
+            url="/trial-guide"
             titleText={<>Which trials are right for you?</>}
           >
             <p>
@@ -256,7 +256,6 @@ const TrialDescriptionPage = ({ location }) => {
                 </AccordionItem>
                 <AccordionItem titleCollapsed="Locations &amp; Contacts">
                   {trial.sites && trial.sites.length > 0 ? (
-
                     <SitesList sites={trial.sites} />
                   ) : noLocInfo.includes(trial.currentTrialStatus.toLower()) ? (
                     <p>Location information is not yet available.</p>

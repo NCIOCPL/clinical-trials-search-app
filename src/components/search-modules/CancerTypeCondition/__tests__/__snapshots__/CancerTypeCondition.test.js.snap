@@ -14,7 +14,7 @@ exports[`CancerTypeCondition Render renders without error 1`] = `
     <a
       aria-label="Help"
       class="text-icon-help"
-      href="https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/help#cancertype"
+      href="/help#cancertype"
       rel="noopener noreferrer"
       target="_blank"
     >

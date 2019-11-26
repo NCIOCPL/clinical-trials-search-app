@@ -14,7 +14,7 @@ exports[`TrialInvestigators Render renders without error 1`] = `
     <a
       aria-label="Help"
       class="text-icon-help"
-      href="https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/help#trialinvestigators"
+      href="/help#trialinvestigators"
       rel="noopener noreferrer"
       target="_blank"
     >

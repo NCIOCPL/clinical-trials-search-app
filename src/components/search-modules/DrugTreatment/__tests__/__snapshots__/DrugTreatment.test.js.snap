@@ -14,7 +14,7 @@ exports[`DrugTreatment Render renders without error 1`] = `
     <a
       aria-label="Help"
       class="text-icon-help"
-      href="https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/help#drugtreatment"
+      href="/help#drugtreatment"
       rel="noopener noreferrer"
       target="_blank"
     >

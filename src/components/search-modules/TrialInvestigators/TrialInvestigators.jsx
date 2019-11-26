@@ -23,7 +23,7 @@ const TrialInvestigators = ({ handleUpdate }) => {
     <Fieldset
       id="trialInvestigators"
       legend="Trial Investigators"
-      helpUrl="https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/help#trialinvestigators"
+      helpUrl="/help#trialinvestigators"
     >
       <Autocomplete
         id="inv"

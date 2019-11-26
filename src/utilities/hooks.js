@@ -596,7 +596,7 @@ export const useStoreToFindTrials = () => {
   useEffect(() => {
     if (queryParamString !== '') {
       history.replace({
-        path: '/about-cancer/treatment/clinical-trials/search/r',
+        path: '/r',
         search: queryParamString,
       });
 

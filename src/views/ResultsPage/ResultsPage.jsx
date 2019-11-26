@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { updateForm, clearForm } from '../../store/actions';
 import { Delighter, Checkbox, Modal, Pager } from '../../components/atomic';
+import { buildQueryString } from '../../utilities';
 import {
-  buildQueryString,
-} from '../../utilities';
-import { useModal, useQueryToBuildStore, useStoreToFindTrials } from '../../utilities/hooks';
+  useModal,
+  useQueryToBuildStore,
+  useStoreToFindTrials,
+} from '../../utilities/hooks';
 import ResultsPageHeader from './ResultsPageHeader';
 import ResultsList from './ResultsList';
 import { history } from '../../services/history.service';
@@ -24,7 +26,7 @@ const ResultsPage = ({ location }) => {
   const [trialResults, setTrialResults] = useState([]);
   const [resultsCount, setResultsCount] = useState(0);
   const formSnapshot = useSelector(store => store.form);
-  const {resultsPage} = useSelector(store => store.form);
+  const { resultsPage } = useSelector(store => store.form);
   const cache = useSelector(store => store.cache);
   const locsearch = location.search;
   const [formData, setFormData] = useState(formSnapshot);
@@ -34,7 +36,7 @@ const ResultsPage = ({ location }) => {
   const [storeRehydrated, setStoreRehydrated] = useState(false);
   const [currCacheKey, setCurrCacheKey] = useState('');
 
-  const [{fetchTrials}] = useStoreToFindTrials();
+  const [{ fetchTrials }] = useStoreToFindTrials();
 
   const handleUpdate = (field, value) => {
     dispatch(
@@ -78,7 +80,6 @@ const ResultsPage = ({ location }) => {
       setStoreRehydrated(false);
     }
   }, [storeRehydrated]);
-  
 
   //when trial results come in, open up shop
   useEffect(() => {
@@ -170,7 +171,7 @@ const ResultsPage = ({ location }) => {
 
       <Delighter
         classes="cts-which"
-        url="/about-cancer/treatment/clinical-trials/search/trial-guide"
+        url="/trial-guide"
         titleText={<>Which trials are right for you?</>}
       >
         <p>
@@ -246,9 +247,7 @@ const ResultsPage = ({ location }) => {
         </p>
         <p>
           <Link
-            to={`/about-cancer/treatment/clinical-trials/search${
-              formSnapshot.formType === 'basic' ? '' : '/advanced'
-            }`}
+            to={`${formSnapshot.formType === 'basic' ? '/' : '/advanced'}`}
             onClick={handleStartOver}
           >
             Try a new search
@@ -273,9 +272,7 @@ const ResultsPage = ({ location }) => {
         </p>
         <p>
           <Link
-            to={`/about-cancer/treatment/clinical-trials/search${
-              formSnapshot.formType === 'basic' ? '' : '/advanced'
-            }`}
+            to={`${formSnapshot.formType === 'basic' ? '/' : '/advanced'}`}
             onClick={handleStartOver}
           >
             Try a new search

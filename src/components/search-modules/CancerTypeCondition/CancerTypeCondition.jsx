@@ -187,7 +187,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
     <Fieldset
       id="type"
       legend="Cancer Type/Condition"
-      helpUrl="https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/help#cancertype"
+      helpUrl="/help#cancertype"
       classes="cancer-type-condition"
     >
       <p>

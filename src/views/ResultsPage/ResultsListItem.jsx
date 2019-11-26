@@ -160,7 +160,7 @@ const ResultsListItem = ({ id, item, isChecked, onCheckChange, queryParams }) =>
       <div className="results-list-item__contents">
         <div className="results-list-item__title">
           <Link
-            to={`/about-cancer/treatment/clinical-trials/search/v?${itemQueryString}`}
+            to={`/v?${itemQueryString}`}
           >
             {item.briefTitle}
           </Link>

@@ -10,7 +10,7 @@ const TrialId = ({ handleUpdate }) => {
     <Fieldset
       id="trialid"
       legend="Trial ID"
-      helpUrl="https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/help#trialid"
+      helpUrl="/help#trialid"
     >
       <TextInput
         action={e => handleUpdate(e.target.id, e.target.value)}
