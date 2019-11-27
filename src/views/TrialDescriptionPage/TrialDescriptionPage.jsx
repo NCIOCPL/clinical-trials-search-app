@@ -250,16 +250,32 @@ const TrialDescriptionPage = ({ location }) => {
   };
 
   const handleExpandAllSections = () => {
-    let sections = document.querySelectorAll('h2');
-    sections.forEach(item => {
-      toggleAccordionSection(item, true);
+    let headings = document.querySelectorAll('h2.cts-accordion__heading');
+    let buttons = document.querySelectorAll('.cts-accordion__button');
+    let contents = document.querySelectorAll('.cts-accordion__content');
+    headings.forEach(item => {
+      item.setAttribute('aria-expanded', true);
+    });
+    buttons.forEach(item => {
+      item.setAttribute('aria-expanded', true);
+    });
+    contents.forEach(item => {
+      item.setAttribute('aria-hidden', false);
     });
   };
 
   const handleHideAllSections = () => {
-    let sections = document.querySelectorAll('h2');
-    sections.forEach(item => {
-      toggleAccordionSection(item, false);
+    let headings = document.querySelectorAll('h2.cts-accordion__heading');
+    let buttons = document.querySelectorAll('.cts-accordion__button');
+    let contents = document.querySelectorAll('.cts-accordion__content');
+    headings.forEach(item => {
+      item.setAttribute('aria-expanded', false);
+    });
+    buttons.forEach(item => {
+      item.setAttribute('aria-expanded', false);
+    });
+    contents.forEach(item => {
+      item.setAttribute('aria-hidden', true);
     });
   };
 
