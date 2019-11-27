@@ -45,6 +45,7 @@
     }
   }
 
+
   .cts-accordion {
     margin: 1em 0;
   }
@@ -71,6 +72,9 @@
   margin-left: 20px;
   .location {
     margin-left: 20px;
+    + .location {
+      margin-top: 1em;
+    }
   }
 }
 
@@ -165,7 +169,7 @@
 .trial-objectives-outline {
   white-space: pre-wrap;
 }
-
+.trial-type-name,
 .sentence-case {
   display: inline-block;
   text-transform: lowercase;
@@ -173,6 +177,10 @@
   &::first-letter {
     text-transform: uppercase;
   }
+}
+
+.trial-type-name{
+  text-transform: capitalize;
 }
 
 .sites-nearby,

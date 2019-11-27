@@ -331,7 +331,7 @@ const TrialDescriptionPage = ({ location }) => {
                       {`${
                         trial.trialPhase.phaseNumber &&
                         trial.trialPhase.phaseNumber !== 'NA'
-                          ? 'Phase ' + trial.trialPhase.phaseNumber
+                          ? 'Phase ' + trial.trialPhase.phaseNumber.replace('_', '/')
                           : 'No phase specified'
                       }`}
                     </p>
@@ -339,10 +339,10 @@ const TrialDescriptionPage = ({ location }) => {
                       trial.primaryPurpose.code !== '' && (
                         <p className="trial-type">
                           <strong className="field-label">Trial Type</strong>
-                          <span className="sentence-case">
+                          <span className="trial-type-name">
                             {trial.primaryPurpose.code.toLowerCase() === 'other'
                               ? trial.primaryPurpose.otherText
-                              : trial.primaryPurpose.code}
+                              : trial.primaryPurpose.code.toLowerCase().replace('_', ' ')}
                           </span>
                         </p>
                       )}
