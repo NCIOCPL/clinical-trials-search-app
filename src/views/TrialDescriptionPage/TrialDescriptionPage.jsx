@@ -24,6 +24,11 @@ const TrialDescriptionPage = ({ location }) => {
   const currId = parsed.id;
   const [storeRehydrated, setStoreRehydrated] = useState(false);
 
+
+  const cacheSnap = useSelector(store => store.cache);
+  const [searchUsed, setSearchUsed] = useState(Object.keys(cacheSnap).length > 0);
+
+
   const handleUpdate = (field, value) => {
     dispatch(
       updateForm({
@@ -151,14 +156,16 @@ const TrialDescriptionPage = ({ location }) => {
   const renderTrialDescriptionHeader = () => {
     return (
       <div className="trial-description-page__header">
-        <div className="back-to-search btnAsLink">
           {isDirty && (
+        <div className="back-to-search btnAsLink">
             <span onClick={() => history.goBack()}>
               &lt; Back to search results
             </span>
-          )}
         </div>
-        <SearchCriteriaTable handleReset={handleStartOver} placement="trial" />
+          )}
+          {searchUsed &&
+            <SearchCriteriaTable handleReset={handleStartOver} placement="trial" />
+          }
       </div>
     );
   };
