@@ -1,17 +1,38 @@
 // import querystring from 'query-string';
-import { UPDATE_FORM, CLEAR_FORM, RECEIVE_DATA } from './identifiers';
-import {ACTIVE_TRIAL_STATUSES, OTHER_MAIN_TYPES} from '../constants';
-
-
+import {
+  UPDATE_FORM_FIELD,
+  UPDATE_FORM,
+  LOAD_GLOBAL,
+  CLEAR_FORM,
+  RECEIVE_DATA,
+} from './identifiers';
+import { ACTIVE_TRIAL_STATUSES, OTHER_MAIN_TYPES } from '../constants';
 
 /**
  * Facade wrapping a ClinicalTrialsService instance to create app specific methods
  * and simplify interacting with API.  Ported from ctapi-facade.ts from WCMS
  */
 
-export function updateForm({ field, value }) {
+export function updateFormField({ field, value }) {
+  return {
+    type: UPDATE_FORM_FIELD,
+    payload: {
+      field,
+      value,
+    },
+  };
+}
+
+export function updateForm(newState) {
   return {
     type: UPDATE_FORM,
+    payload: newState,
+  };
+}
+
+export function updateGlobal({ field, value }) {
+  return {
+    type: LOAD_GLOBAL,
     payload: {
       field,
       value,
@@ -60,7 +81,6 @@ export function getDiseasesForSimpleTypeAhead({
           },
           fetchHandlers: {
             formatResponse: res => {
-
               let diseases = [...res];
 
               // TODO: DEBUG
@@ -70,7 +90,7 @@ export function getDiseasesForSimpleTypeAhead({
                     (disease.name += ' (' + disease.codes.join('|') + ')')
                 );
               }
-              
+
               return diseases;
             },
           },
@@ -80,10 +100,7 @@ export function getDiseasesForSimpleTypeAhead({
   };
 }
 
-export function getCancerTypeDescendents({
-  cacheKey,
-  codes
-}) {
+export function getCancerTypeDescendents({ cacheKey, codes }) {
   return {
     type: '@@cache/RETRIEVE',
     payload: {
@@ -263,7 +280,6 @@ export function getFindings({ ancestorId, size = 0, isDebug = false }) {
     },
   };
 }
-
 
 export function getCountries({ size = 100 } = {}) {
   return {
@@ -450,8 +466,7 @@ export function searchLeadOrg({ searchText, size = 10 } = {}) {
   };
 }
 
-
-export function searchTrials({cacheKey, data}) {
+export function searchTrials({ cacheKey, data }) {
   return {
     type: '@@api/CTS',
     payload: {
@@ -461,15 +476,15 @@ export function searchTrials({cacheKey, data}) {
         {
           method: 'searchTrials',
           requestParams: {
-            document: JSON.stringify(data)
-          }
-        }
-      ]
-    }
-  }
+            document: JSON.stringify(data),
+          },
+        },
+      ],
+    },
+  };
 }
 
-export function getTrial({trialId}) {
+export function getTrial({ trialId }) {
   return {
     type: '@@api/CTS',
     payload: {
@@ -479,10 +494,10 @@ export function getTrial({trialId}) {
         {
           method: 'getTrial',
           requestParams: {
-            trialId: trialId
+            trialId: trialId,
           },
-        }
-      ]
-    }
-  }
+        },
+      ],
+    },
+  };
 }

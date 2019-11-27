@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { updateFormField, clearForm } from '../../store/actions';
+import { updateFormField, clearForm, updateGlobal } from '../../store/actions';
 import { Delighter, Checkbox, Modal, Pager } from '../../components/atomic';
 import { buildQueryString } from '../../utilities';
 import {
@@ -38,6 +38,18 @@ const ResultsPage = ({ location }) => {
 
   const [{ fetchTrials }] = useStoreToFindTrials();
 
+  const appHasBeenVisited = useSelector(
+    store => store.globals.appHasBeenVisited
+  );
+  const handleUpdateGlobal = (field, value) => {
+    dispatch(
+      updateGlobal({
+        field,
+        value,
+      })
+    );
+  };
+
   const handleUpdate = (field, value) => {
     dispatch(
       updateFormField({
@@ -70,12 +82,9 @@ const ResultsPage = ({ location }) => {
       setPageIsLoading(false);
       setIsLoading(false);
     }
-    dispatch({
-      type: 'LOAD_GLOBAL',
-      payload: {
-        appHasBeenVisited: true
-      },
-    });
+    if (!appHasBeenVisited) {
+      handleUpdateGlobal('appHasBeenVisited', true);
+    }
   }, []);
 
   useEffect(() => {

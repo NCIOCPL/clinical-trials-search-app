@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Delighter, StickySubmitBlock } from '../../components/atomic';
 import {
   Age,
@@ -16,7 +16,7 @@ import {
   ZipCode,
 } from '../../components/search-modules';
 import { history } from '../../services/history.service';
-import { updateForm, clearForm } from '../../store/actions';
+import { updateFormField, updateGlobal } from '../../store/actions';
 
 //Module groups in arrays will be placed side-by-side in the form
 const basicFormModules = [CancerTypeKeyword, [Age, ZipCode]];
@@ -37,9 +37,21 @@ const SearchPage = ({ formInit = 'basic' }) => {
   const sentinelRef = useRef(null);
   const [formFactor, setFormFactor] = useState(formInit);
 
+  const appHasBeenVisited = useSelector(
+    store => store.globals.appHasBeenVisited
+  );
+  const handleUpdateGlobal = (field, value) => {
+    dispatch(
+      updateGlobal({
+        field,
+        value,
+      })
+    );
+  };
+
   const handleUpdate = (field, value) => {
     dispatch(
-      updateForm({
+      updateFormField({
         field,
         value,
       })
@@ -51,6 +63,10 @@ const SearchPage = ({ formInit = 'basic' }) => {
     window.scrollTo(0, 0);
     if (formInit !== 'basic') {
       handleUpdate('formType', formInit);
+    }
+
+    if (!appHasBeenVisited) {
+      handleUpdateGlobal('appHasBeenVisited', true);
     }
   }, []);
 
@@ -139,9 +155,9 @@ const SearchPage = ({ formInit = 'basic' }) => {
       <div className="search-page__header">
         <p>
           NCI-supported clinical trials are those sponsored or otherwise
-          financially supported by NCI. See our guide, <a href="/trial-guide">Steps to Find a Clinical
-          Trial</a>, to learn about options for finding trials not included in NCI's
-          collection.
+          financially supported by NCI. See our guide,{' '}
+          <a href="/trial-guide">Steps to Find a Clinical Trial</a>, to learn
+          about options for finding trials not included in NCI's collection.
         </p>
         {renderSearchTip()}
       </div>

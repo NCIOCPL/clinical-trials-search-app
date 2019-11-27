@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateFormField, clearForm } from '../../store/actions';
+import { updateFormField, clearForm, updateGlobal } from '../../store/actions';
 import { history } from '../../services/history.service';
 import { getTrial } from '../../store/actions';
 import { useQueryToBuildStore } from '../../hooks';
@@ -28,6 +28,17 @@ const TrialDescriptionPage = ({ location }) => {
   const cacheSnap = useSelector(store => store.cache);
   const [searchUsed, setSearchUsed] = useState(Object.keys(cacheSnap).length > 0);
 
+  const appHasBeenVisited = useSelector(
+    store => store.globals.appHasBeenVisited
+  );
+  const handleUpdateGlobal = (field, value) => {
+    dispatch(
+      updateGlobal({
+        field,
+        value,
+      })
+    );
+  };
 
   const handleUpdate = (field, value) => {
     dispatch(
@@ -72,12 +83,9 @@ const TrialDescriptionPage = ({ location }) => {
     } else {
       dispatch(getTrial({ trialId: currId }));
     }
-    dispatch({
-      type: 'LOAD_GLOBAL',
-      payload: {
-        appHasBeenVisited: true
-      },
-    });
+    if (!appHasBeenVisited) {
+      handleUpdateGlobal('appHasBeenVisited', true);
+    }
   }, []);
 
   const initTrialData = () => {
