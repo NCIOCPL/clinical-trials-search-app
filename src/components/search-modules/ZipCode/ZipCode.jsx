@@ -37,7 +37,7 @@ const ZipCode = ({ handleUpdate }) => {
     <Fieldset
       id="zip"
       legend="U.S. Zip Code"
-      helpUrl="/help#basicsearch"
+      helpUrl="/about-cancer/treatment/clinical-trials/search/help#basicsearch"
     >
       <TextInput
         action={handleZipUpdate}

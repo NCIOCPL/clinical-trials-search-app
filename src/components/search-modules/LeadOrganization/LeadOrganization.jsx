@@ -24,7 +24,7 @@ const LeadOrganization = ({ handleUpdate }) => {
     <Fieldset
       id="lead_organization"
       legend="Lead Organization"
-      helpUrl="/help#leadorganization"
+      helpUrl="/about-cancer/treatment/clinical-trials/search/help#leadorganization"
     >
       <Autocomplete
         label="Lead organization"
