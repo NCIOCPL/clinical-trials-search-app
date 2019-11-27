@@ -24,6 +24,11 @@ const TrialDescriptionPage = ({ location }) => {
   const currId = parsed.id;
   const [storeRehydrated, setStoreRehydrated] = useState(false);
 
+
+  const cacheSnap = useSelector(store => store.cache);
+  const [searchUsed, setSearchUsed] = useState(Object.keys(cacheSnap).length > 0);
+
+
   const handleUpdate = (field, value) => {
     dispatch(
       updateForm({
@@ -151,14 +156,16 @@ const TrialDescriptionPage = ({ location }) => {
   const renderTrialDescriptionHeader = () => {
     return (
       <div className="trial-description-page__header">
-        <div className="back-to-search btnAsLink">
           {isDirty && (
+        <div className="back-to-search btnAsLink">
             <span onClick={() => history.goBack()}>
               &lt; Back to search results
             </span>
-          )}
         </div>
-        <SearchCriteriaTable handleReset={handleStartOver} placement="trial" />
+          )}
+          {searchUsed &&
+            <SearchCriteriaTable handleReset={handleStartOver} placement="trial" />
+          }
       </div>
     );
   };
@@ -331,7 +338,7 @@ const TrialDescriptionPage = ({ location }) => {
                       {`${
                         trial.trialPhase.phaseNumber &&
                         trial.trialPhase.phaseNumber !== 'NA'
-                          ? 'Phase ' + trial.trialPhase.phaseNumber
+                          ? 'Phase ' + trial.trialPhase.phaseNumber.replace('_', '/')
                           : 'No phase specified'
                       }`}
                     </p>
@@ -339,10 +346,10 @@ const TrialDescriptionPage = ({ location }) => {
                       trial.primaryPurpose.code !== '' && (
                         <p className="trial-type">
                           <strong className="field-label">Trial Type</strong>
-                          <span className="sentence-case">
+                          <span className="trial-type-name">
                             {trial.primaryPurpose.code.toLowerCase() === 'other'
                               ? trial.primaryPurpose.otherText
-                              : trial.primaryPurpose.code}
+                              : trial.primaryPurpose.code.toLowerCase().replace('_', ' ')}
                           </span>
                         </p>
                       )}
