@@ -110,7 +110,6 @@ const Location = ({ handleUpdate }) => {
     const zipInput = e.target.value;
     handleUpdate('hasInvalidZip', false);
     if (zipInput.length === 5) {
-      console.log('valid!');
       if (/^[0-9]+$/.test(zipInput)) {
         setZipErrorMsg('');
         setInputtedZip(zipInput);

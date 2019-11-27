@@ -259,7 +259,6 @@ const SitesList = sites => {
     const targetVal = e.target.value;
     if (targetVal !== '' && targetVal !== 'all') {
       filtered = statesItems.filter(item => item.state === targetVal);
-      console.log('state: ' + JSON.stringify(filtered));
     } else {
       filtered = locArray;
     }
@@ -382,7 +381,6 @@ const SitesList = sites => {
   };
 
   const generateListDisplay = displayList => {
-    console.log('gld:' + JSON.stringify(displayList));
     return displayList.map((c, idx) => {
       return c.country === 'United States' || c.country === 'Canada' ? (
         <React.Fragment key={'country' + idx}>
@@ -400,7 +398,6 @@ const SitesList = sites => {
   };
 
   const renderSites = () => {
-    console.log(filteredLocArray);
     return (
       <div
         className="sites-all"
