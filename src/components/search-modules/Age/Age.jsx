@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Fieldset, TextInput } from '../../atomic';
 
 const Age = ({ handleUpdate }) => {
-  const {age, ageModified} = useSelector(store => store.form);
+  const {age, ageModified, formType} = useSelector(store => store.form);
   const [errorMsg, setErrorMsg] = useState('');
 
   const validateAgeEntry = () => {
@@ -11,7 +11,7 @@ const Age = ({ handleUpdate }) => {
     if (
       Number.isNaN(parsedAge) ||
       parsedAge > 120 ||
-      parsedAge < 0
+      parsedAge <= 0
     ) {
       setErrorMsg('Please enter a number between 1 and 120.');
     }else {
@@ -22,6 +22,7 @@ const Age = ({ handleUpdate }) => {
     }
   };
 
+  const helperText = (formType === 'basic')? 'Your age helps determine which trials are right for you.' : 'Enter the age of the participant.'
   return (
     <Fieldset
       id="age"
@@ -35,7 +36,7 @@ const Age = ({ handleUpdate }) => {
         label="age"
         labelHidden
         errorMessage={errorMsg}
-        inputHelpText="Your age helps determine which trials are right for you."
+        inputHelpText={helperText}
         maxLength={3}
         onBlur={validateAgeEntry}
         modified={ageModified}

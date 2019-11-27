@@ -33,6 +33,7 @@ const StickySubmitBlock = ({ sentinelRef, onSubmit }) => {
 
   const handleClearForm = e => {
     dispatch(clearForm());
+    window.scrollTo(0, 0);
     window.location.reload();
   }
 
@@ -55,8 +56,6 @@ const StickySubmitBlock = ({ sentinelRef, onSubmit }) => {
         >
           Clear Form
         </button>
-
-        <div className="helper-text">Start your search at any time.</div>
       </div>
     </div>
   );
