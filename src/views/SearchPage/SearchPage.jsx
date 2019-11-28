@@ -105,16 +105,9 @@ const SearchPage = ({ formInit = 'basic' }) => {
     </div>
   );
 
-  const handleClearForm = e => {
-    dispatch(clearForm());
-    window.scrollTo(0, 0);
-    window.location.reload();
-  }
-
   const toggleForm = () => {
     history.push(`${formFactor === 'basic' ? '/advanced' : '/'}`);
     let newState = formFactor === 'basic' ? 'advanced' : 'basic';
-    handleClearForm();
     handleUpdate('formType', newState);
     setFormFactor(newState);
   };
@@ -155,6 +148,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
 
       <div className="search-page__content">
         <form
+          id="cts-search-form"
           onSubmit={handleSubmit}
           className={`search-page__form ${formFactor}`}
         >
