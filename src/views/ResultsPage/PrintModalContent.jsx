@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { usePrintApi } from '../../utilities/hooks';
+import { usePrintApi } from '../../hooks';
 import { history } from '../../services/history.service';
 
 const PrintModalContent = ({ selectedList = [], handleClose = () => {} }) => {

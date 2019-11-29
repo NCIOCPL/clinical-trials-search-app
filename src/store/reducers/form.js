@@ -1,4 +1,4 @@
-import { UPDATE_FORM, CLEAR_FORM } from '../identifiers';
+import { UPDATE_FORM_FIELD, UPDATE_FORM, CLEAR_FORM } from '../identifiers';
 
 export const defaultState = {
   age: '', // (a) Age
@@ -69,10 +69,15 @@ export function addArrayValues(paramName, srcArray) {
 
 export const reducer = (state = defaultState, action) => {
   switch (action.type) {
-    case UPDATE_FORM:
+    case UPDATE_FORM_FIELD:
       return {
         ...state,
         [action.payload.field]: action.payload.value,
+      };
+    case UPDATE_FORM:
+      return {
+        ...state,
+        ...action.payload,
       };
     case CLEAR_FORM:
       return {

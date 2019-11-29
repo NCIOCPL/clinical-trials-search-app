@@ -1,237 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  deepSearchObject,
-  getStateNameFromAbbr,
-  isEmptyObj,
-  formatTrialSearchQuery,
-} from '../utilities';
-import {
-  getMainType,
-  getCancerTypeDescendents,
-  searchTrials,
-} from '../store/actions';
-import { history } from '../services/history.service';
-import axios from 'axios';
+  useCachedValues,
+  useDiseaseLookup,
+  useZipConversion,
+  useInterventionLookup,
+  useTreatmentLookup,
+} from './';
+import { getCancerTypeDescendents, getMainType } from '../store/actions';
+import { isEmptyObj, getStateNameFromAbbr } from '../utilities';
 const queryString = require('query-string');
-
-// Hooks to share common logic between multiple components
-
-export const useCachedValues = cacheKeys => {
-  const [currentVals, setCurrentVals] = useState({
-    ...cacheKeys.map(key => ({ [key]: [] })),
-  });
-  const cache = useSelector(store => store.cache);
-  useEffect(() => {
-    const newVals = Object.assign(
-      {},
-      ...cacheKeys.map(key => {
-        const result = deepSearchObject(key, cache);
-        return { [key]: result[0] || [] };
-      })
-    );
-    setCurrentVals(newVals);
-  }, [cache]);
-  return currentVals;
-};
-
-export const useChipList = (chiplistName, handleUpdate) => {
-  const list = useSelector(store => store.form[chiplistName]);
-  const [chips, setChips] = useState([]);
-  useEffect(() => {
-    handleUpdate(chiplistName, [...chips]);
-  }, [chips, chiplistName, handleUpdate]);
-  const add = item => {
-    //prevent dupes
-    const newChips = [...chips, { label: item }];
-    setChips([...new Set(newChips)]);
-  };
-  const remove = item => {
-    let newChips = chips.filter(value => {
-      return value.label !== item;
-    });
-    setChips([...newChips]);
-  };
-
-  return {
-    list,
-    add,
-    remove,
-  };
-};
-
-// showing and hiding a react modal component
-export const useModal = () => {
-  const [isShowing, setIsShowing] = useState(false);
-  function toggleModal() {
-    setIsShowing(!isShowing);
-
-    if (!isShowing) {
-      document.getElementById('main-content').classList.add('modal-open');
-    } else {
-      document.body.classList.remove('modal-open');
-    }
-  }
-  return {
-    isShowing,
-    toggleModal,
-  };
-};
-
-// fetches cache id for clinical trials print service
-export const usePrintApi = (idList = {}, printAPIUrl = '') => {
-  const [data, setData] = useState({});
-  const [isError, setIsError] = useState(false);
-  const [url, setUrl] = useState();
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsError(false);
-      setIsLoading(true);
-      const headers = {
-        'Content-Type': 'application/json',
-      };
-      try {
-        const result = await axios.post(url, idList, {
-          headers: headers,
-        });
-        setData(result.data);
-      } catch (error) {
-        setIsError(true);
-      }
-      setIsLoading(false);
-    };
-    if (url && url !== '') {
-      fetchData();
-    }
-  }, [url]);
-
-  const doPrint = () => {
-    setUrl(printAPIUrl);
-  };
-
-  return [{ data, isLoading, isError, doPrint }];
-};
-
-export const useZipConversion = updateFunc => {
-  const [zip, setZip] = useState();
-  const [isError, setIsError] = useState(false);
-  const zipBase = useSelector(store => store.globals.zipConversionEndpoint);
-
-  useEffect(() => {
-    const fetchZipCoords = async () => {
-      setIsError(false);
-      const url = `${zipBase}/${zip}`;
-      try {
-        const response = await axios.get(url);
-        // if we don't get back a message, good to go
-        if (response.data && !response.data.message) {
-          updateFunc('zipCoords', response.data);
-        } else {
-          updateFunc('hasInvalidZip', true);
-        }
-      } catch (error) {
-        updateFunc('hasInvalidZip', true);
-        setIsError(true);
-      }
-    };
-    if (zip && zip !== '') {
-      fetchZipCoords();
-    }
-  }, [zip]);
-
-  const getZipCoords = lookupZip => {
-    setZip(lookupZip);
-  };
-  return [{ getZipCoords, isError }];
-};
-
-export const useDiseaseLookup = () => {
-  const [ctCode, setCtCode] = useState('');
-  const [ctObj, setCtObj] = useState({});
-
-  useEffect(() => {
-    const fetchDisease = async () => {
-      const url = `https://clinicaltrialsapi.cancer.gov/v1/diseases?code=${ctCode}`;
-      try {
-        const response = await axios.get(url);
-        setCtObj(response.data.terms[0]);
-      } catch (error) {}
-    };
-    if (ctCode !== '') {
-      fetchDisease();
-    }
-  }, [ctCode]);
-
-  const getBasicDiseaseFromCode = diseaseCode => {
-    setCtCode(diseaseCode);
-  };
-
-  return [{ getBasicDiseaseFromCode, ctObj }];
-};
-
-export const useInterventionLookup = updateFunc => {
-  const [codesList, setCodesList] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const headers = {
-        'Content-Type': 'application/json',
-      };
-      const url = 'https://ctsproxy.cancer.gov/v1/interventions';
-      try {
-        const response = await axios.post(
-          url,
-          { code: codesList },
-          {
-            headers: headers,
-          }
-        );
-        updateFunc('drugs', response.data.terms);
-      } catch (error) {}
-    };
-    if (codesList.length > 0) {
-      fetchData();
-    }
-  }, [codesList]);
-
-  const getInterventionByCode = codesArr => {
-    setCodesList(codesArr);
-  };
-  return [{ getInterventionByCode }];
-};
-
-export const useTreatmentLookup = updateFunc => {
-  const [codesList, setCodesList] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const headers = {
-        'Content-Type': 'application/json',
-      };
-      const url = 'https://ctsproxy.cancer.gov/v1/interventions';
-      try {
-        const response = await axios.post(
-          url,
-          { code: codesList },
-          {
-            headers: headers,
-          }
-        );
-        updateFunc('treatments', response.data.terms);
-      } catch (error) {}
-    };
-    if (codesList.length > 0) {
-      fetchData();
-    }
-  }, [codesList]);
-
-  const getTreatmentByCode = codesArr => {
-    setCodesList(codesArr);
-  };
-  return [{ getTreatmentByCode }];
-};
 
 export const useQueryToBuildStore = (
   baseQuery,
@@ -288,7 +66,7 @@ export const useQueryToBuildStore = (
   }, [maintypeOptions, cancerCode]);
 
   useEffect(() => {
-    if(inputtedZip !== ''){
+    if (inputtedZip !== '') {
       getZipCoords(inputtedZip);
     }
   }, [inputtedZip]);
@@ -586,32 +364,4 @@ export const useQueryToBuildStore = (
   }, [storeObj]);
 
   return [{ buildStoreFromQuery }];
-};
-
-export const useStoreToFindTrials = () => {
-  const dispatch = useDispatch();
-  const currentForm = useSelector(store => store.form);
-  const [queryParamString, setQueryParamString] = useState('');
-
-  useEffect(() => {
-    if (queryParamString !== '') {
-      history.replace({
-        path: '/r',
-        search: queryParamString,
-      });
-
-      dispatch(
-        searchTrials({
-          cacheKey: queryParamString,
-          data: formatTrialSearchQuery(currentForm),
-        })
-      );
-    }
-  }, [queryParamString]);
-
-  const fetchTrials = qs => {
-    setQueryParamString(qs);
-  };
-
-  return [{ fetchTrials }];
 };

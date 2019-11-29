@@ -2,6 +2,7 @@ import { LOAD_GLOBAL, LOAD_GLOBALS } from '../identifiers';
 
 export const initialState = {
   printCacheEndpoint: '',
+  appHasBeenVisited: false,
 };
 
 export const reducer = (state = initialState, action) => {
@@ -9,7 +10,7 @@ export const reducer = (state = initialState, action) => {
     case LOAD_GLOBAL:
       return {
         ...state,
-        [action.payload.key]: action.payload.value,
+        [action.payload.field]: action.payload.value,
       };
     case LOAD_GLOBALS:
       return {

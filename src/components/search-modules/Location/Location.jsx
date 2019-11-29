@@ -10,7 +10,7 @@ import {
 } from '../../atomic';
 import { getCountries, searchHospital } from '../../../store/actions';
 import { matchItemToTerm, sortItems } from '../../../utilities';
-import { useZipConversion } from '../../../utilities/hooks';
+import { useZipConversion } from '../../../hooks';
 import './Location.scss';
 
 import {
@@ -33,7 +33,6 @@ const Location = ({ handleUpdate }) => {
     city,
     states,
     hospital,
-    nihOnly,
     vaOnly,
   } = useSelector(store => store.form);
   const [activeRadio, setActiveRadio] = useState(location);

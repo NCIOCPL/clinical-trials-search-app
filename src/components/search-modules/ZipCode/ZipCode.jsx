@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { useSelector } from 'react-redux';
 import { Fieldset, TextInput } from '../../atomic';
-import {useZipConversion} from '../../../utilities/hooks';
+import {useZipConversion} from '../../../hooks';
 
 const ZipCode = ({ handleUpdate }) => {
   const { zip } = useSelector(store => store.form);

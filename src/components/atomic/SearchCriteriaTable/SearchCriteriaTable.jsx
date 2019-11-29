@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Accordion, AccordionItem, Table } from '../../atomic';
-import { updateForm } from '../../../store/actions';
+import { updateFormField } from '../../../store/actions';
 import './SearchCriteriaTable.scss';
 
 const SearchCriteriaTable = ({
@@ -47,7 +47,7 @@ const SearchCriteriaTable = ({
 
   const handleUpdate = (field, value) => {
     dispatch(
-      updateForm({
+      updateFormField({
         field,
         value,
       })

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateForm, clearForm } from '../../store/actions';
+import { updateFormField, clearForm, updateGlobal } from '../../store/actions';
 import { history } from '../../services/history.service';
 import { getTrial } from '../../store/actions';
-import { useQueryToBuildStore } from '../../utilities/hooks';
+import { useQueryToBuildStore } from '../../hooks';
 import {
   Accordion,
   AccordionItem,
@@ -28,10 +28,21 @@ const TrialDescriptionPage = ({ location }) => {
   const cacheSnap = useSelector(store => store.cache);
   const [searchUsed, setSearchUsed] = useState(Object.keys(cacheSnap).length > 0);
 
+  const appHasBeenVisited = useSelector(
+    store => store.globals.appHasBeenVisited
+  );
+  const handleUpdateGlobal = (field, value) => {
+    dispatch(
+      updateGlobal({
+        field,
+        value,
+      })
+    );
+  };
 
   const handleUpdate = (field, value) => {
     dispatch(
-      updateForm({
+      updateFormField({
         field,
         value,
       })
@@ -71,6 +82,9 @@ const TrialDescriptionPage = ({ location }) => {
       buildStoreFromQuery(qs);
     } else {
       dispatch(getTrial({ trialId: currId }));
+    }
+    if (!appHasBeenVisited) {
+      handleUpdateGlobal('appHasBeenVisited', true);
     }
   }, []);
 
