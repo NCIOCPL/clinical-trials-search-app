@@ -44,7 +44,7 @@ const TrialPhase = ({ handleUpdate }) => {
       id="trialphase"
       classes="trial-phase"
       legend="Trial Phase"
-      helpUrl="/help#trialphase"
+      helpUrl="/about-cancer/treatment/clinical-trials/search/help#trialphase"
     >
       <p>
         Select the trial phases for your search. You may check more than one box

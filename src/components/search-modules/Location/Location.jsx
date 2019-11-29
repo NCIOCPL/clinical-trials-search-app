@@ -127,7 +127,7 @@ const Location = ({ handleUpdate }) => {
     <Fieldset
       id="location"
       legend="Location"
-      helpUrl="/help#location"
+      helpUrl="/about-cancer/treatment/clinical-trials/search/help#location"
       classes="search-location"
     >
       <p>

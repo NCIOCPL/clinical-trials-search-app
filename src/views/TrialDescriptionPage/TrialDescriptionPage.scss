@@ -95,6 +95,18 @@
   }
 }
 
+.cts-share {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto 15px;
+  @media only screen and (min-width: 1025px){
+    display: block;
+    margin: 30px 10px;
+  }
+
+}
+
 .share-btn-container {
   display: flex;
   flex-wrap: nowrap;
@@ -122,6 +134,7 @@
       width: 47%;
     }
   }
+
   .cts-share-email {
     background-color: #14819b;
     .icon-email {
@@ -144,6 +157,8 @@
     }
   }
 }
+
+
 
 .eligibility-criteria {
   ul {

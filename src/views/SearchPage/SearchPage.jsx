@@ -16,7 +16,7 @@ import {
   ZipCode,
 } from '../../components/search-modules';
 import { history } from '../../services/history.service';
-import { updateForm } from '../../store/actions';
+import { updateForm, clearForm } from '../../store/actions';
 
 //Module groups in arrays will be placed side-by-side in the form
 const basicFormModules = [CancerTypeKeyword, [Age, ZipCode]];
@@ -50,13 +50,10 @@ const SearchPage = ({ formInit = 'basic' }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
     if (formInit !== 'basic') {
-      updateFormType();
+      handleUpdate('formType', formInit);
     }
   }, []);
 
-  const updateFormType = () => {
-    handleUpdate('formType', formInit);
-  };
 
   let formModules =
     formFactor === 'advanced' ? advancedFormModules : basicFormModules;
@@ -151,6 +148,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
 
       <div className="search-page__content">
         <form
+          id="cts-search-form"
           onSubmit={handleSubmit}
           className={`search-page__form ${formFactor}`}
         >
