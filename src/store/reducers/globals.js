@@ -2,6 +2,9 @@ import { LOAD_GLOBAL, LOAD_GLOBALS } from '../identifiers';
 
 export const initialState = {
   printCacheEndpoint: '',
+  appHasBeenInitialized: false,
+  initErrorsList: [],
+  // TODO: REMOVE THIS!
   appHasBeenVisited: false,
 };
 

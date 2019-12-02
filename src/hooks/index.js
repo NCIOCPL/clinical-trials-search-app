@@ -6,5 +6,5 @@ export { useZipConversion } from './useZipConversion';
 export { useDiseaseLookup } from './useDiseaseLookup';
 export { useInterventionLookup } from './useInterventionLookup';
 export { useTreatmentLookup } from './useTreatmentLookup';
-export { useQueryToBuildStore } from './useQueryToBuildStore';
 export { useStoreToFindTrials } from './useStoreToFindTrials';
+export { useAppInitializer } from './useAppInitializer';

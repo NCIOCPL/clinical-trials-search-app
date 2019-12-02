@@ -38,9 +38,6 @@ const SearchPage = ({ formInit = 'basic' }) => {
   const sentinelRef = useRef(null);
   const [formFactor, setFormFactor] = useState(formInit);
 
-  const appHasBeenVisited = useSelector(
-    store => store.globals.appHasBeenVisited
-  );
   const handleUpdateGlobal = (field, value) => {
     dispatch(
       updateGlobal({
@@ -64,10 +61,6 @@ const SearchPage = ({ formInit = 'basic' }) => {
     window.scrollTo(0, 0);
     if (formInit !== 'basic') {
       handleUpdate('formType', formInit);
-    }
-
-    if (!appHasBeenVisited) {
-      handleUpdateGlobal('appHasBeenVisited', true);
     }
   }, []);
 

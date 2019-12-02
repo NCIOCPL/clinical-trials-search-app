@@ -75,7 +75,7 @@ const initialize = ({
     ReactDOM.hydrate(
       <Provider store={store}>
         <Router history={history} basename="/about-cancer/treatment/clinical-trials/search">
-          <App />
+          <App services={services} zipConversionEndpoint={zipConversionEndpoint}/>
         </Router>
       </Provider>,
       appRootDOMNode
@@ -84,7 +84,7 @@ const initialize = ({
     ReactDOM.render(
       <Provider store={store}>
         <Router history={history} basename="/about-cancer/treatment/clinical-trials/search">
-          <App />
+          <App services={services} zipConversionEndpoint={zipConversionEndpoint} />
         </Router>
       </Provider>,
       appRootDOMNode

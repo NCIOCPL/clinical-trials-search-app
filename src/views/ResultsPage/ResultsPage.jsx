@@ -7,7 +7,6 @@ import { Delighter, Checkbox, Modal, Pager } from '../../components/atomic';
 import { buildQueryString } from '../../utilities';
 import {
   useModal,
-  useQueryToBuildStore,
   useStoreToFindTrials,
 } from '../../hooks';
 import ResultsPageHeader from './ResultsPageHeader';
@@ -31,16 +30,13 @@ const ResultsPage = ({ location }) => {
   const cache = useSelector(store => store.cache);
   const locsearch = location.search.replace('?', '');
   const [qs, setQs] = useState(
-    queryString.stringify(buildQueryString(formSnapshot))
+    queryString.stringify(buildQueryString(formSnapshot), {arrayFormat: 'comma'})
   );
   const [storeRehydrated, setStoreRehydrated] = useState(false);
   const [currCacheKey, setCurrCacheKey] = useState('');
 
   const [{ fetchTrials }] = useStoreToFindTrials();
 
-  const appHasBeenVisited = useSelector(
-    store => store.globals.appHasBeenVisited
-  );
   const handleUpdateGlobal = (field, value) => {
     dispatch(
       updateGlobal({
@@ -59,20 +55,11 @@ const ResultsPage = ({ location }) => {
     );
   };
 
-  const [{ buildStoreFromQuery }] = useQueryToBuildStore(
-    locsearch,
-    handleUpdate,
-    setStoreRehydrated
-  );
-
   // scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
     if (trialResults && trialResults.total >= 0) {
       initData();
-    } else if (locsearch !== '') {
-      // hydrate the query, it's been pasted in
-      buildStoreFromQuery(locsearch);
     } else if (!formSnapshot.hasInvalidZip) {
       // data is in the store
       setCurrCacheKey(qs);
@@ -81,9 +68,6 @@ const ResultsPage = ({ location }) => {
       //something went wrog
       setPageIsLoading(false);
       setIsLoading(false);
-    }
-    if (!appHasBeenVisited) {
-      handleUpdateGlobal('appHasBeenVisited', true);
     }
   }, []);
 
@@ -152,7 +136,7 @@ const ResultsPage = ({ location }) => {
       // update qs
       const parsed = queryString.parse(location.search);
       parsed.pn = currentPage + 1;
-      let newqs = queryString.stringify(parsed);
+      let newqs = queryString.stringify(parsed, {arrayFormat: 'comma'});
       setQs(newqs);
       setCurrCacheKey(newqs);
       history.push({

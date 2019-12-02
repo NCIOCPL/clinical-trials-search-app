@@ -180,6 +180,7 @@
     "enzyme-adapter-react-16": "^1.14.0",
     "enzyme-to-json": "^3.4.0",
     "jest-enzyme": "^7.1.1",
+    "nock": "^11.7.0",
     "node-sass": "^4.12.0",
     "plop": "^2.4.0",
     "redux-devtools-extension": "^2.13.8",
