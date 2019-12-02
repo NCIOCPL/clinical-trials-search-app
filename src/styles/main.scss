@@ -1,4 +1,4 @@
-#NCI-CTS-root{
+#NCI-CTS-root {
   min-height: 100vh;
 }
 .show-for-sr {
@@ -27,9 +27,9 @@
   }
 }
 
+
 // atomic
-@import 
-  '../components/atomic/Accordion/Accordion',
+@import '../components/atomic/Accordion/Accordion',
   '../components/atomic/Autocomplete/Autocomplete',
   '../components/atomic/Checkbox/Checkbox.scss',
   '../components/atomic/Delighter/Delighter',
@@ -48,8 +48,7 @@
   '../components/atomic/Toggle/Toggle';
 
 // search modules
-@import 
-  '../components/search-modules/Age/Age',
+@import '../components/search-modules/Age/Age',
   '../components/search-modules/CancerTypeCondition/CancerTypeCondition',
   '../components/search-modules/DrugTreatment/DrugTreatment',
   '../components/search-modules/Location/Location',
@@ -57,7 +56,6 @@
   '../components/search-modules/TrialType/TrialType';
 
 // Views
-@import 
-  '../views/ResultsPage/ResultsPage',
+@import '../views/ResultsPage/ResultsPage', 
   '../views/SearchPage/SearchPage',
   '../views/TrialDescriptionPage/TrialDescriptionPage';

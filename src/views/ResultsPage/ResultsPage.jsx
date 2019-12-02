@@ -28,8 +28,7 @@ const ResultsPage = ({ location }) => {
   const formSnapshot = useSelector(store => store.form);
   const { resultsPage } = useSelector(store => store.form);
   const cache = useSelector(store => store.cache);
-  const locsearch = location.search;
-  const [formData, setFormData] = useState(formSnapshot);
+  const locsearch = location.search.replace('?', '');
   const [qs, setQs] = useState(
     queryString.stringify(buildQueryString(formSnapshot))
   );
@@ -161,6 +160,46 @@ const ResultsPage = ({ location }) => {
       fetchTrials(newqs);
     }
   };
+  const renderResultsListLoader = () => (
+    <div className="loader__results-list-wrapper">
+      <div className="loader__results-list">
+        <div className="loader__results-list-title">
+          <div></div>
+          <div></div>
+        </div>
+        <div className="loader__results-list-labels">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      <div className="loader__results-list">
+        <div className="loader__results-list-title">
+          <div></div>
+          <div></div>
+        </div>
+        <div className="loader__results-list-labels">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      <div className="loader__results-list">
+        <div className="loader__results-list-title">
+          <div></div>
+          <div></div>
+        </div>
+        <div className="loader__results-list-labels">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+  );
 
   const renderDelighters = () => (
     <div className="cts-delighter-container">
@@ -200,39 +239,43 @@ const ResultsPage = ({ location }) => {
     const cbxId = isBottom ? 'select-all-cbx-bottom' : 'select-all-cbx-top';
     return (
       <>
-        {resultsCount > 0 ? (
+        {isLoading || resultsCount > 0 ? (
           <div
             className={`results-page__control ${
               isBottom ? '--bottom' : '--top'
             }`}
           >
-            <div className="results-page__select-all">
-              <Checkbox
-                id={cbxId}
-                name="select-all"
-                label="Select all on page"
-                checked={selectAll}
-                classes="check-all"
-                onChange={handleSelectAll}
-              />
-              <button
-                className="results-page__print-button"
-                ref={printSelectedBtn}
-                onClick={handlePrintSelected}
-              >
-                Print Selected
-              </button>
-            </div>
-            <div className="results-page__pager">
-              {trialResults && trialResults.total > 1 && (
-                <Pager
-                  data={trialResults.trials}
-                  callback={handlePagination}
-                  startFromPage={resultsPage}
-                  totalItems={trialResults.total}
-                />
-              )}
-            </div>
+            {!isLoading && trialResults.total !== 0 && (
+              <>
+                <div className="results-page__select-all">
+                  <Checkbox
+                    id={cbxId}
+                    name="select-all"
+                    label="Select all on page"
+                    checked={selectAll}
+                    classes="check-all"
+                    onChange={handleSelectAll}
+                  />
+                  <button
+                    className="results-page__print-button"
+                    ref={printSelectedBtn}
+                    onClick={handlePrintSelected}
+                  >
+                    Print Selected
+                  </button>
+                </div>
+                <div className="results-page__pager">
+                  {trialResults && trialResults.total > 1 && (
+                    <Pager
+                      data={trialResults.trials}
+                      callback={handlePagination}
+                      startFromPage={resultsPage}
+                      totalItems={trialResults.total}
+                    />
+                  )}
+                </div>
+              </>
+            )}
           </div>
         ) : null}
       </>
@@ -301,22 +344,26 @@ const ResultsPage = ({ location }) => {
     <>
       <article className="results-page">
         <h1>Clinical Trials Search Results</h1>
-        {isLoading ? (
-          <>Loading...</>
-        ) : formSnapshot.hasInvalidZip ? (
+        {formSnapshot.hasInvalidZip ? (
           <>{renderInvalidZip()}</>
         ) : (
           <>
-            <ResultsPageHeader
-              resultsCount={resultsCount}
-              pageNum={resultsPage}
-              handleUpdate={handleUpdate}
-              handleReset={handleStartOver}
-            />
+            {(isLoading)
+              ? (<div className="loader__pageheader"></div>)
+              : (<ResultsPageHeader
+                resultsCount={resultsCount}
+                pageNum={resultsPage}
+                handleUpdate={handleUpdate}
+                handleReset={handleStartOver}
+              />)
+            }
+            
             <div className="results-page__content">
               {renderControls()}
               <div className="results-page__list">
-                {trialResults && trialResults.total === 0 ? (
+                {isLoading ? (
+                  <>{renderResultsListLoader()}</>
+                ) : trialResults && trialResults.total === 0 ? (
                   <>{renderNoResults()}</>
                 ) : (
                   <ResultsList
@@ -327,6 +374,7 @@ const ResultsPage = ({ location }) => {
                     setSelectAll={setSelectAll}
                   />
                 )}
+
                 <aside className="results-page__aside --side">
                   {renderDelighters()}
                 </aside>

@@ -1,5 +1,6 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import {receiveData} from '../../store/actions';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Checkbox from '../../components/atomic/Checkbox';
@@ -7,6 +8,7 @@ import { isWithinRadius } from '../../utilities';
 const queryString = require('query-string');
 
 const ResultsListItem = ({ id, item, isChecked, onCheckChange, queryParams }) => {
+  const dispatch = useDispatch();
   const {
     zip,
     zipCoords,
@@ -16,6 +18,8 @@ const ResultsListItem = ({ id, item, isChecked, onCheckChange, queryParams }) =>
     states,
     city,
   } = useSelector(store => store.form);
+
+
 
   const qsQbj = queryString.parse(queryParams);
   qsQbj.id = item.nciID;
@@ -144,6 +148,11 @@ const ResultsListItem = ({ id, item, isChecked, onCheckChange, queryParams }) =>
     return `${item.sites.length} location${item.sites.length === 1 ? '' : 's'}`;
   };
 
+  const setCachedTitle = () => {
+    dispatch(
+      receiveData('currentTrialTitle', item.briefTitle)
+    )
+  }
 
   return (
     <div className="results-list-item results-list__item">
@@ -161,6 +170,7 @@ const ResultsListItem = ({ id, item, isChecked, onCheckChange, queryParams }) =>
         <div className="results-list-item__title">
           <Link
             to={`/v?${itemQueryString}`}
+            onClick={setCachedTitle}
           >
             {item.briefTitle}
           </Link>
