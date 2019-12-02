@@ -70,13 +70,12 @@ const SearchPage = ({ formInit = 'basic' }) => {
     }
   }, []);
 
-
   let formModules =
     formFactor === 'advanced' ? advancedFormModules : basicFormModules;
 
   const handleSubmit = e => {
     e.preventDefault();
-    history.push('/r');
+    history.push('/about-cancer/treatment/clinical-trials/search/r');
   };
 
   const renderDelighters = () => (
@@ -122,7 +121,13 @@ const SearchPage = ({ formInit = 'basic' }) => {
   );
 
   const toggleForm = () => {
-    history.push(`${formFactor === 'basic' ? '/advanced' : '/'}`);
+    history.push(
+      `${
+        formFactor === 'basic'
+          ? '/about-cancer/treatment/clinical-trials/search/advanced'
+          : '/about-cancer/treatment/clinical-trials/search'
+      }`
+    );
     let newState = formFactor === 'basic' ? 'advanced' : 'basic';
     handleUpdate('formType', newState);
     setFormFactor(newState);
@@ -156,7 +161,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
         <p>
           NCI-supported clinical trials are those sponsored or otherwise
           financially supported by NCI. See our guide,{' '}
-          <a href="/trial-guide">Steps to Find a Clinical Trial</a>, to learn
+          <a href="/about-cancer/treatment/clinical-trials/search/trial-guide">Steps to Find a Clinical Trial</a>, to learn
           about options for finding trials not included in NCI's collection.
         </p>
         {renderSearchTip()}

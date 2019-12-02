@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import {useDispatch} from 'react-redux';
 import { clearForm } from '../../../store/actions';
+import { history } from '../../../services/history.service';
 import PropTypes from 'prop-types';
 import './StickySubmitBlock.scss';
 
@@ -34,7 +35,7 @@ const StickySubmitBlock = ({ sentinelRef, onSubmit }) => {
   const handleClearForm = e => {
     dispatch(clearForm());
     window.scrollTo(0, 0);
-    window.location.reload();
+    history.push('/about-cancer/treatment/clinical-trials/search/advanced');
   }
 
   const intObserver = new IntersectionObserver(callback, options);

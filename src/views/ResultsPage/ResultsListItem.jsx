@@ -169,7 +169,7 @@ const ResultsListItem = ({ id, item, isChecked, onCheckChange, queryParams }) =>
       <div className="results-list-item__contents">
         <div className="results-list-item__title">
           <Link
-            to={`/v?${itemQueryString}`}
+            to={`/about-cancer/treatment/clinical-trials/search/v?${itemQueryString}`}
             onClick={setCachedTitle}
           >
             {item.briefTitle}
