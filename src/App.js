@@ -11,17 +11,18 @@ const App = () => {
   const appHasBeenVisited = useSelector(
     store => store.globals.appHasBeenVisited
   );
+  
   return (
     <Fragment>
       <Switch>
-        <Route path="/r" component={ResultsPage} />
-        <Route path="/v" component={TrialDescriptionPage} />
+        <Route path="/about-cancer/treatment/clinical-trials/search/r" component={ResultsPage} />
+        <Route path="/about-cancer/treatment/clinical-trials/search/v" component={TrialDescriptionPage} />
         <Route
           exact
-          path="/advanced"
+          path="/about-cancer/treatment/clinical-trials/search/advanced"
           render={() => <SearchPage formInit="advanced" />}
         />
-        <Route path="/" component={SearchPage} />
+        <Route path="/about-cancer/treatment/clinical-trials/search/" component={SearchPage} />
       </Switch>
     </Fragment>
   );

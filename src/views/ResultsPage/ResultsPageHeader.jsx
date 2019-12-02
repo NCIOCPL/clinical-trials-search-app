@@ -45,7 +45,7 @@ const ResultsPageHeader = ({
       handleUpdate('formType', 'advanced');
     }
     handleUpdate('refineSearch', true);
-    history.push('/search/advanced');
+    history.push('/about-cancer/treatment/clinical-trials/search/advanced');
   };
 
   return (

@@ -75,7 +75,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    history.push('/r');
+    history.push('/about-cancer/treatment/clinical-trials/search/r');
   };
 
   const renderDelighters = () => (

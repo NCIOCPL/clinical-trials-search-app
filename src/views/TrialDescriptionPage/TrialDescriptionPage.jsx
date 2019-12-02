@@ -261,14 +261,6 @@ const TrialDescriptionPage = ({ location }) => {
     return { __html: formattedStr };
   };
 
-  const toggleAccordionSection = (scope, value) => {
-    let x = scope.querySelector('.cts-accordion__button');
-    let y = scope.nextElementSibling;
-    scope.setAttribute('aria-expanded', value);
-    x.setAttribute('aria-expanded', value);
-    y.setAttribute('aria-hidden', !value);
-  };
-
   const handleExpandAllSections = () => {
     let headings = document.querySelectorAll('h2.cts-accordion__heading');
     let buttons = document.querySelectorAll('.cts-accordion__button');
@@ -313,7 +305,7 @@ const TrialDescriptionPage = ({ location }) => {
       ) : (
         <h1>{trial.briefTitle}</h1>
       )}
-
+      {renderTrialDescriptionHeader()}
       <div className="trial-description-page__description">
         <div className="trial-description-page__content">
           {isTrialLoading ? (
