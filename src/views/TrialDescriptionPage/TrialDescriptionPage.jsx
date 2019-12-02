@@ -300,189 +300,184 @@ const TrialDescriptionPage = ({ location }) => {
   };
 
   return (
-    <>
-      <article className="trial-description-page">
-        {isTrialLoading ? (
-          trialTitle ? (
-            <h1>{trialTitle}</h1>
-          ) : (
-            <div className="loader__trial-title">
-              <div className="skeleton"></div>
-              <div className="skeleton"></div>
-            </div>
-          )
+    <article className="trial-description-page">
+      {isTrialLoading ? (
+        trialTitle ? (
+          <h1>{trialTitle}</h1>
         ) : (
-          <h1>{trial.briefTitle}</h1>
-        )}
-        <div className="trial-description-page__description">
-          <div className="trial-description-page__content">
-            {isTrialLoading ? (
-              <>
-                <div className="loader__mock-accordion">
-                  <div></div>
-                  <div className="loader__mock-description">
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                  </div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                </div>
-              </>
-            ) : (
-              <>
-                <div className="trial-content-header">
-                  <TrialStatusIndicator
-                    status={trial.currentTrialStatus.toLowerCase()}
-                  />
-                  <div className="accordion-control__wrapper">
-                    <button
-                      type="button"
-                      className="accordion-control__button open"
-                      onClick={handleExpandAllSections}
-                    >
-                      <span className="icon expand"></span> Open all{' '}
-                      <span className="show-for-sr">sections</span>
-                    </button>
-                    <button
-                      type="button"
-                      className="accordion-control__button close"
-                      onClick={handleHideAllSections}
-                    >
-                      <span className="icon contract"></span> Close all{' '}
-                      <span className="show-for-sr">sections</span>
-                    </button>
-                  </div>
-                </div>
+          <div className="loader__trial-title">
+            <div className="skeleton"></div>
+            <div className="skeleton"></div>
+          </div>
+        )
+      ) : (
+        <h1>{trial.briefTitle}</h1>
+      )}
 
-                <Accordion>
-                  <AccordionItem titleCollapsed="Description" expanded>
-                    <p>{trial.briefSummary}</p>
-                  </AccordionItem>
-                  <AccordionItem titleCollapsed="Eligibility Criteria">
-                    {renderEligibilityCriteria()}
-                  </AccordionItem>
-                  <AccordionItem titleCollapsed="Locations &amp; Contacts">
-                    {trial.sites && trial.sites.length > 0 ? (
-                      <SitesList sites={trial.sites} />
-                    ) : noLocInfo.includes(
-                        trial.currentTrialStatus.toLower()
-                      ) ? (
-                      <p>Location information is not yet available.</p>
-                    ) : (
-                      <p>
-                        See trial information on{' '}
-                        <a
-                          href={`https://www.clinicaltrials.gov/show/${trial.NCTID}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          ClinicalTrials.gov
-                        </a>{' '}
-                        for a list of participating sites.
-                      </p>
-                    )}
-                  </AccordionItem>
-                  <AccordionItem titleCollapsed="Trial Objectives and Outline">
-                    {trial.detailedDescription && (
-                      <div
-                        className="trial-objectives-outline"
-                        dangerouslySetInnerHTML={prettifyDescription()}
-                      />
-                    )}
-                  </AccordionItem>
-                  <AccordionItem titleCollapsed="Trial Phase &amp; Type">
+      <div className="trial-description-page__description">
+        <div className="trial-description-page__content">
+          {isTrialLoading ? (
+            <>
+              <div className="loader__mock-accordion">
+                <div></div>
+                <div className="loader__mock-description">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="trial-content-header">
+                <TrialStatusIndicator
+                  status={trial.currentTrialStatus.toLowerCase()}
+                />
+                <div className="accordion-control__wrapper">
+                  <button
+                    type="button"
+                    className="accordion-control__button open"
+                    onClick={handleExpandAllSections}
+                  >
+                    <span className="icon expand"></span> Open all{' '}
+                    <span className="show-for-sr">sections</span>
+                  </button>
+                  <button
+                    type="button"
+                    className="accordion-control__button close"
+                    onClick={handleHideAllSections}
+                  >
+                    <span className="icon contract"></span> Close all{' '}
+                    <span className="show-for-sr">sections</span>
+                  </button>
+                </div>
+              </div>
+
+              <Accordion>
+                <AccordionItem titleCollapsed="Description" expanded>
+                  <p>{trial.briefSummary}</p>
+                </AccordionItem>
+                <AccordionItem titleCollapsed="Eligibility Criteria">
+                  {renderEligibilityCriteria()}
+                </AccordionItem>
+                <AccordionItem titleCollapsed="Locations &amp; Contacts">
+                  {trial.sites && trial.sites.length > 0 ? (
+                    <SitesList sites={trial.sites} />
+                  ) : noLocInfo.includes(trial.currentTrialStatus.toLower()) ? (
+                    <p>Location information is not yet available.</p>
+                  ) : (
+                    <p>
+                      See trial information on{' '}
+                      <a
+                        href={`https://www.clinicaltrials.gov/show/${trial.NCTID}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        ClinicalTrials.gov
+                      </a>{' '}
+                      for a list of participating sites.
+                    </p>
+                  )}
+                </AccordionItem>
+                <AccordionItem titleCollapsed="Trial Objectives and Outline">
+                  {trial.detailedDescription && (
+                    <div
+                      className="trial-objectives-outline"
+                      dangerouslySetInnerHTML={prettifyDescription()}
+                    />
+                  )}
+                </AccordionItem>
+                <AccordionItem titleCollapsed="Trial Phase &amp; Type">
+                  <>
+                    <p className="trial-phase">
+                      <strong className="field-label">Trial Phase</strong>
+                      {`${
+                        trial.trialPhase.phaseNumber &&
+                        trial.trialPhase.phaseNumber !== 'NA'
+                          ? 'Phase ' +
+                            trial.trialPhase.phaseNumber.replace('_', '/')
+                          : 'No phase specified'
+                      }`}
+                    </p>
+                    {trial.primaryPurpose.code &&
+                      trial.primaryPurpose.code !== '' && (
+                        <p className="trial-type">
+                          <strong className="field-label">Trial Type</strong>
+                          <span className="trial-type-name">
+                            {trial.primaryPurpose.code.toLowerCase() === 'other'
+                              ? trial.primaryPurpose.otherText
+                              : trial.primaryPurpose.code
+                                  .toLowerCase()
+                                  .replace(/_/g, " ")}
+                          </span>
+                        </p>
+                      )}
+                  </>
+                </AccordionItem>
+                {(trial.leadOrganizationName ||
+                  trial.principalInvestigator) && (
+                  <AccordionItem titleCollapsed="Lead Organization">
                     <>
-                      <p className="trial-phase">
-                        <strong className="field-label">Trial Phase</strong>
-                        {`${
-                          trial.trialPhase.phaseNumber &&
-                          trial.trialPhase.phaseNumber !== 'NA'
-                            ? 'Phase ' +
-                              trial.trialPhase.phaseNumber.replace('_', '/')
-                            : 'No phase specified'
-                        }`}
-                      </p>
-                      {trial.primaryPurpose.code &&
-                        trial.primaryPurpose.code !== '' && (
-                          <p className="trial-type">
-                            <strong className="field-label">Trial Type</strong>
-                            <span className="trial-type-name">
-                              {trial.primaryPurpose.code.toLowerCase() ===
-                              'other'
-                                ? trial.primaryPurpose.otherText
-                                : trial.primaryPurpose.code
-                                    .toLowerCase()
-                                    .replace('_', ' ')}
-                            </span>
+                      {trial.leadOrganizationName &&
+                        trial.leadOrganizationName !== '' && (
+                          <p className="leadOrg">
+                            <strong className="field-label">
+                              Lead Organization
+                            </strong>
+                            {trial.leadOrganizationName}
+                          </p>
+                        )}
+                      {trial.principalInvestigator &&
+                        trial.principalInvestigator !== '' && (
+                          <p className="investigator">
+                            <strong className="field-label">
+                              Principal Investigator
+                            </strong>
+                            {trial.principalInvestigator}
                           </p>
                         )}
                     </>
                   </AccordionItem>
-                  {(trial.leadOrganizationName ||
-                    trial.principalInvestigator) && (
-                    <AccordionItem titleCollapsed="Lead Organization">
-                      <>
-                        {trial.leadOrganizationName &&
-                          trial.leadOrganizationName !== '' && (
-                            <p className="leadOrg">
-                              <strong className="field-label">
-                                Lead Organization
-                              </strong>
-                              {trial.leadOrganizationName}
-                            </p>
-                          )}
-                        {trial.principalInvestigator &&
-                          trial.principalInvestigator !== '' && (
-                            <p className="investigator">
-                              <strong className="field-label">
-                                Principal Investigator
-                              </strong>
-                              {trial.principalInvestigator}
-                            </p>
-                          )}
-                      </>
-                    </AccordionItem>
-                  )}
-                  <AccordionItem titleCollapsed="Trial IDs">
-                    <ul className="trial-ids">
-                      <li>
-                        <strong className="field-label">Primary ID</strong>
-                        {trial.protocolID}
-                      </li>
-                      {renderSecondaryIDs()}
-                      <li>
-                        <strong className="field-label">
-                          Clinicaltials.gov ID
-                        </strong>
-                        <a
-                          href={`http://clinicaltrials.gov/show/${trial.nctID}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {trial.nctID}
-                        </a>
-                      </li>
-                    </ul>
-                  </AccordionItem>
-                </Accordion>
-              </>
-            )}
-          </div>
-
-          <div className="trial-description-page__aside">
-            {renderDelighters()}
-          </div>
+                )}
+                <AccordionItem titleCollapsed="Trial IDs">
+                  <ul className="trial-ids">
+                    <li>
+                      <strong className="field-label">Primary ID</strong>
+                      {trial.protocolID}
+                    </li>
+                    {renderSecondaryIDs()}
+                    <li>
+                      <strong className="field-label">
+                        Clinicaltials.gov ID
+                      </strong>
+                      <a
+                        href={`http://clinicaltrials.gov/show/${trial.nctID}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {trial.nctID}
+                      </a>
+                    </li>
+                  </ul>
+                </AccordionItem>
+              </Accordion>
+            </>
+          )}
         </div>
-        )}
-      </article>
-    </>
+
+        <div className="trial-description-page__aside">
+          {renderDelighters()}
+        </div>
+      </div>
+    </article>
   );
 };
 
