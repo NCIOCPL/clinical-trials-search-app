@@ -293,23 +293,25 @@ const TrialDescriptionPage = ({ location }) => {
 
   return (
     <>
-      <Helmet>
-        <title>{trial.briefTitle}</title>
-        <meta property="og:title" content={trial.briefTitle} />
-        <link
-          rel="canonical"
-          href={`https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/v?id=${currId}`}
-        />
-        <meta
-          property="og:url"
-          content={`https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/v?id=${currId}`}
-        />
-        <meta name="description" content={trial.briefTitle} />
-        <meta
-          property="og:description"
-          content={`${trial.briefTitle} - ${trial.nctID}`}
-        />
-      </Helmet>
+      {!isTrialLoading && (
+        <Helmet>
+          <title>{trial.briefTitle}</title>
+          <meta property="og:title" content={trial.briefTitle} />
+          <link
+            rel="canonical"
+            href={`https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/v?id=${currId}`}
+          />
+          <meta
+            property="og:url"
+            content={`https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/v?id=${currId}`}
+          />
+          <meta name="description" content={trial.briefTitle} />
+          <meta
+            property="og:description"
+            content={`${trial.briefTitle} - ${trial.nctID}`}
+          />
+        </Helmet>
+      )}
       <article className="trial-description-page">
         {isTrialLoading ? (
           trialTitle ? (
