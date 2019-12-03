@@ -161,6 +161,7 @@ const ResultsPage = ({ location }) => {
       fetchTrials(newqs);
     }
   };
+  
   const renderResultsListLoader = () => (
     <div className="loader__results-list-wrapper">
       <div className="loader__results-list">
@@ -306,7 +307,7 @@ const ResultsPage = ({ location }) => {
         </p>
         <p>
           <Link
-            to={`${formSnapshot.formType === 'basic' ? '/' : '/advanced'}`}
+            to={`${formSnapshot.formType === 'basic' ? '/about-cancer/treatment/clinical-trials/search' : '/about-cancer/treatment/clinical-trials/search/advanced'}`}
             onClick={handleStartOver}
           >
             Try a new search
@@ -331,7 +332,7 @@ const ResultsPage = ({ location }) => {
         </p>
         <p>
           <Link
-            to={`${formSnapshot.formType === 'basic' ? '/' : '/advanced'}`}
+            to={`${formSnapshot.formType === 'basic' ? '/about-cancer/treatment/clinical-trials/search' : '/about-cancer/treatment/clinical-trials/search/advanced'}`}
             onClick={handleStartOver}
           >
             Try a new search
