@@ -79,6 +79,7 @@ const SitesList = sites => {
 
   useEffect(() => {
     setFilteredLocArray(locArray);
+    handleFilterByCountry({target: {value: 'United States'}});
   }, [locArray]);
 
   useEffect(() => {
