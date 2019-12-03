@@ -68,7 +68,7 @@ const ResultsPageHeader = ({
               <>
                 for: "all trials" &nbsp; | &nbsp;
                 <Link
-                  to={`${formType === 'basic' ? '/' : '/advanced'}`}
+                  to={`${formType === 'basic' ? '/about-cancer/treatment/clinical-trials/search' : '/about-cancer/treatment/clinical-trials/search/advanced'}`}
                   onClick={handleReset}
                 >
                   Start Over

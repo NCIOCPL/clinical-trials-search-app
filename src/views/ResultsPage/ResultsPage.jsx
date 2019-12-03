@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import {Helmet} from 'react-helmet';
 import { updateFormField, clearForm, updateGlobal } from '../../store/actions';
 import { Delighter, Checkbox, Modal, Pager } from '../../components/atomic';
 import { buildQueryString } from '../../utilities';
@@ -160,6 +161,7 @@ const ResultsPage = ({ location }) => {
       fetchTrials(newqs);
     }
   };
+  
   const renderResultsListLoader = () => (
     <div className="loader__results-list-wrapper">
       <div className="loader__results-list">
@@ -305,7 +307,7 @@ const ResultsPage = ({ location }) => {
         </p>
         <p>
           <Link
-            to={`${formSnapshot.formType === 'basic' ? '/' : '/advanced'}`}
+            to={`${formSnapshot.formType === 'basic' ? '/about-cancer/treatment/clinical-trials/search' : '/about-cancer/treatment/clinical-trials/search/advanced'}`}
             onClick={handleStartOver}
           >
             Try a new search
@@ -330,7 +332,7 @@ const ResultsPage = ({ location }) => {
         </p>
         <p>
           <Link
-            to={`${formSnapshot.formType === 'basic' ? '/' : '/advanced'}`}
+            to={`${formSnapshot.formType === 'basic' ? '/about-cancer/treatment/clinical-trials/search' : '/about-cancer/treatment/clinical-trials/search/advanced'}`}
             onClick={handleStartOver}
           >
             Try a new search
@@ -342,6 +344,28 @@ const ResultsPage = ({ location }) => {
 
   return (
     <>
+      <Helmet>
+        <title>
+          Clinical Trials Search Results - National Cancer Institute
+        </title>
+        <meta property="og:title" content="Clinical Trials Search Results" />
+        <link
+          rel="canonical"
+          href={`https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?${qs}`}
+        />
+        <meta
+          property="og:url"
+          content={`https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?${qs}`}
+        />
+        <meta
+          name="description"
+          content="Find an NCI-supported clinical trial - Search results"
+        />
+        <meta
+          property="og:description"
+          content="Find an NCI-supported clinical trial - Search results"
+        />
+      </Helmet>
       <article className="results-page">
         <h1>Clinical Trials Search Results</h1>
         {formSnapshot.hasInvalidZip ? (

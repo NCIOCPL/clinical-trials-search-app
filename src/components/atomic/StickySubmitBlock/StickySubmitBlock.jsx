@@ -35,7 +35,7 @@ const StickySubmitBlock = ({ sentinelRef, onSubmit }) => {
   const handleClearForm = e => {
     dispatch(clearForm());
     window.scrollTo(0, 0);
-    history.push('/about-cancer/treatment/clinical-trials/search/advanced');
+    window.location.reload(false);
   }
 
   const intObserver = new IntersectionObserver(callback, options);
