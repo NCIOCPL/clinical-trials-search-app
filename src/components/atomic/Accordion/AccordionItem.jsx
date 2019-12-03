@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Utilities from '../../../utilities/utilities';
+import {uniqueIdForComponent} from '../../../utilities';
 
 class AccordionItem extends React.Component {
   static propTypes = {
@@ -38,7 +38,7 @@ class AccordionItem extends React.Component {
   //  variable to that ID which will cause the component to re-render.
 
   componentDidMount() {
-    let id = Utilities.uniqueIdForComponent(this);
+    let id = uniqueIdForComponent(this);
     this.setState({ uuid: id });
   }
 

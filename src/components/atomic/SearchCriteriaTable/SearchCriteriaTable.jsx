@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Accordion, AccordionItem, Table } from '../../atomic';
-import { updateForm } from '../../../store/actions';
+import { updateFormField } from '../../../store/actions';
 import './SearchCriteriaTable.scss';
 
 const SearchCriteriaTable = ({
@@ -47,7 +47,7 @@ const SearchCriteriaTable = ({
 
   const handleUpdate = (field, value) => {
     dispatch(
-      updateForm({
+      updateFormField({
         field,
         value,
       })
@@ -298,9 +298,7 @@ const SearchCriteriaTable = ({
       </Accordion>
       {placement === 'trial' ? (
         <Link
-          to={`/about-cancer/treatment/clinical-trials/search${
-            formType === 'basic' ? '' : '/advanced'
-          }`}
+          to={`${formType === 'basic' ? '/about-cancer/treatment/clinical-trials/search/' : '/about-cancer/treatment/clinical-trials/search/advanced'}`}
           onClick={handleReset}
         >
           <strong>Start Over</strong>
@@ -308,9 +306,7 @@ const SearchCriteriaTable = ({
       ) : (
         <div className="reset-form">
           <Link
-            to={`/about-cancer/treatment/clinical-trials/search${
-              formType === 'basic' ? '' : '/advanced'
-            }`}
+            to={`${formType === 'basic' ? '/about-cancer/treatment/clinical-trials/search/' : '/about-cancer/treatment/clinical-trials/search/advanced'}`}
             onClick={handleReset}
           >
             Start Over
@@ -330,9 +326,7 @@ const SearchCriteriaTable = ({
         <>
           <strong>This clinical trial matches: "all trials"</strong> |{' '}
           <Link
-            to={`/about-cancer/treatment/clinical-trials/search${
-              formType === 'basic' ? '' : '/advanced'
-            }`}
+            to={`${formType === 'basic' ? '/about-cancer/treatment/clinical-trials/search/' : '/about-cancer/treatment/clinical-trials/search/advanced'}`}
             onClick={handleReset}
           >
             <strong>Start Over</strong>

@@ -9,8 +9,8 @@ import {
   Autocomplete,
 } from '../../atomic';
 import { getCountries, searchHospital } from '../../../store/actions';
-import { matchItemToTerm, sortItems } from '../../../utilities/utilities';
-import { useZipConversion } from '../../../utilities/hooks';
+import { matchItemToTerm, sortItems } from '../../../utilities';
+import { useZipConversion } from '../../../hooks';
 import './Location.scss';
 
 import {
@@ -33,7 +33,6 @@ const Location = ({ handleUpdate }) => {
     city,
     states,
     hospital,
-    nihOnly,
     vaOnly,
   } = useSelector(store => store.form);
   const [activeRadio, setActiveRadio] = useState(location);
@@ -110,7 +109,6 @@ const Location = ({ handleUpdate }) => {
     const zipInput = e.target.value;
     handleUpdate('hasInvalidZip', false);
     if (zipInput.length === 5) {
-      console.log('valid!');
       if (/^[0-9]+$/.test(zipInput)) {
         setZipErrorMsg('');
         setInputtedZip(zipInput);
@@ -128,7 +126,7 @@ const Location = ({ handleUpdate }) => {
     <Fieldset
       id="location"
       legend="Location"
-      helpUrl="https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/help#location"
+      helpUrl="/about-cancer/treatment/clinical-trials/search/help#location"
       classes="search-location"
     >
       <p>

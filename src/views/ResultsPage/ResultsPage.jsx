@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { updateForm, clearForm } from '../../store/actions';
+import {Helmet} from 'react-helmet';
+import { updateFormField, clearForm, updateGlobal } from '../../store/actions';
 import { Delighter, Checkbox, Modal, Pager } from '../../components/atomic';
+import { buildQueryString } from '../../utilities';
 import {
-  buildQueryString,
-} from '../../utilities/utilities';
-import { useModal, useQueryToBuildStore, useStoreToFindTrials } from '../../utilities/hooks';
+  useModal,
+  useQueryToBuildStore,
+  useStoreToFindTrials,
+} from '../../hooks';
 import ResultsPageHeader from './ResultsPageHeader';
 import ResultsList from './ResultsList';
 import { history } from '../../services/history.service';
@@ -24,21 +27,32 @@ const ResultsPage = ({ location }) => {
   const [trialResults, setTrialResults] = useState([]);
   const [resultsCount, setResultsCount] = useState(0);
   const formSnapshot = useSelector(store => store.form);
-  const {resultsPage} = useSelector(store => store.form);
+  const { resultsPage } = useSelector(store => store.form);
   const cache = useSelector(store => store.cache);
-  const locsearch = location.search;
-  const [formData, setFormData] = useState(formSnapshot);
+  const locsearch = location.search.replace('?', '');
   const [qs, setQs] = useState(
     queryString.stringify(buildQueryString(formSnapshot))
   );
   const [storeRehydrated, setStoreRehydrated] = useState(false);
   const [currCacheKey, setCurrCacheKey] = useState('');
 
-  const [{fetchTrials}] = useStoreToFindTrials();
+  const [{ fetchTrials }] = useStoreToFindTrials();
+
+  const appHasBeenVisited = useSelector(
+    store => store.globals.appHasBeenVisited
+  );
+  const handleUpdateGlobal = (field, value) => {
+    dispatch(
+      updateGlobal({
+        field,
+        value,
+      })
+    );
+  };
 
   const handleUpdate = (field, value) => {
     dispatch(
-      updateForm({
+      updateFormField({
         field,
         value,
       })
@@ -68,6 +82,9 @@ const ResultsPage = ({ location }) => {
       setPageIsLoading(false);
       setIsLoading(false);
     }
+    if (!appHasBeenVisited) {
+      handleUpdateGlobal('appHasBeenVisited', true);
+    }
   }, []);
 
   useEffect(() => {
@@ -78,7 +95,6 @@ const ResultsPage = ({ location }) => {
       setStoreRehydrated(false);
     }
   }, [storeRehydrated]);
-  
 
   //when trial results come in, open up shop
   useEffect(() => {
@@ -145,6 +161,47 @@ const ResultsPage = ({ location }) => {
       fetchTrials(newqs);
     }
   };
+  
+  const renderResultsListLoader = () => (
+    <div className="loader__results-list-wrapper">
+      <div className="loader__results-list">
+        <div className="loader__results-list-title">
+          <div></div>
+          <div></div>
+        </div>
+        <div className="loader__results-list-labels">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      <div className="loader__results-list">
+        <div className="loader__results-list-title">
+          <div></div>
+          <div></div>
+        </div>
+        <div className="loader__results-list-labels">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      <div className="loader__results-list">
+        <div className="loader__results-list-title">
+          <div></div>
+          <div></div>
+        </div>
+        <div className="loader__results-list-labels">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+  );
 
   const renderDelighters = () => (
     <div className="cts-delighter-container">
@@ -170,7 +227,7 @@ const ResultsPage = ({ location }) => {
 
       <Delighter
         classes="cts-which"
-        url="/about-cancer/treatment/clinical-trials/search/trial-guide"
+        url="/trial-guide"
         titleText={<>Which trials are right for you?</>}
       >
         <p>
@@ -184,39 +241,43 @@ const ResultsPage = ({ location }) => {
     const cbxId = isBottom ? 'select-all-cbx-bottom' : 'select-all-cbx-top';
     return (
       <>
-        {resultsCount > 0 ? (
+        {isLoading || resultsCount > 0 ? (
           <div
             className={`results-page__control ${
               isBottom ? '--bottom' : '--top'
             }`}
           >
-            <div className="results-page__select-all">
-              <Checkbox
-                id={cbxId}
-                name="select-all"
-                label="Select all on page"
-                checked={selectAll}
-                classes="check-all"
-                onChange={handleSelectAll}
-              />
-              <button
-                className="results-page__print-button"
-                ref={printSelectedBtn}
-                onClick={handlePrintSelected}
-              >
-                Print Selected
-              </button>
-            </div>
-            <div className="results-page__pager">
-              {trialResults && trialResults.total > 1 && (
-                <Pager
-                  data={trialResults.trials}
-                  callback={handlePagination}
-                  startFromPage={resultsPage}
-                  totalItems={trialResults.total}
-                />
-              )}
-            </div>
+            {!isLoading && trialResults.total !== 0 && (
+              <>
+                <div className="results-page__select-all">
+                  <Checkbox
+                    id={cbxId}
+                    name="select-all"
+                    label="Select all on page"
+                    checked={selectAll}
+                    classes="check-all"
+                    onChange={handleSelectAll}
+                  />
+                  <button
+                    className="results-page__print-button"
+                    ref={printSelectedBtn}
+                    onClick={handlePrintSelected}
+                  >
+                    Print Selected
+                  </button>
+                </div>
+                <div className="results-page__pager">
+                  {trialResults && trialResults.total > 1 && (
+                    <Pager
+                      data={trialResults.trials}
+                      callback={handlePagination}
+                      startFromPage={resultsPage}
+                      totalItems={trialResults.total}
+                    />
+                  )}
+                </div>
+              </>
+            )}
           </div>
         ) : null}
       </>
@@ -246,9 +307,7 @@ const ResultsPage = ({ location }) => {
         </p>
         <p>
           <Link
-            to={`/about-cancer/treatment/clinical-trials/search${
-              formSnapshot.formType === 'basic' ? '' : '/advanced'
-            }`}
+            to={`${formSnapshot.formType === 'basic' ? '/about-cancer/treatment/clinical-trials/search' : '/about-cancer/treatment/clinical-trials/search/advanced'}`}
             onClick={handleStartOver}
           >
             Try a new search
@@ -273,9 +332,7 @@ const ResultsPage = ({ location }) => {
         </p>
         <p>
           <Link
-            to={`/about-cancer/treatment/clinical-trials/search${
-              formSnapshot.formType === 'basic' ? '' : '/advanced'
-            }`}
+            to={`${formSnapshot.formType === 'basic' ? '/about-cancer/treatment/clinical-trials/search' : '/about-cancer/treatment/clinical-trials/search/advanced'}`}
             onClick={handleStartOver}
           >
             Try a new search
@@ -287,24 +344,50 @@ const ResultsPage = ({ location }) => {
 
   return (
     <>
+      <Helmet>
+        <title>
+          Clinical Trials Search Results - National Cancer Institute
+        </title>
+        <meta property="og:title" content="Clinical Trials Search Results" />
+        <link
+          rel="canonical"
+          href={`https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?${qs}`}
+        />
+        <meta
+          property="og:url"
+          content={`https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?${qs}`}
+        />
+        <meta
+          name="description"
+          content="Find an NCI-supported clinical trial - Search results"
+        />
+        <meta
+          property="og:description"
+          content="Find an NCI-supported clinical trial - Search results"
+        />
+      </Helmet>
       <article className="results-page">
         <h1>Clinical Trials Search Results</h1>
-        {isLoading ? (
-          <>Loading...</>
-        ) : formSnapshot.hasInvalidZip ? (
+        {formSnapshot.hasInvalidZip ? (
           <>{renderInvalidZip()}</>
         ) : (
           <>
-            <ResultsPageHeader
-              resultsCount={resultsCount}
-              pageNum={resultsPage}
-              handleUpdate={handleUpdate}
-              handleReset={handleStartOver}
-            />
+            {(isLoading)
+              ? (<div className="loader__pageheader"></div>)
+              : (<ResultsPageHeader
+                resultsCount={resultsCount}
+                pageNum={resultsPage}
+                handleUpdate={handleUpdate}
+                handleReset={handleStartOver}
+              />)
+            }
+            
             <div className="results-page__content">
               {renderControls()}
               <div className="results-page__list">
-                {trialResults && trialResults.total === 0 ? (
+                {isLoading ? (
+                  <>{renderResultsListLoader()}</>
+                ) : trialResults && trialResults.total === 0 ? (
                   <>{renderNoResults()}</>
                 ) : (
                   <ResultsList
@@ -315,6 +398,7 @@ const ResultsPage = ({ location }) => {
                     setSelectAll={setSelectAll}
                   />
                 )}
+
                 <aside className="results-page__aside --side">
                   {renderDelighters()}
                 </aside>

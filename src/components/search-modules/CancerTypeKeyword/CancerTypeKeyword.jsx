@@ -22,7 +22,7 @@ const CancerTypeKeyword = ({ handleUpdate }) => {
     <Fieldset
       id="type"
       legend="Cancer Type/Keyword"
-      helpUrl="https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/help#basicsearch"
+      helpUrl="/about-cancer/treatment/clinical-trials/search/help#basicsearch"
     >
       <Autocomplete
         id="ctk"

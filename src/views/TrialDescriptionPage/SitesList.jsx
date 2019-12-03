@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Dropdown } from '../../components/atomic';
-import { getStateNameFromAbbr } from '../../utilities/utilities';
-import { isWithinRadius } from '../../utilities/utilities';
+import { getStateNameFromAbbr } from '../../utilities/';
+import { isWithinRadius } from '../../utilities';
 
 const SitesList = sites => {
   const [locArray, setLocArray] = useState([]);
@@ -79,6 +79,7 @@ const SitesList = sites => {
 
   useEffect(() => {
     setFilteredLocArray(locArray);
+    handleFilterByCountry({target: {value: 'United States'}});
   }, [locArray]);
 
   useEffect(() => {
@@ -126,7 +127,7 @@ const SitesList = sites => {
           c.states.push(s);
         });
         if (isAllSites) {
-          setStatesItems(c);
+          setStatesItems(c.states);
         }
         masterArray.unshift(c);
       } else if (countryName === 'Canada') {
@@ -258,7 +259,7 @@ const SitesList = sites => {
     let filtered = [];
     const targetVal = e.target.value;
     if (targetVal !== '' && targetVal !== 'all') {
-      filtered = statesItems.states.filter(item => item.state === targetVal);
+      filtered = statesItems.filter(item => item.state === targetVal);
     } else {
       filtered = locArray;
     }
@@ -335,20 +336,29 @@ const SitesList = sites => {
     });
   };
 
+  const renderStateSites = stateArr => {
+    return (
+      <>
+        {stateArr.cities.length > 0 && (
+          <div className="location-state">
+            <h4>{getStateNameFromAbbr(stateArr.state)}</h4>
+            {renderSitesByCity(stateArr.cities)}
+          </div>
+        )}
+      </>
+    );
+  };
+
   //render North American Sites
   const renderNASites = sitesArr => {
     return (
       <>
+        <h3>{sitesArr.country}</h3>
         {sitesArr.country === 'United States'
           ? sitesArr.states.map((siteState, idx) => {
               return (
                 <React.Fragment key={'state-' + idx}>
-                  {siteState.cities.length > 0 && (
-                    <div className="location-state">
-                      <h4>{getStateNameFromAbbr(siteState.state)}</h4>
-                      {renderSitesByCity(siteState.cities)}
-                    </div>
-                  )}
+                  {renderStateSites(siteState)}
                 </React.Fragment>
               );
             })
@@ -372,22 +382,23 @@ const SitesList = sites => {
   };
 
   const generateListDisplay = displayList => {
-    return displayList.map((country, idx) => {
-      return country.country === 'United States' ||
-        country.country === 'Canada' ? (
+    return displayList.map((c, idx) => {
+      return c.country === 'United States' || c.country === 'Canada' ? (
         <React.Fragment key={'country' + idx}>
-          {renderNASites(country)}
+          {renderNASites(c)}
         </React.Fragment>
+      ) : c.state ? (
+        renderStateSites(c)
       ) : (
         <div className="location-country" key={'country' + idx}>
-          <h3>{country.country}</h3>
-          {renderSitesByCity(country.cities)}
+          <h3>{c.country}</h3>
+          {renderSitesByCity(c.cities)}
         </div>
       );
     });
   };
 
-  const renderAllSites = () => {
+  const renderSites = () => {
     return (
       <div
         className="sites-all"
@@ -414,7 +425,7 @@ const SitesList = sites => {
     <>
       {renderFilterDropdowns()}
       {renderNearbySites()}
-      {renderAllSites()}
+      {renderSites()}
     </>
   );
 };

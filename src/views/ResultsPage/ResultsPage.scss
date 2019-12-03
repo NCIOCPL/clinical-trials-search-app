@@ -3,6 +3,7 @@
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+    min-height: 136px;
 
     label {
       margin-top: 15px;
@@ -21,6 +22,7 @@
 
     @media screen and (min-width: 1025px) {
       flex-direction: row;
+      min-height: 76px;
       &.--top {
         flex-direction: row;
       }
@@ -193,7 +195,7 @@
     margin: 30px 0;
   }
 
-  &.invalid-zip{
+  &.invalid-zip {
     li {
       position: relative;
       margin-top: 0.5em;
@@ -203,7 +205,7 @@
         content: '\2022';
         display: inline;
         position: absolute;
-        left: -.75em;
+        left: -0.75em;
         top: 0.25em;
         margin: 0;
         font-size: 1.1em;
@@ -237,5 +239,101 @@
       font-weight: bold;
       margin-right: 5px;
     }
+  }
+}
+
+.loader__pageheader {
+  margin-top: 36px;
+  width: 95%;
+  @media screen and (min-width: 1025px) {
+    width: 60%;
+
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    display: inline-block;
+    border-radius: 4px;
+    background: #eee;
+    height: 18px;
+  }
+  &::before {
+    width: 74%;
+    margin-right: 2%;
+  }
+  &::after {
+    width: 24%;
+  }
+
+}
+.loader__results-list {
+  width: 100%;
+  padding-left: 45px;
+  animation: threadskeleton 3s ease-in-out forwards infinite;
+  ~ .loader__results-list {
+    animation-delay: 300ms;
+    ~ .loader__results-list {
+      animation-delay: 600ms;
+    }
+  }
+  + .loader__results-list {
+    margin-top: 35px;
+  }
+  &-wrapper {
+    width: 100%;
+    overflow: hidden;
+    margin: 30px 0;
+  }
+  &-title {
+    div {
+      border-radius: 4px;
+      background: #eee;
+      height: 18px;
+      width: 90%;
+      + div {
+        margin-top: 4px;
+      }
+      &:last-child {
+        width: 65%;
+      }
+    }
+  }
+  &-labels {
+    margin-top: 8px;
+    width: 185px;
+    div {
+      border-radius: 4px;
+      background: #eee;
+      height: 16px;
+      + div {
+        margin-top: 4px;
+      }
+      &:first-child {
+        width: 55%;
+      }
+      &:nth-child(2) {
+        width: 90%;
+      }
+    }
+  }
+}
+
+@keyframes threadskeleton {
+  0%,
+  20% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+
+  40%,
+  85% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.6) translateY(0);
   }
 }

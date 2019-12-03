@@ -65,25 +65,25 @@ const ResultsPageHeader = ({
             } `}{' '}
             of {resultsCount} for your search{' '}
             {!isDirty ? (
-                <>
-                  for: "all trials" &nbsp; | &nbsp;
-                  <Link
-                    to={`/about-cancer/treatment/clinical-trials/search${
-                      formType === 'basic' ? '' : '/advanced'
-                    }`}
-                    onClick={handleReset}
-                  >
-                    Start Over
-                  </Link>
-                </>
-              ) : (
-                ''
-              )
-            }
+              <>
+                for: "all trials" &nbsp; | &nbsp;
+                <Link
+                  to={`${formType === 'basic' ? '/about-cancer/treatment/clinical-trials/search' : '/about-cancer/treatment/clinical-trials/search/advanced'}`}
+                  onClick={handleReset}
+                >
+                  Start Over
+                </Link>
+              </>
+            ) : (
+              ''
+            )}
           </strong>
         </div>
       )}
-      <SearchCriteriaTable handleRefine={handleRefineSearch} handleReset={handleReset}/>
+      <SearchCriteriaTable
+        handleRefine={handleRefineSearch}
+        handleReset={handleReset}
+      />
     </div>
   );
 };

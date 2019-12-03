@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Helmet } from 'react-helmet';
 import { Delighter, StickySubmitBlock } from '../../components/atomic';
 import {
   Age,
@@ -16,7 +17,7 @@ import {
   ZipCode,
 } from '../../components/search-modules';
 import { history } from '../../services/history.service';
-import { updateForm } from '../../store/actions';
+import { updateFormField, updateGlobal } from '../../store/actions';
 
 //Module groups in arrays will be placed side-by-side in the form
 const basicFormModules = [CancerTypeKeyword, [Age, ZipCode]];
@@ -37,9 +38,21 @@ const SearchPage = ({ formInit = 'basic' }) => {
   const sentinelRef = useRef(null);
   const [formFactor, setFormFactor] = useState(formInit);
 
+  const appHasBeenVisited = useSelector(
+    store => store.globals.appHasBeenVisited
+  );
+  const handleUpdateGlobal = (field, value) => {
+    dispatch(
+      updateGlobal({
+        field,
+        value,
+      })
+    );
+  };
+
   const handleUpdate = (field, value) => {
     dispatch(
-      updateForm({
+      updateFormField({
         field,
         value,
       })
@@ -50,13 +63,13 @@ const SearchPage = ({ formInit = 'basic' }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
     if (formInit !== 'basic') {
-      updateFormType();
+      handleUpdate('formType', formInit);
+    }
+
+    if (!appHasBeenVisited) {
+      handleUpdateGlobal('appHasBeenVisited', true);
     }
   }, []);
-
-  const updateFormType = () => {
-    handleUpdate('formType', formInit);
-  };
 
   let formModules =
     formFactor === 'advanced' ? advancedFormModules : basicFormModules;
@@ -90,7 +103,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
 
       <Delighter
         classes="cts-what"
-        url="/about-cancer/treatment/clinical-trials/what-are-trials"
+        url="/what-are-trials"
         titleText={<>What Are Cancer Clinical Trials?</>}
       >
         <p>Learn what they are and what you should know about them.</p>
@@ -98,7 +111,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
 
       <Delighter
         classes="cts-which"
-        url="/about-cancer/treatment/clinical-trials/search/trial-guide"
+        url="/trial-guide"
         titleText={<>Which trials are right for you?</>}
       >
         <p>
@@ -110,8 +123,10 @@ const SearchPage = ({ formInit = 'basic' }) => {
 
   const toggleForm = () => {
     history.push(
-      `/about-cancer/treatment/clinical-trials/search${
-        formFactor === 'basic' ? '/advanced' : ''
+      `${
+        formFactor === 'basic'
+          ? '/about-cancer/treatment/clinical-trials/search/advanced'
+          : '/about-cancer/treatment/clinical-trials/search'
       }`
     );
     let newState = formFactor === 'basic' ? 'advanced' : 'basic';
@@ -141,13 +156,45 @@ const SearchPage = ({ formInit = 'basic' }) => {
 
   return (
     <article className="search-page">
+      <Helmet>
+        <title>
+          Find NCI-Supported Clinical Trials - National Cancer Institute
+        </title>
+        <link
+          rel="canonical"
+          href={`https://www.cancer.gov/about-cancer/treatment/clinical-trials/search${
+            formFactor === 'basic' ? '' : 'advanced'
+          }`}
+        />
+        <meta
+          name="description"
+          content="Find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one."
+        />
+        <meta
+          property="og:title"
+          content="Find NCI-Supported Clinical Trials"
+        />
+        <meta
+          property="og:url"
+          content={`https://www.cancer.gov/about-cancer/treatment/clinical-trials/search${
+            formFactor === 'basic' ? '' : 'advanced'
+          }`}
+        />
+        <meta
+          property="og:description"
+          content="Find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one."
+        />
+      </Helmet>
       <div ref={sentinelRef} className="search-page__sentinel"></div>
       <h1>Find NCI-Supported Clinical Trials</h1>
       <div className="search-page__header">
         <p>
           NCI-supported clinical trials are those sponsored or otherwise
-          financially supported by NCI. See our guide, <a href="https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/trial-guide">Steps to Find a Clinical
-          Trial</a>, to learn about options for finding trials not included in NCI's
+          financially supported by NCI. See our guide,{' '}
+          <a href="https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/trial-guide">
+            Steps to Find a Clinical Trial
+          </a>
+          , to learn about options for finding trials not included in NCI's
           collection.
         </p>
         {renderSearchTip()}
@@ -155,6 +202,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
 
       <div className="search-page__content">
         <form
+          id="cts-search-form"
           onSubmit={handleSubmit}
           className={`search-page__form ${formFactor}`}
         >

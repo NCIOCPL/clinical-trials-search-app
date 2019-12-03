@@ -51,7 +51,7 @@ const TrialType = ({ handleUpdate }) => {
       id="trialtype"
       legend="Trial Type"
       classes="trial-type"
-      helpUrl="https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/help#trialtype"
+      helpUrl="/about-cancer/treatment/clinical-trials/search/help#trialtype"
     >
       <p>
         Select the type of trial for your search. You may check more than one

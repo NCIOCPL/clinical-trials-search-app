@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { useSelector } from 'react-redux';
 import { Fieldset, TextInput } from '../../atomic';
-import {useZipConversion} from '../../../utilities/hooks';
+import {useZipConversion} from '../../../hooks';
 
 const ZipCode = ({ handleUpdate }) => {
   const { zip } = useSelector(store => store.form);
@@ -37,7 +37,7 @@ const ZipCode = ({ handleUpdate }) => {
     <Fieldset
       id="zip"
       legend="U.S. Zip Code"
-      helpUrl="https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/help#basicsearch"
+      helpUrl="/about-cancer/treatment/clinical-trials/search/help#basicsearch"
     >
       <TextInput
         action={handleZipUpdate}

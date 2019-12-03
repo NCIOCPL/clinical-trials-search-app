@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Fieldset, Autocomplete, InputLabel } from '../../atomic';
 import { getMainType, getCancerTypeDescendents } from '../../../store/actions';
-import { useCachedValues } from '../../../utilities/hooks';
+import { useCachedValues } from '../../../hooks';
 import './CancerTypeCondition.scss';
 require('../../../polyfills/closest');
 
@@ -187,7 +187,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
     <Fieldset
       id="type"
       legend="Cancer Type/Condition"
-      helpUrl="https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/help#cancertype"
+      helpUrl="/about-cancer/treatment/clinical-trials/search/help#cancertype"
       classes="cancer-type-condition"
     >
       <p>

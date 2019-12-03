@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Utilities from '../../../utilities/utilities';
+import {uniqueIdForComponent} from '../../../utilities';
 import InputLabel from '../InputLabel';
 import './TextInput.scss';
 
@@ -67,7 +67,7 @@ class TextInput extends React.Component {
     };
 
     // Generate an HTML ID if one was not provided
-    this.id = this.props.id || Utilities.uniqueIdForComponent();
+    this.id = this.props.id || uniqueIdForComponent();
   }
 
   componentDidUpdate(prevProps) {

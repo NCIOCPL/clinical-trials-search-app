@@ -10,7 +10,7 @@ import * as reducers from './store/reducers';
 import {
   loadStateFromSessionStorage,
   saveStatetoSessionStorage,
-} from './utilities/utilities';
+} from './utilities';
 import './index.css';
 import createCTSMiddleware from './middleware/CTSMiddleware';
 import cacheMiddleware from './middleware/cacheMiddleware';
@@ -74,7 +74,7 @@ const initialize = ({
   if (isRehydrating) {
     ReactDOM.hydrate(
       <Provider store={store}>
-        <Router history={history}>
+        <Router history={history} basename="/about-cancer/treatment/clinical-trials/search">
           <App />
         </Router>
       </Provider>,
@@ -83,7 +83,7 @@ const initialize = ({
   } else {
     ReactDOM.render(
       <Provider store={store}>
-        <Router history={history}>
+        <Router history={history} basename="/about-cancer/treatment/clinical-trials/search">
           <App />
         </Router>
       </Provider>,

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import {useDispatch} from 'react-redux';
 import { clearForm } from '../../../store/actions';
+import { history } from '../../../services/history.service';
 import PropTypes from 'prop-types';
 import './StickySubmitBlock.scss';
 
@@ -33,7 +34,8 @@ const StickySubmitBlock = ({ sentinelRef, onSubmit }) => {
 
   const handleClearForm = e => {
     dispatch(clearForm());
-    window.location.reload();
+    window.scrollTo(0, 0);
+    window.location.reload(false);
   }
 
   const intObserver = new IntersectionObserver(callback, options);
@@ -55,8 +57,6 @@ const StickySubmitBlock = ({ sentinelRef, onSubmit }) => {
         >
           Clear Form
         </button>
-
-        <div className="helper-text">Start your search at any time.</div>
       </div>
     </div>
   );
