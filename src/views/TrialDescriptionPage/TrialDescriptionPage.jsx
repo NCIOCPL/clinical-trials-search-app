@@ -471,7 +471,7 @@ const TrialDescriptionPage = ({ location }) => {
                       {renderSecondaryIDs()}
                       <li>
                         <strong className="field-label">
-                          Clinicaltials.gov ID
+                          Clinicaltrials.gov ID
                         </strong>
                         <a
                           href={`http://clinicaltrials.gov/show/${trial.nctID}`}
