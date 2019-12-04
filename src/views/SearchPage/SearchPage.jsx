@@ -158,31 +158,31 @@ const SearchPage = ({ formInit = 'basic' }) => {
     <article className="search-page">
       <Helmet>
         <title>
-          Find NCI-Supported Clinical Trials - National Cancer Institute
+          {`Find NCI-Supported Clinical Trials - ${formFactor === 'advanced' ? 'Advanced Search - ' : ''}National Cancer Institute`}
         </title>
         <link
           rel="canonical"
           href={`https://www.cancer.gov/about-cancer/treatment/clinical-trials/search${
-            formFactor === 'basic' ? '' : 'advanced'
+            formFactor === 'basic' ? '' : '/advanced'
           }`}
         />
         <meta
           name="description"
-          content="Find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one."
+          content={`${formFactor === 'advanced' ? 'F': 'Use our advanced search to f'}ind an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one.`}
         />
         <meta
           property="og:title"
-          content="Find NCI-Supported Clinical Trials"
+          content={`Find NCI-Supported Clinical Trials - ${formFactor === 'advanced' ? 'Advanced Search' : ''}`}
         />
         <meta
           property="og:url"
           content={`https://www.cancer.gov/about-cancer/treatment/clinical-trials/search${
-            formFactor === 'basic' ? '' : 'advanced'
+            formFactor === 'basic' ? '' : '/advanced'
           }`}
         />
         <meta
           property="og:description"
-          content="Find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one."
+          content={`${formFactor === 'advanced' ? 'F': 'Use our advanced search to f'}ind an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one.`}
         />
       </Helmet>
       <div ref={sentinelRef} className="search-page__sentinel"></div>
