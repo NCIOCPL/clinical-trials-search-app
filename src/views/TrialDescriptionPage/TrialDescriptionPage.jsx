@@ -4,7 +4,6 @@ import { updateFormField, clearForm, updateGlobal } from '../../store/actions';
 import { Helmet } from 'react-helmet';
 import { history } from '../../services/history.service';
 import { getTrial } from '../../store/actions';
-import { useQueryToBuildStore } from '../../hooks';
 import {
   Accordion,
   AccordionItem,
@@ -31,9 +30,6 @@ const TrialDescriptionPage = ({ location }) => {
     Object.keys(cacheSnap).length > 0
   );
 
-  const appHasBeenVisited = useSelector(
-    store => store.globals.appHasBeenVisited
-  );
   const handleUpdateGlobal = (field, value) => {
     dispatch(
       updateGlobal({
@@ -51,12 +47,6 @@ const TrialDescriptionPage = ({ location }) => {
       })
     );
   };
-
-  const [{ buildStoreFromQuery }] = useQueryToBuildStore(
-    qs,
-    handleUpdate,
-    setStoreRehydrated
-  );
 
   const trial = useSelector(store => store.cache[currId]);
 
@@ -80,14 +70,8 @@ const TrialDescriptionPage = ({ location }) => {
     window.scrollTo(0, 0);
     if (trial && trial.briefTitle) {
       initTrialData();
-    } else if (!isDirty) {
-      //need to hydrate store from query
-      buildStoreFromQuery(qs);
     } else {
       dispatch(getTrial({ trialId: currId }));
-    }
-    if (!appHasBeenVisited) {
-      handleUpdateGlobal('appHasBeenVisited', true);
     }
   }, []);
 
