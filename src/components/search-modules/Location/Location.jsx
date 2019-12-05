@@ -71,8 +71,9 @@ const Location = ({ handleUpdate }) => {
   };
 
   const handleToggleChange = () => {
-    setLimitToVA(!limitToVA);
-    handleUpdate('vaOnly', limitToVA);
+    let newVal = !limitToVA;
+    setLimitToVA(newVal);
+    handleUpdate('vaOnly', newVal);
   };
 
   const handleRadioChange = e => {
