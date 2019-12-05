@@ -68,13 +68,13 @@ describe('ctsapiDiseaseFetcher', () => {
           {
             "name": "Adenosquamous Lung Cancer",
             "codes": [ "C9133" ],
-            "parent_ids": ["C2926"],
+            "parentDiseaseID": ["C2926"],
             "type": [ "subtype" ]
           },
           { 
             "name": "Advanced Lung Carcinoma",
             "codes": ["C153203"],            
-            "parent_ids": ["C4878"],
+            "parentDiseaseID": ["C4878"],
             "type": ["subtype"]
           }          
         ]);

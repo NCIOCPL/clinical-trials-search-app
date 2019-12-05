@@ -55,7 +55,7 @@ const TrialType = ({ handleUpdate }) => {
     >
       <p>
         Select the type of trial for your search. You may check more than one
-        box or select "All." You may choose to limit results to trials accepting
+        box or select "All". You may choose to limit results to trials accepting
         healthy volunteers.
       </p>
 
