@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Checkbox from '../../components/atomic/Checkbox';
 import { isWithinRadius } from '../../utilities';
+import {NIH_ZIPCODE} from '../../constants';
+
 const queryString = require('query-string');
 
 const ResultsListItem = ({ id, item, isChecked, onCheckChange, queryParams }) => {
@@ -69,6 +71,11 @@ const ResultsListItem = ({ id, item, isChecked, onCheckChange, queryParams }) =>
     }
   };
 
+  //compare site values against user criteria
+  const isNIHParamMatch = siteObj => {
+    return (siteObj.postalCode === NIH_ZIPCODE);
+  };
+  
   const countNearbySitesByZip = arr => {
     return arr.reduce(
       (count, siteItem) =>
@@ -81,6 +88,14 @@ const ResultsListItem = ({ id, item, isChecked, onCheckChange, queryParams }) =>
     return arr.reduce(
       (count, siteItem) => 
         count + isLocationParamMatch(siteItem),
+      0
+    );
+  };
+
+  const countNearbySitesByNIHParams = arr => {
+    return arr.reduce(
+      (count, siteItem) => 
+        count + isNIHParamMatch(siteItem),
       0
     );
   };
@@ -144,6 +159,11 @@ const ResultsListItem = ({ id, item, isChecked, onCheckChange, queryParams }) =>
       return `${item.sites.length} location${
         item.sites.length === 1 ? '' : 's'
       }, including ${countNearbySitesByCountryParams(item.sites)} near you`;
+    }
+    if (location === 'search-location-nih') {
+      return `${item.sites.length} location${
+        item.sites.length === 1 ? '' : 's'
+      }, including ${countNearbySitesByNIHParams(item.sites)} near you`;
     }
     return `${item.sites.length} location${item.sites.length === 1 ? '' : 's'}`;
   };
