@@ -17,7 +17,7 @@ import {
   ZipCode,
 } from '../../components/search-modules';
 import { history } from '../../services/history.service';
-import { updateFormField, clearForm } from '../../store/actions';
+import { updateFormField, clearForm, receiveData } from '../../store/actions';
 
 //Module groups in arrays will be placed side-by-side in the form
 const basicFormModules = [CancerTypeKeyword, [Age, ZipCode]];
@@ -60,6 +60,10 @@ const SearchPage = ({ formInit = 'basic' }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    dispatch(receiveData(
+      'selectedTrialsForPrint',
+      []
+    ));
     history.push('/about-cancer/treatment/clinical-trials/search/r');
   };
 
