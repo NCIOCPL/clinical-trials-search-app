@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { Delighter, StickySubmitBlock } from '../../components/atomic';
 import {
@@ -17,7 +17,7 @@ import {
   ZipCode,
 } from '../../components/search-modules';
 import { history } from '../../services/history.service';
-import { updateFormField, updateGlobal } from '../../store/actions';
+import { updateFormField } from '../../store/actions';
 
 //Module groups in arrays will be placed side-by-side in the form
 const basicFormModules = [CancerTypeKeyword, [Age, ZipCode]];
@@ -37,15 +37,6 @@ const SearchPage = ({ formInit = 'basic' }) => {
   const dispatch = useDispatch();
   const sentinelRef = useRef(null);
   const [formFactor, setFormFactor] = useState(formInit);
-
-  const handleUpdateGlobal = (field, value) => {
-    dispatch(
-      updateGlobal({
-        field,
-        value,
-      })
-    );
-  };
 
   const handleUpdate = (field, value) => {
     dispatch(
@@ -161,7 +152,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
         />
         <meta
           name="description"
-          content={`${formFactor === 'advanced' ? 'F': 'Use our advanced search to f'}ind an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one.`}
+          content={`${formFactor === 'basic' ? 'F': 'Use our advanced search to f'}ind an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one.`}
         />
         <meta
           property="og:title"
@@ -175,7 +166,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
         />
         <meta
           property="og:description"
-          content={`${formFactor === 'advanced' ? 'F': 'Use our advanced search to f'}ind an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one.`}
+          content={`${formFactor === 'basic' ? 'F': 'Use our advanced search to f'}ind an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one.`}
         />
       </Helmet>
       <div ref={sentinelRef} className="search-page__sentinel"></div>

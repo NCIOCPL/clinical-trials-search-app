@@ -37,15 +37,6 @@ const ResultsPage = ({ location }) => {
 
   const [{ fetchTrials }] = useStoreToFindTrials();
 
-  const handleUpdateGlobal = (field, value) => {
-    dispatch(
-      updateGlobal({
-        field,
-        value,
-      })
-    );
-  };
-
   const handleUpdate = (field, value) => {
     dispatch(
       updateFormField({
@@ -283,7 +274,7 @@ const ResultsPage = ({ location }) => {
           <li>Zip Code</li>
         </ul>
         <p>
-          For assistance, please contact the NCI Contact Center. You can{' '}
+          For assistance, please contact the Cancer Information Service. You can{' '}
           <a href="/contact" className="live-help-link">
             chat online
           </a>{' '}
@@ -308,7 +299,7 @@ const ResultsPage = ({ location }) => {
           <strong>No clinical trials matched your search.</strong>
         </p>
         <p>
-          For assistance, please contact the NCI Contact Center. You can{' '}
+          For assistance, please contact the Cancer Information Service. You can{' '}
           <a href="/contact" className="live-help-link">
             chat online
           </a>{' '}

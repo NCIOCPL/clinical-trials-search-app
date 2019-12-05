@@ -106,7 +106,6 @@ const CancerTypeCondition = ({ handleUpdate }) => {
         retrieveDescendents(cancerType.name, cancerType.codes);
       } else {
         // use the parentDisease ID to select the primary cancer type
-        console.log(maintypeOptions);
         let parentCancer = cache['maintypeOptions'].find(
           ({ codes }) => codes[0] === cancerType.parentDiseaseID[0]
         );
