@@ -17,5 +17,20 @@
         .preferredName{
             font-weight: bold;
         }
+        .synonyms {
+            &.highlight{
+                font-weight: bold;
+            }
+            ul, li {
+                display: inline-block;
+                margin: 0;
+                padding: 0;
+            }
+            li:not(:last-child)::after {
+                content: ", ";
+                white-space: pre;
+            }
+
+        }
     }
 } 

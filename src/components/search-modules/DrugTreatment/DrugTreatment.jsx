@@ -34,17 +34,6 @@ const DrugTreatment = ({ handleUpdate, useValue }) => {
     }
   }, [treatmentVal, dispatch]);
 
-  const matchItemToTerm = (item, value) => {
-    //convert synonyms array to lowercase for comparison
-    let lcSynonyms = item.synonyms.map(s => {
-      return s.toLowerCase();
-    });
-    return (
-      item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1 ||
-      lcSynonyms.includes(value.toLowerCase())
-    );
-  };
-
   //not displaying everything!!
   const filterSelectedItems = (items = [], selections = []) => {
     if (!items.length || !selections.length) {
@@ -54,6 +43,43 @@ const DrugTreatment = ({ handleUpdate, useValue }) => {
       item => !selections.find(selection => selection.label === item.name)
     );
     return filteredItems;
+  };
+
+  const applyOptionsFilterAndFormatting = ( searchVal, item, isHighlighted ) => {
+    const searchStr = new RegExp('(^' + searchVal.value + '|\\s+' + searchVal.value + ')', 'i');
+    const filteredSynonyms = Array.isArray(item.synonyms) 
+      ? item.synonyms.filter( synonym => synonym.match(searchStr)) 
+      : [];
+    const filteredSynonymsCount = filteredSynonyms.length;
+    
+    return (
+      <div
+        className={`cts-autocomplete__menu-item ${
+          isHighlighted ? 'highlighted' : ''
+        }`}
+        key={item.codes[0]}
+      >
+        <div className="preferredName">
+          {item.name}
+          {item.category.indexOf('category') !== -1 ? ' (DRUG FAMILY)' : ''}
+        </div>
+        {filteredSynonymsCount > 0 && (
+          
+          <span className="synonyms">
+            Other Names: <ul>
+              { filteredSynonyms.map( (synonym, i) => {
+                return (
+                  <li key={i}
+                      dangerouslySetInnerHTML={
+                          {__html: synonym.match(searchStr) ? synonym.replace(searchStr, `<strong>$&</strong>`) : synonym}
+                  }></li>
+                )
+              }) }
+            </ul>
+          </span>
+        )}
+      </div>
+    );
   };
 
   return (
@@ -72,7 +98,7 @@ const DrugTreatment = ({ handleUpdate, useValue }) => {
         inputProps={{ placeholder: 'Start typing to select drugs and/or drug families' }}
         items={filterSelectedItems(drugOptions, drugs)}
         getItemValue={item => item.name}
-        shouldItemRender={matchItemToTerm}
+        shouldItemRender={ () => true }
         onChange={(event, value) => setDrugVal({ value })}
         onSelect={value => {
           handleUpdate('drugs', [
@@ -106,24 +132,7 @@ const DrugTreatment = ({ handleUpdate, useValue }) => {
             </div>
           );
         }}
-        renderItem={(item, isHighlighted) => (
-          <div
-            className={`cts-autocomplete__menu-item ${
-              isHighlighted ? 'highlighted' : ''
-            }`}
-            key={item.codes[0]}
-          >
-            <div className="preferredName">
-              {item.name}
-              {item.category.indexOf('category') !== -1 ? ' (DRUG FAMILY)' : ''}
-            </div>
-            {item.synonyms.length > 0 && (
-              <span className="synonyms">
-                Other Names: {item.synonyms.join(', ')}
-              </span>
-            )}
-          </div>
-        )}
+        renderItem={ (item, isHighlighted) => applyOptionsFilterAndFormatting(drugVal, item, isHighlighted) }
       />
 
       <Autocomplete
@@ -134,7 +143,7 @@ const DrugTreatment = ({ handleUpdate, useValue }) => {
         inputHelpText="More than one selection may be made."
         items={filterSelectedItems(treatmentOptions, treatments)}
         getItemValue={item => item.name}
-        shouldItemRender={matchItemToTerm}
+        shouldItemRender={() => true}
         onChange={(event, value) => setTreatmentVal({ value })}
         onSelect={value => {
           handleUpdate('treatments', [
@@ -168,24 +177,7 @@ const DrugTreatment = ({ handleUpdate, useValue }) => {
             </div>
           );
         }}
-        renderItem={(item, isHighlighted) => (
-          <div
-            className={`cts-autocomplete__menu-item ${
-              isHighlighted ? 'highlighted' : ''
-            }`}
-            key={item.codes[0]}
-          >
-            <div className="preferredName">
-              {item.name}
-              {item.category.indexOf('category') !== -1 ? ' (DRUG FAMILY)' : ''}
-            </div>
-            {item.synonyms.length > 0 && (
-              <span className="synonyms">
-                Other Names: {item.synonyms.join(', ')}
-              </span>
-            )}
-          </div>
-        )}
+        renderItem={(item, isHighlighted) => applyOptionsFilterAndFormatting(treatmentVal, item, isHighlighted)}
       />
     </Fieldset>
   );
