@@ -146,26 +146,35 @@ const ResultsListItem = ({ id, item, isChecked, onCheckChange, queryParams }) =>
           : site.country;
       return displayText;
     }
+    // NOTE: Displays for count should be ONLY US sites
+    // unless it is a country search and the country
+    // is not US.
+    const sitesList = (
+      (location === 'search-location-country') &&
+      (country !== 'United States')
+    ) ? item.sites :
+      item.sites.filter(site => site.country === 'United States');
+
     // zip code present
     if (zip !== '') {
       //has a zip
       if (zipCoords.lat !== '' && zipCoords.long !== '') {
-        return `${item.sites.length} location${
-          item.sites.length === 1 ? '' : 's'
-        }, including ${countNearbySitesByZip(item.sites)} near you`;
+        return `${sitesList.length} location${
+          sitesList.length === 1 ? '' : 's'
+        }, including ${countNearbySitesByZip(sitesList)} near you`;
       }
     }
     if (location === 'search-location-country') {
-      return `${item.sites.length} location${
-        item.sites.length === 1 ? '' : 's'
-      }, including ${countNearbySitesByCountryParams(item.sites)} near you`;
+      return `${sitesList.length} location${
+        sitesList.length === 1 ? '' : 's'
+      }, including ${countNearbySitesByCountryParams(sitesList)} near you`;
     }
     if (location === 'search-location-nih') {
-      return `${item.sites.length} location${
-        item.sites.length === 1 ? '' : 's'
-      }, including ${countNearbySitesByNIHParams(item.sites)} near you`;
+      return `${sitesList.length} location${
+        sitesList.length === 1 ? '' : 's'
+      }, including ${countNearbySitesByNIHParams(sitesList)} near you`;
     }
-    return `${item.sites.length} location${item.sites.length === 1 ? '' : 's'}`;
+    return `${sitesList.length} location${sitesList.length === 1 ? '' : 's'}`;
   };
 
   const setCachedTitle = () => {
