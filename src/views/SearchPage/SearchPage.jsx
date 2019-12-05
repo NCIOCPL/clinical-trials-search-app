@@ -17,7 +17,7 @@ import {
   ZipCode,
 } from '../../components/search-modules';
 import { history } from '../../services/history.service';
-import { updateFormField } from '../../store/actions';
+import { updateFormField, clearForm } from '../../store/actions';
 
 //Module groups in arrays will be placed side-by-side in the form
 const basicFormModules = [CancerTypeKeyword, [Age, ZipCode]];
@@ -106,16 +106,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
   );
 
   const toggleForm = () => {
-    history.push(
-      `${
-        formFactor === 'basic'
-          ? '/about-cancer/treatment/clinical-trials/search/advanced'
-          : '/about-cancer/treatment/clinical-trials/search'
-      }`
-    );
-    let newState = formFactor === 'basic' ? 'advanced' : 'basic';
-    handleUpdate('formType', newState);
-    setFormFactor(newState);
+    dispatch(clearForm());
   };
 
   const renderSearchTip = () => (
@@ -130,9 +121,10 @@ const SearchPage = ({ formInit = 'basic' }) => {
         ) : (
           <>{` All fields are optional. Skip any items that are unknown or not applicable or try our `}</>
         )}
-        <button type="button" className="btnAsLink" onClick={toggleForm}>
+        <a href={`${formFactor === 'advanced'? '/about-cancer/treatment/clinical-trials/search' : '/about-cancer/treatment/clinical-trials/search/advanced'}`}  
+        onClick={toggleForm}>
           {formFactor === 'basic' ? 'advanced search' : 'basic search'}
-        </button>
+        </a>
         .
       </div>
     </div>
