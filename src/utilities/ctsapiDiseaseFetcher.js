@@ -29,7 +29,7 @@ export const ctsapiDiseaseFetcher = async (ctsService, ids) => {
     return matchingDiseases.terms.map(disease => ({
         name: disease.name,
         codes: disease.codes,
-        parent_ids: disease.parentDiseaseID,
+        parentDiseaseID: disease.parentDiseaseID,
         type: disease.type
     }));
 }
