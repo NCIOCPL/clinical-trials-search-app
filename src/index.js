@@ -1,4 +1,4 @@
-import './polyfills/array_fill';
+import './polyfills';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
