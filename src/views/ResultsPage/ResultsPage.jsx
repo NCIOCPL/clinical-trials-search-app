@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {Helmet} from 'react-helmet';
-import { updateFormField, clearForm, updateGlobal } from '../../store/actions';
+import { updateFormField, clearForm, receiveData } from '../../store/actions';
 import { Delighter, Checkbox, Modal, Pager } from '../../components/atomic';
 import { buildQueryString } from '../../utilities';
 import {
@@ -20,7 +20,7 @@ const ResultsPage = ({ location }) => {
   const dispatch = useDispatch();
   const [selectAll, setSelectAll] = useState(false);
   const [pagerPage, setPagerPage] = useState(0);
-  const [selectedResults, setSelectedResults] = useState([]);
+  
   const [pageIsLoading, setPageIsLoading] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [trialResults, setTrialResults] = useState([]);
@@ -34,9 +34,8 @@ const ResultsPage = ({ location }) => {
   );
   const [storeRehydrated, setStoreRehydrated] = useState(false);
   const [currCacheKey, setCurrCacheKey] = useState('');
-
   const [{ fetchTrials }] = useStoreToFindTrials();
-
+  const [selectedResults, setSelectedResults] = useState(cache['selectedTrialsForPrint'] || []);
   const handleUpdate = (field, value) => {
     dispatch(
       updateFormField({
@@ -80,7 +79,14 @@ const ResultsPage = ({ location }) => {
 
   //track usage of selected results for print
   useEffect(() => {
-    if (selectedResults.length >= 100) {
+    // update cacheStore with new selectedResults Value
+    dispatch(
+      receiveData(
+        'selectedTrialsForPrint',
+        [...selectedResults]
+      )
+    );
+    if (selectedResults.length > 100) {
       toggleModal();
     }
   }, [selectedResults]);
