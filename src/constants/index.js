@@ -53,3 +53,5 @@ export const OTHER_MAIN_TYPES = [
   'C3262', //Neoplasm not in main type (Other Neoplasm)
   'C2991', //Disease or Disorder (Other Disease)
 ];
+
+export const NIH_ZIPCODE = "20892";
