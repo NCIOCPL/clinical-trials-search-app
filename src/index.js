@@ -107,13 +107,15 @@ if (process.env.NODE_ENV !== 'production') {
     return service;
   };
 
+  const zipConversionEndpoint =`${window.location.protocol}//${window.location.host}/cts_api/zip_code_lookup`;
+
   initialize({
     rootId,
     services: {
       ctsSearch,
     },
     printCacheEndpoint: 'https://dceg-test-acsf.cancer.gov/CTS.Print/GenCache',
-    zipConversionEndpoint: 'https://ncigovcdode283.prod.acquia-sites.com/cts_api/zip_code_lookup'
+    zipConversionEndpoint
   });
 }
 
