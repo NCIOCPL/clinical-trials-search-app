@@ -24,6 +24,7 @@ const ErrorPage = ({ initErrorsList }) => {
       findings: 'Findings',
       keywordPhrases: 'Keywords and Phrases',
       zip: 'Zip',
+      zipCoords: 'Zip',
       country: 'Country',
       healthyVolunteers: 'Healthy Volunteers',
       trialTypes: 'Trial Type',
@@ -108,7 +109,7 @@ const ErrorPage = ({ initErrorsList }) => {
                   ))}
                 </ul>
                 <p>
-                  For assistance, please contact the NCI Contact Center. You can{' '}
+                  For assistance, please contact the Cancer Information Service. You can{' '}
                   <a href="/contact" className="live-help-link">
                     chat online
                   </a>{' '}

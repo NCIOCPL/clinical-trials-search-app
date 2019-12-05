@@ -57,6 +57,7 @@ export function matchStateToTerm(state, value) {
       { abbr: 'CA', name: 'California' },
       { abbr: 'CO', name: 'Colorado' },
       { abbr: 'CT', name: 'Connecticut' },
+      { abbr: 'DC', name: 'District of Columbia'},
       { abbr: 'DE', name: 'Delaware' },
       { abbr: 'FL', name: 'Florida' },
       { abbr: 'GA', name: 'Georgia' },

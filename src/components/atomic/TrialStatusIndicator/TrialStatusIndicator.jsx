@@ -21,6 +21,13 @@ const TrialStatusIndicator = ({
       case 'approved':
         indicatorClass = 'not-active';
         break;
+      case 'complete':
+      case 'administratively complete':
+        indicatorClass = 'complete';
+        break;
+      case 'withdrawn':
+        indicatorClass = 'withdrawn'
+        break;
       case 'active':
       default:
         indicatorClass = 'active';
