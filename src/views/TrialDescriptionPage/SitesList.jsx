@@ -215,13 +215,9 @@ const SitesList = sites => {
     }
   };
 
-  const renderLocationBlock = (locationObj, index) => {
+  const renderContactInfoBlock = (locationObj) => {
     return (
-      <div key={'loc-' + locationObj.name} className="location">
-        <strong className="location-name">{locationObj.name}</strong>
-        <div>
-          Status: {getTrialStatusForDisplay(locationObj.recruitmentStatus)}
-        </div>
+      <>
         <div>Contact: {locationObj.contactName}</div>
         {locationObj.contactPhone && (
           <div>Phone: {locationObj.contactPhone}</div>
@@ -234,6 +230,22 @@ const SitesList = sites => {
             </a>
           </div>
         )}
+      </>
+    );
+  }
+
+  const renderLocationBlock = (locationObj, index) => {
+    return (
+      <div key={'loc-' + locationObj.name} className="location">
+        <strong className="location-name">{locationObj.name}</strong>
+        <div>
+          Status: {getTrialStatusForDisplay(locationObj.recruitmentStatus)}
+        </div>
+        {/* Contact only displays if there is a name */}
+        {locationObj.contactName ?
+          renderContactInfoBlock(locationObj) : 
+          (<>Name Not Available</>) 
+        }   
       </div>
     );
   };
