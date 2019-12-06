@@ -66,16 +66,15 @@ const DrugTreatment = ({ handleUpdate, useValue }) => {
         {filteredSynonymsCount > 0 && (
           
           <span className="synonyms">
-            Other Names: <ul>
+            Other Names: {' '}
               { filteredSynonyms.map( (synonym, i) => {
                 return (
-                  <li key={i}
+                  <span key={i}
                       dangerouslySetInnerHTML={
                           {__html: synonym.match(searchStr) ? synonym.replace(searchStr, `<strong>$&</strong>`) : synonym}
-                  }></li>
+                  }></span>
                 )
               }) }
-            </ul>
           </span>
         )}
       </div>
