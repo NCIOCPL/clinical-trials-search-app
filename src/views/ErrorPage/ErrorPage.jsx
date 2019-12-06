@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearForm } from '../../store/actions';
 import { Helmet } from 'react-helmet';
 import { Delighter } from '../../components/atomic';
-import { Link } from 'react-router-dom';
 
 import './ErrorPage.scss';
 
@@ -116,8 +115,8 @@ const ErrorPage = ({ initErrorsList }) => {
                   or call 1-800-4-CANCER (1-800-422-6237).
                 </p>
                 <p>
-                  <Link
-                    to={`${
+                  <a
+                    href={`${
                       formSnapshot.formType === 'basic'
                         ? '/about-cancer/treatment/clinical-trials/search'
                         : '/about-cancer/treatment/clinical-trials/search/advanced'
@@ -125,7 +124,7 @@ const ErrorPage = ({ initErrorsList }) => {
                     onClick={handleStartOver}
                   >
                     Try a new search
-                  </Link>
+                  </a>
                 </p>
               </div>
               <aside className="error-page__aside --side">
