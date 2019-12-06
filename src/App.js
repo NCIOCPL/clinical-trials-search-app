@@ -1,5 +1,7 @@
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
+import 'core-js/stable';
+
 
 import React, { Fragment } from 'react';
 import { useSelector } from 'react-redux';
