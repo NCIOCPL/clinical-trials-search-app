@@ -25,7 +25,21 @@
   &:hover {
     text-decoration: underline;
   }
+
+  &.chat-link{
+    background: none;
+    color: #2b7bba;
+    box-shadow: none;
+    margin: 0;
+    &:focus,
+  &:hover {
+    background: none;
+    color: #2b7bba;
+    text-decoration: underline;
+  }
+  }
 }
+
 
 
 // atomic

@@ -2,9 +2,10 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearForm } from '../../store/actions';
 import { Helmet } from 'react-helmet';
-import { Delighter } from '../../components/atomic';
+import { ChatOpener, Delighter } from '../../components/atomic';
 
 import './ErrorPage.scss';
+import { isNullOrUndefined } from 'util';
 
 const ErrorPage = ({ initErrorsList }) => {
   const dispatch = useDispatch();
@@ -109,9 +110,7 @@ const ErrorPage = ({ initErrorsList }) => {
                 </ul>
                 <p>
                   For assistance, please contact the Cancer Information Service. You can{' '}
-                  <a href="/contact" className="live-help-link">
-                    chat online
-                  </a>{' '}
+                  <ChatOpener />{' '}
                   or call 1-800-4-CANCER (1-800-422-6237).
                 </p>
                 <p>
