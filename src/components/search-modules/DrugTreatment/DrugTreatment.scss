@@ -21,12 +21,13 @@
             &.highlight{
                 font-weight: bold;
             }
-            ul, li {
-                display: inline-block;
+            ol, li {
+                display: inline;
                 margin: 0;
                 padding: 0;
+                list-style: none;
             }
-            li:not(:last-child)::after {
+            ol li:not(:last-child)::after {
                 content: ", ";
                 white-space: pre;
             }

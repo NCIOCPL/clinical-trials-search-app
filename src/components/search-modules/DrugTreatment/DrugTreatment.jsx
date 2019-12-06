@@ -66,7 +66,8 @@ const DrugTreatment = ({ handleUpdate, useValue }) => {
         {filteredSynonymsCount > 0 && (
           
           <span className="synonyms">
-            Other Names: <ul>
+            Other Names: {' '}
+            <ol>
               { filteredSynonyms.map( (synonym, i) => {
                 return (
                   <li key={i}
@@ -75,7 +76,7 @@ const DrugTreatment = ({ handleUpdate, useValue }) => {
                   }></li>
                 )
               }) }
-            </ul>
+            </ol>
           </span>
         )}
       </div>
