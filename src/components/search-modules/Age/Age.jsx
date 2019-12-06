@@ -4,26 +4,35 @@ import { Fieldset, TextInput } from '../../atomic';
 
 const Age = ({ handleUpdate }) => {
   const { age, ageModified, formType } = useSelector(store => store.form);
-  const [errorMsg, setErrorMsg] = useState('');
+  const [inputtedAge, setInputtedAge] = useState(age);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const validateAgeEntry = () => {
-    let parsedAge = parseInt(age);
-    if (Number.isNaN(parsedAge) || parsedAge > 120 || parsedAge <= 0) {
+    if (inputtedAge !== '' && (isNaN(inputtedAge) || inputtedAge > 120 || inputtedAge < 1)) {
+      setErrorMessage('Please enter a number between 1 and 120.');
       handleUpdate('age', '');
-      setErrorMsg('Please enter a number between 1 and 120.');
+      handleUpdate('hasInvalidAge', true);
     } else {
-      setErrorMsg('');
+      setErrorMessage('');
+      handleUpdate('age', inputtedAge);
+      handleUpdate('hasInvalidAge', false);
     }
+
     if (ageModified) {
       handleUpdate('ageModified', false);
     }
+  };
+
+  const updateAge = a => {
+    setErrorMessage('');
+    setInputtedAge(a);
   };
 
   const helperText =
     formType === 'basic'
       ? 'Your age helps determine which trials are right for you.'
       : 'Enter the age of the participant.';
-      
+
   return (
     <Fieldset
       id="age"
@@ -31,12 +40,12 @@ const Age = ({ handleUpdate }) => {
       helpUrl="/about-cancer/treatment/clinical-trials/search/help#age"
     >
       <TextInput
-        action={e => handleUpdate(e.target.id, e.target.value)}
+        action={e => updateAge(e.target.value)}
         id="age"
-        value={age}
+        value={inputtedAge}
         label="age"
         labelHidden
-        errorMessage={errorMsg}
+        errorMessage={errorMessage}
         inputHelpText={helperText}
         maxLength={3}
         onBlur={validateAgeEntry}

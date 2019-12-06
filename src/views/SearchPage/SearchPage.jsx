@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { Delighter, StickySubmitBlock } from '../../components/atomic';
 import {
@@ -37,6 +37,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
   const dispatch = useDispatch();
   const sentinelRef = useRef(null);
   const [formFactor, setFormFactor] = useState(formInit);
+  const {hasInvalidAge, hasInvalidZip} = useSelector(store => store.form)
 
   const handleUpdate = (field, value) => {
     dispatch(
@@ -58,11 +59,14 @@ const SearchPage = ({ formInit = 'basic' }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(receiveData(
-      'selectedTrialsForPrint',
-      []
-    ));
-    history.push('/about-cancer/treatment/clinical-trials/search/r');
+    if(!hasInvalidAge && !hasInvalidZip){
+      dispatch(receiveData(
+        'selectedTrialsForPrint',
+        []
+      ));
+      history.push('/about-cancer/treatment/clinical-trials/search/r');
+    }
+    
   };
 
   const renderDelighters = () => (
