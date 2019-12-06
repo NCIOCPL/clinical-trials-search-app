@@ -213,7 +213,17 @@ describe('Adv - queryStringToFormObject maps query to form', () => {
         formType: "advanced"
       }
     ],
-    
+    [
+      "Pager test",
+      "rl=2&pn=200",
+      async () => [],
+      async () => [],
+      async () => null,
+      {
+        resultsPage: 200,
+        formType: "advanced"
+      }
+    ]
   ];
 
   // Test iterates over multiple cases defined by mappingTestCases

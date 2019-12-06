@@ -151,6 +151,21 @@ export const queryStringToFormObject = async (urlQuery, diseaseFetcher, interven
     }
   }
 
+  // TODO: This should only be allowed on the results page
+  if (query['pn']) {
+    const pageNum = parseInt(query['pn']);
+    if (!Number.isNaN(pageNum) && pageNum > 0) {
+      rtnFormState = {
+        ...rtnFormState,
+        resultsPage: pageNum,
+      }
+    } else {
+      rtnErrorsList.push(makeError(
+        "resultsPage", "Invalid parameter"
+      ))
+    }
+  }
+
   // Healthy Volunteers
   if (query['hv']) {
     const healthy = parseInt(query['hv']);

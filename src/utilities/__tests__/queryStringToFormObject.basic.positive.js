@@ -105,6 +105,17 @@ describe('Basic - queryStringToFormObject maps query to form', () => {
         formType: 'basic'
       }
     ],
+    [
+      "Pager test",
+      "rl=1&pn=200",
+      async () => [],
+      async () => [],
+      async () => null,
+      {
+        resultsPage: 200,
+        formType: "basic"
+      }
+    ],
   ];
 
   // Test iterates over multiple cases defined by mappingTestCases
