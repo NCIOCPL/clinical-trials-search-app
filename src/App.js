@@ -1,6 +1,5 @@
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
-import 'core-js/stable';
 
 
 import React, { Fragment } from 'react';
@@ -15,8 +14,10 @@ import TrialDescriptionPage from './views/TrialDescriptionPage';
 import ErrorPage from './views/ErrorPage';
 
 import { useAppInitializer } from './hooks';
+require('es6-promise').polyfill();
 
 const App = ({ services, zipConversionEndpoint }) => {
+
   const appHasBeenInitialized = useSelector(
     store => store.globals.appHasBeenInitialized
   );
