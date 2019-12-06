@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Dropdown } from '../../components/atomic';
 import { getStateNameFromAbbr } from '../../utilities/';
 import { isWithinRadius } from '../../utilities';
+import { NIH_ZIPCODE } from '../../constants';
 
 const SitesList = sites => {
   const [locArray, setLocArray] = useState([]);
@@ -24,6 +25,7 @@ const SitesList = sites => {
     country,
     states,
     city,
+    vaOnly,
   } = useSelector(store => store.form);
 
   const buildCountriesList = sitesArr => {
@@ -181,21 +183,37 @@ const SitesList = sites => {
   };
 
   const buildNearbySites = siteArr => {
-    if (zip !== '') {
+
+    // We only build nearby sites IF there
+    // was a location search we can filter on.
+    if (
+      (location === 'search-location-hospital') ||
+      (location === 'search-location-all' && !vaOnly)
+    ) {
+      return;
+    }
+
+    // Pre-filter sites when vaOnly is set.
+    const preFilteredSites = vaOnly ?
+      siteArr.filter(site => site.isVA) :
+      siteArr;
+
+    if (location === 'search-location-zip') {
+      // Assume that zip is valid if location is set to zip.
+      // Otherwise you should be looking at an error message instead.
       setNearbySites(
-        siteArr.filter(site =>
+        preFilteredSites.filter(site =>
           isWithinRadius(zipCoords, site.coordinates, zipRadius)
         )
       );
-    }
-    if (location === 'search-location-country') {
+    } else if (location === 'search-location-country') {
       if (country === 'United States') {
         if (states.length > 0) {
           let nearbyStates = [...new Set(states.map(item => item.abbr))];
 
           if (city !== '') {
             setNearbySites(
-              siteArr.filter(
+              preFilteredSites.filter(
                 site =>
                   nearbyStates.includes(site.stateOrProvinceAbbreviation) &&
                   site.city === city
@@ -203,7 +221,7 @@ const SitesList = sites => {
             );
           } else {
             setNearbySites(
-              siteArr.filter(site =>
+              preFilteredSites.filter(site =>
                 nearbyStates.includes(site.stateOrProvinceAbbreviation)
               )
             );
@@ -211,26 +229,35 @@ const SitesList = sites => {
         } else {
           if (city !== '') {
             setNearbySites(
-              siteArr.filter(
+              preFilteredSites.filter(
                 site => site.country === country && site.city === city
               )
             );
           } else {
             // just looking for US sites
-            setNearbySites(siteArr.filter(site => site.country === country));
+            setNearbySites(preFilteredSites.filter(site => site.country === country));
           }
         }
       } else {
         if (city !== '') {
           setNearbySites(
-            siteArr.filter(
+            preFilteredSites.filter(
               site => site.country === country && site.city === city
             )
           );
         } else {
-          setNearbySites(siteArr.filter(site => site.country === country));
+          setNearbySites(preFilteredSites.filter(site => site.country === country));
         }
       }
+    } else if (location === 'search-location-nih') {
+      setNearbySites(
+        preFilteredSites.filter(site => site.postalCode === NIH_ZIPCODE)
+      );
+    } else {
+      // All search + vaOnly
+      setNearbySites(
+        preFilteredSites
+      );
     }
   };
 
