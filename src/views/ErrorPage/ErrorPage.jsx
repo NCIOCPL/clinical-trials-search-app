@@ -5,7 +5,6 @@ import { Helmet } from 'react-helmet';
 import { ChatOpener, Delighter } from '../../components/atomic';
 
 import './ErrorPage.scss';
-import { isNullOrUndefined } from 'util';
 
 const ErrorPage = ({ initErrorsList }) => {
   const dispatch = useDispatch();
@@ -35,6 +34,7 @@ const ErrorPage = ({ initErrorsList }) => {
       trialId: 'Trial ID',
       investigator: 'Trial Investigators',
       leadOrg: 'Lead Organization',
+      formType: 'Form Version',
     };
     return fieldNameMap[fieldName] || fieldName;
   };
