@@ -477,7 +477,7 @@ export function searchTrials({ cacheKey, data }) {
           method: 'searchTrials',
           requestParams: {
             document: JSON.stringify(data),
-          },
+          }
         },
       ],
     },

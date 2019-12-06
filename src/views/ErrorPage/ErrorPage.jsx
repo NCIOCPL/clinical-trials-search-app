@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearForm } from '../../store/actions';
+import { updateGlobal } from '../../store/actions';
 import { Helmet } from 'react-helmet';
 import { ChatOpener, Delighter } from '../../components/atomic';
 
@@ -11,7 +11,10 @@ const ErrorPage = ({ initErrorsList }) => {
   const formSnapshot = useSelector(store => store.form);
 
   const handleStartOver = () => {
-    dispatch(clearForm());
+    dispatch(updateGlobal({
+      field: 'initErrorsList',
+      value: []
+    }));
   };
 
   const getFieldNameDisplay = fieldName => {

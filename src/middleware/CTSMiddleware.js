@@ -17,7 +17,7 @@ const createCTSMiddleware = services => ({
   if (action.type !== '@@api/CTS') {
     return;
   }
- 
+
   const { service: serviceName, cacheKey, requests } = action.payload;
   const service = services[serviceName]();
 
@@ -47,12 +47,18 @@ const createCTSMiddleware = services => ({
           };
         } else {
           const { method, requestParams, fetchHandlers } = request;
+          let headers = {
+            'Accept': '*/*',
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache',
+          };
           const response =
             method === 'searchTrials'
-              ? await service[method](...Object.values(requestParams))
+              ? await service[method](...Object.values(requestParams), {headers})
               : await service[method](...Object.values(requestParams));
           let body = {};
-          
+
           // if search results, add total and starting index
           if (response.terms) {
             body = response.terms;
@@ -65,7 +71,7 @@ const createCTSMiddleware = services => ({
             for (const trial of response.trials) {
               // change the trial sites list to only those that are
               // actively recruiting.
-              trial.sites = trial.sites.filter(site => 
+              trial.sites = trial.sites.filter(site =>
                 ACTIVE_RECRUITMENT_STATUSES.includes(
                   // Site comes all upper case from the API
                   site.recruitmentStatus.toLowerCase()
@@ -79,15 +85,14 @@ const createCTSMiddleware = services => ({
             // I no like this middleware how everything calls the service from
             // the same function and then adds a big conditional to manipulate
             // the data. It is too late to redo this, but it needs to be fixed later.
-            response.sites = response.sites.filter(site => 
+            response.sites = response.sites.filter(site =>
               ACTIVE_RECRUITMENT_STATUSES.includes(
                 // Site comes all upper case from the API
                 site.recruitmentStatus.toLowerCase()
               )
             );
             body = response;
-          }
-          else {
+          } else {
             body = response;
           }
 
