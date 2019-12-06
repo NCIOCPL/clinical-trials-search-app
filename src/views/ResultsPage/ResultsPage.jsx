@@ -1,14 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import {Helmet} from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import { updateFormField, clearForm, receiveData } from '../../store/actions';
-import { Delighter, Checkbox, Modal, Pager } from '../../components/atomic';
+import { ChatOpener, Delighter, Checkbox, Modal, Pager } from '../../components/atomic';
 import { buildQueryString } from '../../utilities';
-import {
-  useModal,
-  useStoreToFindTrials,
-} from '../../hooks';
+import { useModal, useStoreToFindTrials } from '../../hooks';
 import ResultsPageHeader from './ResultsPageHeader';
 import ResultsList from './ResultsList';
 import { history } from '../../services/history.service';
@@ -20,7 +17,7 @@ const ResultsPage = ({ location }) => {
   const dispatch = useDispatch();
   const [selectAll, setSelectAll] = useState(false);
   const [pagerPage, setPagerPage] = useState(0);
-  
+
   const [pageIsLoading, setPageIsLoading] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [trialResults, setTrialResults] = useState([]);
@@ -30,12 +27,16 @@ const ResultsPage = ({ location }) => {
   const cache = useSelector(store => store.cache);
   const locsearch = location.search.replace('?', '');
   const [qs, setQs] = useState(
-    queryString.stringify(buildQueryString(formSnapshot), {arrayFormat: 'comma'})
+    queryString.stringify(buildQueryString(formSnapshot), {
+      arrayFormat: 'comma',
+    })
   );
   const [storeRehydrated, setStoreRehydrated] = useState(false);
   const [currCacheKey, setCurrCacheKey] = useState('');
   const [{ fetchTrials }] = useStoreToFindTrials();
-  const [selectedResults, setSelectedResults] = useState(cache['selectedTrialsForPrint'] || []);
+  const [selectedResults, setSelectedResults] = useState(
+    cache['selectedTrialsForPrint'] || []
+  );
   const handleUpdate = (field, value) => {
     dispatch(
       updateFormField({
@@ -80,12 +81,7 @@ const ResultsPage = ({ location }) => {
   //track usage of selected results for print
   useEffect(() => {
     // update cacheStore with new selectedResults Value
-    dispatch(
-      receiveData(
-        'selectedTrialsForPrint',
-        [...selectedResults]
-      )
-    );
+    dispatch(receiveData('selectedTrialsForPrint', [...selectedResults]));
     if (selectedResults.length > 100) {
       toggleModal();
     }
@@ -133,7 +129,7 @@ const ResultsPage = ({ location }) => {
       // update qs
       const parsed = queryString.parse(location.search);
       parsed.pn = currentPage + 1;
-      let newqs = queryString.stringify(parsed, {arrayFormat: 'comma'});
+      let newqs = queryString.stringify(parsed, { arrayFormat: 'comma' });
       setQs(newqs);
       setCurrCacheKey(newqs);
       history.push({
@@ -142,7 +138,7 @@ const ResultsPage = ({ location }) => {
       fetchTrials(newqs);
     }
   };
-  
+
   const renderResultsListLoader = () => (
     <div className="loader__results-list-wrapper">
       <div className="loader__results-list">
@@ -281,14 +277,16 @@ const ResultsPage = ({ location }) => {
         </ul>
         <p>
           For assistance, please contact the Cancer Information Service. You can{' '}
-          <a href="/contact" className="live-help-link">
-            chat online
-          </a>{' '}
+          <ChatOpener />{' '}
           or call 1-800-4-CANCER (1-800-422-6237).
         </p>
         <p>
           <Link
-            to={`${formSnapshot.formType === 'basic' ? '/about-cancer/treatment/clinical-trials/search' : '/about-cancer/treatment/clinical-trials/search/advanced'}`}
+            to={`${
+              formSnapshot.formType === 'basic'
+                ? '/about-cancer/treatment/clinical-trials/search'
+                : '/about-cancer/treatment/clinical-trials/search/advanced'
+            }`}
             onClick={handleStartOver}
           >
             Try a new search
@@ -306,14 +304,16 @@ const ResultsPage = ({ location }) => {
         </p>
         <p>
           For assistance, please contact the Cancer Information Service. You can{' '}
-          <a href="/contact" className="live-help-link">
-            chat online
-          </a>{' '}
+          <ChatOpener />{' '}
           or call 1-800-4-CANCER (1-800-422-6237).
         </p>
         <p>
           <Link
-            to={`${formSnapshot.formType === 'basic' ? '/about-cancer/treatment/clinical-trials/search' : '/about-cancer/treatment/clinical-trials/search/advanced'}`}
+            to={`${
+              formSnapshot.formType === 'basic'
+                ? '/about-cancer/treatment/clinical-trials/search'
+                : '/about-cancer/treatment/clinical-trials/search/advanced'
+            }`}
             onClick={handleStartOver}
           >
             Try a new search
@@ -353,16 +353,17 @@ const ResultsPage = ({ location }) => {
           <>{renderInvalidZip()}</>
         ) : (
           <>
-            {(isLoading)
-              ? (<div className="loader__pageheader"></div>)
-              : (<ResultsPageHeader
+            {isLoading ? (
+              <div className="loader__pageheader"></div>
+            ) : (
+              <ResultsPageHeader
                 resultsCount={resultsCount}
                 pageNum={resultsPage}
                 handleUpdate={handleUpdate}
                 handleReset={handleStartOver}
-              />)
-            }
-            
+              />
+            )}
+
             <div className="results-page__content">
               {renderControls()}
               <div className="results-page__list">
