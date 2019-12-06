@@ -55,7 +55,7 @@ export const buildQueryString = formStore => {
     // form type param
     searchValues.rl = 1;
     return searchValues;
-  } else {
+  } else if (formType === 'advanced') {
     searchValues.rl = 2;
 
     if (subtypes.length > 0) {
@@ -131,5 +131,9 @@ export const buildQueryString = formStore => {
     }
 
     return searchValues;
+  } else {
+    // No formType set, no params
+    return {};
   }
+
 };

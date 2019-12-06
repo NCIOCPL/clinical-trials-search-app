@@ -44,7 +44,7 @@ const App = ({ services, zipConversionEndpoint }) => {
             />
             <Route
               path="/about-cancer/treatment/clinical-trials/search/"
-              component={SearchPage}
+              render={() => <SearchPage formInit="basic" /> }
             />
           </Switch>
         </Fragment>

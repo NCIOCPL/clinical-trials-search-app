@@ -18,7 +18,7 @@ describe('Basic - Negative - queryStringToFormObject maps query to form', () => 
       ]
     ],
     ["basic - bad main type",
-      't=chicken',
+      't=chicken&rl=1',
       async () => [],
       async () => [],
       async () => null,
@@ -30,7 +30,7 @@ describe('Basic - Negative - queryStringToFormObject maps query to form', () => 
       ]
     ],
     [ "basic - bad multiple main types",
-      't=C1111,C1112',
+      't=C1111,C1112&rl=1',
       async () => [],
       async () => [],
       async () => null,
@@ -42,7 +42,7 @@ describe('Basic - Negative - queryStringToFormObject maps query to form', () => 
       ]
     ],
     [ "basic - unknown type",
-      't=C9999',
+      't=C9999&rl=1',
       getDiseaseFetcher(["C9999"], []),
       async () => [],
       async () => null,
@@ -54,7 +54,7 @@ describe('Basic - Negative - queryStringToFormObject maps query to form', () => 
       ]
     ],
     [ "basic - disallowed disease type",
-      't=C4444',
+      't=C4444&rl=1',
       getDiseaseFetcher(["C4444"], ["Finding A"]),
       async () => [],
       async () => null,
@@ -66,7 +66,7 @@ describe('Basic - Negative - queryStringToFormObject maps query to form', () => 
       ]
     ],
     [ "basic - bad age nan",
-      'a=chicken',
+      'a=chicken&rl=1',
       async () => [],
       async () => [],
       async () => null,
@@ -78,7 +78,7 @@ describe('Basic - Negative - queryStringToFormObject maps query to form', () => 
       ]    
     ],
     [ "basic - bad age <0",
-      'a=-1',
+      'a=-1&rl=1',
       async () => [],
       async () => [],
       async () => null,
@@ -90,7 +90,7 @@ describe('Basic - Negative - queryStringToFormObject maps query to form', () => 
       ]    
     ],
     [ "basic - bad age >120",
-      'a=122',
+      'a=122&rl=1',
       async () => [],
       async () => [],
       async () => null,
