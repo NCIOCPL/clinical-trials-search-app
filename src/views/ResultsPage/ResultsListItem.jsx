@@ -138,15 +138,7 @@ const ResultsListItem = ({ id, item, isChecked, onCheckChange, queryParams }) =>
   };
 
   const getLocationDisplay = () => {
-    if (item.sites.length === 1) {
-      const site = item.sites[0];
-      let displayText = `${site.name}, ${site.city}, `;
-      displayText +=
-        site.country === 'United States'
-          ? site.stateOrProvinceAbbreviation
-          : site.country;
-      return displayText;
-    }
+
     // NOTE: Displays for count should be ONLY US sites
     // unless it is a country search and the country
     // is not US.
@@ -155,6 +147,41 @@ const ResultsListItem = ({ id, item, isChecked, onCheckChange, queryParams }) =>
       (country !== 'United States')
     ) ? item.sites :
       item.sites.filter(site => site.country === 'United States');
+
+    // If there are no sites we need to display special information
+    if (sitesListAll.length === 0) {
+      // The old code also referenced a "not yet active" status, which does not exist, so
+      // we are going to ignore that.
+      if (item.currentTrialStatus === "Approved" || item.currentTrialStatus === "In Review") {
+        return "Location information is not yet available"
+      } else {
+        return (
+          <>
+            See{' '}
+            <a
+              href={`https://www.clinicaltrials.gov/show/${item.nctID}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              ClinicalTrials.gov
+            </a>
+          </>
+        );
+      }
+    }
+
+    // A single study site shows the name of the organiztion.
+    // Don't ask me (bp) what the ID is of a trial that has no
+    // US sites and only a single forign site.
+    if (sitesListAll.length === 1) {
+      const site = sitesListAll[0];
+      let displayText = `${site.name}, ${site.city}, `;
+      displayText +=
+        site.country === 'United States'
+          ? site.stateOrProvinceAbbreviation
+          : site.country;
+      return displayText;
+    }
 
     // We filter on VA here to cut down on conditionals
     // in all the cout by.
