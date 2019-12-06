@@ -1,6 +1,7 @@
 export { default as Accordion } from './Accordion';
 export { default as AccordionItem } from './Accordion/AccordionItem';
 export { default as Autocomplete } from './Autocomplete';
+export { default as ChatOpener } from './ChatOpener';
 export { default as Checkbox } from './Checkbox';
 export { default as Delighter } from './Delighter';
 export { default as Dropdown } from './Dropdown';

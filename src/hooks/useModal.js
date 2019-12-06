@@ -7,7 +7,7 @@ export const useModal = () => {
     setIsShowing(!isShowing);
 
     if (!isShowing) {
-      document.getElementById('main-content').classList.add('modal-open');
+      document.body.classList.add('modal-open');
     } else {
       document.body.classList.remove('modal-open');
     }

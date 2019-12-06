@@ -74,6 +74,11 @@ const Location = ({ handleUpdate }) => {
     let newVal = !limitToVA;
     setLimitToVA(newVal);
     handleUpdate('vaOnly', newVal);
+    // make sure that the newly hidden selections are not selected 
+    if(activeRadio === 'search-location-nih' || activeRadio === 'search-location-hospital'){
+      setActiveRadio('search-location-all');
+      handleUpdate('hospital', { term: '', termKey: '' });
+    }
   };
 
   const handleRadioChange = e => {
