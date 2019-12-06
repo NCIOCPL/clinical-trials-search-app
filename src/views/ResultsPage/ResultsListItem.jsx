@@ -19,6 +19,7 @@ const ResultsListItem = ({ id, item, isChecked, onCheckChange, queryParams }) =>
     country,
     states,
     city,
+    vaOnly,
   } = useSelector(store => store.form);
 
 
@@ -149,32 +150,44 @@ const ResultsListItem = ({ id, item, isChecked, onCheckChange, queryParams }) =>
     // NOTE: Displays for count should be ONLY US sites
     // unless it is a country search and the country
     // is not US.
-    const sitesList = (
+    const sitesListAll = (
       (location === 'search-location-country') &&
       (country !== 'United States')
     ) ? item.sites :
       item.sites.filter(site => site.country === 'United States');
 
-    // zip code present
-    if (zip !== '') {
+    // We filter on VA here to cut down on conditionals
+    // in all the cout by.
+    const sitesListForNearCount = vaOnly ?
+      sitesListAll.filter(site => site.isVA):
+      sitesListAll;
+
+    // Assume that search-location-zip means that
+    // you have a properly filled in zip code. 
+    if (location === 'search-location-zip') {
       //has a zip
       if (zipCoords.lat !== '' && zipCoords.long !== '') {
-        return `${sitesList.length} location${
-          sitesList.length === 1 ? '' : 's'
-        }, including ${countNearbySitesByZip(sitesList)} near you`;
+        return `${sitesListAll.length} location${
+          sitesListAll.length === 1 ? '' : 's'
+        }, including ${countNearbySitesByZip(sitesListForNearCount)} near you`;
       }
+    } else if (location === 'search-location-country') {
+      return `${sitesListAll.length} location${
+        sitesListAll.length === 1 ? '' : 's'
+      }, including ${countNearbySitesByCountryParams(sitesListForNearCount)} near you`;
+    } else if (location === 'search-location-nih') {
+      return `${sitesListAll.length} location${
+        sitesListAll.length === 1 ? '' : 's'
+      }, including ${countNearbySitesByNIHParams(sitesListForNearCount)} near you`;
+    } else if (vaOnly) {
+      // This accounts for search-location-all and vaOnly. The old code made sure
+      // hospital + va would not display, but the new logic should not have this
+      // issue.
+      return `${sitesListAll.length} location${
+        sitesListAll.length === 1 ? '' : 's'
+      }, including ${sitesListForNearCount.length} near you`;
     }
-    if (location === 'search-location-country') {
-      return `${sitesList.length} location${
-        sitesList.length === 1 ? '' : 's'
-      }, including ${countNearbySitesByCountryParams(sitesList)} near you`;
-    }
-    if (location === 'search-location-nih') {
-      return `${sitesList.length} location${
-        sitesList.length === 1 ? '' : 's'
-      }, including ${countNearbySitesByNIHParams(sitesList)} near you`;
-    }
-    return `${sitesList.length} location${sitesList.length === 1 ? '' : 's'}`;
+    return `${sitesListAll.length} location${sitesListAll.length === 1 ? '' : 's'}`;
   };
 
   const setCachedTitle = () => {
