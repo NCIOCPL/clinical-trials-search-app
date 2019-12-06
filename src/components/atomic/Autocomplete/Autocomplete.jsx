@@ -606,8 +606,9 @@ class Autocomplete extends React.Component {
 
   handleInputClick() {
     // Input will not be focused if it's disabled
-    if (this.isInputFocused() && !this.isOpen() && this.props.value.length > 2)
+    if (this.isInputFocused()) {
       this.setState({ isOpen: true });
+    }
   }
 
   composeEventHandlers(internal, external) {
