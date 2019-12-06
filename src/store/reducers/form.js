@@ -44,7 +44,7 @@ export const defaultState = {
   leadOrg: { term: '', termKey: '' }, // (lo) Lead Organization
   resultsPage: 0,
   
-  formType: 'basic', // (basic (default) | advanced)
+  formType: '', // (empty string (default) | basic | advanced)
   isDirty: false, // only updated after submission of either form
   zipModified: false,
   hasInvalidZip: false, // zip does not return coodinates

@@ -50,9 +50,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
   // scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (formInit !== 'basic') {
-      handleUpdate('formType', formInit);
-    }
+    handleUpdate('formType', formInit);
   }, []);
 
   let formModules =

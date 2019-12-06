@@ -19,13 +19,14 @@ const TrialDescriptionPage = ({ location }) => {
   const dispatch = useDispatch();
   const [isTrialLoading, setIsTrialLoading] = useState(true);
   const [qs, setQs] = useState(location.search);
-  const { isDirty } = useSelector(store => store.form);
+  const { isDirty, formType } = useSelector(store => store.form);
   const parsed = queryString.parse(qs);
   const currId = parsed.id;
   const [storeRehydrated, setStoreRehydrated] = useState(false);
 
   const trialTitle = useSelector(store => store.cache.currentTrialTitle);
   const cacheSnap = useSelector(store => store.cache);
+  
   const [searchUsed, setSearchUsed] = useState(
     Object.keys(cacheSnap).length > 1
   );
@@ -289,7 +290,10 @@ const TrialDescriptionPage = ({ location }) => {
         ) : (
           <h1>{trial.briefTitle}</h1>
         )}
-        {renderTrialDescriptionHeader()}
+        { (formType === 'basic' || formType === 'advanced') ?
+            (renderTrialDescriptionHeader()) :
+            <></>
+        }
         <div className="trial-description-page__description">
           <div className="trial-description-page__content">
             {isTrialLoading ? (
