@@ -348,14 +348,14 @@ const TrialDescriptionPage = ({ location }) => {
                     {trial.sites && trial.sites.length > 0 ? (
                       <SitesList sites={trial.sites} />
                     ) : noLocInfo.includes(
-                        trial.currentTrialStatus.toLower()
+                        trial.currentTrialStatus.toLowerCase()
                       ) ? (
                       <p>Location information is not yet available.</p>
                     ) : (
                       <p>
                         See trial information on{' '}
                         <a
-                          href={`https://www.clinicaltrials.gov/show/${trial.NCTID}`}
+                          href={`https://www.clinicaltrials.gov/show/${trial.nctID}`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
