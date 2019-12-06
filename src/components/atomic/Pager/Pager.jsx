@@ -23,7 +23,9 @@ const Pager = ({ data, totalItems, startFromPage, numberToShow, callback }) => {
   useEffect(() => {
     //handle browser back button events
     window.onpopstate = e => {
-      determineResults(currentPage - 1);
+      if(currentPage >= 1){
+        determineResults(currentPage - 1);
+      }
     };
   }, []);
 
