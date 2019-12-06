@@ -19,6 +19,7 @@ const ResultsListItem = ({ id, item, isChecked, onCheckChange, queryParams }) =>
     country,
     states,
     city,
+    vaOnly,
   } = useSelector(store => store.form);
 
 
@@ -137,8 +138,43 @@ const ResultsListItem = ({ id, item, isChecked, onCheckChange, queryParams }) =>
   };
 
   const getLocationDisplay = () => {
-    if (item.sites.length === 1) {
-      const site = item.sites[0];
+
+    // NOTE: Displays for count should be ONLY US sites
+    // unless it is a country search and the country
+    // is not US.
+    const sitesListAll = (
+      (location === 'search-location-country') &&
+      (country !== 'United States')
+    ) ? item.sites :
+      item.sites.filter(site => site.country === 'United States');
+
+    // If there are no sites we need to display special information
+    if (sitesListAll.length === 0) {
+      // The old code also referenced a "not yet active" status, which does not exist, so
+      // we are going to ignore that.
+      if (item.currentTrialStatus === "Approved" || item.currentTrialStatus === "In Review") {
+        return "Location information is not yet available"
+      } else {
+        return (
+          <>
+            See{' '}
+            <a
+              href={`https://www.clinicaltrials.gov/show/${item.nctID}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              ClinicalTrials.gov
+            </a>
+          </>
+        );
+      }
+    }
+
+    // A single study site shows the name of the organiztion.
+    // Don't ask me (bp) what the ID is of a trial that has no
+    // US sites and only a single forign site.
+    if (sitesListAll.length === 1) {
+      const site = sitesListAll[0];
       let displayText = `${site.name}, ${site.city}, `;
       displayText +=
         site.country === 'United States'
@@ -146,26 +182,39 @@ const ResultsListItem = ({ id, item, isChecked, onCheckChange, queryParams }) =>
           : site.country;
       return displayText;
     }
-    // zip code present
-    if (zip !== '') {
+
+    // We filter on VA here to cut down on conditionals
+    // in all the cout by.
+    const sitesListForNearCount = vaOnly ?
+      sitesListAll.filter(site => site.isVA):
+      sitesListAll;
+
+    // Assume that search-location-zip means that
+    // you have a properly filled in zip code. 
+    if (location === 'search-location-zip') {
       //has a zip
       if (zipCoords.lat !== '' && zipCoords.long !== '') {
-        return `${item.sites.length} location${
-          item.sites.length === 1 ? '' : 's'
-        }, including ${countNearbySitesByZip(item.sites)} near you`;
+        return `${sitesListAll.length} location${
+          sitesListAll.length === 1 ? '' : 's'
+        }, including ${countNearbySitesByZip(sitesListForNearCount)} near you`;
       }
+    } else if (location === 'search-location-country') {
+      return `${sitesListAll.length} location${
+        sitesListAll.length === 1 ? '' : 's'
+      }, including ${countNearbySitesByCountryParams(sitesListForNearCount)} near you`;
+    } else if (location === 'search-location-nih') {
+      return `${sitesListAll.length} location${
+        sitesListAll.length === 1 ? '' : 's'
+      }, including ${countNearbySitesByNIHParams(sitesListForNearCount)} near you`;
+    } else if (vaOnly) {
+      // This accounts for search-location-all and vaOnly. The old code made sure
+      // hospital + va would not display, but the new logic should not have this
+      // issue.
+      return `${sitesListAll.length} location${
+        sitesListAll.length === 1 ? '' : 's'
+      }, including ${sitesListForNearCount.length} near you`;
     }
-    if (location === 'search-location-country') {
-      return `${item.sites.length} location${
-        item.sites.length === 1 ? '' : 's'
-      }, including ${countNearbySitesByCountryParams(item.sites)} near you`;
-    }
-    if (location === 'search-location-nih') {
-      return `${item.sites.length} location${
-        item.sites.length === 1 ? '' : 's'
-      }, including ${countNearbySitesByNIHParams(item.sites)} near you`;
-    }
-    return `${item.sites.length} location${item.sites.length === 1 ? '' : 's'}`;
+    return `${sitesListAll.length} location${sitesListAll.length === 1 ? '' : 's'}`;
   };
 
   const setCachedTitle = () => {

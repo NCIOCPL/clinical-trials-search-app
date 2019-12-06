@@ -32,6 +32,7 @@ export const ACTIVE_RECRUITMENT_STATUSES = [
 // Specify which fields will be returned in the TrialsResults Object from clinicaltrialsapi
 export const SEARCH_RETURNS_FIELDS = [
   'nci_id',
+  'nct_id',
   'brief_title',
   'sites.org_name',
   'sites.org_postal_code',

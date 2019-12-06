@@ -1,4 +1,5 @@
 import { receiveData } from '../store/actions';
+import { ACTIVE_RECRUITMENT_STATUSES } from '../constants';
 
 /**
  * This middleware serves two purposes (and could perhaps be broken into two pieces).
@@ -55,9 +56,41 @@ const createCTSMiddleware = services => ({
           // if search results, add total and starting index
           if (response.terms) {
             body = response.terms;
-          } else {
+          } else if (response.trials) {
+            // This is going to be very dirty, we need to filter out
+            // inactive trial sites, but the service returns a class
+            // for each trial so we can't make this immutable. We
+            // instead need to modify the sites property of each
+            // trial.
+            for (const trial of response.trials) {
+              // change the trial sites list to only those that are
+              // actively recruiting.
+              trial.sites = trial.sites.filter(site => 
+                ACTIVE_RECRUITMENT_STATUSES.includes(
+                  // Site comes all upper case from the API
+                  site.recruitmentStatus.toLowerCase()
+                )
+              );
+            }
+
+            body = response;
+          } else if (response.nciID) {
+            // This is a trial, and this is REALLY dirty.
+            // I no like this middleware how everything calls the service from
+            // the same function and then adds a big conditional to manipulate
+            // the data. It is too late to redo this, but it needs to be fixed later.
+            response.sites = response.sites.filter(site => 
+              ACTIVE_RECRUITMENT_STATUSES.includes(
+                // Site comes all upper case from the API
+                site.recruitmentStatus.toLowerCase()
+              )
+            );
             body = response;
           }
+          else {
+            body = response;
+          }
+
           let formattedBody = body;
 
           if (fetchHandlers) {
