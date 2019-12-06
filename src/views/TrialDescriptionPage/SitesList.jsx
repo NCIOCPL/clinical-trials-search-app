@@ -36,12 +36,31 @@ const SitesList = sites => {
 
   const buildUSStatesList = sitesArr => {
     if (sitesArr.length > 0) {
-      let stateside = sitesArr.filter(item => item.country === 'United States');
-      let statesList = [
+      // Get all the US sites
+      const stateside = sitesArr.filter(item => item.country === 'United States');
+
+      // Get a UNIQUE list of all the US state abbreviations in use.
+      const statesAbbrs = [
         ...new Set(stateside.map(item => item.stateOrProvinceAbbreviation)),
       ];
-      statesList.sort((a, b) => (a > b ? 1 : -1));
-      setStatesList(statesList);
+
+      // Get the abbr/name combo for the states.
+      // NOTE: getStateNameFromAbbr is called later in order to draw the states
+      // dropdown. It may be beneficial to refactor this to always have the
+      // abbr/name pair sorted in statesList.
+      const stateNameAbbrObjs = statesAbbrs.map(s => ({
+        abbr: s,
+        name: getStateNameFromAbbr(s)
+      }));
+
+      // Get the sorted list of state abbreviations. NOTE: you
+      // need the names in order to sort.
+      const sortedStatesList = stateNameAbbrObjs
+        .sort((a,b) => (a.name > b.name ? 1 : -1))
+        .map(s => s.abbr);
+      
+      // Update the statesList state.
+      setStatesList(sortedStatesList);
     }
   };
 
