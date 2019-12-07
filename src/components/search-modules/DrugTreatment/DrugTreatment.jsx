@@ -34,24 +34,26 @@ const DrugTreatment = ({ handleUpdate, useValue }) => {
     }
   }, [treatmentVal, dispatch]);
 
-  //not displaying everything!!
   const filterSelectedItems = (items = [], selections = []) => {
     if (!items.length || !selections.length) {
       return items;
     }
     const filteredItems = items.filter(
-      item => !selections.find(selection => selection.label === item.name)
+      item => !selections.find(selection => selection.name === item.name)
     );
     return filteredItems;
   };
 
-  const applyOptionsFilterAndFormatting = ( searchVal, item, isHighlighted ) => {
-    const searchStr = new RegExp('(^' + searchVal.value + '|\\s+' + searchVal.value + ')', 'i');
-    const filteredSynonyms = Array.isArray(item.synonyms) 
-      ? item.synonyms.filter( synonym => synonym.match(searchStr)) 
+  const applyOptionsFilterAndFormatting = (searchVal, item, isHighlighted) => {
+    const searchStr = new RegExp(
+      '(^' + searchVal.value + '|\\s+' + searchVal.value + ')',
+      'i'
+    );
+    const filteredSynonyms = Array.isArray(item.synonyms)
+      ? item.synonyms.filter(synonym => synonym.match(searchStr))
       : [];
     const filteredSynonymsCount = filteredSynonyms.length;
-    
+
     return (
       <div
         className={`cts-autocomplete__menu-item ${
@@ -64,18 +66,21 @@ const DrugTreatment = ({ handleUpdate, useValue }) => {
           {item.category.indexOf('category') !== -1 ? ' (DRUG FAMILY)' : ''}
         </div>
         {filteredSynonymsCount > 0 && (
-          
           <span className="synonyms">
-            Other Names: {' '}
+            Other Names:{' '}
             <ol>
-              { filteredSynonyms.map( (synonym, i) => {
+              {filteredSynonyms.map((synonym, i) => {
                 return (
-                  <li key={i}
-                      dangerouslySetInnerHTML={
-                          {__html: synonym.match(searchStr) ? synonym.replace(searchStr, `<strong>$&</strong>`) : synonym}
-                  }></li>
-                )
-              }) }
+                  <li
+                    key={i}
+                    dangerouslySetInnerHTML={{
+                      __html: synonym.match(searchStr)
+                        ? synonym.replace(searchStr, `<strong>$&</strong>`)
+                        : synonym,
+                    }}
+                  ></li>
+                );
+              })}
             </ol>
           </span>
         )}
@@ -96,10 +101,12 @@ const DrugTreatment = ({ handleUpdate, useValue }) => {
         label="Drug/Drug Family"
         inputHelpText="You can use the drug's generic or brand name. More than one selection may be made."
         value={drugVal.value}
-        inputProps={{ placeholder: 'Start typing to select drugs and/or drug families' }}
+        inputProps={{
+          placeholder: 'Start typing to select drugs and/or drug families',
+        }}
         items={filterSelectedItems(drugOptions, drugs)}
         getItemValue={item => item.name}
-        shouldItemRender={ () => true }
+        shouldItemRender={() => true}
         onChange={(event, value) => setDrugVal({ value })}
         onSelect={value => {
           handleUpdate('drugs', [
@@ -133,7 +140,9 @@ const DrugTreatment = ({ handleUpdate, useValue }) => {
             </div>
           );
         }}
-        renderItem={ (item, isHighlighted) => applyOptionsFilterAndFormatting(drugVal, item, isHighlighted) }
+        renderItem={(item, isHighlighted) =>
+          applyOptionsFilterAndFormatting(drugVal, item, isHighlighted)
+        }
       />
 
       <Autocomplete
@@ -178,7 +187,9 @@ const DrugTreatment = ({ handleUpdate, useValue }) => {
             </div>
           );
         }}
-        renderItem={(item, isHighlighted) => applyOptionsFilterAndFormatting(treatmentVal, item, isHighlighted)}
+        renderItem={(item, isHighlighted) =>
+          applyOptionsFilterAndFormatting(treatmentVal, item, isHighlighted)
+        }
       />
     </Fieldset>
   );
