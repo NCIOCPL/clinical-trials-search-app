@@ -18,7 +18,7 @@ export {
 } from './stateUtils';
 export { keyHandler } from './keyHandler';
 export { uniqueIdForComponent } from './uniqueIdForComponent';
-export { sortItems } from './sortItems';
+export { sortItems, sortItemsByName } from './sortItems';
 export { ctsapiDiseaseFetcher } from './ctsapiDiseaseFetcher';
 export { ctsapiInterventionFetcher } from './ctsapiInterventionFetcher';
 export { zipcodeFetcher } from './zipcodeFetcher';
