@@ -16,6 +16,7 @@ export const useZipConversion = updateFunc => {
         // if we don't get back a message, good to go
         if (response.data && !response.data.message) {
           updateFunc('zipCoords', response.data);
+          updateFunc('hasInvalidZip', false);
         } else {
           updateFunc('hasInvalidZip', true);
         }

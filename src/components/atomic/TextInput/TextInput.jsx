@@ -224,9 +224,9 @@ class TextInput extends React.Component {
         this.setState({ isPristine: false });
       }
       // if
-      if (this.state.hasError || this.state.isValid) {
-        this._validate();
-      }
+      // if (this.state.hasError || this.state.isValid) {
+      //   this._validate();
+      // }
     });
   }
 }

@@ -29,6 +29,7 @@ const Location = ({ handleUpdate }) => {
     zip,
     zipModified,
     zipRadius,
+    hasInvalidZip,
     country,
     city,
     states,
@@ -38,7 +39,6 @@ const Location = ({ handleUpdate }) => {
   const [activeRadio, setActiveRadio] = useState(location);
   const [limitToVA, setLimitToVA] = useState(vaOnly);
   const [showStateField, setShowStateField] = useState(true);
-  const [zipErrorMsg, setZipErrorMsg] = useState('');
 
   //hospital
   const [hospitalName, setHospitalName] = useState({ value: hospital.term });
@@ -48,27 +48,18 @@ const Location = ({ handleUpdate }) => {
   const stateOptions = getStates();
 
   useEffect(() => {
-    if (inputtedZip !== '') {
-      getZipCoords(inputtedZip);
-    }
-  }, [inputtedZip]);
-
-  useEffect(() => {
     if (hospitalName.value.length > 2) {
       dispatch(searchHospital({ searchText: hospitalName.value }));
     }
   }, [hospitalName, dispatch]);
 
   useEffect(() => {
-    if (activeRadio === 'search-location-country') {
+    handleUpdate('location', activeRadio);
+    handleUpdate('nihOnly', activeRadio === 'search-location-nih');
+    if(activeRadio === 'search-location-country' && countries.length < 1){
       dispatch(getCountries());
     }
   }, [activeRadio, dispatch]);
-
-  const updateStore = locRadio => {
-    handleUpdate('location', locRadio);
-    handleUpdate('nihOnly', locRadio === 'search-location-nih');
-  };
 
   const handleToggleChange = () => {
     let newVal = !limitToVA;
@@ -83,7 +74,6 @@ const Location = ({ handleUpdate }) => {
 
   const handleRadioChange = e => {
     setActiveRadio(e.target.value);
-    updateStore(e.target.value);
   };
 
   const handleCountryOnChange = e => {
@@ -105,26 +95,44 @@ const Location = ({ handleUpdate }) => {
     );
   };
 
-  const checkZip = () => {
-    if (zipModified) {
-      handleUpdate('zipModified', false);
+  useEffect(() => {
+    if (inputtedZip.length === 5) {
+      getZipCoords(inputtedZip);
+      validateZip();
+    } else if (inputtedZip === '') {
+      clearZip();
+    } else {
+      // prepopulated with a 5 digit zip has been modified
+      if (zipModified) {
+        handleUpdate('zipModified', false);
+      }
     }
-  };
+  }, [inputtedZip]);
 
   const handleZipUpdate = e => {
-    const zipInput = e.target.value;
+    setInputtedZip(e.target.value);
+  };
+
+  const clearZip = () => {
+    handleUpdate('zip', '');
+    handleUpdate('zipCoords', { lat: '', long: '' });
     handleUpdate('hasInvalidZip', false);
-    if (zipInput.length === 5) {
-      if (/^[0-9]+$/.test(zipInput)) {
-        setZipErrorMsg('');
-        setInputtedZip(zipInput);
-        handleUpdate(e.target.id, zipInput);
-        handleUpdate('location', 'search-location-zip');
+  };
+
+  const validateZip = () => {
+    if (inputtedZip.length === 5) {
+      // test that all characters are numbers
+      if (isNaN(inputtedZip)) {
+        handleUpdate('hasInvalidZip', true);
       } else {
-        handleUpdate('zip', '');
-        handleUpdate('zipCoords', { lat: '', long: '' });
-        setZipErrorMsg(`Please enter a 5 digit U.S. zip code`);
+        handleUpdate('zip', inputtedZip);
+        handleUpdate('location', 'search-location-zip');
       }
+    } else if (inputtedZip.length === 0) {
+      // empty treat as blank
+      clearZip();
+    } else {
+      handleUpdate('hasInvalidZip', true);
     }
   };
 
@@ -173,8 +181,8 @@ const Location = ({ handleUpdate }) => {
                 classes="search-location__zip --zip"
                 label="U.S. ZIP Code"
                 modified={zipModified}
-                errorMessage={zipErrorMsg}
-                onBlur={checkZip}
+                errorMessage={hasInvalidZip? 'Please enter a valid 5 digit U.S. zip code' : ''}
+                onBlur={validateZip}
                 maxLength={5}
               />
               <Dropdown
