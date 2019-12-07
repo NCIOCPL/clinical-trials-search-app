@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Fieldset, Autocomplete } from '../../atomic';
 import { getDiseasesForSimpleTypeAhead } from '../../../store/actions';
+import { sortItemsByName } from '../../../utilities'
 
 const CancerTypeKeyword = ({ handleUpdate }) => {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ const CancerTypeKeyword = ({ handleUpdate }) => {
         inputHelpText="Leave blank to search all cancer types or keywords."
         getItemValue={item => item.name}
         shouldItemRender={matchItemToTerm}
+        sortItems={sortItemsByName}
         onChange={(event, value) => {
           setCTK({ value });
           handleUpdate('cancerType', {name: '', codes: []})
