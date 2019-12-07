@@ -249,7 +249,7 @@ const Location = ({ handleUpdate }) => {
                   renderMenu={children => {
                     return (
                       <div className="cts-autocomplete__menu --drugs">
-                        {stateVal.value.length ? (
+                        {
                           filterSelectedItems(stateOptions, states).length ? (
                             children
                           ) : (
@@ -257,11 +257,7 @@ const Location = ({ handleUpdate }) => {
                               No results found
                             </div>
                           )
-                        ) : (
-                          <div className="cts-autocomplete__menu-item">
-                            Enter state name
-                          </div>
-                        )}
+                        }
                       </div>
                     );
                   }}
