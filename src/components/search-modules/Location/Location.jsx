@@ -14,6 +14,7 @@ import {
   sortItems,
   getStates,
   matchStateToTerm,
+  sortStates,
 } from '../../../utilities';
 import { useZipConversion } from '../../../hooks';
 import './Location.scss';
@@ -230,6 +231,7 @@ const Location = ({ handleUpdate }) => {
                   items={filterSelectedItems(stateOptions, states)}
                   getItemValue={item => item.name}
                   shouldItemRender={matchStateToTerm}
+                  sortItems={sortStates}
                   onChange={(event, value) => setStateVal({ value })}
                   onSelect={value => {
                     handleUpdate('states', [
