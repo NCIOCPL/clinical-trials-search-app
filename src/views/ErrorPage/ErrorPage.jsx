@@ -99,7 +99,7 @@ const ErrorPage = ({ initErrorsList }) => {
         <div class="error-page__content">
           <div className="error-page__control --top">
             <div className="error-page__list">
-              <div class="error-list">
+              <div className="error-list">
                 <p>
                   Sorry, you seem to have entered invalid criteria. Please check
                   the following, and try your search again:
