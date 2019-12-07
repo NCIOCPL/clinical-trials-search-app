@@ -9,14 +9,14 @@ import {
   Autocomplete,
 } from '../../atomic';
 import { getCountries, searchHospital } from '../../../store/actions';
-import { matchItemToTerm, sortItems } from '../../../utilities';
-import { useZipConversion } from '../../../hooks';
-import './Location.scss';
-
 import {
+  matchItemToTerm,
+  sortItems,
   getStates,
   matchStateToTerm,
-} from '../../../mocks/mock-autocomplete-util';
+} from '../../../utilities';
+import { useZipConversion } from '../../../hooks';
+import './Location.scss';
 
 const Location = ({ handleUpdate }) => {
   //Hooks must always be rendered in same order.
@@ -74,8 +74,11 @@ const Location = ({ handleUpdate }) => {
     let newVal = !limitToVA;
     setLimitToVA(newVal);
     handleUpdate('vaOnly', newVal);
-    // make sure that the newly hidden selections are not selected 
-    if(activeRadio === 'search-location-nih' || activeRadio === 'search-location-hospital'){
+    // make sure that the newly hidden selections are not selected
+    if (
+      activeRadio === 'search-location-nih' ||
+      activeRadio === 'search-location-hospital'
+    ) {
       setActiveRadio('search-location-all');
       handleUpdate('hospital', { term: '', termKey: '' });
     }
