@@ -22,7 +22,6 @@ import './Location.scss';
 const Location = ({ handleUpdate }) => {
   //Hooks must always be rendered in same order.
   const dispatch = useDispatch();
-  const [inputtedZip, setInputtedZip] = useState('');
   const [{ getZipCoords }] = useZipConversion(handleUpdate);
   const { countries = [], hospitals = [] } = useSelector(store => store.cache);
   const {
@@ -36,8 +35,10 @@ const Location = ({ handleUpdate }) => {
     states,
     hospital,
     vaOnly,
+    refineSearch
   } = useSelector(store => store.form);
   const [activeRadio, setActiveRadio] = useState(location);
+  const [inputtedZip, setInputtedZip] = useState(zip);
   const [limitToVA, setLimitToVA] = useState(vaOnly);
   const [showStateField, setShowStateField] = useState(true);
 
@@ -47,6 +48,7 @@ const Location = ({ handleUpdate }) => {
   //state input
   const [stateVal, setStateVal] = useState({ value: '' });
   const stateOptions = getStates();
+
 
   useEffect(() => {
     if (hospitalName.value.length > 2) {
