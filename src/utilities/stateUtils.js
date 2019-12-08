@@ -1,5 +1,5 @@
 export function matchStateToTerm(state, value) {
-  const searchStr = new RegExp('(^' + value + '|\\s+' + value + ')', 'i');
+  const searchStr = new RegExp('(^' + value + ')', 'i');
   return state.name.match(searchStr);                    
 }
 
