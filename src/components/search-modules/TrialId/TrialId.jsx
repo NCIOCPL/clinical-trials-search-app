@@ -19,7 +19,7 @@ const TrialId = ({ handleUpdate }) => {
         type="text"
         label="Trial ID"
         labelHidden
-        inputHelpText="Separate multiple IDs with commas or semicolons."
+        inputHelpText="Separate multiple IDs with commas."
       />
     </Fieldset>
   );

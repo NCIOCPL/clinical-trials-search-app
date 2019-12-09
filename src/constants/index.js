@@ -32,6 +32,7 @@ export const ACTIVE_RECRUITMENT_STATUSES = [
 // Specify which fields will be returned in the TrialsResults Object from clinicaltrialsapi
 export const SEARCH_RETURNS_FIELDS = [
   'nci_id',
+  'nct_id',
   'brief_title',
   'sites.org_name',
   'sites.org_postal_code',
@@ -53,3 +54,5 @@ export const OTHER_MAIN_TYPES = [
   'C3262', //Neoplasm not in main type (Other Neoplasm)
   'C2991', //Disease or Disorder (Other Disease)
 ];
+
+export const NIH_ZIPCODE = "20892";

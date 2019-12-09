@@ -17,7 +17,7 @@ import {
   ZipCode,
 } from '../../components/search-modules';
 import { history } from '../../services/history.service';
-import { updateFormField, updateGlobal } from '../../store/actions';
+import { updateFormField, clearForm, receiveData } from '../../store/actions';
 
 //Module groups in arrays will be placed side-by-side in the form
 const basicFormModules = [CancerTypeKeyword, [Age, ZipCode]];
@@ -37,18 +37,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
   const dispatch = useDispatch();
   const sentinelRef = useRef(null);
   const [formFactor, setFormFactor] = useState(formInit);
-
-  const appHasBeenVisited = useSelector(
-    store => store.globals.appHasBeenVisited
-  );
-  const handleUpdateGlobal = (field, value) => {
-    dispatch(
-      updateGlobal({
-        field,
-        value,
-      })
-    );
-  };
+  const {hasInvalidAge, hasInvalidZip} = useSelector(store => store.form)
 
   const handleUpdate = (field, value) => {
     dispatch(
@@ -62,13 +51,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
   // scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (formInit !== 'basic') {
-      handleUpdate('formType', formInit);
-    }
-
-    if (!appHasBeenVisited) {
-      handleUpdateGlobal('appHasBeenVisited', true);
-    }
+    handleUpdate('formType', formInit);
   }, []);
 
   let formModules =
@@ -76,7 +59,14 @@ const SearchPage = ({ formInit = 'basic' }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    history.push('/about-cancer/treatment/clinical-trials/search/r');
+    if(!hasInvalidAge && !hasInvalidZip){
+      dispatch(receiveData(
+        'selectedTrialsForPrint',
+        []
+      ));
+      history.push('/about-cancer/treatment/clinical-trials/search/r');
+    }
+    
   };
 
   const renderDelighters = () => (
@@ -122,16 +112,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
   );
 
   const toggleForm = () => {
-    history.push(
-      `${
-        formFactor === 'basic'
-          ? '/about-cancer/treatment/clinical-trials/search/advanced'
-          : '/about-cancer/treatment/clinical-trials/search'
-      }`
-    );
-    let newState = formFactor === 'basic' ? 'advanced' : 'basic';
-    handleUpdate('formType', newState);
-    setFormFactor(newState);
+    dispatch(clearForm());
   };
 
   const renderSearchTip = () => (
@@ -146,9 +127,10 @@ const SearchPage = ({ formInit = 'basic' }) => {
         ) : (
           <>{` All fields are optional. Skip any items that are unknown or not applicable or try our `}</>
         )}
-        <button type="button" className="btnAsLink" onClick={toggleForm}>
+        <a href={`${formFactor === 'advanced'? '/about-cancer/treatment/clinical-trials/search' : '/about-cancer/treatment/clinical-trials/search/advanced'}`}  
+        onClick={toggleForm}>
           {formFactor === 'basic' ? 'advanced search' : 'basic search'}
-        </button>
+        </a>
         .
       </div>
     </div>
@@ -168,7 +150,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
         />
         <meta
           name="description"
-          content={`${formFactor === 'advanced' ? 'F': 'Use our advanced search to f'}ind an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one.`}
+          content={`${formFactor === 'basic' ? 'F': 'Use our advanced search to f'}ind an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one.`}
         />
         <meta
           property="og:title"
@@ -182,7 +164,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
         />
         <meta
           property="og:description"
-          content={`${formFactor === 'advanced' ? 'F': 'Use our advanced search to f'}ind an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one.`}
+          content={`${formFactor === 'basic' ? 'F': 'Use our advanced search to f'}ind an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one.`}
         />
       </Helmet>
       <div ref={sentinelRef} className="search-page__sentinel"></div>

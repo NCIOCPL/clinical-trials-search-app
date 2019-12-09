@@ -3,6 +3,7 @@ import {
   ACTIVE_TRIAL_STATUSES,
   ACTIVE_RECRUITMENT_STATUSES,
   SEARCH_RETURNS_FIELDS,
+  NIH_ZIPCODE
 } from '../constants';
 
 export const formatTrialSearchQuery = form => {
@@ -114,7 +115,7 @@ export const formatTrialSearchQuery = form => {
   switch (form.location) {
     case 'search-location-nih':
       //NIH has their own postal code, so this means @NIH
-      filterCriteria['sites.org_postal_code'] = '20892';
+      filterCriteria['sites.org_postal_code'] = NIH_ZIPCODE;
       break;
     case 'search-location-hospital':
       filterCriteria['sites.org_name_fulltext'] = form.hospital.term;

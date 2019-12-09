@@ -291,10 +291,10 @@ export function getCountries({ size = 100 } = {}) {
         {
           method: 'getTerms',
           requestParams: {
-            category: 'sites.org_country',
+            termType: 'sites.org_country',
             additionalParams: {
               sort: 'term',
-              current_trial_status: ACTIVE_TRIAL_STATUSES,
+              current_trial_statuses: ACTIVE_TRIAL_STATUSES,
             },
             size,
           },
@@ -477,7 +477,7 @@ export function searchTrials({ cacheKey, data }) {
           method: 'searchTrials',
           requestParams: {
             document: JSON.stringify(data),
-          },
+          }
         },
       ],
     },

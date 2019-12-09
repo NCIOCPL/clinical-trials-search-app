@@ -22,14 +22,13 @@ const mappingTestCases = [
   // Basic searches.
   [ "basic - empty search",
     {},
-    {
-      ...NO_LOC_BASIC
-    }
+    {}
   ],
   [
     "basic - main type - simple",
     {
       cancerType: { name: 'Breast Cancer', codes: ["C4872"] },
+      formType: 'basic',
     },
     {
       ...NO_LOC_BASIC,
@@ -39,6 +38,7 @@ const mappingTestCases = [
   ["basic - main type - complex",
     {
       cancerType: { name: 'Stage IV Breast Cancer', codes: ["C3995", "C4872"] },
+      formType: 'basic',
     },
     {
       ...NO_LOC_BASIC,
@@ -47,7 +47,8 @@ const mappingTestCases = [
   ],
   ["basic - age",
     {
-      age: 35
+      age: 35,
+      formType: 'basic',
     },
     {
       ...NO_LOC_BASIC,
@@ -56,7 +57,8 @@ const mappingTestCases = [
   ],
   ["basic - phrase",
     {
-      keywordPhrases: "chicken"
+      keywordPhrases: "chicken",
+      formType: 'basic',
     },
     {
       ...NO_LOC_BASIC,
@@ -67,7 +69,8 @@ const mappingTestCases = [
   [ "basic - location",
     {
       zip: "20850",
-      zipCoords: {lat: 39.0897, long: -77.1798}
+      zipCoords: {lat: 39.0897, long: -77.1798},
+      formType: 'basic',
     }, {
       ...NO_LOC_BASIC,
       "z": "20850",
@@ -76,7 +79,8 @@ const mappingTestCases = [
   ],
   ["basic - pager",
     {
-      resultsPage: 3
+      resultsPage: 3,
+      formType: 'basic',
     },
     {
       ...NO_LOC_BASIC,

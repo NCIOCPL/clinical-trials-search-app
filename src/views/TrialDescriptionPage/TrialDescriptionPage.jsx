@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateFormField, clearForm, updateGlobal } from '../../store/actions';
+import { clearForm } from '../../store/actions';
 import { Helmet } from 'react-helmet';
 import { history } from '../../services/history.service';
 import { getTrial } from '../../store/actions';
-import { useQueryToBuildStore } from '../../hooks';
 import {
   Accordion,
   AccordionItem,
@@ -20,42 +19,16 @@ const TrialDescriptionPage = ({ location }) => {
   const dispatch = useDispatch();
   const [isTrialLoading, setIsTrialLoading] = useState(true);
   const [qs, setQs] = useState(location.search);
-  const { isDirty } = useSelector(store => store.form);
+  const { isDirty, formType } = useSelector(store => store.form);
   const parsed = queryString.parse(qs);
   const currId = parsed.id;
   const [storeRehydrated, setStoreRehydrated] = useState(false);
 
   const trialTitle = useSelector(store => store.cache.currentTrialTitle);
   const cacheSnap = useSelector(store => store.cache);
+  
   const [searchUsed, setSearchUsed] = useState(
-    Object.keys(cacheSnap).length > 0
-  );
-
-  const appHasBeenVisited = useSelector(
-    store => store.globals.appHasBeenVisited
-  );
-  const handleUpdateGlobal = (field, value) => {
-    dispatch(
-      updateGlobal({
-        field,
-        value,
-      })
-    );
-  };
-
-  const handleUpdate = (field, value) => {
-    dispatch(
-      updateFormField({
-        field,
-        value,
-      })
-    );
-  };
-
-  const [{ buildStoreFromQuery }] = useQueryToBuildStore(
-    qs,
-    handleUpdate,
-    setStoreRehydrated
+    Object.keys(cacheSnap).length > 1
   );
 
   const trial = useSelector(store => store.cache[currId]);
@@ -80,14 +53,8 @@ const TrialDescriptionPage = ({ location }) => {
     window.scrollTo(0, 0);
     if (trial && trial.briefTitle) {
       initTrialData();
-    } else if (!isDirty) {
-      //need to hydrate store from query
-      buildStoreFromQuery(qs);
     } else {
       dispatch(getTrial({ trialId: currId }));
-    }
-    if (!appHasBeenVisited) {
-      handleUpdateGlobal('appHasBeenVisited', true);
     }
   }, []);
 
@@ -173,19 +140,17 @@ const TrialDescriptionPage = ({ location }) => {
   const renderTrialDescriptionHeader = () => {
     return (
       <div className="trial-description-page__header">
-        {isDirty && (
+        {(isDirty || searchUsed) &&(
           <div className="back-to-search btnAsLink">
             <span onClick={() => history.goBack()}>
               &lt; Back to search results
             </span>
           </div>
         )}
-        {searchUsed && (
           <SearchCriteriaTable
             handleReset={handleStartOver}
             placement="trial"
           />
-        )}
       </div>
     );
   };
@@ -262,9 +227,9 @@ const TrialDescriptionPage = ({ location }) => {
   };
 
   const handleExpandAllSections = () => {
-    let headings = document.querySelectorAll('h2.cts-accordion__heading');
-    let buttons = document.querySelectorAll('.cts-accordion__button');
-    let contents = document.querySelectorAll('.cts-accordion__content');
+    let headings = document.querySelectorAll('.trial-description-page__content h2.cts-accordion__heading');
+    let buttons = document.querySelectorAll('.trial-description-page__content .cts-accordion__button');
+    let contents = document.querySelectorAll('.trial-description-page__content .cts-accordion__content');
     headings.forEach(item => {
       item.setAttribute('aria-expanded', true);
     });
@@ -277,9 +242,9 @@ const TrialDescriptionPage = ({ location }) => {
   };
 
   const handleHideAllSections = () => {
-    let headings = document.querySelectorAll('h2.cts-accordion__heading');
-    let buttons = document.querySelectorAll('.cts-accordion__button');
-    let contents = document.querySelectorAll('.cts-accordion__content');
+    let headings = document.querySelectorAll('.trial-description-page__content h2.cts-accordion__heading');
+    let buttons = document.querySelectorAll('.trial-description-page__content .cts-accordion__button');
+    let contents = document.querySelectorAll('.trial-description-page__content .cts-accordion__content');
     headings.forEach(item => {
       item.setAttribute('aria-expanded', false);
     });
@@ -325,7 +290,10 @@ const TrialDescriptionPage = ({ location }) => {
         ) : (
           <h1>{trial.briefTitle}</h1>
         )}
-        {renderTrialDescriptionHeader()}
+        { (formType === 'basic' || formType === 'advanced') ?
+            (renderTrialDescriptionHeader()) :
+            <></>
+        }
         <div className="trial-description-page__description">
           <div className="trial-description-page__content">
             {isTrialLoading ? (
@@ -384,14 +352,14 @@ const TrialDescriptionPage = ({ location }) => {
                     {trial.sites && trial.sites.length > 0 ? (
                       <SitesList sites={trial.sites} />
                     ) : noLocInfo.includes(
-                        trial.currentTrialStatus.toLower()
+                        trial.currentTrialStatus.toLowerCase()
                       ) ? (
                       <p>Location information is not yet available.</p>
                     ) : (
                       <p>
                         See trial information on{' '}
                         <a
-                          href={`https://www.clinicaltrials.gov/show/${trial.NCTID}`}
+                          href={`https://www.clinicaltrials.gov/show/${trial.nctID}`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -471,7 +439,7 @@ const TrialDescriptionPage = ({ location }) => {
                       {renderSecondaryIDs()}
                       <li>
                         <strong className="field-label">
-                          Clinicaltrials.gov ID
+                          ClinicalTrials.gov ID
                         </strong>
                         <a
                           href={`http://clinicaltrials.gov/show/${trial.nctID}`}

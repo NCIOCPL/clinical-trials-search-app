@@ -1,6 +1,6 @@
 .trial-description-page {
   h1 {
-    line-height: 1.4;
+    line-height: 1.175;
   }
 
   &__header {
@@ -204,6 +204,7 @@
   flex-wrap: nowrap;
   justify-content: space-between;
 }
+
 .accordion-control {
   &__wrapper {
     display: flex;

@@ -1,15 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import {Helmet} from 'react-helmet';
-import { updateFormField, clearForm, updateGlobal } from '../../store/actions';
-import { Delighter, Checkbox, Modal, Pager } from '../../components/atomic';
+import { Helmet } from 'react-helmet';
+import { updateFormField, clearForm, receiveData } from '../../store/actions';
+import { ChatOpener, Delighter, Checkbox, Modal, Pager } from '../../components/atomic';
 import { buildQueryString } from '../../utilities';
-import {
-  useModal,
-  useQueryToBuildStore,
-  useStoreToFindTrials,
-} from '../../hooks';
+import { useModal, useStoreToFindTrials } from '../../hooks';
 import ResultsPageHeader from './ResultsPageHeader';
 import ResultsList from './ResultsList';
 import { history } from '../../services/history.service';
@@ -21,7 +17,7 @@ const ResultsPage = ({ location }) => {
   const dispatch = useDispatch();
   const [selectAll, setSelectAll] = useState(false);
   const [pagerPage, setPagerPage] = useState(0);
-  const [selectedResults, setSelectedResults] = useState([]);
+
   const [pageIsLoading, setPageIsLoading] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [trialResults, setTrialResults] = useState([]);
@@ -31,25 +27,16 @@ const ResultsPage = ({ location }) => {
   const cache = useSelector(store => store.cache);
   const locsearch = location.search.replace('?', '');
   const [qs, setQs] = useState(
-    queryString.stringify(buildQueryString(formSnapshot))
+    queryString.stringify(buildQueryString(formSnapshot), {
+      arrayFormat: 'comma',
+    })
   );
   const [storeRehydrated, setStoreRehydrated] = useState(false);
   const [currCacheKey, setCurrCacheKey] = useState('');
-
   const [{ fetchTrials }] = useStoreToFindTrials();
-
-  const appHasBeenVisited = useSelector(
-    store => store.globals.appHasBeenVisited
+  const [selectedResults, setSelectedResults] = useState(
+    cache['selectedTrialsForPrint'] || []
   );
-  const handleUpdateGlobal = (field, value) => {
-    dispatch(
-      updateGlobal({
-        field,
-        value,
-      })
-    );
-  };
-
   const handleUpdate = (field, value) => {
     dispatch(
       updateFormField({
@@ -59,20 +46,11 @@ const ResultsPage = ({ location }) => {
     );
   };
 
-  const [{ buildStoreFromQuery }] = useQueryToBuildStore(
-    locsearch,
-    handleUpdate,
-    setStoreRehydrated
-  );
-
   // scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
     if (trialResults && trialResults.total >= 0) {
       initData();
-    } else if (locsearch !== '') {
-      // hydrate the query, it's been pasted in
-      buildStoreFromQuery(locsearch);
     } else if (!formSnapshot.hasInvalidZip) {
       // data is in the store
       setCurrCacheKey(qs);
@@ -81,9 +59,6 @@ const ResultsPage = ({ location }) => {
       //something went wrog
       setPageIsLoading(false);
       setIsLoading(false);
-    }
-    if (!appHasBeenVisited) {
-      handleUpdateGlobal('appHasBeenVisited', true);
     }
   }, []);
 
@@ -105,7 +80,9 @@ const ResultsPage = ({ location }) => {
 
   //track usage of selected results for print
   useEffect(() => {
-    if (selectedResults.length >= 100) {
+    // update cacheStore with new selectedResults Value
+    dispatch(receiveData('selectedTrialsForPrint', [...selectedResults]));
+    if (selectedResults.length > 100) {
       toggleModal();
     }
   }, [selectedResults]);
@@ -152,7 +129,7 @@ const ResultsPage = ({ location }) => {
       // update qs
       const parsed = queryString.parse(location.search);
       parsed.pn = currentPage + 1;
-      let newqs = queryString.stringify(parsed);
+      let newqs = queryString.stringify(parsed, { arrayFormat: 'comma' });
       setQs(newqs);
       setCurrCacheKey(newqs);
       history.push({
@@ -161,7 +138,7 @@ const ResultsPage = ({ location }) => {
       fetchTrials(newqs);
     }
   };
-  
+
   const renderResultsListLoader = () => (
     <div className="loader__results-list-wrapper">
       <div className="loader__results-list">
@@ -299,15 +276,17 @@ const ResultsPage = ({ location }) => {
           <li>Zip Code</li>
         </ul>
         <p>
-          For assistance, please contact the NCI Contact Center. You can{' '}
-          <a href="/contact" className="live-help-link">
-            chat online
-          </a>{' '}
+          For assistance, please contact the Cancer Information Service. You can{' '}
+          <ChatOpener />{' '}
           or call 1-800-4-CANCER (1-800-422-6237).
         </p>
         <p>
           <Link
-            to={`${formSnapshot.formType === 'basic' ? '/about-cancer/treatment/clinical-trials/search' : '/about-cancer/treatment/clinical-trials/search/advanced'}`}
+            to={`${
+              formSnapshot.formType === 'basic'
+                ? '/about-cancer/treatment/clinical-trials/search'
+                : '/about-cancer/treatment/clinical-trials/search/advanced'
+            }`}
             onClick={handleStartOver}
           >
             Try a new search
@@ -324,15 +303,17 @@ const ResultsPage = ({ location }) => {
           <strong>No clinical trials matched your search.</strong>
         </p>
         <p>
-          For assistance, please contact the NCI Contact Center. You can{' '}
-          <a href="/contact" className="live-help-link">
-            chat online
-          </a>{' '}
+          For assistance, please contact the Cancer Information Service. You can{' '}
+          <ChatOpener />{' '}
           or call 1-800-4-CANCER (1-800-422-6237).
         </p>
         <p>
           <Link
-            to={`${formSnapshot.formType === 'basic' ? '/about-cancer/treatment/clinical-trials/search' : '/about-cancer/treatment/clinical-trials/search/advanced'}`}
+            to={`${
+              formSnapshot.formType === 'basic'
+                ? '/about-cancer/treatment/clinical-trials/search'
+                : '/about-cancer/treatment/clinical-trials/search/advanced'
+            }`}
             onClick={handleStartOver}
           >
             Try a new search
@@ -372,16 +353,17 @@ const ResultsPage = ({ location }) => {
           <>{renderInvalidZip()}</>
         ) : (
           <>
-            {(isLoading)
-              ? (<div className="loader__pageheader"></div>)
-              : (<ResultsPageHeader
+            {isLoading ? (
+              <div className="loader__pageheader"></div>
+            ) : (
+              <ResultsPageHeader
                 resultsCount={resultsCount}
                 pageNum={resultsPage}
                 handleUpdate={handleUpdate}
                 handleReset={handleStartOver}
-              />)
-            }
-            
+              />
+            )}
+
             <div className="results-page__content">
               {renderControls()}
               <div className="results-page__list">

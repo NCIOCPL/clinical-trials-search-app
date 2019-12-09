@@ -1,4 +1,4 @@
-import './polyfills/array_fill';
+import './polyfills';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -75,7 +75,7 @@ const initialize = ({
     ReactDOM.hydrate(
       <Provider store={store}>
         <Router history={history} basename="/about-cancer/treatment/clinical-trials/search">
-          <App />
+          <App services={services} zipConversionEndpoint={zipConversionEndpoint}/>
         </Router>
       </Provider>,
       appRootDOMNode
@@ -84,7 +84,7 @@ const initialize = ({
     ReactDOM.render(
       <Provider store={store}>
         <Router history={history} basename="/about-cancer/treatment/clinical-trials/search">
-          <App />
+          <App services={services} zipConversionEndpoint={zipConversionEndpoint} />
         </Router>
       </Provider>,
       appRootDOMNode
@@ -107,13 +107,15 @@ if (process.env.NODE_ENV !== 'production') {
     return service;
   };
 
+  const zipConversionEndpoint =`${window.location.protocol}//${window.location.host}/cts_api/zip_code_lookup`;
+
   initialize({
     rootId,
     services: {
       ctsSearch,
     },
     printCacheEndpoint: 'https://dceg-test-acsf.cancer.gov/CTS.Print/GenCache',
-    zipConversionEndpoint: 'https://ncigovcdode283.prod.acquia-sites.com/cts_api/zip_code_lookup'
+    zipConversionEndpoint
   });
 }
 
