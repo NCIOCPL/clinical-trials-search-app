@@ -12,10 +12,11 @@ import {
   SearchCriteriaTable,
 } from '../../components/atomic';
 import SitesList from './SitesList';
+import track from 'react-tracking';
 import './TrialDescriptionPage.scss';
 const queryString = require('query-string');
 
-const TrialDescriptionPage = ({ location }) => {
+const TrialDescriptionPage = ({ location, tracking }) => {
   const dispatch = useDispatch();
   const [isTrialLoading, setIsTrialLoading] = useState(true);
   const [qs, setQs] = useState(location.search);
@@ -26,7 +27,7 @@ const TrialDescriptionPage = ({ location }) => {
 
   const trialTitle = useSelector(store => store.cache.currentTrialTitle);
   const cacheSnap = useSelector(store => store.cache);
-  
+
   const [searchUsed, setSearchUsed] = useState(
     Object.keys(cacheSnap).length > 1
   );
@@ -51,6 +52,7 @@ const TrialDescriptionPage = ({ location }) => {
   // scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
+    tracking.trackEvent({action: 'pageLoad'});
     if (trial && trial.briefTitle) {
       initTrialData();
     } else {
@@ -140,17 +142,14 @@ const TrialDescriptionPage = ({ location }) => {
   const renderTrialDescriptionHeader = () => {
     return (
       <div className="trial-description-page__header">
-        {(isDirty || searchUsed) &&(
+        {(isDirty || searchUsed) && (
           <div className="back-to-search btnAsLink">
             <span onClick={() => history.goBack()}>
               &lt; Back to search results
             </span>
           </div>
         )}
-          <SearchCriteriaTable
-            handleReset={handleStartOver}
-            placement="trial"
-          />
+        <SearchCriteriaTable handleReset={handleStartOver} placement="trial" />
       </div>
     );
   };
@@ -227,9 +226,15 @@ const TrialDescriptionPage = ({ location }) => {
   };
 
   const handleExpandAllSections = () => {
-    let headings = document.querySelectorAll('.trial-description-page__content h2.cts-accordion__heading');
-    let buttons = document.querySelectorAll('.trial-description-page__content .cts-accordion__button');
-    let contents = document.querySelectorAll('.trial-description-page__content .cts-accordion__content');
+    let headings = document.querySelectorAll(
+      '.trial-description-page__content h2.cts-accordion__heading'
+    );
+    let buttons = document.querySelectorAll(
+      '.trial-description-page__content .cts-accordion__button'
+    );
+    let contents = document.querySelectorAll(
+      '.trial-description-page__content .cts-accordion__content'
+    );
     headings.forEach(item => {
       item.setAttribute('aria-expanded', true);
     });
@@ -242,9 +247,15 @@ const TrialDescriptionPage = ({ location }) => {
   };
 
   const handleHideAllSections = () => {
-    let headings = document.querySelectorAll('.trial-description-page__content h2.cts-accordion__heading');
-    let buttons = document.querySelectorAll('.trial-description-page__content .cts-accordion__button');
-    let contents = document.querySelectorAll('.trial-description-page__content .cts-accordion__content');
+    let headings = document.querySelectorAll(
+      '.trial-description-page__content h2.cts-accordion__heading'
+    );
+    let buttons = document.querySelectorAll(
+      '.trial-description-page__content .cts-accordion__button'
+    );
+    let contents = document.querySelectorAll(
+      '.trial-description-page__content .cts-accordion__content'
+    );
     headings.forEach(item => {
       item.setAttribute('aria-expanded', false);
     });
@@ -290,10 +301,11 @@ const TrialDescriptionPage = ({ location }) => {
         ) : (
           <h1>{trial.briefTitle}</h1>
         )}
-        { (formType === 'basic' || formType === 'advanced') ?
-            (renderTrialDescriptionHeader()) :
-            <></>
-        }
+        {formType === 'basic' || formType === 'advanced' ? (
+          renderTrialDescriptionHeader()
+        ) : (
+          <></>
+        )}
         <div className="trial-description-page__description">
           <div className="trial-description-page__content">
             {isTrialLoading ? (
@@ -465,4 +477,6 @@ const TrialDescriptionPage = ({ location }) => {
   );
 };
 
-export default TrialDescriptionPage;
+export default track({
+  page: window.location.pathname,
+})(TrialDescriptionPage);
