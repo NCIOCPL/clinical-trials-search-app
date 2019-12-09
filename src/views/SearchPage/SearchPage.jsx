@@ -18,6 +18,7 @@ import {
 } from '../../components/search-modules';
 import { history } from '../../services/history.service';
 import { updateFormField, clearForm, receiveData } from '../../store/actions';
+import track from 'react-tracking';
 
 //Module groups in arrays will be placed side-by-side in the form
 const basicFormModules = [CancerTypeKeyword, [Age, ZipCode]];
@@ -33,7 +34,8 @@ const advancedFormModules = [
   LeadOrganization,
 ];
 
-const SearchPage = ({ formInit = 'basic' }) => {
+const SearchPage = ({ formInit = 'basic', tracking }) => {
+
   const dispatch = useDispatch();
   const sentinelRef = useRef(null);
   const [formFactor, setFormFactor] = useState(formInit);
@@ -52,6 +54,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
     handleUpdate('formType', formInit);
+    tracking.trackEvent({action: 'pageLoad'})
   }, []);
 
   let formModules =
@@ -244,4 +247,6 @@ const SearchPage = ({ formInit = 'basic' }) => {
   );
 };
 
-export default SearchPage;
+export default track({
+  page: window.location.pathname,
+})(SearchPage);

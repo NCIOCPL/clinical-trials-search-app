@@ -10,10 +10,11 @@ import ResultsPageHeader from './ResultsPageHeader';
 import ResultsList from './ResultsList';
 import { history } from '../../services/history.service';
 import PrintModalContent from './PrintModalContent';
+import track from 'react-tracking';
 import './ResultsPage.scss';
 const queryString = require('query-string');
 
-const ResultsPage = ({ location }) => {
+const ResultsPage = ({ location, tracking }) => {
   const dispatch = useDispatch();
   const [selectAll, setSelectAll] = useState(false);
   const [pagerPage, setPagerPage] = useState(0);
@@ -37,6 +38,7 @@ const ResultsPage = ({ location }) => {
   const [selectedResults, setSelectedResults] = useState(
     cache['selectedTrialsForPrint'] || []
   );
+  
   const handleUpdate = (field, value) => {
     dispatch(
       updateFormField({
@@ -49,6 +51,7 @@ const ResultsPage = ({ location }) => {
   // scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
+    tracking.trackEvent({action: 'pageLoad', page: window.location.pathname});
     if (trialResults && trialResults.total >= 0) {
       initData();
     } else if (!formSnapshot.hasInvalidZip) {
@@ -405,4 +408,6 @@ const ResultsPage = ({ location }) => {
   );
 };
 
-export default ResultsPage;
+export default track({
+  page: window.location.pathname,
+})(ResultsPage);
