@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import {keyHandler} from '../../../utilities';
+import { keyHandler } from '../../../utilities';
 import './Pager.scss';
 
 const Pager = ({ data, totalItems, startFromPage, numberToShow, callback }) => {
@@ -17,7 +17,17 @@ const Pager = ({ data, totalItems, startFromPage, numberToShow, callback }) => {
 
   useEffect(() => {
     setCurrentPage(startFromPage);
-  }, [startFromPage])
+  }, [startFromPage]);
+
+  //listen for back button
+  useEffect(() => {
+    //handle browser back button events
+    window.onpopstate = e => {
+      if(currentPage >= 1){
+        determineResults(currentPage - 1);
+      }
+    };
+  }, []);
 
   const renderEllipsis = key => {
     return (
@@ -41,12 +51,7 @@ const Pager = ({ data, totalItems, startFromPage, numberToShow, callback }) => {
           .map((el, idx) => idx);
       }
       if (pagesFromEnd > 3) {
-        pages = [
-          ...pages,
-          activePage + 1,
-          renderEllipsis,
-          divisions - 1,
-        ];
+        pages = [...pages, activePage + 1, renderEllipsis, divisions - 1];
       } else {
         const remainingPages = Array(pagesFromEnd)
           .fill()
@@ -130,7 +135,7 @@ Pager.propTypes = {
   startFromPage: PropTypes.number,
   numberToShow: PropTypes.number,
   callback: PropTypes.func.isRequired,
-  totalItems: PropTypes.number
+  totalItems: PropTypes.number,
 };
 
 Pager.defaultProps = {

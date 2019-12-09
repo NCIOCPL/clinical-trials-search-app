@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Dropdown } from '../../components/atomic';
 import { getStateNameFromAbbr } from '../../utilities/';
 import { isWithinRadius } from '../../utilities';
+import { NIH_ZIPCODE } from '../../constants';
 
 const SitesList = sites => {
   const [locArray, setLocArray] = useState([]);
@@ -24,6 +25,7 @@ const SitesList = sites => {
     country,
     states,
     city,
+    vaOnly,
   } = useSelector(store => store.form);
 
   const buildCountriesList = sitesArr => {
@@ -36,12 +38,31 @@ const SitesList = sites => {
 
   const buildUSStatesList = sitesArr => {
     if (sitesArr.length > 0) {
-      let stateside = sitesArr.filter(item => item.country === 'United States');
-      let statesList = [
+      // Get all the US sites
+      const stateside = sitesArr.filter(item => item.country === 'United States');
+
+      // Get a UNIQUE list of all the US state abbreviations in use.
+      const statesAbbrs = [
         ...new Set(stateside.map(item => item.stateOrProvinceAbbreviation)),
       ];
-      statesList.sort((a, b) => (a > b ? 1 : -1));
-      setStatesList(statesList);
+
+      // Get the abbr/name combo for the states.
+      // NOTE: getStateNameFromAbbr is called later in order to draw the states
+      // dropdown. It may be beneficial to refactor this to always have the
+      // abbr/name pair sorted in statesList.
+      const stateNameAbbrObjs = statesAbbrs.map(s => ({
+        abbr: s,
+        name: getStateNameFromAbbr(s)
+      }));
+
+      // Get the sorted list of state abbreviations. NOTE: you
+      // need the names in order to sort.
+      const sortedStatesList = stateNameAbbrObjs
+        .sort((a,b) => (a.name > b.name ? 1 : -1))
+        .map(s => s.abbr);
+      
+      // Update the statesList state.
+      setStatesList(sortedStatesList);
     }
   };
 
@@ -162,21 +183,37 @@ const SitesList = sites => {
   };
 
   const buildNearbySites = siteArr => {
-    if (zip !== '') {
+
+    // We only build nearby sites IF there
+    // was a location search we can filter on.
+    if (
+      (location === 'search-location-hospital') ||
+      (location === 'search-location-all' && !vaOnly)
+    ) {
+      return;
+    }
+
+    // Pre-filter sites when vaOnly is set.
+    const preFilteredSites = vaOnly ?
+      siteArr.filter(site => site.isVA) :
+      siteArr;
+
+    if (location === 'search-location-zip') {
+      // Assume that zip is valid if location is set to zip.
+      // Otherwise you should be looking at an error message instead.
       setNearbySites(
-        siteArr.filter(site =>
+        preFilteredSites.filter(site =>
           isWithinRadius(zipCoords, site.coordinates, zipRadius)
         )
       );
-    }
-    if (location === 'search-location-country') {
+    } else if (location === 'search-location-country') {
       if (country === 'United States') {
         if (states.length > 0) {
           let nearbyStates = [...new Set(states.map(item => item.abbr))];
 
           if (city !== '') {
             setNearbySites(
-              siteArr.filter(
+              preFilteredSites.filter(
                 site =>
                   nearbyStates.includes(site.stateOrProvinceAbbreviation) &&
                   site.city === city
@@ -184,7 +221,7 @@ const SitesList = sites => {
             );
           } else {
             setNearbySites(
-              siteArr.filter(site =>
+              preFilteredSites.filter(site =>
                 nearbyStates.includes(site.stateOrProvinceAbbreviation)
               )
             );
@@ -192,36 +229,41 @@ const SitesList = sites => {
         } else {
           if (city !== '') {
             setNearbySites(
-              siteArr.filter(
+              preFilteredSites.filter(
                 site => site.country === country && site.city === city
               )
             );
           } else {
             // just looking for US sites
-            setNearbySites(siteArr.filter(site => site.country === country));
+            setNearbySites(preFilteredSites.filter(site => site.country === country));
           }
         }
       } else {
         if (city !== '') {
           setNearbySites(
-            siteArr.filter(
+            preFilteredSites.filter(
               site => site.country === country && site.city === city
             )
           );
         } else {
-          setNearbySites(siteArr.filter(site => site.country === country));
+          setNearbySites(preFilteredSites.filter(site => site.country === country));
         }
       }
+    } else if (location === 'search-location-nih') {
+      setNearbySites(
+        preFilteredSites.filter(site => site.postalCode === NIH_ZIPCODE)
+      );
+    } else {
+      // All search + vaOnly
+      setNearbySites(
+        preFilteredSites
+      );
     }
   };
 
-  const renderLocationBlock = (locationObj, index) => {
+  const renderContactInfoBlock = (locationObj) => {
     return (
-      <div key={'loc-' + locationObj.name} className="location">
-        <strong className="location-name">{locationObj.name}</strong>
-        <div>
-          Status: {getTrialStatusForDisplay(locationObj.recruitmentStatus)}
-        </div>
+      <>
         <div>Contact: {locationObj.contactName}</div>
         {locationObj.contactPhone && (
           <div>Phone: {locationObj.contactPhone}</div>
@@ -234,6 +276,22 @@ const SitesList = sites => {
             </a>
           </div>
         )}
+      </>
+    );
+  }
+
+  const renderLocationBlock = (locationObj, index) => {
+    return (
+      <div key={'loc-' + locationObj.name} className="location">
+        <strong className="location-name">{locationObj.name}</strong>
+        <div>
+          Status: {getTrialStatusForDisplay(locationObj.recruitmentStatus)}
+        </div>
+        {/* Contact only displays if there is a name */}
+        {locationObj.contactName ?
+          renderContactInfoBlock(locationObj) : 
+          (<>Name Not Available</>) 
+        }   
       </div>
     );
   };

@@ -9,19 +9,19 @@ import {
   Autocomplete,
 } from '../../atomic';
 import { getCountries, searchHospital } from '../../../store/actions';
-import { matchItemToTerm, sortItems } from '../../../utilities';
-import { useZipConversion } from '../../../hooks';
-import './Location.scss';
-
 import {
+  matchItemToTerm,
+  sortItems,
   getStates,
   matchStateToTerm,
-} from '../../../mocks/mock-autocomplete-util';
+  sortStates,
+} from '../../../utilities';
+import { useZipConversion } from '../../../hooks';
+import './Location.scss';
 
 const Location = ({ handleUpdate }) => {
   //Hooks must always be rendered in same order.
   const dispatch = useDispatch();
-  const [inputtedZip, setInputtedZip] = useState('');
   const [{ getZipCoords }] = useZipConversion(handleUpdate);
   const { countries = [], hospitals = [] } = useSelector(store => store.cache);
   const {
@@ -29,16 +29,18 @@ const Location = ({ handleUpdate }) => {
     zip,
     zipModified,
     zipRadius,
+    hasInvalidZip,
     country,
     city,
     states,
     hospital,
     vaOnly,
+    refineSearch
   } = useSelector(store => store.form);
   const [activeRadio, setActiveRadio] = useState(location);
+  const [inputtedZip, setInputtedZip] = useState(zip);
   const [limitToVA, setLimitToVA] = useState(vaOnly);
   const [showStateField, setShowStateField] = useState(true);
-  const [zipErrorMsg, setZipErrorMsg] = useState('');
 
   //hospital
   const [hospitalName, setHospitalName] = useState({ value: hospital.term });
@@ -47,11 +49,6 @@ const Location = ({ handleUpdate }) => {
   const [stateVal, setStateVal] = useState({ value: '' });
   const stateOptions = getStates();
 
-  useEffect(() => {
-    if (inputtedZip !== '') {
-      getZipCoords(inputtedZip);
-    }
-  }, [inputtedZip]);
 
   useEffect(() => {
     if (hospitalName.value.length > 2) {
@@ -60,24 +57,29 @@ const Location = ({ handleUpdate }) => {
   }, [hospitalName, dispatch]);
 
   useEffect(() => {
-    if (activeRadio === 'search-location-country') {
+    handleUpdate('location', activeRadio);
+    handleUpdate('nihOnly', activeRadio === 'search-location-nih');
+    if(activeRadio === 'search-location-country' && countries.length < 1){
       dispatch(getCountries());
     }
   }, [activeRadio, dispatch]);
 
-  const updateStore = locRadio => {
-    handleUpdate('location', locRadio);
-    handleUpdate('nihOnly', locRadio === 'search-location-nih');
-  };
-
   const handleToggleChange = () => {
-    setLimitToVA(!limitToVA);
-    handleUpdate('vaOnly', limitToVA);
+    let newVal = !limitToVA;
+    setLimitToVA(newVal);
+    handleUpdate('vaOnly', newVal);
+    // make sure that the newly hidden selections are not selected
+    if (
+      activeRadio === 'search-location-nih' ||
+      activeRadio === 'search-location-hospital'
+    ) {
+      setActiveRadio('search-location-all');
+      handleUpdate('hospital', { term: '', termKey: '' });
+    }
   };
 
   const handleRadioChange = e => {
     setActiveRadio(e.target.value);
-    updateStore(e.target.value);
   };
 
   const handleCountryOnChange = e => {
@@ -99,26 +101,44 @@ const Location = ({ handleUpdate }) => {
     );
   };
 
-  const checkZip = () => {
-    if (zipModified) {
-      handleUpdate('zipModified', false);
+  useEffect(() => {
+    if (inputtedZip.length === 5) {
+      getZipCoords(inputtedZip);
+      validateZip();
+    } else if (inputtedZip === '') {
+      clearZip();
+    } else {
+      // prepopulated with a 5 digit zip has been modified
+      if (zipModified) {
+        handleUpdate('zipModified', false);
+      }
     }
-  };
+  }, [inputtedZip]);
 
   const handleZipUpdate = e => {
-    const zipInput = e.target.value;
+    setInputtedZip(e.target.value);
+  };
+
+  const clearZip = () => {
+    handleUpdate('zip', '');
+    handleUpdate('zipCoords', { lat: '', long: '' });
     handleUpdate('hasInvalidZip', false);
-    if (zipInput.length === 5) {
-      if (/^[0-9]+$/.test(zipInput)) {
-        setZipErrorMsg('');
-        setInputtedZip(zipInput);
-        handleUpdate(e.target.id, zipInput);
-        handleUpdate('location', 'search-location-zip');
+  };
+
+  const validateZip = () => {
+    if (inputtedZip.length === 5) {
+      // test that all characters are numbers
+      if (isNaN(inputtedZip)) {
+        handleUpdate('hasInvalidZip', true);
       } else {
-        handleUpdate('zip', '');
-        handleUpdate('zipCoords', { lat: '', long: '' });
-        setZipErrorMsg(`Please enter a 5 digit U.S. zip code`);
+        handleUpdate('zip', inputtedZip);
+        handleUpdate('location', 'search-location-zip');
       }
+    } else if (inputtedZip.length === 0) {
+      // empty treat as blank
+      clearZip();
+    } else {
+      handleUpdate('hasInvalidZip', true);
     }
   };
 
@@ -167,8 +187,8 @@ const Location = ({ handleUpdate }) => {
                 classes="search-location__zip --zip"
                 label="U.S. ZIP Code"
                 modified={zipModified}
-                errorMessage={zipErrorMsg}
-                onBlur={checkZip}
+                errorMessage={hasInvalidZip? 'Please enter a valid 5 digit U.S. zip code' : ''}
+                onBlur={validateZip}
                 maxLength={5}
               />
               <Dropdown
@@ -221,6 +241,7 @@ const Location = ({ handleUpdate }) => {
                   items={filterSelectedItems(stateOptions, states)}
                   getItemValue={item => item.name}
                   shouldItemRender={matchStateToTerm}
+                  sortItems={sortStates}
                   onChange={(event, value) => setStateVal({ value })}
                   onSelect={value => {
                     handleUpdate('states', [
@@ -238,7 +259,7 @@ const Location = ({ handleUpdate }) => {
                   renderMenu={children => {
                     return (
                       <div className="cts-autocomplete__menu --drugs">
-                        {stateVal.value.length ? (
+                        {
                           filterSelectedItems(stateOptions, states).length ? (
                             children
                           ) : (
@@ -246,11 +267,7 @@ const Location = ({ handleUpdate }) => {
                               No results found
                             </div>
                           )
-                        ) : (
-                          <div className="cts-autocomplete__menu-item">
-                            Enter state name
-                          </div>
-                        )}
+                        }
                       </div>
                     );
                   }}

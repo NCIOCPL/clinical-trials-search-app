@@ -88,6 +88,28 @@ describe('Adv - Negative - queryStringToFormObject maps query to form', () => {
         message: 'Invalid selection'
       }]
     ],    
+    [
+      "Pager test - bad",
+      "rl=2&pn=chicken",
+      async () => [],
+      async () => [],
+      async () => null,
+      [{
+        fieldName: 'resultsPage',
+        message: 'Invalid parameter'
+      }]
+    ],
+    [
+      "Pager test - bad",
+      "rl=2&pn=-1",
+      async () => [],
+      async () => [],
+      async () => null,
+      [{
+        fieldName: 'resultsPage',
+        message: 'Invalid parameter'
+      }]
+    ]    
   ];
 
   // Test iterates over multiple cases defined by mappingTestCases

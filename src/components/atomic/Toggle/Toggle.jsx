@@ -12,6 +12,7 @@ const Toggle = ({ id, classes, label, onClick, checked, ...otherProps }) => {
         type="checkbox"
         className="cts-toggle__input"
         id={id}
+        checked={checked}
         {...otherProps}
       />
       <label
@@ -41,7 +42,8 @@ Toggle.propTypes = {
 Toggle.defaultProps = {
   classes: '',
   label: '',
-  onClick: {}
+  onClick: {},
+  checked: false,
 };
 
 export default Toggle;

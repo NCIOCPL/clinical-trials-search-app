@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearForm } from '../../store/actions';
+import { updateGlobal } from '../../store/actions';
 import { Helmet } from 'react-helmet';
-import { Delighter } from '../../components/atomic';
+import { ChatOpener, Delighter } from '../../components/atomic';
 
 import './ErrorPage.scss';
 
@@ -11,7 +11,10 @@ const ErrorPage = ({ initErrorsList }) => {
   const formSnapshot = useSelector(store => store.form);
 
   const handleStartOver = () => {
-    dispatch(clearForm());
+    dispatch(updateGlobal({
+      field: 'initErrorsList',
+      value: []
+    }));
   };
 
   const getFieldNameDisplay = fieldName => {
@@ -34,6 +37,7 @@ const ErrorPage = ({ initErrorsList }) => {
       trialId: 'Trial ID',
       investigator: 'Trial Investigators',
       leadOrg: 'Lead Organization',
+      formType: 'Form Version',
     };
     return fieldNameMap[fieldName] || fieldName;
   };
@@ -95,7 +99,7 @@ const ErrorPage = ({ initErrorsList }) => {
         <div class="error-page__content">
           <div className="error-page__control --top">
             <div className="error-page__list">
-              <div class="error-list">
+              <div className="error-list">
                 <p>
                   Sorry, you seem to have entered invalid criteria. Please check
                   the following, and try your search again:
@@ -109,9 +113,7 @@ const ErrorPage = ({ initErrorsList }) => {
                 </ul>
                 <p>
                   For assistance, please contact the Cancer Information Service. You can{' '}
-                  <a href="/contact" className="live-help-link">
-                    chat online
-                  </a>{' '}
+                  <ChatOpener />{' '}
                   or call 1-800-4-CANCER (1-800-422-6237).
                 </p>
                 <p>

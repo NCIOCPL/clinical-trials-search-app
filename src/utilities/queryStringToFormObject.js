@@ -55,16 +55,21 @@ export const queryStringToFormObject = async (urlQuery, diseaseFetcher, interven
   // actually need to access that API...
 
   /**************************
-   * MUST HAVE VALID RL PARAM TO CONTINUE
+   * If you have the rl param it must be valid!
    * (some fields need to know which one)
    **************************/
   if (query['rl']) {
-    if (query['rl'] === "2") {
+    if (query['rl'] === "1") {
+      rtnFormState = {
+        ...rtnFormState,
+        formType: "basic"
+      }
+    } else if (query['rl'] === "2") {
       rtnFormState = {
         ...rtnFormState,
         formType: "advanced"
       }
-    } else if (query['rl'] !== "1") {
+    } else {
       // HARD STOP. BAIL. DO NOT PASS GO.
       return {
         formState: null,
@@ -73,7 +78,13 @@ export const queryStringToFormObject = async (urlQuery, diseaseFetcher, interven
           message: "Results Link Flag can only equal 1 or 2."
         }]
       };
-    } // Default is basic, aka 1
+    }
+  } else {
+    // No rl, was not from a search, exit.
+    return {
+      formState: rtnFormState,
+      errors: rtnErrorsList
+    };
   }
 
   /*************************
@@ -137,6 +148,21 @@ export const queryStringToFormObject = async (urlQuery, diseaseFetcher, interven
     rtnFormState = {
       ...rtnFormState,
       trialId: ids
+    }
+  }
+
+  // TODO: This should only be allowed on the results page
+  if (query['pn']) {
+    const pageNum = parseInt(query['pn']);
+    if (!Number.isNaN(pageNum) && pageNum > 0) {
+      rtnFormState = {
+        ...rtnFormState,
+        resultsPage: pageNum,
+      }
+    } else {
+      rtnErrorsList.push(makeError(
+        "resultsPage", "Invalid parameter"
+      ))
     }
   }
 

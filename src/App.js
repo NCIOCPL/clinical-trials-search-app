@@ -1,6 +1,11 @@
-import React, { Fragment, useEffect } from 'react';
+import 'react-app-polyfill/ie11';
+import 'react-app-polyfill/stable';
+
+
+import React, { Fragment } from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
+
 import './styles/main.scss';
 
 import SearchPage from './views/SearchPage';
@@ -9,8 +14,10 @@ import TrialDescriptionPage from './views/TrialDescriptionPage';
 import ErrorPage from './views/ErrorPage';
 
 import { useAppInitializer } from './hooks';
+require('es6-promise').polyfill();
 
 const App = ({ services, zipConversionEndpoint }) => {
+
   const appHasBeenInitialized = useSelector(
     store => store.globals.appHasBeenInitialized
   );
@@ -44,7 +51,7 @@ const App = ({ services, zipConversionEndpoint }) => {
             />
             <Route
               path="/about-cancer/treatment/clinical-trials/search/"
-              component={SearchPage}
+              render={() => <SearchPage formInit="basic" /> }
             />
           </Switch>
         </Fragment>

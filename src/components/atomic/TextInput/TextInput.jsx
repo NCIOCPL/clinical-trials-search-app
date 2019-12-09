@@ -36,7 +36,6 @@ class TextInput extends React.Component {
       'week',
       'number',
     ]),
-    validators: PropTypes.array,
     value: PropTypes.string,
   };
 
@@ -138,62 +137,12 @@ class TextInput extends React.Component {
     );
   }
 
-  _validate() {
-    let validators = this.props.validators;
-    // Check if field empty
-    if (!this.state.value) {
-      // If it's required, say so
-      if (this.props.required) {
-        this.setState({
-          hasError: true,
-          isValid: false,
-          errorMessage: 'This field is required',
-        });
-      } else {
-        // is empty so reset isValid and hasError
-        this.setState({
-          isValid: false,
-          hasError: false,
-          errorMessage: null,
-        });
-      }
-    }
-    // If validator(s) were sent as a prop, test them next
-    else if (validators) {
-      // eslint-disable-next-line
-      for (let validator of validators) {
-        // check is validator is forced 'no validation'
-        if (!validator.pattern && !validator.isValid(this.state.value)) {
-          this.setState({
-            hasError: true,
-            isValid: false,
-            errorMessage: validator.message,
-          });
-          break;
-        } else {
-          this.setState({
-            hasError: false,
-            isValid: true,
-          });
-        }
-      }
-    }
-    // must be required field with a value, so no error
-    else {
-      this.setState({
-        hasError: false,
-        errorMessage: null,
-      });
-    }
-  }
-
   //  onBlur event on input
   _handleBlur() {
     if (
-      (this.props.required || this.props.validators || this.props.onBlur) &&
+      (this.props.required || this.props.onBlur) &&
       !this.state.isPristine
     ) {
-      this._validate();
       this.props.onBlur();
     }
   }
@@ -222,10 +171,6 @@ class TextInput extends React.Component {
       // recursive loop and blow up the call stack
       if (this.state.value && this.state.isPristine) {
         this.setState({ isPristine: false });
-      }
-      // if
-      if (this.state.hasError || this.state.isValid) {
-        this._validate();
       }
     });
   }

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Fieldset, Autocomplete, InputLabel } from '../../atomic';
 import { getMainType, getCancerTypeDescendents } from '../../../store/actions';
 import { useCachedValues } from '../../../hooks';
+import {sortItemsByName} from '../../../utilities';
 import './CancerTypeCondition.scss';
 require('../../../polyfills/closest');
 
@@ -271,6 +272,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
             items={filterSelectedItems(subtypeOptions, subtypes)}
             getItemValue={item => item.name}
             shouldItemRender={matchItemToTerm}
+            sortItems={sortItemsByName}
             onChange={(event, value) => {
               setSubtype({ value });
               handleUpdate('subtypeModified', false);
@@ -321,6 +323,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
             items={filterSelectedItems(stageOptions, stages)}
             getItemValue={item => item.name}
             shouldItemRender={matchItemToTerm}
+            sortItems={sortItemsByName}
             onChange={(event, value) => {
               setStage({ value });
               handleUpdate('stagesModified', false);
@@ -370,6 +373,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
             items={filterSelectedItems(findingsOptions, findings)}
             getItemValue={item => item.name}
             shouldItemRender={matchItemToTerm}
+            sortItems={sortItemsByName}
             onChange={(event, value) => setSideEffects({ value })}
             onSelect={value => {
               handleUpdate('findings', [
