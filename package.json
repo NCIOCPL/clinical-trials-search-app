@@ -1,6 +1,6 @@
 {
   "name": "@nciocpl/clinical-trials-search-app",
-  "version": "0.11.5",
+  "version": "0.12.0",
   "author": "National Cancer Institute",
   "license": "ISC",
   "main": "build/static/js/main.js",
