@@ -16,6 +16,7 @@ import {
   TrialType,
   ZipCode,
 } from '../../components/search-modules';
+import { trackedEvents } from '../../tracking';
 import { history } from '../../services/history.service';
 import { updateFormField, clearForm, receiveData } from '../../store/actions';
 
@@ -39,7 +40,7 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
   const sentinelRef = useRef(null);
   const [formFactor, setFormFactor] = useState(formInit);
   const {hasInvalidAge, hasInvalidZip} = useSelector(store => store.form)
-
+  
   const handleUpdate = (field, value) => {
     dispatch(
       updateFormField({
@@ -61,11 +62,15 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    const { FindTrialsButtonClick } = trackedEvents;
     if(!hasInvalidAge && !hasInvalidZip){
       dispatch(receiveData(
         'selectedTrialsForPrint',
         []
       ));
+      FindTrialsButtonClick.data.formType = formFactor;
+      FindTrialsButtonClick.data.status = 'complete';
+      tracking.trackEvent(FindTrialsButtonClick);
       history.push('/about-cancer/treatment/clinical-trials/search/r');
     }
     
