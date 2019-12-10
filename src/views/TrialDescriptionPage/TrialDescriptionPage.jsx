@@ -478,5 +478,5 @@ const TrialDescriptionPage = ({ location, tracking }) => {
 };
 
 export default track({
-  page: window.location.pathname,
+  page: "trial_description",
 })(TrialDescriptionPage);

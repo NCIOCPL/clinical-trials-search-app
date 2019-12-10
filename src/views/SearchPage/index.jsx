@@ -1,1 +1,2 @@
-export { default } from './SearchPage';
+export { default as BasicSearchPage } from './BasicSearchPage';
+export { default as AdvancedSearchPage } from './AdvancedSearchPage';
