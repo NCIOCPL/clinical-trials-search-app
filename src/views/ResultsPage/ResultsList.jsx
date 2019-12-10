@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ResultsListItem from './ResultsListItem';
 
 
-const ResultsList = ({ results, selectedResults, setSelectedResults, setSelectAll, queryParams }) => {
+const ResultsList = ({ results, selectedResults, setSelectedResults, setSelectAll, queryParams, tracking }) => {
   const handleOnCheckChange = id => {
     if (selectedResults.indexOf(id) === -1) {
       setSelectedResults([...selectedResults, id]);
@@ -16,15 +16,17 @@ const ResultsList = ({ results, selectedResults, setSelectedResults, setSelectAl
 
   return (
     <div className="results-list">
-      {results.map(item => {
+      {results.map((item, idx) => {
         return (
           <ResultsListItem
             queryParams={queryParams}
             key={item.nciID}
             id={item.nciID}
             item={item}
+            itemIndex={idx}
             isChecked={selectedResults.indexOf(item.nciID) > -1}
             onCheckChange={handleOnCheckChange}
+            tracking={tracking}
           />
         );
       })}
