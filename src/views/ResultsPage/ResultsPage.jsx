@@ -48,6 +48,10 @@ const ResultsPage = ({ location, tracking }) => {
     );
   };
 
+  const handleTracking = (analyticsPayload)  => {
+    tracking.trackEvent(analyticsPayload);
+  }
+
   // scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -381,6 +385,7 @@ const ResultsPage = ({ location, tracking }) => {
                     selectedResults={selectedResults}
                     setSelectedResults={setSelectedResults}
                     setSelectAll={setSelectAll}
+                    tracking={handleTracking}
                   />
                 )}
 
@@ -409,5 +414,5 @@ const ResultsPage = ({ location, tracking }) => {
 };
 
 export default track({
-  page: window.location.pathname,
+  page: "results",
 })(ResultsPage);
