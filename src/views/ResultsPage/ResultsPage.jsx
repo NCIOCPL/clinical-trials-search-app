@@ -17,10 +17,14 @@ import ResultsList from './ResultsList';
 import { history } from '../../services/history.service';
 import PrintModalContent from './PrintModalContent';
 import track from 'react-tracking';
+import { trackedEvents } from '../../tracking';
 import './ResultsPage.scss';
 const queryString = require('query-string');
 
+
+
 const ResultsPage = ({ location, tracking }) => {
+
   const dispatch = useDispatch();
   const [selectAll, setSelectAll] = useState(false);
   const [pagerPage, setPagerPage] = useState(0);
@@ -61,7 +65,7 @@ const ResultsPage = ({ location, tracking }) => {
   // scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
-    tracking.trackEvent({ action: 'pageLoad', page: window.location.pathname });
+    handleTracking({action: 'pageLoad'})
     if (trialResults && trialResults.total >= 0) {
       initData();
     } else if (!formSnapshot.hasInvalidZip) {
@@ -293,27 +297,25 @@ const ResultsPage = ({ location, tracking }) => {
   };
 
   const handlePrintSelected = (e) => {
+    const {PrintSelectedButtonClick, PrintNoneSelectedClick, PrintMaxExceededClick} = trackedEvents;
     const buttonPos = e.target.getAttribute('data-pos');
+
+    //emit analytics
     if (selectedResults.length === 0) {
-      handleTracking({
-        action: 'click',
-        source: 'print_selected_none_selected_button',
-        data: {
-          formType: formSnapshot.formType,
-        },
-      });
+      PrintNoneSelectedClick.data.formType = formSnapshot.formType;
+      handleTracking(PrintNoneSelectedClick);
+    }else if (selectedResults.length >= 100){
+      PrintMaxExceededClick.data.formType = formSnapshot.formType;
+      handleTracking(PrintMaxExceededClick);
+    }else{
+      PrintSelectedButtonClick.data.formType = formSnapshot.formType;
+      PrintSelectedButtonClick.data.buttonPos = buttonPos;
+      PrintSelectedButtonClick.data.selectAll = selectAll;
+      PrintSelectedButtonClick.data.selectedCount = selectedResults.length;
+      PrintSelectedButtonClick.data.pagesWithSelected = [...new Set(selectedResults.map(({fromPage}) => fromPage) )];
+      handleTracking(PrintSelectedButtonClick);
     }
-    handleTracking({
-      action: 'click',
-      source: 'print_selected_button',
-      data: {
-        formType: formSnapshot.formType,
-        buttonPos: buttonPos,
-        selectAll: selectAll,
-        selectedCount: selectedResults.length,
-        pagesWithSelected: [...new Set(selectedResults.map(({fromPage}) => fromPage) )]
-      },
-    });
+
     toggleModal();
   };
 
