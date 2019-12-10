@@ -1,3 +1,5 @@
+import * as events from './tracking/events';
+
 export const ACTIVE_TRIAL_STATUSES = [
   // These CTRP statuses appear in results:
   'Active',
@@ -56,3 +58,7 @@ export const OTHER_MAIN_TYPES = [
 ];
 
 export const NIH_ZIPCODE = "20892";
+
+export const trackedEvents = {
+  ...events
+};
