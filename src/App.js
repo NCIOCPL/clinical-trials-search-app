@@ -8,7 +8,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import './styles/main.scss';
 
-import SearchPage from './views/SearchPage';
+import {BasicSearchPage, AdvancedSearchPage} from './views/SearchPage';
 import ResultsPage from './views/ResultsPage';
 import TrialDescriptionPage from './views/TrialDescriptionPage';
 import ErrorPage from './views/ErrorPage';
@@ -47,11 +47,11 @@ const App = ({ services, zipConversionEndpoint }) => {
             <Route
               exact
               path="/about-cancer/treatment/clinical-trials/search/advanced"
-              render={() => <SearchPage formInit="advanced" />}
+              component={AdvancedSearchPage}
             />
             <Route
               path="/about-cancer/treatment/clinical-trials/search/"
-              render={() => <SearchPage formInit="basic" /> }
+              component={BasicSearchPage}
             />
           </Switch>
         </Fragment>

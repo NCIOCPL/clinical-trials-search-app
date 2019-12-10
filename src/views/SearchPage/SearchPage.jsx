@@ -18,7 +18,6 @@ import {
 } from '../../components/search-modules';
 import { history } from '../../services/history.service';
 import { updateFormField, clearForm, receiveData } from '../../store/actions';
-import track from 'react-tracking';
 
 //Module groups in arrays will be placed side-by-side in the form
 const basicFormModules = [CancerTypeKeyword, [Age, ZipCode]];
@@ -247,6 +246,4 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
   );
 };
 
-export default track({
-  page: window.location.pathname,
-})(SearchPage);
+export default SearchPage;

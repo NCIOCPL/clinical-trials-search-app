@@ -414,5 +414,5 @@ const ResultsPage = ({ location, tracking }) => {
 };
 
 export default track({
-  page: window.location.pathname,
+  page: "results",
 })(ResultsPage);
