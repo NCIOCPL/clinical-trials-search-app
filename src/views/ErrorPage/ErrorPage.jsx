@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateGlobal } from '../../store/actions';
 import { Helmet } from 'react-helmet';
 import { ChatOpener, Delighter } from '../../components/atomic';
+import track from 'react-tracking';
 
 import './ErrorPage.scss';
 
-const ErrorPage = ({ initErrorsList }) => {
+const ErrorPage = ({ initErrorsList, tracking }) => {
   const dispatch = useDispatch();
   const formSnapshot = useSelector(store => store.form);
 
@@ -143,4 +144,6 @@ const ErrorPage = ({ initErrorsList }) => {
   );
 };
 
-export default ErrorPage;
+export default track({
+  page: "error_page",
+})(ErrorPage);
