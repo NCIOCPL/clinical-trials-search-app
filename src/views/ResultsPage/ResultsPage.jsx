@@ -3,7 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { updateFormField, clearForm, receiveData } from '../../store/actions';
-import { ChatOpener, Delighter, Checkbox, Modal, Pager } from '../../components/atomic';
+import {
+  ChatOpener,
+  Delighter,
+  Checkbox,
+  Modal,
+  Pager,
+} from '../../components/atomic';
 import { buildQueryString } from '../../utilities';
 import { useModal, useStoreToFindTrials } from '../../hooks';
 import ResultsPageHeader from './ResultsPageHeader';
@@ -11,10 +17,14 @@ import ResultsList from './ResultsList';
 import { history } from '../../services/history.service';
 import PrintModalContent from './PrintModalContent';
 import track from 'react-tracking';
+import { trackedEvents } from '../../tracking';
 import './ResultsPage.scss';
 const queryString = require('query-string');
 
+
+
 const ResultsPage = ({ location, tracking }) => {
+
   const dispatch = useDispatch();
   const [selectAll, setSelectAll] = useState(false);
   const [pagerPage, setPagerPage] = useState(0);
@@ -38,7 +48,7 @@ const ResultsPage = ({ location, tracking }) => {
   const [selectedResults, setSelectedResults] = useState(
     cache['selectedTrialsForPrint'] || []
   );
-  
+
   const handleUpdate = (field, value) => {
     dispatch(
       updateFormField({
@@ -48,14 +58,14 @@ const ResultsPage = ({ location, tracking }) => {
     );
   };
 
-  const handleTracking = (analyticsPayload)  => {
+  const handleTracking = analyticsPayload => {
     tracking.trackEvent(analyticsPayload);
-  }
+  };
 
   // scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
-    tracking.trackEvent({action: 'pageLoad', page: window.location.pathname});
+    handleTracking({action: 'pageLoad'})
     if (trialResults && trialResults.total >= 0) {
       initData();
     } else if (!formSnapshot.hasInvalidZip) {
@@ -90,6 +100,14 @@ const ResultsPage = ({ location, tracking }) => {
     // update cacheStore with new selectedResults Value
     dispatch(receiveData('selectedTrialsForPrint', [...selectedResults]));
     if (selectedResults.length > 100) {
+      //max number of print selections made
+      handleTracking({
+        action: 'click',
+        source: 'print_selected_max_reached_button',
+        data: {
+          formType: formSnapshot.formType,
+        },
+      });
       toggleModal();
     }
   }, [selectedResults]);
@@ -105,15 +123,24 @@ const ResultsPage = ({ location, tracking }) => {
 
   const handleSelectAll = () => {
     const pageResultIds = [
-      ...new Set(trialResults.trials.map(item => item.nciID)),
+      ...new Set(trialResults.trials.map(item => {
+        let resItem = {
+          id: item.nciID,
+          fromPage: formSnapshot.resultsPage + 1
+        }
+        return resItem;
+      }))
     ];
+
+    let simpleIds =  pageResultIds.map(({id})=> id);
+
     if (!selectAll) {
-      setSelectAll(true); // toggle the box then check all the trial results boxes
+      setSelectAll(true); 
       setSelectedResults([...new Set([...selectedResults, ...pageResultIds])]);
     } else {
       setSelectAll(false);
       setSelectedResults(
-        selectedResults.filter(item => !pageResultIds.includes(item))
+        selectedResults.filter(item => !simpleIds.includes(item.id))
       );
     }
   };
@@ -246,6 +273,7 @@ const ResultsPage = ({ location, tracking }) => {
                     className="results-page__print-button"
                     ref={printSelectedBtn}
                     onClick={handlePrintSelected}
+                    data-pos={isBottom? 'bottom' : 'top'}
                   >
                     Print Selected
                   </button>
@@ -268,7 +296,26 @@ const ResultsPage = ({ location, tracking }) => {
     );
   };
 
-  const handlePrintSelected = () => {
+  const handlePrintSelected = (e) => {
+    const {PrintSelectedButtonClick, PrintNoneSelectedClick, PrintMaxExceededClick} = trackedEvents;
+    const buttonPos = e.target.getAttribute('data-pos');
+
+    //emit analytics
+    if (selectedResults.length === 0) {
+      PrintNoneSelectedClick.data.formType = formSnapshot.formType;
+      handleTracking(PrintNoneSelectedClick);
+    }else if (selectedResults.length >= 100){
+      PrintMaxExceededClick.data.formType = formSnapshot.formType;
+      handleTracking(PrintMaxExceededClick);
+    }else{
+      PrintSelectedButtonClick.data.formType = formSnapshot.formType;
+      PrintSelectedButtonClick.data.buttonPos = buttonPos;
+      PrintSelectedButtonClick.data.selectAll = selectAll;
+      PrintSelectedButtonClick.data.selectedCount = selectedResults.length;
+      PrintSelectedButtonClick.data.pagesWithSelected = [...new Set(selectedResults.map(({fromPage}) => fromPage) )];
+      handleTracking(PrintSelectedButtonClick);
+    }
+
     toggleModal();
   };
 
@@ -284,8 +331,7 @@ const ResultsPage = ({ location, tracking }) => {
         </ul>
         <p>
           For assistance, please contact the Cancer Information Service. You can{' '}
-          <ChatOpener />{' '}
-          or call 1-800-4-CANCER (1-800-422-6237).
+          <ChatOpener /> or call 1-800-4-CANCER (1-800-422-6237).
         </p>
         <p>
           <Link
@@ -311,8 +357,7 @@ const ResultsPage = ({ location, tracking }) => {
         </p>
         <p>
           For assistance, please contact the Cancer Information Service. You can{' '}
-          <ChatOpener />{' '}
-          or call 1-800-4-CANCER (1-800-422-6237).
+          <ChatOpener /> or call 1-800-4-CANCER (1-800-422-6237).
         </p>
         <p>
           <Link
