@@ -17,6 +17,7 @@ import cacheMiddleware from './middleware/cacheMiddleware';
 import { ClinicalTrialsServiceFactory } from '@nciocpl/clinical-trials-search-client.js';
 
 import App from './App';
+import AnalyticsProvider from './AnalyticsProvider';
 
 const initialize = ({
   appId = '@@/DEFAULT_CTS_APP_ID',
@@ -24,7 +25,8 @@ const initialize = ({
   rootId = 'NCI-CTS-root',
   services = {},
   printCacheEndpoint = '/CTS.Print/GenCache',
-  zipConversionEndpoint = '/cts_api/zip_code_lookup'
+  zipConversionEndpoint = '/cts_api/zip_code_lookup',
+  analyticsHandler = (data) => {},
 } = {}) => {
   let cachedState;
 
@@ -75,7 +77,9 @@ const initialize = ({
     ReactDOM.hydrate(
       <Provider store={store}>
         <Router history={history} basename="/about-cancer/treatment/clinical-trials/search">
-          <App services={services} zipConversionEndpoint={zipConversionEndpoint}/>
+          <AnalyticsProvider analyticsHandler={analyticsHandler}>
+            <App services={services} zipConversionEndpoint={zipConversionEndpoint}/>
+          </AnalyticsProvider>
         </Router>
       </Provider>,
       appRootDOMNode
@@ -84,7 +88,9 @@ const initialize = ({
     ReactDOM.render(
       <Provider store={store}>
         <Router history={history} basename="/about-cancer/treatment/clinical-trials/search">
-          <App services={services} zipConversionEndpoint={zipConversionEndpoint} />
+          <AnalyticsProvider analyticsHandler={analyticsHandler}>
+            <App services={services} zipConversionEndpoint={zipConversionEndpoint} />
+          </AnalyticsProvider>
         </Router>
       </Provider>,
       appRootDOMNode
@@ -115,7 +121,8 @@ if (process.env.NODE_ENV !== 'production') {
       ctsSearch,
     },
     printCacheEndpoint: 'https://dceg-test-acsf.cancer.gov/CTS.Print/GenCache',
-    zipConversionEndpoint
+    zipConversionEndpoint,
+    analyticsHandler: (data) => { console.log(data); },
   });
 }
 
