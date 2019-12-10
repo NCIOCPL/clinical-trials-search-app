@@ -63,16 +63,20 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
   const handleSubmit = e => {
     e.preventDefault();
     const { FindTrialsButtonClick } = trackedEvents;
+    FindTrialsButtonClick.data.formType = formFactor;
     if(!hasInvalidAge && !hasInvalidZip){
       dispatch(receiveData(
         'selectedTrialsForPrint',
         []
       ));
-      FindTrialsButtonClick.data.formType = formFactor;
       FindTrialsButtonClick.data.status = 'complete';
       tracking.trackEvent(FindTrialsButtonClick);
       history.push('/about-cancer/treatment/clinical-trials/search/r');
+      return;
     }
+    FindTrialsButtonClick.data.status = 'error';
+    FindTrialsButtonClick.data.message = 'attempted form submit with errors';
+    tracking.trackEvent(FindTrialsButtonClick);
     
   };
 
