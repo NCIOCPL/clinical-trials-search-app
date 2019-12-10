@@ -1,18 +1,25 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {receiveData} from '../../store/actions';
+import { receiveData } from '../../store/actions';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Checkbox from '../../components/atomic/Checkbox';
 import { isWithinRadius } from '../../utilities';
-import {NIH_ZIPCODE} from '../../constants';
+import { NIH_ZIPCODE } from '../../constants';
 
 const queryString = require('query-string');
 
-const ResultsListItem = ({ id, item, isChecked, onCheckChange, queryParams }) => {
+const ResultsListItem = ({
+  id,
+  item,
+  isChecked,
+  onCheckChange,
+  queryParams,
+  tracking,
+  itemIndex,
+}) => {
   const dispatch = useDispatch();
   const {
-    zip,
     zipCoords,
     zipRadius,
     location,
@@ -22,24 +29,22 @@ const ResultsListItem = ({ id, item, isChecked, onCheckChange, queryParams }) =>
     vaOnly,
   } = useSelector(store => store.form);
 
-
-
   const qsQbj = queryString.parse(queryParams);
   qsQbj.id = item.nciID;
-  const itemQueryString = queryString.stringify(qsQbj, {arrayFormat: 'comma'});
+  const itemQueryString = queryString.stringify(qsQbj, {
+    arrayFormat: 'comma',
+  });
 
   //compare site values against user criteria
-   const isLocationParamMatch = siteObj => {
+  const isLocationParamMatch = siteObj => {
     if (siteObj.country === country) {
       if (country === 'United States') {
         if (states.length > 0) {
-          const statesList = [
-            ...new Set(states.map(item => item.abbr)),
-          ];
+          const statesList = [...new Set(states.map(item => item.abbr))];
           if (statesList.includes(siteObj.stateOrProvinceAbbreviation)) {
             if (siteObj.city && siteObj.city === city) {
               return true;
-            } 
+            }
             return true;
           } else {
             return false;
@@ -74,9 +79,9 @@ const ResultsListItem = ({ id, item, isChecked, onCheckChange, queryParams }) =>
 
   //compare site values against user criteria
   const isNIHParamMatch = siteObj => {
-    return (siteObj.postalCode === NIH_ZIPCODE);
+    return siteObj.postalCode === NIH_ZIPCODE;
   };
-  
+
   const countNearbySitesByZip = arr => {
     return arr.reduce(
       (count, siteItem) =>
@@ -87,16 +92,14 @@ const ResultsListItem = ({ id, item, isChecked, onCheckChange, queryParams }) =>
 
   const countNearbySitesByCountryParams = arr => {
     return arr.reduce(
-      (count, siteItem) => 
-        count + isLocationParamMatch(siteItem),
+      (count, siteItem) => count + isLocationParamMatch(siteItem),
       0
     );
   };
 
   const countNearbySitesByNIHParams = arr => {
     return arr.reduce(
-      (count, siteItem) => 
-        count + isNIHParamMatch(siteItem),
+      (count, siteItem) => count + isNIHParamMatch(siteItem),
       0
     );
   };
@@ -138,22 +141,23 @@ const ResultsListItem = ({ id, item, isChecked, onCheckChange, queryParams }) =>
   };
 
   const getLocationDisplay = () => {
-
     // NOTE: Displays for count should be ONLY US sites
     // unless it is a country search and the country
     // is not US.
-    const sitesListAll = (
-      (location === 'search-location-country') &&
-      (country !== 'United States')
-    ) ? item.sites :
-      item.sites.filter(site => site.country === 'United States');
+    const sitesListAll =
+      location === 'search-location-country' && country !== 'United States'
+        ? item.sites
+        : item.sites.filter(site => site.country === 'United States');
 
     // If there are no sites we need to display special information
     if (sitesListAll.length === 0) {
       // The old code also referenced a "not yet active" status, which does not exist, so
       // we are going to ignore that.
-      if (item.currentTrialStatus === "Approved" || item.currentTrialStatus === "In Review") {
-        return "Location information is not yet available"
+      if (
+        item.currentTrialStatus === 'Approved' ||
+        item.currentTrialStatus === 'In Review'
+      ) {
+        return 'Location information is not yet available';
       } else {
         return (
           <>
@@ -185,12 +189,12 @@ const ResultsListItem = ({ id, item, isChecked, onCheckChange, queryParams }) =>
 
     // We filter on VA here to cut down on conditionals
     // in all the cout by.
-    const sitesListForNearCount = vaOnly ?
-      sitesListAll.filter(site => site.isVA):
-      sitesListAll;
+    const sitesListForNearCount = vaOnly
+      ? sitesListAll.filter(site => site.isVA)
+      : sitesListAll;
 
     // Assume that search-location-zip means that
-    // you have a properly filled in zip code. 
+    // you have a properly filled in zip code.
     if (location === 'search-location-zip') {
       //has a zip
       if (zipCoords.lat !== '' && zipCoords.long !== '') {
@@ -201,11 +205,15 @@ const ResultsListItem = ({ id, item, isChecked, onCheckChange, queryParams }) =>
     } else if (location === 'search-location-country') {
       return `${sitesListAll.length} location${
         sitesListAll.length === 1 ? '' : 's'
-      }, including ${countNearbySitesByCountryParams(sitesListForNearCount)} near you`;
+      }, including ${countNearbySitesByCountryParams(
+        sitesListForNearCount
+      )} near you`;
     } else if (location === 'search-location-nih') {
       return `${sitesListAll.length} location${
         sitesListAll.length === 1 ? '' : 's'
-      }, including ${countNearbySitesByNIHParams(sitesListForNearCount)} near you`;
+      }, including ${countNearbySitesByNIHParams(
+        sitesListForNearCount
+      )} near you`;
     } else if (vaOnly) {
       // This accounts for search-location-all and vaOnly. The old code made sure
       // hospital + va would not display, but the new logic should not have this
@@ -214,14 +222,25 @@ const ResultsListItem = ({ id, item, isChecked, onCheckChange, queryParams }) =>
         sitesListAll.length === 1 ? '' : 's'
       }, including ${sitesListForNearCount.length} near you`;
     }
-    return `${sitesListAll.length} location${sitesListAll.length === 1 ? '' : 's'}`;
+    return `${sitesListAll.length} location${
+      sitesListAll.length === 1 ? '' : 's'
+    }`;
   };
 
   const setCachedTitle = () => {
-    dispatch(
-      receiveData('currentTrialTitle', item.briefTitle)
-    )
-  }
+    dispatch(receiveData('currentTrialTitle', item.briefTitle));
+  };
+
+  const handleLinkClick = () => {
+    tracking({
+      action: 'click',
+      source: 'results_page_link',
+      data: {
+        resultsPosition: itemIndex,
+      },
+    });
+    setCachedTitle();
+  };
 
   return (
     <div className="results-list-item results-list__item">
@@ -239,7 +258,7 @@ const ResultsListItem = ({ id, item, isChecked, onCheckChange, queryParams }) =>
         <div className="results-list-item__title">
           <Link
             to={`/about-cancer/treatment/clinical-trials/search/v?${itemQueryString}`}
-            onClick={setCachedTitle}
+            onClick={handleLinkClick}
           >
             {item.briefTitle}
           </Link>
