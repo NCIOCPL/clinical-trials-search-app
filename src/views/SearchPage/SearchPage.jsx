@@ -16,7 +16,7 @@ import {
   TrialType,
   ZipCode,
 } from '../../components/search-modules';
-import { trackedEvents } from '../../constants';
+import { trackedEvents } from '../../tracking';
 import { history } from '../../services/history.service';
 import { updateFormField, clearForm, receiveData } from '../../store/actions';
 
