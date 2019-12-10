@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { usePrintApi } from '../../hooks';
-import { history } from '../../services/history.service';
 
 const PrintModalContent = ({ selectedList = [], handleClose = () => {} }) => {
   // in dev use
   const printUrl = useSelector(store => store.globals.printCacheEndpoint);
 
+  const printIds =  selectedList.map(({id})=> id);
   const [{ data, isLoading, isError, doPrint }] = usePrintApi(
-    { TrialIDs: selectedList },
+    { TrialIDs: printIds },
     printUrl
   );
 
