@@ -1,9 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMainType } from '../../store/actions';
 import { Link } from 'react-router-dom';
+
 import { SearchCriteriaTable } from '../../components/atomic';
+import { START_OVER_LINK } from '../../constants';
 import { history } from '../../services/history.service';
+import { getMainType } from '../../store/actions';
 
 const ResultsPageHeader = ({
   handleUpdate,
@@ -69,7 +71,7 @@ const ResultsPageHeader = ({
                 for: "all trials" &nbsp; | &nbsp;
                 <Link
                   to={`${formType === 'basic' ? '/about-cancer/treatment/clinical-trials/search' : '/about-cancer/treatment/clinical-trials/search/advanced'}`}
-                  onClick={handleReset}
+                  onClick={() => handleReset(START_OVER_LINK)}
                 >
                   Start Over
                 </Link>

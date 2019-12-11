@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Accordion, AccordionItem, Table } from '../../atomic';
-import { updateFormField } from '../../../store/actions';
+
 import './SearchCriteriaTable.scss';
+
+import { Accordion, AccordionItem, Table } from '../../atomic';
+import { START_OVER_LINK } from '../../../constants';
+import { updateFormField } from '../../../store/actions';
 
 const SearchCriteriaTable = ({
   placement = 'results',
@@ -299,7 +302,7 @@ const SearchCriteriaTable = ({
       {placement === 'trial' ? (
         <Link
           to={`${formType === 'basic' ? '/about-cancer/treatment/clinical-trials/search/' : '/about-cancer/treatment/clinical-trials/search/advanced'}`}
-          onClick={handleReset}
+          onClick={() => handleReset(START_OVER_LINK)}
         >
           <strong>Start Over</strong>
         </Link>
@@ -307,7 +310,7 @@ const SearchCriteriaTable = ({
         <div className="reset-form">
           <Link
             to={`${formType === 'basic' ? '/about-cancer/treatment/clinical-trials/search/' : '/about-cancer/treatment/clinical-trials/search/advanced'}`}
-            onClick={handleReset}
+            onClick={() => handleReset(START_OVER_LINK)}
           >
             Start Over
           </Link>
@@ -327,7 +330,7 @@ const SearchCriteriaTable = ({
           <strong>This clinical trial matches: "all trials"</strong> |{' '}
           <Link
             to={`${formType === 'basic' ? '/about-cancer/treatment/clinical-trials/search/' : '/about-cancer/treatment/clinical-trials/search/advanced'}`}
-            onClick={handleReset}
+            onClick={() => handleReset(START_OVER_LINK)}
           >
             <strong>Start Over</strong>
           </Link>

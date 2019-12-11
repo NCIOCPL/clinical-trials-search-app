@@ -2,6 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import track from 'react-tracking';
+
+import './ResultsPage.scss';
+
 import { updateFormField, clearForm, receiveData } from '../../store/actions';
 import {
   ChatOpener,
@@ -10,18 +14,16 @@ import {
   Modal,
   Pager,
 } from '../../components/atomic';
+import { TRY_NEW_SEARCH_LINK } from '../../constants';
 import { buildQueryString } from '../../utilities';
 import { useModal, useStoreToFindTrials } from '../../hooks';
 import ResultsPageHeader from './ResultsPageHeader';
 import ResultsList from './ResultsList';
 import { history } from '../../services/history.service';
 import PrintModalContent from './PrintModalContent';
-import track from 'react-tracking';
 import { trackedEvents } from '../../tracking';
-import './ResultsPage.scss';
+
 const queryString = require('query-string');
-
-
 
 const ResultsPage = ({ location, tracking }) => {
 
@@ -145,7 +147,11 @@ const ResultsPage = ({ location, tracking }) => {
     }
   };
 
-  const handleStartOver = () => {
+  const handleStartOver = (linkType) => {
+    const { NewSearchLinkClick } = trackedEvents;
+    NewSearchLinkClick.data.formType = formSnapshot.formType;
+    NewSearchLinkClick.source = linkType;
+    handleTracking(NewSearchLinkClick);
     dispatch(clearForm());
   };
 
@@ -340,7 +346,7 @@ const ResultsPage = ({ location, tracking }) => {
                 ? '/about-cancer/treatment/clinical-trials/search'
                 : '/about-cancer/treatment/clinical-trials/search/advanced'
             }`}
-            onClick={handleStartOver}
+            onClick={() => handleStartOver(TRY_NEW_SEARCH_LINK)}
           >
             Try a new search
           </Link>
@@ -366,7 +372,7 @@ const ResultsPage = ({ location, tracking }) => {
                 ? '/about-cancer/treatment/clinical-trials/search'
                 : '/about-cancer/treatment/clinical-trials/search/advanced'
             }`}
-            onClick={handleStartOver}
+            onClick={() => handleStartOver(TRY_NEW_SEARCH_LINK)}
           >
             Try a new search
           </Link>
