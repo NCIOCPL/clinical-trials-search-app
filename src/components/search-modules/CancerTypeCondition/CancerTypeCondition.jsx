@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Fieldset, Autocomplete, InputLabel } from '../../atomic';
 import { getMainType, getCancerTypeDescendents } from '../../../store/actions';
@@ -39,7 +39,9 @@ const CancerTypeCondition = ({ handleUpdate }) => {
   ]);
 
   const cache = useSelector(store => store.cache);
-  
+  const ctButton = useRef();
+
+  const focusCTButton = () => ctButton.current.blur();
 
   useEffect(() => {
     if(cache[cancerType.codes[0]]){
@@ -53,15 +55,33 @@ const CancerTypeCondition = ({ handleUpdate }) => {
     setFindingsOptions(cache[ctCode].findingsOptions);
   }
 
+  const menuDropdown = document.getElementById('NCI-CTS-root');
+
+
+  const outsideClickListener = event => {
+    if (!document.getElementById('ctMenu').contains(event.target) && ctMenuOpen) {
+      setCtMenuOpen(false);
+      removeClickListener();
+    }
+  };
+
+  const removeClickListener = () => {
+    menuDropdown.removeEventListener('click', outsideClickListener);
+  };
+
+
   // Retrieval of main types is triggered by expanding the cancer type dropdown
   useEffect(() => {
     // if maintypes is essentially empty, fetch mainTypes
     if (maintypeOptions.length < 1 && ctMenuOpen) {
       dispatch(getMainType({}));
     }
+
     if (ctMenuOpen) {
       document.getElementById('ct-searchTerm').focus();
-      watchClickOutside(document.getElementById('ctMenu'));
+      menuDropdown.addEventListener('click', outsideClickListener);
+    } else {
+      removeClickListener()
     }
     if (cancerType.codes.length > 0 && !refineSearch) {
       dispatch(
@@ -165,23 +185,10 @@ const CancerTypeCondition = ({ handleUpdate }) => {
     handleUpdate('subtypeModified', false);
     handleUpdate('stagesModified', false);
     setCtMenuOpen(false);
+    removeClickListener();
     setSearchText({ value: '', codes: null });
+    focusCTButton();
   };
-
-  function watchClickOutside(element) {
-    const outsideClickListener = event => {
-      if (!element.contains(event.target) && ctMenuOpen) {
-        setCtMenuOpen(false);
-        removeClickListener();
-      }
-    };
-
-    const removeClickListener = () => {
-      document.removeEventListener('click', outsideClickListener);
-    };
-
-    document.addEventListener('click', outsideClickListener);
-  }
 
   return (
     <Fieldset
@@ -198,6 +205,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
       <div className="ct-select">
         <InputLabel label="Primary Cancer Type/Condition" htmlFor="ct" />
         <button
+          ref={ctButton}
           id="ct-btn"
           className={`ct-select__button faux-select ${
             cancerTypeModified ? '--modified' : ''
