@@ -9,7 +9,7 @@ const ResultsList = ({ results, selectedResults, setSelectedResults, setSelectAl
     resultsPage,
     formType 
   } = useSelector(store => store.form);
-  
+
   const handleOnCheckChange = id => {
     let resultItem = {
       id: id,
