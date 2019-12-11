@@ -1,13 +1,19 @@
-import React, { useEffect, useRef } from 'react';
-import {useDispatch} from 'react-redux';
-import { clearForm } from '../../../store/actions';
-import { history } from '../../../services/history.service';
 import PropTypes from 'prop-types';
+import React, { useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { useTracking } from 'react-tracking';
+import { clearForm } from '../../../store/actions';
+
 import './StickySubmitBlock.scss';
+
+import { trackedEvents } from '../../../tracking/index';
+
 
 const StickySubmitBlock = ({ sentinelRef, onSubmit }) => {
   const dispatch = useDispatch();
   const stickyEl = useRef(null);
+  const { trackEvent } = useTracking();
+  const { ClearFormLinkClick } = trackedEvents;
 
   useEffect(() => {
     intObserver.observe(stickyEl.current);
@@ -36,6 +42,7 @@ const StickySubmitBlock = ({ sentinelRef, onSubmit }) => {
     dispatch(clearForm());
     window.scrollTo(0, 0);
     window.location.reload(false);
+    trackEvent(ClearFormLinkClick);
   }
 
   const intObserver = new IntersectionObserver(callback, options);

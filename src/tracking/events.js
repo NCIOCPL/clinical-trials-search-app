@@ -20,6 +20,19 @@ function getBaseEventObj() {
 }
 
 /**
+ * ClearFormLinkClick - Default analytics data dispatched on clicking the clear form link on the search page
+ * @returns {BaseEvent}
+ */
+export const ClearFormLinkClick = {
+    ...getBaseEventObj(),
+    action: 'click',
+    data: {
+      formType: 'advanced',
+    },
+    source: 'clear_form_link',
+};
+
+/**
  * FindTrialsButtonClick - Default analytics data dispatched for basic and advanced trial search click (defaults to basic)
  * @returns {BaseEvent}
  */
@@ -66,4 +79,14 @@ export const PrintMaxExceededClick = {
     formType: 'basic',
   },
   source: 'print_selected_max_reached_button',
+};
+
+/**
+ * NewSearchLinkClick - Analytics data dispatched on clicking "Start Over" or "Try a new search" link on results page 
+ * (data and source added before event trigger)
+ * @returns {BaseEvent}
+ */
+export const NewSearchLinkClick = {
+    ...getBaseEventObj(),
+    action: 'click',
 };
