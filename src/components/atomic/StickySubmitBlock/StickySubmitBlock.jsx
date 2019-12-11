@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTracking } from 'react-tracking';
-import { clearForm } from '../../../store/actions';
 
 import './StickySubmitBlock.scss';
 
+import { clearForm } from '../../../store/actions';
 import { trackedEvents } from '../../../tracking/index';
 
 
