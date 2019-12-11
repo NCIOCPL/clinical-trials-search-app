@@ -15,7 +15,7 @@ const ResultsList = ({ results, selectedResults, setSelectedResults, setSelectAl
       id: id,
       fromPage: resultsPage + 1
     }
-
+    
     //if the new item does not already exist in the selected results, add it
     if (selectedResults.filter( item => item.id === resultItem.id).length === 0) {
       setSelectedResults([...selectedResults, resultItem]);

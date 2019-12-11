@@ -17,8 +17,6 @@ const ResultsListItem = ({
   queryParams,
   tracking,
   itemIndex,
-  resultsPage,
-  formType
 }) => {
   const dispatch = useDispatch();
   const {
@@ -238,9 +236,7 @@ const ResultsListItem = ({
       action: 'click',
       source: 'results_page_link',
       data: {
-        pageNum: resultsPage + 1, // This is obviously 1 based.
-        resultsPosition: itemIndex + 1, //This is 1 based.
-        formType: formType,
+        resultsPosition: itemIndex,
       },
     });
     setCachedTitle();
