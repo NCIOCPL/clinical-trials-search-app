@@ -65,6 +65,7 @@ const TrialType = ({ handleUpdate }) => {
           checked={hvToggle}
           label="Limit results to Veterans Affairs facilities"
           onClick={handleToggle}
+          onChange={()=>{}}
         />
         Limit results to trials accepting healthy volunteers
       </div>
