@@ -5,7 +5,10 @@ import ResultsListItem from './ResultsListItem';
 
 
 const ResultsList = ({ results, selectedResults, setSelectedResults, setSelectAll, queryParams, tracking }) => {
-  const resultsPage = useSelector(store => store.form.resultsPage);
+  const { 
+    resultsPage,
+    formType 
+  } = useSelector(store => store.form);
 
   const handleOnCheckChange = id => {
     let resultItem = {
@@ -33,6 +36,8 @@ const ResultsList = ({ results, selectedResults, setSelectedResults, setSelectAl
             id={item.nciID}
             item={item}
             itemIndex={idx}
+            resultsPage={resultsPage}
+            formType={formType}
             isChecked={selectedResults.find( ({id}) => id === item.nciID) !== undefined}
             onCheckChange={handleOnCheckChange}
             tracking={tracking}
