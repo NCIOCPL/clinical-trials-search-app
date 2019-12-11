@@ -161,6 +161,7 @@ const Location = ({ handleUpdate }) => {
           checked={limitToVA}
           label="Limit results to Veterans Affairs facilities"
           onClick={handleToggleChange}
+          onChange={()=>{}}
         />
         Limit results to Veterans Affairs facilities
       </div>

@@ -82,8 +82,19 @@ export const PrintMaxExceededClick = {
 };
 
 /**
+ * ModifySearchCriteriaLinkClick - Default analytics data dispatched  when "Modify Search Criteria" link is clicked on results page
+ * (data updated before trackEvent is triggered)
+ * @returns {BaseEvent}
+ */
+export const ModifySearchCriteriaLinkClick = {
+  ...getBaseEventObj(),
+  action: 'click',
+  source: 'modify_search_criteria_link',
+};
+
+/**
  * NewSearchLinkClick - Analytics data dispatched on clicking "Start Over" or "Try a new search" link on results page 
- * (data and source added before event trigger)
+ * (data and source updated before trackEvent is triggered)
  * @returns {BaseEvent}
  */
 export const NewSearchLinkClick = {
