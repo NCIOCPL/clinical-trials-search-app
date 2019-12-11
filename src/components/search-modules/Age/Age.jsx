@@ -7,25 +7,20 @@ const Age = ({ handleUpdate }) => {
   const [inputtedAge, setInputtedAge] = useState(age);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const validateAgeEntry = () => {
-    if (inputtedAge !== '' && (isNaN(inputtedAge) || inputtedAge > 120 || inputtedAge < 1)) {
+  const validateAgeEntry = (a) => {
+    setInputtedAge(a);
+    if (a !== '' && (isNaN(a) || a > 120 || a < 1)) {
       setErrorMessage('Please enter a number between 1 and 120.');
       handleUpdate('age', '');
       handleUpdate('hasInvalidAge', true);
     } else {
       setErrorMessage('');
-      handleUpdate('age', inputtedAge);
+      handleUpdate('age', a);
       handleUpdate('hasInvalidAge', false);
     }
-
     if (ageModified) {
       handleUpdate('ageModified', false);
     }
-  };
-
-  const updateAge = a => {
-    setErrorMessage('');
-    setInputtedAge(a);
   };
 
   const helperText =
@@ -40,7 +35,7 @@ const Age = ({ handleUpdate }) => {
       helpUrl="/about-cancer/treatment/clinical-trials/search/help#age"
     >
       <TextInput
-        action={e => updateAge(e.target.value)}
+        action={e => validateAgeEntry(e.target.value)}
         id="age"
         value={inputtedAge}
         label="age"
@@ -49,6 +44,7 @@ const Age = ({ handleUpdate }) => {
         inputHelpText={helperText}
         maxLength={3}
         onBlur={validateAgeEntry}
+        onChange={validateAgeEntry}
         modified={ageModified}
       />
     </Fieldset>
