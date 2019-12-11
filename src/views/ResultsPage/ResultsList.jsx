@@ -5,11 +5,11 @@ import ResultsListItem from './ResultsListItem';
 
 
 const ResultsList = ({ results, selectedResults, setSelectedResults, setSelectAll, queryParams, tracking }) => {
-  const {
+  const { 
     resultsPage,
-    formType
+    formType 
   } = useSelector(store => store.form);
-
+  
   const handleOnCheckChange = id => {
     let resultItem = {
       id: id,
