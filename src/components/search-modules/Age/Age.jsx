@@ -43,7 +43,6 @@ const Age = ({ handleUpdate }) => {
         errorMessage={errorMessage}
         inputHelpText={helperText}
         maxLength={3}
-        onBlur={validateAgeEntry}
         onChange={validateAgeEntry}
         modified={ageModified}
       />
