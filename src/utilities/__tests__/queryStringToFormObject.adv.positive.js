@@ -214,6 +214,17 @@ describe('Adv - queryStringToFormObject maps query to form', () => {
       }
     ],
     [
+      "VA Only",
+      "rl=2&va=1",
+      async () => [],
+      async () => [],
+      async () => null,
+      {
+        vaOnly: true,
+        formType: "advanced"
+      }
+    ],
+    [
       "Pager test",
       "rl=2&pn=200",
       async () => [],

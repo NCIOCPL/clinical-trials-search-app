@@ -182,6 +182,22 @@ export const queryStringToFormObject = async (urlQuery, diseaseFetcher, interven
     }
   }
 
+  if (query['va']) {
+    const vaOnly = parseInt(query['va']);
+    if (vaOnly === 1) {
+      rtnFormState = {
+        ...rtnFormState,
+        vaOnly: true
+      };
+    } else {
+      rtnErrorsList.push(makeError(
+        "vaOnly",
+        "Invalid parameter"
+      ));
+    }
+  }
+
+
   // Trial Types and Phases
   const [typeFormState, typeErrorsList] = processChecklistField(query['tt'], 'trialTypes');
 
