@@ -109,7 +109,18 @@ describe('Adv - Negative - queryStringToFormObject maps query to form', () => {
         fieldName: 'resultsPage',
         message: 'Invalid parameter'
       }]
-    ]    
+    ],
+    [
+      "VA Only test - bad",
+      "rl=2&va=chicken",
+      async () => [],
+      async () => [],
+      async () => null,
+      [{
+        fieldName: 'vaOnly',
+        message: 'Invalid parameter'
+      }]
+    ],    
   ];
 
   // Test iterates over multiple cases defined by mappingTestCases
