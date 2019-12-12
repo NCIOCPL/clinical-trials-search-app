@@ -52,7 +52,6 @@ const TrialDescriptionPage = ({ location, tracking }) => {
   // scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
-    tracking.trackEvent({action: 'pageLoad'});
     if (trial && trial.briefTitle) {
       initTrialData();
     } else {
@@ -62,6 +61,12 @@ const TrialDescriptionPage = ({ location, tracking }) => {
 
   const initTrialData = () => {
     setIsTrialLoading(false);
+    tracking.trackEvent({
+      action: 'pageLoad',
+      data: {
+        nctId: trial.nctID,
+      },
+    });
   };
 
   const handleStartOver = () => {
@@ -478,5 +483,5 @@ const TrialDescriptionPage = ({ location, tracking }) => {
 };
 
 export default track({
-  page: "trial_description",
+  page: 'trial_description',
 })(TrialDescriptionPage);

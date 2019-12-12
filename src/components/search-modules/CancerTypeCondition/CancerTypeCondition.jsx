@@ -179,6 +179,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
     retrieveDescendents(item.codes[0], item.codes);
     handleUpdate('subtypes', []);
     handleUpdate('stages', []);
+    handleUpdate('findings', []);
     handleUpdate('subtypeModified', false);
     handleUpdate('stagesModified', false);
     setCtMenuOpen(false);
