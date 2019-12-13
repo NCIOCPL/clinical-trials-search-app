@@ -370,7 +370,7 @@ const testCases = [
       trialTypes: getTrialTypesObject(['supportive_care'])
     },
     {
-      trialTypes: ['i'],
+      trialTypes: ['supportive_care'],
       location: 'search-location-all'
     }
   ],
@@ -379,7 +379,7 @@ const testCases = [
       trialTypes: getTrialTypesObject(['supportive_care', 'treatment'])
     },
     {
-      trialTypes: ['supportive_care', 'treatment'],
+      trialTypes: ['treatment', 'supportive_care'],
       location: 'search-location-all'
     }
   ],
