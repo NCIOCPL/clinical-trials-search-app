@@ -117,12 +117,12 @@ export const formToTrackingData = formStore => {
   }
 
   // Trial Type & Phase
-  for (const field in ['trialTypes', 'trialPhases']) {
-    const selectedItems = (formStore['field'] && Array.isArray(formStore['field'])) ?
-                            formStore['field'].filter(item => item.checked) : 
-                            [];
+  for (const field of ['trialTypes', 'trialPhases']) {
+    const selectedItems = formStore[field].filter(item => item.checked);
     if (selectedItems.length > 0) {
-      rtnObj[field] = selectedItems.map(item => item.value);
+      rtnObj[field] = selectedItems.map(
+        item => item.value
+      );
     }
   }
 
