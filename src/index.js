@@ -19,6 +19,13 @@ import { ClinicalTrialsServiceFactory } from '@nciocpl/clinical-trials-search-cl
 import App from './App';
 import AnalyticsProvider from './AnalyticsProvider';
 
+import {
+  CommonAnalyticsActions,
+  DescriptionAnalyticsActions,
+  ResultsAnalyticsActions,
+  SearchAnalyticsActions
+} from './utilities/cgdp-analytics'
+
 const initialize = ({
   appId = '@@/DEFAULT_CTS_APP_ID',
   useSessionStorage = true,
@@ -127,3 +134,15 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 export default initialize;
+
+// This is kind of hacky. These are the mapping functions for this apps analytics
+// to Cgov-Digital-Platform Adobe Analytics structures. We have working tests here
+// so we put the functions here so we have tests for them. Instead of copy and
+// pasting the files, we are exporting them with the app. This *is* nice because
+// if someone raises a new event, then they can add the action for that event.
+export const AnalyticsActions = {
+  ...CommonAnalyticsActions,
+  ...DescriptionAnalyticsActions,
+  ...ResultsAnalyticsActions,
+  ...SearchAnalyticsActions
+}

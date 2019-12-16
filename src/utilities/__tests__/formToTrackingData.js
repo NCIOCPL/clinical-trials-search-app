@@ -201,13 +201,15 @@ const testCases = [
   ],  
 
   // ZIP
-  [ "Zip - no radius",
+  [ "Zip - default radius",
     {
       zip: "20852",
+      zipRadius: "100",
       location: "search-location-zip"
     },
     {
       zip: "20852",
+      zipRadius: "100",
       location: "search-location-zip"      
     }
   ],
@@ -383,7 +385,6 @@ const testCases = [
       location: 'search-location-all'
     }
   ],
-
 ];
 
 describe("formToTrackingData", () => {

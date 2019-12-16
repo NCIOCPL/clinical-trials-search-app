@@ -64,6 +64,7 @@ const TrialDescriptionPage = ({ location, tracking }) => {
     tracking.trackEvent({
       action: 'pageLoad',
       data: {
+        formType: formType,
         nctId: trial.nctID,
       },
     });

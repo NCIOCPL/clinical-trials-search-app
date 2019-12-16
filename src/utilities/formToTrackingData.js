@@ -52,9 +52,9 @@ export const formToTrackingData = formStore => {
       // Assume zip exists
       rtnObj['zip'] = formStore['zip'];
 
-      if (formStore['zipRadius'] !== '100') {
-        rtnObj["zipRadius"] = formStore["zipRadius"];
-      }
+      // Proximity is required on advanced search analytics
+      // even if using default value
+      rtnObj["zipRadius"] = formStore["zipRadius"];
       break;
     }
     case "search-location-country" : {
