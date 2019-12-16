@@ -66,6 +66,19 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
     );
   };
 
+  const onSearchPageExitEvent = () => {
+    const eventListener = window.attachEvent || window.addEventListener;
+    const unloadCheck = window.attachEvent ? 'onbeforeunload' : 'beforeunload';
+    eventListener(unloadCheck, function(e) {
+      if ( hasUserInteractedWithForm && !formInFocus.isSubmitted ) {
+        const {FormAbandonment} = trackedEvents;
+        FormAbandonment.data.formType = formFactor;
+        FormAbandonment.data.field = fieldInFocus.id;
+        tracking.trackEvent(FormAbandonment);
+      }
+    });
+  };
+
   // scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -87,6 +100,7 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
       tracking.trackEvent(FormInteractionStart);
       const { dispatchedFormInteractionEvent } = actions;
       dispatch( dispatchedFormInteractionEvent( true ) );
+      onSearchPageExitEvent();
     }
   }, [hasUserInteractedWithForm]);
 
@@ -95,6 +109,7 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    const { trackedFormSubmitted } = actions;
     const { FindTrialsButtonClickComplete, FindTrialsButtonClickError } = trackedEvents;
     FindTrialsButtonClickComplete.data.formType = formFactor;
     if(!hasFormError){
@@ -104,6 +119,7 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
       ));
       FindTrialsButtonClickComplete.data.status = 'complete';
       tracking.trackEvent(FindTrialsButtonClickComplete);
+      dispatch( trackedFormSubmitted(true) );
       history.push('/about-cancer/treatment/clinical-trials/search/r');
       return;
     }
