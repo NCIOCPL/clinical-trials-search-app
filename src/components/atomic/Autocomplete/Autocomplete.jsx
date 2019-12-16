@@ -1,14 +1,10 @@
-import scrollIntoView from 'dom-scroll-into-view';
-import PropTypes from 'prop-types';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
-import { connect } from 'react-redux';
-
-import './Autocomplete.scss';
-
+import scrollIntoView from 'dom-scroll-into-view';
 import { InputLabel, RemovableTag } from '../../atomic';
-import { trackFormInputChange } from '../../../store/modules/analytics/tracking/tracking.actions';
-import { uniqueIdForComponent } from '../../../utilities';
+import {uniqueIdForComponent} from '../../../utilities';
+import './Autocomplete.scss';
 
 const IMPERATIVE_API = [
   'blur',
@@ -188,10 +184,6 @@ class Autocomplete extends React.Component {
     multiselect: PropTypes.bool,
     chipList: PropTypes.array,
     onChipRemove: PropTypes.func,
-    /**
-     * Flag used to determine whether analytics is enabled for field.
-     */
-    isTrackingEnabled: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -221,7 +213,6 @@ class Autocomplete extends React.Component {
     multiselect: false,
     chipList: [],
     onChipRemove() {},
-    isTrackingEnabled: false
   };
 
   constructor(props) {
@@ -316,26 +307,7 @@ class Autocomplete extends React.Component {
   }
 
   handleChange(event) {
-    const { target } = event;
-    console.log('Autocomplete - handleChange 1:', target.form, target);
-    // this.props.onChange(event, target.value);
-
-    if ( this.props.isTrackingEnabled ) {
-      const { form, id, value } = target;
-      const { trackFormInputChange } = this.props;
-      const { errorMessageBody, hasError } = this.state;
-      const formName = form && form.id ? form.id : null;
-      const inputActionProps = {
-        errorMessage: errorMessageBody,
-        formName,
-        hasError,
-        id,
-        value
-      };
-      trackFormInputChange(inputActionProps);
-      console.log('Autocomplete - handleChange:', target.form, target);
-
-    }
+    this.props.onChange(event, event.target.value);
   }
 
   static keyDownHandlers = {
@@ -739,10 +711,4 @@ class Autocomplete extends React.Component {
   }
 }
 
-const mapDispatchToProps = {
-  trackFormInputChange
-};
-
-export default connect(
-    null, mapDispatchToProps
-)(Autocomplete);
+export default Autocomplete;

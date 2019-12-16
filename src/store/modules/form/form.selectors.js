@@ -1,11 +1,16 @@
 import { createSelector } from 'reselect';
 
+/**
+ * getFormData - Simple selector that returns form data in store
+ * @param {State} store
+ * @returns {Object} formData
+ */
 export const getFormData = state => state.form;
 
 /**
  * getHasInvalidAge - Returns boolean flag if an invalid age has been entered in the form
- * @param {state} state
- * @returns {boolean}
+ * @param {Function} getFormData
+ * @returns {boolean} hasInvalidAge
  */
 export const getHasInvalidAge = createSelector(
     getFormData,
@@ -14,8 +19,8 @@ export const getHasInvalidAge = createSelector(
 
 /**
  * getHasInvalidZip - Returns boolean flag if an invalid zip has been entered in the form
- * @param {state} state
- * @returns {boolean}
+ * @param {Function} getFormData
+ * @returns {boolean} hasInvalidZip
  */
 export const getHasInvalidZip = createSelector(
     getFormData,
@@ -23,11 +28,12 @@ export const getHasInvalidZip = createSelector(
 );
 
 /**
- * getFormHasError - Returns boolean flag if an error has occurred om the form
- * @param {state} state
- * @returns {boolean}
+ * getHasFormError - Returns boolean flag if an error has occurred om the form
+ * @param {Function} getHasInvalidAge
+ * @param {Function} getHasInvalidZip
+ * @returns {boolean} hasFormError
  */
-export const getFormHasError = createSelector(
+export const getHasFormError = createSelector(
     getHasInvalidAge,
     getHasInvalidZip,
     (hasInvalidAge, hasInvalidZip) => hasInvalidAge || hasInvalidZip

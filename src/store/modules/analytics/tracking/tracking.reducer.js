@@ -29,7 +29,6 @@ const tracking = (
         case ADD_FORM_TO_TRACKING: {
             const { formType } = payload;
             const allTrackedForms = getAllTrackedFormsOnPage();
-            console.log(`${type} called from tracking reducer:`, payload, allTrackedForms[0].className, allTrackedForms);
 
             const trackedForms = allTrackedForms.map( trackedForm => {
                 const form = new FormTrackingObject().get();
@@ -44,7 +43,6 @@ const tracking = (
             };
         }
         case DISPATCHED_FORM_INTERACTION_EVENT: {
-            console.log(`${type} called from tracking reducer:`, payload);
             return {
                 ...state,
                 hasDispatchedFormInteractionEvent: payload
@@ -59,7 +57,6 @@ const tracking = (
                 value
             } = payload;
             const { forms } = state;
-            // console.log(`${type} called from tracking reducer:`, forms);
             // Check if current element has a parent form in store
             const hasParentForm = forms.some( form => form.name === formName );
 
@@ -71,18 +68,14 @@ const tracking = (
                 );
                 return state;
             }
-
+            // Parent form for tracked field
             const parentForm = forms.map( form => {
                 // Reset all values to false
                 form.isFocused = false;
-                // console.log('parentForm:', form.name, formName, form);
                 return form.name === formName ? form : {};
             })[0];
 
             const hasMatchingField = parentForm.fields && parentForm.fields.some( field => field.id === id );
-            const fieldCount = hasMatchingField ? parentForm.fields.length : 0;
-
-            console.log(`${type} called from tracking reducer:`, hasMatchingField, fieldCount);
 
             const trackedField = new FieldTrackingObject().get();
             trackedField.id = id;
@@ -115,7 +108,6 @@ const tracking = (
                 fields: fields
             };
 
-            console.log(`${type} called from tracking reducer:`, hasParentForm, formName, parentForm, payload, fields, form);
             return {
                 ...state,
                 hasUserInteractedWithForm: true,

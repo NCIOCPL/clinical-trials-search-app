@@ -7,7 +7,6 @@ import './TextInput.scss';
 import InputLabel from '../InputLabel';
 import { trackFormInputChange } from '../../../store/modules/analytics/tracking/tracking.actions';
 import { uniqueIdForComponent } from '../../../utilities';
-import { getErrorMessage } from '../../../utilities/forms';
 
 class TextInput extends React.Component {
   static propTypes = {
@@ -29,7 +28,6 @@ class TextInput extends React.Component {
     placeHolder: PropTypes.string,
     required: PropTypes.bool,
     modified: PropTypes.bool,
-    isTrackingEnabled: PropTypes.bool,
     type: PropTypes.oneOf([
       'text',
       'email',
@@ -53,7 +51,6 @@ class TextInput extends React.Component {
     required: false,
     modified: false,
     disabled: false,
-    isTrackingEnabled: false
   };
 
   constructor(props) {
@@ -183,22 +180,18 @@ class TextInput extends React.Component {
       }
     });
 
-    if (this.props.isTrackingEnabled) {
-      const { form, id, value } = target;
-      const { errorMessage, trackFormInputChange } = this.props;
-      const { errorMessageBody, hasError } = this.state;
-      const formName = form && form.id ? form.id : null;
-      const errorMssg = getErrorMessage(form);
-      const inputActionProps = {
-        errorMessage: errorMessageBody,
-        formName,
-        hasError,
-        id,
-        value
-      };
-      trackFormInputChange(inputActionProps);
-      console.log('TextInput - _handleChange:', form.getElementsByClassName('cts-input__error-message').innerText, hasError, errorMessage, errorMessageBody, target.form, target);
-    }
+    const { form, id, value } = target;
+    const { errorMessage, trackFormInputChange } = this.props;
+    const { errorMessageBody, hasError } = this.state;
+    const formName = form && form.id ? form.id : null;
+    const inputActionProps = {
+      errorMessage: errorMessageBody,
+      formName,
+      hasError,
+      id,
+      value
+    };
+    trackFormInputChange(inputActionProps);
   }
 }
 

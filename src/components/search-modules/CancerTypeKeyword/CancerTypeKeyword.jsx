@@ -5,7 +5,7 @@ import { Fieldset, Autocomplete } from '../../atomic';
 import { getDiseasesForSimpleTypeAhead } from '../../../store/actions';
 import { sortItemsByName } from '../../../utilities'
 
-const CancerTypeKeyword = ({ handleUpdate, handleFormStoreTracking }) => {
+const CancerTypeKeyword = ({ handleUpdate }) => {
   const dispatch = useDispatch();
   const { keywordPhrases, cancerType } = useSelector(store => store.form);
   const { diseases = [] } = useSelector(store => store.cache);
@@ -43,7 +43,6 @@ const CancerTypeKeyword = ({ handleUpdate, handleFormStoreTracking }) => {
           handleUpdate('cancerType', {name: '', codes: []})
           handleUpdate('keywordPhrases', value);
           handleUpdate('typeCode', {});
-          handleFormStoreTracking( event, false, '' );
         }}
         onSelect={(value, item) => {
           setCTK({ value });

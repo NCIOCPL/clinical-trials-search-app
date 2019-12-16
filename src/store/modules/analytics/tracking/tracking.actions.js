@@ -5,7 +5,6 @@ export const TRACK_FORM_INPUT_CHANGE = 'TRACK_FORM_INPUT_CHANGE';
 
 // Actions
 export const addFormToTracking = (payload) => {
-    console.log(`${ADD_FORM_TO_TRACKING}:`, payload);
   return {
       type: ADD_FORM_TO_TRACKING,
       payload
