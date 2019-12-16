@@ -11,15 +11,15 @@ const Age = ({ handleUpdate, tracking }) => {
 
   const validateAgeEntry = (a) => {
     const { InputValidation } = trackedEvents;
-    const errorText = 'Please enter a number between 1 and 120.';
+    const invalidAgeText = 'Please enter a number between 1 and 120.';
     setInputtedAge(a);
     if (a !== '' && (isNaN(a) || a > 120 || a < 1)) {
-      setErrorMessage(errorText);
+      setErrorMessage(invalidAgeText);
       handleUpdate('age', '');
       handleUpdate('hasInvalidAge', true);
       InputValidation.data.field = 'age';
       InputValidation.data.formType = formType;
-      InputValidation.data.message = errorText;
+      InputValidation.data.message = invalidAgeText;
       tracking.trackEvent(InputValidation);
     } else {
       setErrorMessage('');
