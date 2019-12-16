@@ -74,11 +74,21 @@ const TrialDescriptionPage = ({ location, tracking }) => {
     dispatch(clearForm());
   };
 
+  const trackShare = (shareType) => ({    
+    action: 'click',
+    source: `${shareType}_share_button`,
+    data: {      
+      formType: formType
+    },
+  })
+
   const handlePrintTrial = () => {
+    tracking.trackEvent(trackShare('print'));
     window.print();
   };
 
   const handleEmailTrial = () => {
+    tracking.trackEvent(trackShare('email'));
     window.location.href = `mailto:?subject=Information%20from%20the%20National%20Cancer%20Institute%20Web%20Site&body=I%20found%20this%20information%20on%20www.cancer.gov%20and%20I'd%20like%20to%20share%20it%20with%20you:%20https%3A%2F%2Fwww.cancer.gov%2Fabout-cancer%2Ftreatment%2Fclinical-trials%2Fsearch%2Fv%3Fid%3D${currId}%0A%0A%20NCI's%20Web%20site,%20www.cancer.gov,%20provides%20accurate,%20up-to-date,%20comprehensive%20cancer%20information%20from%20the%20U.S.%20government's%20principal%20agency%20for%20cancer%20research.%20If%20you%20have%20questions%20or%20need%20additional%20information,%20we%20invite%20you%20to%20contact%20NCI%E2%80%99s%20LiveHelp%20instant%20messaging%20service%20at%20https://livehelp.cancer.gov,%20or%20call%20the%20NCI's%20Contact%20Center%201-800-4-CANCER%20(1-800-422-6237)%20(toll-free%20from%20the%20United%20States).`;
   };
 
