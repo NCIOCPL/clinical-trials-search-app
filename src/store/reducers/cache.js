@@ -1,8 +1,9 @@
 import { RECEIVE_DATA } from '../identifiers';
 
-export const defaultState = {};
+export const defaultState = {
+};
 
-const cache = (state = defaultState, action) => {
+export const reducer = (state = defaultState, action) => {
   switch (action.type) {
     case RECEIVE_DATA:
       return {
@@ -15,5 +16,3 @@ const cache = (state = defaultState, action) => {
       };
   }
 };
-
-export default cache;

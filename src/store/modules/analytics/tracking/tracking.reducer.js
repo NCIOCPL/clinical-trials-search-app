@@ -6,7 +6,7 @@ import {
     TRACK_FORM_INPUT_CHANGE
 } from './tracking.actions';
 import './tracking.defs';
-import { getAllTrackedFormsOnPage } from '../../../../utilities/forms';
+import { SEARCH_FORM_ID } from '../../../../constants';
 
 const defaultState = {
     forms: [],
@@ -20,7 +20,7 @@ const defaultState = {
  * @param action
  * @returns {tracking}
  */
-const tracking = (
+export const reducer = (
     state = defaultState,
     action
 ) => {
@@ -28,18 +28,15 @@ const tracking = (
     switch (type) {
         case ADD_FORM_TO_TRACKING: {
             const { formType } = payload;
-            const allTrackedForms = getAllTrackedFormsOnPage();
-
-            const trackedForms = allTrackedForms.map( trackedForm => {
-                const form = new FormTrackingObject().get();
-                form.formType = trackedForm.className.indexOf(formType) !== -1 ? formType : null;
-                form.name = trackedForm.id;
-                return form;
-            });
+            const trackedForm = [];
+            const form = new FormTrackingObject().get();
+            form.formType = formType;
+            form.name = SEARCH_FORM_ID;
+            trackedForm.push(form);
 
             return {
                 ...state,
-                forms: trackedForms
+                forms: trackedForm
             };
         }
         case DISPATCHED_FORM_INTERACTION_EVENT: {
@@ -118,5 +115,3 @@ const tracking = (
             return state;
     }
 };
-
-export default tracking;

@@ -21,6 +21,7 @@ import { history } from '../../services/history.service';
 import { updateFormField, clearForm, receiveData } from '../../store/actions';
 import { actions } from '../../store/reducers';
 import { getHasFormError } from '../../store/modules/form/form.selectors';
+import { SEARCH_FORM_ID } from '../../constants';
 
 // Module groups in arrays will be placed side-by-side in the form
 const basicFormModules = [CancerTypeKeyword, [Age, ZipCode]];
@@ -205,7 +206,7 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
 
       <div className="search-page__content">
         <form
-          id="cts-search-form"
+          id={SEARCH_FORM_ID}
           onSubmit={handleSubmit}
           className={`search-page__form ${formFactor}`}
           data-tracked="tracked"

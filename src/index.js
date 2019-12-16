@@ -1,29 +1,23 @@
-// Polyfills first
 import './polyfills';
-
-// External imports
-import { ClinicalTrialsServiceFactory } from '@nciocpl/clinical-trials-search-client.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router } from 'react-router-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-
-// Styles
-import './index.css';
-
-// Local imports
-import App from './App';
-import AnalyticsProvider from './AnalyticsProvider';
+import { Router } from 'react-router-dom';
 import { history } from './services/history.service';
-import reducers from './store/reducers';
-import createCTSMiddleware from './middleware/CTSMiddleware';
-import cacheMiddleware from './middleware/cacheMiddleware';
+import * as reducers from './store/reducers';
 import {
   loadStateFromSessionStorage,
   saveStatetoSessionStorage,
 } from './utilities';
+import './index.css';
+import createCTSMiddleware from './middleware/CTSMiddleware';
+import cacheMiddleware from './middleware/cacheMiddleware';
+import { ClinicalTrialsServiceFactory } from '@nciocpl/clinical-trials-search-client.js';
+
+import App from './App';
+import AnalyticsProvider from './AnalyticsProvider';
 
 import {
   CommonAnalyticsActions,
