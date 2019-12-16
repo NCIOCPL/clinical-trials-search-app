@@ -25,22 +25,25 @@ function getBaseEventObj() {
 export const ClearFormLinkClick = {
     ...getBaseEventObj(),
     action: 'click',
-    data: {
-      formType: 'advanced',
-    },
     source: 'clear_form_link',
 };
 
 /**
- * FindTrialsButtonClick - Default analytics data dispatched for basic and advanced trial search click (defaults to basic)
+ * FindTrialsButtonClickComplete - Default analytics data dispatched for basic and advanced trial search click
  */
-export const FindTrialsButtonClick = {
+export const FindTrialsButtonClickComplete = {
   ...getBaseEventObj(),
   action: 'click',
-  data: {
-    formType: 'basic',
-  },
-  source: 'find_trials_button',
+  source: 'form_submission_complete',
+};
+
+/**
+ * FindTrialsButtonClickError - Default analytics data dispatched for basic and advanced trial search click
+ */
+export const FindTrialsButtonClickError = {
+  ...getBaseEventObj(),
+  action: 'click',
+  source: 'form_submission_error',
 };
 
 /**
@@ -51,10 +54,21 @@ export const FormInteractionStart = {
   ...getBaseEventObj(),
   action: 'click',
   data: {
-    formType: 'basic',
     status: 'start'
   },
   source: 'form_start'
+};
+
+/**
+ * InputValidation - Default analytics data dispatched for basic and advanced trial search click
+ */
+export const InputValidation = {
+  ...getBaseEventObj(),
+  action: 'click',
+  data: {
+    status: 'input_error'
+  },
+  source: 'form_validation_error',
 };
 
 /**

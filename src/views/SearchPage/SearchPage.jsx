@@ -108,21 +108,21 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const { FindTrialsButtonClick } = trackedEvents;
-    FindTrialsButtonClick.data.formType = formFactor;
-    if(!hasInvalidAge && !hasInvalidZip){
+    const { FindTrialsButtonClickComplete, FindTrialsButtonClickError } = trackedEvents;
+    FindTrialsButtonClickComplete.data.formType = formFactor;
+    if(!formHasError){
       dispatch(receiveData(
         'selectedTrialsForPrint',
         []
       ));
-      FindTrialsButtonClick.data.status = 'complete';
-      tracking.trackEvent(FindTrialsButtonClick);
+      FindTrialsButtonClickComplete.data.status = 'complete';
+      tracking.trackEvent(FindTrialsButtonClickComplete);
       history.push('/about-cancer/treatment/clinical-trials/search/r');
       return;
     }
-    FindTrialsButtonClick.data.status = 'error';
-    FindTrialsButtonClick.data.message = 'attempted form submit with errors';
-    tracking.trackEvent(FindTrialsButtonClick);
+    FindTrialsButtonClickError.data.status = 'error';
+    FindTrialsButtonClickError.data.message = 'attempted form submit with errors';
+    tracking.trackEvent(FindTrialsButtonClickError);
     
   };
 
@@ -255,6 +255,7 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
                       key={`formAdvanced-${idx}-${i}`}
                       handleUpdate={handleUpdate}
                       handleFormStoreTracking={handleFormStoreTracking}
+                      tracking={tracking}
                     />
                   ))}
                 </div>
@@ -265,6 +266,7 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
                   key={`formAdvanced-${idx}`}
                   handleUpdate={handleUpdate}
                   handleFormStoreTracking={handleFormStoreTracking}
+                  tracking={tracking}
                 />
               );
             }

@@ -154,7 +154,7 @@ class TextInput extends React.Component {
     }
   }
 
-  //  This function runs every time the user changes the contents of the input.
+  //  his function runs every time the user changes the contents of the input.
   //  @param {event} event The event
   _handleChange(event) {
     // Check if allowedChars validator exists. If it does, check the last char
@@ -170,8 +170,7 @@ class TextInput extends React.Component {
     }
 
     // Call action handler prop
-    // this.props.action(event);
-    this.props.onChange(target.value);
+    this.props.action(event);
 
     // Commit the input's value to state.value.
     this.setState({ value: event.target.value }, () => {
