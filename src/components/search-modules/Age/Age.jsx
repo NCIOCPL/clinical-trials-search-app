@@ -1,18 +1,26 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Fieldset, TextInput } from '../../atomic';
 
-const Age = ({ handleUpdate }) => {
+import { Fieldset, TextInput } from '../../atomic';
+import { trackedEvents } from '../../../tracking';
+
+const Age = ({ handleUpdate, tracking }) => {
   const { age, ageModified, formType } = useSelector(store => store.form);
   const [inputtedAge, setInputtedAge] = useState(age);
   const [errorMessage, setErrorMessage] = useState('');
 
   const validateAgeEntry = (a) => {
+    const { InputValidation } = trackedEvents;
+    const invalidAgeText = 'Please enter a number between 1 and 120.';
     setInputtedAge(a);
     if (a !== '' && (isNaN(a) || a > 120 || a < 1)) {
-      setErrorMessage('Please enter a number between 1 and 120.');
+      setErrorMessage(invalidAgeText);
       handleUpdate('age', '');
       handleUpdate('hasInvalidAge', true);
+      InputValidation.data.field = 'age';
+      InputValidation.data.formType = formType;
+      InputValidation.data.message = invalidAgeText;
+      tracking.trackEvent(InputValidation);
     } else {
       setErrorMessage('');
       handleUpdate('age', a);

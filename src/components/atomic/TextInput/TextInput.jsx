@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import {uniqueIdForComponent} from '../../../utilities';
 import InputLabel from '../InputLabel';
 import './TextInput.scss';
+import { connect } from 'react-redux';
+import { trackFormInputChange } from '../../../store/modules/analytics/tracking/tracking.actions';
 
 class TextInput extends React.Component {
   static propTypes = {
@@ -153,6 +155,8 @@ class TextInput extends React.Component {
     // Check if allowedChars validator exists. If it does, check the last char
     // entered against the validator. If validation fails, return thereby preventing
     // the value from being added to the state.
+    const { target } = event;
+
     if (this.props.allowedChars) {
       let input = event.target.value.slice(-1);
       if (!this.props.allowedChars.isValid(input)) {
@@ -173,7 +177,26 @@ class TextInput extends React.Component {
         this.setState({ isPristine: false });
       }
     });
+
+    const { form, id, value } = target;
+    const { errorMessage, trackFormInputChange } = this.props;
+    const { errorMessageBody, hasError } = this.state;
+    const formName = form && form.id ? form.id : null;
+    const inputActionProps = {
+      errorMessage: errorMessageBody,
+      formName,
+      hasError,
+      id,
+      value
+    };
+    trackFormInputChange(inputActionProps);
   }
 }
 
-export default TextInput;
+const mapDispatchToProps = {
+  trackFormInputChange
+};
+
+export default connect(
+    null, mapDispatchToProps
+)(TextInput);

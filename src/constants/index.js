@@ -58,3 +58,5 @@ export const OTHER_MAIN_TYPES = [
 export const NIH_ZIPCODE = "20892";
 export const START_OVER_LINK = 'start_over_link';
 export const TRY_NEW_SEARCH_LINK = 'try_a_new_search_link';
+export const INVALID_ZIP_TEXT = 'Please enter a valid 5 digit U.S. zip code';
+export const SEARCH_FORM_ID = 'cts-search-form';

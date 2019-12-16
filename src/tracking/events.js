@@ -21,28 +21,54 @@ function getBaseEventObj() {
 
 /**
  * ClearFormLinkClick - Default analytics data dispatched on clicking the clear form link on the search page
- * @returns {BaseEvent}
  */
 export const ClearFormLinkClick = {
     ...getBaseEventObj(),
     action: 'click',
-    data: {
-      formType: 'advanced',
-    },
     source: 'clear_form_link',
 };
 
 /**
- * FindTrialsButtonClick - Default analytics data dispatched for basic and advanced trial search click (defaults to basic)
- * @returns {BaseEvent}
+ * FindTrialsButtonClickComplete - Default analytics data dispatched for basic and advanced trial search click
  */
-export const FindTrialsButtonClick = {
+export const FindTrialsButtonClickComplete = {
+  ...getBaseEventObj(),
+  action: 'click',
+  source: 'form_submission_complete',
+};
+
+/**
+ * FindTrialsButtonClickError - Default analytics data dispatched for basic and advanced trial search click
+ */
+export const FindTrialsButtonClickError = {
+  ...getBaseEventObj(),
+  action: 'click',
+  source: 'form_submission_error',
+};
+
+/**
+ * FormInteractionStart - Default analytics data dispatched  when "Modify Search Criteria" link is clicked on results page
+ * (data updated before trackEvent is triggered)
+ */
+export const FormInteractionStart = {
   ...getBaseEventObj(),
   action: 'click',
   data: {
-    formType: 'basic',
+    status: 'start'
   },
-  source: 'find_trials_button',
+  source: 'form_start'
+};
+
+/**
+ * InputValidation - Default analytics data dispatched for basic and advanced trial search click
+ */
+export const InputValidation = {
+  ...getBaseEventObj(),
+  action: 'click',
+  data: {
+    status: 'input_error'
+  },
+  source: 'form_validation_error',
 };
 
 /**
@@ -84,7 +110,6 @@ export const PrintMaxExceededClick = {
 /**
  * ModifySearchCriteriaLinkClick - Default analytics data dispatched  when "Modify Search Criteria" link is clicked on results page
  * (data updated before trackEvent is triggered)
- * @returns {BaseEvent}
  */
 export const ModifySearchCriteriaLinkClick = {
   ...getBaseEventObj(),
@@ -95,7 +120,6 @@ export const ModifySearchCriteriaLinkClick = {
 /**
  * NewSearchLinkClick - Analytics data dispatched on clicking "Start Over" or "Try a new search" link on results page 
  * (data and source updated before trackEvent is triggered)
- * @returns {BaseEvent}
  */
 export const NewSearchLinkClick = {
     ...getBaseEventObj(),
