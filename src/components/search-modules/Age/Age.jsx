@@ -45,6 +45,7 @@ const Age = ({ handleUpdate }) => {
         maxLength={3}
         onChange={validateAgeEntry}
         modified={ageModified}
+        isTrackingEnabled
       />
     </Fieldset>
   );

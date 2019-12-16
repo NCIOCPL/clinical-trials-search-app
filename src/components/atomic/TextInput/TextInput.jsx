@@ -1,8 +1,13 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import {uniqueIdForComponent} from '../../../utilities';
-import InputLabel from '../InputLabel';
+import React from 'react';
+import { connect } from 'react-redux';
+
 import './TextInput.scss';
+
+import InputLabel from '../InputLabel';
+import { trackFormInputChange } from '../../../store/modules/analytics/tracking/tracking.actions';
+import { uniqueIdForComponent } from '../../../utilities';
+import { getErrorMessage } from '../../../utilities/forms';
 
 class TextInput extends React.Component {
   static propTypes = {
@@ -24,6 +29,7 @@ class TextInput extends React.Component {
     placeHolder: PropTypes.string,
     required: PropTypes.bool,
     modified: PropTypes.bool,
+    isTrackingEnabled: PropTypes.bool,
     type: PropTypes.oneOf([
       'text',
       'email',
@@ -47,6 +53,7 @@ class TextInput extends React.Component {
     required: false,
     modified: false,
     disabled: false,
+    isTrackingEnabled: false
   };
 
   constructor(props) {
@@ -147,21 +154,24 @@ class TextInput extends React.Component {
     }
   }
 
-  //  his function runs every time the user changes the contents of the input.
+  //  This function runs every time the user changes the contents of the input.
   //  @param {event} event The event
   _handleChange(event) {
     // Check if allowedChars validator exists. If it does, check the last char
     // entered against the validator. If validation fails, return thereby preventing
     // the value from being added to the state.
+    const { target } = event;
+
     if (this.props.allowedChars) {
-      let input = event.target.value.slice(-1);
+      let input = target.value.slice(-1);
       if (!this.props.allowedChars.isValid(input)) {
         return;
       }
     }
 
     // Call action handler prop
-    this.props.action(event);
+    // this.props.action(event);
+    this.props.onChange(target.value);
 
     // Commit the input's value to state.value.
     this.setState({ value: event.target.value }, () => {
@@ -173,7 +183,30 @@ class TextInput extends React.Component {
         this.setState({ isPristine: false });
       }
     });
+
+    if (this.props.isTrackingEnabled) {
+      const { form, id, value } = target;
+      const { errorMessage, trackFormInputChange } = this.props;
+      const { errorMessageBody, hasError } = this.state;
+      const formName = form && form.id ? form.id : null;
+      const errorMssg = getErrorMessage(form);
+      const inputActionProps = {
+        errorMessage: errorMessageBody,
+        formName,
+        hasError,
+        id,
+        value
+      };
+      trackFormInputChange(inputActionProps);
+      console.log('TextInput - _handleChange:', form.getElementsByClassName('cts-input__error-message').innerText, hasError, errorMessage, errorMessageBody, target.form, target);
+    }
   }
 }
 
-export default TextInput;
+const mapDispatchToProps = {
+  trackFormInputChange
+};
+
+export default connect(
+    null, mapDispatchToProps
+)(TextInput);

@@ -8,7 +8,7 @@ export const initialState = {
   appHasBeenVisited: false,
 };
 
-export const reducer = (state = initialState, action) => {
+const globals = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_GLOBAL:
       return {
@@ -24,3 +24,5 @@ export const reducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export default globals;

@@ -19,8 +19,17 @@ import {
 import { trackedEvents } from '../../tracking';
 import { history } from '../../services/history.service';
 import { updateFormField, clearForm, receiveData } from '../../store/actions';
+import {
+  getFocusedField,
+  getFocusedForm,
+  getHasDispatchedFormInteractionEvent,
+  getHasUserInteractedWithForm
+} from '../../store/modules/analytics/tracking/tracking.selectors';
+import { actions } from '../../store/reducers';
+import { getFormHasError } from '../../store/modules/form/form.selectors';
+import { serializeFormTrackingData } from '../../utilities/forms';
 
-//Module groups in arrays will be placed side-by-side in the form
+// Module groups in arrays will be placed side-by-side in the form
 const basicFormModules = [CancerTypeKeyword, [Age, ZipCode]];
 const advancedFormModules = [
   CancerTypeCondition,
@@ -34,14 +43,23 @@ const advancedFormModules = [
   LeadOrganization,
 ];
 
+
+
 const SearchPage = ({ formInit = 'basic', tracking }) => {
 
   const dispatch = useDispatch();
   const sentinelRef = useRef(null);
   const [formFactor, setFormFactor] = useState(formInit);
-  const {hasInvalidAge, hasInvalidZip} = useSelector(store => store.form)
-  
+  const focusedField = useSelector(getFocusedField);
+  const focusedForm = useSelector(getFocusedForm);
+  const formHasError = useSelector(getFormHasError);
+  const hasDispatchedFormInteractionEvent = useSelector(getHasDispatchedFormInteractionEvent);
+  const hasUserInteractedWithForm = useSelector(getHasUserInteractedWithForm);
+  const { hasInvalidAge, hasInvalidZip } = useSelector(store => store.form);
+  const { addFormToTracking } = actions;
+
   const handleUpdate = (field, value) => {
+    console.log('handleUpdate:', field, value);
     dispatch(
       updateFormField({
         field,
@@ -50,12 +68,40 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
     );
   };
 
+  const handleFormStoreTracking = ( event, hasError, error ) => {
+    console.log('handleFormStoreTracking:', event.target);
+    const { trackFormInputChange } = actions;
+    dispatch(
+        trackFormInputChange(
+            serializeFormTrackingData( event, false, '')
+        )
+    );
+  };
+
   // scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
     handleUpdate('formType', formInit);
+
+    // Init form tracking in store
+    dispatch( addFormToTracking({
+      formType: formFactor
+    }) );
     tracking.trackEvent({action: 'pageLoad'})
   }, []);
+
+  useEffect(() => {
+    console.log('Checking out effects...', hasDispatchedFormInteractionEvent);
+    // Run analytics event based on condition
+    if ( hasUserInteractedWithForm && !hasDispatchedFormInteractionEvent ) {
+      const { FormInteractionStart } = trackedEvents;
+      FormInteractionStart.data.formType = formFactor;
+      FormInteractionStart.data.field = focusedField.id;
+      tracking.trackEvent(FormInteractionStart);
+      const { dispatchedFormInteractionEvent } = actions;
+      dispatch( dispatchedFormInteractionEvent( true ) );
+    }
+  }, [hasUserInteractedWithForm]);
 
   let formModules =
     formFactor === 'advanced' ? advancedFormModules : basicFormModules;
@@ -198,6 +244,7 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
           id="cts-search-form"
           onSubmit={handleSubmit}
           className={`search-page__form ${formFactor}`}
+          data-tracked="tracked"
         >
           {formModules.map((Module, idx) => {
             if (Array.isArray(Module)) {
@@ -207,6 +254,7 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
                     <Mod
                       key={`formAdvanced-${idx}-${i}`}
                       handleUpdate={handleUpdate}
+                      handleFormStoreTracking={handleFormStoreTracking}
                     />
                   ))}
                 </div>
@@ -216,6 +264,7 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
                 <Module
                   key={`formAdvanced-${idx}`}
                   handleUpdate={handleUpdate}
+                  handleFormStoreTracking={handleFormStoreTracking}
                 />
               );
             }

@@ -67,7 +67,7 @@ export function addArrayValues(paramName, srcArray) {
   return params;
 }
 
-export const reducer = (state = defaultState, action) => {
+const form = (state = defaultState, action) => {
   switch (action.type) {
     case UPDATE_FORM_FIELD:
       return {
@@ -89,3 +89,5 @@ export const reducer = (state = defaultState, action) => {
       };
   }
 };
+
+export default form;

@@ -261,6 +261,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
                 {item.name}
               </div>
             )}
+            isTrackingEnabled
           />
         </div>
         <input type="hidden" id="ct" name="ct" value={cancerType.name} />

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { Fieldset, Autocomplete } from '../../atomic';
 import { getDiseasesForSimpleTypeAhead } from '../../../store/actions';
 import { sortItemsByName } from '../../../utilities'
 
-const CancerTypeKeyword = ({ handleUpdate }) => {
+const CancerTypeKeyword = ({ handleUpdate, handleFormStoreTracking }) => {
   const dispatch = useDispatch();
   const { keywordPhrases, cancerType } = useSelector(store => store.form);
   const { diseases = [] } = useSelector(store => store.cache);
@@ -42,6 +43,7 @@ const CancerTypeKeyword = ({ handleUpdate }) => {
           handleUpdate('cancerType', {name: '', codes: []})
           handleUpdate('keywordPhrases', value);
           handleUpdate('typeCode', {});
+          handleFormStoreTracking( event, false, '' );
         }}
         onSelect={(value, item) => {
           setCTK({ value });
