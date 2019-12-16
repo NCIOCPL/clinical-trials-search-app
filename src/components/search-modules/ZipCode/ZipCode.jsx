@@ -69,7 +69,6 @@ const ZipCode = ({ handleUpdate, tracking }) => {
         maxLength={5}
         value={zip}
         onBlur={validateZip}
-        isTrackingEnabled
       />
     </Fieldset>
   );

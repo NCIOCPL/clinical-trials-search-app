@@ -60,8 +60,7 @@ export const reducer = (
             if ( !hasParentForm ) {
                 console.log(
                     `Could not find matching parent form for ${id} while running ${type} action.\n 
-                    This element would not be tracked! Wrap element in a form tag and add \n
-                    "data-tracked" attribute with value "tracked" in order to track.`
+                    This element would not be tracked! Wrap element in a form tag in order to track.`
                 );
                 return state;
             }

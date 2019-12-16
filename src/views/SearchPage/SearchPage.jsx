@@ -209,7 +209,6 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
           id={SEARCH_FORM_ID}
           onSubmit={handleSubmit}
           className={`search-page__form ${formFactor}`}
-          data-tracked="tracked"
         >
           {formModules.map((Module, idx) => {
             if (Array.isArray(Module)) {

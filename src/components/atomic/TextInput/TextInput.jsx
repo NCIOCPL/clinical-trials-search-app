@@ -1,12 +1,10 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-import { connect } from 'react-redux';
-
-import './TextInput.scss';
-
+import PropTypes from 'prop-types';
+import {uniqueIdForComponent} from '../../../utilities';
 import InputLabel from '../InputLabel';
+import './TextInput.scss';
+import { connect } from 'react-redux';
 import { trackFormInputChange } from '../../../store/modules/analytics/tracking/tracking.actions';
-import { uniqueIdForComponent } from '../../../utilities';
 
 class TextInput extends React.Component {
   static propTypes = {
@@ -160,7 +158,7 @@ class TextInput extends React.Component {
     const { target } = event;
 
     if (this.props.allowedChars) {
-      let input = target.value.slice(-1);
+      let input = event.target.value.slice(-1);
       if (!this.props.allowedChars.isValid(input)) {
         return;
       }
