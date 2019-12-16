@@ -19,6 +19,12 @@ import {
 import { trackedEvents } from '../../tracking';
 import { history } from '../../services/history.service';
 import { updateFormField, clearForm, receiveData } from '../../store/actions';
+import {
+  getFieldInFocus,
+  getFormInFocus,
+  getHasDispatchedFormInteractionEvent,
+  getHasUserInteractedWithForm
+} from '../../store/modules/analytics/tracking/tracking.selectors';
 import { actions } from '../../store/reducers';
 import { getHasFormError } from '../../store/modules/form/form.selectors';
 import { SEARCH_FORM_ID } from '../../constants';
@@ -44,7 +50,11 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
   const dispatch = useDispatch();
   const sentinelRef = useRef(null);
   const [formFactor, setFormFactor] = useState(formInit);
+  const fieldInFocus = useSelector(getFieldInFocus);
+  const formInFocus = useSelector(getFormInFocus);
+  const hasDispatchedFormInteractionEvent = useSelector(getHasDispatchedFormInteractionEvent);
   const hasFormError = useSelector(getHasFormError);
+  const hasUserInteractedWithForm = useSelector(getHasUserInteractedWithForm);
   const { addFormToTracking } = actions;
 
   const handleUpdate = (field, value) => {
@@ -67,6 +77,18 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
     }) );
     tracking.trackEvent({action: 'pageLoad'})
   }, []);
+
+  useEffect(() => {
+    // Run analytics event based on condition
+    if ( hasUserInteractedWithForm && !hasDispatchedFormInteractionEvent ) {
+      const { FormInteractionStart } = trackedEvents;
+      FormInteractionStart.data.formType = formFactor;
+      FormInteractionStart.data.field = fieldInFocus.id;
+      tracking.trackEvent(FormInteractionStart);
+      const { dispatchedFormInteractionEvent } = actions;
+      dispatch( dispatchedFormInteractionEvent( true ) );
+    }
+  }, [hasUserInteractedWithForm]);
 
   let formModules =
     formFactor === 'advanced' ? advancedFormModules : basicFormModules;
