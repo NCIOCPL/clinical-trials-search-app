@@ -15,7 +15,7 @@ import {
   Pager,
 } from '../../components/atomic';
 import { TRY_NEW_SEARCH_LINK } from '../../constants';
-import { buildQueryString } from '../../utilities';
+import { buildQueryString, formToTrackingData } from '../../utilities';
 import { useModal, useStoreToFindTrials } from '../../hooks';
 import ResultsPageHeader from './ResultsPageHeader';
 import ResultsList from './ResultsList';
@@ -67,7 +67,6 @@ const ResultsPage = ({ location, tracking }) => {
   // scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
-    handleTracking({action: 'pageLoad'})
     if (trialResults && trialResults.total >= 0) {
       initData();
     } else if (!formSnapshot.hasInvalidZip) {
@@ -121,6 +120,15 @@ const ResultsPage = ({ location, tracking }) => {
     setIsLoading(false);
     setTrialResults(cache[currCacheKey]);
     setResultsCount(cache[currCacheKey].total);
+    handleTracking({
+      action: 'pageLoad',
+      data: {
+        status: "success",
+        formType: formSnapshot.formType,
+        numResults: cache[currCacheKey].total,
+        formData: formToTrackingData(formSnapshot)      
+      }
+    })
   };
 
   const handleSelectAll = () => {
@@ -326,6 +334,13 @@ const ResultsPage = ({ location, tracking }) => {
   };
 
   const renderInvalidZip = () => {
+    handleTracking({
+      action: 'pageLoad',
+      data: {
+        status: "error",
+        formType: formSnapshot.formType
+      }
+    })
     return (
       <div className="results-list invalid-zip">
         <p>
