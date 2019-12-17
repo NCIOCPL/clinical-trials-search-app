@@ -1,5 +1,5 @@
 import { queryStringToFormObject } from '../queryStringToFormObject';
-import {defaultState} from '../../store/reducers/form';
+import {defaultState} from './defaultStateCopy';
 
 describe('Adv - Locations - queryStringToFormObject maps query to form', () => {
 

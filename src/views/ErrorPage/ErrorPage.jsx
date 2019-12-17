@@ -4,6 +4,8 @@ import { updateGlobal } from '../../store/actions';
 import { Helmet } from 'react-helmet';
 import { ChatOpener, Delighter } from '../../components/atomic';
 import track from 'react-tracking';
+import { trackedEvents } from '../../tracking';
+import { TRY_NEW_SEARCH_LINK } from '../../constants';
 
 import './ErrorPage.scss';
 
@@ -11,7 +13,15 @@ const ErrorPage = ({ initErrorsList, tracking }) => {
   const dispatch = useDispatch();
   const formSnapshot = useSelector(store => store.form);
 
+  // Fire off page load event
+  tracking.trackEvent({action: 'pageLoad'})
+
   const handleStartOver = () => {
+    const { NewSearchLinkClick } = trackedEvents;    
+    NewSearchLinkClick.data.formType = '';
+    NewSearchLinkClick.source = TRY_NEW_SEARCH_LINK;
+    tracking.trackEvent(NewSearchLinkClick);
+
     dispatch(updateGlobal({
       field: 'initErrorsList',
       value: []
@@ -97,7 +107,7 @@ const ErrorPage = ({ initErrorsList, tracking }) => {
       <article className="error-page">
         <h1>Clinical Trials Search</h1>
 
-        <div class="error-page__content">
+        <div className="error-page__content">
           <div className="error-page__control --top">
             <div className="error-page__list">
               <div className="error-list">

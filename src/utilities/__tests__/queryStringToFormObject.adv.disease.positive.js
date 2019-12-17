@@ -1,6 +1,6 @@
 import { queryStringToFormObject } from '../queryStringToFormObject';
 import { getDiseaseFetcher, TYPE_EXPECTATION} from './queryStringToFormObject.common';
-import {defaultState} from '../../store/reducers/form';
+import {defaultState} from './defaultStateCopy';
 
 
 

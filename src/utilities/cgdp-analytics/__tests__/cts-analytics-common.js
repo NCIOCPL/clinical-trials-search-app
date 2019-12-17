@@ -1,6 +1,26 @@
-import {CommonAnalyticsActions} from '../cts-analytics-common';
+import {CommonAnalyticsActions, get62Contents} from '../cts-analytics-common';
 
 const TEST_CASES = [
+  // Error page load
+  [ "load_error_page",
+    "Error page",
+    {},
+    [{
+      type: "LINK",
+      data: {        
+        events: [41],
+        eVars: { 
+          '47': `clinicaltrials_direct`,
+          '62': 'Clinical Trials: Direct'
+        },
+        props: {
+          '74': `clinicaltrials_direct|error`,
+          '75': `apperror|invalidparams`,
+          '62': 'Clinical Trials: Direct'
+        }
+      }
+    }]
+  ],
   // Start Over
   [ "link_start_over_link",
     "basic works",
