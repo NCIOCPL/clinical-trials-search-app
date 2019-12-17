@@ -41,7 +41,17 @@ const getBaseClick = (source, data) => getBase('click', source, data);
  */
 export const trackClearFormLinkClick = (formType) => getBaseClick('clear_form_link', { formType });
 
+/**
+ * Default analytics data dispatched for a successful basic and advanced trial search click
+ * @param {string} formType - the form type
+ */
+export const trackSubmitComplete = (formType) => getBaseClick('form_submission_complete', { formType });
 
+/**
+ * Default analytics data dispatched for basic and advanced trial search click with errors
+ * @param {string} formType - the form type
+ */
+export const trackSubmitError = (formType) => getBaseClick('form_submission_error', { formType });
 
 
 
@@ -56,24 +66,6 @@ export const FormAbandonment = {
     status: 'abandon'
   },
   source: 'form_abandon'
-};
-
-/**
- * FindTrialsButtonClickComplete - Default analytics data dispatched for basic and advanced trial search click
- */
-export const FindTrialsButtonClickComplete = {
-  ...getBaseEventObj(),
-  action: 'click',
-  source: 'form_submission_complete',
-};
-
-/**
- * FindTrialsButtonClickError - Default analytics data dispatched for basic and advanced trial search click
- */
-export const FindTrialsButtonClickError = {
-  ...getBaseEventObj(),
-  action: 'click',
-  source: 'form_submission_error',
 };
 
 /**
