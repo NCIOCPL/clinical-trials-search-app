@@ -3,7 +3,8 @@ import { FormTrackingObject } from './objects/form.object';
 import {
     ADD_FORM_TO_TRACKING,
     DISPATCHED_FORM_INTERACTION_EVENT,
-    TRACK_FORM_INPUT_CHANGE
+    TRACK_FORM_INPUT_CHANGE,
+    TRACKED_FORM_SUBMITTED
 } from './tracking.actions';
 import './tracking.defs';
 import { SEARCH_FORM_ID } from '../../../../constants';
@@ -101,13 +102,24 @@ export const reducer = (
                 ...parentForm,
                 isPristine: false,
                 isFocused: true,
-                fields: fields
+                fields: fields,
+                previousFieldName: id
             };
 
             return {
                 ...state,
                 hasUserInteractedWithForm: true,
                 forms: [ form ]
+            };
+        }
+        case TRACKED_FORM_SUBMITTED: {
+            const forms = state.forms.map( form => {
+                form.isSubmitted = payload;
+                return form;
+            });
+            return {
+                ...state,
+                forms
             };
         }
         default:

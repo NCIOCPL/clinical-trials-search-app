@@ -29,6 +29,19 @@ export const ClearFormLinkClick = {
 };
 
 /**
+ * FormAbandonment - Default analytics data dispatched when form is exited after user starts interacting with form
+ * (data updated before trackEvent is triggered)
+ */
+export const FormAbandonment = {
+  ...getBaseEventObj(),
+  action: 'click',
+  data: {
+    status: 'abandon'
+  },
+  source: 'form_abandon'
+};
+
+/**
  * FindTrialsButtonClickComplete - Default analytics data dispatched for basic and advanced trial search click
  */
 export const FindTrialsButtonClickComplete = {

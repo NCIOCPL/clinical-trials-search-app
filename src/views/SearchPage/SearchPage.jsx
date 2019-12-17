@@ -19,6 +19,12 @@ import {
 import { trackedEvents } from '../../tracking';
 import { history } from '../../services/history.service';
 import { updateFormField, clearForm, receiveData } from '../../store/actions';
+import {
+  getFieldInFocus,
+  getFormInFocus,
+  getHasDispatchedFormInteractionEvent,
+  getHasUserInteractedWithForm
+} from '../../store/modules/analytics/tracking/tracking.selectors';
 import { actions } from '../../store/reducers';
 import { getHasFormError } from '../../store/modules/form/form.selectors';
 import { SEARCH_FORM_ID } from '../../constants';
@@ -44,7 +50,11 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
   const dispatch = useDispatch();
   const sentinelRef = useRef(null);
   const [formFactor, setFormFactor] = useState(formInit);
+  const fieldInFocus = useSelector(getFieldInFocus);
+  const formInFocus = useSelector(getFormInFocus);
+  const hasDispatchedFormInteractionEvent = useSelector(getHasDispatchedFormInteractionEvent);
   const hasFormError = useSelector(getHasFormError);
+  const hasUserInteractedWithForm = useSelector(getHasUserInteractedWithForm);
   const { addFormToTracking } = actions;
 
   const handleUpdate = (field, value) => {
@@ -54,6 +64,19 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
         value,
       })
     );
+  };
+
+  const onSearchPageExitEvent = () => {
+    const eventListener = window.attachEvent || window.addEventListener;
+    const unloadCheck = window.attachEvent ? 'onbeforeunload' : 'beforeunload';
+    eventListener(unloadCheck, function(e) {
+      if ( hasUserInteractedWithForm && !formInFocus.isSubmitted ) {
+        const {FormAbandonment} = trackedEvents;
+        FormAbandonment.data.formType = formFactor;
+        FormAbandonment.data.field = fieldInFocus.id;
+        tracking.trackEvent(FormAbandonment);
+      }
+    });
   };
 
   // scroll to top on mount
@@ -68,11 +91,25 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
     tracking.trackEvent({action: 'pageLoad'})
   }, []);
 
+  useEffect(() => {
+    // Run analytics event based on condition
+    if ( hasUserInteractedWithForm && !hasDispatchedFormInteractionEvent ) {
+      const { FormInteractionStart } = trackedEvents;
+      FormInteractionStart.data.formType = formFactor;
+      FormInteractionStart.data.field = fieldInFocus.id;
+      tracking.trackEvent(FormInteractionStart);
+      const { dispatchedFormInteractionEvent } = actions;
+      dispatch( dispatchedFormInteractionEvent( true ) );
+      onSearchPageExitEvent();
+    }
+  }, [hasUserInteractedWithForm]);
+
   let formModules =
     formFactor === 'advanced' ? advancedFormModules : basicFormModules;
 
   const handleSubmit = e => {
     e.preventDefault();
+    const { trackedFormSubmitted } = actions;
     const { FindTrialsButtonClickComplete, FindTrialsButtonClickError } = trackedEvents;
     FindTrialsButtonClickComplete.data.formType = formFactor;
     if(!hasFormError){
@@ -82,6 +119,7 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
       ));
       FindTrialsButtonClickComplete.data.status = 'complete';
       tracking.trackEvent(FindTrialsButtonClickComplete);
+      dispatch( trackedFormSubmitted(true) );
       history.push('/about-cancer/treatment/clinical-trials/search/r');
       return;
     }
