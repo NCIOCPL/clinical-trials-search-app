@@ -7,7 +7,7 @@
  */
 
 /**
- * Returns a base event object
+ * Returns a base shape of an event object
  * @returns {BaseEvent}
  */
 function getBaseEventObj() {
@@ -20,13 +20,30 @@ function getBaseEventObj() {
 }
 
 /**
- * ClearFormLinkClick - Default analytics data dispatched on clicking the clear form link on the search page
+ * Returns a base shape of an event object
+ * @returns {BaseEvent}
  */
-export const ClearFormLinkClick = {
-    ...getBaseEventObj(),
-    action: 'click',
-    source: 'clear_form_link',
-};
+const getBase = (action, source, data) => ({
+    action: action,
+    data: data,
+    source: source
+});
+
+/**
+ * Returns a base shape of a click event object
+ * @returns {BaseEvent}
+ */
+const getBaseClick = (source, data) => getBase('click', source, data);
+
+/**
+ * Default analytics data dispatched on clicking the clear form link on the search page
+ * @param {string} formType - the form type
+ */
+export const trackClearFormLinkClick = (formType) => getBaseClick('clear_form_link', { formType });
+
+
+
+
 
 /**
  * FormAbandonment - Default analytics data dispatched when form is exited after user starts interacting with form

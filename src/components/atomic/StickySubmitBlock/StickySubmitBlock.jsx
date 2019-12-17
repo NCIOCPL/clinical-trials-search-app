@@ -9,11 +9,11 @@ import { clearForm } from '../../../store/actions';
 import { trackedEvents } from '../../../tracking/index';
 
 
-const StickySubmitBlock = ({ sentinelRef, onSubmit }) => {
+const StickySubmitBlock = ({ sentinelRef, onSubmit, formType }) => {
   const dispatch = useDispatch();
   const stickyEl = useRef(null);
   const { trackEvent } = useTracking();
-  const { ClearFormLinkClick } = trackedEvents;
+  const { trackClearFormLinkClick } = trackedEvents;
 
   useEffect(() => {
     intObserver.observe(stickyEl.current);
@@ -39,10 +39,12 @@ const StickySubmitBlock = ({ sentinelRef, onSubmit }) => {
   };
 
   const handleClearForm = e => {
+    // Track before clearing please...
+    trackEvent(trackClearFormLinkClick(formType));
+
     dispatch(clearForm());
     window.scrollTo(0, 0);
-    window.location.reload(false);
-    trackEvent(ClearFormLinkClick);
+    window.location.reload(false);    
   }
 
   const intObserver = new IntersectionObserver(callback, options);

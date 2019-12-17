@@ -272,7 +272,7 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
             }
           })}
           {formFactor === 'advanced' ? (
-            <StickySubmitBlock sentinel={sentinelRef} onSubmit={handleSubmit} />
+            <StickySubmitBlock formType={formFactor} sentinel={sentinelRef} onSubmit={handleSubmit} />
           ) : (
             <div className="static-submit-block">
               <button
