@@ -47,7 +47,9 @@ const ZipCode = ({ handleUpdate, tracking }) => {
       InputValidation.data.field = 'zip';
       InputValidation.data.formType = formType;
       InputValidation.data.message = INVALID_ZIP_TEXT;
-      tracking.trackEvent(InputValidation);
+      if ( !hasInvalidZip ) {
+        tracking.trackEvent(InputValidation);
+      }
     }
   };
 

@@ -5,7 +5,7 @@ import { Fieldset, TextInput } from '../../atomic';
 import { trackedEvents } from '../../../tracking';
 
 const Age = ({ handleUpdate, tracking }) => {
-  const { age, ageModified, formType } = useSelector(store => store.form);
+  const { age, ageModified, formType, hasInvalidAge } = useSelector(store => store.form);
   const [inputtedAge, setInputtedAge] = useState(age);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -20,7 +20,9 @@ const Age = ({ handleUpdate, tracking }) => {
       InputValidation.data.field = 'age';
       InputValidation.data.formType = formType;
       InputValidation.data.message = invalidAgeText;
-      tracking.trackEvent(InputValidation);
+      if( !hasInvalidAge ) {
+        tracking.trackEvent(InputValidation);
+      }
     } else {
       setErrorMessage('');
       handleUpdate('age', a);
