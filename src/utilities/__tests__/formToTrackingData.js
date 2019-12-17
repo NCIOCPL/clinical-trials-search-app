@@ -1,5 +1,5 @@
 import {formToTrackingData} from '../formToTrackingData';
-import {defaultState} from '../../store/reducers/form';
+import {defaultState} from './defaultStateCopy';
 
 import {API_DISEASE_MOCKS, API_INTERVENTION_MOCKS} from './queryStringToFormObject.common';
 

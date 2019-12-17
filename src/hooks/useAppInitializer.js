@@ -31,8 +31,9 @@ export const useAppInitializer = (ctsapiclient, zipcodeEndpoint) => {
     // TODO: FIX THIS! BAD BAD BAD!
     const querystring = window.location.search;
   
-    // Only try and rehydrate the store if there are actual query params.
-    if (querystring.length > 0) {
+    // Only try and rehydrate the store if there are actual query params OR,
+    // this is a results page. (A results page REQUIRES query params)
+    if (window.location.pathname.endsWith('/r') || querystring.length > 0) {
       const initResults = await queryStringToFormObject(querystring, diseaseFetcher, interventionFetcher, zipFetcher);
   
       if (initResults.errors.length === 0) {

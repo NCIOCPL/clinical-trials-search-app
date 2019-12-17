@@ -1,19 +1,12 @@
 import { queryStringToFormObject } from '../queryStringToFormObject';
 import { getDiseaseFetcher, TYPE_EXPECTATION} from './queryStringToFormObject.common';
-import {defaultState} from '../../store/reducers/form';
+import {defaultState} from './defaultStateCopy';
 
 
 
 describe('Basic - queryStringToFormObject maps query to form', () => {
 
   const goodMappingTestCases = [
-    [ "no query params",
-      '',
-      async () => [],
-      async () => [],
-      async () => null,
-      {}
-    ],
     [ "basic - no params",
       'rl=1',
       async () => [],

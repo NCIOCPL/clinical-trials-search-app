@@ -52,6 +52,24 @@ export const FIELD_TO_KEY_MAP = {
 // so we are going to put those here.
 export const CommonAnalyticsActions = {};
 
+CommonAnalyticsActions.load_error_page = (data) => {
+  return [{
+    type: EVENT_TYPES.Link,
+    data: {
+      events: [41],
+      eVars: { 
+        '47': `clinicaltrials_direct`,
+        '62': get62Contents('')
+      },
+      props: {
+        '74': `clinicaltrials_direct|error`,
+        '75': `apperror|invalidparams`,
+        '62': get62Contents('')
+      }
+    }
+  }];
+}
+
 CommonAnalyticsActions.link_start_over_link = (data) => {
   const searchForm = `clinicaltrials_${data.formType}`;
 

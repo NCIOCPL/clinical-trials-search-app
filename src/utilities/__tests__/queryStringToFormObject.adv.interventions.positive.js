@@ -1,5 +1,5 @@
 import { queryStringToFormObject } from '../queryStringToFormObject';
-import {defaultState} from '../../store/reducers/form';
+import {defaultState} from './defaultStateCopy';
 import { getInterventionFetcher, INTERVENTION_EXPECTATION} from './queryStringToFormObject.common';
 
 describe('Adv - Interventions - queryStringToFormObject maps query to form', () => {
