@@ -83,7 +83,7 @@ const TrialType = ({ handleUpdate }) => {
         {trialTypes.map((trialType, idx) => (
           <Checkbox
             key={idx}
-            id={`tp_${trialType.value}`}
+            id={`tt_${trialType.value}`}
             value={trialType.value}
             label={trialType.label}
             onChange={handleCheckType}

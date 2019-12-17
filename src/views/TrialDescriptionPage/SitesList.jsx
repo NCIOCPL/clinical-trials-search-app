@@ -344,6 +344,7 @@ const SitesList = sites => {
             {countries.length > 1 && (
               <Dropdown
                 label="Country:"
+                disableTracking={true}
                 action={handleFilterByCountry}
                 value={selectedCountry}
               >
@@ -361,6 +362,7 @@ const SitesList = sites => {
             {statesList.length > 1 && selectedCountry === 'United States' && (
               <Dropdown
                 label="State:"
+                disableTracking={true}
                 action={handleFilterByState}
                 value={selectedState}
               >
