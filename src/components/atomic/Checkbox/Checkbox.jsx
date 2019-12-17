@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { trackFormInputChange } from '../../../store/modules/analytics/tracking/tracking.actions';
 import './Checkbox.scss';
 
 const Checkbox = ({
@@ -13,6 +15,21 @@ const Checkbox = ({
   ...otherProps
 }) => {
   
+  const dispatch = useDispatch();
+
+  const trackInteraction = (event) => {
+    const { target } = event;
+    const { form, id, value } = target;
+    const formName = form && form.id ? form.id : null;
+    const inputActionProps = {
+      formName,
+      id,
+      value
+    };
+    dispatch(
+      trackFormInputChange(inputActionProps)
+    )
+  }
 
   return (
   <div className={`cts-checkbox ${classes}`}>
@@ -21,6 +38,7 @@ const Checkbox = ({
       className="cts-checkbox__input"
       type="checkbox"
       name={name}
+      onInput={trackInteraction}
       value={value ? value : id}
       disabled={disabled || false}
       {...otherProps}
