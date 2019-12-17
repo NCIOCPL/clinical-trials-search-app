@@ -114,7 +114,7 @@ if (process.env.NODE_ENV !== 'production') {
     services: {
       ctsSearch,
     },
-    printCacheEndpoint: 'https://dceg-test-acsf.cancer.gov/CTS.Print/GenCache',
+    printCacheEndpoint: 'https://www.cancer.gov/CTS.Print/GenCache',
     zipConversionEndpoint
   });
 }
