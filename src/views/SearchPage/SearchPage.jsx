@@ -110,23 +110,18 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
   const handleSubmit = e => {
     e.preventDefault();
     const { trackedFormSubmitted } = actions;
-    const { FindTrialsButtonClickComplete, FindTrialsButtonClickError } = trackedEvents;
-    FindTrialsButtonClickComplete.data.formType = formFactor;
+    const { trackSubmitComplete, trackSubmitError } = trackedEvents;
     if(!hasFormError){
       dispatch(receiveData(
         'selectedTrialsForPrint',
         []
       ));
-      FindTrialsButtonClickComplete.data.status = 'complete';
-      tracking.trackEvent(FindTrialsButtonClickComplete);
+      tracking.trackEvent(trackSubmitComplete(formFactor));
       dispatch( trackedFormSubmitted(true) );
       history.push('/about-cancer/treatment/clinical-trials/search/r');
       return;
     }
-    FindTrialsButtonClickError.data.status = 'error';
-    FindTrialsButtonClickError.data.message = 'attempted form submit with errors';
-    tracking.trackEvent(FindTrialsButtonClickError);
-    
+    tracking.trackEvent(trackSubmitError(formFactor));
   };
 
   const renderDelighters = () => (

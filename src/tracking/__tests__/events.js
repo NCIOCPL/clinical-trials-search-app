@@ -19,6 +19,46 @@ const TEST_CASES = [
       }
     )
   ],
+  [ "trackSubmitComplete",
+    "works",
+    ['basic'],
+    getBaseClick(
+        'form_submission_complete',
+        {
+          formType: 'basic'
+        }
+    )
+  ],
+  [ "trackSubmitComplete",
+    "works",
+    ['advanced'],
+    getBaseClick(
+        'form_submission_complete',
+        {
+          formType: 'advanced'
+        }
+    )
+  ],
+  [ "trackSubmitError",
+    "works",
+    ['basic'],
+    getBaseClick(
+        'form_submission_error',
+        {
+          formType: 'basic'
+        }
+    )
+  ],
+  [ "trackSubmitError",
+    "works",
+    ['advanced'],
+    getBaseClick(
+        'form_submission_error',
+        {
+          formType: 'advanced'
+        }
+    )
+  ]
 ]
 
 
