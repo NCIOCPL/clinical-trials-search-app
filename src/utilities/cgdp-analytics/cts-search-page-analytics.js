@@ -1,4 +1,4 @@
-import { get62Contents, EVENT_TYPES, FIELD_TO_KEY_MAP } from './cts-analytics-common';
+import { get62Contents, getSearchFormName, EVENT_TYPES, FIELD_TO_KEY_MAP } from './cts-analytics-common';
 
 /**********************
  * DO NOT COPY ABOVE THIS LINE
@@ -60,16 +60,18 @@ SearchAnalyticsActions.load_advanced_search = (data) => {
 
 SearchAnalyticsActions.link_form_start = (data) => {
 
+  const searchForm = getSearchFormName(data.formType);
+
   return [{
     type: EVENT_TYPES.Link,
     data: {
       linkname: `formAnalysis|clinicaltrials_${data.formType}|start`,
       events: [38],
       eVars: {
-        '47': `clinicaltrials_${data.formType}`
+        '47': searchForm
       },
       props: {
-        '74': `clinicaltrials_${data.formType}|start`,
+        '74': `${searchForm}|start`,
       }
     }
   }];
@@ -78,13 +80,15 @@ SearchAnalyticsActions.link_form_start = (data) => {
 
 SearchAnalyticsActions.link_clear_form_link = (data) => {
 
+  const searchForm = getSearchFormName(data.formType);
+
   return [{
     type: EVENT_TYPES.Link,
     data: {
       linkname: `clinicaltrials_advanced|clear`,
       events: [68],
-      eVars: { '47': `clinicaltrials_${data.formType}` },
-      props: { '74': `clinicaltrials_${data.formType}|clear`}
+      eVars: { '47': searchForm },
+      props: { '74': `${searchForm}|clear`}
     }
   }];
 };
@@ -93,7 +97,7 @@ SearchAnalyticsActions.link_form_submission_complete = (data) => {
 
   // TODO: logic for event46 did we do the Levenshtein distance thing for
   // a basic form's keyword
-
+  const searchForm = getSearchFormName(data.formType);
   const completion = data['wasScrolling'] ? 'complete_scrolling' : 'complete';
 
   return [{
@@ -101,13 +105,14 @@ SearchAnalyticsActions.link_form_submission_complete = (data) => {
     data: {
       linkname: `formAnalysis|clinicaltrials_${data.formType}|complete`,
       events: [39],
-      eVars: { '47': `clinicaltrials_${data.formType}` },
-      props: { '74': `clinicaltrials_${data.formType}|${completion}`}
+      eVars: { '47': searchForm },
+      props: { '74': `${searchForm}|${completion}`}
     }
   }];
 };
 
 SearchAnalyticsActions.link_form_submission_error = (data) => {
+  const searchForm = getSearchFormName(data.formType);
 
   return [{
     type: EVENT_TYPES.Link,
@@ -115,10 +120,10 @@ SearchAnalyticsActions.link_form_submission_error = (data) => {
       linkname: `formAnalysis|clinicaltrials_${data.formType}|error`,
       events: [41],
       eVars: {
-        '47': `clinicaltrials_${data.formType}`
+        '47': searchForm
       },
       props: {
-        '74': `clinicaltrials_${data.formType}|error`,
+        '74': `${searchForm}|error`,
         '75': 'submit|attempted form submit with errors'
       }
     }
@@ -129,6 +134,7 @@ SearchAnalyticsActions.link_form_submission_error = (data) => {
 
 SearchAnalyticsActions.link_form_validation_error = (data) => {
 
+  const searchForm = getSearchFormName(data.formType);
   const fieldName = FIELD_TO_KEY_MAP[data.field] ?
     FIELD_TO_KEY_MAP[data.field] :
     data.field;
@@ -136,13 +142,13 @@ SearchAnalyticsActions.link_form_validation_error = (data) => {
   return [{
     type: EVENT_TYPES.Link,
     data: {
-      linkname: `formAnalysis|clinicaltrials_${data.formType}|error`,
+      linkname: `formAnalysis|${searchForm}|error`,
       events: [41],
       eVars: {
-        '47': `clinicaltrials_${data.formType}`
+        '47': searchForm
       },
       props: {
-        '74': `clinicaltrials_${data.formType}|error`,
+        '74': `${searchForm}|error`,
         '75': `${fieldName}|${data.message}`
       }
     }
@@ -152,6 +158,8 @@ SearchAnalyticsActions.link_form_validation_error = (data) => {
 
 SearchAnalyticsActions.link_form_abandon = (data) => {
 
+  const searchForm = getSearchFormName(data.formType);
+
   const fieldName = FIELD_TO_KEY_MAP[data.field] ?
     FIELD_TO_KEY_MAP[data.field] :
     data.field;
@@ -159,13 +167,13 @@ SearchAnalyticsActions.link_form_abandon = (data) => {
   return [{
     type: EVENT_TYPES.Link,
     data: {
-      linkname: `formAnalysis|clinicaltrials_${data.formType}|abandon`,
+      linkname: `formAnalysis|${searchForm}|abandon`,
       events: [40],
       eVars: {
-        '47': `clinicaltrials_${data.formType}`
+        '47': searchForm
       },
       props: {
-        '74': `clinicaltrials_${data.formType}|abandon|${fieldName}`
+        '74': `${searchForm}|abandon|${fieldName}`
       }
     }
   }];

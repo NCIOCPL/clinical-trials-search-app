@@ -1,4 +1,4 @@
-import { get62Contents, EVENT_TYPES, FIELD_TO_KEY_MAP } from './cts-analytics-common';
+import { get62Contents, getSearchFormName, EVENT_TYPES, FIELD_TO_KEY_MAP } from './cts-analytics-common';
 
 /**********************
  * DO NOT COPY ABOVE THIS LINE
@@ -302,6 +302,7 @@ const searchParamsBasic = (data) => {
 
 ResultsAnalyticsActions.load_results = (data) => {
 
+  const searchForm = getSearchFormName(data.formType);
   const searchFormParams = data.formType === 'advanced' ?
     searchParamsAdvanced(data) :
     searchParamsBasic(data);
@@ -311,13 +312,13 @@ ResultsAnalyticsActions.load_results = (data) => {
     eVars: {
       ...searchFormParams.eVars,
       '10': data.numResults,
-      '11': `clinicaltrials_${data.formType}`,
+      '11': searchForm,
       '62': get62Contents(data.formType)
     },
     // Prop44 comes from elsewhere, so not including.
     props: {
       ...searchFormParams.eVars,
-      '11': `clinicaltrials_${data.formType}`,
+      '11': searchForm,
       '62': get62Contents(data.formType),
     }
   };
@@ -330,7 +331,7 @@ ResultsAnalyticsActions.load_results = (data) => {
 
 // Clicking on a result in the results pages.
 ResultsAnalyticsActions.link_results_page_link = (data) => {
-  const searchForm = `clinicaltrials_${data.formType}`;
+  const searchForm = getSearchFormName(data.formType);
   const rank = `${data.resultsPosition}|page ${data.pageNum}`;
 
   return [{
@@ -353,7 +354,7 @@ ResultsAnalyticsActions.link_print_selected_button = (data) => {
   const selectAllText = data.selectAll ? "selectall" : "noselectall";
   const totalChecked = data.selectedCount;
   const checkedPages = data.pagesWithSelected ? data.pagesWithSelected.join(',') : '';
-  const searchForm = `clinicaltrials_${data.formType}`;
+  const searchForm = getSearchFormName(data.formType);
 
   return [{
     type: EVENT_TYPES.Link,
@@ -369,7 +370,7 @@ ResultsAnalyticsActions.link_print_selected_button = (data) => {
 };
 
 ResultsAnalyticsActions.link_print_selected_none_selected_button = (data) => {
-  const searchForm = `clinicaltrials_${data.formType}`;
+  const searchForm = getSearchFormName(data.formType);
 
   return [{
     type: EVENT_TYPES.Link,
@@ -385,7 +386,7 @@ ResultsAnalyticsActions.link_print_selected_none_selected_button = (data) => {
 };
 
 ResultsAnalyticsActions.link_print_selected_max_reached_button = (data) => {
-  const searchForm = `clinicaltrials_${data.formType}`;
+  const searchForm = getSearchFormName(data.formType);
  
   return [{
     type: EVENT_TYPES.Link,

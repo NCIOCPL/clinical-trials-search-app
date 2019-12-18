@@ -126,7 +126,23 @@ const TEST_CASES = [
       }
     }]
   ],  
-
+  [ "link_try_a_new_search_link",
+    "direct works",
+    {
+      formType: ''
+    },
+    [{
+      type: "LINK",
+      data: {
+        linkname: "CTSTryNewSearchClick",
+        events: [49],
+        eVars: { '47': `clinicaltrials_direct` },
+        props: {
+          '74': `clinicaltrials_direct|try a new search`
+        }
+      }
+    }]
+  ], 
 ]
 
 describe("CommonAnalyticsActions - Link Tests", () => {

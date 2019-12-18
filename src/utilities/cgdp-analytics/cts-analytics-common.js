@@ -35,6 +35,19 @@ export const get62Contents = (formType) => {
   }
 }
 
+export const getSearchFormName = (formType) => {
+  switch (formType) {
+    case "basic": return 'clinicaltrials_basic'
+    case "advanced": return 'clinicaltrials_advanced'
+    // This should only be for links to description pages
+    // from dynamic linking.
+    case "custom": return 'clinicaltrials_custom'
+    // This should only work right for google links going
+    // directly to the description page.
+    default: return "clinicaltrials_direct"  
+  }
+}
+
 // Analytics use lots of letters, well, mainly the query
 // params, in order to track field usage. This is the
 // lookup for app data field -> key.
@@ -53,16 +66,18 @@ export const FIELD_TO_KEY_MAP = {
 export const CommonAnalyticsActions = {};
 
 CommonAnalyticsActions.load_error_page = (data) => {
+  const searchFormName = getSearchFormName(data.formType);
+
   return [{
     type: EVENT_TYPES.Load,
     data: {
       events: [41],
       eVars: { 
-        '47': `clinicaltrials_direct`,
+        '47': searchFormName,
         '62': get62Contents('')
       },
       props: {
-        '74': `clinicaltrials_direct|error`,
+        '74': `${searchFormName}|error`,
         '75': `apperror|invalidparams`,
         '62': get62Contents('')
       }
@@ -71,7 +86,7 @@ CommonAnalyticsActions.load_error_page = (data) => {
 }
 
 CommonAnalyticsActions.link_start_over_link = (data) => {
-  const searchForm = `clinicaltrials_${data.formType}`;
+  const searchForm = getSearchFormName(data.formType);
 
   return [{
     type: EVENT_TYPES.Link,    
@@ -79,7 +94,7 @@ CommonAnalyticsActions.link_start_over_link = (data) => {
       linkname: 'CTStartOverClick',
       events: [49],
       eVars: {
-        '47': `clinicaltrials_${data.formType}`
+        '47': searchForm
       },      
       props: {
         '74': `${searchForm}|start over`
@@ -89,7 +104,7 @@ CommonAnalyticsActions.link_start_over_link = (data) => {
 };
 
 CommonAnalyticsActions.link_modify_search_criteria_link = (data) => {
-  const searchForm = `clinicaltrials_${data.formType}`;
+  const searchForm = getSearchFormName(data.formType);
 
   return [{
     type: EVENT_TYPES.Link,    
@@ -97,7 +112,7 @@ CommonAnalyticsActions.link_modify_search_criteria_link = (data) => {
       linkname: 'CTSModifyClick',
       events: [49],
       eVars: {
-        '47': `clinicaltrials_${data.formType}`
+        '47': searchForm
       },
       props: {
         '74': `${searchForm}|modify`
@@ -107,7 +122,7 @@ CommonAnalyticsActions.link_modify_search_criteria_link = (data) => {
 };
 
 CommonAnalyticsActions.link_try_a_new_search_link = (data) => {
-  const searchForm = `clinicaltrials_${data.formType}`;
+  const searchForm = getSearchFormName(data.formType);
 
   return [{
     type: EVENT_TYPES.Link,    
@@ -115,7 +130,7 @@ CommonAnalyticsActions.link_try_a_new_search_link = (data) => {
       linkname: 'CTSTryNewSearchClick',
       events: [49],
       eVars: {
-        '47': `clinicaltrials_${data.formType}`
+        '47': searchForm
       },
       props: {
         '74': `${searchForm}|try a new search`

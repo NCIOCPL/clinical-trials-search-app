@@ -1,4 +1,4 @@
-import { get62Contents, EVENT_TYPES } from './cts-analytics-common';
+import { get62Contents, getSearchFormName, EVENT_TYPES } from './cts-analytics-common';
 
 /**********************
  * DO NOT COPY ABOVE THIS LINE
