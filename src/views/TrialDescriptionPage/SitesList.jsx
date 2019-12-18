@@ -182,6 +182,48 @@ const SitesList = sites => {
     });
   };
 
+  /**
+   * Filter function to check if site matches params
+   * @param {*} site 
+   */
+  const filterNearbyCSCLocations = siteObj => {
+    // If search params have a city, but it does
+    // not match.
+    if (
+      city !== '' && 
+      (!siteObj.city || (siteObj.city.toLowerCase() !== city.toLowerCase()))
+    ) {
+      return false;
+    }
+
+    // Now check country
+    if (
+      country !== '' && 
+      (!siteObj.country || (siteObj.country.toLowerCase() !== country.toLowerCase()))
+    ) {
+      return false;
+    }
+
+    // If states are provided and there is not a state match
+    // Note, let's pretend the abbreviation matches against
+    // another countries state abbreviation -- the country
+    // check would fail in that case...
+    if (states.length > 0) {
+      // This site has no state so it can't be a match.
+      if (!siteObj.stateOrProvinceAbbreviation) {
+        return false;
+      }
+      // Extract abbreviations
+      const stateAbbrs = states.map(st => st.abbr.toUpperCase());
+      if (!stateAbbrs.includes(siteObj.stateOrProvinceAbbreviation.toUpperCase())) {
+        return false;
+      }
+    }
+
+    // If we get here, then everything is a match.
+    return true;
+  }
+
   const buildNearbySites = siteArr => {
 
     // We only build nearby sites IF there
@@ -207,48 +249,10 @@ const SitesList = sites => {
         )
       );
     } else if (location === 'search-location-country') {
-      if (country === 'United States') {
-        if (states.length > 0) {
-          let nearbyStates = [...new Set(states.map(item => item.abbr))];
 
-          if (city !== '') {
-            setNearbySites(
-              preFilteredSites.filter(
-                site =>
-                  nearbyStates.includes(site.stateOrProvinceAbbreviation) &&
-                  site.city === city
-              )
-            );
-          } else {
-            setNearbySites(
-              preFilteredSites.filter(site =>
-                nearbyStates.includes(site.stateOrProvinceAbbreviation)
-              )
-            );
-          }
-        } else {
-          if (city !== '') {
-            setNearbySites(
-              preFilteredSites.filter(
-                site => site.country === country && site.city === city
-              )
-            );
-          } else {
-            // just looking for US sites
-            setNearbySites(preFilteredSites.filter(site => site.country === country));
-          }
-        }
-      } else {
-        if (city !== '') {
-          setNearbySites(
-            preFilteredSites.filter(
-              site => site.country === country && site.city === city
-            )
-          );
-        } else {
-          setNearbySites(preFilteredSites.filter(site => site.country === country));
-        }
-      }
+      setNearbySites(
+        preFilteredSites.filter(site => filterNearbyCSCLocations(site))
+      )
     } else if (location === 'search-location-nih') {
       setNearbySites(
         preFilteredSites.filter(site => site.postalCode === NIH_ZIPCODE)
