@@ -39,44 +39,42 @@ const ResultsListItem = ({
 
   //compare site values against user criteria
   const isLocationParamMatch = siteObj => {
-    if (siteObj.country === country) {
-      if (country === 'United States') {
-        if (states.length > 0) {
-          const statesList = [...new Set(states.map(item => item.abbr))];
-          if (statesList.includes(siteObj.stateOrProvinceAbbreviation)) {
-            if (siteObj.city && siteObj.city === city) {
-              return true;
-            }
-            return true;
-          } else {
-            return false;
-          }
-        }
-        if (city !== '') {
-          if (siteObj.city === city) {
-            return true;
-          } else {
-            return false;
-          }
-        }
-        // only looking for US sites
-        return true;
-      } else {
-        // check for city
-        if (city !== '') {
-          if (siteObj.city === city) {
-            return true;
-          } else {
-            return false;
-          }
-        } else {
-          // only searching on country but is match
-          return true;
-        }
-      }
-    } else {
+
+    // If search params have a city, but it does
+    // not match.
+    if (
+      city !== '' && 
+      (!siteObj.city || (siteObj.city.toLowerCase() !== city.toLowerCase()))
+    ) {
       return false;
     }
+
+    // Now check country
+    if (
+      country !== '' && 
+      (!siteObj.country || (siteObj.country.toLowerCase() !== country.toLowerCase()))
+    ) {
+      return false;
+    }
+
+    // If states are provided and there is not a state match
+    // Note, let's pretend the abbreviation matches against
+    // another countries state abbreviation -- the country
+    // check would fail in that case...
+    if (states.length > 0) {
+      // This site has no state so it can't be a match.
+      if (!siteObj.stateOrProvinceAbbreviation) {
+        return false;
+      }
+      // Extract abbreviations
+      const stateAbbrs = states.map(st => st.abbr.toUpperCase());
+      if (!stateAbbrs.includes(siteObj.stateOrProvinceAbbreviation.toUpperCase())) {
+        return false;
+      }
+    }
+
+    // If we get here, then everything is a match.
+    return true;
   };
 
   //compare site values against user criteria
