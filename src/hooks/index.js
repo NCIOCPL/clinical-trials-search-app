@@ -8,3 +8,5 @@ export { useInterventionLookup } from './useInterventionLookup';
 export { useTreatmentLookup } from './useTreatmentLookup';
 export { useStoreToFindTrials } from './useStoreToFindTrials';
 export { useAppInitializer } from './useAppInitializer';
+export { useGlobalBeforeUnload, useWindowEvent } from './useWindowEvent';
+export { useHasLocationChanged } from './useReactRouter';

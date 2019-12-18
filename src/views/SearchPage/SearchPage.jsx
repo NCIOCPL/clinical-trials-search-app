@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet';
+import { useLocation } from 'react-router-dom';
 import { Delighter, StickySubmitBlock } from '../../components/atomic';
 import {
   Age,
@@ -28,6 +29,7 @@ import {
 import { actions } from '../../store/reducers';
 import { getHasFormError } from '../../store/modules/form/form.selectors';
 import { SEARCH_FORM_ID } from '../../constants';
+import { useGlobalBeforeUnload, useHasLocationChanged } from '../../hooks';
 import { metadataHasUpdatedHandler } from '../../utilities';
 
 // Module groups in arrays will be placed side-by-side in the form
@@ -48,6 +50,7 @@ const advancedFormModules = [
 
 const SearchPage = ({ formInit = 'basic', tracking }) => {
   const dispatch = useDispatch();
+  const location = useLocation().pathname;
   const sentinelRef = useRef(null);
   const [formFactor, setFormFactor] = useState(formInit);
   const fieldInFocus = useSelector(getFieldInFocus);
@@ -68,36 +71,32 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
     );
   };
 
-  const onSearchPageExitEvent = () => {
-    const eventListener = window.attachEvent || window.addEventListener;
-    const unloadCheck = window.attachEvent ? 'onbeforeunload' : 'beforeunload';
-    eventListener(unloadCheck, function(e) {
-      if ( hasUserInteractedWithForm && !formInFocus.isSubmitted ) {
-        const {FormAbandonment} = trackedEvents;
-        FormAbandonment.data.formType = formFactor;
-        FormAbandonment.data.field = fieldInFocus.id;
-        tracking.trackEvent(FormAbandonment);
-      }
-    });
-  };
   // scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
     handleUpdate('formType', formInit);
-
-    // Init form tracking in store
-    dispatch( addFormToTracking({
-      formType: formFactor
-    }) );
     setIsPageLoadReady(true);
   }, []);
 
-  useEffect(() => {
-    // This should also be dependent on the current route/url
-    if (hasMetadataUpdated && isPageLoadReady) {
-      tracking.trackEvent({action: 'pageLoad'})
+  const handleTrackingStoreInit = useCallback(() => {
+    // Init form tracking store
+    dispatch( addFormToTracking({
+      formType: formFactor
+    }) );
+  }, [location]);
+
+  const handleFormAbandon = useCallback(() => {
+    if (hasUserInteractedWithForm && !formInFocus.isSubmitted) {
+      const {FormAbandonment} = trackedEvents;
+      FormAbandonment.data.formType = formFactor;
+      FormAbandonment.data.field = fieldInFocus.id;
+      tracking.trackEvent(FormAbandonment);
     }
-  }, [hasMetadataUpdated, isPageLoadReady]);
+  }, [hasUserInteractedWithForm, formInFocus.isSubmitted]);
+
+  useGlobalBeforeUnload(handleFormAbandon);
+  useHasLocationChanged(handleTrackingStoreInit);
+
 
   useEffect(() => {
     // Run analytics event based on condition
@@ -108,7 +107,6 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
       tracking.trackEvent(FormInteractionStart);
       const { dispatchedFormInteractionEvent } = actions;
       dispatch( dispatchedFormInteractionEvent( true ) );
-      onSearchPageExitEvent();
     }
   }, [hasUserInteractedWithForm]);
 
