@@ -209,7 +209,7 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
         />
         <meta
           property="og:title"
-          content={`Find NCI-Supported Clinical Trials - ${formFactor === 'advanced' ? 'Advanced Search' : ''}`}
+          content={`Find NCI-Supported Clinical Trials${formFactor === 'advanced' ? ' - Advanced Search' : ''}`}
         />
         <meta
           property="og:url"
