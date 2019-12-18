@@ -15,7 +15,7 @@ import {
   Pager,
 } from '../../components/atomic';
 import { TRY_NEW_SEARCH_LINK } from '../../constants';
-import { buildQueryString, formToTrackingData } from '../../utilities';
+import { buildQueryString, formToTrackingData, metadataHasUpdatedHandler } from '../../utilities';
 import { useModal, useStoreToFindTrials } from '../../hooks';
 import ResultsPageHeader from './ResultsPageHeader';
 import ResultsList from './ResultsList';
@@ -35,6 +35,8 @@ const ResultsPage = ({ location, tracking }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [trialResults, setTrialResults] = useState([]);
   const [resultsCount, setResultsCount] = useState(0);
+  const [hasMetadataUpdated, setHasMetadataUpdated ] = useState(false);
+  const [isPageLoadReady, setIsPageLoadReady ] = useState(false);
   const formSnapshot = useSelector(store => store.form);
   const { resultsPage } = useSelector(store => store.form);
   const cache = useSelector(store => store.cache);
@@ -80,14 +82,17 @@ const ResultsPage = ({ location, tracking }) => {
     }
   }, []);
 
-  useEffect(() => {
-    if (storeRehydrated) {
-      setIsLoading(true);
-      setCurrCacheKey(locsearch);
-      fetchTrials(locsearch);
-      setStoreRehydrated(false);
-    }
-  }, [storeRehydrated]);
+  // I think this code is inert since the initial state
+  // is false, and nothing calls storeRehydrated except
+  // itself
+  // useEffect(() => {
+  //   if (storeRehydrated) {
+  //     setIsLoading(true);
+  //     setCurrCacheKey(locsearch);
+  //     fetchTrials(locsearch);
+  //     setStoreRehydrated(false);
+  //   }
+  // }, [storeRehydrated]);
 
   //when trial results come in, open up shop
   useEffect(() => {
@@ -95,6 +100,23 @@ const ResultsPage = ({ location, tracking }) => {
       initData();
     }
   }, [cache[currCacheKey]]);
+
+  useEffect(() => {
+    // This should also be dependent on the current route/url
+    if (hasMetadataUpdated && isPageLoadReady) {
+      handleTracking({
+        action: 'pageLoad',
+        data: {
+          status: "success",
+          formType: formSnapshot.formType,
+          numResults: resultsCount,
+          formData: formToTrackingData(formSnapshot)      
+        }
+      })
+      // Since we can page we need to prep isPageLoadReady
+      setIsPageLoadReady(false);
+    }
+  }, [hasMetadataUpdated, isPageLoadReady]);
 
   //track usage of selected results for print
   useEffect(() => {
@@ -115,20 +137,14 @@ const ResultsPage = ({ location, tracking }) => {
 
   const initData = () => {
     window.scrollTo(0, 0);
+    //We are changing the results page, so
+    //queue up another load.
     setSelectAll(false);
     setPageIsLoading(false);
     setIsLoading(false);
     setTrialResults(cache[currCacheKey]);
     setResultsCount(cache[currCacheKey].total);
-    handleTracking({
-      action: 'pageLoad',
-      data: {
-        status: "success",
-        formType: formSnapshot.formType,
-        numResults: cache[currCacheKey].total,
-        formData: formToTrackingData(formSnapshot)      
-      }
-    })
+    setIsPageLoadReady(true);
   };
 
   const handleSelectAll = () => {
@@ -398,7 +414,9 @@ const ResultsPage = ({ location, tracking }) => {
 
   return (
     <>
-      <Helmet>
+      <Helmet
+        onChangeClientState={metadataHasUpdatedHandler(setHasMetadataUpdated)}
+      >
         <title>
           Clinical Trials Search Results - National Cancer Institute
         </title>

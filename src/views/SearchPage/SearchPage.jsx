@@ -28,6 +28,7 @@ import {
 import { actions } from '../../store/reducers';
 import { getHasFormError } from '../../store/modules/form/form.selectors';
 import { SEARCH_FORM_ID } from '../../constants';
+import { metadataHasUpdatedHandler } from '../../utilities';
 
 // Module groups in arrays will be placed side-by-side in the form
 const basicFormModules = [CancerTypeKeyword, [Age, ZipCode]];
@@ -46,7 +47,6 @@ const advancedFormModules = [
 
 
 const SearchPage = ({ formInit = 'basic', tracking }) => {
-
   const dispatch = useDispatch();
   const sentinelRef = useRef(null);
   const [formFactor, setFormFactor] = useState(formInit);
@@ -55,6 +55,8 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
   const hasDispatchedFormInteractionEvent = useSelector(getHasDispatchedFormInteractionEvent);
   const hasFormError = useSelector(getHasFormError);
   const hasUserInteractedWithForm = useSelector(getHasUserInteractedWithForm);
+  const [hasMetadataUpdated, setHasMetadataUpdated ] = useState(false);
+  const [isPageLoadReady, setIsPageLoadReady ] = useState(false);
   const { addFormToTracking } = actions;
 
   const handleUpdate = (field, value) => {
@@ -78,7 +80,6 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
       }
     });
   };
-
   // scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -88,8 +89,15 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
     dispatch( addFormToTracking({
       formType: formFactor
     }) );
-    tracking.trackEvent({action: 'pageLoad'})
+    setIsPageLoadReady(true);
   }, []);
+
+  useEffect(() => {
+    // This should also be dependent on the current route/url
+    if (hasMetadataUpdated && isPageLoadReady) {
+      tracking.trackEvent({action: 'pageLoad'})
+    }
+  }, [hasMetadataUpdated, isPageLoadReady]);
 
   useEffect(() => {
     // Run analytics event based on condition
@@ -193,7 +201,9 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
 
   return (
     <article className="search-page">
-      <Helmet>
+      <Helmet
+        onChangeClientState={metadataHasUpdatedHandler(setHasMetadataUpdated)}
+      >
         <title>
           {`Find NCI-Supported Clinical Trials - ${formFactor === 'advanced' ? 'Advanced Search - ' : ''}National Cancer Institute`}
         </title>

@@ -11,6 +11,7 @@ import {
   TrialStatusIndicator,
   SearchCriteriaTable,
 } from '../../components/atomic';
+import { metadataHasUpdatedHandler } from '../../utilities';
 import SitesList from './SitesList';
 import track from 'react-tracking';
 import './TrialDescriptionPage.scss';
@@ -20,6 +21,8 @@ const TrialDescriptionPage = ({ location, tracking }) => {
   const dispatch = useDispatch();
   const [isTrialLoading, setIsTrialLoading] = useState(true);
   const [qs, setQs] = useState(location.search);
+  const [hasMetadataUpdated, setHasMetadataUpdated ] = useState(false);
+  const [isPageLoadReady, setIsPageLoadReady ] = useState(false);
   const { isDirty, formType } = useSelector(store => store.form);
   const parsed = queryString.parse(qs);
   const currId = parsed.id;
@@ -59,15 +62,22 @@ const TrialDescriptionPage = ({ location, tracking }) => {
     }
   }, []);
 
+  useEffect(() => {
+    // This should also be dependent on the current route/url
+    if (hasMetadataUpdated && isPageLoadReady) {
+      tracking.trackEvent({
+        action: 'pageLoad',
+        data: {
+          formType: formType,
+          nctId: trial.nctID,
+        },
+      });
+    }
+  }, [hasMetadataUpdated, isPageLoadReady]);
+
   const initTrialData = () => {
     setIsTrialLoading(false);
-    tracking.trackEvent({
-      action: 'pageLoad',
-      data: {
-        formType: formType,
-        nctId: trial.nctID,
-      },
-    });
+    setIsPageLoadReady(true);
   };
 
   const handleStartOver = () => {
@@ -286,7 +296,9 @@ const TrialDescriptionPage = ({ location, tracking }) => {
   return (
     <>
       {!isTrialLoading && (
-        <Helmet>
+        <Helmet
+        onChangeClientState={metadataHasUpdatedHandler(setHasMetadataUpdated)}
+        >
           <title>{trial.briefTitle}</title>
           <meta property="og:title" content={trial.briefTitle} />
           <link

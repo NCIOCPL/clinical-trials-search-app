@@ -24,3 +24,4 @@ export { ctsapiInterventionFetcher } from './ctsapiInterventionFetcher';
 export { zipcodeFetcher } from './zipcodeFetcher';
 export { queryStringToFormObject } from './queryStringToFormObject';
 export { formToTrackingData } from './formToTrackingData';
+export { metadataHasUpdatedHandler } from './metadataHasUpdatedHandler';
