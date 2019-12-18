@@ -6,7 +6,7 @@ const TEST_CASES = [
     "Error page",
     {},
     [{
-      type: "LINK",
+      type: "LOAD",
       data: {        
         events: [41],
         eVars: { 

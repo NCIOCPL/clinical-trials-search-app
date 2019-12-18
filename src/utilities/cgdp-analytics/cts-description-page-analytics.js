@@ -25,7 +25,7 @@ DescriptionAnalyticsActions.load_trial_description = (data) => {
   }];
 };
 
-DescriptionAnalyticsActions.click_print_share_button = (data) => {
+DescriptionAnalyticsActions.link_print_share_button = (data) => {
   return [{
     type: 'LINK',
     data: {
@@ -39,7 +39,7 @@ DescriptionAnalyticsActions.click_print_share_button = (data) => {
   }];
 }
 
-DescriptionAnalyticsActions.click_email_share_button = (data) => {
+DescriptionAnalyticsActions.link_email_share_button = (data) => {
   return [{
     type: 'LINK',
     data: {

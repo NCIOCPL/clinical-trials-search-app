@@ -91,7 +91,7 @@ describe("", () => {
     url: 'https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/v?id=nci-2019-1234',
   });
 
-  test("click_print_share_button", () => {
+  test("link_print_share_button", () => {
     const expected = [{
       type: 'LINK',
       data: {
@@ -108,11 +108,11 @@ describe("", () => {
       formType: 'basic'
     };
  
-    const actual = DescriptionAnalyticsActions['click_print_share_button'](eventdata);
+    const actual = DescriptionAnalyticsActions['link_print_share_button'](eventdata);
     expect(actual).toEqual(expected);
   });
 
-  test("click_email_share_button", () => {
+  test("link_email_share_button", () => {
     const expected = [{
       type: 'LINK',
       data: {
@@ -129,7 +129,7 @@ describe("", () => {
       formType: 'basic'
     };
  
-    const actual = DescriptionAnalyticsActions['click_email_share_button'](eventdata);
+    const actual = DescriptionAnalyticsActions['link_email_share_button'](eventdata);
     expect(actual).toEqual(expected);
   });
 

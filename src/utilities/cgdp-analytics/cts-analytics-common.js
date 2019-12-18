@@ -54,7 +54,7 @@ export const CommonAnalyticsActions = {};
 
 CommonAnalyticsActions.load_error_page = (data) => {
   return [{
-    type: EVENT_TYPES.Link,
+    type: EVENT_TYPES.Load,
     data: {
       events: [41],
       eVars: { 
