@@ -78,6 +78,13 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
     setIsPageLoadReady(true);
   }, []);
 
+  useEffect(() => {
+    // This should also be dependent on the current route/url
+    if (hasMetadataUpdated && isPageLoadReady) {
+      tracking.trackEvent({action: 'pageLoad'})
+    }
+  }, [hasMetadataUpdated, isPageLoadReady]);
+
   const handleTrackingStoreInit = useCallback(() => {
     // Init form tracking store
     dispatch( addFormToTracking({
