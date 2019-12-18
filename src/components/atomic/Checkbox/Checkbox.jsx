@@ -12,10 +12,17 @@ const Checkbox = ({
   classes,
   disabled,
   hideLabel,
+  disableTracking,
   ...otherProps
 }) => {
   
   const dispatch = useDispatch();
+
+  const handleInput = (event) => {
+    if ( !disableTracking ) {
+      trackInteraction(event);
+    }
+  };
 
   const trackInteraction = (event) => {
     const { target } = event;
@@ -38,7 +45,7 @@ const Checkbox = ({
       className="cts-checkbox__input"
       type="checkbox"
       name={name}
-      onInput={trackInteraction}
+      onInput={handleInput}
       value={value ? value : id}
       disabled={disabled || false}
       {...otherProps}
@@ -58,12 +65,14 @@ Checkbox.propTypes = {
   disabled: PropTypes.bool,
   classes: PropTypes.string,
   hideLabel: PropTypes.bool,
+  disableTracking: PropTypes.bool
 };
 
 Checkbox.defaultProps = {
   classes: '',
   name: 'checkboxes',
-  hideLabel: false
+  hideLabel: false,
+  disableTracking: false
 };
 
 export default Checkbox;

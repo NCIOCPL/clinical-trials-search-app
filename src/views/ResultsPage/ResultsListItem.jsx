@@ -256,6 +256,7 @@ const ResultsListItem = ({
           label="Select this article for print"
           hideLabel
           onChange={() => onCheckChange(id)}
+          disableTracking={true}
         />
       </div>
       <div className="results-list-item__contents">
