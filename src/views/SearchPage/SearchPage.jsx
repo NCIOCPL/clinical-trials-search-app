@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { Delighter, StickySubmitBlock } from '../../components/atomic';
@@ -28,6 +28,7 @@ import {
 import { actions } from '../../store/reducers';
 import { getHasFormError } from '../../store/modules/form/form.selectors';
 import { SEARCH_FORM_ID } from '../../constants';
+import { useGlobalBeforeUnload } from '../../hooks/useWindowEvent';
 
 // Module groups in arrays will be placed side-by-side in the form
 const basicFormModules = [CancerTypeKeyword, [Age, ZipCode]];
@@ -66,18 +67,16 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
     );
   };
 
-  const onSearchPageExitEvent = () => {
-    const eventListener = window.attachEvent || window.addEventListener;
-    const unloadCheck = window.attachEvent ? 'onbeforeunload' : 'beforeunload';
-    eventListener(unloadCheck, function(e) {
-      if ( hasUserInteractedWithForm && !formInFocus.isSubmitted ) {
-        const {FormAbandonment} = trackedEvents;
-        FormAbandonment.data.formType = formFactor;
-        FormAbandonment.data.field = fieldInFocus.id;
-        tracking.trackEvent(FormAbandonment);
-      }
-    });
-  };
+  const handleFormAbandon = useCallback(() => {
+    if (hasUserInteractedWithForm && !formInFocus.isSubmitted) {
+      const {FormAbandonment} = trackedEvents;
+      FormAbandonment.data.formType = formFactor;
+      FormAbandonment.data.field = fieldInFocus.id;
+      tracking.trackEvent(FormAbandonment);
+    }
+  }, [hasUserInteractedWithForm, formInFocus.isSubmitted]);
+
+  useGlobalBeforeUnload(handleFormAbandon);
 
   // scroll to top on mount
   useEffect(() => {
@@ -100,7 +99,6 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
       tracking.trackEvent(FormInteractionStart);
       const { dispatchedFormInteractionEvent } = actions;
       dispatch( dispatchedFormInteractionEvent( true ) );
-      onSearchPageExitEvent();
     }
   }, [hasUserInteractedWithForm]);
 
