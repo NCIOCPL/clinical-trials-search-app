@@ -36,7 +36,7 @@ export const reducer = (
             trackedForm.push(form);
 
             return {
-                ...state,
+                ...defaultState,
                 forms: trackedForm
             };
         }
