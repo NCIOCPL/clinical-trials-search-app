@@ -268,7 +268,7 @@ const ResultsPage = ({ location, tracking }) => {
 
       <Delighter
         classes="cts-which"
-        url="/trial-guide"
+        url="/about-cancer/treatment/clinical-trials/search/trial-guide"
         titleText={<>Which trials are right for you?</>}
       >
         <p>

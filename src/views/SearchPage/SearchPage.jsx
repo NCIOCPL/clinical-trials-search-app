@@ -161,7 +161,7 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
 
       <Delighter
         classes="cts-what"
-        url="/what-are-trials"
+        url="/about-cancer/treatment/clinical-trials/what-are-trials"
         titleText={<>What Are Cancer Clinical Trials?</>}
       >
         <p>Learn what they are and what you should know about them.</p>
@@ -169,7 +169,7 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
 
       <Delighter
         classes="cts-which"
-        url="/trial-guide"
+        url="/about-cancer/treatment/clinical-trials/search/trial-guide"
         titleText={<>Which trials are right for you?</>}
       >
         <p>
