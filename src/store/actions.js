@@ -429,7 +429,7 @@ export function searchTrialInvestigators({ searchText, size = 10 } = {}) {
             additionalParams: {
               term: searchText,
               sort: 'term',
-              current_trial_status: ACTIVE_TRIAL_STATUSES,
+              current_trial_statuses: ACTIVE_TRIAL_STATUSES,
             },
             size,
           },
@@ -456,7 +456,7 @@ export function searchLeadOrg({ searchText, size = 10 } = {}) {
             additionalParams: {
               term: searchText,
               sort: 'term',
-              current_trial_status: ACTIVE_TRIAL_STATUSES,
+              current_trial_statuses: ACTIVE_TRIAL_STATUSES,
             },
             size,
           },
