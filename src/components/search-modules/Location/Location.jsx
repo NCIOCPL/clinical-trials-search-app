@@ -53,7 +53,7 @@ const Location = ({ handleUpdate, tracking }) => {
   const stateOptions = getStates();
 
 
-  useEffect(() => {
+  useEffect(() => {    
     if (hospitalName.value.length > 2) {
       dispatch(searchHospital({ searchText: hospitalName.value }));
     }
@@ -328,7 +328,10 @@ const Location = ({ handleUpdate, tracking }) => {
                   getItemValue={item => item.term}
                   shouldItemRender={matchItemToTerm}
                   sortItems={sortItems}
-                  onChange={(event, value) => setHospitalName({ value })}
+                  onChange={(event, value) => {
+                    handleUpdate('hospital', {term: value, termKey: value});
+                    setHospitalName({ value })
+                  }}
                   onSelect={(value, item) => {
                     handleUpdate('hospital', item);
                     setHospitalName({ value: item.term });

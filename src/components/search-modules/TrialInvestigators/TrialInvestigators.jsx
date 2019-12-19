@@ -37,7 +37,10 @@ const TrialInvestigators = ({ handleUpdate }) => {
         getItemValue={item => item.term}
         shouldItemRender={matchItemToTerm}
         sortItems={sortItems}
-        onChange={(event, value) => setTiName({ value })}
+        onChange={(event, value) => {
+          handleUpdate('investigator', {term: value, termKey: value});
+          setTiName({ value })
+        }}
         onSelect={(value, item) => {
           handleUpdate('investigator', item);
           setTiName({ value });

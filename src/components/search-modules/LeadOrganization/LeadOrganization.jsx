@@ -37,7 +37,10 @@ const LeadOrganization = ({ handleUpdate }) => {
         getItemValue={item => item.term}
         shouldItemRender={matchItemToTerm}
         sortItems={sortItems}
-        onChange={(event, value) => setOrgName({ value })}
+        onChange={(event, value) => {
+          handleUpdate('leadOrg', {term: value, termKey: value});
+          setOrgName({ value })          
+        }}
         onSelect={(value, item) => { 
           handleUpdate('leadOrg', item);
           setOrgName({value: item.term});
