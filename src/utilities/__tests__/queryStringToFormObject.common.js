@@ -1,4 +1,3 @@
-import { testNameToKey } from "jest-snapshot/build/utils";
 
 // Mocks for what the API /disease endpoint will return
 export const API_DISEASE_MOCKS = {

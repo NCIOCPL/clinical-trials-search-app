@@ -18,8 +18,10 @@ import {
 } from '../../../utilities';
 import { useZipConversion } from '../../../hooks';
 import './Location.scss';
+import { trackedEvents } from '../../../tracking';
+import { INVALID_ZIP_TEXT } from '../../../constants';
 
-const Location = ({ handleUpdate }) => {
+const Location = ({ handleUpdate, tracking }) => {
   //Hooks must always be rendered in same order.
   const dispatch = useDispatch();
   const [{ getZipCoords }] = useZipConversion(handleUpdate);
@@ -35,7 +37,8 @@ const Location = ({ handleUpdate }) => {
     states,
     hospital,
     vaOnly,
-    refineSearch
+    refineSearch,
+    formType
   } = useSelector(store => store.form);
   const [activeRadio, setActiveRadio] = useState(location);
   const [inputtedZip, setInputtedZip] = useState(zip);
@@ -138,7 +141,12 @@ const Location = ({ handleUpdate }) => {
       // empty treat as blank
       clearZip();
     } else {
+      const { InputValidation } = trackedEvents;
       handleUpdate('hasInvalidZip', true);
+      InputValidation.data.field = 'zip';
+      InputValidation.data.formType = formType;
+      InputValidation.data.message = INVALID_ZIP_TEXT;
+      tracking.trackEvent(InputValidation);
     }
   };
 
@@ -161,6 +169,7 @@ const Location = ({ handleUpdate }) => {
           checked={limitToVA}
           label="Limit results to Veterans Affairs facilities"
           onClick={handleToggleChange}
+          onChange={()=>{}}
         />
         Limit results to Veterans Affairs facilities
       </div>
@@ -187,7 +196,7 @@ const Location = ({ handleUpdate }) => {
                 classes="search-location__zip --zip"
                 label="U.S. ZIP Code"
                 modified={zipModified}
-                errorMessage={hasInvalidZip? 'Please enter a valid 5 digit U.S. zip code' : ''}
+                errorMessage={hasInvalidZip? INVALID_ZIP_TEXT : ''}
                 onBlur={validateZip}
                 maxLength={5}
               />

@@ -79,8 +79,32 @@ export const queryStringToFormObject = async (urlQuery, diseaseFetcher, interven
         }]
       };
     }
+  }
+  // Details page can take in a r=1 param
+  else if (window.location.pathname.endsWith('/v') && query['r']) {
+    return {
+      formState: {
+        ...rtnFormState,
+        formType: "custom"
+      },
+      errors: rtnErrorsList
+    };
+  }
+  // Results URL requires rl
+  else if (window.location.pathname.endsWith('/r')) {
+    // HARD STOP. BAIL. DO NOT PASS GO.
+    return {
+      formState: null,
+      errors: [{ 
+        fieldName: "formType",
+        message: "Results Link Flag cannot be empty on results page."
+      }]
+    };
   } else {
-    // No rl, was not from a search, exit.
+    // No rl, and this is not the results page, so we
+    // don't need to keep processing params. So for the
+    // details page we would assume this is just a direct
+    // request.
     return {
       formState: rtnFormState,
       errors: rtnErrorsList
@@ -181,6 +205,22 @@ export const queryStringToFormObject = async (urlQuery, diseaseFetcher, interven
       ));
     }
   }
+
+  if (query['va']) {
+    const vaOnly = parseInt(query['va']);
+    if (vaOnly === 1) {
+      rtnFormState = {
+        ...rtnFormState,
+        vaOnly: true
+      };
+    } else {
+      rtnErrorsList.push(makeError(
+        "vaOnly",
+        "Invalid parameter"
+      ));
+    }
+  }
+
 
   // Trial Types and Phases
   const [typeFormState, typeErrorsList] = processChecklistField(query['tt'], 'trialTypes');

@@ -1,8 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { trackFormInputChange } from '../../../store/modules/analytics/tracking/tracking.actions';
 import './Toggle.scss';
 
 const Toggle = ({ id, classes, label, onClick, checked, ...otherProps }) => {
+
+  const dispatch = useDispatch();
+
+  const trackInteraction = (event) => {
+    const { target } = event;
+    const { form, id, value } = target;
+    const formName = form && form.id ? form.id : null;
+    const inputActionProps = {
+      formName,
+      id,
+      value
+    };
+    dispatch(
+      trackFormInputChange(inputActionProps)
+    )
+  }
+
   const handleChange = e => {
     onClick(e);
   };
@@ -12,6 +31,7 @@ const Toggle = ({ id, classes, label, onClick, checked, ...otherProps }) => {
         type="checkbox"
         className="cts-toggle__input"
         id={id}
+        onInput={trackInteraction}
         checked={checked}
         {...otherProps}
       />

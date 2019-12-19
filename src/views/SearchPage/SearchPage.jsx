@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet';
+import { useLocation } from 'react-router-dom';
 import { Delighter, StickySubmitBlock } from '../../components/atomic';
 import {
   Age,
@@ -16,10 +17,22 @@ import {
   TrialType,
   ZipCode,
 } from '../../components/search-modules';
+import { trackedEvents } from '../../tracking';
 import { history } from '../../services/history.service';
 import { updateFormField, clearForm, receiveData } from '../../store/actions';
+import {
+  getFieldInFocus,
+  getFormInFocus,
+  getHasDispatchedFormInteractionEvent,
+  getHasUserInteractedWithForm
+} from '../../store/modules/analytics/tracking/tracking.selectors';
+import { actions } from '../../store/reducers';
+import { getHasFormError } from '../../store/modules/form/form.selectors';
+import { SEARCH_FORM_ID } from '../../constants';
+import { useGlobalBeforeUnload, useHasLocationChanged } from '../../hooks';
+import { metadataHasUpdatedHandler } from '../../utilities';
 
-//Module groups in arrays will be placed side-by-side in the form
+// Module groups in arrays will be placed side-by-side in the form
 const basicFormModules = [CancerTypeKeyword, [Age, ZipCode]];
 const advancedFormModules = [
   CancerTypeCondition,
@@ -33,11 +46,21 @@ const advancedFormModules = [
   LeadOrganization,
 ];
 
-const SearchPage = ({ formInit = 'basic' }) => {
+
+
+const SearchPage = ({ formInit = 'basic', tracking }) => {
   const dispatch = useDispatch();
+  const location = useLocation().pathname;
   const sentinelRef = useRef(null);
   const [formFactor, setFormFactor] = useState(formInit);
-  const {hasInvalidAge, hasInvalidZip} = useSelector(store => store.form)
+  const fieldInFocus = useSelector(getFieldInFocus);
+  const formInFocus = useSelector(getFormInFocus);
+  const hasDispatchedFormInteractionEvent = useSelector(getHasDispatchedFormInteractionEvent);
+  const hasFormError = useSelector(getHasFormError);
+  const hasUserInteractedWithForm = useSelector(getHasUserInteractedWithForm);
+  const [hasMetadataUpdated, setHasMetadataUpdated ] = useState(false);
+  const [isPageLoadReady, setIsPageLoadReady ] = useState(false);
+  const { addFormToTracking } = actions;
 
   const handleUpdate = (field, value) => {
     dispatch(
@@ -52,21 +75,66 @@ const SearchPage = ({ formInit = 'basic' }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
     handleUpdate('formType', formInit);
+    setIsPageLoadReady(true);
   }, []);
+
+  useEffect(() => {
+    // This should also be dependent on the current route/url
+    if (hasMetadataUpdated && isPageLoadReady) {
+      tracking.trackEvent({action: 'pageLoad'})
+    }
+  }, [hasMetadataUpdated, isPageLoadReady]);
+
+  const handleTrackingStoreInit = useCallback(() => {
+    // Init form tracking store
+    dispatch( addFormToTracking({
+      formType: formFactor
+    }) );
+  }, [location]);
+
+  const handleFormAbandon = useCallback(() => {
+    if (hasUserInteractedWithForm && !formInFocus.isSubmitted) {
+      const {FormAbandonment} = trackedEvents;
+      FormAbandonment.data.formType = formFactor;
+      FormAbandonment.data.field = fieldInFocus.id;
+      tracking.trackEvent(FormAbandonment);
+    }
+  }, [hasUserInteractedWithForm, formInFocus.isSubmitted]);
+
+  useGlobalBeforeUnload(handleFormAbandon);
+  useHasLocationChanged(handleTrackingStoreInit);
+
+
+  useEffect(() => {
+    // Run analytics event based on condition
+    if ( hasUserInteractedWithForm && !hasDispatchedFormInteractionEvent ) {
+      const { FormInteractionStart } = trackedEvents;
+      FormInteractionStart.data.formType = formFactor;
+      FormInteractionStart.data.field = fieldInFocus.id;
+      tracking.trackEvent(FormInteractionStart);
+      const { dispatchedFormInteractionEvent } = actions;
+      dispatch( dispatchedFormInteractionEvent( true ) );
+    }
+  }, [hasUserInteractedWithForm]);
 
   let formModules =
     formFactor === 'advanced' ? advancedFormModules : basicFormModules;
 
   const handleSubmit = e => {
     e.preventDefault();
-    if(!hasInvalidAge && !hasInvalidZip){
+    const { trackedFormSubmitted } = actions;
+    const { trackSubmitComplete, trackSubmitError } = trackedEvents;
+    if(!hasFormError){
       dispatch(receiveData(
         'selectedTrialsForPrint',
         []
       ));
+      tracking.trackEvent(trackSubmitComplete(formFactor));
+      dispatch( trackedFormSubmitted(true) );
       history.push('/about-cancer/treatment/clinical-trials/search/r');
+      return;
     }
-    
+    tracking.trackEvent(trackSubmitError(formFactor));
   };
 
   const renderDelighters = () => (
@@ -138,7 +206,9 @@ const SearchPage = ({ formInit = 'basic' }) => {
 
   return (
     <article className="search-page">
-      <Helmet>
+      <Helmet
+        onChangeClientState={metadataHasUpdatedHandler(setHasMetadataUpdated)}
+      >
         <title>
           {`Find NCI-Supported Clinical Trials - ${formFactor === 'advanced' ? 'Advanced Search - ' : ''}National Cancer Institute`}
         </title>
@@ -154,7 +224,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
         />
         <meta
           property="og:title"
-          content={`Find NCI-Supported Clinical Trials - ${formFactor === 'advanced' ? 'Advanced Search' : ''}`}
+          content={`Find NCI-Supported Clinical Trials${formFactor === 'advanced' ? ' - Advanced Search' : ''}`}
         />
         <meta
           property="og:url"
@@ -184,7 +254,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
 
       <div className="search-page__content">
         <form
-          id="cts-search-form"
+          id={SEARCH_FORM_ID}
           onSubmit={handleSubmit}
           className={`search-page__form ${formFactor}`}
         >
@@ -196,6 +266,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
                     <Mod
                       key={`formAdvanced-${idx}-${i}`}
                       handleUpdate={handleUpdate}
+                      tracking={tracking}
                     />
                   ))}
                 </div>
@@ -205,12 +276,13 @@ const SearchPage = ({ formInit = 'basic' }) => {
                 <Module
                   key={`formAdvanced-${idx}`}
                   handleUpdate={handleUpdate}
+                  tracking={tracking}
                 />
               );
             }
           })}
           {formFactor === 'advanced' ? (
-            <StickySubmitBlock sentinel={sentinelRef} onSubmit={handleSubmit} />
+            <StickySubmitBlock formType={formFactor} sentinel={sentinelRef} onSubmit={handleSubmit} />
           ) : (
             <div className="static-submit-block">
               <button

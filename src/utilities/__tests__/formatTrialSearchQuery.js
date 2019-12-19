@@ -1,4 +1,4 @@
-import {defaultState} from '../../store/reducers/form';
+import {defaultState} from './defaultStateCopy';
 import { formatTrialSearchQuery } from '../formatTrialSearchQuery';
 import {
   ACTIVE_TRIAL_STATUSES,

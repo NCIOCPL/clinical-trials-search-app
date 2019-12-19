@@ -65,6 +65,7 @@ const TrialType = ({ handleUpdate }) => {
           checked={hvToggle}
           label="Limit results to Veterans Affairs facilities"
           onClick={handleToggle}
+          onChange={()=>{}}
         />
         Limit results to trials accepting healthy volunteers
       </div>
@@ -82,7 +83,7 @@ const TrialType = ({ handleUpdate }) => {
         {trialTypes.map((trialType, idx) => (
           <Checkbox
             key={idx}
-            id={`tp_${trialType.value}`}
+            id={`tt_${trialType.value}`}
             value={trialType.value}
             label={trialType.label}
             onChange={handleCheckType}

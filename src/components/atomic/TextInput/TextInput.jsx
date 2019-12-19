@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import {uniqueIdForComponent} from '../../../utilities';
 import InputLabel from '../InputLabel';
 import './TextInput.scss';
+import { connect } from 'react-redux';
+import { trackFormInputChange } from '../../../store/modules/analytics/tracking/tracking.actions';
 
 class TextInput extends React.Component {
   static propTypes = {
@@ -129,6 +131,7 @@ class TextInput extends React.Component {
           disabled={this.props.disabled}
           onBlur={this._handleBlur.bind(this)}
           onChange={this._handleChange.bind(this)}
+          onInput={this._internalTrackInputChange.bind(this)}
           spellCheck={this.props.enableSpellCheck ? true : false}
           {...ariaLabel}
         />
@@ -147,12 +150,35 @@ class TextInput extends React.Component {
     }
   }
 
+  /**
+   * Shared change handler for field tracking
+   * @param {Object} event 
+   */
+  _internalTrackInputChange(event) {
+    const { target } = event;
+
+    const { form, id, value } = target;
+    const { errorMessage, trackFormInputChange } = this.props;
+    const { errorMessageBody, hasError } = this.state;
+    const formName = form && form.id ? form.id : null;
+    const inputActionProps = {
+      errorMessage: errorMessageBody,
+      formName,
+      hasError,
+      id,
+      value
+    };
+    trackFormInputChange(inputActionProps);
+    return true;
+  }
+
   //  his function runs every time the user changes the contents of the input.
   //  @param {event} event The event
   _handleChange(event) {
     // Check if allowedChars validator exists. If it does, check the last char
     // entered against the validator. If validation fails, return thereby preventing
     // the value from being added to the state.
+
     if (this.props.allowedChars) {
       let input = event.target.value.slice(-1);
       if (!this.props.allowedChars.isValid(input)) {
@@ -176,4 +202,10 @@ class TextInput extends React.Component {
   }
 }
 
-export default TextInput;
+const mapDispatchToProps = {
+  trackFormInputChange
+};
+
+export default connect(
+    null, mapDispatchToProps
+)(TextInput);

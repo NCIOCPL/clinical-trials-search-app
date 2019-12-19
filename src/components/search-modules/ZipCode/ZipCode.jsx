@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Fieldset, TextInput } from '../../atomic';
 import { useZipConversion } from '../../../hooks';
+import { trackedEvents } from '../../../tracking';
+import { INVALID_ZIP_TEXT } from '../../../constants';
 
-const ZipCode = ({ handleUpdate }) => {
-  const { zip, hasInvalidZip } = useSelector(store => store.form);
+const ZipCode = ({ handleUpdate, tracking }) => {
+  const { zip, hasInvalidZip, formType } = useSelector(store => store.form);
   const [inputtedZip, setInputtedZip] = useState('');
   const [{ getZipCoords }] = useZipConversion(handleUpdate);
 
@@ -40,7 +42,14 @@ const ZipCode = ({ handleUpdate }) => {
       // empty treat as blank
       clearZip();
     } else {
+      const { InputValidation } = trackedEvents;
       handleUpdate('hasInvalidZip', true);
+      InputValidation.data.field = 'zip';
+      InputValidation.data.formType = formType;
+      InputValidation.data.message = INVALID_ZIP_TEXT;
+      if ( !hasInvalidZip ) {
+        tracking.trackEvent(InputValidation);
+      }
     }
   };
 
@@ -56,7 +65,7 @@ const ZipCode = ({ handleUpdate }) => {
         label="zip code"
         labelHidden
         errorMessage={
-          hasInvalidZip ? 'Please enter a valid 5 digit U.S. zip code' : ''
+          hasInvalidZip ? INVALID_ZIP_TEXT : ''
         }
         inputHelpText="Show trials near this U.S. ZIP code."
         maxLength={5}

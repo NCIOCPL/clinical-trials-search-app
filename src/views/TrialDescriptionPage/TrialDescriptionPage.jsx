@@ -11,14 +11,18 @@ import {
   TrialStatusIndicator,
   SearchCriteriaTable,
 } from '../../components/atomic';
+import { metadataHasUpdatedHandler } from '../../utilities';
 import SitesList from './SitesList';
+import track from 'react-tracking';
 import './TrialDescriptionPage.scss';
 const queryString = require('query-string');
 
-const TrialDescriptionPage = ({ location }) => {
+const TrialDescriptionPage = ({ location, tracking }) => {
   const dispatch = useDispatch();
   const [isTrialLoading, setIsTrialLoading] = useState(true);
   const [qs, setQs] = useState(location.search);
+  const [hasMetadataUpdated, setHasMetadataUpdated ] = useState(false);
+  const [isPageLoadReady, setIsPageLoadReady ] = useState(false);
   const { isDirty, formType } = useSelector(store => store.form);
   const parsed = queryString.parse(qs);
   const currId = parsed.id;
@@ -26,7 +30,7 @@ const TrialDescriptionPage = ({ location }) => {
 
   const trialTitle = useSelector(store => store.cache.currentTrialTitle);
   const cacheSnap = useSelector(store => store.cache);
-  
+
   const [searchUsed, setSearchUsed] = useState(
     Object.keys(cacheSnap).length > 1
   );
@@ -58,19 +62,43 @@ const TrialDescriptionPage = ({ location }) => {
     }
   }, []);
 
+  useEffect(() => {
+    // This should also be dependent on the current route/url
+    if (hasMetadataUpdated && isPageLoadReady) {
+      tracking.trackEvent({
+        action: 'pageLoad',
+        data: {
+          formType: formType,
+          nctId: trial.nctID,
+        },
+      });
+    }
+  }, [hasMetadataUpdated, isPageLoadReady]);
+
   const initTrialData = () => {
     setIsTrialLoading(false);
+    setIsPageLoadReady(true);
   };
 
   const handleStartOver = () => {
     dispatch(clearForm());
   };
 
+  const trackShare = (shareType) => ({    
+    action: 'click',
+    source: `${shareType}_share_button`,
+    data: {      
+      formType: formType
+    },
+  })
+
   const handlePrintTrial = () => {
+    tracking.trackEvent(trackShare('print'));
     window.print();
   };
 
   const handleEmailTrial = () => {
+    tracking.trackEvent(trackShare('email'));
     window.location.href = `mailto:?subject=Information%20from%20the%20National%20Cancer%20Institute%20Web%20Site&body=I%20found%20this%20information%20on%20www.cancer.gov%20and%20I'd%20like%20to%20share%20it%20with%20you:%20https%3A%2F%2Fwww.cancer.gov%2Fabout-cancer%2Ftreatment%2Fclinical-trials%2Fsearch%2Fv%3Fid%3D${currId}%0A%0A%20NCI's%20Web%20site,%20www.cancer.gov,%20provides%20accurate,%20up-to-date,%20comprehensive%20cancer%20information%20from%20the%20U.S.%20government's%20principal%20agency%20for%20cancer%20research.%20If%20you%20have%20questions%20or%20need%20additional%20information,%20we%20invite%20you%20to%20contact%20NCI%E2%80%99s%20LiveHelp%20instant%20messaging%20service%20at%20https://livehelp.cancer.gov,%20or%20call%20the%20NCI's%20Contact%20Center%201-800-4-CANCER%20(1-800-422-6237)%20(toll-free%20from%20the%20United%20States).`;
   };
 
@@ -140,17 +168,14 @@ const TrialDescriptionPage = ({ location }) => {
   const renderTrialDescriptionHeader = () => {
     return (
       <div className="trial-description-page__header">
-        {(isDirty || searchUsed) &&(
+        {(isDirty || searchUsed) && (
           <div className="back-to-search btnAsLink">
             <span onClick={() => history.goBack()}>
               &lt; Back to search results
             </span>
           </div>
         )}
-          <SearchCriteriaTable
-            handleReset={handleStartOver}
-            placement="trial"
-          />
+        <SearchCriteriaTable handleReset={handleStartOver} placement="trial" />
       </div>
     );
   };
@@ -227,9 +252,15 @@ const TrialDescriptionPage = ({ location }) => {
   };
 
   const handleExpandAllSections = () => {
-    let headings = document.querySelectorAll('.trial-description-page__content h2.cts-accordion__heading');
-    let buttons = document.querySelectorAll('.trial-description-page__content .cts-accordion__button');
-    let contents = document.querySelectorAll('.trial-description-page__content .cts-accordion__content');
+    let headings = document.querySelectorAll(
+      '.trial-description-page__content h2.cts-accordion__heading'
+    );
+    let buttons = document.querySelectorAll(
+      '.trial-description-page__content .cts-accordion__button'
+    );
+    let contents = document.querySelectorAll(
+      '.trial-description-page__content .cts-accordion__content'
+    );
     headings.forEach(item => {
       item.setAttribute('aria-expanded', true);
     });
@@ -242,9 +273,15 @@ const TrialDescriptionPage = ({ location }) => {
   };
 
   const handleHideAllSections = () => {
-    let headings = document.querySelectorAll('.trial-description-page__content h2.cts-accordion__heading');
-    let buttons = document.querySelectorAll('.trial-description-page__content .cts-accordion__button');
-    let contents = document.querySelectorAll('.trial-description-page__content .cts-accordion__content');
+    let headings = document.querySelectorAll(
+      '.trial-description-page__content h2.cts-accordion__heading'
+    );
+    let buttons = document.querySelectorAll(
+      '.trial-description-page__content .cts-accordion__button'
+    );
+    let contents = document.querySelectorAll(
+      '.trial-description-page__content .cts-accordion__content'
+    );
     headings.forEach(item => {
       item.setAttribute('aria-expanded', false);
     });
@@ -259,7 +296,9 @@ const TrialDescriptionPage = ({ location }) => {
   return (
     <>
       {!isTrialLoading && (
-        <Helmet>
+        <Helmet
+        onChangeClientState={metadataHasUpdatedHandler(setHasMetadataUpdated)}
+        >
           <title>{trial.briefTitle}</title>
           <meta property="og:title" content={trial.briefTitle} />
           <link
@@ -290,10 +329,11 @@ const TrialDescriptionPage = ({ location }) => {
         ) : (
           <h1>{trial.briefTitle}</h1>
         )}
-        { (formType === 'basic' || formType === 'advanced') ?
-            (renderTrialDescriptionHeader()) :
-            <></>
-        }
+        {formType === 'basic' || formType === 'advanced' ? (
+          renderTrialDescriptionHeader()
+        ) : (
+          <></>
+        )}
         <div className="trial-description-page__description">
           <div className="trial-description-page__content">
             {isTrialLoading ? (
@@ -465,4 +505,6 @@ const TrialDescriptionPage = ({ location }) => {
   );
 };
 
-export default TrialDescriptionPage;
+export default track({
+  page: 'trial_description',
+})(TrialDescriptionPage);

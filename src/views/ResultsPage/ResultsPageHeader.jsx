@@ -1,9 +1,13 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMainType } from '../../store/actions';
 import { Link } from 'react-router-dom';
+import { useTracking } from 'react-tracking';
+
 import { SearchCriteriaTable } from '../../components/atomic';
+import { START_OVER_LINK } from '../../constants';
 import { history } from '../../services/history.service';
+import { getMainType } from '../../store/actions';
+import { trackedEvents } from '../../tracking';
 
 const ResultsPageHeader = ({
   handleUpdate,
@@ -21,10 +25,15 @@ const ResultsPageHeader = ({
     keywordPhrases,
     isDirty,
   } = useSelector(store => store.form);
+  const { trackEvent } = useTracking();
 
   const { maintypeOptions } = useSelector(store => store.cache);
 
   const handleRefineSearch = () => {
+    
+    const { ModifySearchCriteriaLinkClick } = trackedEvents;
+    ModifySearchCriteriaLinkClick.data.formType = formType;
+
     if (formType === 'basic') {
       //prefetch stuff
       if (!maintypeOptions || maintypeOptions.length < 1) {
@@ -44,8 +53,11 @@ const ResultsPageHeader = ({
       }
       handleUpdate('formType', 'advanced');
     }
+
     handleUpdate('refineSearch', true);
+    trackEvent(ModifySearchCriteriaLinkClick);
     history.push('/about-cancer/treatment/clinical-trials/search/advanced');
+  
   };
 
   return (
@@ -69,7 +81,7 @@ const ResultsPageHeader = ({
                 for: "all trials" &nbsp; | &nbsp;
                 <Link
                   to={`${formType === 'basic' ? '/about-cancer/treatment/clinical-trials/search' : '/about-cancer/treatment/clinical-trials/search/advanced'}`}
-                  onClick={handleReset}
+                  onClick={() => handleReset(START_OVER_LINK)}
                 >
                   Start Over
                 </Link>

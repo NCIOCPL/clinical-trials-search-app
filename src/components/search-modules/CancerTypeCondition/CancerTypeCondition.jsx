@@ -124,7 +124,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
         // just retrieve descendents
         //switch off refineSearch
         handleUpdate('refineSearch', false);
-        retrieveDescendents(cancerType.name, cancerType.codes);
+        retrieveDescendents(cancerType.codes[0], cancerType.codes);
       } else {
         // use the parentDisease ID to select the primary cancer type
         let parentCancer = cache['maintypeOptions'].find(
@@ -153,9 +153,6 @@ const CancerTypeCondition = ({ handleUpdate }) => {
     }
   };
 
-
-
-
   const matchItemToTerm = (item, value) => {
     return item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
   };
@@ -182,6 +179,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
     retrieveDescendents(item.codes[0], item.codes);
     handleUpdate('subtypes', []);
     handleUpdate('stages', []);
+    handleUpdate('findings', []);
     handleUpdate('subtypeModified', false);
     handleUpdate('stagesModified', false);
     setCtMenuOpen(false);

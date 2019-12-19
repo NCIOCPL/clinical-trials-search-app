@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import InputLabel from '../InputLabel';
 import {uniqueIdForComponent} from '../../../utilities';
+import { connect } from 'react-redux';
+import { trackFormInputChange } from '../../../store/modules/analytics/tracking/tracking.actions';
 import './Dropdown.scss';
 
 //  Class representing a dropdown
@@ -18,7 +20,7 @@ import './Dropdown.scss';
 //  - required: bool. Adds required label, required attribute and aria-required='true'
 //  - errorMessage: string. If present triggers the error state and displays the error message
 
-export default class Dropdown extends React.Component {
+class Dropdown extends React.Component {
   //  Constructor
   //  @param {object} props The props. See proptypes below.
   //
@@ -33,6 +35,7 @@ export default class Dropdown extends React.Component {
     label: PropTypes.string.isRequired,
     children: PropTypes.node.isRequired,
     classes: PropTypes.string,
+    disableTracking: PropTypes.bool,
     required: PropTypes.bool,
     hasError: PropTypes.bool,
     errorMessage: PropTypes.string,
@@ -44,6 +47,7 @@ export default class Dropdown extends React.Component {
     required: false,
     classes: '',
     hasError: false,
+    disableTracking: false,
     action: () => {},
   };
 
@@ -63,6 +67,28 @@ export default class Dropdown extends React.Component {
     this.id = this.props.id ? this.props.id : uniqueIdForComponent(this);
   }
 
+  /**
+   * Shared change handler for field tracking
+   * @param {Object} event 
+   */
+  _internalTrackInputChange(event) {
+    const { target } = event;
+
+    const { form, id, value } = target;
+    const { errorMessage, trackFormInputChange } = this.props;
+    const { errorMessageBody, hasError } = this.state;
+    const formName = form && form.id ? form.id : null;
+    const inputActionProps = {
+      errorMessage: errorMessageBody,
+      formName,
+      hasError,
+      id,
+      value
+    };
+    trackFormInputChange(inputActionProps);
+    return true;
+  }
+
   //  Update the state when user selects a new option
   //  @param {event} event The async event
 
@@ -71,6 +97,9 @@ export default class Dropdown extends React.Component {
       value: event.target.value,
     });
     this.props.action(event);
+    if (!this.props.disableTracking) {
+      this._internalTrackInputChange(event);
+    }
   }
 
   render() {
@@ -107,3 +136,11 @@ export default class Dropdown extends React.Component {
     );
   }
 }
+
+const mapDispatchToProps = {
+  trackFormInputChange
+};
+
+export default connect(
+    null, mapDispatchToProps
+)(Dropdown);

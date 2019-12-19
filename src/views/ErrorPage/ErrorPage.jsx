@@ -1,16 +1,35 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateGlobal } from '../../store/actions';
 import { Helmet } from 'react-helmet';
 import { ChatOpener, Delighter } from '../../components/atomic';
+import track from 'react-tracking';
+import { trackedEvents } from '../../tracking';
+import { TRY_NEW_SEARCH_LINK } from '../../constants';
+import { metadataHasUpdatedHandler } from '../../utilities';
 
 import './ErrorPage.scss';
 
-const ErrorPage = ({ initErrorsList }) => {
+const ErrorPage = ({ initErrorsList, tracking }) => {
+
   const dispatch = useDispatch();
   const formSnapshot = useSelector(store => store.form);
+  const [hasMetadataUpdated, setHasMetadataUpdated ] = useState(false);
+
+  useEffect(() => {
+    // This should also be dependent on the current route/url
+    if (hasMetadataUpdated) {
+      // Fire off page load event
+      tracking.trackEvent({action: 'pageLoad'})
+    }
+  }, [hasMetadataUpdated]);
 
   const handleStartOver = () => {
+    const { NewSearchLinkClick } = trackedEvents;    
+    NewSearchLinkClick.data.formType = '';
+    NewSearchLinkClick.source = TRY_NEW_SEARCH_LINK;
+    tracking.trackEvent(NewSearchLinkClick);
+
     dispatch(updateGlobal({
       field: 'initErrorsList',
       value: []
@@ -78,7 +97,9 @@ const ErrorPage = ({ initErrorsList }) => {
 
   return (
     <>
-      <Helmet>
+      <Helmet
+        onChangeClientState={metadataHasUpdatedHandler(setHasMetadataUpdated)}
+      >
         <title>
           Clinical Trials Search - National Cancer Institute
         </title>
@@ -96,7 +117,7 @@ const ErrorPage = ({ initErrorsList }) => {
       <article className="error-page">
         <h1>Clinical Trials Search</h1>
 
-        <div class="error-page__content">
+        <div className="error-page__content">
           <div className="error-page__control --top">
             <div className="error-page__list">
               <div className="error-list">
@@ -143,4 +164,6 @@ const ErrorPage = ({ initErrorsList }) => {
   );
 };
 
-export default ErrorPage;
+export default track({
+  page: "error_page",
+})(ErrorPage);

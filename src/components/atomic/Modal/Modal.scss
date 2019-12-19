@@ -73,6 +73,7 @@ $modal-ltblue: #319fbe;
 
 // freezes scroll behind modal per a11y reqs
 body.modal-open {
-  position: fixed;
+  position: relative;
+  padding-right: 15px;
   overflow-y: hidden;
 }
