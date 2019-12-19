@@ -210,7 +210,10 @@ const SearchCriteriaTable = ({
           joinedVals.push(trialType.label);
         }
       });
-      if (joinedVals.length > 0 && joinedVals.length !== trialTypes.length) {
+      // The list of trial types for some reason do not cover ALL the
+      // possible types. So even if they check all the checkboxes,
+      // then we need to show all of those.
+      if (joinedVals.length > 0) {
         criteria.push({
           category: 'Trial Type',
           selection: joinedVals.join(', '),
