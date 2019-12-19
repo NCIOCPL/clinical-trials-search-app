@@ -314,7 +314,7 @@ export function getCountries({ size = 100 } = {}) {
  */
 export function searchHospital({ searchText, size = 10 }) {
   return {
-    type: '@@cache/RETRIEVE',
+    type: '@@api/CTS',
     payload: {
       service: 'ctsSearch',
       cacheKey: 'hospitals',
