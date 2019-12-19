@@ -246,13 +246,16 @@ const SearchCriteriaTable = ({
     }
 
     if (trialPhases) {
-      let joinedVals = [];
+      let joinedVals = [];      
       trialPhases.forEach(function(phase) {
         if (phase.checked === true) {
           joinedVals.push(phase.label);
         }
       });
-      if (joinedVals.length > 0 && joinedVals.length < trialPhases.length) {
+      // The list of trial phases do not cover ALL the possible phases
+      // so if some one selects I, II, III, IV, then we need to show
+      // all of those.
+      if (joinedVals.length > 0) {
         criteria.push({
           category: 'Trial Phase',
           selection: joinedVals.join(', '),
