@@ -60,7 +60,7 @@ describe('Advanced - Locations - Negative - queryStringToFormObject maps query t
       [{fieldName: 'zip', message: 'Invalid Parameter'}]
     ],
     ["Zip - Multizip",
-      "?loc=1&z=20852,20874&rl=2",
+      "?loc=1&z=20852&z=20874&rl=2",
       async () => [],
       async () => [],
       async () => null,

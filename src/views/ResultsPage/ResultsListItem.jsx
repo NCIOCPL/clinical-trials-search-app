@@ -34,7 +34,7 @@ const ResultsListItem = ({
   const qsQbj = queryString.parse(queryParams);
   qsQbj.id = item.nciID;
   const itemQueryString = queryString.stringify(qsQbj, {
-    arrayFormat: 'comma',
+    arrayFormat: 'none',
   });
 
   //compare site values against user criteria

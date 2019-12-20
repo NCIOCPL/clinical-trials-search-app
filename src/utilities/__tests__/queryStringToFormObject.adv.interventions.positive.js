@@ -57,7 +57,7 @@ describe('Adv - Interventions - queryStringToFormObject maps query to form', () 
       }
     ],
     [ "multiple drugs",
-      "?d=C5555,C5556|C5557&rl=2",
+      "?d=C5555&d=C5556|C5557&rl=2",
       async () => [],
       getInterventionFetcher(["C5555","C5556","C5557"], ["Drug A", "Drug B"]),
       async () => null,
@@ -111,7 +111,7 @@ describe('Adv - Interventions - queryStringToFormObject maps query to form', () 
       }
     ],
     [ "multiple drugs",
-      "?i=C6666,C6667|C6668&rl=2",
+      "?i=C6666&i=C6667|C6668&rl=2",
       async () => [],
       getInterventionFetcher(["C6666","C6667","C6668"], ["Treatment A", "Treatment B"]),
       async () => null,
