@@ -18,7 +18,7 @@ describe('Adv - Disease - Negative - queryStringToFormObject maps query to form'
       ]
     ],
     [ "adv - bad multiple main types",
-      't=C1111,C1112&rl=2',
+      't=C1111&t=C1112&rl=2',
       async () => [],
       async () => [],
       async () => null,
@@ -91,7 +91,7 @@ describe('Adv - Disease - Negative - queryStringToFormObject maps query to form'
       ]
     ],
     [ "adv - bad subtypes with 1 good",
-      'st=C1111,chicken&rl=2',
+      'st=C1111&st=chicken&rl=2',
       async () => [],
       async () => [],
       async () => null,
@@ -164,7 +164,7 @@ describe('Adv - Disease - Negative - queryStringToFormObject maps query to form'
       ]
     ],
     [ "adv - bad stage after good",
-      'stg=C1111,chicken&rl=2',
+      'stg=C1111&stg=chicken&rl=2',
       async () => [],
       async () => [],
       async () => null,
@@ -237,7 +237,7 @@ describe('Adv - Disease - Negative - queryStringToFormObject maps query to form'
       ]
     ],
     [ "adv - bad finding following good",
-      'fin=C4444,chicken&rl=2',
+      'fin=C4444&fin=chicken&rl=2',
       async () => [],
       async () => [],
       async () => null,

@@ -72,7 +72,37 @@ describe('Adv - Locations - queryStringToFormObject maps query to form', () => {
       }
     ],
     ["CCS - states only, multi state",
+      "?loc=2&lcnty=United+States&lst=MD&lst=VA&rl=2",
+      async () => [],
+      async () => [],
+      async () => null,
+      {
+        location: 'search-location-country',
+        states: [
+          {abbr: 'MD', name: 'Maryland'},
+          {abbr: 'VA', name: 'Virginia'}
+        ],
+        country: 'United States',
+        formType: 'advanced'
+      }
+    ],
+    ["CCS - states only, multi state - old description page style",
       "?loc=2&lcnty=United+States&lst=MD,VA&rl=2",
+      async () => [],
+      async () => [],
+      async () => null,
+      {
+        location: 'search-location-country',
+        states: [
+          {abbr: 'MD', name: 'Maryland'},
+          {abbr: 'VA', name: 'Virginia'}
+        ],
+        country: 'United States',
+        formType: 'advanced'
+      }
+    ],
+    ["CCS - states only, multi state - old description page style spaces and commas",
+      "?loc=2&lcnty=United+States&lst=MD,  ,  ,VA&rl=2",
       async () => [],
       async () => [],
       async () => null,

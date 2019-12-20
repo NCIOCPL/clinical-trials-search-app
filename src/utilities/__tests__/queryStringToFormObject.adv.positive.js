@@ -182,7 +182,7 @@ describe('Adv - queryStringToFormObject maps query to form', () => {
     ],
     [
       "Trial Type - multi",
-      "rl=2&tt=basic_science,Treatment,supportive_care",
+      "rl=2&tt=basic_science&tt=Treatment&tt=supportive_care",
       async () => [],
       async () => [],
       async () => null,
@@ -204,7 +204,7 @@ describe('Adv - queryStringToFormObject maps query to form', () => {
     ],
     [
       "Trial Type - multi",
-      "rl=2&tp=II,III",
+      "rl=2&tp=II&tp=III",
       async () => [],
       async () => [],
       async () => null,

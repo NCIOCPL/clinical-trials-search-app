@@ -3,6 +3,7 @@ import {defaultState} from '../store/reducers/form';
 import {resolveConcepts} from './resolveConcepts';
 import {getStateNameFromAbbr} from './getStateNameFromAbbr';
 import { upper } from 'change-case';
+import { trimExt } from 'upath';
 
 const VALID_CCODE_REGEX = /c\d+/i;
 const VALID_ZIPCODE_REGEX = /^\d{5}$/;
@@ -46,7 +47,7 @@ export const queryStringToFormObject = async (urlQuery, diseaseFetcher, interven
     // Treating zipcodes as numbers will really cause issues.
     parseNumbers: false,
     // Note: any text fields need to be rejoined!
-    arrayFormat: 'comma'
+    arrayFormat: 'none'
   });
 
   // All parameters need to be processed even if there is an
@@ -489,17 +490,27 @@ const processLocationsCountry = (query) => {
       if (queryLocations.country !== "United States") {
         rtnErrorsList.push(makeError('states','State with non-US Country Invalid.'));
       } else {
+        // For legacy support there are cases where states were separated by a comma.        
         const states = (Array.isArray(query['lst']) ? query['lst'] : [query['lst']])
-                        .map(st => {
-                          const upperAbbr = st.toUpperCase();
-                          const matchedName = getStateNameFromAbbr(upperAbbr);
-                          
-                          if (matchedName) {
-                            return {abbr: upperAbbr, name: matchedName};
-                          } else {
-                            return upperAbbr;
-                          }
-                        });
+          .reduce((ac, stategrp) => {
+            const stategrparr = stategrp.split(',')
+              .map(st=>st.trim())
+              .filter(st => st !== '')
+            return [
+              ...ac,
+              ...stategrparr
+            ]
+          },[])
+          .map(st => {
+            const upperAbbr = st.toUpperCase();
+            const matchedName = getStateNameFromAbbr(upperAbbr);
+            
+            if (matchedName) {
+              return {abbr: upperAbbr, name: matchedName};
+            } else {
+              return upperAbbr;
+            }
+          });
         // There is still a string, then it is a bad state.
         if (states.find(st => typeof st === 'string')) {          
           rtnErrorsList.push(makeError('states','Unknown State.'));

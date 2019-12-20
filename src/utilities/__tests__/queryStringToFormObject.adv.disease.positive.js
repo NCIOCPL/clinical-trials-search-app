@@ -89,7 +89,7 @@ describe('Advanced - Disease - queryStringToFormObject maps query to form', () =
       }
     ],
     [ "adv - multiple subtypes",
-      "?st=C2222,C2223|C2224&rl=2",
+      "?st=C2222&st=C2223|C2224&rl=2",
       getDiseaseFetcher(["C2222","C2223", "C2224"], ["Subtype A", "Subtype B"]),
       async () => [],
       async () => null,
@@ -153,7 +153,7 @@ describe('Advanced - Disease - queryStringToFormObject maps query to form', () =
       }
     ],
     [ "adv - multiple stages",
-      "?stg=C3333,C3334|C3335&rl=2",
+      "?stg=C3333&stg=C3334|C3335&rl=2",
       getDiseaseFetcher(["C3333","C3334","C3335"], ["Stage A", "Stage B"]),
       async () => [],
       async () => null,
@@ -207,7 +207,7 @@ describe('Advanced - Disease - queryStringToFormObject maps query to form', () =
       }
     ],
     [ "adv - multiple findings",
-      "?fin=C4444,C4445|C4446&rl=2",
+      "?fin=C4444&fin=C4445|C4446&rl=2",
       getDiseaseFetcher(["C4444","C4445","C4446"], ["Finding A", "Finding B"]),
       async () => [],
       async () => null,
@@ -225,7 +225,7 @@ describe('Advanced - Disease - queryStringToFormObject maps query to form', () =
     // makes sure that we are fetching a bunch of things and
     // picking out the correct concepts.
     [ "adv - multiple diseases",
-      "?t=C1111&st=C2222&stg=C3336|C3337&fin=C4444,C4445|C4446&rl=2",
+      "?t=C1111&st=C2222&stg=C3336|C3337&fin=C4444&fin=C4445|C4446&rl=2",
       getDiseaseFetcher(
         ["C1111","C2222","C3336","C3337","C4444","C4445","C4446"],
         ["Main Type A","Subtype A","Stage C","Finding A","Finding B"]

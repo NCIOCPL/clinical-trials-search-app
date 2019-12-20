@@ -9,8 +9,16 @@ const PrintModalContent = ({ selectedList = [], handleClose = () => {} }) => {
   const printUrl = useSelector(store => store.globals.printCacheEndpoint);
   const formSnapshot = useSelector(store => store.form);
 
-  const queryParams = queryString.stringify(buildQueryString(formSnapshot), {
-    arrayFormat: 'comma',
+  const queryParams = buildQueryString(formSnapshot);
+
+  // Support for legacy things
+  const queryParamsModified = {
+    ...queryParams,
+    tp: queryParams['tp']? queryParams['tp'].map(tp=>tp.toUpperCase()) : []
+  };
+  
+  const queryParamsString = queryString.stringify(queryParamsModified, {
+    arrayFormat: 'none',
   })
 
   const printIds =  selectedList.map(({id})=> id);
@@ -18,7 +26,7 @@ const PrintModalContent = ({ selectedList = [], handleClose = () => {} }) => {
     { TrialIDs: printIds },
     // Make sure URL gets query params for search criteria on
     // print!!!
-    queryParams.length > 0 ? printUrl + '?' + queryParams : printUrl
+    queryParamsString.length > 0 ? printUrl + '?' + queryParamsString : printUrl
   );
 
   // on component mount, check for selected IDs,
