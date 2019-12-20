@@ -1,15 +1,32 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { usePrintApi } from '../../hooks';
+import { buildQueryString } from '../../utilities';
+const queryString = require('query-string');
 
 const PrintModalContent = ({ selectedList = [], handleClose = () => {} }) => {
   // in dev use
   const printUrl = useSelector(store => store.globals.printCacheEndpoint);
+  const formSnapshot = useSelector(store => store.form);
+
+  const queryParams = buildQueryString(formSnapshot);
+
+  // Support for legacy things
+  const queryParamsModified = {
+    ...queryParams,
+    tp: queryParams['tp']? queryParams['tp'].map(tp=>tp.toUpperCase()) : []
+  };
+  
+  const queryParamsString = queryString.stringify(queryParamsModified, {
+    arrayFormat: 'none',
+  })
 
   const printIds =  selectedList.map(({id})=> id);
   const [{ data, isLoading, isError, doPrint }] = usePrintApi(
     { TrialIDs: printIds },
-    printUrl
+    // Make sure URL gets query params for search criteria on
+    // print!!!
+    queryParamsString.length > 0 ? printUrl + '?' + queryParamsString : printUrl
   );
 
   // on component mount, check for selected IDs,

@@ -13,7 +13,7 @@ describe('Advanced - Interventions - Negative - queryStringToFormObject maps que
       [{fieldName: "drugs", message: "Please enter a valid parameter"}]
     ],
     [ "bad drug id with one good",
-      'd=C1111,chicken&rl=2',
+      'd=C1111&d=chicken&rl=2',
       async () => [],
       async () => [],
       async () => null,
@@ -57,7 +57,7 @@ describe('Advanced - Interventions - Negative - queryStringToFormObject maps que
       [{fieldName: "treatments", message: "Please enter a valid parameter"}]
     ],
     [ "bad treatment id with one good",
-      'i=C1111,chicken&rl=2',
+      'i=C1111&i=chicken&rl=2',
       async () => [],
       async () => [],
       async () => null,

@@ -43,7 +43,7 @@ const ResultsPage = ({ location, tracking }) => {
   const locsearch = location.search.replace('?', '');
   const [qs, setQs] = useState(
     queryString.stringify(buildQueryString(formSnapshot), {
-      arrayFormat: 'comma',
+      arrayFormat: 'none',
     })
   );
   const [storeRehydrated, setStoreRehydrated] = useState(false);
@@ -193,7 +193,7 @@ const ResultsPage = ({ location, tracking }) => {
       // update qs
       const parsed = queryString.parse(location.search);
       parsed.pn = currentPage + 1;
-      let newqs = queryString.stringify(parsed, { arrayFormat: 'comma' });
+      let newqs = queryString.stringify(parsed, { arrayFormat: 'none' });
       setQs(newqs);
       setCurrCacheKey(newqs);
       history.push({
@@ -268,7 +268,7 @@ const ResultsPage = ({ location, tracking }) => {
 
       <Delighter
         classes="cts-which"
-        url="/trial-guide"
+        url="/about-cancer/treatment/clinical-trials/search/trial-guide"
         titleText={<>Which trials are right for you?</>}
       >
         <p>

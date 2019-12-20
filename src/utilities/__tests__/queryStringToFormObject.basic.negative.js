@@ -30,7 +30,7 @@ describe('Basic - Negative - queryStringToFormObject maps query to form', () => 
       ]
     ],
     [ "basic - bad multiple main types",
-      't=C1111,C1112&rl=1',
+      't=C1111&t=C1112&rl=1',
       async () => [],
       async () => [],
       async () => null,
