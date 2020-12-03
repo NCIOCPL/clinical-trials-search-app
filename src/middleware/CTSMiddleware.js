@@ -71,12 +71,14 @@ const createCTSMiddleware = services => ({
             for (const trial of response.trials) {
               // change the trial sites list to only those that are
               // actively recruiting.
-              trial.sites = trial.sites.filter(site =>
-                ACTIVE_RECRUITMENT_STATUSES.includes(
-                  // Site comes all upper case from the API
-                  site.recruitmentStatus.toLowerCase()
-                )
-              );
+              trial.sites = trial.sites
+                ? trial.sites.filter(site =>
+                    ACTIVE_RECRUITMENT_STATUSES.includes(
+                      // Site comes all upper case from the API
+                      site.recruitmentStatus.toLowerCase()
+                    )
+                  )
+                : [];
             }
 
             body = response;
@@ -85,12 +87,14 @@ const createCTSMiddleware = services => ({
             // I no like this middleware how everything calls the service from
             // the same function and then adds a big conditional to manipulate
             // the data. It is too late to redo this, but it needs to be fixed later.
-            response.sites = response.sites.filter(site =>
-              ACTIVE_RECRUITMENT_STATUSES.includes(
-                // Site comes all upper case from the API
-                site.recruitmentStatus.toLowerCase()
-              )
-            );
+            response.sites = response.sites
+              ? response.sites.filter(site =>
+                  ACTIVE_RECRUITMENT_STATUSES.includes(
+                    // Site comes all upper case from the API
+                    site.recruitmentStatus.toLowerCase()
+                  )
+                )
+              : [];
             body = response;
           } else {
             body = response;
