@@ -366,10 +366,10 @@ const ResultsPage = ({ location, tracking }) => {
         <ul>
           <li>Zip Code</li>
         </ul>
-        <p>
+        <div>
           For assistance, please contact the Cancer Information Service. You can{' '}
           <ChatOpener /> or call 1-800-4-CANCER (1-800-422-6237).
-        </p>
+        </div>
         <p>
           <Link
             to={`${
@@ -392,10 +392,10 @@ const ResultsPage = ({ location, tracking }) => {
         <p>
           <strong>No clinical trials matched your search.</strong>
         </p>
-        <p>
+        <div>
           For assistance, please contact the Cancer Information Service. You can{' '}
           <ChatOpener /> or call 1-800-4-CANCER (1-800-422-6237).
-        </p>
+        </div>
         <p>
           <Link
             to={`${
