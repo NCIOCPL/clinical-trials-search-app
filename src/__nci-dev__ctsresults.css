@@ -10,7 +10,7 @@
 .icon-expand,
 .lightbulb-circle-yellow {
   display: inline-block;
-  background-image: url(/publishedcontent/images/images/design-elements/sprites/svg-sprite.__v15577802.svg);
+  background-image: url(https://cancer.gov/PublishedContent/images/images/design-elements/sprites/svg-sprite.__v15577802.svg);
   background-size: 12em 262.5em;
 }
 .cts-start-over {
@@ -1103,7 +1103,7 @@ a.listing-chat-button:hover {
   .select2-selection--single
   .select2-selection__arrow:before {
   display: inline-block;
-  background-image: url(/publishedcontent/images/images/design-elements/sprites/svg-sprite.__v15577802.svg);
+  background-image: url(https://cancer.gov/PublishedContent/images/images/design-elements/sprites/svg-sprite.__v15577802.svg);
   background-size: 12em 262.5em;
 }
 .select2-container {
