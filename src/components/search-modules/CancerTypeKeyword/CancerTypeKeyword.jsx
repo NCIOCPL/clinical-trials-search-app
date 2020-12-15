@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Fieldset, Autocomplete } from '../../atomic';
 import { getDiseasesForSimpleTypeAhead } from '../../../store/actions';
+import { sortItemsByName } from '../../../utilities'
 
 const CancerTypeKeyword = ({ handleUpdate }) => {
   const dispatch = useDispatch();
@@ -18,21 +19,16 @@ const CancerTypeKeyword = ({ handleUpdate }) => {
     return item.name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
   };
 
-  // when selecting from dropdown, make it the cancer type and clear keywords/phrases
-  const handleSelection = (diseaseResult) => {
-    handleUpdate('cancerType', diseaseResult);
-    handleUpdate('keywordPhrases', '');
-  }
-
   return (
     <Fieldset
       id="type"
       legend="Cancer Type/Keyword"
-      helpUrl="https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/help#basicsearch"
+      helpUrl="/about-cancer/treatment/clinical-trials/search/help#basicsearch"
     >
       <Autocomplete
         id="ctk"
         label="Cancer Type/Keyword"
+        labelHidden
         value={CTK.value}
         inputProps={{ placeholder: 'Start typing to select a cancer type or keyword' }}
         wrapperStyle={{ position: 'relative', display: 'inline-block' }}
@@ -40,14 +36,17 @@ const CancerTypeKeyword = ({ handleUpdate }) => {
         inputHelpText="Leave blank to search all cancer types or keywords."
         getItemValue={item => item.name}
         shouldItemRender={matchItemToTerm}
+        sortItems={sortItemsByName}
         onChange={(event, value) => {
           setCTK({ value });
           handleUpdate('cancerType', {name: '', codes: []})
           handleUpdate('keywordPhrases', value);
+          handleUpdate('typeCode', {});
         }}
         onSelect={(value, item) => {
           setCTK({ value });
-          handleSelection(item);
+          handleUpdate('cancerType', item);
+          handleUpdate('keywordPhrases', '');
         }}
         renderMenu={children => (
           <div className="cts-autocomplete__menu --q">

@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import InputLabel from '../InputLabel';
-import utils from '../../../utilities/utilities';
+import {uniqueIdForComponent} from '../../../utilities';
+import { connect } from 'react-redux';
+import { trackFormInputChange } from '../../../store/modules/analytics/tracking/tracking.actions';
 import './Dropdown.scss';
 
 //  Class representing a dropdown
@@ -18,7 +20,7 @@ import './Dropdown.scss';
 //  - required: bool. Adds required label, required attribute and aria-required='true'
 //  - errorMessage: string. If present triggers the error state and displays the error message
 
-export default class Dropdown extends React.Component {
+class Dropdown extends React.Component {
   //  Constructor
   //  @param {object} props The props. See proptypes below.
   //
@@ -33,6 +35,7 @@ export default class Dropdown extends React.Component {
     label: PropTypes.string.isRequired,
     children: PropTypes.node.isRequired,
     classes: PropTypes.string,
+    disableTracking: PropTypes.bool,
     required: PropTypes.bool,
     hasError: PropTypes.bool,
     errorMessage: PropTypes.string,
@@ -44,6 +47,7 @@ export default class Dropdown extends React.Component {
     required: false,
     classes: '',
     hasError: false,
+    disableTracking: false,
     action: () => {},
   };
 
@@ -60,17 +64,29 @@ export default class Dropdown extends React.Component {
 
   // check to see if an Id was passed in, if not generate one.
   componentWillMount() {
-    this.id = this.props.id ? this.props.id : utils.uniqueIdForComponent(this);
+    this.id = this.props.id ? this.props.id : uniqueIdForComponent(this);
   }
 
-  // If a errorMessage is passed after initial render, adjust the state accordingly
-  componentWillReceiveProps({ errorMessage }) {
-    if (errorMessage) {
-      this.setState({
-        hasError: true,
-        errorMessageBody: errorMessage,
-      });
-    }
+  /**
+   * Shared change handler for field tracking
+   * @param {Object} event 
+   */
+  _internalTrackInputChange(event) {
+    const { target } = event;
+
+    const { form, id, value } = target;
+    const { errorMessage, trackFormInputChange } = this.props;
+    const { errorMessageBody, hasError } = this.state;
+    const formName = form && form.id ? form.id : null;
+    const inputActionProps = {
+      errorMessage: errorMessageBody,
+      formName,
+      hasError,
+      id,
+      value
+    };
+    trackFormInputChange(inputActionProps);
+    return true;
   }
 
   //  Update the state when user selects a new option
@@ -81,28 +97,12 @@ export default class Dropdown extends React.Component {
       value: event.target.value,
     });
     this.props.action(event);
+    if (!this.props.disableTracking) {
+      this._internalTrackInputChange(event);
+    }
   }
 
   render() {
-    let errorMessage = null;
-    if (this.state.hasError) {
-      errorMessage = (
-        <span className="cts-error-message" role="alert">
-          {this.state.errorMessageBody}
-        </span>
-      );
-    }
-
-    let emptyPlaceholder = null;
-
-    if (this.state.value === '') {
-      emptyPlaceholder = (
-        <option disabled value="">
-          Select ...
-        </option>
-      );
-    }
-
     return (
       <div className={this.props.classes}>
         <InputLabel
@@ -111,7 +111,11 @@ export default class Dropdown extends React.Component {
           label={this.props.label}
         />
 
-        {errorMessage}
+        {this.props.hasError && (
+          <span className="cts-error-message" role="alert">
+            {this.props.errorMessage}
+          </span>
+        )}
 
         <select
           className="cts-select"
@@ -121,10 +125,22 @@ export default class Dropdown extends React.Component {
           required={this.props.required}
           onChange={this._handleChange.bind(this)}
         >
-          {emptyPlaceholder}
+          {this.state.value === '' && (
+            <option disabled value="">
+              Select ...
+            </option>
+          )}
           {this.props.children}
         </select>
       </div>
     );
   }
 }
+
+const mapDispatchToProps = {
+  trackFormInputChange
+};
+
+export default connect(
+    null, mapDispatchToProps
+)(Dropdown);

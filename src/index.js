@@ -1,4 +1,4 @@
-import './polyfills/array_fill';
+import './polyfills';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -10,24 +10,33 @@ import * as reducers from './store/reducers';
 import {
   loadStateFromSessionStorage,
   saveStatetoSessionStorage,
-} from './utilities/utilities';
+} from './utilities';
 import './index.css';
 import createCTSMiddleware from './middleware/CTSMiddleware';
 import cacheMiddleware from './middleware/cacheMiddleware';
 import { ClinicalTrialsServiceFactory } from '@nciocpl/clinical-trials-search-client.js';
 
 import App from './App';
+import AnalyticsProvider from './AnalyticsProvider';
+
+import {
+  CommonAnalyticsActions,
+  DescriptionAnalyticsActions,
+  ResultsAnalyticsActions,
+  SearchAnalyticsActions
+} from './utilities/cgdp-analytics'
 
 const initialize = ({
   appId = '@@/DEFAULT_CTS_APP_ID',
   useSessionStorage = true,
   rootId = 'NCI-CTS-root',
   services = {},
-  language = 'en',
+  printCacheEndpoint = '/CTS.Print/GenCache',
+  zipConversionEndpoint = '/cts_api/zip_code_lookup',
+  analyticsHandler = (data) => {},
 } = {}) => {
-
   let cachedState;
-  
+
   if (process.env.NODE_ENV !== 'development' && useSessionStorage === true) {
     cachedState = loadStateFromSessionStorage(appId);
   }
@@ -42,6 +51,14 @@ const initialize = ({
     composeWithDevTools(applyMiddleware(cacheMiddleware, ctsMiddleware))
   );
 
+  store.dispatch({
+    type: 'LOAD_GLOBALS',
+    payload: {
+      printCacheEndpoint,
+      zipConversionEndpoint
+    },
+  });
+
   // With the store now created, we want to subscribe to updates.
   // This implementation updates session storage backup on each store change.
   // If for some reason that proves too heavy, it's simple enough to scope to
@@ -51,23 +68,41 @@ const initialize = ({
     const saveDesiredStateToSessionStorage = () => {
       const state = store.getState();
       // const { form, ...state } = allState;
-      saveStatetoSessionStorage({
-        state,
-        appId,
-      });
+      // saveStatetoSessionStorage({
+      //   state,
+      //   appId,
+      // });
     };
 
     store.subscribe(saveDesiredStateToSessionStorage);
   }
+
   const appRootDOMNode = document.getElementById(rootId);
-  ReactDOM.render(
-    <Provider store={store}>
-      <Router history={history}>
-        <App />
-      </Router>
-    </Provider>,
-    appRootDOMNode
-  );
+  const isRehydrating = appRootDOMNode.getAttribute('data-isRehydrating');
+
+  if (isRehydrating) {
+    ReactDOM.hydrate(
+      <Provider store={store}>
+        <Router history={history} basename="/about-cancer/treatment/clinical-trials/search">
+          <AnalyticsProvider analyticsHandler={analyticsHandler}>
+            <App services={services} zipConversionEndpoint={zipConversionEndpoint}/>
+          </AnalyticsProvider>
+        </Router>
+      </Provider>,
+      appRootDOMNode
+    );
+  } else {
+    ReactDOM.render(
+      <Provider store={store}>
+        <Router history={history} basename="/about-cancer/treatment/clinical-trials/search">
+          <AnalyticsProvider analyticsHandler={analyticsHandler}>
+            <App services={services} zipConversionEndpoint={zipConversionEndpoint} />
+          </AnalyticsProvider>
+        </Router>
+      </Provider>,
+      appRootDOMNode
+    );
+  }
   return appRootDOMNode;
 };
 
@@ -80,18 +115,34 @@ if (process.env.NODE_ENV !== 'production') {
   }
   const rootId = 'NCI-CTS-root';
   const ctsSearch = () => {
-    const hostName = 'clinicaltrialsapi.cancer.gov';
+    const hostName = 'ctsproxy.cancer.gov';
     const service = ClinicalTrialsServiceFactory.create(hostName);
     return service;
   };
+
+  const zipConversionEndpoint =`${window.location.protocol}//${window.location.host}/cts_api/zip_code_lookup`;
 
   initialize({
     rootId,
     services: {
       ctsSearch,
     },
-    language: 'en',
+    printCacheEndpoint: 'https://www.cancer.gov/CTS.Print/GenCache',
+    zipConversionEndpoint,
+    analyticsHandler: (data) => { console.log(data); },
   });
 }
 
 export default initialize;
+
+// This is kind of hacky. These are the mapping functions for this apps analytics
+// to Cgov-Digital-Platform Adobe Analytics structures. We have working tests here
+// so we put the functions here so we have tests for them. Instead of copy and
+// pasting the files, we are exporting them with the app. This *is* nice because
+// if someone raises a new event, then they can add the action for that event.
+export const AnalyticsActions = {
+  ...CommonAnalyticsActions,
+  ...DescriptionAnalyticsActions,
+  ...ResultsAnalyticsActions,
+  ...SearchAnalyticsActions
+}

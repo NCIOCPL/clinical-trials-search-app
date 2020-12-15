@@ -1,43 +1,59 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+
 import { Fieldset, TextInput } from '../../atomic';
+import { trackedEvents } from '../../../tracking';
 
-const Age = ({ handleUpdate }) => {
-  const {age, ageModified} = useSelector(store => store.form);
-  const [errorMsg, setErrorMsg] = useState('');
+const Age = ({ handleUpdate, tracking }) => {
+  const { age, ageModified, formType, hasInvalidAge } = useSelector(store => store.form);
+  const [inputtedAge, setInputtedAge] = useState(age);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const validateAgeEntry = () => {
-    let parsedAge = parseInt(age);
-    if (
-      Number.isNaN(parsedAge) ||
-      parsedAge > 120 ||
-      parsedAge < 0
-    ) {
-      setErrorMsg('Please enter a number between 1 and 120.');
-    }else {
-      setErrorMsg('');
+  const validateAgeEntry = (a) => {
+    const { InputValidation } = trackedEvents;
+    const invalidAgeText = 'Please enter a number between 1 and 120.';
+    setInputtedAge(a);
+    if (a !== '' && (isNaN(a) || a > 120 || a < 1)) {
+      setErrorMessage(invalidAgeText);
+      handleUpdate('age', '');
+      handleUpdate('hasInvalidAge', true);
+      InputValidation.data.field = 'age';
+      InputValidation.data.formType = formType;
+      InputValidation.data.message = invalidAgeText;
+      if( !hasInvalidAge ) {
+        tracking.trackEvent(InputValidation);
+      }
+    } else {
+      setErrorMessage('');
+      handleUpdate('age', a);
+      handleUpdate('hasInvalidAge', false);
     }
-    if(ageModified){
+    if (ageModified) {
       handleUpdate('ageModified', false);
     }
   };
+
+  const helperText =
+    formType === 'basic'
+      ? 'Your age helps determine which trials are right for you.'
+      : 'Enter the age of the participant.';
 
   return (
     <Fieldset
       id="age"
       legend="Age"
-      helpUrl="https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/help#basicsearch"
+      helpUrl="/about-cancer/treatment/clinical-trials/search/help#age"
     >
       <TextInput
-        action={e => handleUpdate(e.target.id, e.target.value)}
+        action={e => validateAgeEntry(e.target.value)}
         id="age"
-        value={age}
+        value={inputtedAge}
         label="age"
         labelHidden
-        errorMessage={errorMsg}
-        inputHelpText="Your age helps determine which trials are right for you."
+        errorMessage={errorMessage}
+        inputHelpText={helperText}
         maxLength={3}
-        onBlur={validateAgeEntry}
+        onChange={validateAgeEntry}
         modified={ageModified}
       />
     </Fieldset>

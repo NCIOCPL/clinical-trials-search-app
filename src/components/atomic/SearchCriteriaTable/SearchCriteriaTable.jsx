@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Accordion, AccordionItem, Table } from '../../atomic';
-import { updateForm } from '../../../store/actions';
+import { Link } from 'react-router-dom';
+
 import './SearchCriteriaTable.scss';
 
-const SearchCriteriaTable = () => {
+import { Accordion, AccordionItem, Table } from '../../atomic';
+import { START_OVER_LINK } from '../../../constants';
+import { updateFormField } from '../../../store/actions';
+
+const SearchCriteriaTable = ({
+  placement = 'results',
+  handleReset,
+  handleRefine,
+}) => {
   const dispatch = useDispatch();
 
   //store vals
@@ -42,13 +50,12 @@ const SearchCriteriaTable = () => {
 
   const handleUpdate = (field, value) => {
     dispatch(
-      updateForm({
+      updateFormField({
         field,
         value,
       })
     );
   };
-
 
   const criteria = [];
   const formatStoreDataForDisplay = () => {
@@ -203,7 +210,10 @@ const SearchCriteriaTable = () => {
           joinedVals.push(trialType.label);
         }
       });
-      if (joinedVals.length > 0 && joinedVals.length !== trialTypes.length) {
+      // The list of trial types for some reason do not cover ALL the
+      // possible types. So even if they check all the checkboxes,
+      // then we need to show all of those.
+      if (joinedVals.length > 0) {
         criteria.push({
           category: 'Trial Type',
           selection: joinedVals.join(', '),
@@ -212,24 +222,25 @@ const SearchCriteriaTable = () => {
     }
 
     if (drugs && drugs.length > 0) {
-      let joinedVals = '';
+      let joinedVals = [];
+
       drugs.forEach(function(drug) {
-        joinedVals += drug.name + ', ';
+        joinedVals.push(drug.name);
       });
       criteria.push({
         category: 'Drug/Drug Family',
-        selection: joinedVals,
+        selection: joinedVals.join(', ')
       });
     }
 
     if (treatments && treatments.length > 0) {
-      let joinedVals = '';
+      let joinedVals = [];
       treatments.forEach(function(treatment) {
-        joinedVals += treatment.name + ', ';
+        joinedVals.push(treatment.name);
       });
       criteria.push({
         category: 'Other Treatments',
-        selection: joinedVals,
+        selection: joinedVals.join(', ')
       });
     }
 
@@ -238,13 +249,16 @@ const SearchCriteriaTable = () => {
     }
 
     if (trialPhases) {
-      let joinedVals = [];
+      let joinedVals = [];      
       trialPhases.forEach(function(phase) {
         if (phase.checked === true) {
           joinedVals.push(phase.label);
         }
       });
-      if (joinedVals.length > 0 && joinedVals.length < trialPhases.length) {
+      // The list of trial phases do not cover ALL the possible phases
+      // so if some one selects I, II, III, IV, then we need to show
+      // all of those.
+      if (joinedVals.length > 0) {
         criteria.push({
           category: 'Trial Phase',
           selection: joinedVals.join(', '),
@@ -269,22 +283,67 @@ const SearchCriteriaTable = () => {
     setCriterion([...criteria]);
   };
 
-  return criterion.length ? (
-    <Accordion bordered startCollapsed>
-      <AccordionItem titleExpanded="Hide Search Criteria" titleCollapsed="Show Search Criteria">
-        <div className="search-criteria-table">
-          <Table
-            borderless
-            columns={[
-              { colId: 'category', displayName: 'Category' },
-              { colId: 'selection', displayName: 'Your Selection' },
-            ]}
-            data={criterion}
-          />
+  return criterion.length > 0 ? (
+    <>
+      {placement === 'trial' ? (
+        <strong>This clinical trial matches:</strong>
+      ) : null}
+      <Accordion classes="table-dropdown" startCollapsed>
+        <AccordionItem
+          titleExpanded="Hide Search Criteria"
+          titleCollapsed="Show Search Criteria"
+        >
+          <div className="search-criteria-table">
+            <Table
+              borderless
+              columns={[
+                { colId: 'category', displayName: 'Category' },
+                { colId: 'selection', displayName: 'Your Selection' },
+              ]}
+              data={criterion}
+            />
+          </div>
+        </AccordionItem>
+      </Accordion>
+      {placement === 'trial' ? (
+        <Link
+          to={`${formType === 'basic' ? '/about-cancer/treatment/clinical-trials/search/' : '/about-cancer/treatment/clinical-trials/search/advanced'}`}
+          onClick={() => handleReset(START_OVER_LINK)}
+        >
+          <strong>Start Over</strong>
+        </Link>
+      ) : (
+        <div className="reset-form">
+          <Link
+            to={`${formType === 'basic' ? '/about-cancer/treatment/clinical-trials/search/' : '/about-cancer/treatment/clinical-trials/search/advanced'}`}
+            onClick={() => handleReset(START_OVER_LINK)}
+          >
+            Start Over
+          </Link>
+          <span aria-hidden="true" className="separator">
+            |
+          </span>
+          <button type="button" className="btnAsLink" onClick={handleRefine}>
+            Modify Search Criteria
+          </button>
         </div>
-      </AccordionItem>
-    </Accordion>
-  ) : null;
+      )}
+    </>
+  ) : (
+    <>
+      {placement === 'trial' && (
+        <>
+          <strong>This clinical trial matches: "all trials"</strong> |{' '}
+          <Link
+            to={`${formType === 'basic' ? '/about-cancer/treatment/clinical-trials/search/' : '/about-cancer/treatment/clinical-trials/search/advanced'}`}
+            onClick={() => handleReset(START_OVER_LINK)}
+          >
+            <strong>Start Over</strong>
+          </Link>
+        </>
+      )}
+    </>
+  );
 };
 
 export default SearchCriteriaTable;

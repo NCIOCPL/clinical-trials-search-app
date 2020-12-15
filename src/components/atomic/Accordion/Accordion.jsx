@@ -6,12 +6,14 @@ class Accordion extends React.Component {
   static propTypes = {
     bordered: PropTypes.bool,
     children: PropTypes.node,
-    startCollapsed: PropTypes.bool,
+    classes: PropTypes.string,
+    startCollapsed: PropTypes.bool
   };
 
   static defaultProps = {
     bordered: false,
-    startCollapsed: false,
+    classes: '',
+    startCollapsed: false
   };
 
   constructor(props) {
@@ -20,7 +22,6 @@ class Accordion extends React.Component {
     this.state = {
       activeIndex: props.startCollapsed ? -1 : 0,
     };
-    this._initialExpand();
   }
 
   //  Before the component mounts, loop through the children to see if any of
@@ -61,10 +62,13 @@ class Accordion extends React.Component {
   //
   //  @param {Number} index The item index that should be the active item.
   //
+  componentDidMount() {
+    this._initialExpand();
+  }
+
   setActiveItem(index) {
     this.setState({ activeIndex: index });
   }
-
 
   render() {
     let index = 0;
@@ -80,7 +84,7 @@ class Accordion extends React.Component {
       <div
         className={`cts-accordion ${
           this.props.bordered ? 'cts-accordion--bordered' : ''
-        }`}
+        } ${this.props.classes}`}
       >
         {children}
       </div>

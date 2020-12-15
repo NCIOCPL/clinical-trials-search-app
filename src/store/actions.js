@@ -1,32 +1,38 @@
 // import querystring from 'query-string';
-import { UPDATE_FORM, CLEAR_FORM, RECEIVE_DATA } from './identifiers';
-
-//Statuses of what Cancer.gov trials should be shown
-const VIEWABLE_TRIALS = [
-  'Active',
-  'Approved',
-  'Enrolling by Invitation',
-  'In Review',
-  'Temporarily Closed to Accrual',
-  'Temporarily Closed to Accrual and Intervention',
-];
-
-//These are the two catch all buckets that we must add to the bottom of the list.
-//ORDER will matter here.
-const OTHER_MAIN_TYPES = [
-  'C2916', //Carcinoma not in main type (Other Carcinoma)
-  'C3262', //Neoplasm not in main type (Other Neoplasm)
-  'C2991', //Disease or Disorder (Other Disease)
-];
+import {
+  UPDATE_FORM_FIELD,
+  UPDATE_FORM,
+  LOAD_GLOBAL,
+  CLEAR_FORM,
+  RECEIVE_DATA,
+} from './identifiers';
+import { ACTIVE_TRIAL_STATUSES, OTHER_MAIN_TYPES } from '../constants';
 
 /**
  * Facade wrapping a ClinicalTrialsService instance to create app specific methods
  * and simplify interacting with API.  Ported from ctapi-facade.ts from WCMS
  */
 
-export function updateForm({ field, value }) {
+export function updateFormField({ field, value }) {
+  return {
+    type: UPDATE_FORM_FIELD,
+    payload: {
+      field,
+      value,
+    },
+  };
+}
+
+export function updateForm(newState) {
   return {
     type: UPDATE_FORM,
+    payload: newState,
+  };
+}
+
+export function updateGlobal({ field, value }) {
+  return {
+    type: LOAD_GLOBAL,
     payload: {
       field,
       value,
@@ -70,18 +76,21 @@ export function getDiseasesForSimpleTypeAhead({
               name,
               size,
               sort: 'cancergov',
-              current_trial_status: VIEWABLE_TRIALS
+              current_trial_status: ACTIVE_TRIAL_STATUSES,
             },
           },
           fetchHandlers: {
-            formatResponse: diseases => {
+            formatResponse: res => {
+              let diseases = [...res];
+
               // TODO: DEBUG
               if (isDebug) {
                 diseases.forEach(
                   disease =>
-                    (disease.fieldName += ' (' + disease.codes.join('|') + ')')
+                    (disease.name += ' (' + disease.codes.join('|') + ')')
                 );
               }
+
               return diseases;
             },
           },
@@ -91,12 +100,7 @@ export function getDiseasesForSimpleTypeAhead({
   };
 }
 
-export function getCancerTypeDescendents({
-  cacheKey,
-  codes,
-  size = 0,
-  isDebug = false,
-}) {
+export function getCancerTypeDescendents({ cacheKey, codes }) {
   return {
     type: '@@cache/RETRIEVE',
     payload: {
@@ -128,7 +132,7 @@ export function getMainType({ size = 0, isDebug = false }) {
             ancestorId: undefined,
             additionalParams: {
               size,
-              current_trial_status: VIEWABLE_TRIALS,
+              current_trial_status: ACTIVE_TRIAL_STATUSES,
             },
           },
           fetchHandlers: {
@@ -152,7 +156,7 @@ export function getMainType({ size = 0, isDebug = false }) {
               if (isDebug) {
                 diseases.forEach(
                   disease =>
-                    (disease.fieldName += ' (' + disease.codes.join('|') + ')')
+                    (disease.name += ' (' + disease.codes.join('|') + ')')
                 );
               }
               return diseases;
@@ -181,7 +185,7 @@ export function getSubtypes({ ancestorId, size = 0, isDebug = false }) {
             ancestorId: ancestorId,
             additionalParams: {
               size,
-              current_trial_status: VIEWABLE_TRIALS,
+              current_trial_status: ACTIVE_TRIAL_STATUSES,
             },
           },
           fetchHandlers: {
@@ -189,7 +193,7 @@ export function getSubtypes({ ancestorId, size = 0, isDebug = false }) {
               if (isDebug) {
                 diseases.forEach(
                   disease =>
-                    (disease.fieldName += ' (' + disease.codes.join('|') + ')')
+                    (disease.name += ' (' + disease.codes.join('|') + ')')
                 );
               }
               return diseases;
@@ -218,7 +222,7 @@ export function getStages({ ancestorId, size = 0, isDebug = false }) {
             ancestorId: ancestorId,
             additionalParams: {
               size,
-              current_trial_status: VIEWABLE_TRIALS,
+              current_trial_status: ACTIVE_TRIAL_STATUSES,
             },
           },
           fetchHandlers: {
@@ -227,7 +231,7 @@ export function getStages({ ancestorId, size = 0, isDebug = false }) {
               if (isDebug) {
                 diseases.forEach(
                   disease =>
-                    (disease.fieldName += ' (' + disease.codes.join('|') + ')')
+                    (disease.name += ' (' + disease.codes.join('|') + ')')
                 );
               }
               return diseases;
@@ -256,7 +260,7 @@ export function getFindings({ ancestorId, size = 0, isDebug = false }) {
             ancestorId: ancestorId,
             additionalParams: {
               size,
-              current_trial_status: VIEWABLE_TRIALS,
+              current_trial_status: ACTIVE_TRIAL_STATUSES,
             },
           },
           fetchHandlers: {
@@ -265,7 +269,7 @@ export function getFindings({ ancestorId, size = 0, isDebug = false }) {
               if (isDebug) {
                 diseases.forEach(
                   disease =>
-                    (disease.fieldName += ' (' + disease.codes.join('|') + ')')
+                    (disease.name += ' (' + disease.codes.join('|') + ')')
                 );
               }
               return diseases;
@@ -277,7 +281,6 @@ export function getFindings({ ancestorId, size = 0, isDebug = false }) {
   };
 }
 
-
 export function getCountries({ size = 100 } = {}) {
   return {
     type: '@@cache/RETRIEVE',
@@ -288,10 +291,10 @@ export function getCountries({ size = 100 } = {}) {
         {
           method: 'getTerms',
           requestParams: {
-            category: 'sites.org_country',
+            termType: 'sites.org_country',
             additionalParams: {
               sort: 'term',
-              current_trial_status: VIEWABLE_TRIALS,
+              current_trial_statuses: ACTIVE_TRIAL_STATUSES,
             },
             size,
           },
@@ -311,7 +314,7 @@ export function getCountries({ size = 100 } = {}) {
  */
 export function searchHospital({ searchText, size = 10 }) {
   return {
-    type: '@@cache/RETRIEVE',
+    type: '@@api/CTS',
     payload: {
       service: 'ctsSearch',
       cacheKey: 'hospitals',
@@ -323,7 +326,7 @@ export function searchHospital({ searchText, size = 10 }) {
             additionalParams: {
               term: searchText,
               sort: 'term',
-              current_trial_statuses: VIEWABLE_TRIALS,
+              current_trial_statuses: ACTIVE_TRIAL_STATUSES,
             },
             size,
           },
@@ -348,10 +351,10 @@ export function searchDrugs({ searchText, isDebug = false, size = 10 } = {}) {
           method: 'getInterventions',
           requestParams: {
             category: ['Agent', 'Agent Category'],
-            searchText: searchText,
+            name: searchText,
             size: size,
             additionalParams: {
-              current_trial_status: VIEWABLE_TRIALS,
+              current_trial_status: ACTIVE_TRIAL_STATUSES,
             },
             sort: 'cancergov',
           },
@@ -385,10 +388,10 @@ export function searchOtherInterventions({ searchText, size = 10 } = {}) {
           method: 'getInterventions',
           requestParams: {
             category: 'Other',
-            searchText: searchText,
+            name: searchText,
             size: size,
             additionalParams: {
-              current_trial_status: VIEWABLE_TRIALS,
+              current_trial_status: ACTIVE_TRIAL_STATUSES,
             },
             sort: 'cancergov',
           },
@@ -426,7 +429,7 @@ export function searchTrialInvestigators({ searchText, size = 10 } = {}) {
             additionalParams: {
               term: searchText,
               sort: 'term',
-              current_trial_status: VIEWABLE_TRIALS,
+              current_trial_statuses: ACTIVE_TRIAL_STATUSES,
             },
             size,
           },
@@ -453,9 +456,45 @@ export function searchLeadOrg({ searchText, size = 10 } = {}) {
             additionalParams: {
               term: searchText,
               sort: 'term',
-              current_trial_status: VIEWABLE_TRIALS,
+              current_trial_statuses: ACTIVE_TRIAL_STATUSES,
             },
             size,
+          },
+        },
+      ],
+    },
+  };
+}
+
+export function searchTrials({ cacheKey, data }) {
+  return {
+    type: '@@api/CTS',
+    payload: {
+      service: 'ctsSearch',
+      cacheKey: cacheKey,
+      requests: [
+        {
+          method: 'searchTrials',
+          requestParams: {
+            document: JSON.stringify(data),
+          }
+        },
+      ],
+    },
+  };
+}
+
+export function getTrial({ trialId }) {
+  return {
+    type: '@@api/CTS',
+    payload: {
+      service: 'ctsSearch',
+      cacheKey: trialId,
+      requests: [
+        {
+          method: 'getTrial',
+          requestParams: {
+            trialId: trialId,
           },
         },
       ],

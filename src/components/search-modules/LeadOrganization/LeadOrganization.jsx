@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Fieldset from '../../atomic/Fieldset';
 import { Autocomplete } from '../../atomic';
 import { searchLeadOrg } from '../../../store/actions';
-import { matchItemToTerm, sortItems } from '../../../utilities/utilities';
+import { matchItemToTerm, sortItems } from '../../../utilities';
 
 const LeadOrganization = ({ handleUpdate }) => {
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ const LeadOrganization = ({ handleUpdate }) => {
     <Fieldset
       id="lead_organization"
       legend="Lead Organization"
-      helpUrl="https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/help#leadorganization"
+      helpUrl="/about-cancer/treatment/clinical-trials/search/help#leadorganization"
     >
       <Autocomplete
         label="Lead organization"
@@ -37,7 +37,10 @@ const LeadOrganization = ({ handleUpdate }) => {
         getItemValue={item => item.term}
         shouldItemRender={matchItemToTerm}
         sortItems={sortItems}
-        onChange={(event, value) => setOrgName({ value })}
+        onChange={(event, value) => {
+          handleUpdate('leadOrg', {term: value, termKey: value});
+          setOrgName({ value })          
+        }}
         onSelect={(value, item) => { 
           handleUpdate('leadOrg', item);
           setOrgName({value: item.term});

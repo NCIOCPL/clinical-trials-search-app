@@ -1,13 +1,21 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useCachedValues } from '../../utilities/hooks';
-import { getMainType, getCancerTypeDescendents } from '../../store/actions';
 import { Link } from 'react-router-dom';
-import { SearchCriteriaTable } from '../../components/atomic';
-import { history } from '../../services/history.service';
+import { useTracking } from 'react-tracking';
 
-const ResultsPageHeader = ({ handleUpdate, resultsCount }) => {
+import { SearchCriteriaTable } from '../../components/atomic';
+import { START_OVER_LINK } from '../../constants';
+import { history } from '../../services/history.service';
+import { getMainType } from '../../store/actions';
+import { trackedEvents } from '../../tracking';
+
+const ResultsPageHeader = ({
+  handleUpdate,
+  handleReset,
+  resultsCount,
+  pageNum,
+  step = 10,
+}) => {
   const dispatch = useDispatch();
   const {
     formType,
@@ -17,12 +25,18 @@ const ResultsPageHeader = ({ handleUpdate, resultsCount }) => {
     keywordPhrases,
     isDirty,
   } = useSelector(store => store.form);
-  const { maintypeOptions = [] } = useCachedValues(['maintypeOptions']);
+  const { trackEvent } = useTracking();
+
+  const { maintypeOptions } = useSelector(store => store.cache);
 
   const handleRefineSearch = () => {
+    
+    const { ModifySearchCriteriaLinkClick } = trackedEvents;
+    ModifySearchCriteriaLinkClick.data.formType = formType;
+
     if (formType === 'basic') {
       //prefetch stuff
-      if (maintypeOptions.length < 1) {
+      if (!maintypeOptions || maintypeOptions.length < 1) {
         dispatch(getMainType({}));
       }
       if (cancerType.name !== '') {
@@ -39,33 +53,49 @@ const ResultsPageHeader = ({ handleUpdate, resultsCount }) => {
       }
       handleUpdate('formType', 'advanced');
     }
+
     handleUpdate('refineSearch', true);
-    history.push('/search');
+    trackEvent(ModifySearchCriteriaLinkClick);
+    history.push('/about-cancer/treatment/clinical-trials/search/advanced');
+  
   };
 
   return (
     <div className="cts-results-header">
-      <p>
-        <strong>Results 1-10 of {resultsCount} for your search</strong>
-      </p>
-
-      <SearchCriteriaTable handleUpdate={handleUpdate} />
-      <p className="reset-form">
-        <Link to="/search">Start Over</Link>
-        {isDirty && (
-          <>
-            <span aria-hidden="true" className="separator">
-              |
-            </span>
-            <button
-              type="button"
-              className="btnAsLink"
-              onClick={handleRefineSearch}>
-              Modify Search Criteria
-            </button>
-          </>
-        )}
-      </p>
+      {resultsCount === 0 ? (
+        <div className="no-trials-found">
+          <strong>No clinical trials matched your search.</strong>
+        </div>
+      ) : (
+        <div className="all-trials">
+          <strong>
+            Results{' '}
+            {`${pageNum * step + 1}-${
+              resultsCount <= step * (pageNum + 1)
+                ? resultsCount
+                : step * (pageNum + 1)
+            } `}{' '}
+            of {resultsCount} for your search{' '}
+            {!isDirty ? (
+              <>
+                for: "all trials" &nbsp; | &nbsp;
+                <Link
+                  to={`${formType === 'basic' ? '/about-cancer/treatment/clinical-trials/search' : '/about-cancer/treatment/clinical-trials/search/advanced'}`}
+                  onClick={() => handleReset(START_OVER_LINK)}
+                >
+                  Start Over
+                </Link>
+              </>
+            ) : (
+              ''
+            )}
+          </strong>
+        </div>
+      )}
+      <SearchCriteriaTable
+        handleRefine={handleRefineSearch}
+        handleReset={handleReset}
+      />
     </div>
   );
 };

@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import scrollIntoView from 'dom-scroll-into-view';
 import { InputLabel, RemovableTag } from '../../atomic';
-import Utilities from '../../../utilities/utilities';
+import {uniqueIdForComponent} from '../../../utilities';
+import { connect } from 'react-redux';
+import { trackFormInputChange } from '../../../store/modules/analytics/tracking/tracking.actions';
+import {SEARCH_FORM_ID} from '../../../constants';
 import './Autocomplete.scss';
 
 const IMPERATIVE_API = [
@@ -232,7 +235,7 @@ class Autocomplete extends React.Component {
     this.maybeAutoCompleteText = this.maybeAutoCompleteText.bind(this);
 
     // Generate an HTML ID if one was not provided
-    this.id = this.props.id || Utilities.uniqueIdForComponent();
+    this.id = this.props.id || uniqueIdForComponent();
   }
 
   componentWillMount() {
@@ -272,12 +275,16 @@ class Autocomplete extends React.Component {
     if (
       (this.state.isOpen && !prevState.isOpen) ||
       ('open' in this.props && this.props.open && !prevProps.open)
-    )
-      this.setMenuPositions();
+    ) {
+      this.setMenuPositions();      
+    }
 
     //this.maybeScrollItemIntoView();
     if (prevState.isOpen !== this.state.isOpen) {
       this.props.onMenuVisibilityChange(this.state.isOpen);
+      if (this.state.isOpen && (this.getFilteredItems(this.props).length > 0)) {
+        this._internalTrackInputChange();
+      }
     }
   }
 
@@ -306,8 +313,22 @@ class Autocomplete extends React.Component {
     }
   }
 
+  /**
+   * Shared change handler for field tracking
+   * @param {Object} event 
+   */
+  _internalTrackInputChange() {
+    const inputActionProps = {
+      formName: SEARCH_FORM_ID,
+      id: this.props.id
+    };
+    
+    this.props.trackFormInputChange(inputActionProps);
+  }  
+
   handleChange(event) {
     this.props.onChange(event, event.target.value);
+    this._internalTrackInputChange(event);
   }
 
   static keyDownHandlers = {
@@ -606,8 +627,9 @@ class Autocomplete extends React.Component {
 
   handleInputClick() {
     // Input will not be focused if it's disabled
-    if (this.isInputFocused() && !this.isOpen() && this.props.value.length > 2)
+    if (this.isInputFocused()) {
       this.setState({ isOpen: true });
+    }
   }
 
   composeEventHandlers(internal, external) {
@@ -672,7 +694,8 @@ class Autocomplete extends React.Component {
                 'cts-input cts-autocomplete__input ' + this.props.inputClasses,
               onFocus: this.handleInputFocus,
               onBlur: this.handleInputBlur,
-              onChange: this.handleChange,
+              onChange: this.handleChange.bind(this),
+              onInput: this._internalTrackInputChange.bind(this),
               onKeyDown: this.composeEventHandlers(
                 this.handleKeyDown,
                 inputProps.onKeyDown
@@ -710,4 +733,10 @@ class Autocomplete extends React.Component {
   }
 }
 
-export default Autocomplete;
+const mapDispatchToProps = {
+  trackFormInputChange
+};
+
+export default connect(
+    null, mapDispatchToProps
+)(Autocomplete);

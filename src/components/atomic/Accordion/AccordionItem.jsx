@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Utilities from '../../../utilities/utilities';
+import {uniqueIdForComponent} from '../../../utilities';
 
 class AccordionItem extends React.Component {
   static propTypes = {
@@ -9,7 +9,7 @@ class AccordionItem extends React.Component {
     children: PropTypes.node,
     expanded: PropTypes.bool,
     titleCollapsed: PropTypes.string,
-    titleExpanded: PropTypes.string
+    titleExpanded: PropTypes.string,
   };
 
   static defaultProps = {
@@ -20,7 +20,6 @@ class AccordionItem extends React.Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
       uuid: '',
     };
@@ -39,9 +38,9 @@ class AccordionItem extends React.Component {
   //  variable to that ID which will cause the component to re-render.
 
   componentDidMount() {
-    let id = Utilities.uniqueIdForComponent(this);
+    let id = uniqueIdForComponent(this);
     this.setState({ uuid: id });
-  };
+  }
 
   //  Click handler for the title element.
   //
@@ -71,7 +70,13 @@ class AccordionItem extends React.Component {
   renderTitleElement() {
     let element;
     if (this.props.titleCollapsed.length > 0) {
-      element = <span>{this.props.expanded? this.props.titleExpanded : this.props.titleCollapsed}</span>;
+      element = (
+        <span>
+          {this.props.expanded && this.props.titleExpanded
+            ? this.props.titleExpanded
+            : this.props.titleCollapsed}
+        </span>
+      );
     } else {
       if (React.Children.count(this.props.children) !== 2) {
         throw new Error('Either a title or 2 child elements must be supplied.');
@@ -80,7 +85,10 @@ class AccordionItem extends React.Component {
       element = children[0];
     }
     return (
-      <h2 className="cts-accordion__heading" aria-expanded={this.props.expanded}>
+      <h2
+        className="cts-accordion__heading"
+        aria-expanded={this.props.expanded}
+      >
         <button
           className="cts-accordion__button"
           aria-expanded={this.props.expanded}
@@ -91,7 +99,7 @@ class AccordionItem extends React.Component {
         </button>
       </h2>
     );
-  };
+  }
 
   //  Renders our content element
   //
@@ -109,7 +117,7 @@ class AccordionItem extends React.Component {
         {element}
       </div>
     );
-  };
+  }
 
   render() {
     // Ensure there are only 2 children.
@@ -125,7 +133,7 @@ class AccordionItem extends React.Component {
         {this.renderContentElement()}
       </React.Fragment>
     );
-  };
+  }
 }
 
 export default AccordionItem;

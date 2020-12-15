@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Utilities from '../../../utilities/utilities';
+import {uniqueIdForComponent} from '../../../utilities';
 import InputLabel from '../InputLabel';
 import './TextInput.scss';
+import { connect } from 'react-redux';
+import { trackFormInputChange } from '../../../store/modules/analytics/tracking/tracking.actions';
 
 class TextInput extends React.Component {
   static propTypes = {
@@ -36,7 +38,6 @@ class TextInput extends React.Component {
       'week',
       'number',
     ]),
-    validators: PropTypes.array,
     value: PropTypes.string,
   };
 
@@ -67,7 +68,7 @@ class TextInput extends React.Component {
     };
 
     // Generate an HTML ID if one was not provided
-    this.id = this.props.id || Utilities.uniqueIdForComponent();
+    this.id = this.props.id || uniqueIdForComponent();
   }
 
   componentDidUpdate(prevProps) {
@@ -130,6 +131,7 @@ class TextInput extends React.Component {
           disabled={this.props.disabled}
           onBlur={this._handleBlur.bind(this)}
           onChange={this._handleChange.bind(this)}
+          onInput={this._internalTrackInputChange.bind(this)}
           spellCheck={this.props.enableSpellCheck ? true : false}
           {...ariaLabel}
         />
@@ -138,64 +140,36 @@ class TextInput extends React.Component {
     );
   }
 
-  _validate() {
-    let validators = this.props.validators;
-    // Check if field empty
-    if (!this.state.value) {
-      // If it's required, say so
-      if (this.props.required) {
-        this.setState({
-          hasError: true,
-          isValid: false,
-          errorMessage: 'This field is required',
-        });
-      } else {
-        // is empty so reset isValid and hasError
-        this.setState({
-          isValid: false,
-          hasError: false,
-          errorMessage: null,
-        });
-      }
-    }
-    // If validator(s) were sent as a prop, test them next
-    else if (validators) {
-      // eslint-disable-next-line
-      for (let validator of validators) {
-        // check is validator is forced 'no validation'
-        if (!validator.pattern && !validator.isValid(this.state.value)) {
-          this.setState({
-            hasError: true,
-            isValid: false,
-            errorMessage: validator.message,
-          });
-          break;
-        } else {
-          this.setState({
-            hasError: false,
-            isValid: true,
-          });
-        }
-      }
-    }
-    // must be required field with a value, so no error
-    else {
-      this.setState({
-        hasError: false,
-        errorMessage: null,
-      });
-    }
-  }
-
   //  onBlur event on input
   _handleBlur() {
     if (
-      (this.props.required || this.props.validators || this.props.onBlur) &&
+      (this.props.required || this.props.onBlur) &&
       !this.state.isPristine
     ) {
-      this._validate();
       this.props.onBlur();
     }
+  }
+
+  /**
+   * Shared change handler for field tracking
+   * @param {Object} event 
+   */
+  _internalTrackInputChange(event) {
+    const { target } = event;
+
+    const { form, id, value } = target;
+    const { errorMessage, trackFormInputChange } = this.props;
+    const { errorMessageBody, hasError } = this.state;
+    const formName = form && form.id ? form.id : null;
+    const inputActionProps = {
+      errorMessage: errorMessageBody,
+      formName,
+      hasError,
+      id,
+      value
+    };
+    trackFormInputChange(inputActionProps);
+    return true;
   }
 
   //  his function runs every time the user changes the contents of the input.
@@ -204,6 +178,7 @@ class TextInput extends React.Component {
     // Check if allowedChars validator exists. If it does, check the last char
     // entered against the validator. If validation fails, return thereby preventing
     // the value from being added to the state.
+
     if (this.props.allowedChars) {
       let input = event.target.value.slice(-1);
       if (!this.props.allowedChars.isValid(input)) {
@@ -223,12 +198,14 @@ class TextInput extends React.Component {
       if (this.state.value && this.state.isPristine) {
         this.setState({ isPristine: false });
       }
-      // if
-      if (this.state.hasError || this.state.isValid) {
-        this._validate();
-      }
     });
   }
 }
 
-export default TextInput;
+const mapDispatchToProps = {
+  trackFormInputChange
+};
+
+export default connect(
+    null, mapDispatchToProps
+)(TextInput);

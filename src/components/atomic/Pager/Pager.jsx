@@ -1,24 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Utilities from '../../../utilities/utilities';
+import { keyHandler } from '../../../utilities';
 import './Pager.scss';
 
-const Pager = ({ data, startFromPage, numberToShow, callback }) => {
+const Pager = ({ data, totalItems, startFromPage, numberToShow, callback }) => {
   const [currentPage, setCurrentPage] = useState(startFromPage);
 
   useEffect(() => {
     if (callback) {
-      const startFrom = currentPage * numberToShow;
-      const endAt = startFrom + numberToShow;
-      const results = data.slice(startFrom, endAt);
-      callback(results, currentPage);
+      // originally, this assumed that the data comes back as a huge block, in CTS case, each results set is a distinct block
+      // just tell the parent to get the page
+      callback(currentPage);
     }
-    document.querySelector('.pager__num--active').focus();
+    //document.querySelector('.pager__num--active').focus();
   }, [currentPage, data, numberToShow]);
 
   useEffect(() => {
     setCurrentPage(startFromPage);
-  }, [startFromPage])
+  }, [startFromPage]);
+
+  //listen for back button
+  useEffect(() => {
+    //handle browser back button events
+    window.onpopstate = e => {
+      if(currentPage >= 1){
+        determineResults(currentPage - 1);
+      }
+    };
+  }, []);
 
   const renderEllipsis = key => {
     return (
@@ -42,12 +51,7 @@ const Pager = ({ data, startFromPage, numberToShow, callback }) => {
           .map((el, idx) => idx);
       }
       if (pagesFromEnd > 3) {
-        pages = [
-          ...pages,
-          activePage + 1,
-          renderEllipsis,
-          divisions - 1,
-        ];
+        pages = [...pages, activePage + 1, renderEllipsis, divisions - 1];
       } else {
         const remainingPages = Array(pagesFromEnd)
           .fill()
@@ -77,7 +81,7 @@ const Pager = ({ data, startFromPage, numberToShow, callback }) => {
             tabIndex="0"
             className={`pager__num ${isCurrent ? 'pager__num--active' : ''}`}
             onClick={!isCurrent ? () => determineResults(currentStep) : null}
-            onKeyPress={Utilities.keyHandler({
+            onKeyPress={keyHandler({
               fn: !isCurrent ? () => determineResults(currentStep) : null,
             })}
           >
@@ -88,9 +92,9 @@ const Pager = ({ data, startFromPage, numberToShow, callback }) => {
     });
   };
 
-  let steps = determineSteps(data.length, numberToShow, currentPage);
+  let steps = determineSteps(totalItems, numberToShow, currentPage);
   let isFirstPage = currentPage === 0;
-  let isLastPage = currentPage + 1 === Math.ceil(data.length / numberToShow);
+  let isLastPage = currentPage + 1 === Math.ceil(totalItems / numberToShow);
   return (
     <nav className="pager__container">
       {steps.length > 0 ? (
@@ -100,7 +104,7 @@ const Pager = ({ data, startFromPage, numberToShow, callback }) => {
               className="pager__arrow"
               tabIndex="0"
               onClick={() => determineResults(currentPage - 1)}
-              onKeyPress={Utilities.keyHandler({
+              onKeyPress={keyHandler({
                 fn: () => determineResults(currentPage - 1),
               })}
             >
@@ -113,7 +117,7 @@ const Pager = ({ data, startFromPage, numberToShow, callback }) => {
               className="pager__arrow"
               tabIndex="0"
               onClick={() => determineResults(currentPage + 1)}
-              onKeyPress={Utilities.keyHandler({
+              onKeyPress={keyHandler({
                 fn: () => determineResults(currentPage + 1),
               })}
             >
@@ -131,6 +135,7 @@ Pager.propTypes = {
   startFromPage: PropTypes.number,
   numberToShow: PropTypes.number,
   callback: PropTypes.func.isRequired,
+  totalItems: PropTypes.number,
 };
 
 Pager.defaultProps = {

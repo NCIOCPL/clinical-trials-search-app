@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Fieldset, Autocomplete, InputLabel } from '../../atomic';
 import { getMainType, getCancerTypeDescendents } from '../../../store/actions';
-import { useCachedValues } from '../../../utilities/hooks';
+import { useCachedValues } from '../../../hooks';
+import {sortItemsByName} from '../../../utilities';
 import './CancerTypeCondition.scss';
 require('../../../polyfills/closest');
 
@@ -12,13 +13,13 @@ const CancerTypeCondition = ({ handleUpdate }) => {
 
   //store values
   const {
-    cancerType,
+    cancerType = {codes: []},
     cancerTypeModified,
-    subtypes,
+    subtypes = [],
     subtypeModified,
-    stages,
+    stages = [],
     stagesModified,
-    findings,
+    findings = [],
     refineSearch,
   } = useSelector(store => store.form);
   //typeahead states
@@ -26,18 +27,48 @@ const CancerTypeCondition = ({ handleUpdate }) => {
   const [stage, setStage] = useState({ value: '' });
   const [sideEffects, setSideEffects] = useState({ value: '' });
   const [ctMenuOpen, setCtMenuOpen] = useState(false);
+  const [subtypeOptions, setSubtypeOptions] = useState([]);
+  const [stageOptions, setStageOptions] = useState([]);
+  const [findingsOptions, setFindingsOptions] = useState([]);
+
 
   const {
-    maintypeOptions = [],
-    subtypeOptions,
-    stageOptions,
-    findingsOptions,
+    maintypeOptions = []
   } = useCachedValues([
-    'maintypeOptions',
-    'subtypeOptions',
-    'stageOptions',
-    'findingsOptions',
+    'maintypeOptions'
   ]);
+
+  const cache = useSelector(store => store.cache);
+  const ctButton = useRef();
+
+  const focusCTButton = () => ctButton.current.blur();
+
+  useEffect(() => {
+    if(cache[cancerType.codes[0]]){
+      populateSubmenus(cancerType.codes[0])
+    }
+  }, [cache])
+
+  const populateSubmenus = (ctCode) => {
+    setSubtypeOptions(cache[ctCode].subtypeOptions);
+    setStageOptions(cache[ctCode].stageOptions);
+    setFindingsOptions(cache[ctCode].findingsOptions);
+  }
+
+  const menuDropdown = document.getElementById('NCI-CTS-root');
+
+
+  const outsideClickListener = event => {
+    if (!document.getElementById('ctMenu').contains(event.target) && ctMenuOpen) {
+      setCtMenuOpen(false);
+      removeClickListener();
+    }
+  };
+
+  const removeClickListener = () => {
+    menuDropdown.removeEventListener('click', outsideClickListener);
+  };
+
 
   // Retrieval of main types is triggered by expanding the cancer type dropdown
   useEffect(() => {
@@ -45,14 +76,17 @@ const CancerTypeCondition = ({ handleUpdate }) => {
     if (maintypeOptions.length < 1 && ctMenuOpen) {
       dispatch(getMainType({}));
     }
+
     if (ctMenuOpen) {
       document.getElementById('ct-searchTerm').focus();
-      watchClickOutside(document.getElementById('ctMenu'));
+      menuDropdown.addEventListener('click', outsideClickListener);
+    } else {
+      removeClickListener()
     }
     if (cancerType.codes.length > 0 && !refineSearch) {
       dispatch(
         getCancerTypeDescendents({
-          cacheKey: cancerType.name,
+          cacheKey: cancerType.codes[0],
           codes: cancerType.codes,
         })
       );
@@ -64,7 +98,14 @@ const CancerTypeCondition = ({ handleUpdate }) => {
     if (maintypeOptions.length > 0 && refineSearch) {
       initRefineSearch();
     }
-  }, [maintypeOptions]);
+  }, []);
+
+  // in case it hasn't come back by this time
+  useEffect(()=> {
+    if (cache['maintypeOptions'] && cache['maintypeOptions'].length > 0 && refineSearch) {
+      initRefineSearch();
+    }
+  }, [cache['maintypeOptions']])
 
   const retrieveDescendents = (cacheKey, diseaseCodes) => {
     dispatch(
@@ -77,17 +118,21 @@ const CancerTypeCondition = ({ handleUpdate }) => {
 
   const initRefineSearch = () => {
     if(cancerTypeModified) {
+
       if (cancerType.type.length > 0 && cancerType.type.includes('maintype')) {
         //if it has a maintype, primary is already set!
         // just retrieve descendents
-        retrieveDescendents(cancerType.name, cancerType.codes);
+        //switch off refineSearch
+        handleUpdate('refineSearch', false);
+        retrieveDescendents(cancerType.codes[0], cancerType.codes);
       } else {
         // use the parentDisease ID to select the primary cancer type
-        let parentCancer = maintypeOptions.find(
+        let parentCancer = cache['maintypeOptions'].find(
           ({ codes }) => codes[0] === cancerType.parentDiseaseID[0]
         );
+
         if (parentCancer) {
-          retrieveDescendents(parentCancer.name, parentCancer.codes);
+          retrieveDescendents(parentCancer.codes[0], parentCancer.codes);
         } else {
           //codes don't match up!  Handle error
           // TODO: handle error (unrecognizable maintype)
@@ -106,9 +151,6 @@ const CancerTypeCondition = ({ handleUpdate }) => {
         handleUpdate('cancerType', parentCancer);
       }
     }
-
-    //switch off refineSearch
-    handleUpdate('refineSearch', false);
   };
 
   const matchItemToTerm = (item, value) => {
@@ -134,34 +176,23 @@ const CancerTypeCondition = ({ handleUpdate }) => {
 
   const handleCTSelect = (value, item) => {
     handleUpdate('cancerType', item);
+    retrieveDescendents(item.codes[0], item.codes);
     handleUpdate('subtypes', []);
     handleUpdate('stages', []);
+    handleUpdate('findings', []);
     handleUpdate('subtypeModified', false);
     handleUpdate('stagesModified', false);
     setCtMenuOpen(false);
+    removeClickListener();
     setSearchText({ value: '', codes: null });
+    focusCTButton();
   };
-
-  function watchClickOutside(element) {
-    const outsideClickListener = event => {
-      if (!element.contains(event.target) && ctMenuOpen) {
-        setCtMenuOpen(false);
-        removeClickListener();
-      }
-    };
-
-    const removeClickListener = () => {
-      document.removeEventListener('click', outsideClickListener);
-    };
-
-    document.addEventListener('click', outsideClickListener);
-  }
 
   return (
     <Fieldset
       id="type"
       legend="Cancer Type/Condition"
-      helpUrl="https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/help#cancertype"
+      helpUrl="/about-cancer/treatment/clinical-trials/search/help#cancertype"
       classes="cancer-type-condition"
     >
       <p>
@@ -172,10 +203,12 @@ const CancerTypeCondition = ({ handleUpdate }) => {
       <div className="ct-select">
         <InputLabel label="Primary Cancer Type/Condition" htmlFor="ct" />
         <button
+          ref={ctButton}
           id="ct-btn"
           className={`ct-select__button faux-select ${
             cancerTypeModified ? '--modified' : ''
           }`}
+          type="button"
           onClick={handleCTSelectToggle}
           aria-label="Click to select specific cancer type"
           aria-haspopup={true}
@@ -206,8 +239,6 @@ const CancerTypeCondition = ({ handleUpdate }) => {
             }}
             onSelect={(value, item) => {
               handleCTSelect(value, item);
-              handleUpdate('subtypeModified', false);
-              handleUpdate('stagesModified', false);
             }}
             renderMenu={children => (
               <div className="cts-autocomplete__menu --ct">
@@ -247,6 +278,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
             items={filterSelectedItems(subtypeOptions, subtypes)}
             getItemValue={item => item.name}
             shouldItemRender={matchItemToTerm}
+            sortItems={sortItemsByName}
             onChange={(event, value) => {
               setSubtype({ value });
               handleUpdate('subtypeModified', false);
@@ -297,6 +329,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
             items={filterSelectedItems(stageOptions, stages)}
             getItemValue={item => item.name}
             shouldItemRender={matchItemToTerm}
+            sortItems={sortItemsByName}
             onChange={(event, value) => {
               setStage({ value });
               handleUpdate('stagesModified', false);
@@ -346,6 +379,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
             items={filterSelectedItems(findingsOptions, findings)}
             getItemValue={item => item.name}
             shouldItemRender={matchItemToTerm}
+            sortItems={sortItemsByName}
             onChange={(event, value) => setSideEffects({ value })}
             onSelect={value => {
               handleUpdate('findings', [

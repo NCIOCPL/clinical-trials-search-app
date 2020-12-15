@@ -5,21 +5,19 @@ import { Checkbox, Fieldset, Toggle } from '../../atomic';
 import './TrialType.scss';
 
 const TrialType = ({ handleUpdate }) => {
-  const healthyVolunteers = useSelector(store => store.form.healthyVolunteers);
-
   //store vals
-  const { trialTypes } = useSelector(store => store.form);
+  const { trialTypes, healthyVolunteers } = useSelector(store => store.form);
   const [trials, setTrials] = useState(trialTypes);
-
   const [hvToggle, setHvToggle] = useState(healthyVolunteers);
 
   useEffect(() => {
-    handleUpdate('trialTypes', [...trials]);
-  }, [trials, handleUpdate]);
+    updateStore();
+  }, [trials, hvToggle]);
 
-  useEffect(() => {
+  const updateStore = () => {
+    handleUpdate('trialTypes', [...trials]);
     handleUpdate('healthyVolunteers', hvToggle);
-  }, [hvToggle, handleUpdate]);
+  };
 
   const handleToggle = checked => {
     setHvToggle(!hvToggle);
@@ -53,11 +51,12 @@ const TrialType = ({ handleUpdate }) => {
       id="trialtype"
       legend="Trial Type"
       classes="trial-type"
-      helpUrl="https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/help#trialtype"
+      helpUrl="/about-cancer/treatment/clinical-trials/search/help#trialtype"
     >
       <p>
         Select the type of trial for your search. You may check more than one
-        box or select "All." You may choose to limit results to trials accepting healthy volunteers.
+        box or select "All". You may choose to limit results to trials accepting
+        healthy volunteers.
       </p>
 
       <div className="data-toggle-block">
@@ -66,6 +65,7 @@ const TrialType = ({ handleUpdate }) => {
           checked={hvToggle}
           label="Limit results to Veterans Affairs facilities"
           onClick={handleToggle}
+          onChange={()=>{}}
         />
         Limit results to trials accepting healthy volunteers
       </div>
@@ -83,7 +83,7 @@ const TrialType = ({ handleUpdate }) => {
         {trialTypes.map((trialType, idx) => (
           <Checkbox
             key={idx}
-            id={`tp_${trialType.value}`}
+            id={`tt_${trialType.value}`}
             value={trialType.value}
             label={trialType.label}
             onChange={handleCheckType}
@@ -99,6 +99,5 @@ TrialType.propTypes = {
   trialTypeFields: PropTypes.array,
   handleUpdate: PropTypes.func,
 };
-
 
 export default TrialType;

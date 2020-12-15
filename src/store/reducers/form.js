@@ -1,4 +1,4 @@
-import { UPDATE_FORM, CLEAR_FORM } from '../identifiers';
+import { UPDATE_FORM_FIELD, UPDATE_FORM, CLEAR_FORM } from '../identifiers';
 
 export const defaultState = {
   age: '', // (a) Age
@@ -8,6 +8,7 @@ export const defaultState = {
   findings: [], // (fin) Side effects
   keywordPhrases: '', // (q) Cancer Type Keyword (ALSO Keyword Phrases)
   zip: '', // (z) Zipcode
+  zipCoords: {lat: '', long: ''},
   zipRadius: '100', //(zp) Radius
   country: 'United States', // (lcnty) Country
   states: [], // (lst) State
@@ -29,10 +30,10 @@ export const defaultState = {
     { label: 'Other', value: 'other', checked: false },
   ], // (tt) Trial Type
   trialPhases: [
-    { label: 'Phase I', value: 'I', checked: false },
-    { label: 'Phase I', value: 'II', checked: false },
-    { label: 'Phase III', value: 'III', checked: false },
-    { label: 'Phase IV', value: 'IV', checked: false },
+    { label: 'Phase I', value: 'i', checked: false },
+    { label: 'Phase II', value: 'ii', checked: false },
+    { label: 'Phase III', value: 'iii', checked: false },
+    { label: 'Phase IV', value: 'iv', checked: false },
   ], // (tp) Trial phase
   nihOnly: false, // (nih) At NIH only
   vaOnly: false, // (va) VA facilities only
@@ -41,12 +42,14 @@ export const defaultState = {
   trialId: '', // (tid) Trial ID,
   investigator: { term: '', termKey: '' }, // (in) Trial investigators ('in' is legacy but is a keyword and does not work well as a key name; be ready to handle both in query string)
   leadOrg: { term: '', termKey: '' }, // (lo) Lead Organization
+  resultsPage: 0,
   
-  formType: 'basic', // (basic (default) | advanced)
+  formType: '', // (empty string (default) | basic | advanced)
   isDirty: false, // only updated after submission of either form
+  zipModified: false,
+  hasInvalidZip: false, // zip does not return coodinates
   refineSearch: false, //is the form in refine search mode
   ageModified: false,
-  zipModified: false,
   cancerTypeModified: false,
   subtypeModified: false,
   stagesModified: false,
@@ -54,12 +57,27 @@ export const defaultState = {
   location: 'search-location-all', // active location option (search-location-all | search-location-zip | search-location-country | search-location-hospital | search-location-nih)
 };
 
+export function addArrayValues(paramName, srcArray) {
+  let params = '';
+  if(srcArray.length > 0){
+    let p = `&${paramName}=`;
+    params += p;
+    params += srcArray.map(e => e.codes ).join(p);
+  }
+  return params;
+}
+
 export const reducer = (state = defaultState, action) => {
   switch (action.type) {
-    case UPDATE_FORM:
+    case UPDATE_FORM_FIELD:
       return {
         ...state,
         [action.payload.field]: action.payload.value,
+      };
+    case UPDATE_FORM:
+      return {
+        ...state,
+        ...action.payload,
       };
     case CLEAR_FORM:
       return {

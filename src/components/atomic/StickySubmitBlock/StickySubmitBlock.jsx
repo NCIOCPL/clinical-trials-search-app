@@ -1,10 +1,19 @@
-import React, { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import React, { useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { useTracking } from 'react-tracking';
+
 import './StickySubmitBlock.scss';
 
-const StickySubmitBlock = ({ sentinelRef }) => {
+import { clearForm } from '../../../store/actions';
+import { trackedEvents } from '../../../tracking/index';
+
+
+const StickySubmitBlock = ({ sentinelRef, onSubmit, formType }) => {
+  const dispatch = useDispatch();
   const stickyEl = useRef(null);
+  const { trackEvent } = useTracking();
+  const { trackClearFormLinkClick } = trackedEvents;
 
   useEffect(() => {
     intObserver.observe(stickyEl.current);
@@ -19,24 +28,44 @@ const StickySubmitBlock = ({ sentinelRef }) => {
     entries.forEach(entry => {
       if (entry.isIntersecting && entry.intersectionRatio === 1) {
         entry.target.classList.remove('--sticky');
-      } else {
+      } else if (window.scrollY < entry.target.offsetTop) {
         entry.target.classList.add('--sticky');
       }
     });
   };
 
+  const handleClick = e => {
+    onSubmit(e);
+  };
+
+  const handleClearForm = e => {
+    // Track before clearing please...
+    trackEvent(trackClearFormLinkClick(formType));
+
+    dispatch(clearForm());
+    window.scrollTo(0, 0);
+    window.location.reload(false);    
+  }
+
   const intObserver = new IntersectionObserver(callback, options);
 
   return (
-    <div ref={stickyEl} className="sticky-block__anchor">
+    <div id="stickyAnchor" ref={stickyEl} className="sticky-block__anchor">
       <div className="sticky-block">
-        {/* <button type="submit" className="btn-submit">
+        <button
+          type="submit"
+          className="btn-submit faux-btn-submit"
+          onClick={handleClick}
+        >
           Find Trials
-        </button> */}
-        <Link to="/r" className="faux-btn-submit">
-          Find Trials
-        </Link>
-        <div className="helper-text">Start your search at any time.</div>
+        </button>
+        <button
+          type="button"
+          className="btn-submit clear-form"
+          onClick={handleClearForm}
+        >
+          Clear Form
+        </button>
       </div>
     </div>
   );
@@ -44,8 +73,11 @@ const StickySubmitBlock = ({ sentinelRef }) => {
 
 StickySubmitBlock.propTypes = {
   sentinelRef: PropTypes.node,
+  onSubmit: PropTypes.func,
 };
 
-StickySubmitBlock.defaultProps = {};
+StickySubmitBlock.defaultProps = {
+  onSubmit: () => {},
+};
 
 export default StickySubmitBlock;
