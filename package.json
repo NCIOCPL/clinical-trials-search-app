@@ -92,7 +92,11 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js",
+    "test": "npm run unit-tests && npm run cy:ci",
+    "test:it": "cypress open",
+    "cy:ci": "start-server-and-test start http://localhost:3000 integration-tests",
+    "unit-tests": "jest",
+    "integration-tests": "cypress run",
     "test:ci": "npm test -- --coverage --watchAll=false",
     "test:cvg": "npm run test:ci -- --watchAll",
     "plop": "plop --plopfile .plop/index.js",
@@ -172,6 +176,9 @@
       "node_modules"
     ]
   },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
+  },
   "devDependencies": {
     "@babel/core": "^7.6.0",
     "@storybook/addon-a11y": "^5.1.11",
@@ -183,6 +190,8 @@
     "@storybook/react": "^5.1.11",
     "@testing-library/react": "^9.1.4",
     "babel-loader": "^8.0.6",
+    "cypress": "^6.2.0",
+    "cypress-cucumber-preprocessor": "^4.0.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "enzyme-to-json": "^3.4.0",
@@ -194,6 +203,7 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-mock-store": "^1.5.3",
     "sinon": "^7.4.2",
+    "start-server-and-test": "^1.11.6",
     "storybook-react-router": "^1.0.7"
   },
   "babel": {
