@@ -38,3 +38,9 @@ export const getHasFormError = createSelector(
     getHasInvalidZip,
     (hasInvalidAge, hasInvalidZip) => hasInvalidAge || hasInvalidZip
 );
+
+export const getFieldError = createSelector(
+    getHasInvalidAge,
+    getHasInvalidZip,
+    (hasInvalidAge, hasInvalidZip) =>  hasInvalidZip && hasInvalidAge? 'a,z' : hasInvalidZip ? 'z' : hasInvalidAge? 'a' : ''
+);

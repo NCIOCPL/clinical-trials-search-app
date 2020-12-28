@@ -1,0 +1,171 @@
+{
+    "terms": [
+        {
+            "name": "11-Beta-Hydroxylase Deficiency",
+            "codes": [
+                "C131085"
+            ],
+            "ancestor_ids": [
+                "C2991"
+            ],
+            "parent_ids": [
+                "C2991"
+            ],
+            "type": [
+                "subtype"
+            ]
+        },
+        {
+            "name": "22q11.2 Deletion Syndrome",
+            "codes": [
+                "C2989"
+            ],
+            "ancestor_ids": [
+                "C2991"
+            ],
+            "parent_ids": [
+                "C2991"
+            ],
+            "type": [
+                "subtype"
+            ]
+        },
+        {
+            "name": "AIDS-Related Burkitt Lymphoma",
+            "codes": [
+                "C8286"
+            ],
+            "ancestor_ids": [
+                "C27134",
+                "C3208",
+                "C3211"
+            ],
+            "parent_ids": [
+                "C3211"
+            ],
+            "type": [
+                "subtype"
+            ]
+        },
+        {
+            "name": "AIDS-Related Hodgkin Lymphoma",
+            "codes": [
+                "C9279"
+            ],
+            "ancestor_ids": [
+                "C27134",
+                "C3208",
+                "C9357"
+            ],
+            "parent_ids": [
+                "C9357"
+            ],
+            "type": [
+                "subtype"
+            ]
+        },
+        {
+            "name": "AIDS-Related Lymphoma",
+            "codes": [
+                "C3471"
+            ],
+            "ancestor_ids": [
+                "C27134",
+                "C3208"
+            ],
+            "parent_ids": [
+                "C3208"
+            ],
+            "type": [
+                "subtype"
+            ]
+        },
+        {
+            "name": "AIDS-Related Non-Hodgkin Lymphoma",
+            "codes": [
+                "C5051"
+            ],
+            "ancestor_ids": [
+                "C27134",
+                "C3208",
+                "C3211"
+            ],
+            "parent_ids": [
+                "C3211"
+            ],
+            "type": [
+                "subtype"
+            ]
+        },
+        {
+            "name": "AIDS-Related Primary Effusion Lymphoma",
+            "codes": [
+                "C9017"
+            ],
+            "ancestor_ids": [
+                "C27134",
+                "C3208",
+                "C3211"
+            ],
+            "parent_ids": [
+                "C3211"
+            ],
+            "type": [
+                "subtype"
+            ]
+        },
+        {
+            "name": "AL Amyloidosis",
+            "codes": [
+                "C158963"
+            ],
+            "ancestor_ids": [
+                "C27134",
+                "C4665"
+            ],
+            "parent_ids": [
+                "C4665"
+            ],
+            "type": [
+                "subtype"
+            ]
+        },
+        {
+            "name": "ALK-Positive Large B-Cell Lymphoma",
+            "codes": [
+                "C7225"
+            ],
+            "ancestor_ids": [
+                "C27134",
+                "C3208",
+                "C3211"
+            ],
+            "parent_ids": [
+                "C3211"
+            ],
+            "type": [
+                "subtype"
+            ]
+        },
+        {
+            "name": "Accelerated Phase Chronic Myelogenous Leukemia, BCR-ABL1 Positive",
+            "codes": [
+                "C3173"
+            ],
+            "ancestor_ids": [
+                "C27134",
+                "C3161",
+                "C3172",
+                "C3174",
+                "C4345",
+                "C9290"
+            ],
+            "parent_ids": [
+                "C3174"
+            ],
+            "type": [
+                "subtype"
+            ]
+        }
+    ]
+}

@@ -7,7 +7,6 @@ import { SearchCriteriaTable } from '../../components/atomic';
 import { START_OVER_LINK } from '../../constants';
 import { history } from '../../services/history.service';
 import { getMainType } from '../../store/actions';
-import { trackedEvents } from '../../tracking';
 
 const ResultsPageHeader = ({
   handleUpdate,
@@ -25,14 +24,12 @@ const ResultsPageHeader = ({
     keywordPhrases,
     isDirty,
   } = useSelector(store => store.form);
-  const { trackEvent } = useTracking();
+  const tracking = useTracking();
+  const { analyticsName } = useSelector(store => store.globals);
 
   const { maintypeOptions } = useSelector(store => store.cache);
 
   const handleRefineSearch = () => {
-    
-    const { ModifySearchCriteriaLinkClick } = trackedEvents;
-    ModifySearchCriteriaLinkClick.data.formType = formType;
 
     if (formType === 'basic') {
       //prefetch stuff
@@ -55,7 +52,17 @@ const ResultsPageHeader = ({
     }
 
     handleUpdate('refineSearch', true);
-    trackEvent(ModifySearchCriteriaLinkClick);
+    tracking.trackEvent({
+      // These properties are required.
+      type: 'Other',
+      event: 'ClinicalTrialsSearchApp:Other:ModifySearchCriteriaLinkClick',
+      analyticsName,
+      linkName: 'CTSModifyClick',
+      // Any additional properties fall into the "page.additionalDetails" bucket
+      // for the event.
+      formType,
+      source: 'modify_search_criteria_link'
+    });
     history.push('/about-cancer/treatment/clinical-trials/search/advanced');
   
   };
