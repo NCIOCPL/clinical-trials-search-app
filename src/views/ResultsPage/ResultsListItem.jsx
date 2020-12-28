@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Checkbox from '../../components/atomic/Checkbox';
 import { isWithinRadius } from '../../utilities';
 import { NIH_ZIPCODE } from '../../constants';
+import { useTracking } from 'react-tracking';
 
 const queryString = require('query-string');
 
@@ -15,7 +16,6 @@ const ResultsListItem = ({
   isChecked,
   onCheckChange,
   queryParams,
-  tracking,
   itemIndex,
   resultsPage,
   formType
@@ -30,6 +30,8 @@ const ResultsListItem = ({
     city,
     vaOnly,
   } = useSelector(store => store.form);
+  const analyticsName = useSelector(store => store.globals.analyticsName);
+  const tracking = useTracking();
 
   const qsQbj = queryString.parse(queryParams);
   qsQbj.id = item.nciID;
@@ -232,14 +234,18 @@ const ResultsListItem = ({
   };
 
   const handleLinkClick = () => {
-    tracking({
-      action: 'click',
-      source: 'results_page_link',
-      data: {
-        pageNum: resultsPage + 1, // This is obviously 1 based.
-        resultsPosition: itemIndex + 1, //This is 1 based.
-        formType: formType,
-      },
+    tracking.trackEvent({
+      // These properties are required.
+      type: 'Other',
+      event: 'ClinicalTrialsSearchApp:Other:ResultsListItem',
+      analyticsName,
+      // Any additional properties fall into the "page.additionalDetails" bucket
+      // for the event.
+      pageNum: resultsPage + 1, // This is obviously 1 based.
+      resultsPosition: itemIndex + 1, //This is 1 based.
+      formType,
+      linkName: "UnknownLinkName"
+
     });
     setCachedTitle();
   };

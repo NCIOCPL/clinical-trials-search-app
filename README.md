@@ -1,3 +1,27 @@
+
+# Mock API Directions
+
+## /mock-api/clinical-trial
+This is the mock for clinicaltrialsapi.cancer.gov/v1/clinical-trial/:id. It only supports gets.
+To create a mock:
+1. Fetch a single clinical trial from the API and place the JSON response into the folder `support/mock-data/clinical-trial` with a file name of `<NCI_ID>.json` where `NCI_ID` is the trial's nci id. (e.g. `NCI-2015-01918.json`) 
+
+>*_NOTE:_* You can also use the NCT ID in place of the NCI_ID for any tests for the urls like `/v?id=NCI123435`. This ID *is* supported on the `/v` route, however within the search app, all links to the `/v` route are generated with the NCI ID. The NCT id is for backwards compatibility and certain other dynamic elements outside of the clinical trials search.
+
+
+## /mock-api/clinical-trials
+This is the mock for clinicaltrialsapi.cancer.gov/v1/clinical-trials. It only supports posts right now as our app only uses posts.
+
+To create a mock:
+1. Make some descriptive name to describe this scenario to be used in the file name, e.g. org_name_query. This will be referred to as `<scenario_name>` in the preceeding steps. 
+1. Copy the JSON of a request made to the api endpoint and store it in `support/mock-data/clinical-trials/<scenario_name>-request.json`.
+1. Copy the JSON of a response returned from the api endpoint and store it in `support/mock-data/clinical-trials/<scenario_name>-response.json`.
+
+The mock api server should return the correct response if the parameters of the request match. We use deep-equal to perform the comparison.
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
