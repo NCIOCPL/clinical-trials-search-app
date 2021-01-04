@@ -1,13 +1,10 @@
 import React from 'react';
-import track from 'react-tracking';
 import SearchPage from './SearchPage'
 
-const BasicSearchPage = ({ tracking }) => {
+const BasicSearchPage = () => {
   return (
-    <SearchPage formInit='basic' tracking={tracking} />
+    <SearchPage formInit='basic' />
   )
 }
 
-export default track({
-  page: "basic_search",
-})(BasicSearchPage);
+export default BasicSearchPage;

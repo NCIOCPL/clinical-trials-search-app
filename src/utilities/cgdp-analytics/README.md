@@ -1,1 +1,0 @@
-cgov-digital-platform does not have support for running tests yet. So I am creating the CTS analytics helpers here so that I can create tests. It is dirty as anything, but it also will help ensure code quality. These functions are NOT to be used in this app and NEED TO BE MOVED WHEN FIXED.

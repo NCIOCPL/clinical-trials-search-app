@@ -1,19 +1,17 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTracking } from 'react-tracking';
 
 import './StickySubmitBlock.scss';
 
 import { clearForm } from '../../../store/actions';
-import { trackedEvents } from '../../../tracking/index';
-
 
 const StickySubmitBlock = ({ sentinelRef, onSubmit, formType }) => {
   const dispatch = useDispatch();
   const stickyEl = useRef(null);
-  const { trackEvent } = useTracking();
-  const { trackClearFormLinkClick } = trackedEvents;
+  const tracking = useTracking();
+  const { analyticsName } = useSelector(store => store.globals);
 
   useEffect(() => {
     intObserver.observe(stickyEl.current);
@@ -40,7 +38,16 @@ const StickySubmitBlock = ({ sentinelRef, onSubmit, formType }) => {
 
   const handleClearForm = e => {
     // Track before clearing please...
-    trackEvent(trackClearFormLinkClick(formType));
+    tracking.trackEvent({
+      // These properties are required.
+      type: 'Other',
+      event: 'ClinicalTrialsSearchApp:Other:ClearForm',
+      analyticsName,
+      linkName: 'clinicaltrials_advanced|clear',
+      // Any additional properties fall into the "page.additionalDetails" bucket
+      // for the event.
+      formType
+    });
 
     dispatch(clearForm());
     window.scrollTo(0, 0);

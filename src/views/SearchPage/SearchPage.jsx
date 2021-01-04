@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { useLocation } from 'react-router-dom';
+import { useTracking } from 'react-tracking';
 import { Delighter, StickySubmitBlock } from '../../components/atomic';
 import {
   Age,
@@ -17,7 +18,6 @@ import {
   TrialType,
   ZipCode,
 } from '../../components/search-modules';
-import { trackedEvents } from '../../tracking';
 import { history } from '../../services/history.service';
 import { updateFormField, clearForm, receiveData } from '../../store/actions';
 import {
@@ -30,7 +30,6 @@ import { actions } from '../../store/reducers';
 import { getHasFormError } from '../../store/modules/form/form.selectors';
 import { SEARCH_FORM_ID } from '../../constants';
 import { useGlobalBeforeUnload, useHasLocationChanged } from '../../hooks';
-import { metadataHasUpdatedHandler } from '../../utilities';
 
 // Module groups in arrays will be placed side-by-side in the form
 const basicFormModules = [CancerTypeKeyword, [Age, ZipCode]];
@@ -46,9 +45,7 @@ const advancedFormModules = [
   LeadOrganization,
 ];
 
-
-
-const SearchPage = ({ formInit = 'basic', tracking }) => {
+const SearchPage = ({ formInit = 'basic' }) => {
   const dispatch = useDispatch();
   const location = useLocation().pathname;
   const sentinelRef = useRef(null);
@@ -58,9 +55,15 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
   const hasDispatchedFormInteractionEvent = useSelector(getHasDispatchedFormInteractionEvent);
   const hasFormError = useSelector(getHasFormError);
   const hasUserInteractedWithForm = useSelector(getHasUserInteractedWithForm);
-  const [hasMetadataUpdated, setHasMetadataUpdated ] = useState(false);
   const [isPageLoadReady, setIsPageLoadReady ] = useState(false);
   const { addFormToTracking } = actions;
+  const tracking = useTracking();
+  const {
+    analyticsName,
+    basePath,
+    canonicalHost,
+    siteName
+  } = useSelector(store => store.globals);
 
   const handleUpdate = (field, value) => {
     dispatch(
@@ -79,11 +82,20 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
   }, []);
 
   useEffect(() => {
-    // This should also be dependent on the current route/url
-    if (hasMetadataUpdated && isPageLoadReady) {
-      tracking.trackEvent({action: 'pageLoad'})
+    if (isPageLoadReady) {
+      tracking.trackEvent({
+        // These properties are required.
+        type: 'PageLoad',
+        event: `ClinicalTrialsSearchApp:Load:${formFactor === 'advanced' ? 'AdvancedSearch' : 'BasicSearch'}`,
+        analyticsName,
+        name: `${canonicalHost.replace('https://', '')}${basePath}/${formFactor}`,
+        title: `Find NCI-Supported Clinical Trials${formFactor === 'advanced' ? ' - Advanced Search' : ''}`,
+        metaTitle: `Find NCI-Supported Clinical Trials - ${formFactor === 'advanced' ? 'Advanced Search - ' : ''}${siteName}`,
+        // Any additional properties fall into the "page.additionalDetails" bucket
+        // for the event.
+      });
     }
-  }, [hasMetadataUpdated, isPageLoadReady]);
+  }, [isPageLoadReady]);
 
   const handleTrackingStoreInit = useCallback(() => {
     // Init form tracking store
@@ -94,24 +106,37 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
 
   const handleFormAbandon = useCallback(() => {
     if (hasUserInteractedWithForm && !formInFocus.isSubmitted) {
-      const {FormAbandonment} = trackedEvents;
-      FormAbandonment.data.formType = formFactor;
-      FormAbandonment.data.field = fieldInFocus.id;
-      tracking.trackEvent(FormAbandonment);
+      tracking.trackEvent({
+        // These properties are required.
+        type: 'Other',
+        event: 'ClinicalTrialsSearchApp:Other:FormAbandon',
+        analyticsName,
+        linkName: `formAnalysis|clinicaltrials_${formFactor}|abandon`,
+        // Any additional properties fall into the "page.additionalDetails" bucket
+        // for the event.
+        formType: formFactor,
+        field: fieldInFocus.id
+      });
     }
   }, [hasUserInteractedWithForm, formInFocus.isSubmitted]);
 
   useGlobalBeforeUnload(handleFormAbandon);
   useHasLocationChanged(handleTrackingStoreInit);
 
-
   useEffect(() => {
     // Run analytics event based on condition
     if ( hasUserInteractedWithForm && !hasDispatchedFormInteractionEvent ) {
-      const { FormInteractionStart } = trackedEvents;
-      FormInteractionStart.data.formType = formFactor;
-      FormInteractionStart.data.field = fieldInFocus.id;
-      tracking.trackEvent(FormInteractionStart);
+      tracking.trackEvent({
+        // These properties are required.
+        type: 'Other',
+        event: 'ClinicalTrialsSearchApp:Other:FormInteractionStart',
+        analyticsName,
+        linkName: `formAnalysis|clinicaltrials_${formFactor}|start`,
+        // Any additional properties fall into the "page.additionalDetails" bucket
+        // for the event.
+        formType: formFactor,
+        field: fieldInFocus.id
+      });
       const { dispatchedFormInteractionEvent } = actions;
       dispatch( dispatchedFormInteractionEvent( true ) );
     }
@@ -123,18 +148,35 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
   const handleSubmit = e => {
     e.preventDefault();
     const { trackedFormSubmitted } = actions;
-    const { trackSubmitComplete, trackSubmitError } = trackedEvents;
     if(!hasFormError){
       dispatch(receiveData(
         'selectedTrialsForPrint',
         []
       ));
-      tracking.trackEvent(trackSubmitComplete(formFactor));
+      tracking.trackEvent({
+        // These properties are required.
+        type: 'Other',
+        event: 'ClinicalTrialsSearchApp:Other:FormSubmissionComplete',
+        analyticsName,
+        linkName: `formAnalysis|clinicaltrials_${formFactor}|complete`,
+        // Any additional properties fall into the "page.additionalDetails" bucket
+        // for the event.
+        formType: formFactor,
+      });
       dispatch( trackedFormSubmitted(true) );
       history.push('/about-cancer/treatment/clinical-trials/search/r');
       return;
     }
-    tracking.trackEvent(trackSubmitError(formFactor));
+    tracking.trackEvent({
+      // These properties are required.
+      type: 'Other',
+      event: 'ClinicalTrialsSearchApp:Other:FormSubmissionError',
+      analyticsName,
+      linkName: `formAnalysis|clinicaltrials_${formFactor}|error`,
+      // Any additional properties fall into the "page.additionalDetails" bucket
+      // for the event.
+      formType: formFactor,
+    });
   };
 
   const renderDelighters = () => (
@@ -206,9 +248,7 @@ const SearchPage = ({ formInit = 'basic', tracking }) => {
 
   return (
     <article className="search-page">
-      <Helmet
-        onChangeClientState={metadataHasUpdatedHandler(setHasMetadataUpdated)}
-      >
+      <Helmet>
         <title>
           {`Find NCI-Supported Clinical Trials - ${formFactor === 'advanced' ? 'Advanced Search - ' : ''}National Cancer Institute`}
         </title>
