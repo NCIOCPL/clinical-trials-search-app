@@ -1,34 +1,50 @@
-import React, {useState, useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateGlobal } from '../../store/actions';
 import { Helmet } from 'react-helmet';
 import { ChatOpener, Delighter } from '../../components/atomic';
-import track from 'react-tracking';
-import { trackedEvents } from '../../tracking';
+import { useTracking } from 'react-tracking';
 import { TRY_NEW_SEARCH_LINK } from '../../constants';
-import { metadataHasUpdatedHandler } from '../../utilities';
 
 import './ErrorPage.scss';
 
-const ErrorPage = ({ initErrorsList, tracking }) => {
+const ErrorPage = ({ initErrorsList }) => {
 
   const dispatch = useDispatch();
   const formSnapshot = useSelector(store => store.form);
-  const [hasMetadataUpdated, setHasMetadataUpdated ] = useState(false);
+  const tracking = useTracking();
+  const { analyticsName, canonicalHost } = useSelector(store => store.globals);
 
   useEffect(() => {
-    // This should also be dependent on the current route/url
-    if (hasMetadataUpdated) {
-      // Fire off page load event
-      tracking.trackEvent({action: 'pageLoad'})
-    }
-  }, [hasMetadataUpdated]);
+
+    const pageTitle = 'Errors Occurred';
+
+    // Fire off page load event
+    tracking.trackEvent({
+      // These properties are required.
+      type: 'PageLoad',
+      event: `ClinicalTrialsSearchApp:Load:Error`,
+      analyticsName,
+      // Todo: Name, title, metaTitle confirmation
+      metaTitle: pageTitle,
+      name: `${canonicalHost.replace('https://', '')}${
+        window.location.pathname
+      }`,
+      title: pageTitle,
+      // Any additional properties fall into the "page.additionalDetails" bucket
+      // for the event.
+    });
+  }, []);
 
   const handleStartOver = () => {
-    const { NewSearchLinkClick } = trackedEvents;    
-    NewSearchLinkClick.data.formType = '';
-    NewSearchLinkClick.source = TRY_NEW_SEARCH_LINK;
-    tracking.trackEvent(NewSearchLinkClick);
+    tracking.trackEvent({
+      type: 'Other',
+      event: 'ClinicalTrialsSearchApp:Other:NewSearchLinkClick',
+      analyticsName,
+      linkName: 'CTStartOverClick',
+      formType: '',
+      source: TRY_NEW_SEARCH_LINK
+    });
 
     dispatch(updateGlobal({
       field: 'initErrorsList',
@@ -97,9 +113,7 @@ const ErrorPage = ({ initErrorsList, tracking }) => {
 
   return (
     <>
-      <Helmet
-        onChangeClientState={metadataHasUpdatedHandler(setHasMetadataUpdated)}
-      >
+      <Helmet>
         <title>
           Clinical Trials Search - National Cancer Institute
         </title>
@@ -164,6 +178,4 @@ const ErrorPage = ({ initErrorsList, tracking }) => {
   );
 };
 
-export default track({
-  page: "error_page",
-})(ErrorPage);
+export default ErrorPage;

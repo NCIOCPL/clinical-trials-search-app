@@ -1,8 +1,7 @@
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 
-
-import React, { Fragment } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 
@@ -34,7 +33,7 @@ const App = ({ services, zipConversionEndpoint }) => {
         // Is initializaing, show loading screen.
         <></>
       ) : initErrorsList.length === 0 ? (
-        <Fragment>
+        <>
           <Switch>
             <Route
               path="/about-cancer/treatment/clinical-trials/search/r"
@@ -54,7 +53,7 @@ const App = ({ services, zipConversionEndpoint }) => {
               component={BasicSearchPage}
             />
           </Switch>
-        </Fragment>
+        </>
       ) : (
         <ErrorPage initErrorsList={initErrorsList} />
       )}
