@@ -69,9 +69,9 @@ const TrialDescriptionPage = ({ location }) => {
         type: 'PageLoad',
         event: `ClinicalTrialsSearchApp:Load:TrialDescription`,
         analyticsName,
-        name: `${canonicalHost.replace('https://', '')}${basePath}/v?id=${currId}`,
-        title: `${trial.briefTitle} - ${trial.nctID}`,
-        metaTitle: `${trial.briefTitle} - ${trial.nctID}`,
+        name: `${canonicalHost.replace('https://', '')}${basePath}/v`,
+        title: `${trial.briefTitle}`,
+        metaTitle: `${trial.briefTitle}`,
         // Any additional properties fall into the "page.additionalDetails" bucket
         // for the event.
         formType: formType,

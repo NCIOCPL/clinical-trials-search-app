@@ -88,6 +88,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
         type: 'PageLoad',
         event: `ClinicalTrialsSearchApp:Load:${formFactor === 'advanced' ? 'AdvancedSearch' : 'BasicSearch'}`,
         analyticsName,
+        formType: formFactor,
         name: `${canonicalHost.replace('https://', '')}${basePath}/${formFactor}`,
         title: `Find NCI-Supported Clinical Trials${formFactor === 'advanced' ? ' - Advanced Search' : ''}`,
         metaTitle: `Find NCI-Supported Clinical Trials - ${formFactor === 'advanced' ? 'Advanced Search - ' : ''}${siteName}`,
@@ -162,6 +163,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
         // Any additional properties fall into the "page.additionalDetails" bucket
         // for the event.
         formType: formFactor,
+        status: "complete"
       });
       dispatch( trackedFormSubmitted(true) );
       history.push('/about-cancer/treatment/clinical-trials/search/r');
@@ -176,6 +178,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
       // Any additional properties fall into the "page.additionalDetails" bucket
       // for the event.
       formType: formFactor,
+      status: "error"
     });
   };
 

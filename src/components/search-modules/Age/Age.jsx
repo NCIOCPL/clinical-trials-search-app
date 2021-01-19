@@ -30,7 +30,6 @@ const Age = ({ handleUpdate }) => {
           // for the event.
           formType,
           field: 'age',
-          status: 'input_error',
           message: invalidAgeText
         });
       }

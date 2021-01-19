@@ -105,11 +105,11 @@ const ResultsPage = ({ location }) => {
         type: 'PageLoad',
         event: `ClinicalTrialsSearchApp:Load:Results`,
         analyticsName,
-        name: `${canonicalHost.replace('https://', '')}${basePath}`,
+        name: `${canonicalHost.replace('https://', '')}${basePath}/r`,
         // Any additional properties fall into the "page.additionalDetails" bucket
         // for the event.
-        title: `Clinical Trials Search Results - ${siteName}`,
-        metaTitle: `Clinical Trials Search Results`,
+        metaTitle: `Clinical Trials Search Results - ${siteName}`,
+        title: `Clinical Trials Search Results`,
         status: 'success',
         formType: formSnapshot.formType,
         numResults: resultsCount,
