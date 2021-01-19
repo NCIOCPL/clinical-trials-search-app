@@ -41,6 +41,9 @@ const initialize = ({
   useSessionStorage = true,
   zipConversionEndpoint = '/cts_api/zip_code_lookup',
 } = {}) => {
+  const appRootDOMNode = document.getElementById(rootId);
+  const isRehydrating = appRootDOMNode.getAttribute('data-isRehydrating');
+
   let cachedState;
 
   const ctsSearch = () => {
@@ -66,7 +69,7 @@ const initialize = ({
     services,
     siteName,
     useSessionStorage,
-    zipConversionEndpoint
+    zipConversionEndpoint,
   };
 
   if (process.env.NODE_ENV !== 'development' && useSessionStorage === true) {
@@ -85,7 +88,7 @@ const initialize = ({
 
   store.dispatch({
     type: 'LOAD_GLOBALS',
-    payload: {...initialState},
+    payload: { ...initialState },
   });
 
   // With the store now created, we want to subscribe to updates.
@@ -106,9 +109,6 @@ const initialize = ({
     store.subscribe(saveDesiredStateToSessionStorage);
   }
 
-  const appRootDOMNode = document.getElementById(rootId);
-  const isRehydrating = appRootDOMNode.getAttribute('data-isRehydrating');
-
   // Determine the analytics HoC we are going to use.
   // The following allows the app to be more portable, cgov will
   // default to using EDDL Analytics. Other sites could supplier
@@ -121,7 +121,8 @@ const initialize = ({
         pageContentGroup={analyticsContentGroup}
         pageName={analyticsName}
         publishedDate={analyticsPublishedDate}
-        analyticsName={analyticsName}>
+        analyticsName={analyticsName}
+      >
         {children}
       </EddlAnalyticsProvider>
     ) : (
@@ -138,8 +139,14 @@ const initialize = ({
     return (
       <Provider store={store}>
         <AnalyticsHoC>
-          <Router history={history} basename="/about-cancer/treatment/clinical-trials/search">
-            <App services={services} zipConversionEndpoint={zipConversionEndpoint} />
+          <Router
+            history={history}
+            basename="/about-cancer/treatment/clinical-trials/search"
+          >
+            <App
+              services={services}
+              zipConversionEndpoint={zipConversionEndpoint}
+            />
           </Router>
         </AnalyticsHoC>
       </Provider>
@@ -151,7 +158,6 @@ const initialize = ({
   } else {
     ReactDOM.render(<AppBlock />, appRootDOMNode);
   }
-
   return appRootDOMNode;
 };
 
@@ -159,7 +165,6 @@ export default initialize;
 
 // expose initialize to window for AppModule integration
 window.CTSApp = initialize;
-
 
 // The following lets us run the app in dev not in situ as would normally be the case.
 const appParams = window.APP_PARAMS || {};

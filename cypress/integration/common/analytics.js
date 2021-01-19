@@ -1,5 +1,5 @@
 /// <reference types="Cypress" />
-import { And, Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
+import { Then, When } from 'cypress-cucumber-preprocessor/steps';
 
 /**
  * Converts a string value to a native data type if indicated in the map.
