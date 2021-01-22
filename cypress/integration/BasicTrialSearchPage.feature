@@ -219,7 +219,7 @@ Feature: Clinical Trials Search Page - Basic
       | page.publishedDate                        | 02/02/2011                                                     |
       | page.additionalDetails.analyticsName      | Clinical Trials                                                |
       | page.additionalDetails.formType           | basic                                                          |
-      | page.additionalDetails.numResults         | (int)6604                                                      |
+      | page.additionalDetails.numResults         | (int)1132                                                      |
       | page.additionalDetails.status             | success                                                        |
       | page.additionalDetails.formData.zip       | 22182                                                          |
       | page.additionalDetails.formData.zipRadius | 100                                                            |
