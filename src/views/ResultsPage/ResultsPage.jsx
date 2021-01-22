@@ -129,12 +129,13 @@ const ResultsPage = ({ location }) => {
       handleTracking({
         // These properties are required.
         type: 'Other',
-        event: 'ClinicalTrialsSearchApp:Other:PrintSelectedMaxReached',
+        event: 'ClinicalTrialsSearchApp:Other:PrintSelectedError',
         analyticsName,
         linkName: 'CTSResultsSelectedErrorClick',
         // Any additional properties fall into the "page.additionalDetails" bucket
         // for the event.
         formType: formSnapshot.formType,
+        errorReason: 'maxselectionreached'
       });
       toggleModal();
     }
@@ -342,10 +343,11 @@ const ResultsPage = ({ location }) => {
     if (selectedResults.length === 0) {
       handleTracking({
         type: 'Other',
-        event: 'ClinicalTrialsSearchApp:Other:PrintNoneSelectedClick',
+        event: 'ClinicalTrialsSearchApp:Other:PrintSelectedError',
         analyticsName,
         linkName: 'CTSResultsSelectedErrorClick',
-        formType: formSnapshot.formType
+        formType: formSnapshot.formType,
+        errorReason: 'noneselected'
       });
     } else if (selectedResults.length >= 100){
       handleTracking({

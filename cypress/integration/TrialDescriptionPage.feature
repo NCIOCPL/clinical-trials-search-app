@@ -27,7 +27,29 @@ Feature: Clinical Trial Description Page
       | page.additionalDetails.analyticsName | Clinical Trials                                                                                                  |
       | page.additionalDetails.formType      | basic                                                                                                            |
       | page.additionalDetails.nctId         | NCT02750826                                                                                                      |
-## both below scenarios are failing
+
+ Scenario: Click event fires when user clicks on Print link on trial description page
+  Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
+  And "baseHost" is set to "http://localhost:3000"
+  And "canonicalHost" is set to "https://www.cancer.gov"
+  And "siteName" is set to "National Cancer Institute"
+  And "channel" is set to "About Cancer"
+  And "analyticsPublishedDate" is set to "02/02/2011"
+  And "analyticsName" is set to "Clinical Trials"
+  Given screen breakpoint is set to "desktop"
+  When the user navigates to "/about-cancer/treatment/clinical-trials/search/v?id=NCI-2015-01918&loc=0&rl=1"
+  And browser waits
+  When user clicks on share by "Print" button
+  Then there should be an analytics event with the following details
+      | key                | value                                      |
+      | type               | Other                                      |
+      | event              | ClinicalTrialsSearchApp:Other:ShareButton  |
+      | linkName           | UnknownLinkName                            |
+      | data.analyticsName | Clinical Trials                            |
+      | data.formType      | basic                                      |
+      | data.shareType     | print                                      |
+
+## below scenario is timing out due to Cypress waiting on page load
 # Scenario: Click event fires when user clicks on Email link on trial description page
 #   Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
 #   And "baseHost" is set to "http://localhost:3000"
@@ -49,23 +71,3 @@ Feature: Clinical Trial Description Page
 #       | data.formType      | basic                                          |
 #       | data.shareType     | email                                          |
 
-#  Scenario: Click event fires when user clicks on Print link on trial description page
-#   Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
-#   And "baseHost" is set to "http://localhost:3000"
-#   And "canonicalHost" is set to "https://www.cancer.gov"
-#   And "siteName" is set to "National Cancer Institute"
-#   And "channel" is set to "About Cancer"
-#   And "analyticsPublishedDate" is set to "02/02/2011"
-#   And "analyticsName" is set to "Clinical Trials"
-#   Given screen breakpoint is set to "desktop"
-#   When the user navigates to "/about-cancer/treatment/clinical-trials/search/v?id=NCI-2015-01918&loc=0&rl=1"
-#   And browser waits
-#   When user clicks on share by "Print" button
-#   Then there should be an analytics event with the following details
-#       | key                | value                                      |
-#       | type               | Other                                      |
-#       | event              | ClinicalTrialsSearchApp:Other:ShareButton  |
-#       | linkName           | UnknownLinkName                            |
-#       | data.analyticsName | Clinical Trials                            |
-#       | data.formType      | basic                                      |
-#       | data.shareType     | print                                      |

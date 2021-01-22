@@ -219,37 +219,32 @@ Feature: Clinical Trials Search Page - Basic
       | page.publishedDate                        | 02/02/2011                                                     |
       | page.additionalDetails.analyticsName      | Clinical Trials                                                |
       | page.additionalDetails.formType           | basic                                                          |
-      | page.additionalDetails.numResults         | (int)1132                                                      |
+      | page.additionalDetails.numResults         | (int)6604                                                      |
       | page.additionalDetails.status             | success                                                        |
       | page.additionalDetails.formData.zip       | 22182                                                          |
       | page.additionalDetails.formData.zipRadius | 100                                                            |
       | page.additionalDetails.formData.location  | search-location-zip                                            |
 
 
-
-
-
-######not sure we can inplement this one####
-
-# Scenario: Click event fires when user abandons the form
-#   Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
-#   And "baseHost" is set to "http://localhost:3000"
-#   And "canonicalHost" is set to "https://www.cancer.gov"
-#   And "siteName" is set to "National Cancer Institute"
-#   And "channel" is set to "About Cancer"
-#   And "analyticsPublishedDate" is set to "02/02/2011"
-#   And "analyticsName" is set to "Clinical Trials"
-#   When the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
-#   When the user navigates to "/about-cancer/treatment/clinical-trials/search"
-#   Then the page title is "Find NCI-Supported Clinical Trials"
-#   And browser waits
-#   When user types "22" in "age" field
-#   And user navigates back to the previous page
-#   Then there should be an analytics event with the following details
-#     | key                | value                                       |
-#     | type               | Other                                       |
-#     | event              | ClinicalTrialsSearchApp:Other:FormAbandon   |
-#     | linkName           | formAnalysis\|clinicaltrials_basic\|abandon |
-#     | data.analyticsName | Clinical Trials                             |
-#     | data.formType      | basic                                       |
-#     | data.field         | age                                         |
+  Scenario: Click event fires when user abandons the form
+    Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
+    And "baseHost" is set to "http://localhost:3000"
+    And "canonicalHost" is set to "https://www.cancer.gov"
+    And "siteName" is set to "National Cancer Institute"
+    And "channel" is set to "About Cancer"
+    And "analyticsPublishedDate" is set to "02/02/2011"
+    And "analyticsName" is set to "Clinical Trials"
+    When the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+    When the user navigates to "/about-cancer/treatment/clinical-trials/search"
+    Then the page title is "Find NCI-Supported Clinical Trials"
+    And browser waits
+    When user types "22" in "age" field
+    And user navigates back to the previous page
+    Then there should be preserved analytics event with the following details
+      | key                | value                                       |
+      | type               | Other                                       |
+      | event              | ClinicalTrialsSearchApp:Other:FormAbandon   |
+      | linkName           | formAnalysis\|clinicaltrials_basic\|abandon |
+      | data.analyticsName | Clinical Trials                             |
+      | data.formType      | basic                                       |
+      | data.field         | age                                         |

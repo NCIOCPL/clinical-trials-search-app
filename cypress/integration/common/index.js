@@ -68,7 +68,16 @@ And('user clicks on {string} link', (linkText) => {
 });
 
 And('user navigates back to the previous page', () => {
+  cy.window().then(win => {
+    cy.NCIDataLayer = Object.assign(win.NCIDataLayer)
+  })
   cy.go('back'), { followRedirect: false };
+})
+And('user clears form', () => {
+  cy.window().then(win => {
+    cy.NCIDataLayer = Object.assign(win.NCIDataLayer)
+  })
+  cy.get('button').contains('Clear Form').click();
 })
 
 When('user scrolls to middle of screen', () => {
@@ -86,23 +95,26 @@ When('user checks {string} checkbox on {int} pages', (label, page) => {
   }
 })
 
-When('user clicks on share by {string} button',(option)=>{
- 
+When('user clicks on share by {string} button', (option) => {
+
   if (option === 'Print') {
     cy.window().then(win => {
       //same approach we used on platform testig and it works, in the app it does not!(
-        //stubbing the print window to prevent the call to open it, 
-        //but still triggering the click event
-        const printStub = cy.stub(win, 'print')
-        cy.get("button").contains(option).click({ force: true });
+      //stubbing the print window to prevent the call to open it, 
+      //but still triggering the click event
+      const printStub = cy.stub(win, 'print')
+      cy.get("button").contains(option).click({ force: true });
 
-    }) 
-} else {
-  cy.get('button[class="share-btn cts-share-email"]').then(button$ => {
-        button$.on('click', e => {
-          //still launch email window ((
-          e.preventDefault();
-        });
-    }).click({force:true});
-}
+    })
+  } else {
+    cy.get('button[class="share-btn cts-share-email"]')
+    .then(button$ => {
+      button$.on('click', e => {
+        //this is useless since cypress still waits for a new page to load 
+        // and it never loads - timeout and fail!
+        e.preventDefault;
+      });
+    })
+    .click({ force: true });
+  }
 });

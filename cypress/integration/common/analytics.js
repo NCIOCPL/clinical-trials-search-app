@@ -189,3 +189,58 @@ function deepEqual(eventObj, expectedObj) {
 function isObject(object) {
   return object != null && typeof object === 'object';
 }
+
+///this is needed to capture event after eddl was refreshed and no longer contain past events (such as FormAbandon before page is reloaded.
+// It is using global cy.NCIDataLayer instead of win.NCIDataLayer and cy has to be set(copied from win.NCIDataLayer) in the navigation step that will trigger
+//page reload: 
+//cy.window().then(win=>{
+//   cy.NCIDataLayer = Object.assign(win.NCIDataLayer)
+// })
+Then(
+  'there should be preserved analytics event with the following details',
+  (datatable) => {
+    cy.window().then((win) => {
+      console.log('finding analytics event for analytics step');
+      // First convert the datatable into nested object.
+      const rawDataObj = convertAnalyticsDatatableObject(datatable.rowsHash());
+      // Gotta strip the header row. (key/value)
+      const dataObj = Object.entries(rawDataObj).reduce((ac, [key, val]) => {
+        if (key === 'key') {
+          return ac;
+        }
+        return {
+          ...ac,
+          [key]: val
+        }
+      }, {})
+
+      if (!dataObj.event) {
+        throw new Error("Datatable is missing the event name")
+      }
+
+      if (!dataObj.type) {
+        throw new Error("Datatable is missing the event type")
+      }
+
+      // Find the matching events, this should be only one.
+      const matchedEvents = getPastEventFromEDDL(dataObj.type, dataObj.event);
+      expect(matchedEvents).to.have.length(1);
+
+      const eventData = matchedEvents[0];
+      console.log(eventData)
+      console.log("data: ", dataObj)
+
+
+      // This is a cheat. For the most part we know all the values so this
+      // is ok. We won't support regex matching this way.
+      // TODO: add regex matching, and when that is added make sure you
+      // also add a check to make sure there are not unexpected props.
+
+      expect(deepEqual(eventData, dataObj)).to.be.true
+    });
+  }
+);
+///this is to use global cy instead of win 
+const getPastEventFromEDDL = (type, event) => {
+  return cy.NCIDataLayer.filter(evt => evt.type === type && evt.event === event);
+};

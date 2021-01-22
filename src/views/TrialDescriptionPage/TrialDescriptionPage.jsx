@@ -91,9 +91,11 @@ const TrialDescriptionPage = ({ location }) => {
 
   const trackShare = (shareType) => ({    
     type: 'Other',
-    event: `ClinicalTrialsSearchApp:Other:${shareType}ShareButton`,
+    event: `ClinicalTrialsSearchApp:Other:ShareButton`,
     analyticsName,
-    formType: formType
+    linkName: 'UnknownLinkName',
+    formType: formType,
+    shareType: shareType.toLowerCase()
   })
 
   const handlePrintTrial = () => {

@@ -340,7 +340,7 @@ Feature: Clinical Trials Search Page - Advanced
       | data.selectedCount     | (int)10                                                |
       | data.pagesWithSelected | (arrInt)1                                              |
 
-###### Needs scroll to be implemented
+##### Needs scroll to be implemented
 
 # Scenario: Click event fires when user clicks on Find Trials button from Advanced Search form
 #   Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
@@ -364,70 +364,67 @@ Feature: Clinical Trials Search Page - Advanced
 #       | data.formType      | advanced                                             |
 #       | data.completion    | complete_scrolling                                   |
 
-#####this test might not be possible to automate with cypress - page reloads and data is lost ()
-# Scenario: Click event fires when user clicks on Clear Form button
-#     Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
-#   And "baseHost" is set to "http://localhost:3000"
-#   And "canonicalHost" is set to "https://www.cancer.gov"
-#   And "siteName" is set to "National Cancer Institute"
-#   And "channel" is set to "About Cancer"
-#   And "analyticsPublishedDate" is set to "02/02/2011"
-#   And "analyticsName" is set to "Clinical Trials"
-#   When the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
-#   Then the page title is "Find NCI-Supported Clinical Trials"
-#   And browser waits
-#   When user clicks on "Clear Form" button
-#   Then there should be an analytics event with the following details
-#       | key                | value                                   |
-#       | type               | Other                                   |
-#       | event              | ClinicalTrialsSearchApp:Other:ClearForm |
-#       | linkName           | clinicaltrials_advanced\|clear          |
-#       | data.analyticsName | Clinical Trials                         |
-#       | data.formType      | advanced                                |
 
-##cypress doesnt capture an event
+Scenario: Click event fires when user clicks on Clear Form button
+    Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
+  And "baseHost" is set to "http://localhost:3000"
+  And "canonicalHost" is set to "https://www.cancer.gov"
+  And "siteName" is set to "National Cancer Institute"
+  And "channel" is set to "About Cancer"
+  And "analyticsPublishedDate" is set to "02/02/2011"
+  And "analyticsName" is set to "Clinical Trials"
+  When the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+  Then the page title is "Find NCI-Supported Clinical Trials"
+  And browser waits
+  When user clears form
+  Then there should be preserved analytics event with the following details
+      | key                | value                                   |
+      | type               | Other                                   |
+      | event              | ClinicalTrialsSearchApp:Other:ClearForm |
+      | linkName           | clinicaltrials_advanced\|clear          |
+      | data.analyticsName | Clinical Trials                         |
+      | data.formType      | advanced                                |
 
-# Scenario: Click event fires when user tries to print without selecting any trial
-#   Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
-#   And "baseHost" is set to "http://localhost:3000"
-#   And "canonicalHost" is set to "https://www.cancer.gov"
-#   And "siteName" is set to "National Cancer Institute"
-#   And "channel" is set to "About Cancer"
-#   And "analyticsPublishedDate" is set to "02/02/2011"
-#   And "analyticsName" is set to "Clinical Trials"
-#   When the user navigates to "/about-cancer/treatment/clinical-trials/search/r?loc=0&rl=2"
-#   Then the page title is "Clinical Trials Search Results"
-#   And browser waits
-#   And user clicks on "Print Selected" button
-#   And browser waits
-#   Then there should be an analytics event with the following details
-#       | key                    | value                                                  |
-#       | type                   | Other                                                  |
-#       | event                  | ClinicalTrialsSearchApp:Other:PrintSelectedError       |
-#       | linkName               | CTSResultsSelectedErrorClick                           |
-#       | data.analyticsName     | Clinical Trials                                        |
-#       | data.formType          | advanced                                               |
-#       | data.errorReason       | noneselected                                           |
+Scenario: Click event fires when user tries to print without selecting any trial
+  Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
+  And "baseHost" is set to "http://localhost:3000"
+  And "canonicalHost" is set to "https://www.cancer.gov"
+  And "siteName" is set to "National Cancer Institute"
+  And "channel" is set to "About Cancer"
+  And "analyticsPublishedDate" is set to "02/02/2011"
+  And "analyticsName" is set to "Clinical Trials"
+  When the user navigates to "/about-cancer/treatment/clinical-trials/search/r?loc=0&rl=2"
+  Then the page title is "Clinical Trials Search Results"
+  And browser waits
+  And user clicks on "Print Selected" button
+  And browser waits
+  Then there should be an analytics event with the following details
+      | key                    | value                                                  |
+      | type                   | Other                                                  |
+      | event                  | ClinicalTrialsSearchApp:Other:PrintSelectedError       |
+      | linkName               | CTSResultsSelectedErrorClick                           |
+      | data.analyticsName     | Clinical Trials                                        |
+      | data.formType          | advanced                                               |
+      | data.errorReason       | noneselected                                           |
 
-##cypress doesnt capture an event
-# Scenario: Click event fires when user reaches max number of selected trials
-#   Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
-#   And "baseHost" is set to "http://localhost:3000"
-#   And "canonicalHost" is set to "https://www.cancer.gov"
-#   And "siteName" is set to "National Cancer Institute"
-#   And "channel" is set to "About Cancer"
-#   And "analyticsPublishedDate" is set to "02/02/2011"
-#   And "analyticsName" is set to "Clinical Trials"
-#   When the user navigates to "/about-cancer/treatment/clinical-trials/search/r?loc=0&rl=2"
-#   Then the page title is "Clinical Trials Search Results"
-#   And browser waits
-#   When user checks "Select all on page" checkbox on 11 pages
-#   And browser waits
-#   Then there should be an analytics event with the following details
-#       | key                    | value                                                  |
-#       | type                   | Other                                                  |
-#       | event                  | ClinicalTrialsSearchApp:Other:PrintSelectedError       |
-#       | linkName               | CTSResultsSelectedErrorClick                           |
-#       | data.analyticsName     | Clinical Trials                                        |
-#       | data.formType          | advanced                                               |
-#       | data.errorReason       | maxselectionreached                                    |
+Scenario: Click event fires when user reaches max number of selected trials
+  Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
+  And "baseHost" is set to "http://localhost:3000"
+  And "canonicalHost" is set to "https://www.cancer.gov"
+  And "siteName" is set to "National Cancer Institute"
+  And "channel" is set to "About Cancer"
+  And "analyticsPublishedDate" is set to "02/02/2011"
+  And "analyticsName" is set to "Clinical Trials"
+  When the user navigates to "/about-cancer/treatment/clinical-trials/search/r?loc=0&rl=2"
+  Then the page title is "Clinical Trials Search Results"
+  And browser waits
+  When user checks "Select all on page" checkbox on 11 pages
+  And browser waits
+  Then there should be an analytics event with the following details
+      | key                    | value                                                  |
+      | type                   | Other                                                  |
+      | event                  | ClinicalTrialsSearchApp:Other:PrintSelectedError       |
+      | linkName               | CTSResultsSelectedErrorClick                           |
+      | data.analyticsName     | Clinical Trials                                        |
+      | data.formType          | advanced                                               |
+      | data.errorReason       | maxselectionreached                                    |
