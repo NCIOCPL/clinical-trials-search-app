@@ -7,6 +7,9 @@
 
 # testing
 /coverage
+/cypress/video
+/cypress/screenshots
+/cypress/fixtures/example.json
 
 # production
 /build
