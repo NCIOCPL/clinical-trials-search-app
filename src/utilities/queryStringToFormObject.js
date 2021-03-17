@@ -2,8 +2,6 @@ import * as queryString from 'query-string';
 import {defaultState} from '../store/reducers/form';
 import {resolveConcepts} from './resolveConcepts';
 import {getStateNameFromAbbr} from './getStateNameFromAbbr';
-import { upper } from 'change-case';
-import { trimExt } from 'upath';
 
 const VALID_CCODE_REGEX = /c\d+/i;
 const VALID_ZIPCODE_REGEX = /^\d{5}$/;
