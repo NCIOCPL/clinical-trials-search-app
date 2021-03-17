@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import ResultsListItem from './ResultsListItem';
 
 
-const ResultsList = ({ results, selectedResults, setSelectedResults, setSelectAll, queryParams, tracking }) => {
+const ResultsList = ({ results, selectedResults, setSelectedResults, setSelectAll, queryParams }) => {
   const { 
     resultsPage,
     formType 
@@ -40,7 +40,6 @@ const ResultsList = ({ results, selectedResults, setSelectedResults, setSelectAl
             formType={formType}
             isChecked={selectedResults.find( ({id}) => id === item.nciID) !== undefined}
             onCheckChange={handleOnCheckChange}
-            tracking={tracking}
           />
         );
       })}

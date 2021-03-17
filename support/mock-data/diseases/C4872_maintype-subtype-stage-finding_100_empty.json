@@ -1,0 +1,11 @@
+{
+  "terms": [
+    {
+      "name": "Breast Cancer",
+      "codes": ["C4872"],
+      "ancestor_ids": [],
+      "parent_ids": [],
+      "type": ["maintype"]
+    }
+  ]
+}

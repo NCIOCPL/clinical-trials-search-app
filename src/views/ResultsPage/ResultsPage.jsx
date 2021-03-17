@@ -2,10 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import track from 'react-tracking';
-
-import './ResultsPage.scss';
-
+import { useTracking } from 'react-tracking';
 import { updateFormField, clearForm, receiveData } from '../../store/actions';
 import {
   ChatOpener,
@@ -15,17 +12,17 @@ import {
   Pager,
 } from '../../components/atomic';
 import { TRY_NEW_SEARCH_LINK } from '../../constants';
-import { buildQueryString, formToTrackingData, metadataHasUpdatedHandler } from '../../utilities';
+import { buildQueryString, formToTrackingData } from '../../utilities';
 import { useModal, useStoreToFindTrials } from '../../hooks';
 import ResultsPageHeader from './ResultsPageHeader';
 import ResultsList from './ResultsList';
 import { history } from '../../services/history.service';
 import PrintModalContent from './PrintModalContent';
-import { trackedEvents } from '../../tracking';
+import { formDataConverter } from "../../utilities/formDataConverter"
 
 const queryString = require('query-string');
 
-const ResultsPage = ({ location, tracking }) => {
+const ResultsPage = ({ location }) => {
 
   const dispatch = useDispatch();
   const [selectAll, setSelectAll] = useState(false);
@@ -35,12 +32,10 @@ const ResultsPage = ({ location, tracking }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [trialResults, setTrialResults] = useState([]);
   const [resultsCount, setResultsCount] = useState(0);
-  const [hasMetadataUpdated, setHasMetadataUpdated ] = useState(false);
-  const [isPageLoadReady, setIsPageLoadReady ] = useState(false);
+  const [isPageLoadReady, setIsPageLoadReady] = useState(false);
   const formSnapshot = useSelector(store => store.form);
   const { resultsPage } = useSelector(store => store.form);
   const cache = useSelector(store => store.cache);
-  const locsearch = location.search.replace('?', '');
   const [qs, setQs] = useState(
     queryString.stringify(buildQueryString(formSnapshot), {
       arrayFormat: 'none',
@@ -52,6 +47,8 @@ const ResultsPage = ({ location, tracking }) => {
   const [selectedResults, setSelectedResults] = useState(
     cache['selectedTrialsForPrint'] || []
   );
+  const tracking = useTracking();
+  const { analyticsName, basePath, canonicalHost, siteName, ctsTitle } = useSelector(store => store.globals);
 
   const handleUpdate = (field, value) => {
     dispatch(
@@ -101,23 +98,31 @@ const ResultsPage = ({ location, tracking }) => {
     }
   }, [cache[currCacheKey]]);
 
+  const formData = formToTrackingData(formSnapshot);
+  
   useEffect(() => {
     // This should also be dependent on the current route/url
-    if (hasMetadataUpdated && isPageLoadReady) {
+    if (isPageLoadReady) {
       handleTracking({
-        action: 'pageLoad',
-        data: {
-          status: "success",
-          formType: formSnapshot.formType,
-          numResults: resultsCount,
-          formData: formToTrackingData(formSnapshot)      
-        }
-      })
+        // These properties are required.
+        type: 'PageLoad',
+        event: `ClinicalTrialsSearchApp:Load:Results`,
+        analyticsName,
+        name: `${window.location.host + window.location.pathname}`,
+        // Any additional properties fall into the "page.additionalDetails" bucket
+        // for the event.
+        metaTitle: `Clinical Trials Search Results - ${siteName}`,
+        title: `Clinical Trials Search Results`,
+        status: 'success',
+        formType: formSnapshot.formType,
+        numResults: resultsCount,
+        formData: formData,
+        helperFormData: formDataConverter(formSnapshot.formType, formData),
+      });
       // Since we can page we need to prep isPageLoadReady
       setIsPageLoadReady(false);
     }
-  }, [hasMetadataUpdated, isPageLoadReady]);
-
+  }, [isPageLoadReady]);
   //track usage of selected results for print
   useEffect(() => {
     // update cacheStore with new selectedResults Value
@@ -125,11 +130,15 @@ const ResultsPage = ({ location, tracking }) => {
     if (selectedResults.length > 100) {
       //max number of print selections made
       handleTracking({
-        action: 'click',
-        source: 'print_selected_max_reached_button',
-        data: {
-          formType: formSnapshot.formType,
-        },
+        // These properties are required.
+        type: 'Other',
+        event: 'ClinicalTrialsSearchApp:Other:PrintSelectedError',
+        analyticsName,
+        linkName: 'CTSResultsSelectedErrorClick',
+        // Any additional properties fall into the "page.additionalDetails" bucket
+        // for the event.
+        formType: formSnapshot.formType,
+        errorReason: 'maxselectionreached'
       });
       toggleModal();
     }
@@ -158,10 +167,10 @@ const ResultsPage = ({ location, tracking }) => {
       }))
     ];
 
-    let simpleIds =  pageResultIds.map(({id})=> id);
+    let simpleIds = pageResultIds.map(({ id }) => id);
 
     if (!selectAll) {
-      setSelectAll(true); 
+      setSelectAll(true);
       setSelectedResults([...new Set([...selectedResults, ...pageResultIds])]);
     } else {
       setSelectAll(false);
@@ -172,10 +181,14 @@ const ResultsPage = ({ location, tracking }) => {
   };
 
   const handleStartOver = (linkType) => {
-    const { NewSearchLinkClick } = trackedEvents;
-    NewSearchLinkClick.data.formType = formSnapshot.formType;
-    NewSearchLinkClick.source = linkType;
-    handleTracking(NewSearchLinkClick);
+    handleTracking({
+      type: 'Other',
+      event: 'ClinicalTrialsSearchApp:Other:NewSearchLinkClick',
+      analyticsName,
+      linkName: 'CTStartOverClick',
+      formType: formSnapshot.formType,
+      source: linkType
+    });
     dispatch(clearForm());
   };
 
@@ -286,7 +299,7 @@ const ResultsPage = ({ location, tracking }) => {
           <div
             className={`results-page__control ${
               isBottom ? '--bottom' : '--top'
-            }`}
+              }`}
           >
             {!isLoading && trialResults.total !== 0 && (
               <>
@@ -303,7 +316,7 @@ const ResultsPage = ({ location, tracking }) => {
                     className="results-page__print-button"
                     ref={printSelectedBtn}
                     onClick={handlePrintSelected}
-                    data-pos={isBottom? 'bottom' : 'top'}
+                    data-pos={isBottom ? 'bottom' : 'top'}
                   >
                     Print Selected
                   </button>
@@ -327,23 +340,39 @@ const ResultsPage = ({ location, tracking }) => {
   };
 
   const handlePrintSelected = (e) => {
-    const {PrintSelectedButtonClick, PrintNoneSelectedClick, PrintMaxExceededClick} = trackedEvents;
     const buttonPos = e.target.getAttribute('data-pos');
 
     //emit analytics
     if (selectedResults.length === 0) {
-      PrintNoneSelectedClick.data.formType = formSnapshot.formType;
-      handleTracking(PrintNoneSelectedClick);
-    }else if (selectedResults.length >= 100){
-      PrintMaxExceededClick.data.formType = formSnapshot.formType;
-      handleTracking(PrintMaxExceededClick);
-    }else{
-      PrintSelectedButtonClick.data.formType = formSnapshot.formType;
-      PrintSelectedButtonClick.data.buttonPos = buttonPos;
-      PrintSelectedButtonClick.data.selectAll = selectAll;
-      PrintSelectedButtonClick.data.selectedCount = selectedResults.length;
-      PrintSelectedButtonClick.data.pagesWithSelected = [...new Set(selectedResults.map(({fromPage}) => fromPage) )];
-      handleTracking(PrintSelectedButtonClick);
+      handleTracking({
+        type: 'Other',
+        event: 'ClinicalTrialsSearchApp:Other:PrintSelectedError',
+        analyticsName,
+        linkName: 'CTSResultsSelectedErrorClick',
+        formType: formSnapshot.formType,
+        errorReason: 'noneselected'
+      });
+    } else if (selectedResults.length >= 100) {
+      handleTracking({
+        type: 'Other',
+        event: 'ClinicalTrialsSearchApp:Other:PrintMaxExceededClick',
+        analyticsName,
+        linkName: 'CTSResultsSelectedErrorClick',
+        formType: formSnapshot.formType,
+        errorReason: 'maxselectionreached'
+      });
+    } else {
+      handleTracking({
+        type: 'Other',
+        event: 'ClinicalTrialsSearchApp:Other:PrintSelectedButtonClick',
+        analyticsName,
+        linkName: 'CTSResultsPrintSelectedClick',
+        formType: formSnapshot.formType,
+        buttonPos,
+        selectAll,
+        selectedCount: selectedResults.length,
+        pagesWithSelected: [...new Set(selectedResults.map(({ fromPage }) => fromPage))]
+      });
     }
 
     toggleModal();
@@ -351,12 +380,17 @@ const ResultsPage = ({ location, tracking }) => {
 
   const renderInvalidZip = () => {
     handleTracking({
-      action: 'pageLoad',
-      data: {
-        status: "error",
-        formType: formSnapshot.formType
-      }
-    })
+      // These properties are required.
+      type: 'PageLoad',
+      event: `ClinicalTrialsSearchApp:Load:Results`,
+      analyticsName,
+      name: `${window.location.host + window.location.pathname}`,
+      title: `${ctsTitle} - Search results`,
+      // Any additional properties fall into the "page.additionalDetails" bucket
+      // for the event.
+      status: 'error',
+      formType: formSnapshot.formType,
+    });
     return (
       <div className="results-list invalid-zip">
         <p>
@@ -376,7 +410,7 @@ const ResultsPage = ({ location, tracking }) => {
               formSnapshot.formType === 'basic'
                 ? '/about-cancer/treatment/clinical-trials/search'
                 : '/about-cancer/treatment/clinical-trials/search/advanced'
-            }`}
+              }`}
             onClick={() => handleStartOver(TRY_NEW_SEARCH_LINK)}
           >
             Try a new search
@@ -402,7 +436,7 @@ const ResultsPage = ({ location, tracking }) => {
               formSnapshot.formType === 'basic'
                 ? '/about-cancer/treatment/clinical-trials/search'
                 : '/about-cancer/treatment/clinical-trials/search/advanced'
-            }`}
+              }`}
             onClick={() => handleStartOver(TRY_NEW_SEARCH_LINK)}
           >
             Try a new search
@@ -414,9 +448,7 @@ const ResultsPage = ({ location, tracking }) => {
 
   return (
     <>
-      <Helmet
-        onChangeClientState={metadataHasUpdatedHandler(setHasMetadataUpdated)}
-      >
+      <Helmet>
         <title>
           Clinical Trials Search Results - National Cancer Institute
         </title>
@@ -443,45 +475,45 @@ const ResultsPage = ({ location, tracking }) => {
         {formSnapshot.hasInvalidZip ? (
           <>{renderInvalidZip()}</>
         ) : (
-          <>
-            {isLoading ? (
-              <div className="loader__pageheader"></div>
-            ) : (
-              <ResultsPageHeader
-                resultsCount={resultsCount}
-                pageNum={resultsPage}
-                handleUpdate={handleUpdate}
-                handleReset={handleStartOver}
-              />
-            )}
-
-            <div className="results-page__content">
-              {renderControls()}
-              <div className="results-page__list">
-                {isLoading ? (
-                  <>{renderResultsListLoader()}</>
-                ) : trialResults && trialResults.total === 0 ? (
-                  <>{renderNoResults()}</>
-                ) : (
-                  <ResultsList
-                    queryParams={currCacheKey}
-                    results={trialResults.trials}
-                    selectedResults={selectedResults}
-                    setSelectedResults={setSelectedResults}
-                    setSelectAll={setSelectAll}
-                    tracking={handleTracking}
+            <>
+              {isLoading ? (
+                <div className="loader__pageheader"></div>
+              ) : (
+                  <ResultsPageHeader
+                    resultsCount={resultsCount}
+                    pageNum={resultsPage}
+                    handleUpdate={handleUpdate}
+                    handleReset={handleStartOver}
                   />
                 )}
 
-                <aside className="results-page__aside --side">
-                  {renderDelighters()}
-                </aside>
-              </div>
+              <div className="results-page__content">
+                {renderControls()}
+                <div className="results-page__list">
+                  {isLoading ? (
+                    <>{renderResultsListLoader()}</>
+                  ) : trialResults && trialResults.total === 0 ? (
+                    <>{renderNoResults()}</>
+                  ) : (
+                        <ResultsList
+                          queryParams={currCacheKey}
+                          results={trialResults.trials}
+                          selectedResults={selectedResults}
+                          setSelectedResults={setSelectedResults}
+                          setSelectAll={setSelectAll}
+                          tracking={handleTracking}
+                        />
+                      )}
 
-              {renderControls(true)}
-            </div>
-          </>
-        )}
+                  <aside className="results-page__aside --side">
+                    {renderDelighters()}
+                  </aside>
+                </div>
+
+                {renderControls(true)}
+              </div>
+            </>
+          )}
 
         <aside className="results-page__aside --bottom">
           {renderDelighters()}
@@ -497,6 +529,4 @@ const ResultsPage = ({ location, tracking }) => {
   );
 };
 
-export default track({
-  page: "results",
-})(ResultsPage);
+export default ResultsPage;
