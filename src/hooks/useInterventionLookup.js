@@ -1,7 +1,13 @@
-import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useState, useEffect } from 'react';
+
+import { useSelector } from 'react-redux';
+
 
 export const useInterventionLookup = updateFunc => {
+  const { ctsProtocol, ctsHost, ctsPort } = useSelector(
+    (store) => store.globals
+  );
   const [codesList, setCodesList] = useState([]);
 
   useEffect(() => {
@@ -9,7 +15,7 @@ export const useInterventionLookup = updateFunc => {
       const headers = {
         'Content-Type': 'application/json',
       };
-      const url = 'https://ctsproxy.cancer.gov/v1/interventions';
+      const url = `${ctsProtocol}://${ctsHost}${ctsPort ? ':' + ctsPort : ''}/v1/interventions`;
       try {
         const response = await axios.post(
           url,

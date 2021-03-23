@@ -36,14 +36,13 @@ const initialize = ({
   language = 'en',
   printCacheEndpoint = '/CTS.Print/GenCache',
   rootId = 'NCI-CTS-root',
-  services = {},
   siteName = 'National Cancer Institute',
   useSessionStorage = true,
   zipConversionEndpoint = '/cts_api/zip_code_lookup',
   // These have been added in to support integration testing.
   // This should default to being the hardcoded default.
   // (Which should not be the proxy...)
-  ctsHostname = 'ctsproxy.cancer.gov',
+  ctsHostname = 'clinicaltrialsapi.cancer.gov',
   ctsProtocol = 'https',
   ctsPort = null
 } = {}) => {
@@ -52,11 +51,13 @@ const initialize = ({
 
   let cachedState;
 
+  const services = {};
   const ctsSearch = () => {
     const service = ClinicalTrialsServiceFactory.create(ctsHostname, 'v1', ctsProtocol, ctsPort);
     return service;
   };
   services.ctsSearch = ctsSearch;
+
   // Populate global state with init params
   const initialState = {
     appId,
@@ -71,10 +72,12 @@ const initialize = ({
     language,
     printCacheEndpoint,
     rootId,
-    services,
     siteName,
     useSessionStorage,
     zipConversionEndpoint,
+    ctsHostname,
+    ctsProtocol,
+    ctsPort
   };
 
   if (process.env.NODE_ENV !== 'development' && useSessionStorage === true) {

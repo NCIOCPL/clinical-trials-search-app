@@ -59,7 +59,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
 
 
   const outsideClickListener = event => {
-    if (!document.getElementById('ctMenu').contains(event.target) && ctMenuOpen) {
+    if (document.getElementById('ctMenu') && !document.getElementById('ctMenu').contains(event.target) && ctMenuOpen) {
       setCtMenuOpen(false);
       removeClickListener();
     }
