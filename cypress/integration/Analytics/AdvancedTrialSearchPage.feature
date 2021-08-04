@@ -38,7 +38,7 @@ Feature: Clinical Trials Search Page - Advanced
     Then the page title is "Find NCI-Supported Clinical Trials"
     And browser waits
     When user clicks on "All" button
-    And user types "c" in "Primary Cancer Type/Condition" field
+    And user types "c" in "CancerTypeCondition" field
     Then there should be an analytics event with the following details
         | key                | value                                              |
         | type               | Other                                              |

@@ -17,7 +17,7 @@ Feature: Clinical Trials Search Page - Basic
       | key                                  | value                                                          |
       | type                                 | PageLoad                                                       |
       | event                                | ClinicalTrialsSearchApp:Load:BasicSearch                       |
-      | page.name                            | www.cancer.gov/about-cancer/treatment/clinical-trials/search/  |
+      | page.name                            | www.cancer.gov/about-cancer/treatment/clinical-trials/search  |
       | page.title                           | Find NCI-Supported Clinical Trials                             |
       | page.metaTitle                       | Find NCI-Supported Clinical Trials - National Cancer Institute |
       | page.language                        | english                                                        |
@@ -40,7 +40,7 @@ Feature: Clinical Trials Search Page - Basic
     When the user navigates to "/about-cancer/treatment/clinical-trials/search"
     Then the page title is "Find NCI-Supported Clinical Trials"
     And browser waits
-    When user clicks on "Cancer Type/Keyword" field
+    When user clicks on "CancerTypeKeyword" field
     Then there should be an analytics event with the following details
       | key                | value                                              |
       | type               | Other                                              |
@@ -61,7 +61,7 @@ Feature: Clinical Trials Search Page - Basic
     When the user navigates to "/about-cancer/treatment/clinical-trials/search"
     Then the page title is "Find NCI-Supported Clinical Trials"
     And browser waits
-    When user types "234" in "age" field
+    When user types "234" in "Age" field
     And user clicks on "Find Trials" button
     Then there should be an analytics event with the following details
       | key                | value                                             |
@@ -84,7 +84,7 @@ Feature: Clinical Trials Search Page - Basic
     When the user navigates to "/about-cancer/treatment/clinical-trials/search"
     Then the page title is "Find NCI-Supported Clinical Trials"
     And browser waits
-    When user types "999g9" in "zip code" field
+    When user types "999g9" in "Zipcode" field
     And user clicks on "Find Trials" button
     Then there should be an analytics event with the following details
       | key                | value                                             |
@@ -107,8 +107,8 @@ Feature: Clinical Trials Search Page - Basic
     When the user navigates to "/about-cancer/treatment/clinical-trials/search"
     Then the page title is "Find NCI-Supported Clinical Trials"
     And browser waits
-    When user types "234" in "age" field
-    And user types "999g9" in "zip code" field
+    When user types "234" in "Age" field
+    And user types "999g9" in "Zipcode" field
     And user clicks on "Find Trials" button
     Then there should be an analytics event with the following details
       | key                | value                                             |
@@ -231,7 +231,7 @@ Feature: Clinical Trials Search Page - Basic
     When the user navigates to "/about-cancer/treatment/clinical-trials/search"
     Then the page title is "Find NCI-Supported Clinical Trials"
     And browser waits
-    When user types "22182" in "zip code" field
+    When user types "22182" in "Zipcode" field
     And user clicks on "Find Trials" button
     And browser waits
     Then there should be an analytics event with the following details
@@ -271,7 +271,7 @@ Feature: Clinical Trials Search Page - Basic
     When the user navigates to "/about-cancer/treatment/clinical-trials/search"
     Then the page title is "Find NCI-Supported Clinical Trials"
     And browser waits
-    When user types "22" in "age" field
+    When user types "22" in "Age" field
     And user navigates back to the previous page
     Then there should be preserved analytics event with the following details
       | key                | value                                       |
