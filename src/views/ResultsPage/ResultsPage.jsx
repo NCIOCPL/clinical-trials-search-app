@@ -108,7 +108,7 @@ const ResultsPage = ({ location }) => {
         type: 'PageLoad',
         event: `ClinicalTrialsSearchApp:Load:Results`,
         analyticsName,
-        name: `${window.location.host + window.location.pathname}`,
+       	name: canonicalHost.replace('https://', '') + window.location.pathname,
         // Any additional properties fall into the "page.additionalDetails" bucket
         // for the event.
         metaTitle: `Clinical Trials Search Results - ${siteName}`,
@@ -384,7 +384,7 @@ const ResultsPage = ({ location }) => {
       type: 'PageLoad',
       event: `ClinicalTrialsSearchApp:Load:Results`,
       analyticsName,
-      name: `${window.location.host + window.location.pathname}`,
+     	name: canonicalHost.replace('https://', '') + window.location.pathname,
       title: `${ctsTitle} - Search results`,
       // Any additional properties fall into the "page.additionalDetails" bucket
       // for the event.

@@ -69,7 +69,7 @@ const TrialDescriptionPage = ({ location }) => {
         type: 'PageLoad',
         event: `ClinicalTrialsSearchApp:Load:TrialDescription`,
         analyticsName,
-        name: `${window.location.host + window.location.pathname}`,
+       	name: canonicalHost.replace('https://', '') + window.location.pathname,
         title: `${trial.briefTitle}`,
         metaTitle: `${trial.briefTitle}`,
         // Any additional properties fall into the "page.additionalDetails" bucket

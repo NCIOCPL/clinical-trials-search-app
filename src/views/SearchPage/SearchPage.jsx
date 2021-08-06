@@ -92,7 +92,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
         }`,
         analyticsName,
         formType: formFactor,
-        name: `${window.location.host + window.location.pathname}`,
+       	name: canonicalHost.replace('https://', '') + window.location.pathname,
         title: `Find NCI-Supported Clinical Trials${
           formFactor === 'advanced' ? ' - Advanced Search' : ''
         }`,

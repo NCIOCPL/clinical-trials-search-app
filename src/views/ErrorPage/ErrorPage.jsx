@@ -27,7 +27,7 @@ const ErrorPage = ({ initErrorsList }) => {
       analyticsName,
       // Todo: Name, title, metaTitle confirmation
       metaTitle: pageTitle,
-      name: `${window.location.host + window.location.pathname}`,
+     	name: canonicalHost.replace('https://', '') + window.location.pathname,
       title: pageTitle,
       // Any additional properties fall into the "page.additionalDetails" bucket
       // for the event.
