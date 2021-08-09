@@ -41,6 +41,8 @@ jobs:
       ## This clones and checks out.
       - name: Checkout branch
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 2  # OR "2" -> To retrieve the preceding commit.
       ## Setup node and npm caching.
       - name: Setup Node
         uses: actions/setup-node@v2
@@ -61,13 +63,29 @@ jobs:
         env:
           CI: true
       ## Get file changes
-      - name: Get file changes
-          id: get_file_changes
-          uses: dorner/file-changes-action@v1.2.0
-          with:
-            githubToken: ${{ secrets.GITHUB_TOKEN }}
-            plaintext: true
-      - name: Echo file changes
+      - name: Get changed files using defaults
+        id: changed-files
+        uses: tj-actions/changed-files@v9.3
+
+      - name: Get changed files using a comma separator
+        id: changed-files-comma
+        uses: tj-actions/changed-files@v9.3
+        with:
+          separator: ","
+      - name: List all changed files
         run: |
-          echo Changed files: ${{ steps.get_file_changes.outputs.files }}
+          for file in "${{ steps.changed-files.outputs.all_changed_files }}"; do
+            echo "$file was added"
+          done
+      - name: Get specific changed files
+        id: changed-files-specific
+        uses: tj-actions/changed-files@v9.3
+        with:
+          files: |
+            src
+            *
+      - name: Run step if any of the listed files above change
+        if: steps.changed-files-specific.outputs.any_changed == 'true'
+        run: |
+          echo "One or more files listed above has changed."
 ## TODO: Post notice PR is ready for testing

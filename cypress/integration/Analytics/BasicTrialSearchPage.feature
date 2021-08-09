@@ -17,7 +17,7 @@ Feature: Clinical Trials Search Page - Basic
       | key                                  | value                                                          |
       | type                                 | PageLoad                                                       |
       | event                                | ClinicalTrialsSearchApp:Load:BasicSearch                       |
-      | page.name                            | www.cancer.gov/about-cancer/treatment/clinical-trials/search  |
+      | page.name                            | www.cancer.gov/about-cancer/treatment/clinical-trials/search   |
       | page.title                           | Find NCI-Supported Clinical Trials                             |
       | page.metaTitle                       | Find NCI-Supported Clinical Trials - National Cancer Institute |
       | page.language                        | english                                                        |
