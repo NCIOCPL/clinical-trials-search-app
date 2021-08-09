@@ -1,0 +1,73 @@
+name: Workflow
+on: [ push, pull_request ]
+jobs:
+  build:
+    name: Install and Test
+    runs-on: ubuntu-latest
+    steps:
+      ## Setup variables for build info
+      - name: Set Variables
+        id: set_vars
+        run: |
+          ## PUSH
+          if [ "${{ github.event_name }}" == "push" ]; then
+            BUILD_NAME=$(sed -E 's/refs\/(heads|tags)\///; s/\//__/g;' <<< $GITHUB_REF)
+            BRANCH_NAME=$(sed -E 's/refs\/(heads|tags)\///;' <<< $GITHUB_REF)
+            COMMIT_HASH=$(echo "${GITHUB_SHA}")
+          ## PULL_REQUEST
+          elif [ "${{ github.event_name }}" == "pull_request" ]; then
+            BUILD_NAME=$(echo "pr-${{ github.event.pull_request.number }}")
+            BRANCH_NAME=$(echo "pr-${{ github.event.pull_request.number }}")
+            COMMIT_HASH=$(echo "${{ github.event.pull_request.head.sha }}")
+          else
+            ## ERROR
+            exit 1
+          fi
+
+          ## For step checks and artifact deployment path.
+          ## Same for push and PR
+          export REPO_FULL=${{ github.repository }}
+          export REPO_RE='([^/]+)/(.*)'
+          [[ "$REPO_FULL" =~ $REPO_RE ]]
+          REPO_OWNER=$(echo "${BASH_REMATCH[1]}")
+          REPO_NAME=$(echo "${BASH_REMATCH[2]}")
+
+          ## Set step outputs for later use
+          echo ::set-output name=build_name::${BUILD_NAME}
+          echo ::set-output name=branch_name::${BRANCH_NAME}
+          echo ::set-output name=commit_hash::${COMMIT_HASH}
+          echo ::set-output name=repo_owner::${REPO_OWNER}
+          echo ::set-output name=repo_name::${REPO_NAME}
+      ## This clones and checks out.
+      - name: Checkout branch
+        uses: actions/checkout@v2
+      ## Setup node and npm caching.
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+          cache: 'npm'
+          registry-url: https://npm.pkg.github.com
+          scope: '@nciocpl'
+      ## Install using CI
+      - name: Install Dependencies
+        run: npm ci
+        env:
+          CI: true
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      ## Runs jest unit and cypress e2e testing and merges coverage reports
+      - name: Run Tests
+        run: npm test
+        env:
+          CI: true
+      ## Get file changes
+      - name: Get file changes
+          id: get_file_changes
+          uses: dorner/file-changes-action@v1.2.0
+          with:
+            githubToken: ${{ secrets.GITHUB_TOKEN }}
+            plaintext: true
+      - name: Echo file changes
+        run: |
+          echo Changed files: ${{ steps.get_file_changes.outputs.files }}
+## TODO: Post notice PR is ready for testing
