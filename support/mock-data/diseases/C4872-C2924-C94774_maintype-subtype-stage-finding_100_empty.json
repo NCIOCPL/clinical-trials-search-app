@@ -1,0 +1,47 @@
+{
+    "terms": [
+        {
+            "name": "Breast Cancer",
+            "codes": [
+                "C4872"
+            ],
+            "ancestor_ids": [],
+            "parent_ids": [],
+            "type": [
+                "maintype"
+            ]
+        },
+        {
+            "name": "Ductal Carcinoma In Situ (DCIS)",
+            "codes": [
+                "C2924"
+            ],
+            "ancestor_ids": [
+                "C4872"
+            ],
+            "parent_ids": [
+                "C4872"
+            ],
+            "type": [
+                "grade",
+                "stage",
+                "subtype"
+            ]
+        },
+        {
+            "name": "Early-Stage Breast Cancer",
+            "codes": [
+                "C94774"
+            ],
+            "ancestor_ids": [
+                "C4872"
+            ],
+            "parent_ids": [
+                "C4872"
+            ],
+            "type": [
+                "stage"
+            ]
+        }
+    ]
+}
