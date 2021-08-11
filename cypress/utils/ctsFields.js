@@ -22,4 +22,3 @@ export const fieldMap = {
     "Keywords": "keywordPhrases",
     "TrialPhase": "trialphase"
 };
-
