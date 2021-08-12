@@ -82,12 +82,17 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
+    "start:silent": "BROWSER=none npm start",
     "build": "node scripts/build.js",
-    "test": "npm run unit-tests && npm run cy:ci",
-    "test:it": "cypress open",
-    "cy:ci": "start-server-and-test start http://localhost:3000 integration-tests",
+    "test": "npm run unit-tests && npm run cy:ci && npm run merge-coverage",
+    "test:it": "NODE_ENV=test cypress open",
+    "cy:ci": "start-server-and-test start:silent http://localhost:3000 integration-tests",
     "unit-tests": "jest",
-    "integration-tests": "cypress run",
+    "integration-tests": "NODE_ENV=test cypress run && nyc report -t coverage/cypress --reporter text --report-dir coverage/cypress",
+    "merge-coverage": "npm run mc:pre && npm run mc:merge && npm run mc:report",
+    "mc:pre": "node scripts/pre-merge-coverage",
+    "mc:merge": "nyc merge coverage/tmp coverage/merged/coverage-final.json",
+    "mc:report": "nyc report --nycrc-path=merged.nyc.config.js",
     "test:ci": "npm test -- --coverage --watchAll=false",
     "test:cvg": "npm run test:ci -- --watchAll",
     "plop": "plop --plopfile .plop/index.js",
@@ -111,73 +116,88 @@
       "last 1 safari version"
     ]
   },
-	"jest": {
-		"roots": [
-			"<rootDir>/src"
-		],
-		"collectCoverage": true,
-		"coverageDirectory": "coverage/jest",
-		"collectCoverageFrom": [
-			"src/**/*.{js,jsx,ts,tsx}",
-			"!src/**/*.d.ts",
-			"!cypress/**/*.{spec,test}.{js,jsx,ts,tsx}"
-		],
-		"coverageThreshold": {
-			"global": {
-				"branches": 0,
-				"functions": 0,
-				"lines": 0,
-        "statements": 0
-			}
-		},
-		"setupFiles": [
-			"react-app-polyfill/jsdom",
-			"<rootDir>/jest-test-setup.js"
-		],
-		"setupFilesAfterEnv": [
-			"<rootDir>/src/setupTests.js"
-		],
-		"testMatch": [
-			"<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
-			"<rootDir>/src/**/*.test.{js,jsx,ts,tsx}"
-		],
-		"testEnvironment": "jest-environment-jsdom-global",
-		"transform": {
-			"^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
-			"^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-			"^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
-		},
-		"transformIgnorePatterns": [
-			"[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
-			"^.+\\.module\\.(css|sass|scss)$"
-		],
-		"modulePaths": [],
-		"moduleNameMapper": {
-			"^react-native$": "react-native-web",
-			"^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
-		},
-		"moduleFileExtensions": [
-			"web.js",
-			"js",
-			"web.ts",
-			"ts",
-			"web.tsx",
-			"tsx",
-			"json",
-			"web.jsx",
-			"jsx",
-			"node"
-		],
-		"watchPlugins": [
-			"jest-watch-typeahead/filename",
-			"jest-watch-typeahead/testname"
-		]
-	},  
+  "jest": {
+    "roots": [
+      "<rootDir>/src"
+    ],
+    "collectCoverage": true,
+    "coverageDirectory": "coverage/jest",
+    "collectCoverageFrom": [
+      "src/**/*.test.{js,jsx,ts,tsx}",
+      "!src/**/*.d.ts",
+      "!cypress/**/*.{spec,test}.{js,jsx,ts,tsx}"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "statements": 0,
+        "branches": 0,
+        "functions": 0,
+        "lines": 0
+      }
+    },
+    "setupFiles": [
+      "react-app-polyfill/jsdom",
+      "<rootDir>/jest-test-setup.js"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/setupTests.js"
+    ],
+    "testMatch": [
+      "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
+      "<rootDir>/src/**/*.test.{js,jsx,ts,tsx}"
+    ],
+    "testEnvironment": "jest-environment-jsdom-global",
+    "transform": {
+      "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
+      "^.+\\.module\\.(css|sass|scss)$"
+    ],
+    "modulePaths": [],
+    "moduleNameMapper": {
+      "^react-native$": "react-native-web",
+      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
+    },
+    "moduleFileExtensions": [
+      "web.js",
+      "js",
+      "web.ts",
+      "ts",
+      "web.tsx",
+      "tsx",
+      "json",
+      "web.jsx",
+      "jsx",
+      "node"
+    ],
+    "watchPlugins": [
+      "jest-watch-typeahead/filename",
+      "jest-watch-typeahead/testname"
+    ]
+  },
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": true
   },
+  "nyc": {
+    "report-dir": "coverage/cypress",
+    "check-coverage": false,
+    "reporter": [
+      "html",
+      "json",
+      "lcov"
+    ],
+    "exclude": [
+      "cypress/**/*.js",
+      "jest-test-setup.js",
+      "src/setupTests.js"
+    ]
+  },
   "devDependencies": {
     "@babel/core": "^7.9.0",
+    "@cypress/code-coverage": "^3.9.10",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.3",
@@ -188,7 +208,7 @@
     "babel-plugin-named-asset-import": "^0.3.6",
     "babel-preset-react-app": "^9.1.2",
     "cypress": "^6.2.0",
-    "cypress-cucumber-preprocessor": "^4.0.0",
+    "cypress-cucumber-preprocessor": "^4.2.0",
     "http-proxy-middleware": "^0.20.0",
     "jest": "^27.0.6",
     "jest-environment-jsdom": "^27.0.6",
