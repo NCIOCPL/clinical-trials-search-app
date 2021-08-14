@@ -118,7 +118,7 @@
     "collectCoverage": true,
     "coverageDirectory": "coverage/jest",
     "collectCoverageFrom": [
-      "src/**/*.test.{js,jsx,ts,tsx}",
+      "src/**/*.{js,jsx,ts,tsx}",
       "!src/**/*.d.ts",
       "!cypress/**/*.{spec,test}.{js,jsx,ts,tsx}"
     ],
