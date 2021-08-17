@@ -90,6 +90,8 @@
     "lint:fix": "npm run lint:src:fix && npm run lint:cypress:fix",
 		"lint:src:fix": "eslint src --ext .js,.jsx --fix",
 		"lint:cypress:fix": "eslint cypress/integration --ext .js,.jsx --fix",
+		"lint:diff:develop": "eslint $(git diff --diff-filter=A --name-only develop HEAD '***.js' '***.jsx' | xargs)",
+		"lint:diff:develop:fix": "eslint --fix $(git diff --diff-filter=A --name-only develop HEAD '***.js' '***.jsx' | xargs)",
     "plop": "plop --plopfile .plop/index.js",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
