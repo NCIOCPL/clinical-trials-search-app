@@ -55,6 +55,13 @@ jobs:
         env:
           CI: true
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      ## Lint Changed Files
+      - name: Lint Changed Files
+        if: github.event_name == 'pull_request'
+        run: |
+          ## Target Branch ${{ github.event.pull_request.base.ref }}
+          git fetch origin "${{ github.base_ref }}" --depth=1
+          ./node_modules/.bin/eslint $(git diff --diff-filter=A --name-only "origin/${{ github.base_ref }}" ${{ github.sha }} '***.js' '***.jsx' | xargs)
       ## Runs jest unit and cypress e2e testing and merges coverage reports
       - name: Run Tests
         run: npm test
