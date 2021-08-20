@@ -1,0 +1,21 @@
+{
+    "terms": [
+        {
+            "name": "Ductal Carcinoma In Situ (DCIS)",
+            "codes": [
+                "C2924"
+            ],
+            "ancestor_ids": [
+                "C4872"
+            ],
+            "parent_ids": [
+                "C4872"
+            ],
+            "type": [
+                "grade",
+                "stage",
+                "subtype"
+            ]
+        }
+    ]
+}
