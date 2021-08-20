@@ -11,6 +11,7 @@ export const getStateNameFromAbbr = abbrToLookup => {
     DE: 'Delaware',
     FL: 'Florida',
     GA: 'Georgia',
+    GU: 'Guam',
     HI: 'Hawaii',
     ID: 'Idaho',
     IL: 'Illinois',
