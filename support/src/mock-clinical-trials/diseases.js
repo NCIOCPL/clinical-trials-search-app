@@ -51,8 +51,8 @@ const diseasesGet = async (req, res, next) => {
   // so we could have C1,C2-C3-C4,C5 if we have 3 concepts, C1,C2 and C3 and C4,C5
 
   // TODO: This needs to be sanitized.
-  const name_fragment = name ? name.replaceAll(' ','-') : "empty";
-  const ancestor_fragment = ancestor_ids ? ancestor_ids : "";
+  const name_fragment = name ? name.replaceAll(' ', '-') : "empty";
+  const ancestor_fragment = ancestor_ids && !Array.isArray(ancestor_ids) ? ancestor_ids : ancestor_ids && Array.isArray(ancestor_ids) && ancestor_ids.length > 0 ? ancestor_ids.join('-') : '';
   const code_fragment = code && !Array.isArray(code) ? code : code && Array.isArray(code) && code.length > 0 ? code.join('-') : "empty";
   const type_fragment = type && !Array.isArray(type) ? type : type && Array.isArray(type) && type.length > 0 ? type.join('-') : "empty";
   const size_fragment = size ? size : "empty";
