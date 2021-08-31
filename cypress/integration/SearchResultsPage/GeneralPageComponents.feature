@@ -147,7 +147,7 @@ Feature: Clinical Trials Search Results Page Components
             | tt        | treatment                  |
 
 
-    Scenario: as a user I expect that the search results page is displaying search criteria in an expected order when I modify location to be hospitals
+    Scenario: as a user I expect that the search results page is displaying search criteria in an expected order when I modify location to be at NIH only
         Given the user navigates to "/about-cancer/treatment/clinical-trials/search/r?a=50&d=C798&i=C15313&in=Benjamin%20David%20Smith&lcnty=United%20States&lcty=Atlanta&lo=M%20D%20Anderson%20Cancer%20Center&loc=2&lst=GA&q=Breast&rl=2&st=C2924&stg=C94774&t=C4872&tid=NCI-2017-00476&tp=iii&tt=treatment"
         And trial info displayes "Results 1-1  of 1 for your search "
         When user clicks on Modify Search Criteria button

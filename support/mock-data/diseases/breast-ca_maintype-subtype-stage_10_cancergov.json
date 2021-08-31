@@ -1,0 +1,74 @@
+{
+	"terms": [
+		{
+			"name": "Advanced Breast Carcinoma",
+			"codes": ["C162648"],
+			"ancestor_ids": ["C4872"],
+			"parent_ids": ["C4872"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "Advanced HER2 Negative Breast Carcinoma",
+			"codes": ["C168782"],
+			"ancestor_ids": ["C4872"],
+			"parent_ids": ["C4872"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "Advanced Triple-Negative Breast Carcinoma",
+			"codes": ["C175236"],
+			"ancestor_ids": ["C4872"],
+			"parent_ids": ["C4872"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "BRCA-Mutated Metastatic Breast Carcinoma",
+			"codes": ["C161830"],
+			"ancestor_ids": ["C4872"],
+			"parent_ids": ["C4872"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "Bilateral Breast Cancer",
+			"codes": ["C8287"],
+			"ancestor_ids": ["C4872"],
+			"parent_ids": ["C4872"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "Breast Cancer",
+			"codes": ["C4872"],
+			"ancestor_ids": [],
+			"parent_ids": [],
+			"type": ["maintype"]
+		},
+		{
+			"name": "Ductal Breast Carcinoma",
+			"codes": ["C4017"],
+			"ancestor_ids": ["C4872"],
+			"parent_ids": ["C4872"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "Early-Stage Breast Cancer",
+			"codes": ["C94774"],
+			"ancestor_ids": ["C4872"],
+			"parent_ids": ["C4872"],
+			"type": ["stage"]
+		},
+		{
+			"name": "HER2 Negative Breast Carcinoma",
+			"codes": ["C168519"],
+			"ancestor_ids": ["C4872"],
+			"parent_ids": ["C4872"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "HER2-Positive Breast Carcinoma",
+			"codes": ["C53556"],
+			"ancestor_ids": ["C4872"],
+			"parent_ids": ["C4872"],
+			"type": ["subtype"]
+		}
+	]
+}

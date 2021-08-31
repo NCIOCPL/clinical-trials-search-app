@@ -1,0 +1,74 @@
+{
+	"terms": [
+		{
+			"name": "AIDS-Related Burkitt Lymphoma",
+			"codes": ["C8286"],
+			"ancestor_ids": ["C27134", "C3208", "C3211"],
+			"parent_ids": ["C3211"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "ALK-Positive Large B-Cell Lymphoma",
+			"codes": ["C7225"],
+			"ancestor_ids": ["C27134", "C3208", "C3211"],
+			"parent_ids": ["C3211"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "Accelerated Phase Chronic Myelogenous Leukemia, BCR-ABL1 Positive",
+			"codes": ["C3173"],
+			"ancestor_ids": ["C27134", "C3161", "C3172", "C3174", "C4345", "C9290"],
+			"parent_ids": ["C3174"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "Acute Bilineal Leukemia",
+			"codes": ["C6923"],
+			"ancestor_ids": ["C27134", "C3161"],
+			"parent_ids": ["C3161"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "Acute Biphenotypic Leukemia",
+			"codes": ["C4673"],
+			"ancestor_ids": ["C27134", "C3161"],
+			"parent_ids": ["C3161"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "Acute Leukemia of Ambiguous Lineage",
+			"codes": ["C7464"],
+			"ancestor_ids": ["C27134", "C3161"],
+			"parent_ids": ["C3161"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "Acute Lymphoblastic Leukemia (ALL)",
+			"codes": ["C3167", "C3168"],
+			"ancestor_ids": ["C27134", "C3161", "C7539", "C3167"],
+			"parent_ids": ["C7539", "C3167"],
+			"type": ["subtype", "maintype"]
+		},
+		{
+			"name": "Acute Megakaryoblastic Leukemia",
+			"codes": ["C3170"],
+			"ancestor_ids": ["C27134", "C3161", "C3171", "C3172", "C9290"],
+			"parent_ids": ["C3171"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "Acute Myeloid Leukemia (AML) with Abnormalities of Chromosome 5q",
+			"codes": ["C122725"],
+			"ancestor_ids": ["C27134", "C3161", "C3171", "C3172", "C9290"],
+			"parent_ids": ["C3171"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "Acute Myeloid Leukemia (AML) with Abnormalities of Chromosome 7",
+			"codes": ["C122726"],
+			"ancestor_ids": ["C27134", "C3161", "C3171", "C3172", "C9290"],
+			"parent_ids": ["C3171"],
+			"type": ["subtype"]
+		}
+	]
+}

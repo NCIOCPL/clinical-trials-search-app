@@ -1,0 +1,74 @@
+{
+	"terms": [
+		{
+			"name": "AIDS-Related Anal Carcinoma",
+			"codes": ["C9278"],
+			"ancestor_ids": ["C9291"],
+			"parent_ids": ["C9291"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "AIDS-Related Burkitt Lymphoma",
+			"codes": ["C8286"],
+			"ancestor_ids": ["C27134", "C3208", "C3211"],
+			"parent_ids": ["C3211"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "AIDS-Related Kaposi Sarcoma",
+			"codes": ["C3992"],
+			"ancestor_ids": ["C9087", "C9118", "C9306"],
+			"parent_ids": ["C9087"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "AIDS-Related Lymphoma",
+			"codes": ["C3471"],
+			"ancestor_ids": ["C27134", "C3208"],
+			"parent_ids": ["C3208"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "AIDS-Related Non-Hodgkin Lymphoma",
+			"codes": ["C5051"],
+			"ancestor_ids": ["C27134", "C3208", "C3211"],
+			"parent_ids": ["C3211"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "AIDS-Related Primary Effusion Lymphoma",
+			"codes": ["C9017"],
+			"ancestor_ids": ["C27134", "C3208", "C3211"],
+			"parent_ids": ["C3211"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "AL Amyloidosis",
+			"codes": ["C158963"],
+			"ancestor_ids": ["C27134", "C4665"],
+			"parent_ids": ["C4665"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "ALK-Positive Large B-Cell Lymphoma",
+			"codes": ["C7225"],
+			"ancestor_ids": ["C27134", "C3208", "C3211"],
+			"parent_ids": ["C3211"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "Accelerated Phase Chronic Myelogenous Leukemia, BCR-ABL1 Positive",
+			"codes": ["C3173"],
+			"ancestor_ids": ["C27134", "C3161", "C3172", "C3174", "C4345", "C9290"],
+			"parent_ids": ["C3174"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "Acinar Cell Carcinoma",
+			"codes": ["C3768"],
+			"ancestor_ids": ["C2916"],
+			"parent_ids": ["C2916"],
+			"type": ["subtype"]
+		}
+	]
+}
