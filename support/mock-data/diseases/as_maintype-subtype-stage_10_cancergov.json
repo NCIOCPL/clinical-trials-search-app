@@ -1,0 +1,74 @@
+{
+	"terms": [
+		{
+			"name": "Anaplastic Astrocytoma",
+			"codes": ["C9477"],
+			"ancestor_ids": ["C3059", "C3268", "C60781", "C9293"],
+			"parent_ids": ["C60781"],
+			"type": ["grade", "subtype"]
+		},
+		{
+			"name": "Anaplastic Astrocytoma, IDH-Mutant",
+			"codes": ["C129290"],
+			"ancestor_ids": ["C3059", "C3268", "C60781", "C9293"],
+			"parent_ids": ["C60781"],
+			"type": ["grade", "subtype"]
+		},
+		{
+			"name": "Anaplastic Astrocytoma, IDH-Wildtype",
+			"codes": ["C129291"],
+			"ancestor_ids": ["C3059", "C3268", "C60781", "C9293"],
+			"parent_ids": ["C60781"],
+			"type": ["grade", "subtype"]
+		},
+		{
+			"name": "Ascites",
+			"codes": ["C2885"],
+			"ancestor_ids": ["C2991"],
+			"parent_ids": ["C2991"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "Asthma",
+			"codes": ["C28397"],
+			"ancestor_ids": ["C2991"],
+			"parent_ids": ["C2991"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "Astrocytoma",
+			"codes": ["C60781"],
+			"ancestor_ids": ["C3059", "C3268", "C9293"],
+			"parent_ids": ["C3059"],
+			"type": ["maintype", "subtype"]
+		},
+		{
+			"name": "Asymptomatic COVID-19 Infection Laboratory-Confirmed",
+			"codes": ["C171547"],
+			"ancestor_ids": ["C171133"],
+			"parent_ids": ["C171133"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "BRCA-Associated Ovarian Carcinoma",
+			"codes": ["C148024"],
+			"ancestor_ids": ["C4908"],
+			"parent_ids": ["C4908"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "Breast Implant-Associated Anaplastic Large Cell Lymphoma",
+			"codes": ["C139012"],
+			"ancestor_ids": ["C27134", "C3208", "C3211"],
+			"parent_ids": ["C3211"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "COVID-19-Associated Acute Respiratory Distress Syndrome",
+			"codes": ["C171551"],
+			"ancestor_ids": ["C2991"],
+			"parent_ids": ["C2991"],
+			"type": ["subtype"]
+		}
+	]
+}

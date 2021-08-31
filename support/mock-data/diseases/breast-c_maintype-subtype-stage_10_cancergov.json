@@ -1,0 +1,74 @@
+{
+	"terms": [
+		{
+			"name": "Advanced Breast Adenocarcinoma",
+			"codes": ["C165700"],
+			"ancestor_ids": ["C4872"],
+			"parent_ids": ["C4872"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "Advanced Breast Carcinoma",
+			"codes": ["C162648"],
+			"ancestor_ids": ["C4872"],
+			"parent_ids": ["C4872"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "Advanced HER2 Negative Breast Carcinoma",
+			"codes": ["C168782"],
+			"ancestor_ids": ["C4872"],
+			"parent_ids": ["C4872"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "Advanced Triple-Negative Breast Carcinoma",
+			"codes": ["C175236"],
+			"ancestor_ids": ["C4872"],
+			"parent_ids": ["C4872"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "BRCA-Mutated Metastatic Breast Carcinoma",
+			"codes": ["C161830"],
+			"ancestor_ids": ["C4872"],
+			"parent_ids": ["C4872"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "Bilateral Breast Cancer",
+			"codes": ["C8287"],
+			"ancestor_ids": ["C4872"],
+			"parent_ids": ["C4872"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "Breast Adenocarcinoma",
+			"codes": ["C5214"],
+			"ancestor_ids": ["C4872"],
+			"parent_ids": ["C4872"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "Breast Angiosarcoma",
+			"codes": ["C5184"],
+			"ancestor_ids": ["C3088", "C9118", "C9306"],
+			"parent_ids": ["C3088", "C9306"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "Breast Atypical Hyperplasia",
+			"codes": ["C5195"],
+			"ancestor_ids": ["C3262"],
+			"parent_ids": ["C3262"],
+			"type": ["subtype"]
+		},
+		{
+			"name": "Breast Cancer",
+			"codes": ["C4872"],
+			"ancestor_ids": [],
+			"parent_ids": [],
+			"type": ["maintype"]
+		}
+	]
+}

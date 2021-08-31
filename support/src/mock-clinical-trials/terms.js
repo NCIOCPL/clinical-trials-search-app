@@ -43,7 +43,7 @@ const termsGet = async (req, res, next) => {
 
   // TODO: This needs to be sanitized.
 
-  const term_fragment = term ? term : "empty";
+  const term_fragment = term ? term.toLowerCase() : "empty";
   const size_fragment = size ? size : "empty";
   const sort_fragment = sort ? sort : "empty";
   const term_type_fragment = term_type ? term_type : "empty";
