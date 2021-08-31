@@ -1,0 +1,21 @@
+{
+    "total": 1,
+    "terms": [
+        {
+            "term_key": "um_baltimore_washington_medical_center_tate_cancer_center",
+            "term": "UM Baltimore Washington Medical Center / Tate Cancer Center",
+            "term_type": "sites.org_name",
+            "current_trial_statuses": [
+                "CLOSED TO ACCRUAL AND INTERVENTION",
+                "CLOSED TO ACCRUAL",
+                "ACTIVE",
+                "TEMPORARILY CLOSED TO ACCRUAL",
+                "ADMINISTRATIVELY COMPLETE",
+                "COMPLETE"
+            ],
+            "count": 57,
+            "count_normalized": 0.023286253051697174,
+            "score": null
+        }
+    ]
+}
