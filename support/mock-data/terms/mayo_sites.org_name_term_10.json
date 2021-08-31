@@ -1,0 +1,166 @@
+{
+    "total": 10,
+    "terms": [
+        {
+            "term_key": "mayo_clinic_health_system_eau_claire_hospital_luther_campus",
+            "term": "Mayo Clinic Health System Eau Claire Hospital-Luther Campus",
+            "term_type": "sites.org_name",
+            "current_trial_statuses": [
+                "CLOSED TO ACCRUAL AND INTERVENTION",
+                "CLOSED TO ACCRUAL",
+                "ACTIVE"
+            ],
+            "count": 14,
+            "count_normalized": 0.005746161386475406,
+            "score": null
+        },
+        {
+            "term_key": "mayo_clinic_health_system_in_albert_lea",
+            "term": "Mayo Clinic Health System in Albert Lea",
+            "term_type": "sites.org_name",
+            "current_trial_statuses": [
+                "CLOSED TO ACCRUAL AND INTERVENTION",
+                "CLOSED TO ACCRUAL",
+                "ACTIVE",
+                "COMPLETE",
+                "TEMPORARILY CLOSED TO ACCRUAL"
+            ],
+            "count": 21,
+            "count_normalized": 0.00861068233499124,
+            "score": null
+        },
+        {
+            "term_key": "mayo_clinic_health_system_eau_claire_clinic",
+            "term": "Mayo Clinic Health System-Eau Claire Clinic",
+            "term_type": "sites.org_name",
+            "current_trial_statuses": [
+                "CLOSED TO ACCRUAL AND INTERVENTION",
+                "CLOSED TO ACCRUAL",
+                "ACTIVE",
+                "COMPLETE"
+            ],
+            "count": 42,
+            "count_normalized": 0.017170276834673665,
+            "score": null
+        },
+        {
+            "term_key": "mayo_clinic_health_system_franciscan_healthcare",
+            "term": "Mayo Clinic Health System-Franciscan Healthcare",
+            "term_type": "sites.org_name",
+            "current_trial_statuses": [
+                "CLOSED TO ACCRUAL AND INTERVENTION",
+                "CLOSED TO ACCRUAL",
+                "ACTIVE",
+                "COMPLETE"
+            ],
+            "count": 49,
+            "count_normalized": 0.020012226617117292,
+            "score": null
+        },
+        {
+            "term_key": "mayo_clinic_health_systems_mankato",
+            "term": "Mayo Clinic Health Systems-Mankato",
+            "term_type": "sites.org_name",
+            "current_trial_statuses": [
+                "CLOSED TO ACCRUAL AND INTERVENTION",
+                "CLOSED TO ACCRUAL",
+                "ACTIVE",
+                "COMPLETE"
+            ],
+            "count": 38,
+            "count_normalized": 0.015543788453955602,
+            "score": null
+        },
+        {
+            "term_key": "mayo_clinic_hospital_in_arizona",
+            "term": "Mayo Clinic Hospital in Arizona",
+            "term_type": "sites.org_name",
+            "current_trial_statuses": [
+                "CLOSED TO ACCRUAL",
+                "CLOSED TO ACCRUAL AND INTERVENTION",
+                "COMPLETE",
+                "ACTIVE",
+                "APPROVED",
+                "ADMINISTRATIVELY COMPLETE",
+                "WITHDRAWN",
+                "TEMPORARILY CLOSED TO ACCRUAL"
+            ],
+            "count": 116,
+            "count_normalized": 0.046934207601502076,
+            "score": null
+        },
+        {
+            "term_key": "mayo_clinic_in_arizona",
+            "term": "Mayo Clinic in Arizona",
+            "term_type": "sites.org_name",
+            "current_trial_statuses": [
+                "CLOSED TO ACCRUAL AND INTERVENTION",
+                "ACTIVE",
+                "CLOSED TO ACCRUAL",
+                "COMPLETE",
+                "TEMPORARILY CLOSED TO ACCRUAL AND INTERVENTION",
+                "ADMINISTRATIVELY COMPLETE",
+                "ENROLLING BY INVITATION",
+                "TEMPORARILY CLOSED TO ACCRUAL",
+                "WITHDRAWN"
+            ],
+            "count": 605,
+            "count_normalized": 0.22954232405564898,
+            "score": null
+        },
+        {
+            "term_key": "mayo_clinic_in_florida",
+            "term": "Mayo Clinic in Florida",
+            "term_type": "sites.org_name",
+            "current_trial_statuses": [
+                "CLOSED TO ACCRUAL AND INTERVENTION",
+                "ACTIVE",
+                "CLOSED TO ACCRUAL",
+                "COMPLETE",
+                "TEMPORARILY CLOSED TO ACCRUAL AND INTERVENTION",
+                "ADMINISTRATIVELY COMPLETE",
+                "ENROLLING BY INVITATION",
+                "TEMPORARILY CLOSED TO ACCRUAL",
+                "WITHDRAWN",
+                "APPROVED"
+            ],
+            "count": 502,
+            "count_normalized": 0.19295348889754946,
+            "score": null
+        },
+        {
+            "term_key": "mayo_clinic_in_rochester",
+            "term": "Mayo Clinic in Rochester",
+            "term_type": "sites.org_name",
+            "current_trial_statuses": [
+                "CLOSED TO ACCRUAL AND INTERVENTION",
+                "CLOSED TO ACCRUAL",
+                "ACTIVE",
+                "COMPLETE",
+                "WITHDRAWN",
+                "ADMINISTRATIVELY COMPLETE",
+                "TEMPORARILY CLOSED TO ACCRUAL AND INTERVENTION",
+                "ENROLLING BY INVITATION",
+                "TEMPORARILY CLOSED TO ACCRUAL",
+                "APPROVED"
+            ],
+            "count": 1183,
+            "count_normalized": 0.4192467530512482,
+            "score": null
+        },
+        {
+            "term_key": "mayo_clinic_radiation_therapy_northfield",
+            "term": "Mayo Clinic Radiation Therapy-Northfield",
+            "term_type": "sites.org_name",
+            "current_trial_statuses": [
+                "CLOSED TO ACCRUAL AND INTERVENTION",
+                "ACTIVE",
+                "CLOSED TO ACCRUAL",
+                "COMPLETE"
+            ],
+            "count": 9,
+            "count_normalized": 0.0036965871805738565,
+            "score": null
+        }
+    ]
+}
