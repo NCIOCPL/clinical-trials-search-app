@@ -1,0 +1,17 @@
+{
+	"terms": [
+		{
+			"name": "Bevacizumab",
+			"codes": [
+				"C2039"
+			],
+			"synonyms": [
+				"Avastin",
+				"Mvasi",
+				"Zirabev"
+			],
+			"category": "agent",
+			"count": 91
+		}
+	]
+}
