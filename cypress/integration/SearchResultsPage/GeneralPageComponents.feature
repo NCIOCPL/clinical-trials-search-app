@@ -30,7 +30,7 @@ Feature: Clinical Trials Search Results Page Components
             | Field               |
             | CancerTypeCondition |
             | Age                 |
-   
+
     Scenario: user can start over at the basic search page after going to url directly
         Given the user navigates to "/about-cancer/treatment/clinical-trials/search/r?a=40&loc=0&rl=1"
         And trial info displayes "Results 1-10  of 6306 for your search "
@@ -42,7 +42,7 @@ Feature: Clinical Trials Search Results Page Components
         Then the following fields have been cleared out
             | Field |
             | Age   |
-    
+
     ####### Search Criteria and Refine###############
     Scenario: as a user I expect that the search results page is displaying search criteria in an expected order when I refine to search for zipcode
         Given the user navigates to "/about-cancer/treatment/clinical-trials/search/r?a=50&d=C798&i=C15313&in=Benjamin%20David%20Smith&lcnty=United%20States&lcty=Atlanta&lo=M%20D%20Anderson%20Cancer%20Center&loc=2&lst=GA&q=Breast&rl=2&st=C2924&stg=C94774&t=C4872&tid=NCI-2017-00476&tp=iii&tt=treatment"
@@ -110,7 +110,6 @@ Feature: Clinical Trials Search Results Page Components
         When user clicks on Modify Search Criteria button
         And user selects "Hospital" radio button
         And user types "anderson" in "Hospitals / Institutions" autosuggest field
-        And user selects "Anderson Cancer Center" from dropdown
         And user clicks on "Find Trials" button
         And trial info displayes "Results 1-1  of 1 for your search "
         Then the criteria table displays the following
@@ -120,7 +119,7 @@ Feature: Clinical Trials Search Results Page Components
             | Stage                         | Early-Stage Breast Cancer       |
             | Age                           | 50                              |
             | Keywords/Phrases              | Breast                          |
-            | At Hospital/Institution       | M D Anderson Cancer Center      |
+            | At Hospital/Institution       | anderson                        |
             | Trial Type                    | Treatment                       |
             | Drug/Drug Family              | Radiosensitizing Agent          |
             | Other Treatments              | Radiation Therapy               |
@@ -132,7 +131,7 @@ Feature: Clinical Trials Search Results Page Components
             | parameter | value                      |
             | a         | 50                         |
             | d         | C798                       |
-            | hos       | M D Anderson Cancer Center |
+            | hos       | anderson                   |
             | i         | C15313                     |
             | in        | Benjamin David Smith       |
             | lo        | M D Anderson Cancer Center |
