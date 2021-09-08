@@ -229,3 +229,7 @@ When('user clicks on {string} section of accordion', (section) => {
 And('text {string} is displayed', (text) => {
 	cy.get('p').contains(text).should('be.visible');
 });
+
+And('search criteria table is not displayed', () => {
+	cy.get('div.cts-accordion.table-dropdown').should('not.exist');
+});
