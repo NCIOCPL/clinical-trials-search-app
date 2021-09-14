@@ -49,3 +49,19 @@ Feature: As a user, I want to be able to search for a clinical trial using advan
 		And Search tip icon is displayed and text "Search Tip: For more search options, use our advanced search." appears
 		When user clicks on "advanced search" with href "/about-cancer/treatment/clinical-trials/search/advanced"
 		Then user is redirected to "/about-cancer/treatment/clinical-trials/search/advanced"
+
+		### meta data
+		Scenario: As a search engine I want to have access to the meta data on a page 
+		Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+		Then the page title is "Find NCI-Supported Clinical Trials"
+		And the title tag should be "Find NCI-Supported Clinical Trials - Advanced Search - National Cancer Institute"
+		And the page contains meta tags with the following names
+			| name        | content                                                                                                                                                  |
+			| description | Use our advanced search to find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one. |
+		And the page contains meta tags with the following properties
+			| property       | content                                                                                                                                                  |
+			| og:title       | Find NCI-Supported Clinical Trials - Advanced Search                                                                                                     |
+			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/advanced                                                                            |
+			| og:description | Use our advanced search to find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one. |
+		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/advanced"
+

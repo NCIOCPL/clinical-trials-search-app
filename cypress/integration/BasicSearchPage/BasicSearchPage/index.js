@@ -119,3 +119,11 @@ When('user clicks on Start Over button', () => {
 When('user types {string} in {string} field', (inputText, fieldLabel) => {
 	cy.get(`input#${inputFieldMap[fieldLabel]}`).type(inputText);
 });
+
+Then('the title tag should be {string}', (expectedTitle) => {
+	cy.get('head>title')
+		.invoke('text')
+		.then((title) => {
+			expect(title.trim().replace(/\n/g), '').to.eq(expectedTitle);
+		});
+});
