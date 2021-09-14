@@ -89,7 +89,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 		When user clicks on "Cancer Type/Keyword" field
 		Then autocomplete dropdown is displayed
 		When user types "asdf" in "Cancer Type/Keyword" field
-		Then autocomplete dropdown is displayed with "No available options found.  Your search will be based on the text above." text
+		Then autocomplete dropdown is displayed with "No available options found. Your search will be based on the text above." text
 		When user clicks on "Find Trials" button
 		Then the search is executed and no results page is displayed
 		And the url query has the following corresponding code

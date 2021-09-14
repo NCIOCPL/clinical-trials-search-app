@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import InputLabel from '../InputLabel';
-import {uniqueIdForComponent} from '../../../utilities';
+import { uniqueIdForComponent } from '../../../utilities';
 import { connect } from 'react-redux';
 import { trackFormInputChange } from '../../../store/modules/analytics/tracking/tracking.actions';
 import './Dropdown.scss';
@@ -21,126 +21,123 @@ import './Dropdown.scss';
 //  - errorMessage: string. If present triggers the error state and displays the error message
 
 class Dropdown extends React.Component {
-  //  Constructor
-  //  @param {object} props The props. See proptypes below.
-  //
-  //  Set initial state
-  //  value: default selected option passed from a prop
-  //  hasError: tracks if the field has an error
-  //  errorMessage: displayed message when the field hasError
+	//  Constructor
+	//  @param {object} props The props. See proptypes below.
+	//
+	//  Set initial state
+	//  value: default selected option passed from a prop
+	//  hasError: tracks if the field has an error
+	//  errorMessage: displayed message when the field hasError
 
-  static propTypes = {
-    id: PropTypes.string,
-    name: PropTypes.string,
-    label: PropTypes.string.isRequired,
-    children: PropTypes.node.isRequired,
-    classes: PropTypes.string,
-    disableTracking: PropTypes.bool,
-    required: PropTypes.bool,
-    hasError: PropTypes.bool,
-    errorMessage: PropTypes.string,
-    value: PropTypes.string,
-    action: PropTypes.func,
-  };
+	static propTypes = {
+		id: PropTypes.string,
+		name: PropTypes.string,
+		label: PropTypes.string.isRequired,
+		children: PropTypes.node.isRequired,
+		classes: PropTypes.string,
+		disableTracking: PropTypes.bool,
+		required: PropTypes.bool,
+		hasError: PropTypes.bool,
+		errorMessage: PropTypes.string,
+		value: PropTypes.string,
+		action: PropTypes.func,
+	};
 
-  static defaultProps = {
-    required: false,
-    classes: '',
-    hasError: false,
-    disableTracking: false,
-    action: () => {},
-  };
+	static defaultProps = {
+		required: false,
+		classes: '',
+		hasError: false,
+		disableTracking: false,
+		action: () => {},
+	};
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: this.props.value || '',
-      hasError: this.props.errorMessage ? true : false,
-      errorMessageBody: this.props.errorMessage
-        ? this.props.errorMessage
-        : null,
-    };
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+			value: this.props.value || '',
+			hasError: this.props.errorMessage ? true : false,
+			errorMessageBody: this.props.errorMessage
+				? this.props.errorMessage
+				: null,
+		};
+	}
 
-  // check to see if an Id was passed in, if not generate one.
-  componentWillMount() {
-    this.id = this.props.id ? this.props.id : uniqueIdForComponent(this);
-  }
+	// check to see if an Id was passed in, if not generate one.
+	componentWillMount() {
+		this.id = this.props.id ? this.props.id : uniqueIdForComponent(this);
+	}
 
-  /**
-   * Shared change handler for field tracking
-   * @param {Object} event 
-   */
-  _internalTrackInputChange(event) {
-    const { target } = event;
+	/**
+	 * Shared change handler for field tracking
+	 * @param {Object} event
+	 */
+	_internalTrackInputChange(event) {
+		const { target } = event;
 
-    const { form, id, value } = target;
-    const { errorMessage, trackFormInputChange } = this.props;
-    const { errorMessageBody, hasError } = this.state;
-    const formName = form && form.id ? form.id : null;
-    const inputActionProps = {
-      errorMessage: errorMessageBody,
-      formName,
-      hasError,
-      id,
-      value
-    };
-    trackFormInputChange(inputActionProps);
-    return true;
-  }
+		const { form, id, value } = target;
+		const { errorMessage, trackFormInputChange } = this.props;
+		const { errorMessageBody, hasError } = this.state;
+		const formName = form && form.id ? form.id : null;
+		const inputActionProps = {
+			errorMessage: errorMessageBody,
+			formName,
+			hasError,
+			id,
+			value,
+		};
+		trackFormInputChange(inputActionProps);
+		return true;
+	}
 
-  //  Update the state when user selects a new option
-  //  @param {event} event The async event
+	//  Update the state when user selects a new option
+	//  @param {event} event The async event
 
-  _handleChange(event) {
-    this.setState({
-      value: event.target.value,
-    });
-    this.props.action(event);
-    if (!this.props.disableTracking) {
-      this._internalTrackInputChange(event);
-    }
-  }
+	_handleChange(event) {
+		this.setState({
+			value: event.target.value,
+		});
+		this.props.action(event);
+		if (!this.props.disableTracking) {
+			this._internalTrackInputChange(event);
+		}
+	}
 
-  render() {
-    return (
-      <div className={this.props.classes}>
-        <InputLabel
-          htmlFor={this.id}
-          required={this.props.required}
-          label={this.props.label}
-        />
+	render() {
+		return (
+			<div className={this.props.classes}>
+				<InputLabel
+					htmlFor={this.id}
+					required={this.props.required}
+					label={this.props.label}
+				/>
 
-        {this.props.hasError && (
-          <span className="cts-error-message" role="alert">
-            {this.props.errorMessage}
-          </span>
-        )}
+				{this.props.hasError && (
+					<span className="cts-error-message" role="alert">
+						{this.props.errorMessage}
+					</span>
+				)}
 
-        <select
-          className="cts-select"
-          name={this.props.name || this.props.id}
-          id={this.id}
-          value={this.state.value}
-          required={this.props.required}
-          onChange={this._handleChange.bind(this)}
-        >
-          {this.state.value === '' && (
-            <option disabled value="">
-              Select ...
-            </option>
-          )}
-          {this.props.children}
-        </select>
-      </div>
-    );
-  }
+				<select
+					className="cts-select"
+					name={this.props.name || this.props.id}
+					id={this.id}
+					value={this.state.value}
+					required={this.props.required}
+					onChange={this._handleChange.bind(this)}>
+					{this.state.value === '' && (
+						<option disabled value="">
+							Select ...
+						</option>
+					)}
+					{this.props.children}
+				</select>
+			</div>
+		);
+	}
 }
 
 const mapDispatchToProps = {
-  trackFormInputChange
+	trackFormInputChange,
 };
 
-export default connect(
-    null, mapDispatchToProps
-)(Dropdown);
+export default connect(null, mapDispatchToProps)(Dropdown);

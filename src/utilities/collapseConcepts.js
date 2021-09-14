@@ -3,9 +3,9 @@
  * into a collection of ids.
  * @param array typesList the list of diseases
  */
-export const collapseConcepts = typesList => {
-  const ids = typesList.reduce((ac, type) => {
-    return [...ac, ...type.codes];
-  }, []);
-  return [...new Set(ids)];
+export const collapseConcepts = (typesList) => {
+	const ids = typesList.reduce((ac, type) => {
+		return [...ac, ...type.codes];
+	}, []);
+	return [...new Set(ids)];
 };

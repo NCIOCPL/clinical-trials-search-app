@@ -7,9 +7,9 @@ import PropTypes from 'prop-types';
  * @param {object} props.children - the child elements.
  */
 const WrapperComponent = ({ children }) => {
-  return <>{children}</>;
+	return <>{children}</>;
 };
 WrapperComponent.propTypes = {
-  children: PropTypes.node,
+	children: PropTypes.node,
 };
 export default WrapperComponent;

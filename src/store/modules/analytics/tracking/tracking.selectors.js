@@ -7,7 +7,7 @@ import './tracking.defs';
  * @param {State} store
  * @returns {tracking}
  */
-export const getTrackingData = store => store.tracking;
+export const getTrackingData = (store) => store.tracking;
 
 /**
  * getHasDispatchedFormInteractionEvent - Returns set store flag that determines if an analytics tracking
@@ -16,8 +16,8 @@ export const getTrackingData = store => store.tracking;
  * @returns {boolean} hasDispatchedFormInteractionEvent
  */
 export const getHasDispatchedFormInteractionEvent = createSelector(
-    getTrackingData,
-    trackingData => trackingData.hasDispatchedFormInteractionEvent
+	getTrackingData,
+	(trackingData) => trackingData.hasDispatchedFormInteractionEvent
 );
 
 /**
@@ -26,8 +26,8 @@ export const getHasDispatchedFormInteractionEvent = createSelector(
  * @returns {boolean} hasUserInteractedWithForm
  */
 export const getHasUserInteractedWithForm = createSelector(
-    getTrackingData,
-    trackingData => trackingData.hasUserInteractedWithForm
+	getTrackingData,
+	(trackingData) => trackingData.hasUserInteractedWithForm
 );
 
 /**
@@ -36,8 +36,8 @@ export const getHasUserInteractedWithForm = createSelector(
  * @returns {Array} forms
  */
 export const getFormTrackingData = createSelector(
-    getTrackingData,
-    trackingData => trackingData.forms
+	getTrackingData,
+	(trackingData) => trackingData.forms
 );
 
 /**
@@ -47,14 +47,14 @@ export const getFormTrackingData = createSelector(
  * @returns {Object} formInFocus
  */
 export const getFormInFocus = createSelector(
-    getHasUserInteractedWithForm,
-    getFormTrackingData,
-    ( hasUserInteractedWithForm, formTrackingData ) => {
-        const formInFocus = hasUserInteractedWithForm
-            ?  formTrackingData.filter( form => form.isFocused )
-            :  [];
-        return formInFocus;
-    }
+	getHasUserInteractedWithForm,
+	getFormTrackingData,
+	(hasUserInteractedWithForm, formTrackingData) => {
+		const formInFocus = hasUserInteractedWithForm
+			? formTrackingData.filter((form) => form.isFocused)
+			: [];
+		return formInFocus;
+	}
 );
 
 /**
@@ -62,12 +62,11 @@ export const getFormInFocus = createSelector(
  * @param {Function} getFormInFocus
  * @returns {Object} fieldInFocus
  */
-export const getFieldInFocus = createSelector(
-    getFormInFocus,
-    formInFocus => {
-        const fieldInFocus = formInFocus.length > 0
-            ? formInFocus[0].fields.length > 0 && formInFocus[0].fields.filter( field => field.isFocused )[0]
-            : {};
-        return fieldInFocus;
-    }
-);
+export const getFieldInFocus = createSelector(getFormInFocus, (formInFocus) => {
+	const fieldInFocus =
+		formInFocus.length > 0
+			? formInFocus[0].fields.length > 0 &&
+			  formInFocus[0].fields.filter((field) => field.isFocused)[0]
+			: {};
+	return fieldInFocus;
+});

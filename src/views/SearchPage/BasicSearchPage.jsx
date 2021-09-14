@@ -1,10 +1,8 @@
 import React from 'react';
-import SearchPage from './SearchPage'
+import SearchPage from './SearchPage';
 
 const BasicSearchPage = () => {
-  return (
-    <SearchPage formInit='basic' />
-  )
-}
+	return <SearchPage formInit="basic" />;
+};
 
 export default BasicSearchPage;

@@ -40,7 +40,9 @@ export const EDDLAnalyticsHandler = (window, isDebugging) => {
 					data: data ? data : {},
 				};
 				window.NCIDataLayer.push(eventData);
-				if (isDebugging) { console.log(eventData); }
+				if (isDebugging) {
+					console.log(eventData);
+				}
 				break;
 			}
 			case 'PageLoad': {
@@ -66,7 +68,7 @@ export const EDDLAnalyticsHandler = (window, isDebugging) => {
 						metaTitle,
 						language,
 						type: 'nciAppModulePage',
-						...(audience && {audience}),
+						...(audience && { audience }),
 						channel,
 						contentGroup,
 						publishedDate,
@@ -74,7 +76,9 @@ export const EDDLAnalyticsHandler = (window, isDebugging) => {
 					},
 				};
 				window.NCIDataLayer.push(eventData);
-				if (isDebugging) { console.log(eventData); }
+				if (isDebugging) {
+					console.log(eventData);
+				}
 				break;
 			}
 			default: {
