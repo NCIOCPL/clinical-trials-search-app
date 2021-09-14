@@ -199,3 +199,7 @@ And('the invalid criteria table displays the following', (dataTable) => {
 		cy.get('ul > li').contains(`${Criteria}`).should('exist');
 	}
 });
+
+When('user clears {string} input field', (fieldLabel) => {
+	cy.get(`input#${fieldMap[fieldLabel]}`).clear();
+});

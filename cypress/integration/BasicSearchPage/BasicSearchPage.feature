@@ -312,3 +312,106 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 			| a         | 40    |
 			| z         | 22182 |
 			| zp        | 100   |
+
+
+	### meta data
+
+	Scenario: As a search engine I want to have access to the meta data on a basic search page
+		Given the user navigates to "/about-cancer/treatment/clinical-trials/search"
+		Then the page title is "Find NCI-Supported Clinical Trials"
+		And the title tag should be "Find NCI-Supported Clinical Trials - National Cancer Institute"
+		And the page contains meta tags with the following names
+			| name        | content                                                                                                                       |
+			| description | Find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one. |
+		And the page contains meta tags with the following properties
+			| property       | content                                                                                                                       |
+			| og:title       | Find NCI-Supported Clinical Trials                                                                                            |
+			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search                                                          |
+			| og:description | Find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one. |
+		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search"
+
+	Scenario: As a user, I expect meta data to update accordingly when I search for criteria and modify my search
+		Given the user navigates to "/about-cancer/treatment/clinical-trials/search"
+		Then the page title is "Find NCI-Supported Clinical Trials"
+		When user types "30" in "Age" field
+		When user types "22182" in "U.S. Zip Code" field
+		When user types "aids" in "Cancer Type/Keyword" field
+		And user clicks on "Find Trials" button
+		Then the search is executed and results page is displayed
+		Then trial info displays "Results 1-10  of 17 for your search "
+		And the title tag should be "Clinical Trials Search Results - National Cancer Institute"
+		And the page contains meta tags with the following names
+			| name        | content                                               |
+			| description | Find an NCI-supported clinical trial - Search results |
+		And the page contains meta tags with the following properties
+			| property       | content                                                                                               |
+			| og:title       | Clinical Trials Search Results                                                                        |
+			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=30&loc=1&q=aids&rl=1&z=22182 |
+			| og:description | Find an NCI-supported clinical trial - Search results                                                 |
+		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=30&loc=1&q=aids&rl=1&z=22182"
+		When user clicks on Modify Search Criteria button
+		When user clears "Age" input field
+		And user types "40" in "Age" field
+		And the title tag should be "Find NCI-Supported Clinical Trials - Advanced Search - National Cancer Institute"
+		And the page contains meta tags with the following names
+			| name        | content                                                                                                                                                  |
+			| description | Use our advanced search to find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one. |
+		And the page contains meta tags with the following properties
+			| property       | content                                                                                                                                                  |
+			| og:title       | Find NCI-Supported Clinical Trials - Advanced Search                                                                                                     |
+			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/advanced                                                                            |
+			| og:description | Use our advanced search to find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one. |
+		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/advanced"
+		And user clicks on "Find Trials" button
+		Then the search is executed and results page is displayed
+		And trial info displays "Results 1-10  of 18 for your search "
+		And the title tag should be "Clinical Trials Search Results - National Cancer Institute"
+		And the page contains meta tags with the following names
+			| name        | content                                               |
+			| description | Find an NCI-supported clinical trial - Search results |
+		And the page contains meta tags with the following properties
+			| property       | content                                                                                                      |
+			| og:title       | Clinical Trials Search Results                                                                               |
+			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=40&loc=1&q=aids&rl=2&z=22182&zp=100 |
+			| og:description | Find an NCI-supported clinical trial - Search results                                                        |
+		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=40&loc=1&q=aids&rl=2&z=22182&zp=100"
+
+	Scenario: As a user, I expect meta data to update accordingly when I navigate to search results directly and modify my search
+		Given the user navigates to "/about-cancer/treatment/clinical-trials/search/r?a=30&loc=1&q=aids&rl=1&z=22182"
+		Then trial info displays "Results 1-10  of 17 for your search "
+		And the title tag should be "Clinical Trials Search Results - National Cancer Institute"
+		And the page contains meta tags with the following names
+			| name        | content                                               |
+			| description | Find an NCI-supported clinical trial - Search results |
+		And the page contains meta tags with the following properties
+			| property       | content                                                                                               |
+			| og:title       | Clinical Trials Search Results                                                                        |
+			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=30&loc=1&q=aids&rl=1&z=22182 |
+			| og:description | Find an NCI-supported clinical trial - Search results                                                 |
+		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=30&loc=1&q=aids&rl=1&z=22182"
+		When user clicks on Modify Search Criteria button
+		When user clears "Age" input field
+		And user types "40" in "Age" field
+		And the title tag should be "Find NCI-Supported Clinical Trials - Advanced Search - National Cancer Institute"
+		And the page contains meta tags with the following names
+			| name        | content                                                                                                                                                  |
+			| description | Use our advanced search to find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one. |
+		And the page contains meta tags with the following properties
+			| property       | content                                                                                                                                                  |
+			| og:title       | Find NCI-Supported Clinical Trials - Advanced Search                                                                                                     |
+			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/advanced                                                                            |
+			| og:description | Use our advanced search to find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one. |
+		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/advanced"
+		And user clicks on "Find Trials" button
+		Then the search is executed and results page is displayed
+		And trial info displays "Results 1-10  of 18 for your search "
+		And the title tag should be "Clinical Trials Search Results - National Cancer Institute"
+		And the page contains meta tags with the following names
+			| name        | content                                               |
+			| description | Find an NCI-supported clinical trial - Search results |
+		And the page contains meta tags with the following properties
+			| property       | content                                                                                                      |
+			| og:title       | Clinical Trials Search Results                                                                               |
+			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=40&loc=1&q=aids&rl=2&z=22182&zp=100 |
+			| og:description | Find an NCI-supported clinical trial - Search results                                                        |
+		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=40&loc=1&q=aids&rl=2&z=22182&zp=100"
