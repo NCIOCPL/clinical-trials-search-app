@@ -6,5 +6,5 @@ export { reducer as cache } from './cache';
 export { reducer as tracking } from '../modules/analytics/tracking/tracking.reducer';
 
 export const actions = {
-    ...trackingActions
+	...trackingActions,
 };

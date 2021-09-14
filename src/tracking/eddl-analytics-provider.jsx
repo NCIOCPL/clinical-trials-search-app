@@ -3,7 +3,7 @@ import React from 'react';
 import track, { useTracking } from 'react-tracking';
 
 import { AnalyticsProvider } from './';
-import {EDDLAnalyticsHandler} from '../utilities'
+import { EDDLAnalyticsHandler } from '../utilities';
 // import {EDDLAnalyticsHandler} from '../utils/index'
 import WrapperComponent from './wrapper-component';
 
@@ -18,54 +18,54 @@ import WrapperComponent from './wrapper-component';
  * TODO: Document page object override
  */
 const EddlAnalyticsProvider = ({
-    children,
-    analyticsHandler = EDDLAnalyticsHandler(window),
-    pageName,
-    pageTitle,
-    pageMetaTitle,
-    pageLanguage,
-    pageAudience,
-    pageChannel,
-    pageContentGroup,
-    pagePublishedDate,
-    ...pageAdditionalDetails
-  }) => {
-  // const tracking = useTracking();
-  const TrackingWrapper = track(
-    {
-      name: pageName,
-      title: pageTitle,
-      metaTitle: pageMetaTitle,
-      language: pageLanguage,
-      audience: pageAudience,
-      channel: pageChannel,
-      contentGroup: pageContentGroup,
-      publishedDate: pagePublishedDate,
-      ...pageAdditionalDetails,
-    },
-    {
-      dispatch: analyticsHandler,
-    }
-  )(WrapperComponent);
+	children,
+	analyticsHandler = EDDLAnalyticsHandler(window),
+	pageName,
+	pageTitle,
+	pageMetaTitle,
+	pageLanguage,
+	pageAudience,
+	pageChannel,
+	pageContentGroup,
+	pagePublishedDate,
+	...pageAdditionalDetails
+}) => {
+	// const tracking = useTracking();
+	const TrackingWrapper = track(
+		{
+			name: pageName,
+			title: pageTitle,
+			metaTitle: pageMetaTitle,
+			language: pageLanguage,
+			audience: pageAudience,
+			channel: pageChannel,
+			contentGroup: pageContentGroup,
+			publishedDate: pagePublishedDate,
+			...pageAdditionalDetails,
+		},
+		{
+			dispatch: analyticsHandler,
+		}
+	)(WrapperComponent);
 
-  return (
-    <AnalyticsProvider analyticsHandler={analyticsHandler}>
-      <TrackingWrapper>{children}</TrackingWrapper>
-    </AnalyticsProvider>
-  );
+	return (
+		<AnalyticsProvider analyticsHandler={analyticsHandler}>
+			<TrackingWrapper>{children}</TrackingWrapper>
+		</AnalyticsProvider>
+	);
 };
 
 EddlAnalyticsProvider.propTypes = {
-  children: PropTypes.node,
-  analyticsHandler: PropTypes.func,
-  pageName: PropTypes.string,
-  pageTitle: PropTypes.string,
-  pageMetaTitle: PropTypes.string,
-  pageLanguage: PropTypes.string,
-  pageAudience: PropTypes.string,
-  pageChannel: PropTypes.string,
-  pageContentGroup: PropTypes.string,
-  pagePublishedDate: PropTypes.string,
+	children: PropTypes.node,
+	analyticsHandler: PropTypes.func,
+	pageName: PropTypes.string,
+	pageTitle: PropTypes.string,
+	pageMetaTitle: PropTypes.string,
+	pageLanguage: PropTypes.string,
+	pageAudience: PropTypes.string,
+	pageChannel: PropTypes.string,
+	pageContentGroup: PropTypes.string,
+	pagePublishedDate: PropTypes.string,
 };
 
 export default EddlAnalyticsProvider;

@@ -1,4 +1,3 @@
-
 /**
  * @typedef field
  * @type {Object}

@@ -5,29 +5,29 @@ import { formatTrialSearchQuery } from '../utilities';
 import { history } from '../services/history.service';
 
 export const useStoreToFindTrials = () => {
-  const dispatch = useDispatch();
-  const currentForm = useSelector(store => store.form);
-  const [queryParamString, setQueryParamString] = useState('');
+	const dispatch = useDispatch();
+	const currentForm = useSelector((store) => store.form);
+	const [queryParamString, setQueryParamString] = useState('');
 
-  useEffect(() => {
-    if (queryParamString !== '') {
-      history.replace({
-        path: '/about-cancer/treatment/clinical-trials/search/advanced/r',
-        search: queryParamString,
-      });
+	useEffect(() => {
+		if (queryParamString !== '') {
+			history.replace({
+				path: '/about-cancer/treatment/clinical-trials/search/advanced/r',
+				search: queryParamString,
+			});
 
-      dispatch(
-        searchTrials({
-          cacheKey: queryParamString,
-          data: formatTrialSearchQuery(currentForm),
-        })
-      );
-    }
-  }, [queryParamString]);
+			dispatch(
+				searchTrials({
+					cacheKey: queryParamString,
+					data: formatTrialSearchQuery(currentForm),
+				})
+			);
+		}
+	}, [queryParamString]);
 
-  const fetchTrials = qs => {
-    setQueryParamString(qs);
-  };
+	const fetchTrials = (qs) => {
+		setQueryParamString(qs);
+	};
 
-  return [{ fetchTrials }];
+	return [{ fetchTrials }];
 };

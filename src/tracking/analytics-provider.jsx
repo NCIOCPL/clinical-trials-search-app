@@ -13,19 +13,19 @@ import WrapperComponent from './wrapper-component';
  * @param {function} props.analyticsHandler - The function for handling tracking dispatches
  */
 const AnalyticsProvider = ({ children, analyticsHandler }) => {
-  const TrackingWrapper = track(
-    {},
-    {
-      dispatch: analyticsHandler,
-    }
-  )(WrapperComponent);
+	const TrackingWrapper = track(
+		{},
+		{
+			dispatch: analyticsHandler,
+		}
+	)(WrapperComponent);
 
-  return <TrackingWrapper>{children}</TrackingWrapper>;
+	return <TrackingWrapper>{children}</TrackingWrapper>;
 };
 
 AnalyticsProvider.propTypes = {
-  children: PropTypes.node,
-  analyticsHandler: PropTypes.func,
+	children: PropTypes.node,
+	analyticsHandler: PropTypes.func,
 };
 
 export default AnalyticsProvider;

@@ -7,14 +7,14 @@ export { formatTrialSearchQuery } from './formatTrialSearchQuery';
 export { matchItemToTerm } from './matchItemToTerm';
 export { deepSearchObject } from './deepSearchObject';
 export {
-  loadStateFromSessionStorage,
-  saveStatetoSessionStorage,
+	loadStateFromSessionStorage,
+	saveStatetoSessionStorage,
 } from './sessionUtils';
 export {
-  matchStateToTerm,
-  matchStateToTermWithHeaders,
-  sortStates,
-  getStates,
+	matchStateToTerm,
+	matchStateToTermWithHeaders,
+	sortStates,
+	getStates,
 } from './stateUtils';
 export { keyHandler } from './keyHandler';
 export { uniqueIdForComponent } from './uniqueIdForComponent';
