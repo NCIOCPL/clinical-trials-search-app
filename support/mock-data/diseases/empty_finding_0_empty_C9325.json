@@ -1,0 +1,44 @@
+{
+    "terms": [
+        {
+            "name": "TP53 Gene Mutation",
+            "codes": [
+                "C118396"
+            ],
+            "ancestor_ids": [
+                "C3262",
+                "C3268",
+                "C3476",
+                "C4715",
+                "C54705",
+                "C7352",
+                "C9293",
+                "C9325"
+            ],
+            "parent_ids": [],
+            "type": [
+                "finding"
+            ]
+        },
+        {
+            "name": "TP53 Mutation Carrier",
+            "codes": [
+                "C156121"
+            ],
+            "ancestor_ids": [
+                "C3262",
+                "C3268",
+                "C3476",
+                "C4715",
+                "C54705",
+                "C7352",
+                "C9293",
+                "C9325"
+            ],
+            "parent_ids": [],
+            "type": [
+                "finding"
+            ]
+        }
+    ]
+}

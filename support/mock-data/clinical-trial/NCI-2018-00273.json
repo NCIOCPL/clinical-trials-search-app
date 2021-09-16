@@ -1,0 +1,2582 @@
+{
+    "nci_id": "NCI-2018-00273",
+    "nct_id": "NCT03326674",
+    "protocol_id": "ODO-TE-B301",
+    "ccr_id": null,
+    "ctep_id": null,
+    "dcp_id": null,
+    "other_ids": null,
+    "associated_studies": null,
+    "outcome_measures": [
+        {
+            "name": "Adverse events, including deaths and other serious adverse events",
+            "description": null,
+            "timeframe": "Approximately 5.0-5.5 years",
+            "type_code": "OTHER_PRE_SPECIFIED"
+        },
+        {
+            "name": "Area under the plasma concentration versus time curve (AUC) of tesetaxel",
+            "description": null,
+            "timeframe": "Approximately 2.5-3.0 years",
+            "type_code": "OTHER_PRE_SPECIFIED"
+        },
+        {
+            "name": "Central nervous system (CNS) ORR as assessed by the CNS IRC in patients with CNS metastases at baseline",
+            "description": null,
+            "timeframe": "Approximately 2.5-3.0 years",
+            "type_code": "SECONDARY"
+        },
+        {
+            "name": "CNS OS in patients with CNS metastases at baseline or a history of CNS metastases",
+            "description": null,
+            "timeframe": "Approximately 2.5-3.0 years",
+            "type_code": "SECONDARY"
+        },
+        {
+            "name": "CNS PFS as assessed by the CNS IRC in patients with CNS metastases at baseline or a history of CNS metastases and in the intent-to-treat (ITT) population",
+            "description": null,
+            "timeframe": "Approximately 2.5-3.0 years",
+            "type_code": "SECONDARY"
+        },
+        {
+            "name": "DCR as assessed by the IRC",
+            "description": null,
+            "timeframe": "Approximately 2.5-3.0 years",
+            "type_code": "SECONDARY"
+        },
+        {
+            "name": "EORTC QLQ-C30 Functional Scales and Symptom Scales/Items",
+            "description": null,
+            "timeframe": "Approximately 2.5-3.0 years",
+            "type_code": "OTHER_PRE_SPECIFIED"
+        },
+        {
+            "name": "European Organisation for Research and Treatment of Cancer Quality of Life Questionnaire-C30 (EORTC QLQ-C30) Global Health Status/QoL",
+            "description": null,
+            "timeframe": "Approximately 2.5-3.0 years",
+            "type_code": "OTHER_PRE_SPECIFIED"
+        },
+        {
+            "name": "Incidence of clinical laboratory abnormalities (e.g., CBC, serum chemistry and coagulation testing)",
+            "description": null,
+            "timeframe": "Approximately 5.0-5.5 years",
+            "type_code": "OTHER_PRE_SPECIFIED"
+        },
+        {
+            "name": "ORR as assessed by the IRC",
+            "description": null,
+            "timeframe": "Approximately 2.5-3.0 years",
+            "type_code": "SECONDARY"
+        },
+        {
+            "name": "OS",
+            "description": null,
+            "timeframe": "Approximately 5.0-5.5 years",
+            "type_code": "SECONDARY"
+        },
+        {
+            "name": "Peak plasma concentration (Cmax) of tesetaxel",
+            "description": null,
+            "timeframe": "Approximately 2.5-3.0 years",
+            "type_code": "OTHER_PRE_SPECIFIED"
+        },
+        {
+            "name": "PFS as assessed by the IRC",
+            "description": null,
+            "timeframe": "Approximately 2.5-3.0 years",
+            "type_code": "PRIMARY"
+        }
+    ],
+    "amendment_date": null,
+    "current_trial_status": "Administratively Complete",
+    "current_trial_status_date": "2021-06-28",
+    "start_date": "2017-12-21",
+    "start_date_type_code": "ACTUAL",
+    "completion_date": "2021-06-28",
+    "completion_date_type_code": "ACTUAL",
+    "record_verification_date": "2021-07-01",
+    "brief_title": "Tesetaxel Plus Reduced Dose of Capecitabine vs. Capecitabine in HER2 Negative, HR Positive, LA / MBC",
+    "official_title": "A Multinational, Multicenter, Randomized, Phase 3 Study of Tesetaxel Plus a Reduced Dose of Capecitabine Versus Capecitabine Alone in Patients With HER2 Negative, HR Positive, Locally Advanced or Metastatic Breast Cancer Previously Treated With a Taxane",
+    "acronym": "CONTESSA",
+    "keywords": [
+        "Tesetaxel",
+        "Capecitabine",
+        "HER2 negative",
+        "Hormone Receptor positive",
+        "Locally advanced or metastatic breast cancer",
+        "Combination of tesetaxel and capecitabine",
+        "Taxanes",
+        "Metastatic breast cancer",
+        "Breast cancer",
+        "Central nervous system (CNS) metastases"
+    ],
+    "brief_summary": "CONTESSA is a multinational, multicenter, randomized, Phase 3 study of tesetaxel in patients with HER2 negative, HR positive LA / MBC previously treated with a taxane in the neoadjuvant or adjuvant setting. The primary objective of the study is to compare the efficacy of tesetaxel plus a reduced dose of capecitabine versus the approved dose of capecitabine alone based on progression-free survival (PFS) as assessed by the Independent Radiologic Review Committee (IRC). 685 patients were enrolled.",
+    "detail_description": "CONTESSA is a multinational, multicenter, randomized, Phase 3 study of tesetaxel plus a\r\n      reduced dose of capecitabine versus the approved dose of capecitabine alone in patients with\r\n      HER2 negative, HR positive locally advanced or metastatic breast cancer (LA/MBC) previously\r\n      treated with a taxane in the neoadjuvant or adjuvant setting. 685 patients were enrolled,\r\n      including 674 who received treatment.\r\n\r\n      Patients randomly assigned to Arm A (tesetaxel plus a reduced dose of capecitabine) are\r\n      administered:\r\n\r\n        -  Tesetaxel (27 mg/m2) orally once every 21 days on Day 1 of each 21-day cycle; and\r\n\r\n        -  Capecitabine (825 mg/m2) orally twice daily (in the morning and evening after a meal,\r\n           for a total daily dose of 1,650 mg/m2) beginning with the evening dose on Day 1 through\r\n           the morning dose on Day 15 of each 21-day cycle.\r\n\r\n      Patients randomly assigned to Arm B (approved dose of capecitabine alone) are administered:\r\n\r\n        -  Capecitabine (1,250 mg/m2) orally twice daily (in the morning and evening after a meal,\r\n           for a total daily dose of 2,500 mg/m2) beginning with the evening dose on Day 1 through\r\n           the morning dose on Day 15 of each 21-day cycle\r\n\r\n      Dose modifications for tesetaxel and/or capecitabine are described in the study protocol.\r\n\r\n      Patients are treated until documentation of progressive disease (PD), evidence of\r\n      unacceptable toxicity or other decision to discontinue treatment. Capecitabine is an oral\r\n      chemotherapy agent that is considered a standard-of-care treatment in LA/MBC. The primary\r\n      efficacy endpoint is PFS as assessed by the IRC. The secondary efficacy endpoints are overall\r\n      survival (OS), objective response rate (ORR) as assessed by the IRC and disease control rate\r\n      (DCR) as assessed by the IRC.",
+    "classification_code": null,
+    "interventional_model": "Parallel",
+    "study_source": "Industrial",
+    "accepts_healthy_volunteers_indicator": "NO",
+    "study_protocol_type": "Interventional",
+    "study_subtype_code": null,
+    "study_population_description": null,
+    "study_model_code": null,
+    "study_model_other_text": null,
+    "sampling_method_code": null,
+    "why_study_stopped": "The Sponsor has discontinued the development of tesetaxel",
+    "bio_specimen": {
+        "f1": "bio_specimen_description",
+        "f2": null,
+        "f3": "bio_specimen_retention_code",
+        "f4": null
+    },
+    "primary_purpose": {
+        "primary_purpose_code": "TREATMENT",
+        "primary_purpose_other_text": null,
+        "primary_purpose_additional_qualifier_code": null
+    },
+    "phase": {
+        "phase": "III",
+        "phase_other_text": null,
+        "phase_additional_qualifier_code": "NO"
+    },
+    "masking": {
+        "masking": null,
+        "masking_allocation_code": "Randomized Controlled Trial",
+        "masking_role_investigator": null,
+        "masking_role_outcome_assessor": null,
+        "masking_role_subject": null,
+        "masking_role_caregiver": null
+    },
+    "principal_investigator": null,
+    "central_contact": {
+        "central_contact_email": null,
+        "central_contact_name": null,
+        "central_contact_phone": null,
+        "central_contact_type": null
+    },
+    "lead_org": "Odonate Therapeutics, Inc.",
+    "collaborators": null,
+    "sites": [
+        {
+            "contact_email": "cpalodichuk@mednet.ucla.edu",
+            "contact_name": "Christine Palodichuk",
+            "contact_phone": "310-794-2971",
+            "recruitment_status": "ACTIVE",
+            "recruitment_status_date": "2018-06-08",
+            "local_site_identifier": "17-001878",
+            "org_address_line_1": "10833 Le Conte Avenue",
+            "org_address_line_2": "University of California at Los Angeles",
+            "org_city": "Los Angeles",
+            "org_country": "United States",
+            "org_email": null,
+            "org_family": "Jonsson Comprehensive Cancer Center",
+            "org_fax": null,
+            "org_name": "UCLA / Jonsson Comprehensive Cancer Center",
+            "org_to_family_relationship": null,
+            "org_phone": "888-798-0719\r310-825-4321",
+            "org_postal_code": "90095",
+            "org_state_or_province": "CA",
+            "org_status": "ACTIVE",
+            "org_status_date": "2018-06-08",
+            "org_tty": null,
+            "org_va": false,
+            "org_coordinates": {
+                "lat": 34.071,
+                "lon": -118.4432
+            }
+        },
+        {
+            "contact_email": null,
+            "contact_name": null,
+            "contact_phone": null,
+            "recruitment_status": "COMPLETED",
+            "recruitment_status_date": "2021-04-22",
+            "local_site_identifier": "18753",
+            "org_address_line_1": "1600 Divisadero Street",
+            "org_address_line_2": null,
+            "org_city": "San Francisco",
+            "org_country": "United States",
+            "org_email": null,
+            "org_family": "UCSF Helen Diller Family Comprehensive Cancer Center",
+            "org_fax": null,
+            "org_name": "UCSF Medical Center-Mount Zion",
+            "org_to_family_relationship": null,
+            "org_phone": "877-827-3222",
+            "org_postal_code": "94115",
+            "org_state_or_province": "CA",
+            "org_status": "COMPLETED",
+            "org_status_date": "2021-04-22",
+            "org_tty": null,
+            "org_va": false,
+            "org_coordinates": {
+                "lat": 37.7858,
+                "lon": -122.4376
+            }
+        },
+        {
+            "contact_email": null,
+            "contact_name": null,
+            "contact_phone": null,
+            "recruitment_status": "CLOSED_TO_ACCRUAL",
+            "recruitment_status_date": "2019-11-01",
+            "local_site_identifier": "BRS0087",
+            "org_address_line_1": "875 Blake Wilbur Drive",
+            "org_address_line_2": null,
+            "org_city": "Palo Alto",
+            "org_country": "United States",
+            "org_email": "ccto-office@stanford.edu",
+            "org_family": "Stanford Cancer Institute",
+            "org_fax": null,
+            "org_name": "Stanford Cancer Institute Palo Alto",
+            "org_to_family_relationship": null,
+            "org_phone": "650-498-7061",
+            "org_postal_code": "94304",
+            "org_state_or_province": "CA",
+            "org_status": "CLOSED_TO_ACCRUAL",
+            "org_status_date": "2019-11-01",
+            "org_tty": null,
+            "org_va": false,
+            "org_coordinates": {
+                "lat": 37.4059,
+                "lon": -122.1462
+            }
+        },
+        {
+            "contact_email": null,
+            "contact_name": null,
+            "contact_phone": null,
+            "recruitment_status": "CLOSED_TO_ACCRUAL",
+            "recruitment_status_date": "2019-09-27",
+            "local_site_identifier": "2000024065",
+            "org_address_line_1": "333 Cedar Street",
+            "org_address_line_2": null,
+            "org_city": "New Haven",
+            "org_country": "United States",
+            "org_email": "canceranswers@yale.edu",
+            "org_family": "Yale Cancer Center",
+            "org_fax": null,
+            "org_name": "Yale University",
+            "org_to_family_relationship": null,
+            "org_phone": "203-785-5702",
+            "org_postal_code": "06520",
+            "org_state_or_province": "CT",
+            "org_status": "CLOSED_TO_ACCRUAL",
+            "org_status_date": "2019-09-27",
+            "org_tty": null,
+            "org_va": false,
+            "org_coordinates": {
+                "lat": 41.31,
+                "lon": -72.9291
+            }
+        },
+        {
+            "contact_email": null,
+            "contact_name": null,
+            "contact_phone": null,
+            "recruitment_status": "ACTIVE",
+            "recruitment_status_date": "2019-07-09",
+            "local_site_identifier": "STUDY00000016",
+            "org_address_line_1": "3800 Reservoir Road Northwest",
+            "org_address_line_2": "Lombardi Comprehensive Cancer Center",
+            "org_city": "Washington",
+            "org_country": "United States",
+            "org_email": null,
+            "org_family": "Georgetown Lombardi Comprehensive Cancer Center",
+            "org_fax": "202-784-4344",
+            "org_name": "MedStar Georgetown University Hospital",
+            "org_to_family_relationship": null,
+            "org_phone": "202-444-0381\r202-444-4000",
+            "org_postal_code": "20007",
+            "org_state_or_province": "DC",
+            "org_status": "ACTIVE",
+            "org_status_date": "2019-07-09",
+            "org_tty": null,
+            "org_va": false,
+            "org_coordinates": {
+                "lat": 38.9147,
+                "lon": -77.0771
+            }
+        },
+        {
+            "contact_email": null,
+            "contact_name": null,
+            "contact_phone": null,
+            "recruitment_status": "ACTIVE",
+            "recruitment_status_date": "2018-12-26",
+            "local_site_identifier": "IRB18-1060",
+            "org_address_line_1": "5841 South Maryland Avenue",
+            "org_address_line_2": null,
+            "org_city": "Chicago",
+            "org_country": "United States",
+            "org_email": "cancerclinicaltrials@bsd.uchicago.edu",
+            "org_family": "University of Chicago Comprehensive Cancer Center",
+            "org_fax": "773-702-9311",
+            "org_name": "University of Chicago Comprehensive Cancer Center",
+            "org_to_family_relationship": null,
+            "org_phone": "773-834-7424\r773-702-6180",
+            "org_postal_code": "60637",
+            "org_state_or_province": "IL",
+            "org_status": "ACTIVE",
+            "org_status_date": "2018-12-26",
+            "org_tty": null,
+            "org_va": false,
+            "org_coordinates": {
+                "lat": 41.781,
+                "lon": -87.6021
+            }
+        },
+        {
+            "contact_email": null,
+            "contact_name": null,
+            "contact_phone": null,
+            "recruitment_status": "ACTIVE",
+            "recruitment_status_date": "2019-02-13",
+            "local_site_identifier": "18-547",
+            "org_address_line_1": "450 Brookline Avenue",
+            "org_address_line_2": null,
+            "org_city": "Boston",
+            "org_country": "United States",
+            "org_email": null,
+            "org_family": "Dana-Farber / Harvard Cancer Center",
+            "org_fax": null,
+            "org_name": "Dana-Farber Cancer Institute",
+            "org_to_family_relationship": null,
+            "org_phone": "617-632-3000",
+            "org_postal_code": "02215",
+            "org_state_or_province": "MA",
+            "org_status": "ACTIVE",
+            "org_status_date": "2019-02-13",
+            "org_tty": null,
+            "org_va": false,
+            "org_coordinates": {
+                "lat": 42.3469,
+                "lon": -71.1025
+            }
+        },
+        {
+            "contact_email": null,
+            "contact_name": null,
+            "contact_phone": null,
+            "recruitment_status": "ACTIVE",
+            "recruitment_status_date": "2019-02-13",
+            "local_site_identifier": "18-547",
+            "org_address_line_1": "75 Francis Street",
+            "org_address_line_2": null,
+            "org_city": "Boston",
+            "org_country": "United States",
+            "org_email": null,
+            "org_family": "Dana-Farber / Harvard Cancer Center",
+            "org_fax": null,
+            "org_name": "Brigham and Women's Hospital",
+            "org_to_family_relationship": null,
+            "org_phone": "617-724-5200",
+            "org_postal_code": "02115",
+            "org_state_or_province": "MA",
+            "org_status": "ACTIVE",
+            "org_status_date": "2019-02-13",
+            "org_tty": null,
+            "org_va": false,
+            "org_coordinates": {
+                "lat": 42.341,
+                "lon": -71.0948
+            }
+        },
+        {
+            "contact_email": null,
+            "contact_name": null,
+            "contact_phone": null,
+            "recruitment_status": "ACTIVE",
+            "recruitment_status_date": "2019-05-16",
+            "local_site_identifier": "18-547",
+            "org_address_line_1": "330 Brookline Avenue",
+            "org_address_line_2": null,
+            "org_city": "Boston",
+            "org_country": "United States",
+            "org_email": null,
+            "org_family": "Dana-Farber / Harvard Cancer Center",
+            "org_fax": null,
+            "org_name": "Beth Israel Deaconess Medical Center",
+            "org_to_family_relationship": null,
+            "org_phone": "617-667-9925",
+            "org_postal_code": "02215",
+            "org_state_or_province": "MA",
+            "org_status": "ACTIVE",
+            "org_status_date": "2019-05-16",
+            "org_tty": null,
+            "org_va": false,
+            "org_coordinates": {
+                "lat": 42.3469,
+                "lon": -71.1025
+            }
+        },
+        {
+            "contact_email": "Cheryl.young@umm.edu",
+            "contact_name": "Cheryl Arcigal Young",
+            "contact_phone": "410-328-8611",
+            "recruitment_status": "CLOSED_TO_ACCRUAL",
+            "recruitment_status_date": "2019-09-27",
+            "local_site_identifier": "1808GCCC",
+            "org_address_line_1": "22 South Greene Street",
+            "org_address_line_2": null,
+            "org_city": "Baltimore",
+            "org_country": "United States",
+            "org_email": null,
+            "org_family": "University of Maryland Marlene and Stewart Greenebaum Comprehensive Cancer Center",
+            "org_fax": null,
+            "org_name": "University of Maryland / Greenebaum Cancer Center",
+            "org_to_family_relationship": null,
+            "org_phone": "800-888-8823",
+            "org_postal_code": "21201",
+            "org_state_or_province": "MD",
+            "org_status": "CLOSED_TO_ACCRUAL",
+            "org_status_date": "2019-09-27",
+            "org_tty": "800-735-2258",
+            "org_va": false,
+            "org_coordinates": {
+                "lat": 39.294,
+                "lon": -76.6226
+            }
+        },
+        {
+            "contact_email": null,
+            "contact_name": null,
+            "contact_phone": null,
+            "recruitment_status": "COMPLETED",
+            "recruitment_status_date": "2019-12-13",
+            "local_site_identifier": "2018IS183",
+            "org_address_line_1": "420 Delaware Street Southeast",
+            "org_address_line_2": null,
+            "org_city": "Minneapolis",
+            "org_country": "United States",
+            "org_email": null,
+            "org_family": "Masonic Cancer Center",
+            "org_fax": null,
+            "org_name": "University of Minnesota / Masonic Cancer Center",
+            "org_to_family_relationship": null,
+            "org_phone": "612-624-2620",
+            "org_postal_code": "55455",
+            "org_state_or_province": "MN",
+            "org_status": "COMPLETED",
+            "org_status_date": "2019-12-13",
+            "org_tty": null,
+            "org_va": false,
+            "org_coordinates": {
+                "lat": 44.974,
+                "lon": -93.2319
+            }
+        },
+        {
+            "contact_email": "info@siteman.wustl.edu",
+            "contact_name": "Cynthia Xiuguang Ma",
+            "contact_phone": "800-600-3606",
+            "recruitment_status": "ADMINISTRATIVELY_COMPLETE",
+            "recruitment_status_date": "2021-07-09",
+            "local_site_identifier": "201711006",
+            "org_address_line_1": "4921 Parkview Place",
+            "org_address_line_2": null,
+            "org_city": "Saint Louis",
+            "org_country": "United States",
+            "org_email": null,
+            "org_family": "Alvin J. Siteman Cancer Center",
+            "org_fax": null,
+            "org_name": "Siteman Cancer Center at Washington University",
+            "org_to_family_relationship": null,
+            "org_phone": "314-747-7236",
+            "org_postal_code": "63110",
+            "org_state_or_province": "MO",
+            "org_status": "ADMINISTRATIVELY_COMPLETE",
+            "org_status_date": "2021-07-09",
+            "org_tty": null,
+            "org_va": false,
+            "org_coordinates": {
+                "lat": 38.6267,
+                "lon": -90.267
+            }
+        },
+        {
+            "contact_email": null,
+            "contact_name": null,
+            "contact_phone": null,
+            "recruitment_status": "CLOSED_TO_ACCRUAL",
+            "recruitment_status_date": "2019-10-21",
+            "local_site_identifier": "ODO-TE-B301",
+            "org_address_line_1": "450 West Drive",
+            "org_address_line_2": "Lineberger Comprehensive Cancer Center Third Floor Administrative Tower CB 7295",
+            "org_city": "Chapel Hill",
+            "org_country": "United States",
+            "org_email": "cancerclinicaltrials@med.unc.edu",
+            "org_family": "UNC Lineberger Comprehensive Cancer Center",
+            "org_fax": null,
+            "org_name": "UNC Lineberger Comprehensive Cancer Center",
+            "org_to_family_relationship": null,
+            "org_phone": null,
+            "org_postal_code": "27599",
+            "org_state_or_province": "NC",
+            "org_status": "CLOSED_TO_ACCRUAL",
+            "org_status_date": "2019-10-21",
+            "org_tty": null,
+            "org_va": false,
+            "org_coordinates": {
+                "lat": 35.9134,
+                "lon": -79.0561
+            }
+        },
+        {
+            "contact_email": null,
+            "contact_name": null,
+            "contact_phone": null,
+            "recruitment_status": "CLOSED_TO_ACCRUAL",
+            "recruitment_status_date": "2019-09-27",
+            "local_site_identifier": "Pharm ODO-TE-B301",
+            "org_address_line_1": "1201 Camino De Salud Northeast",
+            "org_address_line_2": null,
+            "org_city": "Albuquerque",
+            "org_country": "United States",
+            "org_email": "LByatt@nmcca.org",
+            "org_family": "University of New Mexico Cancer Research & Treatment Center",
+            "org_fax": null,
+            "org_name": "University of New Mexico Cancer Center",
+            "org_to_family_relationship": null,
+            "org_phone": "505-925-0366",
+            "org_postal_code": "87102",
+            "org_state_or_province": "NM",
+            "org_status": "CLOSED_TO_ACCRUAL",
+            "org_status_date": "2019-09-27",
+            "org_tty": null,
+            "org_va": false,
+            "org_coordinates": {
+                "lat": 35.0815,
+                "lon": -106.6469
+            }
+        },
+        {
+            "contact_email": null,
+            "contact_name": null,
+            "contact_phone": null,
+            "recruitment_status": "CLOSED_TO_ACCRUAL",
+            "recruitment_status_date": "2019-09-27",
+            "local_site_identifier": "Pharm ODO-TE-B301",
+            "org_address_line_1": "801 University Boulevard",
+            "org_address_line_2": null,
+            "org_city": "Albuquerque",
+            "org_country": "United States",
+            "org_email": "LByatt@nmcca.org",
+            "org_family": "University of New Mexico Cancer Research & Treatment Center",
+            "org_fax": null,
+            "org_name": "New Mexico Cancer Care Alliance",
+            "org_to_family_relationship": null,
+            "org_phone": "505-272-7825",
+            "org_postal_code": "87106",
+            "org_state_or_province": "NM",
+            "org_status": "CLOSED_TO_ACCRUAL",
+            "org_status_date": "2019-09-27",
+            "org_tty": null,
+            "org_va": false,
+            "org_coordinates": {
+                "lat": 35.0525,
+                "lon": -106.616
+            }
+        },
+        {
+            "contact_email": "seidmana@mskcc.org",
+            "contact_name": "Andrew D. Seidman",
+            "contact_phone": "646-888-4559",
+            "recruitment_status": "CLOSED_TO_ACCRUAL",
+            "recruitment_status_date": "2019-12-10",
+            "local_site_identifier": "18-172",
+            "org_address_line_1": "1275 York Avenue",
+            "org_address_line_2": null,
+            "org_city": "New York",
+            "org_country": "United States",
+            "org_email": null,
+            "org_family": "Memorial Sloan Kettering Cancer Center",
+            "org_fax": null,
+            "org_name": "Memorial Sloan Kettering Cancer Center",
+            "org_to_family_relationship": null,
+            "org_phone": "212-639-2000",
+            "org_postal_code": "10065",
+            "org_state_or_province": "NY",
+            "org_status": "CLOSED_TO_ACCRUAL",
+            "org_status_date": "2019-12-10",
+            "org_tty": null,
+            "org_va": false,
+            "org_coordinates": {
+                "lat": 40.7656,
+                "lon": -73.9624
+            }
+        },
+        {
+            "contact_email": null,
+            "contact_name": null,
+            "contact_phone": null,
+            "recruitment_status": "ADMINISTRATIVELY_COMPLETE",
+            "recruitment_status_date": "2019-12-26",
+            "local_site_identifier": "OSU-18036",
+            "org_address_line_1": "410 West Tenth Avenue",
+            "org_address_line_2": null,
+            "org_city": "Columbus",
+            "org_country": "United States",
+            "org_email": "Jamesline@osumc.edu",
+            "org_family": "Comprehensive Cancer Center - James Cancer Hospital & Solove Research Institute",
+            "org_fax": null,
+            "org_name": "Ohio State University Comprehensive Cancer Center",
+            "org_to_family_relationship": null,
+            "org_phone": "866-627-7616",
+            "org_postal_code": "43210",
+            "org_state_or_province": "OH",
+            "org_status": "ADMINISTRATIVELY_COMPLETE",
+            "org_status_date": "2019-12-26",
+            "org_tty": null,
+            "org_va": false,
+            "org_coordinates": {
+                "lat": 40.0051,
+                "lon": -83.0218
+            }
+        },
+        {
+            "contact_email": null,
+            "contact_name": null,
+            "contact_phone": null,
+            "recruitment_status": "ACTIVE",
+            "recruitment_status_date": "2018-03-22",
+            "local_site_identifier": "17-190",
+            "org_address_line_1": "5150 Centre Avenue",
+            "org_address_line_2": null,
+            "org_city": "Pittsburgh",
+            "org_country": "United States",
+            "org_email": null,
+            "org_family": "University of Pittsburgh Cancer Institute",
+            "org_fax": null,
+            "org_name": "University of Pittsburgh Cancer Institute (UPCI)",
+            "org_to_family_relationship": null,
+            "org_phone": "412-647-8073",
+            "org_postal_code": "15232",
+            "org_state_or_province": "PA",
+            "org_status": "ACTIVE",
+            "org_status_date": "2018-03-22",
+            "org_tty": null,
+            "org_va": false,
+            "org_coordinates": {
+                "lat": 40.4529,
+                "lon": -79.9323
+            }
+        },
+        {
+            "contact_email": "creighton@uthscsa.edu",
+            "contact_name": "Sonia Lisa Creighton",
+            "contact_phone": "210-450-1366",
+            "recruitment_status": "COMPLETED",
+            "recruitment_status_date": "2021-06-28",
+            "local_site_identifier": "CTMS 18-0038",
+            "org_address_line_1": "7979 Wurzbach Road",
+            "org_address_line_2": null,
+            "org_city": "San Antonio",
+            "org_country": "United States",
+            "org_email": null,
+            "org_family": "Mays Cancer Center",
+            "org_fax": null,
+            "org_name": "Cancer Therapy and Research Center at The UT Health Science Center at San Antonio",
+            "org_to_family_relationship": null,
+            "org_phone": "210-616-5798",
+            "org_postal_code": "78229",
+            "org_state_or_province": "TX",
+            "org_status": "COMPLETED",
+            "org_status_date": "2021-06-28",
+            "org_tty": null,
+            "org_va": false,
+            "org_coordinates": {
+                "lat": 29.5052,
+                "lon": -98.5725
+            }
+        },
+        {
+            "contact_email": null,
+            "contact_name": null,
+            "contact_phone": null,
+            "recruitment_status": "COMPLETED",
+            "recruitment_status_date": "2021-05-12",
+            "local_site_identifier": "RG1718046",
+            "org_address_line_1": "1100 Fairview Avenue North",
+            "org_address_line_2": null,
+            "org_city": "Seattle",
+            "org_country": "United States",
+            "org_email": "CRScustomerservice@fredhutch.org",
+            "org_family": "Fred Hutchinson / University of Washington Cancer Consortium",
+            "org_fax": null,
+            "org_name": "Fred Hutch / University of Washington Cancer Consortium",
+            "org_to_family_relationship": null,
+            "org_phone": "206-667-4520",
+            "org_postal_code": "98109",
+            "org_state_or_province": "WA",
+            "org_status": "COMPLETED",
+            "org_status_date": "2021-05-12",
+            "org_tty": null,
+            "org_va": false,
+            "org_coordinates": {
+                "lat": 47.6307,
+                "lon": -122.3461
+            }
+        },
+        {
+            "contact_email": null,
+            "contact_name": null,
+            "contact_phone": null,
+            "recruitment_status": "CLOSED_TO_ACCRUAL",
+            "recruitment_status_date": "2019-09-27",
+            "local_site_identifier": "40-5091",
+            "org_address_line_1": "1 Gustave L. Levy Place",
+            "org_address_line_2": null,
+            "org_city": "New York",
+            "org_country": "United States",
+            "org_email": null,
+            "org_family": "Tisch Cancer Institute",
+            "org_fax": null,
+            "org_name": "Icahn School of Medicine at Mount Sinai",
+            "org_to_family_relationship": null,
+            "org_phone": "212-241-6500",
+            "org_postal_code": "10029",
+            "org_state_or_province": "NY",
+            "org_status": "CLOSED_TO_ACCRUAL",
+            "org_status_date": "2019-09-27",
+            "org_tty": null,
+            "org_va": false,
+            "org_coordinates": {
+                "lat": 40.7917,
+                "lon": -73.9439
+            }
+        }
+    ],
+    "anatomic_sites": [
+        "Breast"
+    ],
+    "diseases": [
+        {
+            "inclusion_indicator": "TRIAL",
+            "lead_disease_indicator": "NO",
+            "nci_thesaurus_concept_id": "C153238",
+            "preferred_name": "Metastatic Breast Carcinoma",
+            "display_name": "Metastatic Breast Carcinoma",
+            "paths": [
+                {
+                    "paths": [
+                        {
+                            "direction": 1,
+                            "concepts": [
+                                {
+                                    "idx": 0,
+                                    "label": "Breast Carcinoma",
+                                    "code": "C4872"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [],
+            "parents": [
+                "C4872",
+                "C3482",
+                "C170728"
+            ]
+        },
+        {
+            "inclusion_indicator": "TRIAL",
+            "lead_disease_indicator": "NO",
+            "nci_thesaurus_concept_id": "C162648",
+            "preferred_name": "Advanced Breast Carcinoma",
+            "display_name": "Advanced Breast Carcinoma",
+            "paths": [
+                {
+                    "paths": [
+                        {
+                            "direction": 1,
+                            "concepts": [
+                                {
+                                    "idx": 0,
+                                    "label": "Breast Carcinoma",
+                                    "code": "C4872"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [],
+            "parents": [
+                "C153171",
+                "C153238"
+            ]
+        },
+        {
+            "inclusion_indicator": "TRIAL",
+            "lead_disease_indicator": "NO",
+            "nci_thesaurus_concept_id": "C3995",
+            "preferred_name": "Stage IV Breast Cancer AJCC v6 and v7",
+            "display_name": "Stage IV Breast Cancer",
+            "paths": [
+                {
+                    "paths": [
+                        {
+                            "direction": 1,
+                            "concepts": [
+                                {
+                                    "idx": 0,
+                                    "label": "Breast Carcinoma",
+                                    "code": "C4872"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "type": [
+                "stage"
+            ],
+            "synonyms": [
+                "Breast Cancer Stage IV",
+                "Breast Carcinoma Stage IV",
+                "Stage IV Breast Cancer AJCC v6",
+                "Stage IV Breast Cancer AJCC v6 and v7",
+                "Stage IV Breast Cancer AJCC v7",
+                "Stage IV Breast Carcinoma",
+                "stage IV breast cancer"
+            ],
+            "parents": [
+                "C90513",
+                "C91230"
+            ]
+        },
+        {
+            "inclusion_indicator": "TRIAL",
+            "lead_disease_indicator": "NO",
+            "nci_thesaurus_concept_id": "C53556",
+            "preferred_name": "HER2-Positive Breast Carcinoma",
+            "display_name": "HER2-Positive Breast Carcinoma",
+            "paths": [
+                {
+                    "paths": [
+                        {
+                            "direction": 1,
+                            "concepts": [
+                                {
+                                    "idx": 0,
+                                    "label": "Breast Carcinoma",
+                                    "code": "C4872"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [
+                "ERBB2 Overexpressing Subtype of Breast Carcinoma",
+                "HER2 Overexpressing Breast Carcinoma",
+                "HER2 Overexpressing Subtype of Breast Carcinoma",
+                "HER2 Positive Breast Cancer",
+                "HER2 Positive Breast Carcinoma"
+            ],
+            "parents": [
+                "C53553"
+            ]
+        },
+        {
+            "inclusion_indicator": "TRIAL",
+            "lead_disease_indicator": "NO",
+            "nci_thesaurus_concept_id": "C7770",
+            "preferred_name": "Stage IIIA Breast Cancer AJCC v7",
+            "display_name": "Stage IIIA Breast Cancer",
+            "paths": [
+                {
+                    "paths": [
+                        {
+                            "direction": 1,
+                            "concepts": [
+                                {
+                                    "idx": 0,
+                                    "label": "Breast Carcinoma",
+                                    "code": "C4872"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "type": [
+                "stage"
+            ],
+            "synonyms": [
+                "Breast Cancer Stage IIIA",
+                "Breast Carcinoma Stage IIIA",
+                "Stage IIIA Breast Cancer AJCC v7",
+                "Stage IIIA Breast Carcinoma",
+                "stage IIIA breast cancer"
+            ],
+            "parents": [
+                "C88376"
+            ]
+        },
+        {
+            "inclusion_indicator": "TRIAL",
+            "lead_disease_indicator": "NO",
+            "nci_thesaurus_concept_id": "C7782",
+            "preferred_name": "Stage IIIB Breast Cancer AJCC v7",
+            "display_name": "Stage IIIB Breast Cancer",
+            "paths": [
+                {
+                    "paths": [
+                        {
+                            "direction": 1,
+                            "concepts": [
+                                {
+                                    "idx": 0,
+                                    "label": "Breast Carcinoma",
+                                    "code": "C4872"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "type": [
+                "stage"
+            ],
+            "synonyms": [
+                "Breast Cancer Stage IIIB",
+                "Breast Carcinoma Stage IIIB",
+                "Stage IIIB Breast Cancer AJCC v7",
+                "Stage IIIB Breast Carcinoma",
+                "stage IIIB breast cancer"
+            ],
+            "parents": [
+                "C88376"
+            ]
+        },
+        {
+            "inclusion_indicator": "TRIAL",
+            "lead_disease_indicator": "YES",
+            "nci_thesaurus_concept_id": "C88376",
+            "preferred_name": "Stage III Breast Cancer AJCC v7",
+            "display_name": "Stage III Breast Cancer",
+            "paths": [
+                {
+                    "paths": [
+                        {
+                            "direction": 1,
+                            "concepts": [
+                                {
+                                    "idx": 0,
+                                    "label": "Breast Carcinoma",
+                                    "code": "C4872"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "type": [
+                "stage"
+            ],
+            "synonyms": [
+                "Stage III Breast Cancer AJCC v7"
+            ],
+            "parents": [
+                "C91230"
+            ]
+        },
+        {
+            "inclusion_indicator": "TRIAL",
+            "lead_disease_indicator": "NO",
+            "nci_thesaurus_concept_id": "C88377",
+            "preferred_name": "Stage IIIC Breast Cancer AJCC v7",
+            "display_name": "Stage IIIC Breast Cancer",
+            "paths": [
+                {
+                    "paths": [
+                        {
+                            "direction": 1,
+                            "concepts": [
+                                {
+                                    "idx": 0,
+                                    "label": "Breast Carcinoma",
+                                    "code": "C4872"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "type": [
+                "stage"
+            ],
+            "synonyms": [
+                "Stage IIIC Breast Cancer AJCC v7",
+                "stage IIIC breast cancer"
+            ],
+            "parents": [
+                "C88376"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C7062",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C3262"
+            ],
+            "lead_disease_indicator": "YES",
+            "display_name": "Neoplasm by Special Category",
+            "preferred_name": "Neoplasm by Special Category",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": []
+        },
+        {
+            "nci_thesaurus_concept_id": "C90513",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C4872"
+            ],
+            "lead_disease_indicator": "NO",
+            "display_name": "Breast Cancer by AJCC v6 Stage",
+            "preferred_name": "Breast Cancer by AJCC v6 Stage",
+            "type": [
+                "stage"
+            ],
+            "synonyms": [
+                "Breast Carcinoma by AJCC v6 Stage"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C5214",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C2852",
+                "C4872"
+            ],
+            "lead_disease_indicator": "NO",
+            "display_name": "Breast Adenocarcinoma",
+            "preferred_name": "Breast Adenocarcinoma",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [
+                "Adenocarcinoma of Breast",
+                "Adenocarcinoma of the Breast",
+                "Mammary adenocarcinoma"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C7132",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C3709"
+            ],
+            "lead_disease_indicator": "NO",
+            "display_name": "Glandular Cell Neoplasm",
+            "preferred_name": "Glandular Cell Neoplasm",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [
+                "Glandular Cell Epithelial Neoplasm",
+                "Glandular Cell Epithelium Neoplasm"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C3263",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C3262"
+            ],
+            "lead_disease_indicator": "YES",
+            "display_name": "Neoplasm by Site",
+            "preferred_name": "Neoplasm by Site",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": []
+        },
+        {
+            "nci_thesaurus_concept_id": "C36263",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C3261",
+                "C4968"
+            ],
+            "lead_disease_indicator": "NO",
+            "display_name": "Metastatic Malignant Neoplasm",
+            "preferred_name": "Metastatic Malignant Neoplasm",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [
+                "Metastatic Cancer"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C36310",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C2916",
+                "C4968"
+            ],
+            "lead_disease_indicator": "NO",
+            "display_name": "Secondary Carcinoma",
+            "preferred_name": "Secondary Carcinoma",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [
+                "Secondary carcinoma"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C91230",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C4872"
+            ],
+            "lead_disease_indicator": "NO",
+            "display_name": "Breast Cancer by AJCC v7 Stage",
+            "preferred_name": "Breast Cancer by AJCC v7 Stage",
+            "type": [
+                "stage"
+            ],
+            "synonyms": [
+                "Breast Carcinoma by AJCC v7 Stage"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C88376",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C91230"
+            ],
+            "lead_disease_indicator": "NO",
+            "display_name": "Stage III Breast Cancer",
+            "preferred_name": "Stage III Breast Cancer AJCC v7",
+            "type": [
+                "stage"
+            ],
+            "synonyms": [
+                "Stage III Breast Cancer AJCC v7"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C53553",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C5214"
+            ],
+            "lead_disease_indicator": "NO",
+            "display_name": "Breast Carcinoma by Gene Expression Profile",
+            "preferred_name": "Breast Carcinoma by Gene Expression Profile",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": []
+        },
+        {
+            "nci_thesaurus_concept_id": "C26709",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C27551"
+            ],
+            "lead_disease_indicator": "NO",
+            "display_name": "Breast Disorder",
+            "preferred_name": "Breast Disorder",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [
+                "Breast Disease",
+                "Breast Diseases"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C2852",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C2916",
+                "C7132"
+            ],
+            "lead_disease_indicator": "NO",
+            "display_name": "Adenocarcinoma",
+            "preferred_name": "Adenocarcinoma",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [
+                "ADENOCARCINOMA, MALIGNANT",
+                "Adenocarcinoma, NOS",
+                "adenocarcinoma"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C9305",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C7062"
+            ],
+            "lead_disease_indicator": "YES",
+            "display_name": "Malignant Neoplasm",
+            "preferred_name": "Malignant Neoplasm",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [
+                "CA",
+                "Cancer",
+                "Malignancy",
+                "Malignant Growth",
+                "Malignant Neoplastic Disease",
+                "Malignant Tumor",
+                "NEOPLASM, MALIGNANT",
+                "Neoplasm, malignant",
+                "Tumor, malignant, NOS",
+                "Unclassified tumor, malignant",
+                "cancer",
+                "malignancy"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C36255",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C7062"
+            ],
+            "lead_disease_indicator": "NO",
+            "display_name": "Secondary Neoplasm",
+            "preferred_name": "Secondary Neoplasm",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [
+                "Neoplasm, secondary",
+                "Secondary Tumor",
+                "Tumor, secondary",
+                "secondary tumor"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C4968",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C9305",
+                "C36255"
+            ],
+            "lead_disease_indicator": "NO",
+            "display_name": "Secondary Malignant Neoplasm",
+            "preferred_name": "Secondary Malignant Neoplasm",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [
+                "Secondary Cancer",
+                "Secondary Malignancy",
+                "secondary cancer"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C9305",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C7062"
+            ],
+            "lead_disease_indicator": "NO",
+            "display_name": "Malignant Neoplasm",
+            "preferred_name": "Malignant Neoplasm",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [
+                "CA",
+                "Cancer",
+                "Malignancy",
+                "Malignant Growth",
+                "Malignant Neoplastic Disease",
+                "Malignant Tumor",
+                "NEOPLASM, MALIGNANT",
+                "Neoplasm, malignant",
+                "Tumor, malignant, NOS",
+                "Unclassified tumor, malignant",
+                "cancer",
+                "malignancy"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C2910",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C26709",
+                "C3263"
+            ],
+            "lead_disease_indicator": "YES",
+            "display_name": "Breast Neoplasm",
+            "preferred_name": "Breast Neoplasm",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [
+                "Breast Tumor",
+                "Neoplasm of Breast",
+                "Neoplasm of the Breast",
+                "Tumor of Breast",
+                "Tumor of the Breast"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C3709",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C4741"
+            ],
+            "lead_disease_indicator": "YES",
+            "display_name": "Epithelial Neoplasm",
+            "preferred_name": "Epithelial Neoplasm",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [
+                "Epithelial Neoplasms, NOS",
+                "Epithelioma",
+                "Epithelioma, malignant"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C4741",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C3262"
+            ],
+            "lead_disease_indicator": "NO",
+            "display_name": "Neoplasm by Morphology",
+            "preferred_name": "Neoplasm by Morphology",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [
+                "Tumor Morphology",
+                "Tumor_Morphology"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C4872",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C2916",
+                "C9335"
+            ],
+            "lead_disease_indicator": "NO",
+            "display_name": "Breast Cancer",
+            "preferred_name": "Breast Carcinoma",
+            "type": [
+                "maintype"
+            ],
+            "synonyms": [
+                "Breast Carcinoma",
+                "Breast cancer, NOS",
+                "Cancer of Breast",
+                "Cancer of the Breast",
+                "Carcinoma of Breast",
+                "Carcinoma of the Breast",
+                "Mammary Carcinoma",
+                "breast cancer"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C2991",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C7057"
+            ],
+            "lead_disease_indicator": "NO",
+            "display_name": "Other Disease",
+            "preferred_name": "Disease or Disorder",
+            "type": [
+                "maintype"
+            ],
+            "synonyms": [
+                "Diagnosis",
+                "Disease",
+                "Disease or Disorder",
+                "Disease or Disorder, Non-Neoplastic",
+                "Diseases",
+                "Diseases and Disorders",
+                "Disorder",
+                "Disorders",
+                "condition",
+                "disease",
+                "disease term",
+                "disease type",
+                "disease_term",
+                "disease_type",
+                "disorder"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C26709",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C27551"
+            ],
+            "lead_disease_indicator": "YES",
+            "display_name": "Breast Disorder",
+            "preferred_name": "Breast Disorder",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [
+                "Breast Disease",
+                "Breast Diseases"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C3263",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C3262"
+            ],
+            "lead_disease_indicator": "NO",
+            "display_name": "Neoplasm by Site",
+            "preferred_name": "Neoplasm by Site",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": []
+        },
+        {
+            "nci_thesaurus_concept_id": "C3482",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C36263",
+                "C36310"
+            ],
+            "lead_disease_indicator": "NO",
+            "display_name": "Metastatic Carcinoma",
+            "preferred_name": "Metastatic Carcinoma",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [
+                "Carcinoma, metastatic, NOS"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C27551",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C2991"
+            ],
+            "lead_disease_indicator": "NO",
+            "display_name": "Disorder by Site",
+            "preferred_name": "Disorder by Site",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [
+                "Disease by Site"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C9270",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C36263"
+            ],
+            "lead_disease_indicator": "NO",
+            "display_name": "Advanced Malignant Neoplasm",
+            "preferred_name": "Advanced Malignant Neoplasm",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [
+                "Advanced Cancer",
+                "advanced cancer"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C3262",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C2991"
+            ],
+            "lead_disease_indicator": "YES",
+            "display_name": "Other Neoplasm",
+            "preferred_name": "Neoplasm",
+            "type": [
+                "maintype"
+            ],
+            "synonyms": [
+                "Neoplasia",
+                "Neoplasm",
+                "Neoplasm, NOS",
+                "Neoplasms, NOS",
+                "Neoplastic Disease",
+                "Neoplastic Growth",
+                "Tumor, NOS",
+                "neoplasia",
+                "neoplasm",
+                "tumor"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C170728",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C9335",
+                "C36263"
+            ],
+            "lead_disease_indicator": "NO",
+            "display_name": "Metastatic Malignant Breast Neoplasm",
+            "preferred_name": "Metastatic Malignant Breast Neoplasm",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": []
+        },
+        {
+            "nci_thesaurus_concept_id": "C7062",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C3262"
+            ],
+            "lead_disease_indicator": "NO",
+            "display_name": "Neoplasm by Special Category",
+            "preferred_name": "Neoplasm by Special Category",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": []
+        },
+        {
+            "nci_thesaurus_concept_id": "C2916",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C3709",
+                "C9305"
+            ],
+            "lead_disease_indicator": "NO",
+            "display_name": "Other Carcinoma",
+            "preferred_name": "Carcinoma",
+            "type": [
+                "maintype"
+            ],
+            "synonyms": [
+                "CARCINOMA, MALIGNANT",
+                "Carcinoma",
+                "Carcinoma, NOS",
+                "Epithelial Carcinoma",
+                "Epithelial tumor, malignant",
+                "Epithelioma Malignant",
+                "Malignant Epithelial Neoplasm",
+                "Malignant Epithelial Tumor",
+                "Malignant Epithelioma",
+                "carcinoma",
+                "epithelial carcinoma"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C2916",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C3709",
+                "C9305"
+            ],
+            "lead_disease_indicator": "YES",
+            "display_name": "Other Carcinoma",
+            "preferred_name": "Carcinoma",
+            "type": [
+                "maintype"
+            ],
+            "synonyms": [
+                "CARCINOMA, MALIGNANT",
+                "Carcinoma",
+                "Carcinoma, NOS",
+                "Epithelial Carcinoma",
+                "Epithelial tumor, malignant",
+                "Epithelioma Malignant",
+                "Malignant Epithelial Neoplasm",
+                "Malignant Epithelial Tumor",
+                "Malignant Epithelioma",
+                "carcinoma",
+                "epithelial carcinoma"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C7057",
+            "inclusion_indicator": "TREE",
+            "parents": [],
+            "lead_disease_indicator": "NO",
+            "display_name": "Disease, Disorder or Finding",
+            "preferred_name": "Disease, Disorder or Finding",
+            "type": [],
+            "synonyms": []
+        },
+        {
+            "nci_thesaurus_concept_id": "C9335",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C2910",
+                "C9305"
+            ],
+            "lead_disease_indicator": "NO",
+            "display_name": "Malignant Breast Neoplasm",
+            "preferred_name": "Malignant Breast Neoplasm",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [
+                "Malignant Breast Tumor",
+                "Malignant Neoplasm of Breast",
+                "Malignant Neoplasm of the Breast",
+                "Malignant Tumor of Breast",
+                "Malignant Tumor of the Breast"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C3709",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C4741"
+            ],
+            "lead_disease_indicator": "NO",
+            "display_name": "Epithelial Neoplasm",
+            "preferred_name": "Epithelial Neoplasm",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [
+                "Epithelial Neoplasms, NOS",
+                "Epithelioma",
+                "Epithelioma, malignant"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C3262",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C2991"
+            ],
+            "lead_disease_indicator": "NO",
+            "display_name": "Other Neoplasm",
+            "preferred_name": "Neoplasm",
+            "type": [
+                "maintype"
+            ],
+            "synonyms": [
+                "Neoplasia",
+                "Neoplasm",
+                "Neoplasm, NOS",
+                "Neoplasms, NOS",
+                "Neoplastic Disease",
+                "Neoplastic Growth",
+                "Tumor, NOS",
+                "neoplasia",
+                "neoplasm",
+                "tumor"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C153171",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C9270",
+                "C3482"
+            ],
+            "lead_disease_indicator": "NO",
+            "display_name": "Advanced Carcinoma",
+            "preferred_name": "Advanced Carcinoma",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": []
+        },
+        {
+            "nci_thesaurus_concept_id": "C153238",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C4872",
+                "C3482",
+                "C170728"
+            ],
+            "lead_disease_indicator": "NO",
+            "display_name": "Metastatic Breast Carcinoma",
+            "preferred_name": "Metastatic Breast Carcinoma",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": []
+        },
+        {
+            "nci_thesaurus_concept_id": "C27551",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C2991"
+            ],
+            "lead_disease_indicator": "YES",
+            "display_name": "Disorder by Site",
+            "preferred_name": "Disorder by Site",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [
+                "Disease by Site"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C7057",
+            "inclusion_indicator": "TREE",
+            "parents": [],
+            "lead_disease_indicator": "YES",
+            "display_name": "Disease, Disorder or Finding",
+            "preferred_name": "Disease, Disorder or Finding",
+            "type": [],
+            "synonyms": []
+        },
+        {
+            "nci_thesaurus_concept_id": "C91230",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C4872"
+            ],
+            "lead_disease_indicator": "YES",
+            "display_name": "Breast Cancer by AJCC v7 Stage",
+            "preferred_name": "Breast Cancer by AJCC v7 Stage",
+            "type": [
+                "stage"
+            ],
+            "synonyms": [
+                "Breast Carcinoma by AJCC v7 Stage"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C4872",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C2916",
+                "C9335"
+            ],
+            "lead_disease_indicator": "YES",
+            "display_name": "Breast Cancer",
+            "preferred_name": "Breast Carcinoma",
+            "type": [
+                "maintype"
+            ],
+            "synonyms": [
+                "Breast Carcinoma",
+                "Breast cancer, NOS",
+                "Cancer of Breast",
+                "Cancer of the Breast",
+                "Carcinoma of Breast",
+                "Carcinoma of the Breast",
+                "Mammary Carcinoma",
+                "breast cancer"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C9335",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C2910",
+                "C9305"
+            ],
+            "lead_disease_indicator": "YES",
+            "display_name": "Malignant Breast Neoplasm",
+            "preferred_name": "Malignant Breast Neoplasm",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [
+                "Malignant Breast Tumor",
+                "Malignant Neoplasm of Breast",
+                "Malignant Neoplasm of the Breast",
+                "Malignant Tumor of Breast",
+                "Malignant Tumor of the Breast"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C2991",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C7057"
+            ],
+            "lead_disease_indicator": "YES",
+            "display_name": "Other Disease",
+            "preferred_name": "Disease or Disorder",
+            "type": [
+                "maintype"
+            ],
+            "synonyms": [
+                "Diagnosis",
+                "Disease",
+                "Disease or Disorder",
+                "Disease or Disorder, Non-Neoplastic",
+                "Diseases",
+                "Diseases and Disorders",
+                "Disorder",
+                "Disorders",
+                "condition",
+                "disease",
+                "disease term",
+                "disease type",
+                "disease_term",
+                "disease_type",
+                "disorder"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C2910",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C26709",
+                "C3263"
+            ],
+            "lead_disease_indicator": "NO",
+            "display_name": "Breast Neoplasm",
+            "preferred_name": "Breast Neoplasm",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [
+                "Breast Tumor",
+                "Neoplasm of Breast",
+                "Neoplasm of the Breast",
+                "Tumor of Breast",
+                "Tumor of the Breast"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C3261",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C7062"
+            ],
+            "lead_disease_indicator": "NO",
+            "display_name": "Metastatic Neoplasm",
+            "preferred_name": "Metastatic Neoplasm",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [
+                "Metastasis",
+                "Metastatic",
+                "Metastatic Disease",
+                "Metastatic Tumor",
+                "Neoplasm, metastatic",
+                "Tumor, metastatic",
+                "metastasis"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C4741",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C3262"
+            ],
+            "lead_disease_indicator": "YES",
+            "display_name": "Neoplasm by Morphology",
+            "preferred_name": "Neoplasm by Morphology",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [
+                "Tumor Morphology",
+                "Tumor_Morphology"
+            ]
+        }
+    ],
+    "biomarkers": [
+        {
+            "assay_purpose": "Eligibility Criterion - Inclusion",
+            "long_name": null,
+            "name": null,
+            "synonyms": null,
+            "hugo_biomarker_code": null,
+            "nci_thesaurus_concept_id": "C15492",
+            "eligibility_criterion": "inclusion"
+        },
+        {
+            "assay_purpose": "Eligibility Criterion - Inclusion",
+            "long_name": null,
+            "name": null,
+            "synonyms": null,
+            "hugo_biomarker_code": null,
+            "nci_thesaurus_concept_id": "C15496",
+            "eligibility_criterion": "inclusion"
+        },
+        {
+            "assay_purpose": "Eligibility Criterion - Inclusion",
+            "long_name": null,
+            "name": null,
+            "synonyms": null,
+            "hugo_biomarker_code": null,
+            "nci_thesaurus_concept_id": "C68749",
+            "eligibility_criterion": "inclusion"
+        }
+    ],
+    "minimum_target_accrual_number": 685,
+    "eligibility": {
+        "structured": {
+            "gender": "BOTH",
+            "max_age": "999 Years",
+            "max_age_number": 999,
+            "max_age_unit": "Years",
+            "min_age": "18 Years",
+            "min_age_number": 18,
+            "min_age_unit": "Years",
+            "max_age_in_years": 999,
+            "min_age_in_years": 18
+        },
+        "unstructured": [
+            {
+                "display_order": 0,
+                "inclusion_indicator": true,
+                "description": "Female or male patients at least 18 years of age"
+            },
+            {
+                "display_order": 1,
+                "inclusion_indicator": true,
+                "description": "Histologically or cytologically confirmed breast cancer"
+            },
+            {
+                "display_order": 2,
+                "inclusion_indicator": true,
+                "description": "HER2 negative disease based on local testing: American Society of Clinical Oncology/College of American Pathologists (ASCO/CAP) guidelines should be utilized for assessing HER2 status"
+            },
+            {
+                "display_order": 3,
+                "inclusion_indicator": true,
+                "description": "HR (estrogen receptor [ER] and/or progesterone receptor [PgR]) positive disease based on local testing: ASCO/CAP guidelines should be utilized for assessing HR status"
+            },
+            {
+                "display_order": 4,
+                "inclusion_indicator": true,
+                "description": "Measurable disease per RECIST 1.1 or bone-only disease with lytic component"
+            },
+            {
+                "display_order": 5,
+                "inclusion_indicator": true,
+                "description": "Patients with bone-only metastatic cancer must have a lytic or mixed lytic-blastic lesion that can be accurately assessed by computerized tomography (CT) or magnetic resonance imaging (MRI). Patients with bone-only disease without a lytic component (ie, blastic-only metastasis) are not eligible."
+            },
+            {
+                "display_order": 6,
+                "inclusion_indicator": true,
+                "description": "Known metastases to the CNS are permitted but not required. The following criteria apply:"
+            },
+            {
+                "display_order": 7,
+                "inclusion_indicator": true,
+                "description": "Patients must be neurologically stable and either off corticosteroids or currently treated with a maximum daily dose of 4 mg of dexamethasone (or equivalent), with no increase in corticosteroid dose within 7 days prior to randomization"
+            },
+            {
+                "display_order": 8,
+                "inclusion_indicator": true,
+                "description": "Patients with a history of CNS metastases but with no current evidence of CNS lesions following local therapy are eligible"
+            },
+            {
+                "display_order": 9,
+                "inclusion_indicator": true,
+                "description": "Patients may have CNS metastases that are stable or progressing radiologically"
+            },
+            {
+                "display_order": 10,
+                "inclusion_indicator": true,
+                "description": "Patients with current evidence of leptomeningeal disease are not eligible"
+            },
+            {
+                "display_order": 11,
+                "inclusion_indicator": true,
+                "description": "Patients may have untreated brain metastases or previously treated brain metastases, as long as no immediate local CNS-directed therapy is indicated"
+            },
+            {
+                "display_order": 12,
+                "inclusion_indicator": true,
+                "description": "Any prior whole brain radiation therapy must have been completed > 14 days prior to the date of randomization"
+            },
+            {
+                "display_order": 13,
+                "inclusion_indicator": true,
+                "description": "Prior stereotactic brain radiosurgery is permitted"
+            },
+            {
+                "display_order": 14,
+                "inclusion_indicator": true,
+                "description": "CNS surgical resection must have been completed > 28 days prior to the date of randomization; patient must have complete recovery from surgery"
+            },
+            {
+                "display_order": 15,
+                "inclusion_indicator": true,
+                "description": "Eastern Cooperative Oncology Group (ECOG) performance status 0, 1, or 2"
+            },
+            {
+                "display_order": 16,
+                "inclusion_indicator": true,
+                "description": "Prior therapy (at least one completed dose) with a taxane-containing regimen in the neoadjuvant or adjuvant setting"
+            },
+            {
+                "display_order": 17,
+                "inclusion_indicator": true,
+                "description": "Prior therapy with an anthracycline-containing regimen in the neoadjuvant, adjuvant, or metastatic setting, where indicated by local regulation or Investigator judgment."
+            },
+            {
+                "display_order": 18,
+                "inclusion_indicator": true,
+                "description": "Prior endocrine therapy with or without a CDK 4/6 inhibitor unless endocrine therapy is not indicated (ie, short relapse-free interval while on adjuvant endocrine therapy [endocrine resistance]; rapidly progressing disease/visceral crisis; or endocrine intolerance). Any targeted therapies approved for HER2 negative, HR positive LA/MBC, including everolimus, are permitted as prior therapy. There is no limit to the number of prior endocrine therapies."
+            },
+            {
+                "display_order": 19,
+                "inclusion_indicator": true,
+                "description": "Documented disease recurrence or disease progression of: (a) locally advanced disease that is not considered curable by surgery and/or radiation; or (b) metastatic disease."
+            },
+            {
+                "display_order": 20,
+                "inclusion_indicator": true,
+                "description": "Adequate hematologic, hepatic and renal function, as evidenced by:"
+            },
+            {
+                "display_order": 21,
+                "inclusion_indicator": true,
+                "description": "Absolute neutrophil count (ANC) ≥ 1,500/μL without colony-stimulating factor support"
+            },
+            {
+                "display_order": 22,
+                "inclusion_indicator": true,
+                "description": "Platelet count ≥ 100,000/μL"
+            },
+            {
+                "display_order": 23,
+                "inclusion_indicator": true,
+                "description": "Hemoglobin ≥ 10 g/dL without need for hematopoietic growth factor or transfusion support"
+            },
+            {
+                "display_order": 24,
+                "inclusion_indicator": true,
+                "description": "Total bilirubin < 1.5 × upper limit of normal (ULN); does not apply to patients with Gilbert's syndrome"
+            },
+            {
+                "display_order": 25,
+                "inclusion_indicator": true,
+                "description": "Alanine aminotransferase (ALT) < 3 × ULN unless hepatic metastases are present, then < 5 × ULN"
+            },
+            {
+                "display_order": 26,
+                "inclusion_indicator": true,
+                "description": "Aspartate aminotransferase (AST) < 3 × ULN unless hepatic metastases are present, then < 5 × ULN"
+            },
+            {
+                "display_order": 27,
+                "inclusion_indicator": true,
+                "description": "Alkaline phosphatase < 2.5 × ULN unless hepatic metastases are present, then < 5 × ULN"
+            },
+            {
+                "display_order": 28,
+                "inclusion_indicator": true,
+                "description": "Calculated creatinine clearance ≥ 50 mL/min (by Cockcroft-Gault formula or local standard)"
+            },
+            {
+                "display_order": 29,
+                "inclusion_indicator": true,
+                "description": "Serum albumin ≥ 3.0 g/dL"
+            },
+            {
+                "display_order": 30,
+                "inclusion_indicator": true,
+                "description": "Prothrombin time (PT) < 1.5 × ULN or international normalized ratio (INR) < 1.3, and partial thromboplastin time (PTT) < 1.5 × ULN, unless the patient is on a therapeutic anticoagulant"
+            },
+            {
+                "display_order": 31,
+                "inclusion_indicator": true,
+                "description": "Complete recovery to baseline or Grade 1 per National Cancer Institute (NCI) CTCAE version 5.0 from adverse effects of prior surgery, radiotherapy, endocrine therapy and other therapy, as applicable, with the exception of Grade 2 alopecia from prior chemotherapy"
+            },
+            {
+                "display_order": 32,
+                "inclusion_indicator": true,
+                "description": "Ability to swallow an oral solid-dosage form of medication"
+            },
+            {
+                "display_order": 33,
+                "inclusion_indicator": true,
+                "description": "A negative serum pregnancy test within 7 days prior to the first dose of Study treatment in women of childbearing potential (ie, all women except those who are post menopause for ≥ 1 year or who have a history of hysterectomy or surgical sterilization)"
+            },
+            {
+                "display_order": 34,
+                "inclusion_indicator": true,
+                "description": "Women of childbearing potential must use an effective, non-hormonal form of contraception from Screening throughout the Treatment Phase and until 70 days after the last dose of study treatment • Acceptable methods include: copper intrauterine devices or double barrier methods, including male/female condoms with spermicide and use of contraceptive sponge, cervical cap, or diaphragm"
+            },
+            {
+                "display_order": 35,
+                "inclusion_indicator": true,
+                "description": "Male patients must use an effective, non-hormonal form of contraception from screening throughout the treatment phase and until 130 days after last dose of study treatment • Acceptable methods include male/female condoms with spermicide, or vasectomy with medical confirmation of surgical success"
+            },
+            {
+                "display_order": 36,
+                "inclusion_indicator": true,
+                "description": "Written informed consent and authorization to use and disclose health information"
+            },
+            {
+                "display_order": 37,
+                "inclusion_indicator": true,
+                "description": "Ability to comprehend and comply with the requirements of the study"
+            },
+            {
+                "display_order": 38,
+                "inclusion_indicator": false,
+                "description": "Two or more prior chemotherapy regimens for advanced disease"
+            },
+            {
+                "display_order": 39,
+                "inclusion_indicator": false,
+                "description": "Prior treatment with a taxane in the metastatic setting"
+            },
+            {
+                "display_order": 40,
+                "inclusion_indicator": false,
+                "description": "Prior treatment with capecitabine at any dose"
+            },
+            {
+                "display_order": 41,
+                "inclusion_indicator": false,
+                "description": "Current evidence of leptomeningeal disease"
+            },
+            {
+                "display_order": 42,
+                "inclusion_indicator": false,
+                "description": "Other cancer that required therapy within the preceding 5 years other than adequately treated: (a) non-melanoma skin cancer or in situ cancer; or (b) following approval by the Medical Monitor, other cancer that has a very low risk of interfering with the safety or efficacy endpoints of the study"
+            },
+            {
+                "display_order": 43,
+                "inclusion_indicator": false,
+                "description": "Known human immunodeficiency virus infection, unless well controlled. Patients who are on an adequate antiviral regimen with no evidence of active infection are considered well controlled."
+            },
+            {
+                "display_order": 44,
+                "inclusion_indicator": false,
+                "description": "Active hepatitis B or active hepatitis C infection"
+            },
+            {
+                "display_order": 45,
+                "inclusion_indicator": false,
+                "description": "Other severe acute or chronic medical or psychiatric condition or laboratory abnormality that may increase the risk associated with study participation or investigational product administration or may interfere with the interpretation of study results and, in the judgment of the Investigator, would make the patient inappropriate for entry into this study"
+            },
+            {
+                "display_order": 46,
+                "inclusion_indicator": false,
+                "description": "Presence of neuropathy > Grade 1 per NCI CTCAE version 5.0"
+            },
+            {
+                "display_order": 47,
+                "inclusion_indicator": false,
+                "description": "History of hypersensitivity to taxanes; hypersensitivity to the solvent does not preclude patient participation in this study"
+            },
+            {
+                "display_order": 48,
+                "inclusion_indicator": false,
+                "description": "Anticancer treatment, including endocrine therapy, radiotherapy (except stereotactic brain radiosurgery), chemotherapy, biologic therapy, or therapy in an investigational clinical study, ≤ 14 days prior to the date of randomization"
+            },
+            {
+                "display_order": 49,
+                "inclusion_indicator": false,
+                "description": "Major surgery ≤ 28 days prior to the date of randomization; patient must have complete recovery from surgery"
+            },
+            {
+                "display_order": 50,
+                "inclusion_indicator": false,
+                "description": "Less than 2 weeks or 5 plasma half-lives (whichever is greater) since last use of a medication or ingestion of an agent, beverage or food that is a known clinically relevant strong inhibitor or known clinically relevant inducer of the cytochrome P450 (CYP) 3A pathway (patients should discontinue taking any regularly taken medication that is a strong inhibitor or inducer of the CYP3A pathway)"
+            },
+            {
+                "display_order": 51,
+                "inclusion_indicator": false,
+                "description": "History of hypersensitivity or unexpected reactions to capecitabine, other fluoropyrimidine agents or any of their ingredients"
+            },
+            {
+                "display_order": 52,
+                "inclusion_indicator": false,
+                "description": "Known dihydropyrimidine dehydrogenase (DPD) deficiency. Testing for DPD deficiency must be performed where required by local regulations, using a validated method that is approved by local health authorities."
+            },
+            {
+                "display_order": 53,
+                "inclusion_indicator": false,
+                "description": "Pregnant or breastfeeding"
+            },
+            {
+                "display_order": 54,
+                "inclusion_indicator": false,
+                "description": "If, in the opinion of the Investigator, the patient is deemed unwilling or unable to comply with the requirements of the study"
+            },
+            {
+                "display_order": 55,
+                "inclusion_indicator": false,
+                "description": "Treatment with brivudine, sorivudine or its chemically-related analogs ≤ 28 days prior to the date of randomization"
+            }
+        ]
+    },
+    "number_of_arms": 2,
+    "arms": [
+        {
+            "arm_name": "Arm A: Tesetaxel (oral) and capecitabine (oral)",
+            "arm_type": "EXPERIMENTAL",
+            "arm_description": "Tesetaxel (27 mg/m2) once every 21 days on Day 1 of each 21-day cycle; and capecitabine (825 mg/m2) twice daily (in the morning and evening after a meal, for a total daily dose of 1,650 mg/m2) beginning with the evening dose on Day 1 through the morning dose on Day 15 of each 21-day cycle",
+            "interventions": []
+        },
+        {
+            "arm_name": "Arm B: Capecitabine (oral)",
+            "arm_type": "ACTIVE_COMPARATOR",
+            "arm_description": "Capecitabine (1,250 mg/m2) twice daily (in the morning and evening after a meal, for a total daily dose of 2,500 mg/m2) beginning with the evening dose on Day 1 through the morning dose on Day 15 of each 21-day cycle",
+            "interventions": []
+        },
+        {
+            "arm_name": "Arm not specified",
+            "arm_type": null,
+            "arm_description": null,
+            "interventions": [
+                {
+                    "intervention_name": "Laboratory Biomarker Analysis",
+                    "intervention_type": "Other",
+                    "intervention_code": "C64263",
+                    "intervention_description": null,
+                    "parents": [
+                        "C63333",
+                        "C74957"
+                    ],
+                    "inclusion_indicator": "TRIAL",
+                    "synonyms": [],
+                    "intervention_category": "Other"
+                },
+                {
+                    "intervention_name": "Tesetaxel",
+                    "intervention_type": "Drug",
+                    "intervention_code": "C37451",
+                    "intervention_description": "A semi-synthetic, orally bioavailable taxane derivative with potential antineoplastic and antiangiogenic properties. Tesetaxel binds to and stabilizes tubulin, promoting microtubule assembly and thereby preventing microtubule depolymerization. This may lead to cell cycle arrest and an inhibition of cell proliferation. This agent may also inhibit pro-angiogenic factors such as vascular endothelial growth factor (VEGF). As it represents poor substrate for P-glycoprotein-related drug resistance mechanisms, this agent may be useful for treating multi-drug resistant tumors. Check for active clinical trials or closed clinical trials using this agent. (NCI Thesaurus)Health professional",
+                    "parents": [
+                        "C1742",
+                        "C1490",
+                        "C67437"
+                    ],
+                    "inclusion_indicator": "TRIAL",
+                    "synonyms": [],
+                    "intervention_category": "Agent"
+                },
+                {
+                    "intervention_name": "Capecitabine",
+                    "intervention_type": "Drug",
+                    "intervention_code": "C1794",
+                    "intervention_description": "A fluoropyrimidine carbamate belonging to the class of antineoplastic agents called antimetabolites.  As a prodrug, capecitabine is selectively activated by tumor cells to its cytotoxic moiety, 5-fluorouracil (5-FU); subsequently, 5-FU is metabolized to two active metabolites, 5-fluoro-2-deoxyuridine monophosphate (FdUMP) and 5-fluorouridine triphosphate (FUTP) by both tumor cells and normal cells.  FdUMP inhibits DNA synthesis and cell division by reducing normal thymidine production, while FUTP inhibits RNA and protein synthesis by competing with uridine triphosphate for incorporation into the RNA strand. Check for active clinical trials or closed clinical trials using this agent. (NCI Thesaurus)Health professional",
+                    "parents": [
+                        "C1557"
+                    ],
+                    "inclusion_indicator": "TRIAL",
+                    "synonyms": [
+                        "Xeloda"
+                    ],
+                    "intervention_category": "Agent"
+                },
+                {
+                    "intervention_code": "C63333",
+                    "intervention_name": "Biomarker Analysis",
+                    "inclusion_indicator": "TREE",
+                    "intervention_type": "Other",
+                    "intervention_description": "",
+                    "intervention_category": "NONE",
+                    "parents": [
+                        "C25218"
+                    ],
+                    "synonyms": []
+                },
+                {
+                    "intervention_code": "C25218",
+                    "intervention_name": "Intervention or Procedure",
+                    "inclusion_indicator": "TREE",
+                    "intervention_type": "Other",
+                    "intervention_description": "",
+                    "intervention_category": "NONE",
+                    "parents": [
+                        "C16203"
+                    ],
+                    "synonyms": []
+                },
+                {
+                    "intervention_code": "C16203",
+                    "intervention_name": "Clinical or Research Activity",
+                    "inclusion_indicator": "TREE",
+                    "intervention_type": "Other",
+                    "intervention_description": "",
+                    "intervention_category": "NONE",
+                    "parents": [
+                        "C43431"
+                    ],
+                    "synonyms": []
+                },
+                {
+                    "intervention_code": "C43431",
+                    "intervention_name": "Activity",
+                    "inclusion_indicator": "TREE",
+                    "intervention_type": "Other",
+                    "intervention_description": "",
+                    "intervention_category": "NONE",
+                    "parents": [],
+                    "synonyms": []
+                },
+                {
+                    "intervention_code": "C74957",
+                    "intervention_name": "Mixed Category Laboratory Procedure",
+                    "inclusion_indicator": "TREE",
+                    "intervention_type": "Other",
+                    "intervention_description": "",
+                    "intervention_category": "NONE",
+                    "parents": [
+                        "C25294"
+                    ],
+                    "synonyms": []
+                },
+                {
+                    "intervention_code": "C25294",
+                    "intervention_name": "Laboratory Procedure",
+                    "inclusion_indicator": "TREE",
+                    "intervention_type": "Other",
+                    "intervention_description": "",
+                    "intervention_category": "NONE",
+                    "parents": [
+                        "C25218"
+                    ],
+                    "synonyms": [
+                        "Lab Test",
+                        "Lab Tests",
+                        "Laboratory Test",
+                        "Test",
+                        "Tests"
+                    ]
+                },
+                {
+                    "intervention_code": "C1742",
+                    "intervention_name": "Angiogenesis Inhibitor",
+                    "inclusion_indicator": "TREE",
+                    "intervention_type": "Drug",
+                    "intervention_description": "",
+                    "intervention_category": "Agent Category",
+                    "parents": [
+                        "C274"
+                    ],
+                    "synonyms": [
+                        "Angiogenesis Antagonists",
+                        "Angiogenesis Blockers",
+                        "Anti-Angiogenic Agents",
+                        "Antiangiogenesis Agents",
+                        "Antiangiogenic Agent"
+                    ]
+                },
+                {
+                    "intervention_code": "C274",
+                    "intervention_name": "Antineoplastic Agent",
+                    "inclusion_indicator": "TREE",
+                    "intervention_type": "Drug",
+                    "intervention_description": "",
+                    "intervention_category": "Agent Category",
+                    "parents": [
+                        "C1909"
+                    ],
+                    "synonyms": [
+                        "Anti-Cancer Agents",
+                        "Anti-Tumor Agents",
+                        "Anti-Tumor Drugs",
+                        "Antineoplastic Drugs",
+                        "Antineoplastics",
+                        "Antiproliferative Agents",
+                        "Antiproliferative Drugs",
+                        "Cancer Drug",
+                        "Chemotherapeutic Agents, Neoplastic Disease",
+                        "Tumor-Specific Treatment Agents"
+                    ]
+                },
+                {
+                    "intervention_code": "C1909",
+                    "intervention_name": "Pharmacologic Substance",
+                    "inclusion_indicator": "TREE",
+                    "intervention_type": "Drug",
+                    "intervention_description": "",
+                    "intervention_category": "Agent Category",
+                    "parents": [
+                        "C1908"
+                    ],
+                    "synonyms": []
+                },
+                {
+                    "intervention_code": "C1908",
+                    "intervention_name": "Drug, Food, Chemical or Biomedical Material",
+                    "inclusion_indicator": "TREE",
+                    "intervention_type": "Drug",
+                    "intervention_description": "",
+                    "intervention_category": "Agent Category",
+                    "parents": [],
+                    "synonyms": []
+                },
+                {
+                    "intervention_code": "C1490",
+                    "intervention_name": "Taxane Compound",
+                    "inclusion_indicator": "TREE",
+                    "intervention_type": "Drug",
+                    "intervention_description": "",
+                    "intervention_category": "Agent Category",
+                    "parents": [
+                        "C860"
+                    ],
+                    "synonyms": [
+                        "Taxanes"
+                    ]
+                },
+                {
+                    "intervention_code": "C860",
+                    "intervention_name": "Terpene Compound",
+                    "inclusion_indicator": "TREE",
+                    "intervention_type": "Drug",
+                    "intervention_description": "",
+                    "intervention_category": "Agent Category",
+                    "parents": [
+                        "C552",
+                        "C616"
+                    ],
+                    "synonyms": [
+                        "Terpenes"
+                    ]
+                },
+                {
+                    "intervention_code": "C552",
+                    "intervention_name": "Hydrocarbon",
+                    "inclusion_indicator": "TREE",
+                    "intervention_type": "Drug",
+                    "intervention_description": "",
+                    "intervention_category": "Agent Category",
+                    "parents": [
+                        "C718"
+                    ],
+                    "synonyms": [
+                        "Hydrocarbons"
+                    ]
+                },
+                {
+                    "intervention_code": "C718",
+                    "intervention_name": "Organic Chemical",
+                    "inclusion_indicator": "TREE",
+                    "intervention_type": "Drug",
+                    "intervention_description": "",
+                    "intervention_category": "Agent Category",
+                    "parents": [
+                        "C1913"
+                    ],
+                    "synonyms": []
+                },
+                {
+                    "intervention_code": "C1913",
+                    "intervention_name": "Drug or Chemical by Structure",
+                    "inclusion_indicator": "TREE",
+                    "intervention_type": "Drug",
+                    "intervention_description": "",
+                    "intervention_category": "Agent Category",
+                    "parents": [
+                        "C1908"
+                    ],
+                    "synonyms": []
+                },
+                {
+                    "intervention_code": "C616",
+                    "intervention_name": "Lipid",
+                    "inclusion_indicator": "TREE",
+                    "intervention_type": "Drug",
+                    "intervention_description": "",
+                    "intervention_category": "Agent Category",
+                    "parents": [
+                        "C718"
+                    ],
+                    "synonyms": [
+                        "Lipids"
+                    ]
+                },
+                {
+                    "intervention_code": "C67437",
+                    "intervention_name": "Taxane-Pocket Binding Agent",
+                    "inclusion_indicator": "TREE",
+                    "intervention_type": "Drug",
+                    "intervention_description": "",
+                    "intervention_category": "Agent Category",
+                    "parents": [
+                        "C25974"
+                    ],
+                    "synonyms": [
+                        "Taxane-Site Binding Agent"
+                    ]
+                },
+                {
+                    "intervention_code": "C25974",
+                    "intervention_name": "Tubulin Binding Agent",
+                    "inclusion_indicator": "TREE",
+                    "intervention_type": "Drug",
+                    "intervention_description": "",
+                    "intervention_category": "Agent Category",
+                    "parents": [
+                        "C273"
+                    ],
+                    "synonyms": [
+                        "Tubulin Binding Agents"
+                    ]
+                },
+                {
+                    "intervention_code": "C273",
+                    "intervention_name": "Antimitotic Agent",
+                    "inclusion_indicator": "TREE",
+                    "intervention_type": "Drug",
+                    "intervention_description": "",
+                    "intervention_category": "Agent Category",
+                    "parents": [
+                        "C274"
+                    ],
+                    "synonyms": [
+                        "Antimitotic Drugs",
+                        "Antimitotics",
+                        "Microtubular Function Inhibitors",
+                        "Mitosis Inhibitor Agents",
+                        "Mitosis Inhibitor Drugs",
+                        "Mitosis Inhibitors",
+                        "Mitotic Inhibitor Agents",
+                        "Mitotic Inhibitor Drugs",
+                        "Mitotic Inhibitors"
+                    ]
+                },
+                {
+                    "intervention_code": "C1557",
+                    "intervention_name": "Pyrimidine Antagonist",
+                    "inclusion_indicator": "TREE",
+                    "intervention_type": "Drug",
+                    "intervention_description": "",
+                    "intervention_category": "Agent Category",
+                    "parents": [
+                        "C272"
+                    ],
+                    "synonyms": []
+                },
+                {
+                    "intervention_code": "C272",
+                    "intervention_name": "Antimetabolite",
+                    "inclusion_indicator": "TREE",
+                    "intervention_type": "Drug",
+                    "intervention_description": "",
+                    "intervention_category": "Agent Category",
+                    "parents": [
+                        "C274"
+                    ],
+                    "synonyms": [
+                        "Antimetabolites"
+                    ]
+                }
+            ]
+        }
+    ]
+}

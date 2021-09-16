@@ -15,7 +15,7 @@ Feature: Advanced Clinical Trials Search Lead Organization Section
 		And "Lead Organization" form section is displayed
 		When user clicks on "Lead organization" field
 		Then autocomplete dropdown is displayed with "Please enter 3 or more characters" text
-		And user types "barretos" in "Lead organization" field
+		And user types "bar" in "Lead organization" field
 		And user selects "Barretos Cancer Hospital" from dropdown
 		When user clicks on "Find Trials" button
 		Then the search is executed and results page is displayed

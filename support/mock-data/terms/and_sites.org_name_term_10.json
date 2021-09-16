@@ -1,0 +1,132 @@
+{
+    "total": 31,
+    "terms": [
+        {
+            "term_key": "academic_community_cancer_research_united",
+            "term": "Academic and Community Cancer Research United",
+            "term_type": "lead_org",
+            "current_trial_statuses": [
+                "COMPLETE",
+                "ACTIVE",
+                "CLOSED TO ACCRUAL",
+                "APPROVED",
+                "WITHDRAWN"
+            ],
+            "count": 37,
+            "count_normalized": 0.0452599359232192,
+            "score": null
+        },
+        {
+            "term_key": "ao_clinical_investigation_publishing_documentation",
+            "term": "AO Clinical Investigation and Publishing Documentation",
+            "term_type": "lead_org",
+            "current_trial_statuses": [
+                "ACTIVE"
+            ],
+            "count": 1,
+            "count_normalized": 0.0012420965389623117,
+            "score": null
+        },
+        {
+            "term_key": "aptevo_research_development_llc",
+            "term": "Aptevo Research and Development LLC",
+            "term_type": "lead_org",
+            "current_trial_statuses": [
+                "ACTIVE"
+            ],
+            "count": 1,
+            "count_normalized": 0.0012420965389623117,
+            "score": null
+        },
+        {
+            "term_key": "arqule_inc_a_wholly_owned_subsidiary_merck_sharp_dohme_a_subsidiary_of_merck_co_inc_",
+            "term": "ArQule, Inc. (a wholly owned subsidiary of Merck Sharp and Dohme, a subsidiary of Merck & Co., Inc.)",
+            "term_type": "lead_org",
+            "current_trial_statuses": [
+                "COMPLETE",
+                "ADMINISTRATIVELY COMPLETE",
+                "ACTIVE"
+            ],
+            "count": 3,
+            "count_normalized": 0.003723086042717491,
+            "score": null
+        },
+        {
+            "term_key": "cancer_research_biostatistics",
+            "term": "Cancer Research and Biostatistics",
+            "term_type": "lead_org",
+            "current_trial_statuses": [
+                "ACTIVE"
+            ],
+            "count": 1,
+            "count_normalized": 0.0012420965389623117,
+            "score": null
+        },
+        {
+            "term_key": "cancer_support_community_research_training_institute_philadelphia",
+            "term": "Cancer Support Community, Research and Training Institute, Philadelphia",
+            "term_type": "lead_org",
+            "current_trial_statuses": [
+                "ACTIVE"
+            ],
+            "count": 1,
+            "count_normalized": 0.0012420965389623117,
+            "score": null
+        },
+        {
+            "term_key": "cancer_therapy_research_center_at_ut_health_science_center_at_san_antonio",
+            "term": "Cancer Therapy and Research Center at The UT Health Science Center at San Antonio",
+            "term_type": "lead_org",
+            "current_trial_statuses": [
+                "CLOSED TO ACCRUAL",
+                "WITHDRAWN",
+                "APPROVED",
+                "ACTIVE",
+                "COMPLETE",
+                "CLOSED TO ACCRUAL AND INTERVENTION",
+                "ADMINISTRATIVELY COMPLETE",
+                "ENROLLING BY INVITATION"
+            ],
+            "count": 45,
+            "count_normalized": 0.054861935034518416,
+            "score": null
+        },
+        {
+            "term_key": "center_for_international_blood_marrow_transplant_research",
+            "term": "Center for International Blood and Marrow Transplant Research",
+            "term_type": "lead_org",
+            "current_trial_statuses": [
+                "ACTIVE",
+                "IN REVIEW",
+                "COMPLETE",
+                "ADMINISTRATIVELY COMPLETE",
+                "CLOSED TO ACCRUAL"
+            ],
+            "count": 16,
+            "count_normalized": 0.01974634817287758,
+            "score": null
+        },
+        {
+            "term_key": "children_s_hospital_medical_center_omaha",
+            "term": "Children's Hospital and Medical Center of Omaha",
+            "term_type": "lead_org",
+            "current_trial_statuses": [
+                "ENROLLING BY INVITATION"
+            ],
+            "count": 1,
+            "count_normalized": 0.0012420965389623117,
+            "score": null
+        },
+        {
+            "term_key": "children_s_hospitals_clinics_minnesota_minneapolis",
+            "term": "Children's Hospitals and Clinics of Minnesota - Minneapolis",
+            "term_type": "lead_org",
+            "current_trial_statuses": [
+                "ACTIVE"
+            ],
+            "count": 3,
+            "count_normalized": 0.003723086042717491,
+            "score": null
+        }
+    ]
+}

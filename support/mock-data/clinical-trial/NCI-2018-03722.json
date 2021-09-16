@@ -1,0 +1,747 @@
+{
+    "nci_id": "NCI-2018-03722",
+    "nct_id": "NCT03532035",
+    "protocol_id": "CMX001-211",
+    "ccr_id": null,
+    "ctep_id": null,
+    "dcp_id": null,
+    "other_ids": null,
+    "associated_studies": null,
+    "outcome_measures": [
+        {
+            "name": "Incidence (number and percentage of subjects) of treatment-emergent adverse events",
+            "description": null,
+            "timeframe": "22 days",
+            "type_code": "PRIMARY"
+        },
+        {
+            "name": "Plasma area under the curve (AUC) of BCV",
+            "description": "BCV AUC will be determined by analysis of BCV plasma concentrations at the following time points after the start of Dose 1 and Dose 4: 30 minutes, and 2.5, 3, 4, 8, 10, 12, 36, and 72 hours",
+            "timeframe": "15 days",
+            "type_code": "PRIMARY"
+        },
+        {
+            "name": "Plasma Cmax of BCV",
+            "description": "BCV Cmax will be determined by analysis of BCV plasma concentrations at the following time points after the start of Dose 1 and Dose 4: 30 minutes, and 2.5, 3, 4, 8, 10, 12, 36, and 72 hours",
+            "timeframe": "15 days",
+            "type_code": "PRIMARY"
+        }
+    ],
+    "amendment_date": null,
+    "current_trial_status": "Withdrawn",
+    "current_trial_status_date": "2021-07-19",
+    "start_date": "2018-12-15",
+    "start_date_type_code": "ACTUAL",
+    "completion_date": "2019-05-10",
+    "completion_date_type_code": "ACTUAL",
+    "record_verification_date": "2021-07-01",
+    "brief_title": "Open Label Study of IV Brincidofovir in Adult Transplant Recipients With Adenovirus Viremia",
+    "official_title": "A Randomized, Controlled, Open-Label, Multiple Ascending Dose Study of Intravenous Brincidofovir in Adult Allogeneic Hematopoietic Cell Transplant Recipients With Adenovirus Viremia",
+    "acronym": null,
+    "keywords": null,
+    "brief_summary": "This is a randomized, controlled, open-label, multicenter study to evaluate the safety, tolerability, pharmacokinetic (PK), and adenovirus (AdV) antiviral activity of multiple ascending doses of IV brincidofovir (BCV). Approximately 30 eligible subjects will be sequentially enrolled into 1 of 3 planned cohorts. Within each cohort, subjects will be randomized in a 4:1 ratio to receive IV BCV dosed twice weekly (BIW) (on Days 1, 4, 8, and 11) or to receive investigator-assigned standard of care (SoC).",
+    "detail_description": null,
+    "classification_code": null,
+    "interventional_model": "Parallel",
+    "study_source": "Industrial",
+    "accepts_healthy_volunteers_indicator": "NO",
+    "study_protocol_type": "Interventional",
+    "study_subtype_code": null,
+    "study_population_description": null,
+    "study_model_code": null,
+    "study_model_other_text": null,
+    "sampling_method_code": null,
+    "why_study_stopped": "terminated due to low enrollment rate",
+    "bio_specimen": {
+        "f1": "bio_specimen_description",
+        "f2": null,
+        "f3": "bio_specimen_retention_code",
+        "f4": null
+    },
+    "primary_purpose": {
+        "primary_purpose_code": "TREATMENT",
+        "primary_purpose_other_text": null,
+        "primary_purpose_additional_qualifier_code": null
+    },
+    "phase": {
+        "phase": "II",
+        "phase_other_text": null,
+        "phase_additional_qualifier_code": "NO"
+    },
+    "masking": {
+        "masking": null,
+        "masking_allocation_code": "Randomized Controlled Trial",
+        "masking_role_investigator": null,
+        "masking_role_outcome_assessor": null,
+        "masking_role_subject": null,
+        "masking_role_caregiver": null
+    },
+    "principal_investigator": null,
+    "central_contact": {
+        "central_contact_email": null,
+        "central_contact_name": null,
+        "central_contact_phone": null,
+        "central_contact_type": null
+    },
+    "lead_org": "Chimerix",
+    "collaborators": null,
+    "sites": [
+        {
+            "contact_email": "jmooney@mednet.ucla.edu",
+            "contact_name": "Janet Mooney",
+            "contact_phone": "310-794-8600",
+            "recruitment_status": "ACTIVE",
+            "recruitment_status_date": "2019-01-03",
+            "local_site_identifier": "18-001395",
+            "org_address_line_1": "10833 Le Conte Avenue",
+            "org_address_line_2": "University of California at Los Angeles",
+            "org_city": "Los Angeles",
+            "org_country": "United States",
+            "org_email": null,
+            "org_family": "Jonsson Comprehensive Cancer Center",
+            "org_fax": null,
+            "org_name": "UCLA / Jonsson Comprehensive Cancer Center",
+            "org_to_family_relationship": null,
+            "org_phone": "888-798-0719\r310-825-4321",
+            "org_postal_code": "90095",
+            "org_state_or_province": "CA",
+            "org_status": "ACTIVE",
+            "org_status_date": "2019-01-03",
+            "org_tty": null,
+            "org_va": false,
+            "org_coordinates": {
+                "lat": 34.071,
+                "lon": -118.4432
+            }
+        },
+        {
+            "contact_email": null,
+            "contact_name": null,
+            "contact_phone": null,
+            "recruitment_status": "ACTIVE",
+            "recruitment_status_date": "2018-12-11",
+            "local_site_identifier": "IRB18-1002",
+            "org_address_line_1": "5841 South Maryland Avenue",
+            "org_address_line_2": null,
+            "org_city": "Chicago",
+            "org_country": "United States",
+            "org_email": "cancerclinicaltrials@bsd.uchicago.edu",
+            "org_family": "University of Chicago Comprehensive Cancer Center",
+            "org_fax": "773-702-9311",
+            "org_name": "University of Chicago Comprehensive Cancer Center",
+            "org_to_family_relationship": null,
+            "org_phone": "773-834-7424\r773-702-6180",
+            "org_postal_code": "60637",
+            "org_state_or_province": "IL",
+            "org_status": "ACTIVE",
+            "org_status_date": "2018-12-11",
+            "org_tty": null,
+            "org_va": false,
+            "org_coordinates": {
+                "lat": 41.781,
+                "lon": -87.6021
+            }
+        },
+        {
+            "contact_email": null,
+            "contact_name": null,
+            "contact_phone": null,
+            "recruitment_status": "COMPLETED",
+            "recruitment_status_date": "2019-05-10",
+            "local_site_identifier": "18-459",
+            "org_address_line_1": "450 Brookline Avenue",
+            "org_address_line_2": null,
+            "org_city": "Boston",
+            "org_country": "United States",
+            "org_email": null,
+            "org_family": "Dana-Farber / Harvard Cancer Center",
+            "org_fax": null,
+            "org_name": "Dana-Farber Cancer Institute",
+            "org_to_family_relationship": null,
+            "org_phone": "617-632-3000",
+            "org_postal_code": "02215",
+            "org_state_or_province": "MA",
+            "org_status": "COMPLETED",
+            "org_status_date": "2019-05-10",
+            "org_tty": null,
+            "org_va": false,
+            "org_coordinates": {
+                "lat": 42.3469,
+                "lon": -71.1025
+            }
+        },
+        {
+            "contact_email": null,
+            "contact_name": null,
+            "contact_phone": null,
+            "recruitment_status": "COMPLETED",
+            "recruitment_status_date": "2019-05-10",
+            "local_site_identifier": "18-459",
+            "org_address_line_1": "75 Francis Street",
+            "org_address_line_2": null,
+            "org_city": "Boston",
+            "org_country": "United States",
+            "org_email": null,
+            "org_family": "Dana-Farber / Harvard Cancer Center",
+            "org_fax": null,
+            "org_name": "Brigham and Women's Hospital",
+            "org_to_family_relationship": null,
+            "org_phone": "617-724-5200",
+            "org_postal_code": "02115",
+            "org_state_or_province": "MA",
+            "org_status": "COMPLETED",
+            "org_status_date": "2019-05-10",
+            "org_tty": null,
+            "org_va": false,
+            "org_coordinates": {
+                "lat": 42.341,
+                "lon": -71.0948
+            }
+        },
+        {
+            "contact_email": null,
+            "contact_name": null,
+            "contact_phone": null,
+            "recruitment_status": "COMPLETED",
+            "recruitment_status_date": "2019-06-06",
+            "local_site_identifier": "2018-0826",
+            "org_address_line_1": "30 Prospect Avenue",
+            "org_address_line_2": null,
+            "org_city": "Hackensack",
+            "org_country": "United States",
+            "org_email": null,
+            "org_family": "Georgetown Lombardi Comprehensive Cancer Center",
+            "org_fax": null,
+            "org_name": "Hackensack University Medical Center",
+            "org_to_family_relationship": null,
+            "org_phone": "201-996-2879",
+            "org_postal_code": "07601",
+            "org_state_or_province": "NJ",
+            "org_status": "COMPLETED",
+            "org_status_date": "2019-06-06",
+            "org_tty": null,
+            "org_va": false,
+            "org_coordinates": {
+                "lat": 40.8892,
+                "lon": -74.0466
+            }
+        },
+        {
+            "contact_email": null,
+            "contact_name": null,
+            "contact_phone": null,
+            "recruitment_status": "ACTIVE",
+            "recruitment_status_date": "2019-02-28",
+            "local_site_identifier": "2018-0665",
+            "org_address_line_1": "1515 Holcombe Boulevard",
+            "org_address_line_2": null,
+            "org_city": "Houston",
+            "org_country": "United States",
+            "org_email": "askmdanderson@mdanderson.org",
+            "org_family": "MD Anderson Cancer Center",
+            "org_fax": null,
+            "org_name": "M D Anderson Cancer Center",
+            "org_to_family_relationship": null,
+            "org_phone": "877-632-6789",
+            "org_postal_code": "77030",
+            "org_state_or_province": "TX",
+            "org_status": "ACTIVE",
+            "org_status_date": "2019-02-28",
+            "org_tty": null,
+            "org_va": false,
+            "org_coordinates": {
+                "lat": 29.7059,
+                "lon": -95.4026
+            }
+        },
+        {
+            "contact_email": null,
+            "contact_name": null,
+            "contact_phone": null,
+            "recruitment_status": "WITHDRAWN",
+            "recruitment_status_date": "2019-06-10",
+            "local_site_identifier": "RG1003854",
+            "org_address_line_1": "1100 Fairview Avenue North",
+            "org_address_line_2": null,
+            "org_city": "Seattle",
+            "org_country": "United States",
+            "org_email": "CRScustomerservice@fredhutch.org",
+            "org_family": "Fred Hutchinson / University of Washington Cancer Consortium",
+            "org_fax": null,
+            "org_name": "Fred Hutch / University of Washington Cancer Consortium",
+            "org_to_family_relationship": null,
+            "org_phone": "206-667-4520",
+            "org_postal_code": "98109",
+            "org_state_or_province": "WA",
+            "org_status": "WITHDRAWN",
+            "org_status_date": "2019-06-10",
+            "org_tty": null,
+            "org_va": false,
+            "org_coordinates": {
+                "lat": 47.6307,
+                "lon": -122.3461
+            }
+        }
+    ],
+    "anatomic_sites": [
+        "Multiple"
+    ],
+    "diseases": [
+        {
+            "inclusion_indicator": "TRIAL",
+            "lead_disease_indicator": "YES",
+            "nci_thesaurus_concept_id": "C115149",
+            "preferred_name": "Adenovirus Infection",
+            "display_name": "Adenovirus Infection",
+            "paths": [
+                {
+                    "paths": [
+                        {
+                            "direction": 1,
+                            "concepts": [
+                                {
+                                    "idx": 0,
+                                    "label": "Disease or Disorder",
+                                    "code": "C2991"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [
+                "AdV Infection",
+                "Adenoviral Infection"
+            ],
+            "parents": [
+                "C3439"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C93210",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C53547"
+            ],
+            "lead_disease_indicator": "YES",
+            "display_name": "Inflammatory Disorder",
+            "preferred_name": "Inflammatory Disorder",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [
+                "Inflammatory Disease",
+                "Inflammatory_Disease"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C26726",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C93210"
+            ],
+            "lead_disease_indicator": "YES",
+            "display_name": "Infectious Disorder",
+            "preferred_name": "Infectious Disorder",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [
+                "Clinical Infection",
+                "ID",
+                "INFECTION",
+                "Infection",
+                "Infectious",
+                "Infectious Disease",
+                "Infectious Diseases and Manifestations",
+                "Unspecified Infection",
+                "infection"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C2991",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C7057"
+            ],
+            "lead_disease_indicator": "YES",
+            "display_name": "Other Disease",
+            "preferred_name": "Disease or Disorder",
+            "type": [
+                "maintype"
+            ],
+            "synonyms": [
+                "Diagnosis",
+                "Disease",
+                "Disease or Disorder",
+                "Disease or Disorder, Non-Neoplastic",
+                "Diseases",
+                "Diseases and Disorders",
+                "Disorder",
+                "Disorders",
+                "condition",
+                "disease",
+                "disease term",
+                "disease type",
+                "disease_term",
+                "disease_type",
+                "disorder"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C53547",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C53529"
+            ],
+            "lead_disease_indicator": "YES",
+            "display_name": "Non-Neoplastic Disorder by Special Category",
+            "preferred_name": "Non-Neoplastic Disorder by Special Category",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [
+                "Non-Neoplastic Disease by Special Category"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C7057",
+            "inclusion_indicator": "TREE",
+            "parents": [],
+            "lead_disease_indicator": "YES",
+            "display_name": "Disease, Disorder or Finding",
+            "preferred_name": "Disease, Disorder or Finding",
+            "type": [],
+            "synonyms": []
+        },
+        {
+            "nci_thesaurus_concept_id": "C53529",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C2991"
+            ],
+            "lead_disease_indicator": "YES",
+            "display_name": "Non-Neoplastic Disorder",
+            "preferred_name": "Non-Neoplastic Disorder",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [
+                "NON-NEOPLASTIC",
+                "Non-Neoplastic Disease",
+                "Non-neoplastic Disorder",
+                "Non-neoplastic condition, NOS",
+                "Non-neoplastic disorder, NOS"
+            ]
+        },
+        {
+            "nci_thesaurus_concept_id": "C3439",
+            "inclusion_indicator": "TREE",
+            "parents": [
+                "C26726"
+            ],
+            "lead_disease_indicator": "YES",
+            "display_name": "Viral Infection",
+            "preferred_name": "Viral Infection",
+            "type": [
+                "subtype"
+            ],
+            "synonyms": [
+                "Viral Disease",
+                "Viral Disorder"
+            ]
+        }
+    ],
+    "biomarkers": [
+        {
+            "assay_purpose": "Eligibility Criterion - Inclusion",
+            "long_name": null,
+            "name": null,
+            "synonyms": null,
+            "hugo_biomarker_code": null,
+            "nci_thesaurus_concept_id": "C157570",
+            "eligibility_criterion": "inclusion"
+        }
+    ],
+    "minimum_target_accrual_number": 1,
+    "eligibility": {
+        "structured": {
+            "gender": "BOTH",
+            "max_age": "99 Years",
+            "max_age_number": 99,
+            "max_age_unit": "Years",
+            "min_age": "18 Years",
+            "min_age_number": 18,
+            "min_age_unit": "Years",
+            "max_age_in_years": 99,
+            "min_age_in_years": 18
+        },
+        "unstructured": [
+            {
+                "display_order": 0,
+                "inclusion_indicator": true,
+                "description": "Be ≥ 18-years-old (or per local law or regulations on legal age of consent)."
+            },
+            {
+                "display_order": 1,
+                "inclusion_indicator": true,
+                "description": "Have received an allogeneic hematopoietic cell transplant (HCT) within the previous 100 days."
+            },
+            {
+                "display_order": 2,
+                "inclusion_indicator": true,
+                "description": "Have plasma AdV DNA viremia ≥ 1,000 copies/mL (via quantitative polymerase chain reaction assay; local results must be confirmed by the designated central virology laboratory)."
+            },
+            {
+                "display_order": 3,
+                "inclusion_indicator": false,
+                "description": "Diarrhea meeting the US National Institutes of Health (NIH)/National Cancer Institute (NCI) Common Terminology Criteria for Adverse Events (CTCAE) Grade 2 or greater"
+            },
+            {
+                "display_order": 4,
+                "inclusion_indicator": false,
+                "description": "Acute graft versus host disease (GVHD)"
+            },
+            {
+                "display_order": 5,
+                "inclusion_indicator": false,
+                "description": "NIH Stage 2 or higher acute GVHD of the gut (i.e., diarrhea > 1,000 mL/day, or severe abdominal pain with or without ileus) or liver (i.e., bilirubin > 3 mg/dL : > 51 μmol/L) within 7 days prior to Day 1"
+            },
+            {
+                "display_order": 6,
+                "inclusion_indicator": false,
+                "description": "Any NIH Stage 3 or Stage 4 acute GVHD within 7 days prior to Day 1"
+            },
+            {
+                "display_order": 7,
+                "inclusion_indicator": false,
+                "description": "Concurrent human immunodeficiency virus or active hepatitis B or C infection"
+            },
+            {
+                "display_order": 8,
+                "inclusion_indicator": false,
+                "description": "An estimated creatinine clearance of < 30 mL/min, and/or use of renal replacement therapy within 7 days prior to Day 1."
+            },
+            {
+                "display_order": 9,
+                "inclusion_indicator": false,
+                "description": "Poor clinical prognosis, including active malignancy, irreversible organ failure, use of vasopressors, requirement for mechanical ventilation, resting oxygen saturation < 88%, or Pulmonary Arterial oxygen (PaO2) ≤ 55 mm Hg without supplemental oxygen at any time within 7 days prior to Day 1."
+            },
+            {
+                "display_order": 10,
+                "inclusion_indicator": false,
+                "description": "Receiving or anticipated to start systemic cyclosporine immunosuppressant treatment during study participation."
+            },
+            {
+                "display_order": 11,
+                "inclusion_indicator": false,
+                "description": "Received treatment with CDV within 14 days prior to Day 1."
+            },
+            {
+                "display_order": 12,
+                "inclusion_indicator": false,
+                "description": "Previous receipt of cell-based anti-AdV therapy within 6 weeks prior to Day 1 or prior receipt of an anti-AdV vaccine at any time."
+            },
+            {
+                "display_order": 13,
+                "inclusion_indicator": false,
+                "description": "Consumed food products containing sesame seeds, sesame oil, or dietary supplements containing sesamin within 3 days prior to Day 1."
+            },
+            {
+                "display_order": 14,
+                "inclusion_indicator": false,
+                "description": "Received any investigational drug within 28 days prior to Day 1 or currently participating in another interventional study."
+            },
+            {
+                "display_order": 15,
+                "inclusion_indicator": false,
+                "description": "Pregnant or breastfeeding."
+            }
+        ]
+    },
+    "number_of_arms": 2,
+    "arms": [
+        {
+            "arm_name": "Arm not specified",
+            "arm_type": null,
+            "arm_description": null,
+            "interventions": [
+                {
+                    "intervention_name": "Brincidofovir",
+                    "intervention_type": "Drug",
+                    "intervention_code": "C90587",
+                    "intervention_description": "An alkoxyalkyl ester prodrug containing the synthetic, acyclic nucleoside monophosphate analog cidofovir linked, through its phosphonate group, to a lipid, 3-hexadecyloxy-1-propanol, with antiviral activity against double-stranded DNA viruses. Upon oral administration, hexadecyloxypropyl-cidofovir crosses the intestinal wall and penetrates target viral-infected cells before being cleaved to the free antiviral agent cidofovir. In turn, cidofovir is phosphorylated by pyruvate kinases to its active metabolite cidofovir diphosphate. Cidofovir diphosphate, bearing structural similarity to nucleotides, competes with deoxycytosine-5-triphosphate (dCTP) for viral DNA polymerase and gets incorporated into the growing viral DNA strands. As a result, it prevents further DNA polymerization and disrupts DNA replication of viruses. Compared to cidofovir, which is given intravenously, hexadecyloxypropyl-cidofovir shows better oral bioavailability, less toxicity and enhanced cellular penetration. Chec",
+                    "parents": [
+                        "C281",
+                        "C29575"
+                    ],
+                    "inclusion_indicator": "TRIAL",
+                    "synonyms": [],
+                    "intervention_category": "Agent"
+                },
+                {
+                    "intervention_name": "Best Practice",
+                    "intervention_type": "Other",
+                    "intervention_code": "C94396",
+                    "intervention_description": null,
+                    "parents": [
+                        "C15239"
+                    ],
+                    "inclusion_indicator": "TRIAL",
+                    "synonyms": [],
+                    "intervention_category": "Other"
+                },
+                {
+                    "intervention_code": "C281",
+                    "intervention_name": "Antiviral Agent",
+                    "inclusion_indicator": "TREE",
+                    "intervention_type": "Drug",
+                    "intervention_description": "",
+                    "intervention_category": "Agent Category",
+                    "parents": [
+                        "C254"
+                    ],
+                    "synonyms": [
+                        "Antiviral",
+                        "Antivirals"
+                    ]
+                },
+                {
+                    "intervention_code": "C254",
+                    "intervention_name": "Anti-Infective Agent",
+                    "inclusion_indicator": "TREE",
+                    "intervention_type": "Drug",
+                    "intervention_description": "",
+                    "intervention_category": "Agent Category",
+                    "parents": [
+                        "C1909"
+                    ],
+                    "synonyms": [
+                        "Anti-Infective Agents",
+                        "Anti-Infective Drugs",
+                        "Anti-Infectives",
+                        "AntiInfective Agents",
+                        "AntiInfective Drugs",
+                        "AntiInfectives"
+                    ]
+                },
+                {
+                    "intervention_code": "C1909",
+                    "intervention_name": "Pharmacologic Substance",
+                    "inclusion_indicator": "TREE",
+                    "intervention_type": "Drug",
+                    "intervention_description": "",
+                    "intervention_category": "Agent Category",
+                    "parents": [
+                        "C1908"
+                    ],
+                    "synonyms": []
+                },
+                {
+                    "intervention_code": "C1908",
+                    "intervention_name": "Drug, Food, Chemical or Biomedical Material",
+                    "inclusion_indicator": "TREE",
+                    "intervention_type": "Drug",
+                    "intervention_description": "",
+                    "intervention_category": "Agent Category",
+                    "parents": [],
+                    "synonyms": []
+                },
+                {
+                    "intervention_code": "C29575",
+                    "intervention_name": "DNA Polymerase Inhibitor",
+                    "inclusion_indicator": "TREE",
+                    "intervention_type": "Drug",
+                    "intervention_description": "",
+                    "intervention_category": "Agent Category",
+                    "parents": [
+                        "C471"
+                    ],
+                    "synonyms": []
+                },
+                {
+                    "intervention_code": "C471",
+                    "intervention_name": "Enzyme Inhibitor",
+                    "inclusion_indicator": "TREE",
+                    "intervention_type": "Drug",
+                    "intervention_description": "",
+                    "intervention_category": "Agent Category",
+                    "parents": [
+                        "C1909"
+                    ],
+                    "synonyms": [
+                        "Enzyme Antagonist",
+                        "Enzyme Inhibitor Agent",
+                        "Enzyme Inhibitor Drug"
+                    ]
+                },
+                {
+                    "intervention_code": "C15239",
+                    "intervention_name": "Patient Care",
+                    "inclusion_indicator": "TREE",
+                    "intervention_type": "Other",
+                    "intervention_description": "",
+                    "intervention_category": "NONE",
+                    "parents": [
+                        "C16205"
+                    ],
+                    "synonyms": [
+                        "Patient Care Delivery"
+                    ]
+                },
+                {
+                    "intervention_code": "C16205",
+                    "intervention_name": "Healthcare Activity",
+                    "inclusion_indicator": "TREE",
+                    "intervention_type": "Other",
+                    "intervention_description": "",
+                    "intervention_category": "NONE",
+                    "parents": [
+                        "C16203"
+                    ],
+                    "synonyms": [
+                        "Health Care Activity",
+                        "Healthcare"
+                    ]
+                },
+                {
+                    "intervention_code": "C16203",
+                    "intervention_name": "Clinical or Research Activity",
+                    "inclusion_indicator": "TREE",
+                    "intervention_type": "Other",
+                    "intervention_description": "",
+                    "intervention_category": "NONE",
+                    "parents": [
+                        "C43431"
+                    ],
+                    "synonyms": []
+                },
+                {
+                    "intervention_code": "C43431",
+                    "intervention_name": "Activity",
+                    "inclusion_indicator": "TREE",
+                    "intervention_type": "Other",
+                    "intervention_description": "",
+                    "intervention_category": "NONE",
+                    "parents": [],
+                    "synonyms": []
+                }
+            ]
+        },
+        {
+            "arm_name": "Brincidofovir (BCV)",
+            "arm_type": "EXPERIMENTAL",
+            "arm_description": "Cohort 1: BCV 10 mg twice weekly via IV infusion over 2 hours\r\nCohort 2: BCV 15 mg twice weekly via IV infusion over 2 hours\r\nCohort 3: BCV In Cohort 3, the actual dose may be higher or lower than doses administered in previous cohorts; the maximum dose of IV BCV will be ≤ 25 mg.",
+            "interventions": []
+        },
+        {
+            "arm_name": "Standard of Care (SoC)",
+            "arm_type": "ACTIVE_COMPARATOR",
+            "arm_description": "Subjects randomized to the SoC in each cohort will be managed per local institutional guidelines and investigator judgement. SoC treatment options may include, but are not limited to, taking a \"watch and-wait\" approach, with or without decreased immunosuppression (i.e., no active treatment), or treatment with IV Cidofovir (CDV), ganciclovir, or ribavirin.",
+            "interventions": []
+        }
+    ]
+}
