@@ -233,15 +233,27 @@ Feature:  As a user, I want to be able to view trial description page with all i
         When user clicks on Print button
         Then print window opens
 
-#this should be enabled by https://github.com/NCIOCPL/clinical-trials-search-app/issues/297
-# Scenario: User is able to to email trial info
-# Given screen breakpoint is set to "desktop"
-# Given the user navigates to "/about-cancer/treatment/clinical-trials/search/v?a=40&id=NCI-2014-01507&loc=0&rl=1"
-# Then the page title is "Crizotinib in Treating Patients with Stage IB-IIIA Non-small Cell Lung Cancer That Has Been Removed by Surgery and ALK Fusion Mutations (An ALCHEMIST Treatment Trial)"
-# And "This clinical trial matches:" appears below the title
-# And the criteria table displays the following
-#     | Category | Selection |
-#     | Age      | 40        |
-# When user clicks on Email button
-# Then the request is being sent with the following parameters
-# |parameters|
+    #this should be enabled by https://github.com/NCIOCPL/clinical-trials-search-app/issues/297
+    # Scenario: User is able to to email trial info
+    # Given screen breakpoint is set to "desktop"
+    # Given the user navigates to "/about-cancer/treatment/clinical-trials/search/v?a=40&id=NCI-2014-01507&loc=0&rl=1"
+    # Then the page title is "Crizotinib in Treating Patients with Stage IB-IIIA Non-small Cell Lung Cancer That Has Been Removed by Surgery and ALK Fusion Mutations (An ALCHEMIST Treatment Trial)"
+    # And "This clinical trial matches:" appears below the title
+    # And the criteria table displays the following
+    #     | Category | Selection |
+    #     | Age      | 40        |
+    # When user clicks on Email button
+    # Then the request is being sent with the following parameters
+    # |parameters|
+
+    Scenario Outline: User is able to see the trial's description page  when the trial is no longer in active state
+        Given the user navigates to "<url>"
+        Then the page title is "<title>"
+        And trial status is "<status>"
+
+        Examples:
+
+            | url                                                                | title                                                                                                         | status                        |
+            | /about-cancer/treatment/clinical-trials/search/v?id=NCI-2016-00007 | Disulfiram and Chemotherapy in Treating Patients with Refractory Solid Tumors or Metastatic Pancreatic Cancer | temporarily closed to accrual |
+            | /about-cancer/treatment/clinical-trials/search/v?id=NCI-2018-00273 | Tesetaxel Plus Reduced Dose of Capecitabine vs. Capecitabine in HER2 Negative, HR Positive, LA / MBC          | administratively complete     |
+            | /about-cancer/treatment/clinical-trials/search/v?id=NCI-2018-03722 | Open Label Study of IV Brincidofovir in Adult Transplant Recipients With Adenovirus Viremia                   | withdrawn                     |
