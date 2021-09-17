@@ -203,3 +203,20 @@ And('the invalid criteria table displays the following', (dataTable) => {
 When('user clears {string} input field', (fieldLabel) => {
 	cy.get(`input#${fieldMap[fieldLabel]}`).clear();
 });
+
+let stub;
+
+When('user clicks on chat online button', () => {
+	cy.get('form').then((form$) => {
+		form$.on('submit', (e) => {
+			e.preventDefault();
+		});
+	});
+	cy.window().then((win) => {
+		stub = cy.stub(win, 'open').as('windowOpen');
+		cy.get('.btnAsLink.chat-link').click();
+	});
+});
+Then('the chat is opened', () => {
+	expect(stub).to.be.calledOnce;
+});
