@@ -185,7 +185,7 @@ Feature: Clinical Trials Search Results Page Components
             | tt        | treatment                  |
 
 
-    ##### no results page ######
+    #### no results page ######
     Scenario: user navigates to no Trials found page, modifies search and able to see results found
         Given the user navigates to "/about-cancer/treatment/clinical-trials/search/r?fin=C18673&loc=0&rl=2&st=C8287&stg=C94774&t=C4872"
         And "No clinical trials matched your search." no trial info is displayed
@@ -226,6 +226,8 @@ Feature: Clinical Trials Search Results Page Components
         And text "For assistance, please contact the Cancer Information Service. You can chat online or call 1-800-4-CANCER (1-800-422-6237)." is displayed
         And "chat online" has a link "https://livehelp.cancer.gov/app/chat/chat_landing"
         And "Try a new search" link has a href "/about-cancer/treatment/clinical-trials/search/advanced"
+        When user clicks on chat online button
+        Then the chat is opened
 
     ### meta data
 
@@ -268,10 +270,10 @@ Feature: Clinical Trials Search Results Page Components
             | name        | content                                               |
             | description | Find an NCI-supported clinical trial - Search results |
         And the page contains meta tags with the following properties
-            | property       | content                                                                                                      |
-            | og:title       | Clinical Trials Search Results                                                                               |
+            | property       | content                                                                                |
+            | og:title       | Clinical Trials Search Results                                                         |
             | og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=39&loc=0&rl=2 |
-            | og:description | Find an NCI-supported clinical trial - Search results                                                        |
+            | og:description | Find an NCI-supported clinical trial - Search results                                  |
         And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=39&loc=0&rl=2"
 
 
