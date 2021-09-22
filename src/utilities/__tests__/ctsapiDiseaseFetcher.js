@@ -69,25 +69,23 @@ describe('ctsapiDiseaseFetcher', () => {
 				],
 			});
 
-		return ctsapiDiseaseFetcher(ctsapiClient, ['C9133', 'C153203']).then(
-			(actual) => {
-				expect(actual).toEqual([
-					{
-						name: 'Adenosquamous Lung Cancer',
-						codes: ['C9133'],
-						parentDiseaseID: ['C2926'],
-						type: ['subtype'],
-					},
-					{
-						name: 'Advanced Lung Carcinoma',
-						codes: ['C153203'],
-						parentDiseaseID: ['C4878'],
-						type: ['subtype'],
-					},
-				]);
-				// Assert that nock got the expected request and finished.
-				scope.done();
-			}
-		);
+		ctsapiDiseaseFetcher(ctsapiClient, ['C9133', 'C153203']).then((actual) => {
+			expect(actual).toEqual([
+				{
+					name: 'Adenosquamous Lung Cancer',
+					codes: ['C9133'],
+					parentDiseaseID: ['C2926'],
+					type: ['subtype'],
+				},
+				{
+					name: 'Advanced Lung Carcinoma',
+					codes: ['C153203'],
+					parentDiseaseID: ['C4878'],
+					type: ['subtype'],
+				},
+			]);
+			// Assert that nock got the expected request and finished.
+			scope.done();
+		});
 	});
 });

@@ -120,7 +120,7 @@ describe('Advanced - Interventions - Negative - queryStringToFormObject maps que
 				errors: expectedErrors,
 			};
 
-			return queryStringToFormObject(
+			queryStringToFormObject(
 				urlQuery,
 				diseaseFetcher,
 				interventionsFetcher,

@@ -126,7 +126,7 @@ describe('Advanced - Locations - Negative - queryStringToFormObject maps query t
 				errors: expectedErrors,
 			};
 
-			return queryStringToFormObject(
+			queryStringToFormObject(
 				urlQuery,
 				diseaseFetcher,
 				interventionsFetcher,

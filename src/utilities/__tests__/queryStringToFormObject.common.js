@@ -95,7 +95,7 @@ const fetcherTests = [
 it.each(fetcherTests)(
 	'getDiseaseFetcher - %s',
 	(name, diseaseFetcher, expected) => {
-		return diseaseFetcher(['C1111', 'C1112']).then((actual) => {
+		diseaseFetcher(['C1111', 'C1112']).then((actual) => {
 			expect(actual).toEqual(expected);
 		});
 	}

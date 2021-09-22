@@ -130,7 +130,7 @@ describe('resolveConcepts maps query to form', () => {
 	it.each(resolveTestCases)(
 		'%# - correctly resolves %s',
 		(testName, queryDiseases, diseaseFetcher, expected) => {
-			return resolveConcepts(queryDiseases, diseaseFetcher).then((actual) => {
+			resolveConcepts(queryDiseases, diseaseFetcher).then((actual) => {
 				expect(actual).toEqual(expected);
 			});
 		}
