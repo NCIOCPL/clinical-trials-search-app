@@ -161,7 +161,7 @@ class TextInput extends React.Component {
 		const { target } = event;
 
 		const { form, id, value } = target;
-		const { errorMessage, trackFormInputChange } = this.props;
+		const { trackFormInputChange } = this.props;
 		const { errorMessageBody, hasError } = this.state;
 		const formName = form && form.id ? form.id : null;
 		const inputActionProps = {
