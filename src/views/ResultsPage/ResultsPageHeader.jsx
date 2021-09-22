@@ -77,7 +77,7 @@ const ResultsPageHeader = ({
 						of {resultsCount} for your search{' '}
 						{!isDirty ? (
 							<>
-								for: "all trials" &nbsp; | &nbsp;
+								for: &quot;all trials&quot; &nbsp; | &nbsp;
 								<Link
 									to={`${
 										formType === 'basic'

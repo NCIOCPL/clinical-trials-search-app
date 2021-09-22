@@ -338,7 +338,7 @@ const SearchCriteriaTable = ({
 		<>
 			{placement === 'trial' && (
 				<>
-					<strong>This clinical trial matches: "all trials"</strong> |{' '}
+					<strong>This clinical trial matches: &quot;all trials&quot;</strong> |{' '}
 					<Link
 						to={`${
 							formType === 'basic'
