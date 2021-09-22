@@ -83,7 +83,7 @@ describe('ctsapiInterventionsFetcher', () => {
 				],
 			});
 
-		return ctsapiInterventionFetcher(ctsapiClient, ['C15974', 'C308']).then(
+		ctsapiInterventionFetcher(ctsapiClient, ['C15974', 'C308']).then(
 			(actual) => {
 				expect(actual).toEqual([
 					{

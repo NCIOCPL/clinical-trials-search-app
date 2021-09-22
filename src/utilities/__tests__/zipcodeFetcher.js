@@ -21,7 +21,7 @@ describe('zipcodeFetcher', () => {
 		const scope = nock(zipbase);
 		scope.get(`/20874`).reply(200, expected);
 
-		return zipcodeFetcher(zipbase, '20874').then((actual) => {
+		zipcodeFetcher(zipbase, '20874').then((actual) => {
 			expect(actual).toEqual(expected);
 			scope.done();
 		});
@@ -31,7 +31,7 @@ describe('zipcodeFetcher', () => {
 		const scope = nock(zipbase);
 		scope.get(`/20874`).reply(404);
 
-		return zipcodeFetcher(zipbase, '20874').then((actual) => {
+		zipcodeFetcher(zipbase, '20874').then((actual) => {
 			expect(actual).toBeNull();
 			scope.done();
 		});

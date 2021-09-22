@@ -16,7 +16,7 @@ describe('Basic - queryStringToFormObject maps query to form', () => {
 			errors: [],
 		};
 
-		return queryStringToFormObject(
+		queryStringToFormObject(
 			'',
 			diseaseFetcher,
 			interventionsFetcher,
@@ -39,7 +39,7 @@ describe('Basic - queryStringToFormObject maps query to form', () => {
 			errors: [],
 		};
 
-		return queryStringToFormObject(
+		queryStringToFormObject(
 			'r=1',
 			diseaseFetcher,
 			interventionsFetcher,
@@ -64,7 +64,7 @@ describe('Basic - queryStringToFormObject maps query to form', () => {
 			],
 		};
 
-		return queryStringToFormObject(
+		queryStringToFormObject(
 			'r=1',
 			diseaseFetcher,
 			interventionsFetcher,
@@ -89,7 +89,7 @@ describe('Basic - queryStringToFormObject maps query to form', () => {
 			],
 		};
 
-		return queryStringToFormObject(
+		queryStringToFormObject(
 			'',
 			diseaseFetcher,
 			interventionsFetcher,

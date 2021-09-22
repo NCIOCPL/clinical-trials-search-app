@@ -127,7 +127,7 @@ describe('Basic - Negative - queryStringToFormObject maps query to form', () => 
 				errors: expectedErrors,
 			};
 
-			return queryStringToFormObject(
+			queryStringToFormObject(
 				urlQuery,
 				diseaseFetcher,
 				interventionsFetcher,

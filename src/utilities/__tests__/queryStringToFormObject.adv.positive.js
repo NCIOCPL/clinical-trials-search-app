@@ -278,7 +278,7 @@ describe('Adv - queryStringToFormObject maps query to form', () => {
 				errors: [],
 			};
 
-			return queryStringToFormObject(
+			queryStringToFormObject(
 				urlQuery,
 				diseaseFetcher,
 				interventionsFetcher,
