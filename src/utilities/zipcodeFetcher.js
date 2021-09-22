@@ -15,7 +15,9 @@ export const zipcodeFetcher = async (baseUrl, zipcode) => {
 		) {
 			return response.data;
 		}
-	} catch {}
+	} catch (error) {
+		console.error(error);
+	}
 	// If there was an error, or it was not found, it is all
 	// the same to us -- no zipcode.
 	return null;

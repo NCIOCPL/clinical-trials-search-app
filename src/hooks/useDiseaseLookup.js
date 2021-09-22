@@ -11,7 +11,9 @@ export const useDiseaseLookup = () => {
 			try {
 				const response = await axios.get(url);
 				setCtObj(response.data.terms[0]);
-			} catch (error) {}
+			} catch (error) {
+				console.error(error);
+			}
 		};
 		if (ctCode !== '') {
 			fetchDisease();

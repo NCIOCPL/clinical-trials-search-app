@@ -25,7 +25,9 @@ export const useTreatmentLookup = (updateFunc) => {
 					}
 				);
 				updateFunc('treatments', response.data.terms);
-			} catch (error) {}
+			} catch (error) {
+				console.error(error);
+			}
 		};
 		if (codesList.length > 0) {
 			fetchData();
