@@ -54,8 +54,8 @@ const TrialType = ({ handleUpdate }) => {
 			helpUrl="/about-cancer/treatment/clinical-trials/search/help#trialtype">
 			<p>
 				Select the type of trial for your search. You may check more than one
-				box or select "All". You may choose to limit results to trials accepting
-				healthy volunteers.
+				box or select &quot;All&quot;. You may choose to limit results to trials
+				accepting healthy volunteers.
 			</p>
 
 			<div className="data-toggle-block">

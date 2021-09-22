@@ -47,7 +47,7 @@ const TrialPhase = ({ handleUpdate }) => {
 			helpUrl="/about-cancer/treatment/clinical-trials/search/help#trialphase">
 			<p>
 				Select the trial phases for your search. You may check more than one box
-				or select "All".
+				or select &quot;All&quot;.
 			</p>
 			<div className="select-all">
 				<Checkbox
