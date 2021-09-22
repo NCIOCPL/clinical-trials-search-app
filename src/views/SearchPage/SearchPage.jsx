@@ -200,7 +200,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
 					<>
 						Have a question?
 						<br />
-						We're here to help
+						We&apos;re here to help
 					</>
 				}>
 				<p>
@@ -308,7 +308,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
 					<a href="https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/trial-guide">
 						Steps to Find a Clinical Trial
 					</a>
-					, to learn about options for finding trials not included in NCI's
+					, to learn about options for finding trials not included in NCI&apos;s
 					collection.
 				</p>
 				{renderSearchTip()}

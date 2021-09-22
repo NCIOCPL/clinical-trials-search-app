@@ -143,7 +143,7 @@ const TrialDescriptionPage = ({ location }) => {
 							<>
 								Have a question?
 								<br />
-								We're here to help
+								We&apos;re here to help
 							</>
 						}>
 						<p>
