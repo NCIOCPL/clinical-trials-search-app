@@ -1,9 +1,5 @@
 import { queryStringToFormObject } from '../queryStringToFormObject';
-import { defaultState } from './defaultStateCopy';
-import {
-	getInterventionFetcher,
-	INTERVENTION_EXPECTATION,
-} from './queryStringToFormObject.common';
+import { getInterventionFetcher } from './queryStringToFormObject.common';
 
 describe('Advanced - Interventions - Negative - queryStringToFormObject maps query to form', () => {
 	const errorMappingTestCases = [

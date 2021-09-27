@@ -10,7 +10,7 @@ import { ACTIVE_RECRUITMENT_STATUSES } from '../constants';
  */
 const createCTSMiddleware =
 	(services) =>
-	({ dispatch, getState }) =>
+	({ dispatch }) =>
 	(next) =>
 	async (action) => {
 		next(action);

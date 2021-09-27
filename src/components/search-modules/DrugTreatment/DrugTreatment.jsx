@@ -5,7 +5,7 @@ import { searchDrugs, searchOtherInterventions } from '../../../store/actions';
 
 import './DrugTreatment.scss';
 
-const DrugTreatment = ({ handleUpdate, useValue }) => {
+const DrugTreatment = ({ handleUpdate }) => {
 	const placeholderText = 'Please enter 3 or more characters';
 	const dispatch = useDispatch();
 

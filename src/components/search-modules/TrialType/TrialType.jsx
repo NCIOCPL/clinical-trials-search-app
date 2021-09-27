@@ -19,11 +19,11 @@ const TrialType = ({ handleUpdate }) => {
 		handleUpdate('healthyVolunteers', hvToggle);
 	};
 
-	const handleToggle = (checked) => {
+	const handleToggle = () => {
 		setHvToggle(!hvToggle);
 	};
 
-	const handleSelectAll = (e) => {
+	const handleSelectAll = () => {
 		setTrials(
 			trials.map((type) => ({
 				...type,
