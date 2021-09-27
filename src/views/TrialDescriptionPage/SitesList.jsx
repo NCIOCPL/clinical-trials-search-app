@@ -283,7 +283,7 @@ const SitesList = (sites) => {
 		);
 	};
 
-	const renderLocationBlock = (locationObj, index) => {
+	const renderLocationBlock = (locationObj) => {
 		return (
 			<div key={'loc-' + locationObj.name} className="location">
 				<strong className="location-name">{locationObj.name}</strong>

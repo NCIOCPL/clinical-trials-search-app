@@ -1,6 +1,4 @@
 import { queryStringToFormObject } from '../queryStringToFormObject';
-import { defaultState } from './defaultStateCopy';
-import { getDiseaseFetcher } from './queryStringToFormObject.common';
 
 describe('Adv - Negative - queryStringToFormObject maps query to form', () => {
 	const errorMappingTestCases = [

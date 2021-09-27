@@ -1,8 +1,4 @@
 import { queryStringToFormObject } from '../queryStringToFormObject';
-import {
-	getDiseaseFetcher,
-	TYPE_EXPECTATION,
-} from './queryStringToFormObject.common';
 import { defaultState } from './defaultStateCopy';
 
 // We want to test mapping the trial types, so we should not

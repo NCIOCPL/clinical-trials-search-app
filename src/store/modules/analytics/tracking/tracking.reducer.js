@@ -74,7 +74,7 @@ export const reducer = (state = defaultState, action) => {
 			trackedField.value = value;
 
 			const fields = hasMatchingField
-				? parentForm.fields.map((field, i) => {
+				? parentForm.fields.map((field) => {
 						return field.id === id
 							? {
 									...field,

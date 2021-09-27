@@ -1,4 +1,4 @@
-import React, { Fragment, Children } from 'react';
+import React, { Fragment } from 'react';
 import track from 'react-tracking';
 
 const WrapperComponent = ({ children }) => {

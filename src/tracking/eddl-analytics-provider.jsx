@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import track, { useTracking } from 'react-tracking';
+import track from 'react-tracking';
 
 import { AnalyticsProvider } from './';
 import { EDDLAnalyticsHandler } from '../utilities';

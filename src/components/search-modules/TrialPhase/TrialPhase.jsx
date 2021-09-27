@@ -16,7 +16,7 @@ const TrialPhase = ({ handleUpdate }) => {
 		handleUpdate('trialPhases', [...phases]);
 	};
 
-	const handleSelectAll = (e) => {
+	const handleSelectAll = () => {
 		setPhases(
 			phases.map((phase) => ({
 				...phase,
@@ -61,7 +61,7 @@ const TrialPhase = ({ handleUpdate }) => {
 				/>
 			</div>
 			<div className="group-phases">
-				{phases.map((field, idx) => (
+				{phases.map((field) => (
 					<Checkbox
 						id={'tp_' + field.value}
 						key={'tp_' + field.value}

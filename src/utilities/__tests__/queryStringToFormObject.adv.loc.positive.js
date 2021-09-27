@@ -135,7 +135,7 @@ describe('Adv - Locations - queryStringToFormObject maps query to form', () => {
 			'?loc=1&z=20850&rl=2',
 			async () => [],
 			async () => [],
-			async (zip) => ({ lat: 39.0897, long: -77.1798 }),
+			async () => ({ lat: 39.0897, long: -77.1798 }),
 			{
 				location: 'search-location-zip',
 				zip: '20850',
@@ -148,7 +148,7 @@ describe('Adv - Locations - queryStringToFormObject maps query to form', () => {
 			'?loc=1&z=20850&zp=500&rl=2',
 			async () => [],
 			async () => [],
-			async (zip) => ({ lat: 39.0897, long: -77.1798 }),
+			async () => ({ lat: 39.0897, long: -77.1798 }),
 			{
 				location: 'search-location-zip',
 				zip: '20850',

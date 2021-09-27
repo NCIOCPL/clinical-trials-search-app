@@ -22,7 +22,7 @@ const StickySubmitBlock = ({ sentinelRef, onSubmit, formType }) => {
 		threshold: 1.0,
 	};
 
-	const callback = function (entries, observer) {
+	const callback = function (entries) {
 		entries.forEach((entry) => {
 			if (entry.isIntersecting && entry.intersectionRatio === 1) {
 				entry.target.classList.remove('--sticky');
@@ -36,7 +36,7 @@ const StickySubmitBlock = ({ sentinelRef, onSubmit, formType }) => {
 		onSubmit(e);
 	};
 
-	const handleClearForm = (e) => {
+	const handleClearForm = () => {
 		// Track before clearing please...
 		tracking.trackEvent({
 			// These properties are required.

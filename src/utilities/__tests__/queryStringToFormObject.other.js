@@ -1,8 +1,4 @@
 import { queryStringToFormObject } from '../queryStringToFormObject';
-import {
-	getDiseaseFetcher,
-	TYPE_EXPECTATION,
-} from './queryStringToFormObject.common';
 import { defaultState } from './defaultStateCopy';
 
 describe('Basic - queryStringToFormObject maps query to form', () => {

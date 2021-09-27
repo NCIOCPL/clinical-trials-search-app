@@ -61,7 +61,7 @@ export const INTERVENTION_EXPECTATION = API_INTERVENTION_MOCKS;
  * @param {array} rtnDiseases - An array of the API_DISEASE_MOCKS to return.
  */
 export const getDiseaseFetcher = (ids, rtnDiseases) => {
-	return async (ids) =>
+	return async () =>
 		Object.entries(API_DISEASE_MOCKS)
 			.filter((pair) => rtnDiseases.includes(pair[0]))
 			.map((pair) => pair[1]);
@@ -73,7 +73,7 @@ export const getDiseaseFetcher = (ids, rtnDiseases) => {
  * @param {array} rtnInterventions - An array of the API_INTERVENTION_MOCKS to return.
  */
 export const getInterventionFetcher = (ids, rtnInterventions) => {
-	return async (ids) =>
+	return async () =>
 		Object.entries(API_INTERVENTION_MOCKS)
 			.filter((pair) => rtnInterventions.includes(pair[0]))
 			.map((pair) => pair[1]);
