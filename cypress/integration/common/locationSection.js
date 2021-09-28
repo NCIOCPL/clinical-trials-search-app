@@ -55,7 +55,9 @@ And('user selects {string} radio button', (label) => {
 });
 
 And('user selects {string} from dropdown', (keyword) => {
-	cy.get('.cts-autocomplete__menu-item').contains(keyword).click();
+	cy.get('.cts-autocomplete__menu-item', { timeout: 5000 })
+		.contains(keyword)
+		.click({ force: true });
 });
 
 And('user types {string} in {string} autosuggest field', (text, fieldLabel) => {

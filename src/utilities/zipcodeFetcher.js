@@ -15,9 +15,10 @@ export const zipcodeFetcher = async (baseUrl, zipcode) => {
 		) {
 			return response.data;
 		}
-	} catch (error) {
-		console.error(error);
-	}
+		//disabling lint here as we do not care if there was an error or it was empty
+		//so I dont see any need for action inside catch
+		/* eslint no-empty: ["error", { "allowEmptyCatch": true }] */
+	} catch (error) {}
 	// If there was an error, or it was not found, it is all
 	// the same to us -- no zipcode.
 	return null;

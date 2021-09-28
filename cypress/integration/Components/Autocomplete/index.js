@@ -34,12 +34,26 @@ When('user clears {string} input field', (fieldLabel) => {
 });
 
 And(
-	'user presses {string} key {int} times in {string} field',
-	(key, count, fieldLabel) => {
-		for (let i = 0; i < count; i++) {
-			cy.get(`input#${inputFieldMap[fieldLabel]}`).type(
-				`{${key.replace(' ', '')}}`
-			);
+	'user presses {string} key in {string} field to select {string}',
+	(key, fieldLabel, term) => {
+		let res = '';
+		let count = 0;
+		cy.get(`input#${inputFieldMap[fieldLabel]}`).type(
+			`{${key.replace(' ', '')}}`
+		);
+		while (count < 10) {
+			cy.get('div.cts-autocomplete__menu-item.highlighted').then((el) => {
+				res = el[0].innerText;
+				if (res != term) {
+					cy.get(`input#${inputFieldMap[fieldLabel]}`).type(
+						`{${key.replace(' ', '')}}`
+					);
+				} else {
+					count = 11;
+				}
+			});
+
+			count++;
 		}
 	}
 );

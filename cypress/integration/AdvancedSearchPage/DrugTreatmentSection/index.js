@@ -27,7 +27,11 @@ Then(
 );
 
 And('user selects {string} from dropdown', (autosuggestTerm) => {
-	cy.get('.cts-autocomplete__menu-item').contains(autosuggestTerm).click();
+	cy.get('#fieldset--drug-trtmt .cts-autocomplete__menu-item', {
+		timeout: 5000,
+	})
+		.contains(autosuggestTerm)
+		.click({ force: true });
 });
 
 And('trial info displays {string}', (infoText) => {
