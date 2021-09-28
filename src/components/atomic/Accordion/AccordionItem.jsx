@@ -85,9 +85,7 @@ class AccordionItem extends React.Component {
 			element = children[0];
 		}
 		return (
-			<h2
-				className="cts-accordion__heading"
-				aria-expanded={this.props.expanded}>
+			<h2 className="cts-accordion__heading">
 				<button
 					className="cts-accordion__button"
 					aria-expanded={this.props.expanded}
