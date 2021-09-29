@@ -116,7 +116,7 @@ class Dropdown extends React.Component {
 						{this.props.errorMessage}
 					</span>
 				)}
-
+				{/* eslint-disable-next-line jsx-a11y/no-onchange */}
 				<select
 					className="cts-select"
 					name={this.props.name || this.props.id}
