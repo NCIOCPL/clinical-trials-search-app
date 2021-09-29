@@ -120,7 +120,7 @@ export const formatTrialSearchQuery = (form) => {
 		case 'search-location-hospital':
 			filterCriteria['sites.org_name_fulltext'] = form.hospital.term;
 			break;
-		case 'search-location-country':
+		case 'search-location-country': {
 			filterCriteria['sites.org_country'] = form.country;
 			if (form.city !== '') {
 				filterCriteria['sites.org_city'] = form.city;
@@ -131,6 +131,7 @@ export const formatTrialSearchQuery = (form) => {
 				filterCriteria['sites.org_state_or_province'] = statesList;
 			}
 			break;
+		}
 		case 'search-location-zip':
 			if (form.zipCoords.lat !== '' && form.zipCoords.long !== '') {
 				filterCriteria['sites.org_coordinates_lat'] = form.zipCoords.lat;
