@@ -54,7 +54,8 @@ export const defaultState = {
 	keywordPhrasesModified: false,
 	location: 'search-location-all', // active location option (search-location-all | search-location-zip | search-location-country | search-location-hospital | search-location-nih)
 };
-
-it('placeholder', () => {
-	expect(true).toEqual(true);
+describe('placeholder', () => {
+	it('placeholder', () => {
+		expect(true).toEqual(true);
+	});
 });

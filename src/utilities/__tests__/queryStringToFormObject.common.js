@@ -92,11 +92,13 @@ const fetcherTests = [
 	],
 ];
 
-it.each(fetcherTests)(
-	'getDiseaseFetcher - %s',
-	(name, diseaseFetcher, expected) => {
-		diseaseFetcher(['C1111', 'C1112']).then((actual) => {
-			expect(actual).toEqual(expected);
-		});
-	}
-);
+describe('fetch disease', () => {
+	it.each(fetcherTests)(
+		'getDiseaseFetcher - %s',
+		(name, diseaseFetcher, expected) => {
+			diseaseFetcher(['C1111', 'C1112']).then((actual) => {
+				expect(actual).toEqual(expected);
+			});
+		}
+	);
+});
