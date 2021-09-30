@@ -48,6 +48,7 @@ And(
 					cy.get(`input#${inputFieldMap[fieldLabel]}`).type(
 						`{${key.replace(' ', '')}}`
 					);
+					cy.wait(500);
 				} else {
 					count = 11;
 				}
