@@ -4,7 +4,7 @@ Feature: As a user, I want to be able to use autocomplete features to it's full 
         Given the user navigates to "/about-cancer/treatment/clinical-trials/search"
         When user clicks on "Cancer Type/Keyword" field
         Then autocomplete dropdown is displayed
-        When user types "bre" in "Cancer Type/Keyword" field
+        When user types "Breast Cancer" in "Cancer Type/Keyword" field
         And user presses "down Arrow" key in "Cancer Type/Keyword" field to select "Bilateral Breast Cancer"
         And user presses "enter" key from "Cancer Type/Keyword" field
         Then "Cancer Type/Keyword" input field has a value "Bilateral Breast Cancer"

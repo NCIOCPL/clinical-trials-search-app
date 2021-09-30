@@ -85,7 +85,7 @@ When('user checks {string} checkbox', (label) => {
 
 When('user checks {string} checkbox on {int} pages', (label, page) => {
 	for (let i = 1; i <= page; i++) {
-		cy.get('div.pager__num').contains(`${i}`).click();
+		cy.contains('div.pager__num', `${i}`).click();
 		cy.get('label')
 			.contains(label)
 			.parent()
