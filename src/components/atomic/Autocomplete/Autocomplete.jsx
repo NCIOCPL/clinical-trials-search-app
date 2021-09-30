@@ -204,9 +204,7 @@ class Autocomplete extends React.Component {
 			return true;
 		},
 		renderMenu(items, value, style, classes) {
-			return (
-				<div className={`cts-autocomplete__menu ${classes}`} children={items} />
-			);
+			return <div className={`cts-autocomplete__menu ${classes}`}>{items}</div>;
 		},
 		autoHighlight: true,
 		selectOnBlur: false,
