@@ -1,3 +1,4 @@
+// eslint-disable-next-line jest/no-export
 export const defaultState = {
 	age: '', // (a) Age
 	cancerType: { name: '', codes: [] }, // (ct) Cancer Type/Condition
