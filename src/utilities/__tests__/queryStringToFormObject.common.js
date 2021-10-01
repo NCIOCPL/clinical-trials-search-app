@@ -1,4 +1,5 @@
 // Mocks for what the API /disease endpoint will return
+// eslint-disable-next-line jest/no-export
 export const API_DISEASE_MOCKS = {
 	'Main Type A': { name: 'Main Type A', codes: ['C1111'], type: ['maintype'] },
 	'Main Type B': {
@@ -31,7 +32,7 @@ export const API_DISEASE_MOCKS = {
 		type: ['finding'],
 	},
 };
-
+// eslint-disable-next-line jest/no-export
 export const API_INTERVENTION_MOCKS = {
 	'Drug A': { name: 'Drug A', codes: ['C5555'], category: 'agent' },
 	'Drug B': { name: 'Drug B', codes: ['C5556', 'C5557'], category: 'agent' },
@@ -52,7 +53,9 @@ export const API_INTERVENTION_MOCKS = {
 // NOTE: for now they are exactly the same as the API_XXXXX_MOCKS
 // This is here so if they have to change we don't have to change
 // all the code below.
+// eslint-disable-next-line jest/no-export
 export const TYPE_EXPECTATION = API_DISEASE_MOCKS;
+// eslint-disable-next-line jest/no-export
 export const INTERVENTION_EXPECTATION = API_INTERVENTION_MOCKS;
 
 /**
@@ -60,6 +63,7 @@ export const INTERVENTION_EXPECTATION = API_INTERVENTION_MOCKS;
  * @param {array} ids - The expected IDs.
  * @param {array} rtnDiseases - An array of the API_DISEASE_MOCKS to return.
  */
+// eslint-disable-next-line jest/no-export
 export const getDiseaseFetcher = (ids, rtnDiseases) => {
 	return async () =>
 		Object.entries(API_DISEASE_MOCKS)
@@ -72,6 +76,7 @@ export const getDiseaseFetcher = (ids, rtnDiseases) => {
  * @param {array} ids - The expected IDs.
  * @param {array} rtnInterventions - An array of the API_INTERVENTION_MOCKS to return.
  */
+// eslint-disable-next-line jest/no-export
 export const getInterventionFetcher = (ids, rtnInterventions) => {
 	return async () =>
 		Object.entries(API_INTERVENTION_MOCKS)
