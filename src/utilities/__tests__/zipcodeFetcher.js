@@ -1,17 +1,16 @@
 import { zipcodeFetcher } from '../zipcodeFetcher';
 import nock from 'nock';
 
-// Turn off networking before running any tests.
-beforeAll(() => {
-	nock.disableNetConnect();
-});
-
-// Clean up the state of nock after each test.
-afterEach(() => {
-	nock.cleanAll();
-});
-
 describe('zipcodeFetcher', () => {
+	// Turn off networking before running any tests.
+	beforeAll(() => {
+		nock.disableNetConnect();
+	});
+
+	// Clean up the state of nock after each test.
+	afterEach(() => {
+		nock.cleanAll();
+	});
 	// Create a new client. The host does not matter as long
 	// as it matches what is going to be called.
 	const zipbase = 'https://localhost/zipcode';
