@@ -3,17 +3,17 @@ import nock from 'nock';
 import { ClinicalTrialsServiceFactory } from '@nciocpl/clinical-trials-search-client.js';
 import { ACTIVE_TRIAL_STATUSES } from '../../constants';
 
-// Turn off networking before running any tests.
-beforeAll(() => {
-	nock.disableNetConnect();
-});
-
-// Clean up the state of nock after each test.
-afterEach(() => {
-	nock.cleanAll();
-});
-
 describe('ctsapiDiseaseFetcher', () => {
+	// Turn off networking before running any tests.
+	beforeAll(() => {
+		nock.disableNetConnect();
+	});
+
+	// Clean up the state of nock after each test.
+	afterEach(() => {
+		nock.cleanAll();
+	});
+
 	// Create a new client. The host does not matter as long
 	// as it matches what is going to be called.
 	const ctsapiClient = ClinicalTrialsServiceFactory.create('localhost');
