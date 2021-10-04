@@ -79,6 +79,7 @@ const Pager = ({ data, totalItems, startFromPage, numberToShow, callback }) => {
 					<div
 						key={idx}
 						tabIndex="0"
+						role="button"
 						className={`pager__num ${isCurrent ? 'pager__num--active' : ''}`}
 						onClick={!isCurrent ? () => determineResults(currentStep) : null}
 						onKeyPress={keyHandler({
@@ -102,6 +103,7 @@ const Pager = ({ data, totalItems, startFromPage, numberToShow, callback }) => {
 						<div
 							className="pager__arrow"
 							tabIndex="0"
+							role="button"
 							onClick={() => determineResults(currentPage - 1)}
 							onKeyPress={keyHandler({
 								fn: () => determineResults(currentPage - 1),
@@ -114,6 +116,7 @@ const Pager = ({ data, totalItems, startFromPage, numberToShow, callback }) => {
 						<div
 							className="pager__arrow"
 							tabIndex="0"
+							role="button"
 							onClick={() => determineResults(currentPage + 1)}
 							onKeyPress={keyHandler({
 								fn: () => determineResults(currentPage + 1),

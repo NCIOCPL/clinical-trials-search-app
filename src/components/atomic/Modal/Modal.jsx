@@ -16,7 +16,11 @@ const Modal = ({ children, isShowing, hide }) => {
 	return isShowing
 		? ReactDOM.createPortal(
 				<React.Fragment>
-					<div className="cts-modal__overlay" onClick={hide}></div>
+					<div
+						className="cts-modal__overlay"
+						onClick={hide}
+						onKeyDown={hide}
+						role="dialog"></div>
 					<div
 						className="cts-modal"
 						role="dialog"

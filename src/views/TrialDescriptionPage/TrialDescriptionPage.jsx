@@ -174,7 +174,11 @@ const TrialDescriptionPage = ({ location }) => {
 			<div className="trial-description-page__header">
 				{(isDirty || searchUsed) && (
 					<div className="back-to-search btnAsLink">
-						<span onClick={() => history.goBack()}>
+						<span
+							onClick={() => history.goBack()}
+							onKeyDown={() => history.goBack()}
+							tabIndex="0"
+							role="button">
 							&lt; Back to search results
 						</span>
 					</div>
