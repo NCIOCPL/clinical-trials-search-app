@@ -41,6 +41,7 @@ class Dropdown extends React.Component {
 		errorMessage: PropTypes.string,
 		value: PropTypes.string,
 		action: PropTypes.func,
+		trackFormInputChange: PropTypes.func,
 	};
 
 	static defaultProps = {

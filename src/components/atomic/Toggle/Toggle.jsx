@@ -50,6 +50,7 @@ Toggle.propTypes = {
 	classes: PropTypes.string,
 	label: PropTypes.string,
 	onClick: PropTypes.func,
+	checked: PropTypes.bool,
 };
 
 Toggle.defaultProps = {

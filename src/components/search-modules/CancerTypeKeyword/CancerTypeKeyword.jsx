@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Fieldset, Autocomplete } from '../../atomic';
 import { getDiseasesForSimpleTypeAhead } from '../../../store/actions';
 import { sortItemsByName } from '../../../utilities';
+import PropTypes from 'prop-types';
 
 const CancerTypeKeyword = ({ handleUpdate }) => {
 	const dispatch = useDispatch();
@@ -75,6 +76,9 @@ const CancerTypeKeyword = ({ handleUpdate }) => {
 			/>
 		</Fieldset>
 	);
+};
+CancerTypeKeyword.propTypes = {
+	handleUpdate: PropTypes.func,
 };
 
 export default CancerTypeKeyword;

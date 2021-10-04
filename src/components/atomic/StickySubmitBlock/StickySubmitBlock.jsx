@@ -79,6 +79,7 @@ const StickySubmitBlock = ({ sentinelRef, onSubmit, formType }) => {
 StickySubmitBlock.propTypes = {
 	sentinelRef: PropTypes.node,
 	onSubmit: PropTypes.func,
+	formType: PropTypes.string,
 };
 
 StickySubmitBlock.defaultProps = {

@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { Fieldset, Autocomplete, InputLabel } from '../../atomic';
 import { getMainType, getCancerTypeDescendents } from '../../../store/actions';
 import { useCachedValues } from '../../../hooks';
 import { sortItemsByName } from '../../../utilities';
 import './CancerTypeCondition.scss';
+
 require('../../../polyfills/closest');
 
 const CancerTypeCondition = ({ handleUpdate }) => {
@@ -413,6 +415,9 @@ const CancerTypeCondition = ({ handleUpdate }) => {
 			)}
 		</Fieldset>
 	);
+};
+CancerTypeCondition.propTypes = {
+	handleUpdate: PropTypes.func,
 };
 
 export default CancerTypeCondition;

@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { useLocation } from 'react-router-dom';
@@ -379,5 +380,9 @@ const SearchPage = ({ formInit = 'basic' }) => {
 		</article>
 	);
 };
-
+SearchPage.propTypes = {
+	formInit: PropTypes.string,
+	setFormFactor: PropTypes.func,
+	basePath: PropTypes.string,
+};
 export default SearchPage;

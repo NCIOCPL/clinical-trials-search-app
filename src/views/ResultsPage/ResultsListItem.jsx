@@ -290,6 +290,10 @@ ResultsListItem.propTypes = {
 	item: PropTypes.object,
 	isChecked: PropTypes.bool,
 	onCheckChange: PropTypes.func.isRequired,
+	queryParams: PropTypes.string,
+	itemIndex: PropTypes.number,
+	resultsPage: PropTypes.number,
+	formType: PropTypes.string,
 };
 
 ResultsListItem.defaultProps = {
