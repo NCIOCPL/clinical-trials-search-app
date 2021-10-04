@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
 import { useSelector } from 'react-redux';
 import { useTracking } from 'react-tracking';
 
@@ -55,5 +57,7 @@ const Age = ({ handleUpdate }) => {
 		</Fieldset>
 	);
 };
-
+Age.propTypes = {
+	handleUpdate: PropTypes.func,
+};
 export default Age;

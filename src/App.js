@@ -2,6 +2,7 @@ import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 
@@ -59,5 +60,8 @@ const App = ({ services, zipConversionEndpoint }) => {
 		</>
 	);
 };
-
+App.propTypes = {
+	services: PropTypes.object,
+	zipConversionEndpoint: PropTypes.string,
+};
 export default App;

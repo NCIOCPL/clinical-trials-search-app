@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useTracking } from 'react-tracking';
@@ -101,5 +102,11 @@ const ResultsPageHeader = ({
 		</div>
 	);
 };
-
+ResultsPageHeader.propTypes = {
+	handleUpdate: PropTypes.func,
+	handleReset: PropTypes.func,
+	resultsCount: PropTypes.number,
+	pageNum: PropTypes.number,
+	step: PropTypes.number,
+};
 export default ResultsPageHeader;

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearForm } from '../../store/actions';
 import { Helmet } from 'react-helmet';
@@ -502,5 +503,7 @@ const TrialDescriptionPage = ({ location }) => {
 		</>
 	);
 };
-
+TrialDescriptionPage.propTypes = {
+	location: PropTypes.object,
+};
 export default TrialDescriptionPage;

@@ -26,6 +26,7 @@ class TextInput extends React.Component {
 		placeHolder: PropTypes.string,
 		required: PropTypes.bool,
 		modified: PropTypes.bool,
+		trackFormInputChange: PropTypes.func,
 		type: PropTypes.oneOf([
 			'text',
 			'email',

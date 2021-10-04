@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
@@ -526,5 +527,7 @@ const ResultsPage = ({ location }) => {
 		</>
 	);
 };
-
+ResultsPage.propTypes = {
+	location: PropTypes.object,
+};
 export default ResultsPage;

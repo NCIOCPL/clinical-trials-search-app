@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Fieldset, Autocomplete } from '../../atomic';
 import { searchDrugs, searchOtherInterventions } from '../../../store/actions';
 
@@ -192,4 +193,7 @@ const DrugTreatment = ({ handleUpdate }) => {
 	);
 };
 
+DrugTreatment.propTypes = {
+	handleUpdate: PropTypes.func,
+};
 export default DrugTreatment;

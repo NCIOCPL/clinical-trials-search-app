@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -42,6 +43,12 @@ const SearchCriteriaTable = ({
 		location,
 		formType,
 	} = useSelector((store) => store.form);
+
+	SearchCriteriaTable.propTypes = {
+		placement: PropTypes.string,
+		handleReset: PropTypes.func,
+		handleRefine: PropTypes.func,
+	};
 
 	const [criterion, setCriterion] = useState([]);
 	useEffect(() => {

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { usePrintApi } from '../../hooks';
 import { buildQueryString } from '../../utilities';
@@ -119,5 +120,9 @@ const PrintModalContent = ({ selectedList = [], handleClose = () => {} }) => {
 		</>
 	);
 };
-
+PrintModalContent.propTypes = {
+	selectedList: PropTypes.array,
+	handleClose: PropTypes.func,
+	closeModal: PropTypes.func,
+};
 export default PrintModalContent;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Fieldset, Autocomplete } from '../../atomic';
 import { searchTrialInvestigators } from '../../../store/actions';
 import { matchItemToTerm, sortItems } from '../../../utilities';
@@ -74,5 +75,7 @@ const TrialInvestigators = ({ handleUpdate }) => {
 		</Fieldset>
 	);
 };
-
+TrialInvestigators.propTypes = {
+	handleUpdate: PropTypes.func,
+};
 export default TrialInvestigators;

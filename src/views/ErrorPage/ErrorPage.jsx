@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateGlobal } from '../../store/actions';
 import { Helmet } from 'react-helmet';
@@ -170,5 +171,7 @@ const ErrorPage = ({ initErrorsList }) => {
 		</>
 	);
 };
-
+ErrorPage.propTypes = {
+	initErrorsList: PropTypes.object,
+};
 export default ErrorPage;

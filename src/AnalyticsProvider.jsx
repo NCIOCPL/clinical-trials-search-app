@@ -1,10 +1,14 @@
 import React, { Fragment } from 'react';
 import track from 'react-tracking';
+import PropTypes from 'prop-types';
 
 const WrapperComponent = ({ children }) => {
 	return <>{children}</>;
 };
 
+WrapperComponent.propTypes = {
+	children: PropTypes.node,
+};
 /**
  * A HoC to handle deficiencies in the react-tracking module when using stateless
  * function. This is used to wrap the app so that we can bind the analyticsHandler
@@ -24,5 +28,8 @@ const AnalyticsProvider = ({ children, analyticsHandler }) => {
 
 	return <TrackingWrapper>{children}</TrackingWrapper>;
 };
-
+AnalyticsProvider.propTypes = {
+	children: PropTypes.node,
+	analyticsHandler: PropTypes.func,
+};
 export default AnalyticsProvider;

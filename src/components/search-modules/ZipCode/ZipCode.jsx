@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Fieldset, TextInput } from '../../atomic';
 import { useZipConversion } from '../../../hooks';
@@ -72,5 +73,8 @@ const ZipCode = ({ handleUpdate, tracking }) => {
 		</Fieldset>
 	);
 };
-
+ZipCode.propTypes = {
+	handleUpdate: PropTypes.func,
+	tracking: PropTypes.object,
+};
 export default ZipCode;

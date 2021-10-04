@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import {
 	Fieldset,
 	TextInput,
@@ -373,5 +374,9 @@ const Location = ({ handleUpdate, tracking }) => {
 		</Fieldset>
 	);
 };
-
+Location.propTypes = {
+	handleUpdate: PropTypes.func,
+	tracking: PropTypes.object,
+	refineSearch: PropTypes.bool,
+};
 export default Location;

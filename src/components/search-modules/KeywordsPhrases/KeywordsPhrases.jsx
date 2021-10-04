@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Fieldset, TextInput } from '../../atomic';
 
@@ -30,5 +31,7 @@ const KeywordsPhrases = ({ handleUpdate }) => {
 		</Fieldset>
 	);
 };
-
+KeywordsPhrases.propTypes = {
+	handleUpdate: PropTypes.func,
+};
 export default KeywordsPhrases;
