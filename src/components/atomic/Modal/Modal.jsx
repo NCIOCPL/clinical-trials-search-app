@@ -16,7 +16,7 @@ const Modal = ({ children, isShowing, hide }) => {
 	return isShowing
 		? ReactDOM.createPortal(
 				<React.Fragment>
-					<div
+					<div // eslint-disable-line jsx-a11y/no-noninteractive-element-interactions
 						className="cts-modal__overlay"
 						onClick={hide}
 						onKeyDown={hide}

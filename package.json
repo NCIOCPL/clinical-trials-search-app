@@ -221,6 +221,7 @@
     "jest-watch-typeahead": "^0.4.2",
     "nock": "^11.7.0",
     "node-sass": "^4.14.1",
+    "prop-types": "^15.7.2",
     "redux-devtools-extension": "^2.13.8",
     "redux-mock-store": "^1.5.3",
     "sinon": "^7.4.2",
