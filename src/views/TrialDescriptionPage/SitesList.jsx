@@ -17,7 +17,7 @@ const SitesList = (sites) => {
 	const [filteredNearbySites, setFilteredNearbySites] = useState([]);
 	const [showNearbySites, setShowNearbySites] = useState(false);
 
-	const { location, zip, zipCoords, zipRadius, country, states, city, vaOnly } =
+	const { location, zipCoords, zipRadius, country, states, city, vaOnly } =
 		useSelector((store) => store.form);
 
 	const buildCountriesList = (sitesArr) => {

@@ -22,6 +22,7 @@ export const EDDLAnalyticsHandler = (window, isDebugging) => {
 					// the App level. Meta title at the page level. Who knows. We should
 					// offer flexibility and remove noise.  This way the data element can
 					// be build up through the nested components as well.
+					/* eslint-disable no-unused-vars */
 					name,
 					title,
 					metaTitle,
@@ -30,6 +31,7 @@ export const EDDLAnalyticsHandler = (window, isDebugging) => {
 					channel,
 					contentGroup,
 					publishedDate,
+					/* eslint-enable no-unused-vars */
 					// The rest should be the data.
 					...data
 				} = payload;

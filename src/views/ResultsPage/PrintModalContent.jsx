@@ -5,7 +5,7 @@ import { usePrintApi } from '../../hooks';
 import { buildQueryString } from '../../utilities';
 const queryString = require('query-string');
 
-const PrintModalContent = ({ selectedList = [], handleClose = () => {} }) => {
+const PrintModalContent = ({ selectedList = [] }) => {
 	// in dev use
 	const printUrl = useSelector((store) => store.globals.printCacheEndpoint);
 	const formSnapshot = useSelector((store) => store.form);
@@ -45,10 +45,6 @@ const PrintModalContent = ({ selectedList = [], handleClose = () => {} }) => {
 			window.location.href = `https://www.cancer.gov/CTS.Print/Display?printid=${data.printID}`;
 		}
 	}, [isLoading, isError, data]);
-
-	const closeModal = () => {
-		handleClose();
-	};
 
 	const renderNoItemsSelected = () => (
 		<>

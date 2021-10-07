@@ -20,23 +20,21 @@ const queryString = require('query-string');
 const TrialDescriptionPage = ({ location }) => {
 	const dispatch = useDispatch();
 	const [isTrialLoading, setIsTrialLoading] = useState(true);
-	const [qs, setQs] = useState(location.search);
+	const [qs] = useState(location.search);
 	const [isPageLoadReady, setIsPageLoadReady] = useState(false);
 	const { isDirty, formType } = useSelector((store) => store.form);
 	const parsed = queryString.parse(qs);
 	const currId = parsed.id;
-	const [storeRehydrated, setStoreRehydrated] = useState(false);
+	const [storeRehydrated] = useState(false);
 
 	const trialTitle = useSelector((store) => store.cache.currentTrialTitle);
 	const cacheSnap = useSelector((store) => store.cache);
 	const tracking = useTracking();
 
-	const [searchUsed, setSearchUsed] = useState(
-		Object.keys(cacheSnap).length > 1
-	);
+	const [searchUsed] = useState(Object.keys(cacheSnap).length > 1);
 
 	const trial = useSelector((store) => store.cache[currId]);
-	const { analyticsName, basePath, canonicalHost } = useSelector(
+	const { analyticsName, canonicalHost } = useSelector(
 		(store) => store.globals
 	);
 
