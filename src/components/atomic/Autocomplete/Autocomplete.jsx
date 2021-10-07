@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { findDOMNode } from 'react-dom';
-import scrollIntoView from 'dom-scroll-into-view';
 import { InputLabel, RemovableTag } from '../../atomic';
 import { uniqueIdForComponent } from '../../../utilities';
 import { connect } from 'react-redux';
@@ -187,6 +185,11 @@ class Autocomplete extends React.Component {
 		multiselect: PropTypes.bool,
 		chipList: PropTypes.array,
 		onChipRemove: PropTypes.func,
+		labelHidden: PropTypes.bool,
+		label: PropTypes.string,
+		modified: PropTypes.bool,
+		inputHelpText: PropTypes.string,
+		trackFormInputChange: PropTypes.func,
 	};
 
 	static defaultProps = {
@@ -237,12 +240,10 @@ class Autocomplete extends React.Component {
 	}
 
 	componentWillMount() {
-		this.refs = {};
 		this._ignoreBlur = false;
 		this._ignoreFocus = false;
 		this._scrollOffset = null;
 		this._scrollTimer = null;
-		// this.refs is frozen, so we need to assign a new object to it
 	}
 
 	componentWillUnmount() {
@@ -277,7 +278,6 @@ class Autocomplete extends React.Component {
 			this.setMenuPositions();
 		}
 
-		//this.maybeScrollItemIntoView();
 		if (prevState.isOpen !== this.state.isOpen) {
 			this.props.onMenuVisibilityChange(this.state.isOpen);
 			if (this.state.isOpen && this.getFilteredItems(this.props).length > 0) {
@@ -287,20 +287,10 @@ class Autocomplete extends React.Component {
 	}
 
 	exposeAPI(el) {
-		this.refs.input = el;
+		this.input = el;
 		IMPERATIVE_API.forEach(
 			(ev) => (this[ev] = el && el[ev] && el[ev].bind(el))
 		);
-	}
-
-	maybeScrollItemIntoView() {
-		if (this.isOpen() && this.state.highlightedIndex !== null) {
-			const itemNode = this.refs[`item-${this.state.highlightedIndex}`];
-			const menuNode = this.refs.menu;
-			scrollIntoView(findDOMNode(itemNode), findDOMNode(menuNode), {
-				onlyScrollIfNeeded: true,
-			});
-		}
 	}
 
 	handleKeyDown(event) {
@@ -315,7 +305,6 @@ class Autocomplete extends React.Component {
 
 	/**
 	 * Shared change handler for field tracking
-	 * @param {Object} event
 	 */
 	_internalTrackInputChange() {
 		const inputActionProps = {
@@ -381,15 +370,15 @@ class Autocomplete extends React.Component {
 			this.setIgnoreBlur(false);
 			if (!this.isOpen()) {
 				// menu is closed so there is no selection to accept -> do nothing
-				return;
+				return null;
 			} else if (this.state.highlightedIndex == null) {
-				// input has focus but no menu item is selected + enter is hit -> close the menu, highlight whatever's in input
+				// input has focus but no menu item is selected + enter is hit -> close the menu, highlight whatever is in input
 				this.setState(
 					{
 						isOpen: false,
 					},
 					() => {
-						this.refs.input.select();
+						this.input.select();
 					}
 				);
 			} else {
@@ -405,8 +394,7 @@ class Autocomplete extends React.Component {
 						highlightedIndex: null,
 					},
 					() => {
-						//this.refs.input.focus()
-						this.refs.input.setSelectionRange(value.length, value.length);
+						this.input.setSelectionRange(value.length, value.length);
 						this.props.onSelect(value, item);
 					}
 				);
@@ -473,7 +461,7 @@ class Autocomplete extends React.Component {
 	}
 
 	setMenuPositions() {
-		const node = this.refs.input;
+		const node = this.input;
 		const rect = node.getBoundingClientRect();
 		const computedStyle = global.window.getComputedStyle(node);
 		const marginBottom = parseInt(computedStyle.marginBottom, 10) || 0;
@@ -538,7 +526,7 @@ class Autocomplete extends React.Component {
 				onClick: this.props.isItemSelectable(item)
 					? () => this.selectItemFromMouse(item)
 					: null,
-				ref: (e) => (this.refs[`item-${index}`] = e),
+				ref: (e) => (this[`item-${index}`] = e),
 			});
 		});
 		const style = {
@@ -553,7 +541,7 @@ class Autocomplete extends React.Component {
 			this.props.menuClass
 		);
 		return React.cloneElement(menu, {
-			ref: (e) => (this.refs.menu = e),
+			ref: (e) => (this.menu = e),
 			// Ignore blur to prevent menu from de-rendering before we can process click
 			onTouchStart: () => this.setIgnoreBlur(true),
 			onMouseEnter: () => this.setIgnoreBlur(true),
@@ -565,7 +553,7 @@ class Autocomplete extends React.Component {
 		if (this._ignoreBlur) {
 			this._ignoreFocus = true;
 			this._scrollOffset = getScrollOffset();
-			this.refs.input.focus();
+			this.input.focus();
 			return;
 		}
 		let setStateCallback;
@@ -583,9 +571,9 @@ class Autocomplete extends React.Component {
 			},
 			setStateCallback
 		);
-		const { onBlur } = this.props.inputProps;
-		if (onBlur) {
-			onBlur(event);
+
+		if (this.props.inputProps.onBlur) {
+			this.props.inputProps.onBlur(event);
 		}
 	}
 
@@ -614,14 +602,14 @@ class Autocomplete extends React.Component {
 			return;
 		}
 		this.setState({ isOpen: true });
-		const { onFocus } = this.props.inputProps;
-		if (onFocus) {
-			onFocus(event);
+
+		if (this.props.inputProps.onFocus) {
+			this.props.inputProps.onFocus(event);
 		}
 	}
 
 	isInputFocused() {
-		const el = this.refs.input;
+		const el = this.input;
 		return el.ownerDocument && el === el.ownerDocument.activeElement;
 	}
 
@@ -664,6 +652,7 @@ class Autocomplete extends React.Component {
 		return (
 			<>
 				<div
+					ref={(node) => (this.node = node)}
 					id={this.id + '-autocomplete-wrapper'}
 					className={`cts-autocomplete ${this.props.wrapperClasses}`}
 					{...this.props.wrapperProps}>
