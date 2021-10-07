@@ -18,7 +18,7 @@ describe('ctsapiDiseaseFetcher', () => {
 	// as it matches what is going to be called.
 	const ctsapiClient = ClinicalTrialsServiceFactory.create('localhost');
 
-	it('fetches the terms', () => {
+	it('fetches the terms', async () => {
 		// Setup the nock scope so we can respond like we are the API.
 		const scope = nock('https://localhost');
 
@@ -69,23 +69,25 @@ describe('ctsapiDiseaseFetcher', () => {
 				],
 			});
 
-		ctsapiDiseaseFetcher(ctsapiClient, ['C9133', 'C153203']).then((actual) => {
-			expect(actual).toEqual([
-				{
-					name: 'Adenosquamous Lung Cancer',
-					codes: ['C9133'],
-					parentDiseaseID: ['C2926'],
-					type: ['subtype'],
-				},
-				{
-					name: 'Advanced Lung Carcinoma',
-					codes: ['C153203'],
-					parentDiseaseID: ['C4878'],
-					type: ['subtype'],
-				},
-			]);
-			// Assert that nock got the expected request and finished.
-			scope.done();
-		});
+		const actual = await ctsapiDiseaseFetcher(ctsapiClient, [
+			'C9133',
+			'C153203',
+		]);
+		expect(actual).toEqual([
+			{
+				name: 'Adenosquamous Lung Cancer',
+				codes: ['C9133'],
+				parentDiseaseID: ['C2926'],
+				type: ['subtype'],
+			},
+			{
+				name: 'Advanced Lung Carcinoma',
+				codes: ['C153203'],
+				parentDiseaseID: ['C4878'],
+				type: ['subtype'],
+			},
+		]);
+		// Assert that nock got the expected request and finished.
+		scope.done();
 	});
 });
