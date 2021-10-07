@@ -40,7 +40,6 @@ const Location = ({ handleUpdate, tracking }) => {
 		states,
 		hospital,
 		vaOnly,
-		refineSearch,
 		formType,
 	} = useSelector((store) => store.form);
 	const [activeRadio, setActiveRadio] = useState(location);

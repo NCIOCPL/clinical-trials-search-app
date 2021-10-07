@@ -53,7 +53,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
 	const dispatch = useDispatch();
 	const location = useLocation().pathname;
 	const sentinelRef = useRef(null);
-	const [formFactor, setFormFactor] = useState(formInit);
+	const [formFactor] = useState(formInit);
 	const fieldInFocus = useSelector(getFieldInFocus);
 	const formInFocus = useSelector(getFormInFocus);
 	const hasDispatchedFormInteractionEvent = useSelector(
@@ -65,7 +65,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
 	const [isPageLoadReady, setIsPageLoadReady] = useState(false);
 	const { addFormToTracking } = actions;
 	const tracking = useTracking();
-	const { analyticsName, basePath, canonicalHost, siteName } = useSelector(
+	const { analyticsName, canonicalHost, siteName } = useSelector(
 		(store) => store.globals
 	);
 

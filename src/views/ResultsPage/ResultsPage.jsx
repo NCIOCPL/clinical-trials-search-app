@@ -103,7 +103,7 @@ const ResultsPage = ({ location }) => {
 
 	useEffect(() => {
 		// This should also be dependent on the current route/url
-		if (isPageLoadReady) {
+		if (isPageLoadReady && !pageIsLoading) {
 			handleTracking({
 				// These properties are required.
 				type: 'PageLoad',
@@ -123,7 +123,7 @@ const ResultsPage = ({ location }) => {
 			// Since we can page we need to prep isPageLoadReady
 			setIsPageLoadReady(false);
 		}
-	}, [isPageLoadReady]);
+	}, [isPageLoadReady, pageIsLoading]);
 	//track usage of selected results for print
 	useEffect(() => {
 		// update cacheStore with new selectedResults Value

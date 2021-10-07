@@ -110,14 +110,7 @@ const initialize = ({
 	// only specific changes (like the url);
 	//TODO: Only in prod?
 	if (useSessionStorage === true) {
-		const saveDesiredStateToSessionStorage = () => {
-			const state = store.getState();
-			// const { form, ...state } = allState;
-			// saveStatetoSessionStorage({
-			//   state,
-			//   appId,
-			// });
-		};
+		const saveDesiredStateToSessionStorage = () => {};
 
 		store.subscribe(saveDesiredStateToSessionStorage);
 	}

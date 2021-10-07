@@ -15,7 +15,6 @@ export const buildQueryString = (formStore) => {
 		states,
 		hospital,
 		healthyVolunteers,
-		nihOnly,
 		vaOnly,
 		trialPhases,
 		trialTypes,
