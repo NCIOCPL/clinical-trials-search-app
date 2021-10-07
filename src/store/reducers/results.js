@@ -13,11 +13,11 @@ export const updateResults = (key, value) => ({
 });
 
 export const reducer = (state = defaultState, action) => {
+	const { cacheKey } = action.payload;
 	switch (action.type) {
 		case RECEIVE_DATA: {
 			// All we need to do is store the cache key. The view will select and reconstitute the cached
 			// items.
-			const { cacheKey } = action.payload;
 			return {
 				...state,
 				cacheKey,

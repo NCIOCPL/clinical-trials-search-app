@@ -6,24 +6,23 @@ describe('Basic - queryStringToFormObject maps query to form', () => {
 	const interventionsFetcher = async () => [];
 	const zipcodeFetcher = async () => null;
 
-	it('No Query works for details', () => {
+	it('No Query works for details', async () => {
 		const expected = {
 			formState: defaultState,
 			errors: [],
 		};
 
-		queryStringToFormObject(
+		const actual = await queryStringToFormObject(
 			'',
 			diseaseFetcher,
 			interventionsFetcher,
 			zipcodeFetcher
-		).then((actual) => {
-			expect(actual).toEqual(expected);
-		});
+		);
+		expect(actual).toEqual(expected);
 	});
 
-	it('R=1 param works for details', () => {
-		jsdom.reconfigure({
+	it('R=1 param works for details', async () => {
+		global.jsdom.reconfigure({
 			url: 'https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/v?id=NCI1234&r=1',
 		});
 
@@ -35,18 +34,17 @@ describe('Basic - queryStringToFormObject maps query to form', () => {
 			errors: [],
 		};
 
-		queryStringToFormObject(
+		const actual = await queryStringToFormObject(
 			'r=1',
 			diseaseFetcher,
 			interventionsFetcher,
 			zipcodeFetcher
-		).then((actual) => {
-			expect(actual).toEqual(expected);
-		});
+		);
+		expect(actual).toEqual(expected);
 	});
 
-	it('R=1 param fails for results', () => {
-		jsdom.reconfigure({
+	it('R=1 param fails for results', async () => {
+		global.jsdom.reconfigure({
 			url: 'https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?r=1',
 		});
 
@@ -60,18 +58,17 @@ describe('Basic - queryStringToFormObject maps query to form', () => {
 			],
 		};
 
-		queryStringToFormObject(
+		const actual = await queryStringToFormObject(
 			'r=1',
 			diseaseFetcher,
 			interventionsFetcher,
 			zipcodeFetcher
-		).then((actual) => {
-			expect(actual).toEqual(expected);
-		});
+		);
+		expect(actual).toEqual(expected);
 	});
 
-	it('No rl fails for results', () => {
-		jsdom.reconfigure({
+	it('No rl fails for results', async () => {
+		global.jsdom.reconfigure({
 			url: 'https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r',
 		});
 
@@ -85,13 +82,12 @@ describe('Basic - queryStringToFormObject maps query to form', () => {
 			],
 		};
 
-		queryStringToFormObject(
+		const actual = await queryStringToFormObject(
 			'',
 			diseaseFetcher,
 			interventionsFetcher,
 			zipcodeFetcher
-		).then((actual) => {
-			expect(actual).toEqual(expected);
-		});
+		);
+		expect(actual).toEqual(expected);
 	});
 });

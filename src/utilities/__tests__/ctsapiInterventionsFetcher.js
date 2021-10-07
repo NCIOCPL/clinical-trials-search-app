@@ -18,7 +18,7 @@ describe('ctsapiInterventionsFetcher', () => {
 	// as it matches what is going to be called.
 	const ctsapiClient = ClinicalTrialsServiceFactory.create('localhost');
 
-	it('fetches the terms', () => {
+	it('fetches the terms', async () => {
 		// Setup the nock scope so we can respond like we are the API.
 		const scope = nock('https://localhost');
 
@@ -83,43 +83,43 @@ describe('ctsapiInterventionsFetcher', () => {
 				],
 			});
 
-		ctsapiInterventionFetcher(ctsapiClient, ['C15974', 'C308']).then(
-			(actual) => {
-				expect(actual).toEqual([
-					{
-						name: 'Biological Cancer Immunotherapy',
-						codes: ['C15974'],
-						synonyms: [
-							'Biological Immunotherapy for Cancer',
-							'Immunotherapy, Cancer, Biological',
-						],
-						category: 'agent category',
-					},
-					{
-						name: 'Immunotherapy',
-						codes: ['C308', 'C15262'],
-						synonyms: [
-							'Immunotherapeutic Agent',
-							'BRM',
-							'Biological Response Modifier',
-							'Biomodulators',
-							'Immune Mediators',
-							'Immune Modulators',
-							'Immune Regulators',
-							'Immunomodulating Agent',
-							'Immunomodulators',
-							'Immunomodulatory Agent',
-							'Immunopotentiators',
-							'Immunotherapy Agent',
-							'Immunologically Directed Therapy',
-							'Immunotherapy',
-						],
-						category: 'agent category',
-					},
-				]);
-				// Assert that nock got the expected request and finished.
-				scope.done();
-			}
-		);
+		const actual = await ctsapiInterventionFetcher(ctsapiClient, [
+			'C15974',
+			'C308',
+		]);
+		expect(actual).toEqual([
+			{
+				name: 'Biological Cancer Immunotherapy',
+				codes: ['C15974'],
+				synonyms: [
+					'Biological Immunotherapy for Cancer',
+					'Immunotherapy, Cancer, Biological',
+				],
+				category: 'agent category',
+			},
+			{
+				name: 'Immunotherapy',
+				codes: ['C308', 'C15262'],
+				synonyms: [
+					'Immunotherapeutic Agent',
+					'BRM',
+					'Biological Response Modifier',
+					'Biomodulators',
+					'Immune Mediators',
+					'Immune Modulators',
+					'Immune Regulators',
+					'Immunomodulating Agent',
+					'Immunomodulators',
+					'Immunomodulatory Agent',
+					'Immunopotentiators',
+					'Immunotherapy Agent',
+					'Immunologically Directed Therapy',
+					'Immunotherapy',
+				],
+				category: 'agent category',
+			},
+		]);
+		// Assert that nock got the expected request and finished.
+		scope.done();
 	});
 });

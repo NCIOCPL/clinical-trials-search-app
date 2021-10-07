@@ -15,24 +15,22 @@ describe('zipcodeFetcher', () => {
 	// as it matches what is going to be called.
 	const zipbase = 'https://localhost/zipcode';
 
-	it('fetches the zip', () => {
+	it('fetches the zip', async () => {
 		const expected = { lat: 39.0897, long: -77.1798 };
 		const scope = nock(zipbase);
 		scope.get(`/20874`).reply(200, expected);
 
-		zipcodeFetcher(zipbase, '20874').then((actual) => {
-			expect(actual).toEqual(expected);
-			scope.done();
-		});
+		const actual = await zipcodeFetcher(zipbase, '20874');
+		expect(actual).toEqual(expected);
+		scope.done();
 	});
 
-	it('returns null when not found', () => {
+	it('returns null when not found', async () => {
 		const scope = nock(zipbase);
 		scope.get(`/20874`).reply(404);
 
-		zipcodeFetcher(zipbase, '20874').then((actual) => {
-			expect(actual).toBeNull();
-			scope.done();
-		});
+		const actual = await zipcodeFetcher(zipbase, '20874');
+		expect(actual).toBeNull();
+		scope.done();
 	});
 });
