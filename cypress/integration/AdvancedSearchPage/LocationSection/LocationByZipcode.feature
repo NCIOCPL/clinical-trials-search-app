@@ -60,13 +60,11 @@ Scenario: User has an option to limit results to zipcode and radius and refine s
             | rl        | 2     |
             | zp        | 100   |
     
-    ### this is mentioned in the bug ticket #286 - after it's fixed the test will be uncommented
-    # Scenario: Negative: User is not able to search for an incorrect zip code
-    #     Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
-    #     Then the page title is "Find NCI-Supported Clinical Trials"
-    #     When user selects "ZIP Code" radio button
-    #     When user types "2016" in "U.S. ZIP Code" field
-    #     Then alert "Please enter a valid 5 digit U.S. zip code" is displayed
-    #     Then the search is not executed and path is "/about-cancer/treatment/clinical-trials/search/advanced"
-
-    #### country, state, city #######
+    Scenario: Negative: User is not able to search for an incorrect zip code
+        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+        Then the page title is "Find NCI-Supported Clinical Trials"
+        When user selects "ZIP Code" radio button
+        When user types "2016" in "U.S. ZIP Code" field
+         And user clicks on "Find Trials" button
+        Then alert "Please enter a valid 5 digit U.S. zip code" is displayed
+        Then the search is not executed and path is "/about-cancer/treatment/clinical-trials/search/advanced"

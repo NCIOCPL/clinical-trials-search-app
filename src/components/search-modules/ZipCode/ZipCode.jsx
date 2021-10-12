@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Fieldset, TextInput } from '../../atomic';
 import { useZipConversion } from '../../../hooks';
-import { trackedEvents } from '../../../tracking';
 import { INVALID_ZIP_TEXT } from '../../../constants';
 
-const ZipCode = ({ handleUpdate, tracking }) => {
-	const { zip, hasInvalidZip, formType } = useSelector((store) => store.form);
+const ZipCode = ({ handleUpdate }) => {
+	const { zip, hasInvalidZip } = useSelector((store) => store.form);
 	const [inputtedZip, setInputtedZip] = useState('');
 	const [{ getZipCoords }] = useZipConversion(handleUpdate);
 
@@ -43,14 +42,7 @@ const ZipCode = ({ handleUpdate, tracking }) => {
 			// empty treat as blank
 			clearZip();
 		} else {
-			const { InputValidation } = trackedEvents;
 			handleUpdate('hasInvalidZip', true);
-			InputValidation.data.field = 'zip';
-			InputValidation.data.formType = formType;
-			InputValidation.data.message = INVALID_ZIP_TEXT;
-			if (!hasInvalidZip) {
-				tracking.trackEvent(InputValidation);
-			}
 		}
 	};
 
@@ -75,6 +67,5 @@ const ZipCode = ({ handleUpdate, tracking }) => {
 };
 ZipCode.propTypes = {
 	handleUpdate: PropTypes.func,
-	tracking: PropTypes.object,
 };
 export default ZipCode;
