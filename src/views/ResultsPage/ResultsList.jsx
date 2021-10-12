@@ -57,7 +57,7 @@ ResultsList.propTypes = {
 	setSelectedResults: PropTypes.func,
 	selectedResults: PropTypes.array,
 	results: PropTypes.array,
-	setSelectAll: PropTypes.bool,
+	setSelectAll: PropTypes.func,
 	queryParams: PropTypes.string,
 };
 
