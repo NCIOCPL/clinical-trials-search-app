@@ -19,10 +19,9 @@ import {
 } from '../../../utilities';
 import { useZipConversion } from '../../../hooks';
 import './Location.scss';
-import { trackedEvents } from '../../../tracking';
 import { INVALID_ZIP_TEXT } from '../../../constants';
 
-const Location = ({ handleUpdate, tracking }) => {
+const Location = ({ handleUpdate }) => {
 	//Hooks must always be rendered in same order.
 	const dispatch = useDispatch();
 	const [{ getZipCoords }] = useZipConversion(handleUpdate);
@@ -40,7 +39,6 @@ const Location = ({ handleUpdate, tracking }) => {
 		states,
 		hospital,
 		vaOnly,
-		formType,
 	} = useSelector((store) => store.form);
 	const [activeRadio, setActiveRadio] = useState(location);
 	const [inputtedZip, setInputtedZip] = useState(zip);
@@ -142,12 +140,7 @@ const Location = ({ handleUpdate, tracking }) => {
 			// empty treat as blank
 			clearZip();
 		} else {
-			const { InputValidation } = trackedEvents;
 			handleUpdate('hasInvalidZip', true);
-			InputValidation.data.field = 'zip';
-			InputValidation.data.formType = formType;
-			InputValidation.data.message = INVALID_ZIP_TEXT;
-			tracking.trackEvent(InputValidation);
 		}
 	};
 
@@ -375,7 +368,6 @@ const Location = ({ handleUpdate, tracking }) => {
 };
 Location.propTypes = {
 	handleUpdate: PropTypes.func,
-	tracking: PropTypes.object,
 	refineSearch: PropTypes.bool,
 };
 export default Location;
