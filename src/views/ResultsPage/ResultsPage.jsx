@@ -41,15 +41,15 @@ const ResultsPage = ({ location }) => {
 			arrayFormat: 'none',
 		})
 	);
-	const [storeRehydrated, setStoreRehydrated] = useState(false);
 	const [currCacheKey, setCurrCacheKey] = useState('');
 	const [{ fetchTrials }] = useStoreToFindTrials();
 	const [selectedResults, setSelectedResults] = useState(
 		cache['selectedTrialsForPrint'] || []
 	);
 	const tracking = useTracking();
-	const { analyticsName, basePath, canonicalHost, siteName, ctsTitle } =
-		useSelector((store) => store.globals);
+	const { analyticsName, canonicalHost, siteName, ctsTitle } = useSelector(
+		(store) => store.globals
+	);
 
 	const handleUpdate = (field, value) => {
 		dispatch(
