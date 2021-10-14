@@ -3,11 +3,15 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { usePrintApi } from '../../hooks';
 import { buildQueryString } from '../../utilities';
+import { useAppSettings } from '../../store/store.js';
+
 const queryString = require('query-string');
 
 const PrintModalContent = ({ selectedList = [] }) => {
 	// in dev use
-	const printUrl = useSelector((store) => store.globals.printCacheEndpoint);
+	const [{ printCacheEndpoint }] = useAppSettings();
+	const printUrl = printCacheEndpoint;
+
 	const formSnapshot = useSelector((store) => store.form);
 
 	const queryParams = buildQueryString(formSnapshot);

@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import axios from 'axios';
+import { useAppSettings } from '../store/store.js';
 
 export const useZipConversion = (updateFunc) => {
 	const [zip, setZip] = useState();
 	const [isError, setIsError] = useState(false);
-	const zipBase = useSelector((store) => store.globals.zipConversionEndpoint);
+
+	const [{ zipConversionEndpoint }] = useAppSettings();
+	const zipBase = zipConversionEndpoint;
 
 	useEffect(() => {
 		const fetchZipCoords = async () => {

@@ -1,12 +1,10 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-
-import { useSelector } from 'react-redux';
+import { useAppSettings } from '../store/store.js';
 
 export const useInterventionLookup = (updateFunc) => {
-	const { ctsProtocol, ctsHost, ctsPort } = useSelector(
-		(store) => store.globals
-	);
+	const [{ ctsProtocol, ctsHost, ctsPort }] = useAppSettings();
+
 	const [codesList, setCodesList] = useState([]);
 
 	useEffect(() => {

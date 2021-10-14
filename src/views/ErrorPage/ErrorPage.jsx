@@ -1,21 +1,20 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateGlobal } from '../../store/actions';
+import { useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { ChatOpener, Delighter } from '../../components/atomic';
 import { useTracking } from 'react-tracking';
 import { TRY_NEW_SEARCH_LINK } from '../../constants';
+// Context API store
+import { updateCTXGlobalValue } from '../../store/ctx-actions';
+import { useAppSettings } from '../../store/store.js';
 
 import './ErrorPage.scss';
 
 const ErrorPage = ({ initErrorsList }) => {
-	const dispatch = useDispatch();
 	const formSnapshot = useSelector((store) => store.form);
 	const tracking = useTracking();
-	const { analyticsName, canonicalHost } = useSelector(
-		(store) => store.globals
-	);
+	const [{ dispatch, analyticsName, canonicalHost }] = useAppSettings();
 
 	useEffect(() => {
 		const pageTitle = 'Errors Occurred';
@@ -46,7 +45,7 @@ const ErrorPage = ({ initErrorsList }) => {
 		});
 
 		dispatch(
-			updateGlobal({
+			updateCTXGlobalValue({
 				field: 'initErrorsList',
 				value: [],
 			})

@@ -8,6 +8,7 @@ import { SearchCriteriaTable } from '../../components/atomic';
 import { START_OVER_LINK } from '../../constants';
 import { history } from '../../services/history.service';
 import { getMainType } from '../../store/actions';
+import { useAppSettings } from '../../store/store.js';
 
 const ResultsPageHeader = ({
 	handleUpdate,
@@ -20,8 +21,7 @@ const ResultsPageHeader = ({
 	const { formType, cancerType, age, zip, keywordPhrases, isDirty } =
 		useSelector((store) => store.form);
 	const tracking = useTracking();
-	const { analyticsName } = useSelector((store) => store.globals);
-
+	const [{ analyticsName }] = useAppSettings();
 	const { maintypeOptions } = useSelector((store) => store.cache);
 
 	const handleRefineSearch = () => {

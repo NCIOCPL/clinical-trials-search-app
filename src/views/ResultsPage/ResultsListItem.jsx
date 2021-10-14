@@ -7,7 +7,7 @@ import Checkbox from '../../components/atomic/Checkbox';
 import { isWithinRadius } from '../../utilities';
 import { NIH_ZIPCODE } from '../../constants';
 import { useTracking } from 'react-tracking';
-
+import { useAppSettings } from '../../store/store.js';
 const queryString = require('query-string');
 
 const ResultsListItem = ({
@@ -21,9 +21,10 @@ const ResultsListItem = ({
 	formType,
 }) => {
 	const dispatch = useDispatch();
+	// TODO?
 	const { zipCoords, zipRadius, location, country, states, city, vaOnly } =
 		useSelector((store) => store.form);
-	const analyticsName = useSelector((store) => store.globals.analyticsName);
+	const [{ analyticsName }] = useAppSettings();
 	const tracking = useTracking();
 
 	const qsQbj = queryString.parse(queryParams);

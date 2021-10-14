@@ -15,6 +15,7 @@ import {
 import SitesList from './SitesList';
 import { useTracking } from 'react-tracking';
 import './TrialDescriptionPage.scss';
+import { useAppSettings } from '../../store/store.js';
 const queryString = require('query-string');
 
 const TrialDescriptionPage = ({ location }) => {
@@ -34,10 +35,8 @@ const TrialDescriptionPage = ({ location }) => {
 	const [searchUsed] = useState(Object.keys(cacheSnap).length > 1);
 
 	const trial = useSelector((store) => store.cache[currId]);
-	const { analyticsName, canonicalHost } = useSelector(
-		(store) => store.globals
-	);
 
+	const [{ analyticsName, canonicalHost }] = useAppSettings();
 	// enum for empty location checks
 	const noLocInfo = ['not yet active', 'in review', 'approved'];
 
