@@ -3,7 +3,6 @@ import 'react-app-polyfill/stable';
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 
 import './styles/main.scss';
@@ -12,16 +11,12 @@ import { BasicSearchPage, AdvancedSearchPage } from './views/SearchPage';
 import ResultsPage from './views/ResultsPage';
 import TrialDescriptionPage from './views/TrialDescriptionPage';
 import ErrorPage from './views/ErrorPage';
-
+import { useAppSettings } from './store/store.js';
 import { useAppInitializer } from './hooks';
 require('es6-promise').polyfill();
 
 const App = ({ services, zipConversionEndpoint }) => {
-	const appHasBeenInitialized = useSelector(
-		(store) => store.globals.appHasBeenInitialized
-	);
-
-	const initErrorsList = useSelector((store) => store.globals.initErrorsList);
+	const [{ appHasBeenInitialized, initErrorsList }] = useAppSettings();
 
 	const ctsapiclient = services.ctsSearch();
 

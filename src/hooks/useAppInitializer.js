@@ -1,5 +1,10 @@
+//Redux
 import { useDispatch } from 'react-redux';
-import { updateGlobal, updateForm } from '../store/actions';
+import { updateForm } from '../store/actions';
+
+// Context API store
+import { useAppSettings } from '../store/store';
+import { updateCTXGlobalValue } from '../store/ctx-actions';
 
 import {
 	ctsapiDiseaseFetcher,
@@ -12,7 +17,8 @@ let internalAppHasBeenInitialized = false;
 
 export const useAppInitializer = (ctsapiclient, zipcodeEndpoint) => {
 	// This must be called before any conditionals
-	const dispatch = useDispatch();
+	const rdx_dispatch = useDispatch();
+	const [, updateAppSettings] = useAppSettings();
 
 	// Prevent this hook from ever being called more than
 	// once. Kind of dirty I know...
@@ -44,11 +50,11 @@ export const useAppInitializer = (ctsapiclient, zipcodeEndpoint) => {
 			);
 
 			if (initResults.errors.length === 0) {
-				dispatch(updateForm(initResults.formState));
+				rdx_dispatch(updateForm(initResults.formState));
 			} else {
 				// Show Error message
-				dispatch(
-					updateGlobal({
+				updateAppSettings(
+					updateCTXGlobalValue({
 						field: 'initErrorsList',
 						value: initResults.errors,
 					})
@@ -56,8 +62,8 @@ export const useAppInitializer = (ctsapiclient, zipcodeEndpoint) => {
 			}
 		}
 
-		dispatch(
-			updateGlobal({
+		updateAppSettings(
+			updateCTXGlobalValue({
 				field: 'appHasBeenInitialized',
 				value: true,
 			})

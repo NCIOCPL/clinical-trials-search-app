@@ -2,23 +2,31 @@ import './polyfills';
 import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router } from 'react-router-dom';
+import { history } from './services/history.service';
+
+// Redux
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { Router } from 'react-router-dom';
-import { history } from './services/history.service';
 import * as reducers from './store/reducers';
 import { loadStateFromSessionStorage } from './utilities';
-
-import './index.css';
 import createCTSMiddleware from './middleware/CTSMiddleware';
 import cacheMiddleware from './middleware/cacheMiddleware';
 import { ClinicalTrialsServiceFactory } from '@nciocpl/clinical-trials-search-client.js';
 
-import App from './App';
 import { AnalyticsProvider, EddlAnalyticsProvider } from './tracking';
 
+// Global Context
+import { StateProvider } from './store/store';
+import ctx_reducer from './store/ctx-reducer';
+
+import App from './App';
+import './index.css';
+
 const initialize = ({
+	appHasBeenVisited = false,
+	appHasBeenInitialized = false,
 	analyticsChannel = 'About Cancer',
 	// This should still be configurable in case someone is hosting
 	// this outside of the digital platform, and wants to hookup
@@ -33,6 +41,7 @@ const initialize = ({
 	basePath = '/about-cancer/treatment/clinical-trials/search',
 	canonicalHost = 'https://www.cancer.gov',
 	ctsTitle = 'Find NCI-Supported Clinical Trials',
+	initErrorsList = [],
 	language = 'en',
 	printCacheEndpoint = '/CTS.Print/GenCache',
 	rootId = 'NCI-CTS-root',
@@ -65,6 +74,8 @@ const initialize = ({
 
 	// Populate global state with init params
 	const initialState = {
+		appHasBeenVisited,
+		appHasBeenInitialized,
 		appId,
 		analyticsChannel,
 		analyticsContentGroup,
@@ -74,6 +85,7 @@ const initialize = ({
 		basePath,
 		canonicalHost,
 		ctsTitle,
+		initErrorsList,
 		language,
 		printCacheEndpoint,
 		rootId,
@@ -88,6 +100,7 @@ const initialize = ({
 	if (process.env.NODE_ENV !== 'development' && useSessionStorage === true) {
 		cachedState = loadStateFromSessionStorage(appId);
 	}
+
 	// Set up middleware chain for redux dispatch.
 	// const historyMiddleware = createHistoryMiddleware(history);
 
@@ -98,11 +111,6 @@ const initialize = ({
 		cachedState,
 		composeWithDevTools(applyMiddleware(cacheMiddleware, ctsMiddleware))
 	);
-
-	store.dispatch({
-		type: 'LOAD_GLOBALS',
-		payload: { ...initialState },
-	});
 
 	// With the store now created, we want to subscribe to updates.
 	// This implementation updates session storage backup on each store change.
@@ -142,18 +150,20 @@ const initialize = ({
 
 	const AppBlock = () => {
 		return (
-			<Provider store={store}>
-				<AnalyticsHoC>
-					<Router
-						history={history}
-						basename="/about-cancer/treatment/clinical-trials/search">
-						<App
-							services={services}
-							zipConversionEndpoint={zipConversionEndpoint}
-						/>
-					</Router>
-				</AnalyticsHoC>
-			</Provider>
+			<StateProvider initialState={initialState} reducer={ctx_reducer}>
+				<Provider store={store}>
+					<AnalyticsHoC>
+						<Router
+							history={history}
+							basename="/about-cancer/treatment/clinical-trials/search">
+							<App
+								services={services}
+								zipConversionEndpoint={zipConversionEndpoint}
+							/>
+						</Router>
+					</AnalyticsHoC>
+				</Provider>
+			</StateProvider>
 		);
 	};
 

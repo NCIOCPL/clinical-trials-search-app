@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useAppSettings } from '../store/store.js';
 
 export const useTreatmentLookup = (updateFunc) => {
-	const { ctsProtocol, ctsHost, ctsPort } = useSelector(
-		(store) => store.globals
-	);
+	const [{ ctsProtocol, ctsHost, ctsPort }] = useAppSettings();
 	const [codesList, setCodesList] = useState([]);
 
 	useEffect(() => {

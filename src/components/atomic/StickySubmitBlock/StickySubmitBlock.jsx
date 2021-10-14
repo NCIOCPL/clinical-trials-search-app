@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useTracking } from 'react-tracking';
+import { useAppSettings } from '../../../store/store.js';
 
 import './StickySubmitBlock.scss';
 
@@ -11,7 +12,7 @@ const StickySubmitBlock = ({ sentinelRef, onSubmit, formType }) => {
 	const dispatch = useDispatch();
 	const stickyEl = useRef(null);
 	const tracking = useTracking();
-	const { analyticsName } = useSelector((store) => store.globals);
+	const [{ analyticsName }] = useAppSettings();
 
 	useEffect(() => {
 		intObserver.observe(stickyEl.current);

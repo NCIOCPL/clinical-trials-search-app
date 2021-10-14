@@ -34,7 +34,7 @@ import {
 } from '../../store/modules/form/form.selectors';
 import { SEARCH_FORM_ID } from '../../constants';
 import { useGlobalBeforeUnload, useHasLocationChanged } from '../../hooks';
-
+import { useAppSettings } from '../../store/store.js';
 // Module groups in arrays will be placed side-by-side in the form
 const basicFormModules = [CancerTypeKeyword, [Age, ZipCode]];
 const advancedFormModules = [
@@ -65,9 +65,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
 	const [isPageLoadReady, setIsPageLoadReady] = useState(false);
 	const { addFormToTracking } = actions;
 	const tracking = useTracking();
-	const { analyticsName, canonicalHost, siteName } = useSelector(
-		(store) => store.globals
-	);
+	const [{ analyticsName, canonicalHost, siteName }] = useAppSettings();
 
 	const handleUpdate = (field, value) => {
 		dispatch(

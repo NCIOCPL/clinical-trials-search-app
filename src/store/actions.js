@@ -2,10 +2,10 @@
 import {
 	UPDATE_FORM_FIELD,
 	UPDATE_FORM,
-	LOAD_GLOBAL,
 	CLEAR_FORM,
 	RECEIVE_DATA,
 } from './identifiers';
+
 import { ACTIVE_TRIAL_STATUSES, OTHER_MAIN_TYPES } from '../constants';
 
 /**
@@ -27,16 +27,6 @@ export function updateForm(newState) {
 	return {
 		type: UPDATE_FORM,
 		payload: newState,
-	};
-}
-
-export function updateGlobal({ field, value }) {
-	return {
-		type: LOAD_GLOBAL,
-		payload: {
-			field,
-			value,
-		},
 	};
 }
 

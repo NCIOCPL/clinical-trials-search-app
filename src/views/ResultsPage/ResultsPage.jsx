@@ -20,7 +20,7 @@ import ResultsList from './ResultsList';
 import { history } from '../../services/history.service';
 import PrintModalContent from './PrintModalContent';
 import { formDataConverter } from '../../utilities/formDataConverter';
-
+import { useAppSettings } from '../../store/store.js';
 const queryString = require('query-string');
 
 const ResultsPage = ({ location }) => {
@@ -47,10 +47,8 @@ const ResultsPage = ({ location }) => {
 		cache['selectedTrialsForPrint'] || []
 	);
 	const tracking = useTracking();
-	const { analyticsName, canonicalHost, siteName, ctsTitle } = useSelector(
-		(store) => store.globals
-	);
-
+	const [{ analyticsName, canonicalHost, siteName, ctsTitle }] =
+		useAppSettings();
 	const handleUpdate = (field, value) => {
 		dispatch(
 			updateFormField({
