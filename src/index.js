@@ -17,6 +17,7 @@ import { ClinicalTrialsServiceFactory } from '@nciocpl/clinical-trials-search-cl
 
 import App from './App';
 import { AnalyticsProvider, EddlAnalyticsProvider } from './tracking';
+import { StateProvider } from './store/store';
 
 const initialize = ({
 	analyticsChannel = 'About Cancer',
@@ -88,6 +89,9 @@ const initialize = ({
 	if (process.env.NODE_ENV !== 'development' && useSessionStorage === true) {
 		cachedState = loadStateFromSessionStorage(appId);
 	}
+
+	//TODO: REMOVE
+
 	// Set up middleware chain for redux dispatch.
 	// const historyMiddleware = createHistoryMiddleware(history);
 
@@ -114,6 +118,7 @@ const initialize = ({
 
 		store.subscribe(saveDesiredStateToSessionStorage);
 	}
+	// TODO END-REMOVE
 
 	// Determine the analytics HoC we are going to use.
 	// The following allows the app to be more portable, cgov will
@@ -142,18 +147,20 @@ const initialize = ({
 
 	const AppBlock = () => {
 		return (
-			<Provider store={store}>
-				<AnalyticsHoC>
-					<Router
-						history={history}
-						basename="/about-cancer/treatment/clinical-trials/search">
-						<App
-							services={services}
-							zipConversionEndpoint={zipConversionEndpoint}
-						/>
-					</Router>
-				</AnalyticsHoC>
-			</Provider>
+			<StateProvider initialState={initialState}>
+				<Provider store={store}>
+					<AnalyticsHoC>
+						<Router
+							history={history}
+							basename="/about-cancer/treatment/clinical-trials/search">
+							<App
+								services={services}
+								zipConversionEndpoint={zipConversionEndpoint}
+							/>
+						</Router>
+					</AnalyticsHoC>
+				</Provider>
+			</StateProvider>
 		);
 	};
 
