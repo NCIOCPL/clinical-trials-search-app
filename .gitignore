@@ -11,6 +11,7 @@
 /cypress/screenshots
 /cypress/fixtures/example.json
 .nyc_output/
+snapshots.js
 
 # production
 /build

@@ -18,5 +18,20 @@ require('cypress-plugin-tab')
 import './commands'
 import '@cypress/code-coverage/support'
 
+
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+beforeEach(() => {
+
+    cy.document().then(document=>{
+        cy.on('fail', (error) => {
+            // console.log('Head tag', document.getElementsByTagName('head')[0].innerHTML);
+            console.log('Body tag', document.getElementsByTagName('html')[0].innerHTML);
+           throw error;
+       });
+    })
+  
+    
+  });
+
+

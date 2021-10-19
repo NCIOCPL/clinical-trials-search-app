@@ -2,5 +2,5 @@
 	"testFiles": "**/*.feature",
 	"video": false,
 	"baseUrl": "http://localhost:3000",
-	"retries": 1
+	"retries": 0
 }
