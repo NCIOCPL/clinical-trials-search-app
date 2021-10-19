@@ -27,11 +27,13 @@ Then(
 );
 
 And('user selects {string} from dropdown', (autosuggestTerm) => {
-	cy.get('#fieldset--drug-trtmt .cts-autocomplete__menu-item', {
-		timeout: 5000,
-	})
-		.contains(autosuggestTerm)
-		.click({ force: true });
+	cy.contains(
+		'#fieldset--drug-trtmt .cts-autocomplete__menu-item',
+		autosuggestTerm,
+		{
+			timeout: 7000,
+		}
+	).click({ force: true, timeout: 7000 });
 });
 
 And('trial info displays {string}', (infoText) => {
@@ -93,5 +95,7 @@ And(
 );
 
 Then('autocomplete dropdown is displayed', () => {
-	cy.get('div.cts-autocomplete__menu-item:visible').should('be.visible');
+	cy.get('#fieldset--drug-trtmt .cts-autocomplete__menu-item').should(
+		'be.visible'
+	);
 });

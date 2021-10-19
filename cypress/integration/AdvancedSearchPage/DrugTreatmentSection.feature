@@ -60,11 +60,13 @@ Feature: Advanced Clinical Trials Search Drug Treatment Section
 		Then autocomplete dropdown is displayed with "Please enter 3 or more characters" text
 		And user types "ibup" in "Drug" field
 		And user selects "Ibuprofen" from dropdown
+		When user clicks on "Drug" field
 		And user types "bev" in "Drug" field
 		And user selects "Bevacizumab" from dropdown
 		When user clicks on "Treatment" field
 		And user types "polymo" in "Treatment" field
 		And user selects "Polymorphism AnalysisOther Names: Polymorphism Detection" from dropdown
+		When user clicks on "Treatment" field
 		And user types "orc" in "Treatment" field
 		And user selects "Orchiectomy" from dropdown
 		When user clicks on "Find Trials" button
@@ -82,10 +84,10 @@ Feature: Advanced Clinical Trials Search Drug Treatment Section
 			| loc | 0      |
 			| rl  | 2      |
 		When user clicks on Modify Search Criteria button
-		Then "Drug" input field has a value "Ibuprofen"
-		Then "Treatment" input field has a value "Polymorphism Analysis"
 		When user removes "Bevacizumab" from the "Drug" field
 		When user removes "Orchiectomy" from the "Treatment" field
+		Then "Drug" input field has a value "Ibuprofen"
+		Then "Treatment" input field has a value "Polymorphism Analysis"
 		When user clicks on "Find Trials" button
 		Then the search is executed and results page is displayed
 		And trial info displays "Results 1-4  of 4 for your search "
@@ -120,7 +122,7 @@ Feature: Advanced Clinical Trials Search Drug Treatment Section
 		When user clicks on "Drug" field
 		Then autocomplete dropdown is displayed with "Please enter 3 or more characters" text
 		And user types "chi" in "Drug" field
-		And user selects "Other Names: Chimeric" from dropdown
+		And user selects "Other Names: Chimeric Antigen" from dropdown
 		When user clicks on "Find Trials" button
 		Then the search is executed and results page is displayed
 		And trial info displays "Results 1-10  of 153 for your search "
