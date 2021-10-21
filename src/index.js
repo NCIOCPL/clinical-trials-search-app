@@ -2,8 +2,7 @@ import './polyfills';
 import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router } from 'react-router-dom';
-import { history } from './services/history.service';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 // Redux
 import { Provider } from 'react-redux';
@@ -103,7 +102,6 @@ const initialize = ({
 
 	// Set up middleware chain for redux dispatch.
 	// const historyMiddleware = createHistoryMiddleware(history);
-
 	const ctsMiddleware = createCTSMiddleware(services);
 
 	const store = createStore(
@@ -153,9 +151,7 @@ const initialize = ({
 			<StateProvider initialState={initialState} reducer={ctx_reducer}>
 				<Provider store={store}>
 					<AnalyticsHoC>
-						<Router
-							history={history}
-							basename="/about-cancer/treatment/clinical-trials/search">
+						<Router>
 							<App
 								services={services}
 								zipConversionEndpoint={zipConversionEndpoint}

@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTracking } from 'react-tracking';
 
 import { SearchCriteriaTable } from '../../components/atomic';
 import { START_OVER_LINK } from '../../constants';
-import { history } from '../../services/history.service';
 import { getMainType } from '../../store/actions';
 import { useAppSettings } from '../../store/store.js';
 
@@ -18,6 +17,7 @@ const ResultsPageHeader = ({
 	step = 10,
 }) => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const { formType, cancerType, age, zip, keywordPhrases, isDirty } =
 		useSelector((store) => store.form);
 	const tracking = useTracking();
@@ -57,7 +57,7 @@ const ResultsPageHeader = ({
 			formType,
 			source: 'modify_search_criteria_link',
 		});
-		history.push('/about-cancer/treatment/clinical-trials/search/advanced');
+		navigate('/about-cancer/treatment/clinical-trials/search/advanced');
 	};
 
 	return (

@@ -3,16 +3,18 @@ import 'react-app-polyfill/stable';
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import './styles/main.scss';
 
-import { BasicSearchPage, AdvancedSearchPage } from './views/SearchPage';
-import ResultsPage from './views/ResultsPage';
-import TrialDescriptionPage from './views/TrialDescriptionPage';
-import ErrorPage from './views/ErrorPage';
-import { useAppSettings } from './store/store.js';
 import { useAppInitializer } from './hooks';
+import { useAppSettings } from './store/store.js';
+import ErrorPage from './views/ErrorPage';
+import Layout from './views/Layout';
+import ResultsPage from './views/ResultsPage';
+import { BasicSearchPage, AdvancedSearchPage } from './views/SearchPage';
+import TrialDescriptionPage from './views/TrialDescriptionPage';
+
 require('es6-promise').polyfill();
 
 const App = ({ services, zipConversionEndpoint }) => {
@@ -25,29 +27,20 @@ const App = ({ services, zipConversionEndpoint }) => {
 	return (
 		<>
 			{!appHasBeenInitialized ? (
-				// Is initializaing, show loading screen.
+				// Is initializing, show loading screen.
 				<></>
 			) : initErrorsList.length === 0 ? (
 				<>
-					<Switch>
+					<Routes>
 						<Route
-							path="/about-cancer/treatment/clinical-trials/search/r"
-							component={ResultsPage}
-						/>
-						<Route
-							path="/about-cancer/treatment/clinical-trials/search/v"
-							component={TrialDescriptionPage}
-						/>
-						<Route
-							exact
-							path="/about-cancer/treatment/clinical-trials/search/advanced"
-							component={AdvancedSearchPage}
-						/>
-						<Route
-							path="/about-cancer/treatment/clinical-trials/search/"
-							component={BasicSearchPage}
-						/>
-					</Switch>
+							path="/about-cancer/treatment/clinical-trials/search"
+							element={<Layout />}>
+							<Route index element={<BasicSearchPage />} />
+							<Route path="r" element={<ResultsPage />} />
+							<Route path="v" element={<TrialDescriptionPage />} />
+							<Route path="advanced" element={<AdvancedSearchPage />} />
+						</Route>
+					</Routes>
 				</>
 			) : (
 				<ErrorPage initErrorsList={initErrorsList} />
