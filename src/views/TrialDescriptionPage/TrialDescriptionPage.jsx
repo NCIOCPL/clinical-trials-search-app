@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
-import { clearForm } from '../../store/actions';
 import { Helmet } from 'react-helmet';
-import { history } from '../../services/history.service';
-import { getTrial } from '../../store/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useTracking } from 'react-tracking';
+
+import { clearForm, getTrial } from '../../store/actions';
 import {
 	Accordion,
 	AccordionItem,
@@ -13,13 +13,15 @@ import {
 	SearchCriteriaTable,
 } from '../../components/atomic';
 import SitesList from './SitesList';
-import { useTracking } from 'react-tracking';
+
 import './TrialDescriptionPage.scss';
 import { useAppSettings } from '../../store/store.js';
 const queryString = require('query-string');
 
-const TrialDescriptionPage = ({ location }) => {
+const TrialDescriptionPage = () => {
 	const dispatch = useDispatch();
+	const location = useLocation();
+	const navigate = useNavigate();
 	const [isTrialLoading, setIsTrialLoading] = useState(true);
 	const [qs] = useState(location.search);
 	const [isPageLoadReady, setIsPageLoadReady] = useState(false);
@@ -173,8 +175,8 @@ const TrialDescriptionPage = ({ location }) => {
 				{(isDirty || searchUsed) && (
 					<div className="back-to-search btnAsLink">
 						<span
-							onClick={() => history.goBack()}
-							onKeyDown={() => history.goBack()}
+							onClick={() => navigate(-1)}
+							onKeyDown={() => navigate(-1)}
 							tabIndex="0"
 							role="button">
 							&lt; Back to search results
@@ -504,7 +506,5 @@ const TrialDescriptionPage = ({ location }) => {
 		</>
 	);
 };
-TrialDescriptionPage.propTypes = {
-	location: PropTypes.object,
-};
+
 export default TrialDescriptionPage;

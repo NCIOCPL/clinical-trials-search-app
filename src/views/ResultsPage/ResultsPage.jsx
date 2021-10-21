@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useTracking } from 'react-tracking';
 import { updateFormField, clearForm, receiveData } from '../../store/actions';
@@ -13,18 +12,19 @@ import {
 	Pager,
 } from '../../components/atomic';
 import { TRY_NEW_SEARCH_LINK } from '../../constants';
-import { buildQueryString, formToTrackingData } from '../../utilities';
+import { formToTrackingData } from '../../utilities';
 import { useModal, useStoreToFindTrials } from '../../hooks';
 import ResultsPageHeader from './ResultsPageHeader';
 import ResultsList from './ResultsList';
-import { history } from '../../services/history.service';
 import PrintModalContent from './PrintModalContent';
 import { formDataConverter } from '../../utilities/formDataConverter';
 import { useAppSettings } from '../../store/store.js';
 const queryString = require('query-string');
 
-const ResultsPage = ({ location }) => {
+const ResultsPage = () => {
 	const dispatch = useDispatch();
+	const location = useLocation();
+	const navigate = useNavigate();
 	const [selectAll, setSelectAll] = useState(false);
 	const [pagerPage, setPagerPage] = useState(0);
 
@@ -36,11 +36,7 @@ const ResultsPage = ({ location }) => {
 	const formSnapshot = useSelector((store) => store.form);
 	const { resultsPage } = useSelector((store) => store.form);
 	const cache = useSelector((store) => store.cache);
-	const [qs, setQs] = useState(
-		queryString.stringify(buildQueryString(formSnapshot), {
-			arrayFormat: 'none',
-		})
-	);
+	const qs = queryString.extract(location.search);
 	const [currCacheKey, setCurrCacheKey] = useState('');
 	const [{ fetchTrials }] = useStoreToFindTrials();
 	const [selectedResults, setSelectedResults] = useState(
@@ -207,12 +203,10 @@ const ResultsPage = ({ location }) => {
 			// update qs
 			const parsed = queryString.parse(location.search);
 			parsed.pn = currentPage + 1;
-			let newqs = queryString.stringify(parsed, { arrayFormat: 'none' });
-			setQs(newqs);
+			const newqs = queryString.stringify(parsed, { arrayFormat: 'none' });
 			setCurrCacheKey(newqs);
-			history.push({
-				search: newqs,
-			});
+			// Navigation below is relative, hence use of just the parameters in this case
+			navigate(`?${newqs}`);
 			fetchTrials(newqs);
 		}
 	};
@@ -525,7 +519,5 @@ const ResultsPage = ({ location }) => {
 		</>
 	);
 };
-ResultsPage.propTypes = {
-	location: PropTypes.object,
-};
+
 export default ResultsPage;
