@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useTracking } from 'react-tracking';
 import { Delighter, StickySubmitBlock } from '../../components/atomic';
 import {
@@ -19,7 +19,6 @@ import {
 	TrialType,
 	ZipCode,
 } from '../../components/search-modules';
-import { history } from '../../services/history.service';
 import { updateFormField, clearForm, receiveData } from '../../store/actions';
 import {
 	getFieldInFocus,
@@ -35,6 +34,9 @@ import {
 import { SEARCH_FORM_ID } from '../../constants';
 import { useGlobalBeforeUnload, useHasLocationChanged } from '../../hooks';
 import { useAppSettings } from '../../store/store.js';
+import { buildQueryString } from '../../utilities';
+const queryString = require('query-string');
+
 // Module groups in arrays will be placed side-by-side in the form
 const basicFormModules = [CancerTypeKeyword, [Age, ZipCode]];
 const advancedFormModules = [
@@ -52,6 +54,7 @@ const advancedFormModules = [
 const SearchPage = ({ formInit = 'basic' }) => {
 	const dispatch = useDispatch();
 	const location = useLocation().pathname;
+	const navigate = useNavigate();
 	const sentinelRef = useRef(null);
 	const [formFactor] = useState(formInit);
 	const fieldInFocus = useSelector(getFieldInFocus);
@@ -59,6 +62,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
 	const hasDispatchedFormInteractionEvent = useSelector(
 		getHasDispatchedFormInteractionEvent
 	);
+	const currentForm = useSelector((store) => store.form);
 	const hasFormError = useSelector(getHasFormError);
 	const fieldError = useSelector(getFieldError);
 	const hasUserInteractedWithForm = useSelector(getHasUserInteractedWithForm);
@@ -173,7 +177,8 @@ const SearchPage = ({ formInit = 'basic' }) => {
 				status: 'complete',
 			});
 			dispatch(trackedFormSubmitted(true));
-			history.push('/about-cancer/treatment/clinical-trials/search/r');
+			const urlQuery = queryString.stringify(buildQueryString(currentForm));
+			navigate(`/about-cancer/treatment/clinical-trials/search/r?${urlQuery}`);
 			return;
 		}
 		tracking.trackEvent({
