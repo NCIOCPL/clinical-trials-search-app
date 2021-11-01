@@ -60,7 +60,6 @@ const Location = ({ handleUpdate }) => {
 
 	useEffect(() => {
 		handleUpdate('location', activeRadio);
-		handleUpdate('nihOnly', activeRadio === 'search-location-nih');
 		if (activeRadio === 'search-location-country' && countries.length < 1) {
 			dispatch(getCountries());
 		}

@@ -1,4 +1,9 @@
-import { UPDATE_FORM_FIELD, UPDATE_FORM, CLEAR_FORM } from '../identifiers';
+import {
+	UPDATE_FORM_FIELD,
+	UPDATE_FORM,
+	UPDATE_FORM_SEARCH_CRITERIA,
+	CLEAR_FORM,
+} from '../identifiers';
 
 export const defaultState = {
 	age: '', // (a) Age
@@ -35,7 +40,6 @@ export const defaultState = {
 		{ label: 'Phase III', value: 'iii', checked: false },
 		{ label: 'Phase IV', value: 'iv', checked: false },
 	], // (tp) Trial phase
-	nihOnly: false, // (nih) At NIH only
 	vaOnly: false, // (va) VA facilities only
 	drugs: [], // (dt) Drug/Drug family
 	treatments: [], // (ti) Treatment/Interventions
@@ -75,6 +79,11 @@ export const reducer = (state = defaultState, action) => {
 				[action.payload.field]: action.payload.value,
 			};
 		case UPDATE_FORM:
+			return {
+				...state,
+				...action.payload,
+			};
+		case UPDATE_FORM_SEARCH_CRITERIA:
 			return {
 				...state,
 				...action.payload,

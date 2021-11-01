@@ -4,7 +4,7 @@ import { defaultState } from './defaultStateCopy';
 import {
 	API_DISEASE_MOCKS,
 	API_INTERVENTION_MOCKS,
-} from './queryStringToFormObject.common';
+} from './queryStringToSearchCriteria.common';
 
 const testCases = [
 	// Empty is the MOST IMPORTANT test case.

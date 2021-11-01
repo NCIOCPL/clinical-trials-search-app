@@ -1,10 +1,10 @@
+import queryString from 'query-string';
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useTracking } from 'react-tracking';
 
-import { clearForm, getTrial } from '../../store/actions';
 import {
 	Accordion,
 	AccordionItem,
@@ -15,17 +15,23 @@ import {
 import SitesList from './SitesList';
 
 import './TrialDescriptionPage.scss';
+import {
+	clearForm,
+	getTrial,
+	updateFormSearchCriteria,
+} from '../../store/actions';
 import { useAppSettings } from '../../store/store.js';
-const queryString = require('query-string');
+import { queryStringToSearchCriteria, runQueryFetchers } from '../../utilities';
 
 const TrialDescriptionPage = () => {
 	const dispatch = useDispatch();
 	const location = useLocation();
 	const navigate = useNavigate();
 	const [isTrialLoading, setIsTrialLoading] = useState(true);
-	const [qs] = useState(location.search);
+	const qs = queryString.extract(location.search);
 	const [isPageLoadReady, setIsPageLoadReady] = useState(false);
 	const { isDirty, formType } = useSelector((store) => store.form);
+	const [searchCriteriaObject, setSearchCriteriaObject] = useState();
 	const parsed = queryString.parse(qs);
 	const currId = parsed.id;
 	const [storeRehydrated] = useState(false);
@@ -38,31 +44,48 @@ const TrialDescriptionPage = () => {
 
 	const trial = useSelector((store) => store.cache[currId]);
 
-	const [{ analyticsName, canonicalHost }] = useAppSettings();
+	const [{ analyticsName, canonicalHost, services, zipConversionEndpoint }] =
+		useAppSettings();
+	const ctsapiclient = services.ctsSearch();
 	// enum for empty location checks
 	const noLocInfo = ['not yet active', 'in review', 'approved'];
-
-	useEffect(() => {
-		if (trial) {
-			initTrialData();
-		}
-	}, [trial]);
-
-	useEffect(() => {
-		if (storeRehydrated) {
-			dispatch(getTrial({ trialId: currId }));
-		}
-	}, [storeRehydrated]);
 
 	// scroll to top on mount
 	useEffect(() => {
 		window.scrollTo(0, 0);
-		if (trial && trial.briefTitle) {
+		if (isAllFetchingComplete()) {
 			initTrialData();
 		} else {
-			dispatch(getTrial({ trialId: currId }));
+			const searchCriteria = async () => {
+				const { diseaseFetcher, interventionFetcher, zipFetcher } =
+					await runQueryFetchers(ctsapiclient, zipConversionEndpoint);
+				return await queryStringToSearchCriteria(
+					qs,
+					diseaseFetcher,
+					interventionFetcher,
+					zipFetcher
+				);
+			};
+			searchCriteria().then((res) => {
+				setSearchCriteriaObject(res.searchCriteria);
+				dispatch(updateFormSearchCriteria(res.searchCriteria));
+				dispatch(getTrial({ trialId: currId }));
+			});
 		}
 	}, []);
+
+	useEffect(() => {
+		if (trial && searchCriteriaObject) {
+			initTrialData();
+		}
+	}, [searchCriteriaObject, trial]);
+
+	useEffect(() => {
+		// NOTE: This doesn't seem to be a block that runs. Needs to be pulled out
+		if (storeRehydrated) {
+			dispatch(getTrial({ trialId: currId }));
+		}
+	}, [storeRehydrated]);
 
 	useEffect(() => {
 		if (isPageLoadReady) {
@@ -85,6 +108,12 @@ const TrialDescriptionPage = () => {
 	const initTrialData = () => {
 		setIsTrialLoading(false);
 		setIsPageLoadReady(true);
+	};
+
+	const isAllFetchingComplete = () => {
+		const isFetchingComplete =
+			trial && trial.briefTitle && searchCriteriaObject;
+		return isFetchingComplete;
 	};
 
 	const handleStartOver = () => {

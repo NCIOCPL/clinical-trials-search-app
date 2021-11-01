@@ -1,11 +1,11 @@
-import { queryStringToFormObject } from '../queryStringToFormObject';
+import { queryStringToSearchCriteria } from '../queryStringToSearchCriteria';
 import {
 	getDiseaseFetcher,
 	TYPE_EXPECTATION,
-} from './queryStringToFormObject.common';
+} from './queryStringToSearchCriteria.common';
 import { defaultState } from './defaultStateCopy';
 
-describe('Advanced - Disease - queryStringToFormObject maps query to form', () => {
+describe('Advanced - Disease - queryStringToSearchCriteria maps query to form', () => {
 	const goodMappingTestCases = [
 		[
 			'adv - single id cancer type',
@@ -272,7 +272,7 @@ describe('Advanced - Disease - queryStringToFormObject maps query to form', () =
 	// Test iterates over multiple cases defined by mappingTestCases
 	it.each(goodMappingTestCases)(
 		'%# - correctly maps %s',
-		(
+		async (
 			testName,
 			urlQuery,
 			diseaseFetcher,
@@ -281,21 +281,20 @@ describe('Advanced - Disease - queryStringToFormObject maps query to form', () =
 			additionalExpectedQuery
 		) => {
 			const expected = {
-				formState: {
+				searchCriteria: {
 					...defaultState,
 					...additionalExpectedQuery,
 				},
 				errors: [],
 			};
 
-			queryStringToFormObject(
+			const actual = await queryStringToSearchCriteria(
 				urlQuery,
 				diseaseFetcher,
 				interventionsFetcher,
 				zipcodeFetcher
-			).then((actual) => {
-				expect(actual).toEqual(expected);
-			});
+			);
+			expect(actual).toEqual(expected);
 		}
 	);
 });

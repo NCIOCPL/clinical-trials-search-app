@@ -3,7 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useTracking } from 'react-tracking';
-import { updateFormField, clearForm, receiveData } from '../../store/actions';
+import {
+	updateFormField,
+	updateFormSearchCriteria,
+	clearForm,
+	receiveData,
+} from '../../store/actions';
 import {
 	ChatOpener,
 	Delighter,
@@ -12,13 +17,19 @@ import {
 	Pager,
 } from '../../components/atomic';
 import { TRY_NEW_SEARCH_LINK } from '../../constants';
-import { formToTrackingData } from '../../utilities';
+import ErrorPage from '../ErrorPage';
+import {
+	formDataConverter,
+	formToTrackingData,
+	queryStringToSearchCriteria,
+	runQueryFetchers,
+} from '../../utilities';
 import { useModal, useStoreToFindTrials } from '../../hooks';
 import ResultsPageHeader from './ResultsPageHeader';
 import ResultsList from './ResultsList';
 import PrintModalContent from './PrintModalContent';
-import { formDataConverter } from '../../utilities/formDataConverter';
 import { useAppSettings } from '../../store/store.js';
+
 const queryString = require('query-string');
 
 const ResultsPage = () => {
@@ -32,8 +43,11 @@ const ResultsPage = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [trialResults, setTrialResults] = useState([]);
 	const [resultsCount, setResultsCount] = useState(0);
+	const [error, setError] = useState([]);
 	const [isPageLoadReady, setIsPageLoadReady] = useState(false);
-	const formSnapshot = useSelector((store) => store.form);
+	// This is the only used to derive formType when zip is invalid,
+	// when the form store is removed this will be removed
+	const [searchCriteriaObject, setSearchCriteriaObject] = useState();
 	const { resultsPage } = useSelector((store) => store.form);
 	const cache = useSelector((store) => store.cache);
 	const qs = queryString.extract(location.search);
@@ -43,8 +57,11 @@ const ResultsPage = () => {
 		cache['selectedTrialsForPrint'] || []
 	);
 	const tracking = useTracking();
-	const [{ analyticsName, canonicalHost, siteName, ctsTitle }] =
-		useAppSettings();
+	const [
+		{ analyticsName, canonicalHost, services, siteName, zipConversionEndpoint },
+	] = useAppSettings();
+	const ctsapiclient = services.ctsSearch();
+
 	const handleUpdate = (field, value) => {
 		dispatch(
 			updateFormField({
@@ -58,46 +75,60 @@ const ResultsPage = () => {
 		tracking.trackEvent(analyticsPayload);
 	};
 
+	// This all needs to be reconciled once new fetching is implemented
+	// One loading state to rule them all
+	const isAllFetchingComplete = () => {
+		const isFetchingComplete =
+			!isLoading && isPageLoadReady && !pageIsLoading && searchCriteriaObject;
+		return isFetchingComplete;
+	};
+
 	// scroll to top on mount
 	useEffect(() => {
 		window.scrollTo(0, 0);
-		if (trialResults && trialResults.total >= 0) {
+		if (isAllFetchingComplete()) {
 			initData();
-		} else if (!formSnapshot.hasInvalidZip) {
-			// data is in the store
-			setCurrCacheKey(qs);
-			fetchTrials(qs);
+		} else if (!searchCriteriaObject) {
+			// Get search criteria object
+			const searchCriteria = async () => {
+				const { diseaseFetcher, interventionFetcher, zipFetcher } =
+					await runQueryFetchers(ctsapiclient, zipConversionEndpoint);
+				return await queryStringToSearchCriteria(
+					qs,
+					diseaseFetcher,
+					interventionFetcher,
+					zipFetcher
+				);
+			};
+			searchCriteria().then((res) => {
+				setSearchCriteriaObject(res.searchCriteria);
+				if (res.errors.length) {
+					setError(res.errors);
+				} else {
+					dispatch(updateFormSearchCriteria(res.searchCriteria));
+					setCurrCacheKey(qs);
+					fetchTrials(qs);
+				}
+			});
 		} else {
-			//something went wrog
+			// Something went wrong
 			setPageIsLoading(false);
 			setIsLoading(false);
 		}
 	}, []);
 
-	// I think this code is inert since the initial state
-	// is false, and nothing calls storeRehydrated except
-	// itself
-	// useEffect(() => {
-	//   if (storeRehydrated) {
-	//     setIsLoading(true);
-	//     setCurrCacheKey(locsearch);
-	//     fetchTrials(locsearch);
-	//     setStoreRehydrated(false);
-	//   }
-	// }, [storeRehydrated]);
-
-	//when trial results come in, open up shop
+	// When trial results come in, open up shop
 	useEffect(() => {
 		if (isLoading && cache[currCacheKey] && cache[currCacheKey].total >= 0) {
 			initData();
 		}
 	}, [cache[currCacheKey]]);
 
-	const formData = formToTrackingData(formSnapshot);
-
 	useEffect(() => {
 		// This should also be dependent on the current route/url
-		if (isPageLoadReady && !pageIsLoading) {
+		if (isAllFetchingComplete()) {
+			const formData = formToTrackingData(searchCriteriaObject);
+
 			handleTracking({
 				// These properties are required.
 				type: 'PageLoad',
@@ -109,15 +140,19 @@ const ResultsPage = () => {
 				metaTitle: `Clinical Trials Search Results - ${siteName}`,
 				title: `Clinical Trials Search Results`,
 				status: 'success',
-				formType: formSnapshot.formType,
+				formType: searchCriteriaObject.formType,
 				numResults: resultsCount,
 				formData: formData,
-				helperFormData: formDataConverter(formSnapshot.formType, formData),
+				helperFormData: formDataConverter(
+					searchCriteriaObject.formType,
+					formData
+				),
 			});
 			// Since we can page we need to prep isPageLoadReady
 			setIsPageLoadReady(false);
 		}
-	}, [isPageLoadReady, pageIsLoading]);
+	}, [isPageLoadReady, pageIsLoading, searchCriteriaObject]);
+
 	//track usage of selected results for print
 	useEffect(() => {
 		// update cacheStore with new selectedResults Value
@@ -132,7 +167,7 @@ const ResultsPage = () => {
 				linkName: 'CTSResultsSelectedErrorClick',
 				// Any additional properties fall into the "page.additionalDetails" bucket
 				// for the event.
-				formType: formSnapshot.formType,
+				formType: searchCriteriaObject.formType,
 				errorReason: 'maxselectionreached',
 			});
 			toggleModal();
@@ -157,7 +192,7 @@ const ResultsPage = () => {
 				trialResults.trials.map((item) => {
 					let resItem = {
 						id: item.nciID,
-						fromPage: formSnapshot.resultsPage + 1,
+						fromPage: searchCriteriaObject.resultsPage + 1,
 					};
 					return resItem;
 				})
@@ -183,7 +218,7 @@ const ResultsPage = () => {
 			event: 'ClinicalTrialsSearchApp:Other:NewSearchLinkClick',
 			analyticsName,
 			linkName: 'CTStartOverClick',
-			formType: formSnapshot.formType,
+			formType: searchCriteriaObject.formType,
 			source: linkType,
 		});
 		dispatch(clearForm());
@@ -340,7 +375,7 @@ const ResultsPage = () => {
 				event: 'ClinicalTrialsSearchApp:Other:PrintSelectedError',
 				analyticsName,
 				linkName: 'CTSResultsSelectedErrorClick',
-				formType: formSnapshot.formType,
+				formType: searchCriteriaObject.formType,
 				errorReason: 'noneselected',
 			});
 		} else if (selectedResults.length >= 100) {
@@ -349,7 +384,7 @@ const ResultsPage = () => {
 				event: 'ClinicalTrialsSearchApp:Other:PrintMaxExceededClick',
 				analyticsName,
 				linkName: 'CTSResultsSelectedErrorClick',
-				formType: formSnapshot.formType,
+				formType: searchCriteriaObject.formType,
 				errorReason: 'maxselectionreached',
 			});
 		} else {
@@ -358,7 +393,7 @@ const ResultsPage = () => {
 				event: 'ClinicalTrialsSearchApp:Other:PrintSelectedButtonClick',
 				analyticsName,
 				linkName: 'CTSResultsPrintSelectedClick',
-				formType: formSnapshot.formType,
+				formType: searchCriteriaObject.formType,
 				buttonPos,
 				selectAll,
 				selectedCount: selectedResults.length,
@@ -372,44 +407,7 @@ const ResultsPage = () => {
 	};
 
 	const renderInvalidZip = () => {
-		handleTracking({
-			// These properties are required.
-			type: 'PageLoad',
-			event: `ClinicalTrialsSearchApp:Load:Results`,
-			analyticsName,
-			name: canonicalHost.replace('https://', '') + window.location.pathname,
-			title: `${ctsTitle} - Search results`,
-			// Any additional properties fall into the "page.additionalDetails" bucket
-			// for the event.
-			status: 'error',
-			formType: formSnapshot.formType,
-		});
-		return (
-			<div className="results-list invalid-zip">
-				<p>
-					Sorry you seem to have entered invalid criteria. Please check the
-					following, and try your search again:
-				</p>
-				<ul>
-					<li>Zip Code</li>
-				</ul>
-				<div>
-					For assistance, please contact the Cancer Information Service. You can{' '}
-					<ChatOpener /> or call 1-800-4-CANCER (1-800-422-6237).
-				</div>
-				<p>
-					<Link
-						to={`${
-							formSnapshot.formType === 'basic'
-								? '/about-cancer/treatment/clinical-trials/search'
-								: '/about-cancer/treatment/clinical-trials/search/advanced'
-						}`}
-						onClick={() => handleStartOver(TRY_NEW_SEARCH_LINK)}>
-						Try a new search
-					</Link>
-				</p>
-			</div>
-		);
+		return <ErrorPage initErrorsList={error} />;
 	};
 
 	const renderNoResults = () => {
@@ -425,7 +423,7 @@ const ResultsPage = () => {
 				<p>
 					<Link
 						to={`${
-							formSnapshot.formType === 'basic'
+							searchCriteriaObject.formType === 'basic'
 								? '/about-cancer/treatment/clinical-trials/search'
 								: '/about-cancer/treatment/clinical-trials/search/advanced'
 						}`}
@@ -463,7 +461,7 @@ const ResultsPage = () => {
 			</Helmet>
 			<article className="results-page">
 				<h1>Clinical Trials Search Results</h1>
-				{formSnapshot.hasInvalidZip ? (
+				{error.length && error.filter((err) => err.fieldName === 'zip') ? (
 					<>{renderInvalidZip()}</>
 				) : (
 					<>

@@ -40,7 +40,6 @@ describe('<Search Criteria Table />', () => {
 				{ label: 'Phase III', value: 'iii', checked: false },
 				{ label: 'Phase IV', value: 'iv', checked: false },
 			], // (tp) Trial phase
-			nihOnly: false, // (nih) At NIH only
 			vaOnly: false, // (va) VA facilities only
 			drugs: [], // (dt) Drug/Drug family
 			treatments: [], // (ti) Treatment/Interventions
@@ -95,7 +94,6 @@ describe('<Search Criteria Table />', () => {
 				{ label: 'Phase III', value: 'iii', checked: true },
 				{ label: 'Phase IV', value: 'iv', checked: true },
 			], // (tp) Trial phase
-			nihOnly: false, // (nih) At NIH only
 			vaOnly: true, // (va) VA facilities only
 			drugs: [{ name: 'Bevacizumab', codes: ['C6789'] }], // (dt) Drug/Drug family
 			treatments: [{ name: 'Radiation Therapy', codes: ['C5678'] }], // (ti) Treatment/Interventions
@@ -232,7 +230,6 @@ describe('<Search Criteria Table />', () => {
 				{ label: 'Phase III', value: 'iii', checked: false },
 				{ label: 'Phase IV', value: 'iv', checked: false },
 			], // (tp) Trial phase
-			nihOnly: false, // (nih) At NIH only
 			vaOnly: false, // (va) VA facilities only
 			drugs: [], // (dt) Drug/Drug family
 			treatments: [], // (ti) Treatment/Interventions
@@ -314,7 +311,6 @@ describe('<Search Criteria Table />', () => {
 				{ label: 'Phase III', value: 'iii', checked: false },
 				{ label: 'Phase IV', value: 'iv', checked: false },
 			], // (tp) Trial phase
-			nihOnly: false, // (nih) At NIH only
 			vaOnly: false, // (va) VA facilities only
 			drugs: [], // (dt) Drug/Drug family
 			treatments: [], // (ti) Treatment/Interventions
@@ -396,7 +392,6 @@ describe('<Search Criteria Table />', () => {
 				{ label: 'Phase III', value: 'iii', checked: false },
 				{ label: 'Phase IV', value: 'iv', checked: false },
 			], // (tp) Trial phase
-			nihOnly: false, // (nih) At NIH only
 			vaOnly: false, // (va) VA facilities only
 			drugs: [], // (dt) Drug/Drug family
 			treatments: [], // (ti) Treatment/Interventions
@@ -474,7 +469,6 @@ describe('<Search Criteria Table />', () => {
 				{ label: 'Phase III', value: 'iii', checked: false },
 				{ label: 'Phase IV', value: 'iv', checked: false },
 			], // (tp) Trial phase
-			nihOnly: false, // (nih) At NIH only
 			vaOnly: false, // (va) VA facilities only
 			drugs: [], // (dt) Drug/Drug family
 			treatments: [], // (ti) Treatment/Interventions
@@ -560,7 +554,6 @@ describe('<Search Criteria Table />', () => {
 				{ label: 'Phase III', value: 'iii', checked: false },
 				{ label: 'Phase IV', value: 'iv', checked: false },
 			], // (tp) Trial phase
-			nihOnly: true, // (nih) At NIH only
 			vaOnly: false, // (va) VA facilities only
 			drugs: [], // (dt) Drug/Drug family
 			treatments: [], // (ti) Treatment/Interventions

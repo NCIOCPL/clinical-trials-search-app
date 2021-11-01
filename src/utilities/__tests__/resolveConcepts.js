@@ -2,7 +2,7 @@ import { resolveConcepts } from '../resolveConcepts';
 import {
 	getDiseaseFetcher,
 	TYPE_EXPECTATION,
-} from './queryStringToFormObject.common';
+} from './queryStringToSearchCriteria.common';
 
 describe('resolveConcepts maps query to form', () => {
 	const resolveTestCases = [
@@ -129,10 +129,9 @@ describe('resolveConcepts maps query to form', () => {
 	// Test iterates over multiple cases defined by mappingTestCases
 	it.each(resolveTestCases)(
 		'%# - correctly resolves %s',
-		(testName, queryDiseases, diseaseFetcher, expected) => {
-			resolveConcepts(queryDiseases, diseaseFetcher).then((actual) => {
-				expect(actual).toEqual(expected);
-			});
+		async (testName, queryDiseases, diseaseFetcher, expected) => {
+			const actual = await resolveConcepts(queryDiseases, diseaseFetcher);
+			expect(actual).toEqual(expected);
 		}
 	);
 });

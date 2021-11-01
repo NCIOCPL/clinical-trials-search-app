@@ -171,6 +171,6 @@ const ErrorPage = ({ initErrorsList }) => {
 	);
 };
 ErrorPage.propTypes = {
-	initErrorsList: PropTypes.object,
+	initErrorsList: PropTypes.array,
 };
 export default ErrorPage;

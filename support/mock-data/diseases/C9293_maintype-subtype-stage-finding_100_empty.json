@@ -1,0 +1,20 @@
+{
+	"terms": [
+		{
+			"name": "Brain/Spinal Cord Tumor",
+			"codes": [
+				"C9293"
+			],
+			"ancestor_ids": [
+				"C3268"
+			],
+			"parent_ids": [
+				"C3268"
+			],
+			"type": [
+				"maintype",
+				"subtype"
+			]
+		}
+	]
+}

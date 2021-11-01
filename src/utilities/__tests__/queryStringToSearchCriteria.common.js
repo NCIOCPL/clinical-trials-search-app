@@ -100,10 +100,9 @@ const fetcherTests = [
 describe('fetch disease', () => {
 	it.each(fetcherTests)(
 		'getDiseaseFetcher - %s',
-		(name, diseaseFetcher, expected) => {
-			diseaseFetcher(['C1111', 'C1112']).then((actual) => {
-				expect(actual).toEqual(expected);
-			});
+		async (name, diseaseFetcher, expected) => {
+			const actual = await diseaseFetcher(['C1111', 'C1112']);
+			expect(actual).toEqual(expected);
 		}
 	);
 });

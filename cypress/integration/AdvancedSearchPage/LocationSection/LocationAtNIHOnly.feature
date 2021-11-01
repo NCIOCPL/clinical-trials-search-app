@@ -32,7 +32,9 @@ Feature: As a user, I want to be able to narrow down my search by location
         Given the user navigates to "/about-cancer/treatment/clinical-trials/search/r?loc=4&rl=2"
         Then the search is executed and results page is displayed
         And trial info displayes "Results 1-10  of 283 for your search "
-        And search criteria table is not displayed
+				And the criteria table displays the following
+					| Category | Selection                                                  |
+					| At NIH   | Only show trials at the NIH Clinical Center (Bethesda, MD) |
         And the url query has the following corresponding code
             | parameter | value |
             | loc       | 4     |

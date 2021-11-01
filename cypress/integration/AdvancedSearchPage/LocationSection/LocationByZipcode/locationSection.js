@@ -233,3 +233,8 @@ And('text {string} is displayed', (text) => {
 And('search criteria table is not displayed', () => {
 	cy.get('div.cts-accordion.table-dropdown').should('not.exist');
 });
+
+And('{string} has a link {string}', (link, href) => {
+	cy.get('form').should('have.attr', 'action', href);
+	cy.get('form button').should('have.text', link);
+});

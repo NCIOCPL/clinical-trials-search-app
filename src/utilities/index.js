@@ -1,3 +1,4 @@
+export { formDataConverter } from './formDataConverter';
 export { getStateNameFromAbbr } from './getStateNameFromAbbr';
 export { isEmptyObj } from './isEmptyObj';
 export { buildQueryString } from './buildQueryString';
@@ -22,6 +23,7 @@ export { sortItems, sortItemsByName } from './sortItems';
 export { ctsapiDiseaseFetcher } from './ctsapiDiseaseFetcher';
 export { ctsapiInterventionFetcher } from './ctsapiInterventionFetcher';
 export { zipcodeFetcher } from './zipcodeFetcher';
-export { queryStringToFormObject } from './queryStringToFormObject';
+export { queryStringToSearchCriteria } from './queryStringToSearchCriteria';
 export { formToTrackingData } from './formToTrackingData';
 export { EDDLAnalyticsHandler } from './eddl-analytics-handler';
+export { runQueryFetchers } from './runQueryFetchers';

@@ -1,0 +1,35 @@
+{
+	"terms": [
+		{
+			"name": "Bladder Cancer",
+			"codes": [
+				"C4912"
+			],
+			"ancestor_ids": [
+
+			],
+			"parent_ids": [
+
+			],
+			"type": [
+				"maintype"
+			]
+		},
+		{
+			"name": "Stage III Bladder Cancer",
+			"codes": [
+				"C140421",
+				"C7898"
+			],
+			"ancestor_ids": [
+				"C4912"
+			],
+			"parent_ids": [
+				"C4912"
+			],
+			"type": [
+				"stage"
+			]
+		}
+	]
+}
