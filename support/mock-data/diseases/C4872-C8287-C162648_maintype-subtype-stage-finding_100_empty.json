@@ -1,0 +1,49 @@
+{
+	"terms":[
+		{
+			"name":"Advanced Breast Carcinoma",
+			"codes":[
+				"C162648"
+			],
+			"ancestor_ids":[
+				"C4872"
+			],
+			"parent_ids":[
+				"C4872"
+			],
+			"type":[
+				"subtype"
+			]
+		},
+		{
+			"name":"Bilateral Breast Cancer",
+			"codes":[
+				"C8287"
+			],
+			"ancestor_ids":[
+				"C4872"
+			],
+			"parent_ids":[
+				"C4872"
+			],
+			"type":[
+				"subtype"
+			]
+		},
+		{
+			"name":"Breast Cancer",
+			"codes":[
+				"C4872"
+			],
+			"ancestor_ids":[
+
+			],
+			"parent_ids":[
+
+			],
+			"type":[
+				"maintype"
+			]
+		}
+	]
+}

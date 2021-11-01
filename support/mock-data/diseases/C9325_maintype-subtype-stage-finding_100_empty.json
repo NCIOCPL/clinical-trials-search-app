@@ -1,0 +1,20 @@
+{
+	"terms":[
+		{
+			"name":"Adrenal Cortex Cancer",
+			"codes":[
+				"C9325"
+			],
+			"ancestor_ids":[
+				"C7352"
+			],
+			"parent_ids":[
+				"C7352"
+			],
+			"type":[
+				"maintype",
+				"subtype"
+			]
+		}
+	]
+}

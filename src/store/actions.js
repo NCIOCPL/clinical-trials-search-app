@@ -2,6 +2,7 @@
 import {
 	UPDATE_FORM_FIELD,
 	UPDATE_FORM,
+	UPDATE_FORM_SEARCH_CRITERIA,
 	CLEAR_FORM,
 	RECEIVE_DATA,
 } from './identifiers';
@@ -26,6 +27,13 @@ export function updateFormField({ field, value }) {
 export function updateForm(newState) {
 	return {
 		type: UPDATE_FORM,
+		payload: newState,
+	};
+}
+
+export function updateFormSearchCriteria(newState) {
+	return {
+		type: UPDATE_FORM_SEARCH_CRITERIA,
 		payload: newState,
 	};
 }

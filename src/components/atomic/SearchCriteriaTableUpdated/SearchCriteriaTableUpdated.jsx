@@ -25,7 +25,6 @@ const SearchCriteriaTableUpdated = ({ searchCriteriaObject }) => {
 		healthyVolunteers,
 		trialTypes,
 		trialPhases,
-		nihOnly,
 		vaOnly,
 		drugs,
 		treatments,
@@ -162,13 +161,11 @@ const SearchCriteriaTableUpdated = ({ searchCriteriaObject }) => {
 				}
 				break;
 			case 'search-location-nih':
-				if (nihOnly) {
-					criteria.push({
-						category: 'At NIH',
-						selection:
-							'Only show trials at the NIH Clinical Center (Bethesda, MD)',
-					});
-				}
+				criteria.push({
+					category: 'At NIH',
+					selection:
+						'Only show trials at the NIH Clinical Center (Bethesda, MD)',
+				});
 				break;
 			default:
 				break;

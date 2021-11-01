@@ -1,5 +1,4 @@
 import * as queryString from 'query-string';
-import { defaultState } from '../store/reducers/form';
 import { resolveConcepts } from './resolveConcepts';
 import { getStateNameFromAbbr } from './getStateNameFromAbbr';
 
@@ -24,16 +23,64 @@ const ALLOWED_ADVANCED_INTERVENTIONS = {
 	treatments: ['other', 'none'],
 };
 
+// NOTE: Some state values are not passed into the url
+// and solely handled by event updates using redux actions to the form store.
+// This is merged with form store using "updateForm" in the results and description pages
+const defaultState = {
+	age: '', // (a) Age
+	cancerType: { name: '', codes: [] }, // (ct) Cancer Type/Condition
+	subtypes: [], // (st) Subtype
+	stages: [], // (stg) Stage
+	findings: [], // (fin) Side effects
+	keywordPhrases: '', // (q) Cancer Type Keyword (ALSO Keyword Phrases)
+	zip: '', // (z) Zipcode
+	zipCoords: { lat: '', long: '' },
+	zipRadius: '100', //(zp) Radius
+	country: 'United States', // (lcnty) Country
+	states: [], // (lst) State
+	city: '', // (lcty) City
+	hospital: { term: '', termKey: '' }, // (hos) Hospital
+	healthyVolunteers: false, // (hv) Healthy Volunteers,
+	trialTypes: [
+		{ label: 'Treatment', value: 'treatment', checked: false },
+		{ label: 'Prevention', value: 'prevention', checked: false },
+		{ label: 'Supportive Care', value: 'supportive_care', checked: false },
+		{
+			label: 'Health Services Research',
+			value: 'health_services_research',
+			checked: false,
+		},
+		{ label: 'Diagnostic', value: 'diagnostic', checked: false },
+		{ label: 'Screening', value: 'screening', checked: false },
+		{ label: 'Basic Science', value: 'basic_science', checked: false },
+		{ label: 'Other', value: 'other', checked: false },
+	], // (tt) Trial Type
+	trialPhases: [
+		{ label: 'Phase I', value: 'i', checked: false },
+		{ label: 'Phase II', value: 'ii', checked: false },
+		{ label: 'Phase III', value: 'iii', checked: false },
+		{ label: 'Phase IV', value: 'iv', checked: false },
+	], // (tp) Trial phase
+	vaOnly: false, // (va) VA facilities only
+	drugs: [], // (dt) Drug/Drug family
+	treatments: [], // (ti) Treatment/Interventions
+	trialId: '', // (tid) Trial ID,
+	investigator: { term: '', termKey: '' }, // (in) Trial investigators ('in' is legacy but is a keyword and does not work well as a key name; be ready to handle both in query string)
+	leadOrg: { term: '', termKey: '' }, // (lo) Lead Organization
+	resultsPage: 0,
+	formType: '', // (empty string (default) | basic | advanced)
+	location: 'search-location-all', // active location option (search-location-all | search-location-zip | search-location-country | search-location-hospital | search-location-nih)
+};
+
 /**
- * Maps query parameters to an object that can be used to update
- * the form store.
+ * Maps query parameters to an object.
  *
  * @param {string} urlQuery - the query string to parse
  * @param {function} diseaseFetcher - the function to fetch a list of diseases
  * @param {function} interventionsFetcher - the function to fetch a list of interventions
  * @param {function} zipcodeFetcher - the function to fetch a zip code
  */
-export const queryStringToFormObject = async (
+export const queryStringToSearchCriteria = async (
 	urlQuery,
 	diseaseFetcher,
 	interventionsFetcher,
@@ -41,7 +88,7 @@ export const queryStringToFormObject = async (
 ) => {
 	// Setup the two items we will be modifying throughout the parsing.
 	let rtnErrorsList = [];
-	let rtnFormState = { ...defaultState };
+	let rtnSearchCriteria = { ...defaultState };
 
 	const query = queryString.parse(urlQuery, {
 		parseBooleans: true,
@@ -62,19 +109,19 @@ export const queryStringToFormObject = async (
 	 **************************/
 	if (query['rl']) {
 		if (query['rl'] === '1') {
-			rtnFormState = {
-				...rtnFormState,
+			rtnSearchCriteria = {
+				...rtnSearchCriteria,
 				formType: 'basic',
 			};
 		} else if (query['rl'] === '2') {
-			rtnFormState = {
-				...rtnFormState,
+			rtnSearchCriteria = {
+				...rtnSearchCriteria,
 				formType: 'advanced',
 			};
 		} else {
 			// HARD STOP. BAIL. DO NOT PASS GO.
 			return {
-				formState: null,
+				searchCriteria: null,
 				errors: [
 					{
 						fieldName: 'formType',
@@ -87,8 +134,8 @@ export const queryStringToFormObject = async (
 	// Details page can take in a r=1 param
 	else if (window.location.pathname.endsWith('/v') && query['r']) {
 		return {
-			formState: {
-				...rtnFormState,
+			searchCriteria: {
+				...rtnSearchCriteria,
 				formType: 'custom',
 			},
 			errors: rtnErrorsList,
@@ -98,7 +145,7 @@ export const queryStringToFormObject = async (
 	else if (window.location.pathname.endsWith('/r')) {
 		// HARD STOP. BAIL. DO NOT PASS GO.
 		return {
-			formState: null,
+			searchCriteria: null,
 			errors: [
 				{
 					fieldName: 'formType',
@@ -112,7 +159,7 @@ export const queryStringToFormObject = async (
 		// details page we would assume this is just a direct
 		// request.
 		return {
-			formState: rtnFormState,
+			searchCriteria: rtnSearchCriteria,
 			errors: rtnErrorsList,
 		};
 	}
@@ -130,8 +177,8 @@ export const queryStringToFormObject = async (
 				message: 'Please enter a valid age parameter.',
 			});
 		} else {
-			rtnFormState = {
-				...rtnFormState,
+			rtnSearchCriteria = {
+				...rtnSearchCriteria,
 				age,
 			};
 		}
@@ -144,8 +191,8 @@ export const queryStringToFormObject = async (
 		const phrase = Array.isArray(query['q'])
 			? query['q'].join(',')
 			: query['q'];
-		rtnFormState = {
-			...rtnFormState,
+		rtnSearchCriteria = {
+			...rtnSearchCriteria,
 			keywordPhrases: phrase,
 		};
 	}
@@ -157,8 +204,8 @@ export const queryStringToFormObject = async (
 		const leadOrg = Array.isArray(query['lo'])
 			? query['lo'].join(',')
 			: query['lo'];
-		rtnFormState = {
-			...rtnFormState,
+		rtnSearchCriteria = {
+			...rtnSearchCriteria,
 			leadOrg: { term: leadOrg, termKey: leadOrg },
 		};
 	}
@@ -168,8 +215,8 @@ export const queryStringToFormObject = async (
 		// URL parsing will split params into an array on commas.
 		// string param needs to rejoin.
 		const pi = Array.isArray(query['in']) ? query['in'].join(',') : query['in'];
-		rtnFormState = {
-			...rtnFormState,
+		rtnSearchCriteria = {
+			...rtnSearchCriteria,
 			investigator: { term: pi, termKey: pi },
 		};
 	}
@@ -181,8 +228,8 @@ export const queryStringToFormObject = async (
 		const ids = Array.isArray(query['tid'])
 			? query['tid'].join(',')
 			: query['tid'];
-		rtnFormState = {
-			...rtnFormState,
+		rtnSearchCriteria = {
+			...rtnSearchCriteria,
 			trialId: ids,
 		};
 	}
@@ -191,8 +238,8 @@ export const queryStringToFormObject = async (
 	if (query['pn']) {
 		const pageNum = parseInt(query['pn']);
 		if (!Number.isNaN(pageNum) && pageNum > 0) {
-			rtnFormState = {
-				...rtnFormState,
+			rtnSearchCriteria = {
+				...rtnSearchCriteria,
 				resultsPage: pageNum,
 			};
 		} else {
@@ -204,8 +251,8 @@ export const queryStringToFormObject = async (
 	if (query['hv']) {
 		const healthy = parseInt(query['hv']);
 		if (healthy === 1) {
-			rtnFormState = {
-				...rtnFormState,
+			rtnSearchCriteria = {
+				...rtnSearchCriteria,
 				healthyVolunteers: true,
 			};
 		} else {
@@ -221,8 +268,8 @@ export const queryStringToFormObject = async (
 	if (query['va']) {
 		const vaOnly = parseInt(query['va']);
 		if (vaOnly === 1) {
-			rtnFormState = {
-				...rtnFormState,
+			rtnSearchCriteria = {
+				...rtnSearchCriteria,
 				vaOnly: true,
 			};
 		} else {
@@ -231,15 +278,15 @@ export const queryStringToFormObject = async (
 	}
 
 	// Trial Types and Phases
-	const [typeFormState, typeErrorsList] = processChecklistField(
+	const [typeCriteria, typeErrorsList] = processChecklistField(
 		query['tt'],
 		'trialTypes'
 	);
 
 	// Add form state
-	rtnFormState = {
-		...rtnFormState,
-		...typeFormState,
+	rtnSearchCriteria = {
+		...rtnSearchCriteria,
+		...typeCriteria,
 	};
 
 	// Add Errors
@@ -250,8 +297,8 @@ export const queryStringToFormObject = async (
 		'trialPhases'
 	);
 	// Add form state
-	rtnFormState = {
-		...rtnFormState,
+	rtnSearchCriteria = {
+		...rtnSearchCriteria,
 		...phasesFormState,
 	};
 
@@ -264,14 +311,14 @@ export const queryStringToFormObject = async (
 
 	// This needs 2 passes when it is zipcode. So let's
 	// treat any location search as a zip code search and
-	// defer the setting of formState until after our
+	// defer the setting of searchCriteria until after our
 	// zipcode lookup function is called. (It does not
 	// need to actually call the API for any other
 	// locations...)
 
 	const [queryLocationsPass1, locationErrorsPass1] = processLocationsPass1(
 		query,
-		rtnFormState.formType
+		rtnSearchCriteria.formType
 	);
 
 	// Add in errors for pass 1.
@@ -319,8 +366,8 @@ export const queryStringToFormObject = async (
 	const [queryLocationsPass2, locationErrorsPass2] =
 		processLocationsPass2(locationResults);
 	// Add in correct locations from pass 2.
-	rtnFormState = {
-		...rtnFormState,
+	rtnSearchCriteria = {
+		...rtnSearchCriteria,
 		...queryLocationsPass2,
 	};
 
@@ -330,12 +377,12 @@ export const queryStringToFormObject = async (
 	// Get diseases for pass 2.
 	const [queryDiseasesPass2, diseaseErrorsPass2] = processDiseasesPass2(
 		diseaseResults,
-		rtnFormState.formType
+		rtnSearchCriteria.formType
 	);
 
 	// Add in correct concepts from pass 2.
-	rtnFormState = {
-		...rtnFormState,
+	rtnSearchCriteria = {
+		...rtnSearchCriteria,
 		...queryDiseasesPass2,
 	};
 
@@ -347,8 +394,8 @@ export const queryStringToFormObject = async (
 		processInterventionsPass2(interventionResults);
 
 	// Add in correct concepts from pass 2.
-	rtnFormState = {
-		...rtnFormState,
+	rtnSearchCriteria = {
+		...rtnSearchCriteria,
 		...queryInterventionsPass2,
 	};
 
@@ -356,7 +403,7 @@ export const queryStringToFormObject = async (
 	rtnErrorsList = [...rtnErrorsList, ...interventionErrorsPass2];
 
 	return {
-		formState: rtnErrorsList.length > 0 ? null : rtnFormState,
+		searchCriteria: rtnErrorsList.length > 0 ? null : rtnSearchCriteria,
 		errors: rtnErrorsList,
 	};
 };
@@ -661,7 +708,7 @@ const processDiseasesPass1 = (query) => {
  * @param {string} formType
  */
 const processDiseasesPass2 = (diseaseResults, formType) => {
-	let rtnFormState = {};
+	let rtnSearchCriteria = {};
 	let rtnErrorsList = [];
 	// Now do the second pass for the diseases
 	for (const [fieldName, selectedConcepts] of Object.entries(diseaseResults)) {
@@ -687,8 +734,8 @@ const processDiseasesPass2 = (diseaseResults, formType) => {
 			if (badType) {
 				rtnErrorsList.push(makeError(fieldName, 'Incorrect disease type'));
 			} else {
-				rtnFormState = {
-					...rtnFormState,
+				rtnSearchCriteria = {
+					...rtnSearchCriteria,
 					[fieldName]:
 						fieldName === 'cancerType' ? selectedConcepts[0] : selectedConcepts,
 				};
@@ -696,7 +743,7 @@ const processDiseasesPass2 = (diseaseResults, formType) => {
 		}
 	}
 
-	return [rtnFormState, rtnErrorsList];
+	return [rtnSearchCriteria, rtnErrorsList];
 };
 
 /**
@@ -746,7 +793,7 @@ const processInterventionsPass1 = (query) => {
  * @param {*} interventionResults
  */
 const processInterventionsPass2 = (interventionResults) => {
-	let rtnFormState = {};
+	let rtnSearchCriteria = {};
 	let rtnErrorsList = [];
 	// Now do the second pass for the interventions
 	for (const [fieldName, selectedConcepts] of Object.entries(
@@ -773,15 +820,15 @@ const processInterventionsPass2 = (interventionResults) => {
 					makeError(fieldName, 'Incorrect intervention category')
 				);
 			} else {
-				rtnFormState = {
-					...rtnFormState,
+				rtnSearchCriteria = {
+					...rtnSearchCriteria,
 					[fieldName]: selectedConcepts,
 				};
 			}
 		}
 	}
 
-	return [rtnFormState, rtnErrorsList];
+	return [rtnSearchCriteria, rtnErrorsList];
 };
 
 /**
@@ -820,7 +867,7 @@ const toConceptsList = (contents) => {
 };
 
 const processChecklistField = (queryParam, fieldName) => {
-	let rtnFormState = {};
+	let rtnSearchCriteria = {};
 	let rtnErrorsList = [];
 
 	if (queryParam) {
@@ -840,8 +887,8 @@ const processChecklistField = (queryParam, fieldName) => {
 			rtnErrorsList.push(makeError(fieldName, 'Invalid selection'));
 		} else {
 			// Now that the list looks good
-			rtnFormState = {
-				...rtnFormState,
+			rtnSearchCriteria = {
+				...rtnSearchCriteria,
 				[fieldName]: defaultState[fieldName].map((option) => ({
 					...option,
 					checked: selectedOptions.includes(option.value),
@@ -850,7 +897,7 @@ const processChecklistField = (queryParam, fieldName) => {
 		}
 	}
 
-	return [rtnFormState, rtnErrorsList];
+	return [rtnSearchCriteria, rtnErrorsList];
 };
 
 const resolveLocations = async (query, zipcodeFetcher) => {

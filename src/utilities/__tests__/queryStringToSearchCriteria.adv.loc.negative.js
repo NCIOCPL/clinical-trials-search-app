@@ -1,6 +1,6 @@
-import { queryStringToFormObject } from '../queryStringToFormObject';
+import { queryStringToSearchCriteria } from '../queryStringToSearchCriteria';
 
-describe('Advanced - Locations - Negative - queryStringToFormObject maps query to form', () => {
+describe('Advanced - Locations - Negative - queryStringToSearchCriteria maps query to form', () => {
 	const errorMappingTestCases = [
 		[
 			'Bad location value',
@@ -113,7 +113,7 @@ describe('Advanced - Locations - Negative - queryStringToFormObject maps query t
 	// Test iterates over multiple cases defined by mappingTestCases
 	it.each(errorMappingTestCases)(
 		'%# - errors mapping %s',
-		(
+		async (
 			testName,
 			urlQuery,
 			diseaseFetcher,
@@ -122,18 +122,17 @@ describe('Advanced - Locations - Negative - queryStringToFormObject maps query t
 			expectedErrors
 		) => {
 			const expected = {
-				formState: null,
+				searchCriteria: null,
 				errors: expectedErrors,
 			};
 
-			queryStringToFormObject(
+			const actual = await queryStringToSearchCriteria(
 				urlQuery,
 				diseaseFetcher,
 				interventionsFetcher,
 				zipcodeFetcher
-			).then((actual) => {
-				expect(actual).toEqual(expected);
-			});
+			);
+			expect(actual).toEqual(expected);
 		}
 	);
 });

@@ -34,7 +34,6 @@ export const defaultState = {
 		{ label: 'Phase III', value: 'iii', checked: false },
 		{ label: 'Phase IV', value: 'iv', checked: false },
 	], // (tp) Trial phase
-	nihOnly: false, // (nih) At NIH only
 	vaOnly: false, // (va) VA facilities only
 	drugs: [], // (dt) Drug/Drug family
 	treatments: [], // (ti) Treatment/Interventions
@@ -44,15 +43,6 @@ export const defaultState = {
 	resultsPage: 0,
 
 	formType: '', // (empty string (default) | basic | advanced)
-	isDirty: false, // only updated after submission of either form
-	zipModified: false,
-	hasInvalidZip: false, // zip does not return coodinates
-	refineSearch: false, //is the form in refine search mode
-	ageModified: false,
-	cancerTypeModified: false,
-	subtypeModified: false,
-	stagesModified: false,
-	keywordPhrasesModified: false,
 	location: 'search-location-all', // active location option (search-location-all | search-location-zip | search-location-country | search-location-hospital | search-location-nih)
 };
 describe('placeholder', () => {

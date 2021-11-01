@@ -88,6 +88,7 @@ const initialize = ({
 		language,
 		printCacheEndpoint,
 		rootId,
+		services,
 		siteName,
 		useSessionStorage,
 		zipConversionEndpoint,

@@ -1,7 +1,7 @@
-import { queryStringToFormObject } from '../queryStringToFormObject';
-import { getInterventionFetcher } from './queryStringToFormObject.common';
+import { queryStringToSearchCriteria } from '../queryStringToSearchCriteria';
+import { getInterventionFetcher } from './queryStringToSearchCriteria.common';
 
-describe('Advanced - Interventions - Negative - queryStringToFormObject maps query to form', () => {
+describe('Advanced - Interventions - Negative - queryStringToSearchCriteria maps query to form', () => {
 	const errorMappingTestCases = [
 		[
 			'bad drug id',
@@ -103,7 +103,7 @@ describe('Advanced - Interventions - Negative - queryStringToFormObject maps que
 	// Test iterates over multiple cases defined by mappingTestCases
 	it.each(errorMappingTestCases)(
 		'%# - errors mapping %s',
-		(
+		async (
 			testName,
 			urlQuery,
 			diseaseFetcher,
@@ -112,18 +112,17 @@ describe('Advanced - Interventions - Negative - queryStringToFormObject maps que
 			expectedErrors
 		) => {
 			const expected = {
-				formState: null,
+				searchCriteria: null,
 				errors: expectedErrors,
 			};
 
-			queryStringToFormObject(
+			const actual = await queryStringToSearchCriteria(
 				urlQuery,
 				diseaseFetcher,
 				interventionsFetcher,
 				zipcodeFetcher
-			).then((actual) => {
-				expect(actual).toEqual(expected);
-			});
+			);
+			expect(actual).toEqual(expected);
 		}
 	);
 });

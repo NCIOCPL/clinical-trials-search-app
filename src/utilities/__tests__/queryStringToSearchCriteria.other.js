@@ -1,18 +1,18 @@
-import { queryStringToFormObject } from '../queryStringToFormObject';
+import { queryStringToSearchCriteria } from '../queryStringToSearchCriteria';
 import { defaultState } from './defaultStateCopy';
 
-describe('Basic - queryStringToFormObject maps query to form', () => {
+describe('Basic - queryStringToSearchCriteria maps query to form', () => {
 	const diseaseFetcher = async () => [];
 	const interventionsFetcher = async () => [];
 	const zipcodeFetcher = async () => null;
 
 	it('No Query works for details', async () => {
 		const expected = {
-			formState: defaultState,
+			searchCriteria: defaultState,
 			errors: [],
 		};
 
-		const actual = await queryStringToFormObject(
+		const actual = await queryStringToSearchCriteria(
 			'',
 			diseaseFetcher,
 			interventionsFetcher,
@@ -27,14 +27,14 @@ describe('Basic - queryStringToFormObject maps query to form', () => {
 		});
 
 		const expected = {
-			formState: {
+			searchCriteria: {
 				...defaultState,
 				formType: 'custom',
 			},
 			errors: [],
 		};
 
-		const actual = await queryStringToFormObject(
+		const actual = await queryStringToSearchCriteria(
 			'r=1',
 			diseaseFetcher,
 			interventionsFetcher,
@@ -49,7 +49,7 @@ describe('Basic - queryStringToFormObject maps query to form', () => {
 		});
 
 		const expected = {
-			formState: null,
+			searchCriteria: null,
 			errors: [
 				{
 					fieldName: 'formType',
@@ -58,7 +58,7 @@ describe('Basic - queryStringToFormObject maps query to form', () => {
 			],
 		};
 
-		const actual = await queryStringToFormObject(
+		const actual = await queryStringToSearchCriteria(
 			'r=1',
 			diseaseFetcher,
 			interventionsFetcher,
@@ -73,7 +73,7 @@ describe('Basic - queryStringToFormObject maps query to form', () => {
 		});
 
 		const expected = {
-			formState: null,
+			searchCriteria: null,
 			errors: [
 				{
 					fieldName: 'formType',
@@ -82,7 +82,7 @@ describe('Basic - queryStringToFormObject maps query to form', () => {
 			],
 		};
 
-		const actual = await queryStringToFormObject(
+		const actual = await queryStringToSearchCriteria(
 			'',
 			diseaseFetcher,
 			interventionsFetcher,
