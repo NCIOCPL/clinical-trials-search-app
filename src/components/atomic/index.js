@@ -12,6 +12,7 @@ export { default as Pager } from './Pager';
 export { default as Radio } from './Radio';
 export { default as RemovableTag } from './RemovableTag';
 export { default as SearchCriteriaTable } from './SearchCriteriaTable';
+export { default as SearchCriteriaTableUpdated } from './SearchCriteriaTableUpdated';
 export { default as StickySubmitBlock } from './StickySubmitBlock';
 export { default as Table } from './Table';
 export { default as TableCell } from './Table/TableCell';
