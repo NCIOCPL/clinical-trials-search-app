@@ -1,0 +1,1 @@
+export { getClinicalTrialsQuery } from './getClinicalTrialsQuery';
