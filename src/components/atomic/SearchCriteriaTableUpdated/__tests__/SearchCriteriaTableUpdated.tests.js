@@ -52,9 +52,6 @@ describe('<Search Criteria Table />', () => {
 			location: 'search-location-all', // active location option (search-location-all | search-location-zip | search-location-country | search-location-hospital | search-location-nih)
 		};
 		render(<SearchCriteriaTableUpdated searchCriteriaObject={searchObject} />);
-		expect(
-			screen.getByText('This clinical trial matches: "all trials"')
-		).toBeInTheDocument();
 		expect(screen.queryByText('Show Search Criteria')).not.toBeInTheDocument();
 	});
 
