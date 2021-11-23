@@ -281,9 +281,7 @@ const SearchCriteriaTableUpdated = ({ searchCriteriaObject }) => {
 				</div>
 			</AccordionItem>
 		</Accordion>
-	) : (
-		<strong>This clinical trial matches: &quot;all trials&quot;</strong>
-	);
+	) : null;
 };
 
 export default SearchCriteriaTableUpdated;

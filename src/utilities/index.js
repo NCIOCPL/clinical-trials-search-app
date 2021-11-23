@@ -27,3 +27,4 @@ export { queryStringToSearchCriteria } from './queryStringToSearchCriteria';
 export { formToTrackingData } from './formToTrackingData';
 export { EDDLAnalyticsHandler } from './eddl-analytics-handler';
 export { runQueryFetchers } from './runQueryFetchers';
+export { hasSCOBeenUpdated } from './hasSCOBeenUpdated';

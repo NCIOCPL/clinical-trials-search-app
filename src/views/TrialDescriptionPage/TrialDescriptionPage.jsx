@@ -2,15 +2,16 @@ import queryString from 'query-string';
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTracking } from 'react-tracking';
+import { START_OVER_LINK } from '../../constants';
 
 import {
 	Accordion,
 	AccordionItem,
 	Delighter,
 	TrialStatusIndicator,
-	SearchCriteriaTable,
+	SearchCriteriaTableUpdated,
 } from '../../components/atomic';
 import SitesList from './SitesList';
 
@@ -21,7 +22,11 @@ import {
 	updateFormSearchCriteria,
 } from '../../store/actions';
 import { useAppSettings } from '../../store/store.js';
-import { queryStringToSearchCriteria, runQueryFetchers } from '../../utilities';
+import {
+	queryStringToSearchCriteria,
+	runQueryFetchers,
+	hasSCOBeenUpdated,
+} from '../../utilities';
 
 const TrialDescriptionPage = () => {
 	const dispatch = useDispatch();
@@ -30,7 +35,7 @@ const TrialDescriptionPage = () => {
 	const [isTrialLoading, setIsTrialLoading] = useState(true);
 	const qs = queryString.extract(location.search);
 	const [isPageLoadReady, setIsPageLoadReady] = useState(false);
-	const { isDirty, formType } = useSelector((store) => store.form);
+	const { formType } = useSelector((store) => store.form);
 	const [searchCriteriaObject, setSearchCriteriaObject] = useState();
 	const parsed = queryString.parse(qs);
 	const currId = parsed.id;
@@ -116,10 +121,6 @@ const TrialDescriptionPage = () => {
 		return isFetchingComplete;
 	};
 
-	const handleStartOver = () => {
-		dispatch(clearForm());
-	};
-
 	const trackShare = (shareType) => ({
 		type: 'Other',
 		event: `ClinicalTrialsSearchApp:Other:ShareButton`,
@@ -137,6 +138,20 @@ const TrialDescriptionPage = () => {
 	const handleEmailTrial = () => {
 		tracking.trackEvent(trackShare('Email'));
 		window.location.href = `mailto:?subject=Information%20from%20the%20National%20Cancer%20Institute%20Web%20Site&body=I%20found%20this%20information%20on%20www.cancer.gov%20and%20I'd%20like%20to%20share%20it%20with%20you:%20https%3A%2F%2Fwww.cancer.gov%2Fabout-cancer%2Ftreatment%2Fclinical-trials%2Fsearch%2Fv%3Fid%3D${currId}%0A%0A%20NCI's%20Web%20site,%20www.cancer.gov,%20provides%20accurate,%20up-to-date,%20comprehensive%20cancer%20information%20from%20the%20U.S.%20government's%20principal%20agency%20for%20cancer%20research.%20If%20you%20have%20questions%20or%20need%20additional%20information,%20we%20invite%20you%20to%20contact%20NCI%E2%80%99s%20LiveHelp%20instant%20messaging%20service%20at%20https://livehelp.cancer.gov,%20or%20call%20the%20NCI's%20Contact%20Center%201-800-4-CANCER%20(1-800-422-6237)%20(toll-free%20from%20the%20United%20States).`;
+	};
+
+	const trackStartOver = (linkType) => ({
+		type: 'Other',
+		event: 'ClinicalTrialsSearchApp:Other:NewSearchLinkClick',
+		analyticsName,
+		linkName: 'CTStartOverClick',
+		formType: searchCriteriaObject.formType,
+		source: linkType,
+	});
+
+	const handleStartOver = (linkType) => {
+		tracking.trackEvent(trackStartOver(linkType));
+		dispatch(clearForm());
 	};
 
 	const renderDelighters = () => {
@@ -198,10 +213,25 @@ const TrialDescriptionPage = () => {
 		);
 	};
 
-	const renderTrialDescriptionHeader = () => {
+	const renderStartOver = (searchCriteriaObject) => {
+		return (
+			<Link
+				to={`${
+					searchCriteriaObject?.formType === 'basic'
+						? '/about-cancer/treatment/clinical-trials/search/'
+						: '/about-cancer/treatment/clinical-trials/search/advanced'
+				}`}
+				onClick={() => handleStartOver(START_OVER_LINK)}>
+				<strong>Start Over</strong>
+			</Link>
+		);
+	};
+
+	const renderTrialDescriptionHeader = (searchCriteriaObject) => {
 		return (
 			<div className="trial-description-page__header">
-				{(isDirty || searchUsed) && (
+				{((searchCriteriaObject && searchCriteriaObject.formType != '') ||
+					searchUsed) && (
 					<div className="back-to-search btnAsLink">
 						<span
 							onClick={() => navigate(-1)}
@@ -212,7 +242,20 @@ const TrialDescriptionPage = () => {
 						</span>
 					</div>
 				)}
-				<SearchCriteriaTable handleReset={handleStartOver} placement="trial" />
+				{searchCriteriaObject && !hasSCOBeenUpdated(searchCriteriaObject) ? (
+					<>
+						<strong>This clinical trial matches:</strong>
+						<SearchCriteriaTableUpdated
+							searchCriteriaObject={searchCriteriaObject}
+						/>
+					</>
+				) : (
+					<>
+						<strong>This clinical trial matches: &quot;all trials&quot;</strong>{' '}
+						|{' '}
+					</>
+				)}
+				{renderStartOver(searchCriteriaObject)}
 			</div>
 		);
 	};
@@ -365,7 +408,7 @@ const TrialDescriptionPage = () => {
 					<h1>{trial.briefTitle}</h1>
 				)}
 				{formType === 'basic' || formType === 'advanced' ? (
-					renderTrialDescriptionHeader()
+					renderTrialDescriptionHeader(searchCriteriaObject)
 				) : (
 					<></>
 				)}
