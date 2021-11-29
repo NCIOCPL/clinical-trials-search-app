@@ -224,6 +224,26 @@ const ResultsPage = () => {
 		dispatch(clearForm());
 	};
 
+	const handleRefineSearch = () => {
+		handleTracking({
+			// These properties are required.
+			type: 'Other',
+			event: 'ClinicalTrialsSearchApp:Other:ModifySearchCriteriaLinkClick',
+			analyticsName,
+			linkName: 'CTSModifyClick',
+			// Any additional properties fall into the "page.additionalDetails" bucket
+			// for the event.
+			formType: searchCriteriaObject.formType,
+			source: 'modify_search_criteria_link',
+		});
+		navigate('/about-cancer/treatment/clinical-trials/search/advanced', {
+			state: {
+				criteria: searchCriteriaObject,
+				refineSearch: true,
+			},
+		});
+	};
+
 	// setup print Modal
 	const { isShowing, toggleModal } = useModal();
 	const printSelectedBtn = useRef(null);
@@ -471,8 +491,9 @@ const ResultsPage = () => {
 							<ResultsPageHeader
 								resultsCount={resultsCount}
 								pageNum={resultsPage}
-								handleUpdate={handleUpdate}
-								handleReset={handleStartOver}
+								onModifySearchClick={handleRefineSearch}
+								onStartOverClick={handleStartOver}
+								searchCriteriaObject={searchCriteriaObject}
 							/>
 						)}
 
