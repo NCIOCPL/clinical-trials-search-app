@@ -19,7 +19,13 @@ import {
 	TrialType,
 	ZipCode,
 } from '../../components/search-modules';
-import { updateFormField, clearForm, receiveData } from '../../store/actions';
+import {
+	updateForm,
+	updateFormField,
+	clearForm,
+	receiveData,
+	getMainType,
+} from '../../store/actions';
 import {
 	getFieldInFocus,
 	getFormInFocus,
@@ -70,6 +76,10 @@ const SearchPage = ({ formInit = 'basic' }) => {
 	const { addFormToTracking } = actions;
 	const tracking = useTracking();
 	const [{ analyticsName, canonicalHost, siteName }] = useAppSettings();
+	//this is SCO passed in from search results page
+	const { state: locationState } = useLocation();
+	const { criteria, refineSearch } = locationState || {};
+	const { maintypeOptions } = useSelector((store) => store.cache);
 
 	const handleUpdate = (field, value) => {
 		dispatch(
@@ -79,11 +89,42 @@ const SearchPage = ({ formInit = 'basic' }) => {
 			})
 		);
 	};
+	//will populate the form from search criteria object
+	const populateForm = () => {
+		const { formType, cancerType, age, zip, keywordPhrases } = criteria;
+		if (formType === 'basic') {
+			//prefetch stuff
+			if (!maintypeOptions || maintypeOptions.length < 1) {
+				dispatch(getMainType({}));
+			}
+			if (cancerType.name !== '') {
+				criteria.cancerTypeModified = true;
+			}
+			if (age !== '') {
+				criteria.ageModified = true;
+			}
+			if (zip !== '') {
+				criteria.zipModified = true;
+			}
+			if (keywordPhrases !== '') {
+				criteria.keywordPhrasesModified = true;
+			}
+			criteria.formType = 'advanced';
+		}
+		dispatch(updateForm({ ...criteria, refineSearch: refineSearch }));
+	};
 
 	// scroll to top on mount
 	useEffect(() => {
 		window.scrollTo(0, 0);
-		handleUpdate('formType', formInit);
+		//updating the form data with passed in SCO
+		if (refineSearch) {
+			populateForm();
+		} else if (criteria && criteria == {}) {
+			dispatch(clearForm());
+		} else {
+			handleUpdate('formType', formInit);
+		}
 		setIsPageLoadReady(true);
 	}, []);
 

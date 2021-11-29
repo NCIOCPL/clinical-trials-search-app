@@ -16,11 +16,7 @@ import {
 import SitesList from './SitesList';
 
 import './TrialDescriptionPage.scss';
-import {
-	clearForm,
-	getTrial,
-	updateFormSearchCriteria,
-} from '../../store/actions';
+import { getTrial, updateFormSearchCriteria } from '../../store/actions';
 import { useAppSettings } from '../../store/store.js';
 import {
 	queryStringToSearchCriteria,
@@ -151,7 +147,6 @@ const TrialDescriptionPage = () => {
 
 	const handleStartOver = (linkType) => {
 		tracking.trackEvent(trackStartOver(linkType));
-		dispatch(clearForm());
 	};
 
 	const renderDelighters = () => {
@@ -221,6 +216,7 @@ const TrialDescriptionPage = () => {
 						? '/about-cancer/treatment/clinical-trials/search/'
 						: '/about-cancer/treatment/clinical-trials/search/advanced'
 				}`}
+				state={{ criteria: {}, refineSearch: false }}
 				onClick={() => handleStartOver(START_OVER_LINK)}>
 				<strong>Start Over</strong>
 			</Link>

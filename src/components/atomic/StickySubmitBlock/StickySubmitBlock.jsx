@@ -51,6 +51,7 @@ const StickySubmitBlock = ({ sentinelRef, onSubmit, formType }) => {
 		});
 
 		dispatch(clearForm());
+		window.history.replaceState({}, document.title);
 		window.scrollTo(0, 0);
 		window.location.reload(false);
 	};
