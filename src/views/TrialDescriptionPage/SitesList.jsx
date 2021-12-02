@@ -1,11 +1,11 @@
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { Dropdown } from '../../components/atomic';
 import { getStateNameFromAbbr } from '../../utilities/';
 import { isWithinRadius } from '../../utilities';
 import { NIH_ZIPCODE } from '../../constants';
 
-const SitesList = (sites) => {
+const SitesList = ({ searchCriteria, sites }) => {
 	const [locArray, setLocArray] = useState([]);
 	const [countries, setCountries] = useState([]);
 	const [statesList, setStatesList] = useState([]);
@@ -18,11 +18,13 @@ const SitesList = (sites) => {
 	const [showNearbySites, setShowNearbySites] = useState(false);
 
 	const { location, zipCoords, zipRadius, country, states, city, vaOnly } =
-		useSelector((store) => store.form);
+		searchCriteria;
 
 	const buildCountriesList = (sitesArr) => {
 		if (sitesArr.length > 0) {
-			let countriesList = [...new Set(sitesArr.map((item) => item.country))];
+			let countriesList = [
+				...new Set(sitesArr.map((item) => item.org_country)),
+			];
 			countriesList.sort((a, b) => (a > b ? 1 : -1));
 			setCountries(countriesList);
 		}
@@ -32,12 +34,12 @@ const SitesList = (sites) => {
 		if (sitesArr.length > 0) {
 			// Get all the US sites
 			const stateside = sitesArr.filter(
-				(item) => item.country === 'United States'
+				(item) => item.org_country === 'United States'
 			);
 
 			// Get a UNIQUE list of all the US state abbreviations in use.
 			const statesAbbrs = [
-				...new Set(stateside.map((item) => item.stateOrProvinceAbbreviation)),
+				...new Set(stateside.map((item) => item.org_state_or_province)),
 			];
 
 			// Get the abbr/name combo for the states.
@@ -63,10 +65,10 @@ const SitesList = (sites) => {
 	// build list per city
 	const buildCitiesArray = (parentArray) => {
 		let ca = []; //cities array
-		let citiesList = [...new Set(parentArray.map((item) => item.city))];
+		let citiesList = [...new Set(parentArray.map((item) => item.org_city))];
 		citiesList.sort((a, b) => (a > b ? 1 : -1));
 		citiesList.forEach((cityName) => {
-			let citySites = parentArray.filter((item) => item.city === cityName);
+			let citySites = parentArray.filter((item) => item.org_city === cityName);
 			let cityObj = {
 				city: cityName,
 				sites: citySites,
@@ -77,18 +79,18 @@ const SitesList = (sites) => {
 	};
 
 	useEffect(() => {
-		if (sites.sites.length > 0) {
+		if (sites.length > 0) {
 			if (countries.length === 0) {
-				buildCountriesList(sites.sites);
-				buildUSStatesList(sites.sites);
+				buildCountriesList(sites);
+				buildUSStatesList(sites);
 			}
 		}
 	}, []);
 
 	useEffect(() => {
 		if (countries.length > 0) {
-			constructFilterableArray(sites.sites, setLocArray, countries, true);
-			buildNearbySites(sites.sites);
+			constructFilterableArray(sites, setLocArray, countries, true);
+			buildNearbySites(sites);
 		}
 	}, [countries]);
 
@@ -100,7 +102,7 @@ const SitesList = (sites) => {
 	useEffect(() => {
 		if (nearbySites.length > 0) {
 			let nearbyCountries = [
-				...new Set(nearbySites.map((item) => item.country)),
+				...new Set(nearbySites.map((item) => item.org_country)),
 			];
 			nearbyCountries.sort((a, b) => (a > b ? 1 : -1));
 			constructFilterableArray(
@@ -128,13 +130,13 @@ const SitesList = (sites) => {
 			let c = { country: countryName };
 			if (countryName === 'United States') {
 				let usaSites = parentArray.filter(
-					(item) => item.country === 'United States'
+					(item) => item.org_country === 'United States'
 				);
 				c.states = [];
 
 				statesList.forEach((stateName) => {
 					let sitesByState = usaSites.filter(
-						(item) => item.stateOrProvinceAbbreviation === stateName
+						(item) => item.org_state_or_province === stateName
 					);
 					let stateSitesList = buildCitiesArray(sitesByState);
 					let s = {
@@ -150,19 +152,17 @@ const SitesList = (sites) => {
 			} else if (countryName === 'Canada') {
 				//divvy up Canada into provinces
 				let canadaSites = parentArray.filter(
-					(item) => item.country === 'Canada'
+					(item) => item.org_country === 'Canada'
 				);
 				let pl = [
-					...new Set(
-						canadaSites.map((item) => item.stateOrProvinceAbbreviation)
-					),
+					...new Set(canadaSites.map((item) => item.org_state_or_province)),
 				];
 				pl.sort((a, b) => (a > b ? 1 : -1));
 				c.provinces = [];
 
 				pl.forEach((provinceName) => {
 					let sitesByProvince = canadaSites.filter(
-						(item) => item.stateOrProvinceAbbreviation === provinceName
+						(item) => item.org_state_or_province === provinceName
 					);
 					let provinceSitesList = buildCitiesArray(sitesByProvince);
 					let s = {
@@ -174,7 +174,7 @@ const SitesList = (sites) => {
 				masterArray.push(c);
 			} else {
 				c.cities = buildCitiesArray(
-					parentArray.filter((item) => item.country === countryName)
+					parentArray.filter((item) => item.org_country === countryName)
 				);
 				masterArray.push(c);
 			}
@@ -191,7 +191,8 @@ const SitesList = (sites) => {
 		// not match.
 		if (
 			city !== '' &&
-			(!siteObj.city || siteObj.city.toLowerCase() !== city.toLowerCase())
+			(!siteObj.org_city ||
+				siteObj.org_city.toLowerCase() !== city.toLowerCase())
 		) {
 			return false;
 		}
@@ -199,8 +200,8 @@ const SitesList = (sites) => {
 		// Now check country
 		if (
 			country !== '' &&
-			(!siteObj.country ||
-				siteObj.country.toLowerCase() !== country.toLowerCase())
+			(!siteObj.org_country ||
+				siteObj.org_country.toLowerCase() !== country.toLowerCase())
 		) {
 			return false;
 		}
@@ -211,14 +212,12 @@ const SitesList = (sites) => {
 		// check would fail in that case...
 		if (states.length > 0) {
 			// This site has no state so it can't be a match.
-			if (!siteObj.stateOrProvinceAbbreviation) {
+			if (!siteObj.org_state_or_province) {
 				return false;
 			}
 			// Extract abbreviations
 			const stateAbbrs = states.map((st) => st.abbr.toUpperCase());
-			if (
-				!stateAbbrs.includes(siteObj.stateOrProvinceAbbreviation.toUpperCase())
-			) {
+			if (!stateAbbrs.includes(siteObj.org_state_or_province.toUpperCase())) {
 				return false;
 			}
 		}
@@ -239,7 +238,7 @@ const SitesList = (sites) => {
 
 		// Pre-filter sites when vaOnly is set.
 		const preFilteredSites = vaOnly
-			? siteArr.filter((site) => site.isVA)
+			? siteArr.filter((site) => site.org_va)
 			: siteArr;
 
 		if (location === 'search-location-zip') {
@@ -247,7 +246,7 @@ const SitesList = (sites) => {
 			// Otherwise you should be looking at an error message instead.
 			setNearbySites(
 				preFilteredSites.filter((site) =>
-					isWithinRadius(zipCoords, site.coordinates, zipRadius)
+					isWithinRadius(zipCoords, site.org_coordinates, zipRadius)
 				)
 			);
 		} else if (location === 'search-location-country') {
@@ -256,7 +255,7 @@ const SitesList = (sites) => {
 			);
 		} else if (location === 'search-location-nih') {
 			setNearbySites(
-				preFilteredSites.filter((site) => site.postalCode === NIH_ZIPCODE)
+				preFilteredSites.filter((site) => site.org_postal_code === NIH_ZIPCODE)
 			);
 		} else {
 			// All search + vaOnly
@@ -267,15 +266,15 @@ const SitesList = (sites) => {
 	const renderContactInfoBlock = (locationObj) => {
 		return (
 			<>
-				<div>Contact: {locationObj.contactName}</div>
-				{locationObj.contactPhone && (
-					<div>Phone: {locationObj.contactPhone}</div>
+				<div>Contact: {locationObj.contact_name}</div>
+				{locationObj.contact_phone && (
+					<div>Phone: {locationObj.contact_phone}</div>
 				)}
-				{locationObj.contactEmail && (
+				{locationObj.contact_email && (
 					<div>
 						Email:{' '}
-						<a href={`mailto:${locationObj.contactEmail}`}>
-							{locationObj.contactEmail}
+						<a href={`mailto:${locationObj.contact_email}`}>
+							{locationObj.contact_email}
 						</a>
 					</div>
 				)}
@@ -285,13 +284,16 @@ const SitesList = (sites) => {
 
 	const renderLocationBlock = (locationObj) => {
 		return (
-			<div key={'loc-' + locationObj.name} className="location">
-				<strong className="location-name">{locationObj.name}</strong>
+			<div key={'loc-' + locationObj.org_name} className="location">
+				<strong className="location-name">{locationObj.org_name}</strong>
 				<div>
-					Status: {getTrialStatusForDisplay(locationObj.recruitmentStatus)}
+					Status:{' '}
+					{getStudySiteRecruitmentStatusForDisplay(
+						locationObj.recruitment_status
+					)}
 				</div>
 				{/* Contact only displays if there is a name */}
-				{locationObj.contactName ? (
+				{locationObj.contact_name ? (
 					renderContactInfoBlock(locationObj)
 				) : (
 					<>Name Not Available</>
@@ -434,10 +436,12 @@ const SitesList = (sites) => {
 		);
 	};
 
-	const getTrialStatusForDisplay = (statusKey) => {
+	const getStudySiteRecruitmentStatusForDisplay = (statusKey) => {
 		const statuses = {
 			ACTIVE: 'Active',
-			CLOSED_TO_ACCRUAL: 'Closed to accrual',
+			APPROVED: 'Approved',
+			ENROLLING_BY_INVITATION: 'Enrolling By Invitation',
+			IN_REVIEW: 'In Review',
 			TEMPORARILY_CLOSED_TO_ACCRUAL: 'Temporarily closed to accrual',
 		};
 		return statuses[statusKey];
@@ -488,6 +492,11 @@ const SitesList = (sites) => {
 			{renderSites()}
 		</>
 	);
+};
+
+SitesList.propTypes = {
+	searchCriteria: PropTypes.object.isRequired,
+	sites: PropTypes.array.isRequired,
 };
 
 export default SitesList;

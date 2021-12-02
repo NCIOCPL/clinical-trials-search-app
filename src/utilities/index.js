@@ -28,3 +28,4 @@ export { formToTrackingData } from './formToTrackingData';
 export { EDDLAnalyticsHandler } from './eddl-analytics-handler';
 export { runQueryFetchers } from './runQueryFetchers';
 export { hasSCOBeenUpdated } from './hasSCOBeenUpdated';
+export { filterSitesByActiveRecruitment } from './filterSitesByActiveRecruitment';

@@ -7,7 +7,10 @@ import {
 	setAborted,
 } from './actions';
 import reducer from './reducer';
-import { getClinicalTrials } from '../../services/api/clinical-trials-search-api';
+import {
+	getClinicalTrialDescription,
+	getClinicalTrials,
+} from '../../services/api/clinical-trials-search-api';
 import { convertObjectToBase64 } from '../../utilities/objects';
 import { useAppSettings } from '../../store/store';
 
@@ -39,6 +42,12 @@ const internalFetch = async (clinicalTrialsSearchClient, actions) => {
 			switch (req.type) {
 				case 'getClinicalTrials': {
 					return getClinicalTrials(clinicalTrialsSearchClient, req.payload);
+				}
+				case 'trialDescription': {
+					return getClinicalTrialDescription(
+						clinicalTrialsSearchClient,
+						req.payload
+					);
 				}
 				default: {
 					throw new Error(`Unknown CTS API request`);
