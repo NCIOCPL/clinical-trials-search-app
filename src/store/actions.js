@@ -481,21 +481,3 @@ export function searchTrials({ cacheKey, data }) {
 		},
 	};
 }
-
-export function getTrial({ trialId }) {
-	return {
-		type: '@@api/CTS',
-		payload: {
-			service: 'ctsSearch',
-			cacheKey: trialId,
-			requests: [
-				{
-					method: 'getTrial',
-					requestParams: {
-						trialId: trialId,
-					},
-				},
-			],
-		},
-	};
-}

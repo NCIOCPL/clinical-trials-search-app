@@ -1,3 +1,4 @@
+// This is for the trial status which comes as "trial.current_trial_status" from the api
 export const ACTIVE_TRIAL_STATUSES = [
 	// These CTRP statuses appear in results:
 	'Active',
@@ -14,6 +15,7 @@ export const ACTIVE_TRIAL_STATUSES = [
 	/// "Withdrawn"
 ];
 
+// This is for the study site status (this is actually upper-cased from the api)
 export const ACTIVE_RECRUITMENT_STATUSES = [
 	// These statuses appear in results:
 	'active',

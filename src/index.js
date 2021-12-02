@@ -22,6 +22,7 @@ import ctx_reducer from './store/ctx-reducer';
 
 import App from './App';
 import './index.css';
+import clinicalTrialsSearchClientFactory from './services/api/clinical-trials-search-api';
 
 const initialize = ({
 	appHasBeenVisited = false,
@@ -59,20 +60,29 @@ const initialize = ({
 
 	let cachedState;
 
+	const ctsApiVersion = 'v1';
 	const services = {};
 	const ctsSearch = () => {
 		const service = ClinicalTrialsServiceFactory.create(
 			ctsHostname,
-			'v1',
+			ctsApiVersion,
 			ctsProtocol,
 			ctsPort
 		);
 		return service;
 	};
 	services.ctsSearch = ctsSearch;
+	const ctsApiEndpointV1 = `${ctsProtocol}://${ctsHostname}${
+		ctsPort ? `:${ctsPort}` : ``
+	}/${ctsApiVersion}`;
+	const clinicalTrialsSearchClient =
+		clinicalTrialsSearchClientFactory(ctsApiEndpointV1);
 
 	// Populate global state with init params
 	const initialState = {
+		apiClients: {
+			clinicalTrialsSearchClient,
+		},
 		appHasBeenVisited,
 		appHasBeenInitialized,
 		appId,

@@ -12,8 +12,8 @@ export const isWithinRadius = (zipCoords, siteCoords, zipRadius) => {
 	if (!siteCoords) {
 		return false;
 	}
-	const siteLat = siteCoords.latitude;
-	const siteLong = siteCoords.longitude;
+	const siteLat = siteCoords.lat;
+	const siteLong = siteCoords.lon;
 
 	/**
 	 * Converts a Degree to Radians.

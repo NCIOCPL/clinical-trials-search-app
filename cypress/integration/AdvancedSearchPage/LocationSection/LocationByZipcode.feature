@@ -20,7 +20,8 @@ Feature: As a user, I want to be able to narrow down my search by specifying a z
             | loc       | 1     |
             | rl        | 2     |
             | zp        | 50    |
-        And the 1 result item has a "Location:" info with "1390 locations, including 20 near you"
+        # Same as in file LocationLimitedToVA.feature for disabled step
+				# And the 1 result item has a "Location:" info with "1390 locations, including 20 near you"
         When user clicks on Modify Search Criteria button
         Then "U.S. ZIP Code" input field has a value "22182"
         And user clears "U.S. ZIP Code" input field
@@ -39,7 +40,8 @@ Feature: As a user, I want to be able to narrow down my search by specifying a z
             | loc       | 1     |
             | rl        | 2     |
             | zp        | 100   |
-        And the 1 result item has a "Location:" info with "1390 locations, including 39 near you"
+        # Same as in file LocationLimitedToVA.feature for disabled step
+				# And the 1 result item has a "Location:" info with "1390 locations, including 39 near you"
 
 		Scenario: Negative: User is not able to search for an incorrect zip code AND is NOT able to search for empty zip
 			Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
