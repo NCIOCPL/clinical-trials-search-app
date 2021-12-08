@@ -39,7 +39,7 @@ class TextInput extends React.Component {
 			'week',
 			'number',
 		]),
-		value: PropTypes.string,
+		value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	};
 
 	static defaultProps = {
