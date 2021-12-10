@@ -36,9 +36,15 @@ import { formatTrialSearchQuery } from '../../utilities/formatTrialSearchQuery';
 const queryString = require('query-string');
 
 const ResultsPage = () => {
-	// Load the global settings from our custom context
+	// Load our React context
 	const [
-		{ analyticsName, canonicalHost, services, siteName, zipConversionEndpoint },
+		{
+			analyticsName,
+			canonicalHost,
+			siteName,
+			zipConversionEndpoint,
+			apiClients: { clinicalTrialsSearchClientV2 },
+		},
 	] = useAppSettings();
 
 	// Redux
@@ -88,7 +94,6 @@ const ResultsPage = () => {
 
 	// Analytics
 	const tracking = useTracking();
-	const ctsapiclient = services.ctsSearch();
 
 	const handleTracking = (analyticsPayload) => {
 		tracking.trackEvent(analyticsPayload);
@@ -123,7 +128,10 @@ const ResultsPage = () => {
 
 		const searchCriteria = async () => {
 			const { diseaseFetcher, interventionFetcher, zipFetcher } =
-				await runQueryFetchers(ctsapiclient, zipConversionEndpoint);
+				await runQueryFetchers(
+					clinicalTrialsSearchClientV2,
+					zipConversionEndpoint
+				);
 			return await queryStringToSearchCriteria(
 				qs,
 				diseaseFetcher,

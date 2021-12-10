@@ -1,5 +1,4 @@
 /// <reference path="../../node_modules/@types/express/index.d.ts"/>
-const proxy = require('http-proxy-middleware');
 const express = require('express');
 
 const mockZipCodeLookup = require('./mock-zipcode-lookup');
@@ -36,6 +35,7 @@ module.exports = function (app) {
 
 	//CTS API V2 endpoints
 	app.use('/cts/mock-api/v2/trials', mockTrials);
+	app.use('/cts/mock-api/v2/diseases', mockDiseases);
 	app.use(
 		'/cts/proxy-api/v2',
 		createProxyMiddleware({
