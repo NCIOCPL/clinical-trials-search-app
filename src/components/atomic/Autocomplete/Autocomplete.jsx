@@ -239,6 +239,7 @@ class Autocomplete extends React.Component {
 		this.id = this.props.id || uniqueIdForComponent();
 	}
 
+	/* eslint-disable react/no-deprecated */
 	componentWillMount() {
 		this._ignoreBlur = false;
 		this._ignoreFocus = false;
@@ -251,6 +252,7 @@ class Autocomplete extends React.Component {
 		this._scrollTimer = null;
 	}
 
+	/* eslint-disable react/no-deprecated */
 	componentWillReceiveProps(nextProps) {
 		if (this.state.highlightedIndex !== null) {
 			this.setState(this.ensureHighlightedIndex);

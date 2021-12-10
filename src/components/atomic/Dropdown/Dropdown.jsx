@@ -64,6 +64,7 @@ class Dropdown extends React.Component {
 	}
 
 	// check to see if an Id was passed in, if not generate one.
+	/* eslint-disable react/no-deprecated */
 	componentWillMount() {
 		this.id = this.props.id ? this.props.id : uniqueIdForComponent(this);
 	}
