@@ -20,7 +20,6 @@ export {
 export { keyHandler } from './keyHandler';
 export { uniqueIdForComponent } from './uniqueIdForComponent';
 export { sortItems, sortItemsByName } from './sortItems';
-export { ctsapiDiseaseFetcher } from './ctsapiDiseaseFetcher';
 export { ctsapiInterventionFetcher } from './ctsapiInterventionFetcher';
 export { zipcodeFetcher } from './zipcodeFetcher';
 export { queryStringToSearchCriteria } from './queryStringToSearchCriteria';
