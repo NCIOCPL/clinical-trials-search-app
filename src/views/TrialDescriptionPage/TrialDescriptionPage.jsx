@@ -57,8 +57,15 @@ const TrialDescriptionPage = () => {
 
 	const { error, loading, payload } = useCtsApi(fetchActions);
 
-	const [{ analyticsName, canonicalHost, services, zipConversionEndpoint }] =
-		useAppSettings();
+	const [
+		{
+			analyticsName,
+			canonicalHost,
+			services,
+			zipConversionEndpoint,
+			apiClients: { clinicalTrialsSearchClientV2 },
+		},
+	] = useAppSettings();
 	const ctsapiclient = services.ctsSearch();
 	// enum for empty location checks
 	const noLocInfo = ['not yet active', 'in review', 'approved'];
@@ -117,7 +124,11 @@ const TrialDescriptionPage = () => {
 		} else if (!searchCriteriaObject) {
 			const searchCriteria = async () => {
 				const { diseaseFetcher, interventionFetcher, zipFetcher } =
-					await runQueryFetchers(ctsapiclient, zipConversionEndpoint);
+					await runQueryFetchers(
+						clinicalTrialsSearchClientV2,
+						ctsapiclient,
+						zipConversionEndpoint
+					);
 				return await queryStringToSearchCriteria(
 					qs,
 					diseaseFetcher,

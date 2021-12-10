@@ -10,6 +10,7 @@ import reducer from './reducer';
 import {
 	getClinicalTrialDescription,
 	getClinicalTrials,
+	ctsapiDiseaseFetcher,
 } from '../../services/api/clinical-trials-search-api';
 import { convertObjectToBase64 } from '../../utilities/objects';
 import { useAppSettings } from '../../store/store';
@@ -48,6 +49,9 @@ const internalFetch = async (clinicalTrialsSearchClient, actions) => {
 						clinicalTrialsSearchClient,
 						req.payload
 					);
+				}
+				case 'ctsApiDiseaseFetcher': {
+					return ctsapiDiseaseFetcher(clinicalTrialsSearchClient, req.payload);
 				}
 				default: {
 					throw new Error(`Unknown CTS API request`);

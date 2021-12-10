@@ -33,6 +33,19 @@ import { useAppSettings } from '../../store/store.js';
 const queryString = require('query-string');
 
 const ResultsPage = () => {
+	// Load our React context
+	const [
+		{
+			analyticsName,
+			canonicalHost,
+			services,
+			siteName,
+			zipConversionEndpoint,
+			apiClients: { clinicalTrialsSearchClientV2 },
+		},
+	] = useAppSettings();
+
+	// Redux
 	const dispatch = useDispatch();
 	const location = useLocation();
 	const navigate = useNavigate();
@@ -57,9 +70,6 @@ const ResultsPage = () => {
 		cache['selectedTrialsForPrint'] || []
 	);
 	const tracking = useTracking();
-	const [
-		{ analyticsName, canonicalHost, services, siteName, zipConversionEndpoint },
-	] = useAppSettings();
 	const ctsapiclient = services.ctsSearch();
 
 	const handleUpdate = (field, value) => {
@@ -92,7 +102,11 @@ const ResultsPage = () => {
 			// Get search criteria object
 			const searchCriteria = async () => {
 				const { diseaseFetcher, interventionFetcher, zipFetcher } =
-					await runQueryFetchers(ctsapiclient, zipConversionEndpoint);
+					await runQueryFetchers(
+						clinicalTrialsSearchClientV2,
+						ctsapiclient,
+						zipConversionEndpoint
+					);
 				return await queryStringToSearchCriteria(
 					qs,
 					diseaseFetcher,
