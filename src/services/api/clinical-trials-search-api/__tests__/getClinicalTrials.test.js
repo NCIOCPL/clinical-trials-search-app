@@ -1,7 +1,7 @@
 import axios from 'axios';
 import nock from 'nock';
 
-import { getClinicalTrialsQuery } from '../../actions/getClinicalTrialsQuery';
+import { getClinicalTrialsAction } from '../../actions/getClinicalTrialsAction';
 import clinicalTrialsSearchClientFactory from '../clinicalTrialsSearchClientFactory';
 import { getClinicalTrials } from '../getClinicalTrials';
 
@@ -29,7 +29,7 @@ describe('testing getClinicalTrials', () => {
 			'arms.interventions.intervention_code': ['C1647'],
 		};
 
-		const query = getClinicalTrialsQuery({
+		const query = getClinicalTrialsAction({
 			requestFilters,
 		});
 
@@ -52,7 +52,7 @@ describe('testing getClinicalTrials', () => {
 			'arms.interventions.intervention_code': ['C1647'],
 		};
 
-		const query = getClinicalTrialsQuery({
+		const query = getClinicalTrialsAction({
 			requestFilters,
 		});
 
@@ -71,7 +71,7 @@ describe('testing getClinicalTrials', () => {
 			'bad_request.interventions.intervention_code_request': ['BAD404'],
 		};
 
-		const query = getClinicalTrialsQuery({
+		const query = getClinicalTrialsAction({
 			requestFilters,
 		});
 
@@ -89,7 +89,7 @@ describe('testing getClinicalTrials', () => {
 			'arms.interventions.intervention_code': ['C1647'],
 		};
 
-		const query = getClinicalTrialsQuery({
+		const query = getClinicalTrialsAction({
 			requestFilters,
 		});
 
@@ -107,7 +107,7 @@ describe('testing getClinicalTrials', () => {
 			'arms.interventions.intervention_code': ['C1647'],
 		};
 
-		const query = getClinicalTrialsQuery({
+		const query = getClinicalTrialsAction({
 			requestFilters,
 		});
 

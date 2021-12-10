@@ -7,7 +7,7 @@
  *
  */
 
-export const getClinicalTrialsQuery = ({
+export const getClinicalTrialsAction = ({
 	from = 0,
 	requestFilters = {},
 	size = 50,

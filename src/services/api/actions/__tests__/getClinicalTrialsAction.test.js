@@ -1,4 +1,4 @@
-import { getClinicalTrialsQuery } from '../getClinicalTrialsQuery';
+import { getClinicalTrialsAction } from '../getClinicalTrialsAction';
 
 describe('testing getClinicalTrials', () => {
 	beforeEach(() => {
@@ -41,7 +41,7 @@ describe('testing getClinicalTrials', () => {
 			'primary_purpose.primary_purpose_code': 'treatment',
 		};
 
-		const requestQuery = getClinicalTrialsQuery({
+		const requestQuery = getClinicalTrialsAction({
 			requestFilters,
 		});
 
@@ -77,7 +77,7 @@ describe('testing getClinicalTrials', () => {
 			},
 		};
 
-		const requestQuery = getClinicalTrialsQuery({
+		const requestQuery = getClinicalTrialsAction({
 			from: 5,
 			size: 20,
 		});

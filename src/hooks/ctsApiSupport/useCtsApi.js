@@ -27,16 +27,44 @@ import { useAppSettings } from '../../store/store';
  */
 
 /**
+ * Internal async method to handle the fetches so it is easier to read.
+ * @param {import('axios').AxiosInstance} clinicalTrialsSearchClient the axios client
+ * @param {Array<ListingSupportRequestAction>} actions a collection of request items.
+ */
+const internalFetch = async (clinicalTrialsSearchClient, actions) => {
+	// TODO: Pass in an abort token to internalFetch
+	// We want this function to return a single object we can use
+	try {
+		const requests = actions.map((req) => {
+			switch (req.type) {
+				case 'getClinicalTrials': {
+					return getClinicalTrials(clinicalTrialsSearchClient, req.payload);
+				}
+				default: {
+					throw new Error(`Unknown CTS API request`);
+				}
+			}
+		});
+		const responses = await Promise.all(requests);
+		return responses;
+	} catch (error) {
+		return {
+			errorObject: error,
+		};
+	}
+};
+
+/**
  * Given a fetch trial action this will fetch results from the CTS API.
  *
  * This was borrowed heavily from React Fetching Library's useQuery hook. We did not implement
  * any of the abort controlling as it would not work with Axios. See
  * https://github.com/marcin-piela/react-fetching-library/blob/1.7.6/src/hooks/useQuery/useQuery.ts
  *
- * @param {CtsApiRequestAction} trialQueryAction a fetchTrials action, this is basically the CTS API request.
+ * @param {Array<CtsApiRequestAction>} fetchActions a fetchTrials action, this is basically the CTS API request.
  * @returns {CtsApiResponse} the stateful data
  */
-export const useCtsApi = (trialQueryAction) => {
+export const useCtsApi = (fetchActions) => {
 	const [
 		{
 			apiClients: { clinicalTrialsSearchClient },
@@ -55,7 +83,7 @@ export const useCtsApi = (trialQueryAction) => {
 		aborted: false,
 	});
 
-	const queryActionHash = convertObjectToBase64(trialQueryAction);
+	const fetchActionsHash = convertObjectToBase64(fetchActions);
 
 	// This call back handles the fetch to the api. We use is call back
 	// so the query does not execute except when any of the actions have
@@ -76,40 +104,42 @@ export const useCtsApi = (trialQueryAction) => {
 		// Make the request, the response object will either be the payload
 		// or it will be an error object. This allows us to have one object
 		// that we return for the useCallback to "cache".
-		// TODO: Pass in a cancellation token for this request to handle aborts
-		let response;
+		const response = await internalFetch(
+			clinicalTrialsSearchClient,
+			fetchActions
+		);
 
-		try {
-			response = await getClinicalTrials(
-				clinicalTrialsSearchClient,
-				trialQueryAction.payload
-			);
-			if (isMounted.current) {
-				// We successfully fetched from the API, and our component is still loaded,
-				// so go send back results.
+		if (
+			isMounted.current &&
+			!(response.errorObject && response.errorObject.name === 'AbortError')
+		) {
+			if (response.errorObject) {
+				dispatch(setFailedFetch(response.errorObject));
+			} else {
 				dispatch(setSuccessfulFetch(response));
 			}
-		} catch (err) {
-			if (isMounted.current) {
-				if (err.name === 'AbortError') {
-					// NOTE: The original react fetching code handle a condition here in which the
-					// calling component was still mounted and the request was aborted. In this
-					// case it reset the reducer state to the default state, which is not loading
-					// and queryResponse is an object with a false error.
-					//
-					// We will just return a state with aborted, which really should not be called
-					// unless our component unmounted AND a fetch was in progress, in which case
-					// we really don't care about the response. So we can set an aborted flag in
-					// case we will.
-					dispatch(setAborted());
-				} else {
-					// Our component is going to have to show the user an error message because
-					// something went horribly wrong with the fetch.
-					dispatch(setFailedFetch(err));
-				}
-			}
 		}
-	}, [queryActionHash]);
+
+		// NOTE: The original react fetching code handle a condition here in which the
+		// calling component was still mounted and the request was aborted. In this
+		// case it reset the reducer state to the default state, which is not loading
+		// and queryResponse is an object with a false error.
+		//
+		// We will just return a state with aborted, which really should not be called
+		// unless our component unmounted AND a fetch was in progress, in which case
+		// we really don't care about the response. So we can set an aborted flag in
+		// case we will.
+		if (
+			isMounted.current &&
+			response.errorObject &&
+			response.errorObject.name === 'AbortError'
+		) {
+			dispatch(setAborted());
+		}
+
+		// We should return the response here for useCallback to cache
+		return response;
+	}, [fetchActionsHash]);
 
 	// This callback is for aborting the requests.
 	const handleAbort = useCallback(() => {
