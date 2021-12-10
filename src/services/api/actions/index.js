@@ -1,1 +1,1 @@
-export { getClinicalTrialsQuery } from './getClinicalTrialsQuery';
+export { getClinicalTrialsAction } from './getClinicalTrialsAction';

@@ -6,28 +6,18 @@ import {
 	setAborted,
 } from '../actions';
 
-import { getClinicalTrialsQuery } from '../../../services/api/actions/getClinicalTrialsQuery';
-
 describe('useCtsApi reducer', () => {
 	beforeEach(() => {
 		jest.clearAllMocks();
 	});
 
-	const requestFilters = {
-		'arms.interventions.intervention_code': ['C1234'],
-	};
-	const requestQuery = getClinicalTrialsQuery({
-		from: 0,
-		requestFilters,
-		size: 50,
-	});
-
 	it('should handle successful fetch action', () => {
-		const actual = reducer({}, setSuccessfulFetch(requestQuery));
+		const newPayload = [{ a: 1 }];
+		const actual = reducer({}, setSuccessfulFetch(newPayload));
 		expect(actual).toEqual({
 			loading: false,
 			error: null,
-			payload: requestQuery,
+			payload: newPayload,
 			aborted: false,
 		});
 	});
