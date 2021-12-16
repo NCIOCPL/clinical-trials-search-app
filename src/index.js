@@ -75,13 +75,18 @@ const initialize = ({
 	const ctsApiEndpointV1 = `${ctsProtocol}://${ctsHostname}${
 		ctsPort ? `:${ctsPort}` : ``
 	}/${ctsApiVersion}`;
+	const ctsApiEndpointV2 = `${ctsProtocol}://${ctsHostname}${
+		ctsPort ? `:${ctsPort}` : ``
+	}/api/v2`;
 	const clinicalTrialsSearchClient =
 		clinicalTrialsSearchClientFactory(ctsApiEndpointV1);
-
+	const clinicalTrialsSearchClientV2 =
+		clinicalTrialsSearchClientFactory(ctsApiEndpointV2);
 	// Populate global state with init params
 	const initialState = {
 		apiClients: {
 			clinicalTrialsSearchClient,
+			clinicalTrialsSearchClientV2,
 		},
 		appHasBeenVisited,
 		appHasBeenInitialized,
@@ -192,10 +197,17 @@ window.CTSApp = initialize;
 const appParams = window.APP_PARAMS || {};
 const integrationTestOverrides = window.INT_TEST_APP_PARAMS || {};
 if (process.env.NODE_ENV !== 'production') {
-	//This is DEV
-	const dictSettings = {
+	const ctsSettings = {
+		...appParams,
+		...integrationTestOverrides,
+		ctsApiEndpointV2: 'http://localhost:3000/cts/proxy-api/v2',
+	};
+	initialize(ctsSettings);
+} else if (window?.location?.host === 'react-app-dev.cancer.gov') {
+	// This is for product testing
+	const ctsSettings = {
 		...appParams,
 		...integrationTestOverrides,
 	};
-	initialize(dictSettings);
+	initialize(ctsSettings);
 }
