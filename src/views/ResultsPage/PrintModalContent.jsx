@@ -1,20 +1,17 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
 import { usePrintApi } from '../../hooks';
 import { buildQueryString } from '../../utilities';
 import { useAppSettings } from '../../store/store.js';
 
 const queryString = require('query-string');
 
-const PrintModalContent = ({ selectedList = [] }) => {
+const PrintModalContent = ({ selectedList, searchCriteriaObject }) => {
 	// in dev use
 	const [{ printCacheEndpoint }] = useAppSettings();
 	const printUrl = printCacheEndpoint;
 
-	const formSnapshot = useSelector((store) => store.form);
-
-	const queryParams = buildQueryString(formSnapshot);
+	const queryParams = buildQueryString(searchCriteriaObject);
 
 	// Support for legacy things
 	const queryParamsModified = {
@@ -121,8 +118,7 @@ const PrintModalContent = ({ selectedList = [] }) => {
 	);
 };
 PrintModalContent.propTypes = {
-	selectedList: PropTypes.array,
-	handleClose: PropTypes.func,
-	closeModal: PropTypes.func,
+	selectedList: PropTypes.array.isRequired,
+	searchCriteriaObject: PropTypes.object.isRequired,
 };
 export default PrintModalContent;

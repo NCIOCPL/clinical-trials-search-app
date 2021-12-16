@@ -532,7 +532,7 @@ const ResultsPage = () => {
 			<Modal isShowing={isShowing} hide={toggleModal}>
 				<PrintModalContent
 					selectedList={selectedResults}
-					handleClose={toggleModal}
+					searchCriteriaObject={searchCriteriaObject}
 				/>
 			</Modal>
 		</>
