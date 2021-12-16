@@ -11,15 +11,16 @@ const mockInterventions = require('./mock-clinical-trials/interventions');
 const mockTerm = require('./mock-clinical-trials/term');
 const mockTerms = require('./mock-clinical-trials/terms');
 const mockDiseases = require('./mock-clinical-trials/diseases');
+const  { createProxyMiddleware } = require('http-proxy-middleware');
 
-
+const mockTrials = require('./mock-clinical-trials/trials');
 
 module.exports = function(app) {
 
   // Any posts done with application/json will have thier body convered as an object.
   app.use(express.json());
 
-  // CTS API Mocks
+  // CTS API V1 Mocks
   // NOTE: The client does not allow us to change the base path.
   // So 
   app.use('/v1/clinical-trial/:id', mockClinicalTrial);
@@ -28,17 +29,45 @@ module.exports = function(app) {
   app.use('/v1/term/:term_key', mockTerm);
   app.use('/v1/terms', mockTerms);
   app.use('/v1/diseases', mockDiseases);
+  
 
   // Handle mock requests for the zip code lookup API
   app.use('/mock-api/zip_code_lookup/:zip', mockZipCodeLookup);
 
   // The Zip Code API does not allow CORS headers, so we must proxy it for
   // local development.
+
+  //CTS API V2 endpoints
+  app.use('/cts/mock-api/v2/trials', mockTrials);
   app.use(
-    '/cts_api/**',
-    proxy({
-      target : 'https://www.cancer.gov/',
-      changeOrigin: true,
-    })
+    '/cts/proxy-api/v2',
+    createProxyMiddleware({
+			target: 'https://clinicaltrialsapi.cancer.gov',
+			headers: {
+				'X-API-KEY': process.env.CTS_API_KEY,
+			},
+			pathRewrite: {
+				'^/cts/proxy-api/v2': '/api/v2',
+			},
+			onProxyReq: (proxyReq, req) => {
+				// Strip cookies because CTSAPI chokes on certain ones.
+				proxyReq.removeHeader('cookie');
+
+				// It looks like our webpack-dev-server setup parses the body
+				// before this proxy middleware. This causes the request to
+				// no longer be a stream, and in turn that makes the actual
+				// proxy request to not be sent to the server. So what has to
+				// happen is that we need to write the body to the proxyReq
+				// to turn it back into a stream. (which is what this conditional
+				// does)
+				if (!!req.body && Object.keys(req.body).length > 0) {
+					const bodyData = JSON.stringify(req.body);
+					proxyReq.setHeader('Content-Type', 'application/json');
+					proxyReq.setHeader('Content-Length', Buffer.byteLength(bodyData));
+					proxyReq.write(bodyData);
+				}
+			},
+			changeOrigin: true,
+		})
   );
 }
