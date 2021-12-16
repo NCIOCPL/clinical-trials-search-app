@@ -12,6 +12,7 @@ beforeEach(() => {
 			baseHost: 'http://localhost:3000',
 			basePath: '/about-cancer/treatment/clinical-trials/search',
 			canonicalHost: 'https://www.cancer.gov',
+			ctsApiEndpointV1: '/v1',
 			ctsTitle: 'Find NCI-Supported Clinical Trials',
 			language: 'en',
 			rootId: 'NCI-CTS-root',

@@ -11,6 +11,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import * as reducers from './store/reducers';
 import { loadStateFromSessionStorage } from './utilities';
 import createCTSMiddleware from './middleware/CTSMiddleware';
+import createCTSMiddlewareV2 from './middleware/CTSMiddlewareV2';
 import cacheMiddleware from './middleware/cacheMiddleware';
 import { ClinicalTrialsServiceFactory } from '@nciocpl/clinical-trials-search-client.js';
 
@@ -40,6 +41,8 @@ const initialize = ({
 	baseHost = 'http://localhost:3000',
 	basePath = '/about-cancer/treatment/clinical-trials/search',
 	canonicalHost = 'https://www.cancer.gov',
+	ctsApiEndpointV1,
+	ctsApiEndpointV2,
 	ctsTitle = 'Find NCI-Supported Clinical Trials',
 	initErrorsList = [],
 	language = 'en',
@@ -60,28 +63,22 @@ const initialize = ({
 
 	let cachedState;
 
-	const ctsApiVersion = 'v1';
 	const services = {};
 	const ctsSearch = () => {
 		const service = ClinicalTrialsServiceFactory.create(
 			ctsHostname,
-			ctsApiVersion,
+			'v1',
 			ctsProtocol,
 			ctsPort
 		);
 		return service;
 	};
 	services.ctsSearch = ctsSearch;
-	const ctsApiEndpointV1 = `${ctsProtocol}://${ctsHostname}${
-		ctsPort ? `:${ctsPort}` : ``
-	}/${ctsApiVersion}`;
-	const ctsApiEndpointV2 = `${ctsProtocol}://${ctsHostname}${
-		ctsPort ? `:${ctsPort}` : ``
-	}/api/v2`;
 	const clinicalTrialsSearchClient =
 		clinicalTrialsSearchClientFactory(ctsApiEndpointV1);
 	const clinicalTrialsSearchClientV2 =
 		clinicalTrialsSearchClientFactory(ctsApiEndpointV2);
+
 	// Populate global state with init params
 	const initialState = {
 		apiClients: {
@@ -120,11 +117,13 @@ const initialize = ({
 	// const historyMiddleware = createHistoryMiddleware(history);
 
 	const ctsMiddleware = createCTSMiddleware(services);
+	const ctsMiddlewareV2 = createCTSMiddlewareV2(clinicalTrialsSearchClientV2);
+	const middleware = [cacheMiddleware, ctsMiddleware, ctsMiddlewareV2];
 
 	const store = createStore(
 		combineReducers(reducers),
 		cachedState,
-		composeWithDevTools(applyMiddleware(cacheMiddleware, ctsMiddleware))
+		composeWithDevTools(applyMiddleware(...middleware))
 	);
 
 	// With the store now created, we want to subscribe to updates.
