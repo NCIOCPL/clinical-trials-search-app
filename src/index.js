@@ -198,8 +198,8 @@ const integrationTestOverrides = window.INT_TEST_APP_PARAMS || {};
 if (process.env.NODE_ENV !== 'production') {
 	const ctsSettings = {
 		...appParams,
-		...integrationTestOverrides,
 		ctsApiEndpointV2: 'http://localhost:3000/cts/proxy-api/v2',
+		...integrationTestOverrides,
 	};
 	initialize(ctsSettings);
 } else if (window?.location?.host === 'react-app-dev.cancer.gov') {

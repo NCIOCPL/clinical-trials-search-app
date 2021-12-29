@@ -3,19 +3,28 @@ import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import Fieldset from '../../atomic/Fieldset';
 import { Autocomplete } from '../../atomic';
-import { searchLeadOrg } from '../../../store/actions';
-import { matchItemToTerm, sortItems } from '../../../utilities';
+import { getLeadOrgAction } from '../../../store/actionsV2';
+import {
+	createTermDataFromAggregate,
+	matchItemToTerm,
+	sortItems,
+} from '../../../utilities';
 
 const LeadOrganization = ({ handleUpdate }) => {
 	const dispatch = useDispatch();
 	const { leadOrg } = useSelector((store) => store.form);
-	const { leadorgs = [] } = useSelector((store) => store.cache);
+	const { leadorgs = {} } = useSelector((store) => store.cache);
+	// Forcibly limit results returned from api as there is currently
+	// no way to limit aggregate results returned.
+	const lead_org = leadorgs.aggregations
+		? createTermDataFromAggregate(leadorgs.aggregations.lead_org.slice(0, 10))
+		: [];
 
 	const [orgName, setOrgName] = useState({ value: leadOrg.term });
 
 	useEffect(() => {
 		if (orgName.value.length > 2) {
-			dispatch(searchLeadOrg({ searchText: orgName.value }));
+			dispatch(getLeadOrgAction({ searchText: orgName.value }));
 		}
 	}, [orgName, dispatch]);
 
@@ -31,7 +40,7 @@ const LeadOrganization = ({ handleUpdate }) => {
 				value={orgName.value}
 				inputProps={{ id: 'lo', placeholder: 'Organization name' }}
 				wrapperStyle={{ position: 'relative', display: 'inline-block' }}
-				items={leadorgs}
+				items={lead_org}
 				getItemValue={(item) => item.term}
 				shouldItemRender={matchItemToTerm}
 				sortItems={sortItems}
@@ -46,7 +55,7 @@ const LeadOrganization = ({ handleUpdate }) => {
 				renderMenu={(children) => (
 					<div className="cts-autocomplete__menu --leadOrg">
 						{orgName.value.length > 2 ? (
-							leadorgs.length ? (
+							lead_org.length ? (
 								children
 							) : (
 								<div className="cts-autocomplete__menu-item">
