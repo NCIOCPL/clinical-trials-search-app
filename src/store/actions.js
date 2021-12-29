@@ -437,26 +437,17 @@ export function searchTrialInvestigators({ searchText, size = 10 } = {}) {
 	};
 }
 
-/**
- * Gets lead orgs to populate the Lead Organization field
- */
-export function searchLeadOrg({ searchText, size = 10 } = {}) {
+export function searchTrials({ cacheKey, data }) {
 	return {
 		type: '@@api/CTS',
 		payload: {
 			service: 'ctsSearch',
-			cacheKey: 'leadorgs',
+			cacheKey: cacheKey,
 			requests: [
 				{
-					method: 'getTerms',
+					method: 'searchTrials',
 					requestParams: {
-						category: 'lead_org',
-						additionalParams: {
-							term: searchText,
-							sort: 'term',
-							current_trial_statuses: ACTIVE_TRIAL_STATUSES,
-						},
-						size,
+						document: JSON.stringify(data),
 					},
 				},
 			],

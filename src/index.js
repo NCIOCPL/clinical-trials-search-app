@@ -200,8 +200,8 @@ if (process.env.NODE_ENV !== 'production') {
 	// This is LOCAL DEV
 	const ctsSettings = {
 		...appParams,
-		...integrationTestOverrides,
 		ctsApiEndpointV2: 'http://localhost:3000/cts/proxy-api/v2',
+		...integrationTestOverrides,
 	};
 	initialize(ctsSettings);
 } else if (window?.location?.host === 'react-app-dev.cancer.gov') {
