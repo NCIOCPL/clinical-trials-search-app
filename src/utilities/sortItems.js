@@ -1,6 +1,6 @@
 export function sortItems(a, b, value) {
-	const aLower = a.term.toLowerCase();
-	const bLower = b.term.toLowerCase();
+	const aLower = a.key.toLowerCase();
+	const bLower = b.key.toLowerCase();
 	const valueLower = value.toLowerCase();
 	const queryPosA = aLower.indexOf(valueLower);
 	const queryPosB = bLower.indexOf(valueLower);

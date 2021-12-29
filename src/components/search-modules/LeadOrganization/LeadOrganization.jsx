@@ -3,19 +3,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import Fieldset from '../../atomic/Fieldset';
 import { Autocomplete } from '../../atomic';
-import { searchLeadOrg } from '../../../store/actions';
+import { getLeadOrgAction } from '../../../store/actionsV2';
 import { matchItemToTerm, sortItems } from '../../../utilities';
 
 const LeadOrganization = ({ handleUpdate }) => {
 	const dispatch = useDispatch();
 	const { leadOrg } = useSelector((store) => store.form);
-	const { leadorgs = [] } = useSelector((store) => store.cache);
+	const { leadorgs = {} } = useSelector((store) => store.cache);
+	// Forcibly limit results returned from api as the size parameter
+	// to limit results doesn't work to limit results as expected.
+	const lead_org = leadorgs.aggregations
+		? leadorgs.aggregations.lead_org.slice(0, 10)
+		: [];
 
 	const [orgName, setOrgName] = useState({ value: leadOrg.term });
 
 	useEffect(() => {
 		if (orgName.value.length > 2) {
-			dispatch(searchLeadOrg({ searchText: orgName.value }));
+			dispatch(getLeadOrgAction({ searchText: orgName.value }));
 		}
 	}, [orgName, dispatch]);
 
@@ -31,8 +36,8 @@ const LeadOrganization = ({ handleUpdate }) => {
 				value={orgName.value}
 				inputProps={{ id: 'lo', placeholder: 'Organization name' }}
 				wrapperStyle={{ position: 'relative', display: 'inline-block' }}
-				items={leadorgs}
-				getItemValue={(item) => item.term}
+				items={lead_org}
+				getItemValue={(item) => item.key}
 				shouldItemRender={matchItemToTerm}
 				sortItems={sortItems}
 				onChange={(event, value) => {
@@ -41,12 +46,12 @@ const LeadOrganization = ({ handleUpdate }) => {
 				}}
 				onSelect={(value, item) => {
 					handleUpdate('leadOrg', item);
-					setOrgName({ value: item.term });
+					setOrgName({ value: item.key });
 				}}
 				renderMenu={(children) => (
 					<div className="cts-autocomplete__menu --leadOrg">
 						{orgName.value.length > 2 ? (
-							leadorgs.length ? (
+							lead_org.length ? (
 								children
 							) : (
 								<div className="cts-autocomplete__menu-item">
@@ -65,8 +70,8 @@ const LeadOrganization = ({ handleUpdate }) => {
 						className={`cts-autocomplete__menu-item ${
 							isHighlighted ? 'highlighted' : ''
 						}`}
-						key={item.termKey}>
-						{item.term}
+						key={item.key}>
+						{item.key}
 					</div>
 				)}
 			/>
