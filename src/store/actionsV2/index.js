@@ -1,0 +1,1 @@
+export { getLeadOrgAction } from './getLeadOrgAction';

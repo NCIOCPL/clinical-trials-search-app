@@ -1,4 +1,5 @@
 import { receiveData } from '../store/actions';
+import { getLeadOrg } from '../services/api/clinical-trials-search-api';
 
 /**
  * This middleware serves two purposes (and could perhaps be broken into two pieces).
@@ -20,10 +21,13 @@ const createCTSMiddlewareV2 =
 
 		const getAllRequests = async (fetchAction) => {
 			const requests = () => {
-				const { method } = fetchAction.payload;
+				const { method, requestParams } = fetchAction.payload;
 
 				// Switch block for api calls with default case
 				switch (method) {
+					case 'getLeadOrg': {
+						return getLeadOrg(client, requestParams);
+					}
 					default: {
 						throw new Error(`Unknown CTS API request`);
 					}
@@ -36,7 +40,7 @@ const createCTSMiddlewareV2 =
 		if (client !== null && action.payload) {
 			try {
 				const results = await getAllRequests(action);
-				dispatch(receiveData(action.payload.cacheKey, ...results));
+				dispatch(receiveData(action.payload.cacheKey, results));
 			} catch (err) {
 				console.log(err);
 			}
