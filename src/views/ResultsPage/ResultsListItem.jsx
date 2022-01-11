@@ -4,7 +4,11 @@ import { receiveData } from '../../store/actions';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Checkbox from '../../components/atomic/Checkbox';
-import { isWithinRadius } from '../../utilities';
+
+import {
+	filterSitesByActiveRecruitment,
+	isWithinRadius,
+} from '../../utilities';
 import { NIH_ZIPCODE } from '../../constants';
 import { useTracking } from 'react-tracking';
 import { useAppSettings } from '../../store/store.js';
@@ -21,25 +25,28 @@ const ResultsListItem = ({
 	formType,
 }) => {
 	const dispatch = useDispatch();
-	// TODO?
+	// TODO -- https://github.com/NCIOCPL/clinical-trials-search-app/issues/403
 	const { zipCoords, zipRadius, location, country, states, city, vaOnly } =
 		useSelector((store) => store.form);
 	const [{ analyticsName }] = useAppSettings();
 	const tracking = useTracking();
 
 	const qsQbj = queryString.parse(queryParams);
-	qsQbj.id = item.nciID;
+	qsQbj.id = item.nci_id;
 	const itemQueryString = queryString.stringify(qsQbj, {
 		arrayFormat: 'none',
 	});
 
+	//TODO: Add param comments for all of these
+
 	//compare site values against user criteria
-	const isLocationParamMatch = (siteObj) => {
+	const isLocationParamMatch = (itemSite) => {
 		// If search params have a city, but it does
 		// not match.
 		if (
 			city !== '' &&
-			(!siteObj.city || siteObj.city.toLowerCase() !== city.toLowerCase())
+			(!itemSite.org_city ||
+				itemSite.org_city.toLowerCase() !== city.toLowerCase())
 		) {
 			return false;
 		}
@@ -47,8 +54,8 @@ const ResultsListItem = ({
 		// Now check country
 		if (
 			country !== '' &&
-			(!siteObj.country ||
-				siteObj.country.toLowerCase() !== country.toLowerCase())
+			(!itemSite.org_country ||
+				itemSite.org_country.toLowerCase() !== country.toLowerCase())
 		) {
 			return false;
 		}
@@ -59,14 +66,12 @@ const ResultsListItem = ({
 		// check would fail in that case...
 		if (states.length > 0) {
 			// This site has no state so it can't be a match.
-			if (!siteObj.stateOrProvinceAbbreviation) {
+			if (!itemSite.org_state_or_province) {
 				return false;
 			}
 			// Extract abbreviations
 			const stateAbbrs = states.map((st) => st.abbr.toUpperCase());
-			if (
-				!stateAbbrs.includes(siteObj.stateOrProvinceAbbreviation.toUpperCase())
-			) {
+			if (!stateAbbrs.includes(itemSite.org_state_or_province.toUpperCase())) {
 				return false;
 			}
 		}
@@ -76,28 +81,28 @@ const ResultsListItem = ({
 	};
 
 	//compare site values against user criteria
-	const isNIHParamMatch = (siteObj) => {
-		return siteObj.postalCode === NIH_ZIPCODE;
+	const isNIHParamMatch = (itemSite) => {
+		return itemSite.org_postal_code === NIH_ZIPCODE;
 	};
 
 	const countNearbySitesByZip = (arr) => {
 		return arr.reduce(
-			(count, siteItem) =>
-				count + isWithinRadius(zipCoords, siteItem.coordinates, zipRadius),
+			(count, itemSite) =>
+				count + isWithinRadius(zipCoords, itemSite.org_coordinates, zipRadius),
 			0
 		);
 	};
 
 	const countNearbySitesByCountryParams = (arr) => {
 		return arr.reduce(
-			(count, siteItem) => count + isLocationParamMatch(siteItem),
+			(count, itemSite) => count + isLocationParamMatch(itemSite),
 			0
 		);
 	};
 
 	const countNearbySitesByNIHParams = (arr) => {
 		return arr.reduce(
-			(count, siteItem) => count + isNIHParamMatch(siteItem),
+			(count, itemSite) => count + isNIHParamMatch(itemSite),
 			0
 		);
 	};
@@ -113,28 +118,28 @@ const ResultsListItem = ({
 
 	const getAgeDisplay = () => {
 		if (
-			item.eligibilityInfo.structuredCriteria.minAgeInt === 0 &&
-			item.eligibilityInfo.structuredCriteria.maxAgeInt > 120
+			item.eligibility.structured.min_age_number === 0 &&
+			item.eligibility.structured.max_age_number > 120
 		) {
 			return 'Not Specified';
 		}
 		if (
-			item.eligibilityInfo.structuredCriteria.minAgeInt === 0 &&
-			item.eligibilityInfo.structuredCriteria.maxAgeInt < 120
+			item.eligibility.structured.min_age_number === 0 &&
+			item.eligibility.structured.max_age_number < 120
 		) {
-			return `${item.eligibilityInfo.structuredCriteria.minAgeInt} years and younger`;
+			return `${item.eligibility.structured.min_age_number} years and younger`;
 		}
 		if (
-			item.eligibilityInfo.structuredCriteria.minAgeInt > 0 &&
-			item.eligibilityInfo.structuredCriteria.maxAgeInt < 120
+			item.eligibility.structured.min_age_number > 0 &&
+			item.eligibility.structured.max_age_number < 120
 		) {
-			return `${item.eligibilityInfo.structuredCriteria.minAgeInt} to ${item.eligibilityInfo.structuredCriteria.maxAgeInt} years`;
+			return `${item.eligibility.structured.min_age_number} to ${item.eligibility.structured.max_age_number} years`;
 		}
 		if (
-			item.eligibilityInfo.structuredCriteria.minAgeInt > 0 &&
-			item.eligibilityInfo.structuredCriteria.maxAgeInt > 120
+			item.eligibility.structured.min_age_number > 0 &&
+			item.eligibility.structured.max_age_number > 120
 		) {
-			return `${item.eligibilityInfo.structuredCriteria.minAgeInt} years and over`;
+			return `${item.eligibility.structured.min_age_number} years and over`;
 		}
 	};
 
@@ -142,18 +147,21 @@ const ResultsListItem = ({
 		// NOTE: Displays for count should be ONLY US sites
 		// unless it is a country search and the country
 		// is not US.
-		const sitesListAll =
+		const sitesListAllUnfiltered =
 			location === 'search-location-country' && country !== 'United States'
 				? item.sites
-				: item.sites.filter((site) => site.country === 'United States');
+				: item.sites.filter((site) => site.org_country === 'United States');
+
+		// Filter the sites by active recruitment.
+		const sitesListAll = filterSitesByActiveRecruitment(sitesListAllUnfiltered);
 
 		// If there are no sites we need to display special information
 		if (sitesListAll.length === 0) {
 			// The old code also referenced a "not yet active" status, which does not exist, so
 			// we are going to ignore that.
 			if (
-				item.currentTrialStatus === 'Approved' ||
-				item.currentTrialStatus === 'In Review'
+				item.current_trial_status === 'Approved' ||
+				item.current_trial_status === 'In Review'
 			) {
 				return 'Location information is not yet available';
 			} else {
@@ -161,7 +169,7 @@ const ResultsListItem = ({
 					<>
 						See{' '}
 						<a
-							href={`https://www.clinicaltrials.gov/show/${item.nctID}`}
+							href={`https://www.clinicaltrials.gov/show/${item.nct_id}`}
 							target="_blank"
 							rel="noopener noreferrer">
 							ClinicalTrials.gov
@@ -173,21 +181,21 @@ const ResultsListItem = ({
 
 		// A single study site shows the name of the organiztion.
 		// Don't ask me (bp) what the ID is of a trial that has no
-		// US sites and only a single forign site.
+		// US sites and only a single foreign site.
 		if (sitesListAll.length === 1) {
 			const site = sitesListAll[0];
-			let displayText = `${site.name}, ${site.city}, `;
+			let displayText = `${site.org_name}, ${site.org_city}, `;
 			displayText +=
-				site.country === 'United States'
-					? site.stateOrProvinceAbbreviation
-					: site.country;
+				site.org_country === 'United States'
+					? site.org_state_or_province
+					: site.org_country;
 			return displayText;
 		}
 
 		// We filter on VA here to cut down on conditionals
-		// in all the cout by.
+		// in all the count by.
 		const sitesListForNearCount = vaOnly
-			? sitesListAll.filter((site) => site.isVA)
+			? sitesListAll.filter((site) => site.org_va)
 			: sitesListAll;
 
 		// Assume that search-location-zip means that
@@ -225,7 +233,7 @@ const ResultsListItem = ({
 	};
 
 	const setCachedTitle = () => {
-		dispatch(receiveData('currentTrialTitle', item.briefTitle));
+		dispatch(receiveData('currentTrialTitle', item.brief_title));
 	};
 
 	const handleLinkClick = () => {
@@ -248,8 +256,8 @@ const ResultsListItem = ({
 		<div className="results-list-item results-list__item">
 			<div className="results-list-item__checkbox">
 				<Checkbox
-					id={id || item.nciID}
-					name={item.nciID}
+					id={id || item.nci_id}
+					name={item.nci_id}
 					checked={isChecked}
 					label="Select this article for print"
 					hideLabel
@@ -262,12 +270,12 @@ const ResultsListItem = ({
 					<Link
 						to={`/about-cancer/treatment/clinical-trials/search/v?${itemQueryString}`}
 						onClick={handleLinkClick}>
-						{item.briefTitle}
+						{item.brief_title}
 					</Link>
 				</div>
 				<div className="results-list-item__category">
 					<span>Status:</span>
-					{item.currentTrialStatus ? 'Active' : 'Active'}
+					{item.current_trial_status ? 'Active' : 'Active'}
 				</div>
 				<div className="results-list-item__category">
 					<span>Age:</span>
@@ -275,11 +283,12 @@ const ResultsListItem = ({
 				</div>
 				<div className="results-list-item__category">
 					<span>Gender:</span>
-					{getGenderDisplay(item.eligibilityInfo.structuredCriteria.gender)}
+					{item.eligibility &&
+						getGenderDisplay(item.eligibility.structured.gender)}
 				</div>
 				<div className="results-list-item__category">
 					<span>Location:</span>
-					{getLocationDisplay()}
+					{item.sites && getLocationDisplay()}
 				</div>
 			</div>
 		</div>

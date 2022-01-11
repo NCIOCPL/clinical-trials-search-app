@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useReducer } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useTracking } from 'react-tracking';
 import {
-	updateFormField,
 	updateFormSearchCriteria,
 	clearForm,
 	receiveData,
@@ -24,72 +23,114 @@ import {
 	queryStringToSearchCriteria,
 	runQueryFetchers,
 } from '../../utilities';
-import { useModal, useStoreToFindTrials } from '../../hooks';
+import { convertObjectToBase64 } from '../../utilities/objects';
+import { useModal } from '../../hooks';
 import ResultsPageHeader from './ResultsPageHeader';
 import ResultsList from './ResultsList';
 import PrintModalContent from './PrintModalContent';
 import { useAppSettings } from '../../store/store.js';
 
+import {
+	resultsPageReducer,
+	setSuccessfulFetch,
+	setSelectAll,
+	setFetchActions,
+	setSearchCriteriaObject,
+} from '../resultsPageReducer';
+
+import { useCtsApi } from '../../hooks/ctsApiSupport';
+import { getClinicalTrialsAction } from '../../services/api/actions';
+import { formatTrialSearchQuery } from '../../utilities/formatTrialSearchQuery';
 const queryString = require('query-string');
 
 const ResultsPage = () => {
-	const dispatch = useDispatch();
-	const location = useLocation();
-	const navigate = useNavigate();
-	const [selectAll, setSelectAll] = useState(false);
-	const [pagerPage, setPagerPage] = useState(0);
-
-	const [pageIsLoading, setPageIsLoading] = useState(true);
-	const [isLoading, setIsLoading] = useState(true);
-	const [trialResults, setTrialResults] = useState([]);
-	const [resultsCount, setResultsCount] = useState(0);
-	const [error, setError] = useState([]);
-	const [isPageLoadReady, setIsPageLoadReady] = useState(false);
-	// This is the only used to derive formType when zip is invalid,
-	// when the form store is removed this will be removed
-	const [searchCriteriaObject, setSearchCriteriaObject] = useState();
-	const { resultsPage } = useSelector((store) => store.form);
-	const cache = useSelector((store) => store.cache);
-	const qs = queryString.extract(location.search);
-	const [currCacheKey, setCurrCacheKey] = useState('');
-	const [{ fetchTrials }] = useStoreToFindTrials();
-	const [selectedResults, setSelectedResults] = useState(
-		cache['selectedTrialsForPrint'] || []
-	);
-	const tracking = useTracking();
+	// Load our React context
 	const [
 		{ analyticsName, canonicalHost, services, siteName, zipConversionEndpoint },
 	] = useAppSettings();
-	const ctsapiclient = services.ctsSearch();
 
-	const handleUpdate = (field, value) => {
-		dispatch(
-			updateFormField({
-				field,
-				value,
-			})
-		);
+	// Redux
+	const dispatch = useDispatch();
+	// This is the used to derive formType when zip is invalid,
+	// and for selected print results.
+	// When the form store and print tickets are is completed this will be removed
+	const cache = useSelector((store) => store.cache);
+
+	// This is tightly coupled to the PageHeader.
+	// SCO.resultsPage is undefined on initialRender
+	// const { resultsPage } = useSelector((store) => store.form);
+	// Route Data/ Management
+	const location = useLocation();
+	const navigate = useNavigate();
+	const qs = queryString.extract(location.search);
+
+	// Initial Page state. Used as the initial state in the reducer.
+	const INITIAL_PAGE_STATE = {
+		selectAll: false,
+		pageIsLoading: true,
+		isLoading: true,
+		isPageLoadReady: false,
+		pageErrors: [],
+		searchCriteriaObject: null,
+		trialResults: null,
+		actionsHash: '',
+		fetchActions: [],
+		error: [],
+		pagerPage: 0,
 	};
+
+	const [pageState, ctsDispatch] = useReducer(
+		resultsPageReducer,
+		INITIAL_PAGE_STATE
+	);
+
+	const {
+		pageIsLoading,
+		isLoading,
+		isPageLoadReady,
+		error,
+		selectAll,
+		trialResults,
+		searchCriteriaObject,
+		fetchActions,
+		pagerPage,
+	} = pageState;
+
+	// References Redux: To be removed in https://github.com/NCIOCPL/clinical-trials-search-app/issues/342
+	const [selectedResults, setSelectedResults] = useState(
+		cache['selectedTrialsForPrint'] || []
+	);
+
+	// Analytics
+	const tracking = useTracking();
+	const ctsapiclient = services.ctsSearch();
 
 	const handleTracking = (analyticsPayload) => {
 		tracking.trackEvent(analyticsPayload);
 	};
 
+	const [currentActionsHash, setCurrentActionsHash] = useState('');
+
 	// This all needs to be reconciled once new fetching is implemented
 	// One loading state to rule them all
 	const isAllFetchingComplete = () => {
 		const isFetchingComplete =
-			!isLoading && isPageLoadReady && !pageIsLoading && searchCriteriaObject;
+			!isLoading &&
+			isPageLoadReady &&
+			!pageIsLoading &&
+			searchCriteriaObject &&
+			searchCriteriaObject.formType &&
+			payload &&
+			payload.length &&
+			!loading;
 		return isFetchingComplete;
 	};
 
-	// scroll to top on mount
+	const { loading, payload } = useCtsApi(fetchActions);
+
+	// Initialize the searchCriteriaObject. If the location changes, re-initialize it.
 	useEffect(() => {
-		window.scrollTo(0, 0);
-		if (isAllFetchingComplete()) {
-			initData();
-		} else if (!searchCriteriaObject) {
-			// Get search criteria object
+		if (!searchCriteriaObject) {
 			const searchCriteria = async () => {
 				const { diseaseFetcher, interventionFetcher, zipFetcher } =
 					await runQueryFetchers(ctsapiclient, zipConversionEndpoint);
@@ -101,33 +142,98 @@ const ResultsPage = () => {
 				);
 			};
 			searchCriteria().then((res) => {
-				setSearchCriteriaObject(res.searchCriteria);
+				ctsDispatch(setSearchCriteriaObject(res.searchCriteria));
+
+				// If we have an error bassed onthe qs / SCO paramaeters
+				// set the error and do not proceed with fetching the trials.
 				if (res.errors.length) {
-					setError(res.errors);
+					ctsDispatch({
+						type: 'SET_PROP',
+						prop: 'error',
+						payload: res.errors,
+					});
 				} else {
+					const requestFilters = formatTrialSearchQuery(res.searchCriteria);
+					const searchAction = getClinicalTrialsAction({
+						// 'from' is calculated from (res.searchCriteria.resultsPage * 10). BAD.
+						// And only when resultsPage > 0,
+						// otherwise it's null and gets set in the action from a default value. BAD.
+						// If the 'pn'/resultsPage parameter is...reasonably.. set to  1 for the first results page,
+						// instead of the 'null' it expects for some reason,
+						// the offset gets out of whack. BAD. VERY BAD.
+						// TODO:  queryStringToSearchCriteria should be updated to set a default value for the first page.
+						from: requestFilters.from,
+						requestFilters: requestFilters,
+						size: 10,
+					});
+
+					ctsDispatch(setFetchActions(searchAction));
+
+					// Get a hash of the actions so that we can check= if the response data's
+					// 'originating hash' matches the current hash during render. Changes from
+					// the same route with different data will trigger a re-render with the
+					// old data before the spinner is displayed.
+					setCurrentActionsHash(convertObjectToBase64(searchAction));
+					// setScoHash(convertObjectToBase64(searchAction));
+					// Redux
 					dispatch(updateFormSearchCriteria(res.searchCriteria));
-					setCurrCacheKey(qs);
-					fetchTrials(qs);
 				}
 			});
 		} else {
-			// Something went wrong
-			setPageIsLoading(false);
-			setIsLoading(false);
-		}
-	}, []);
+			const requestFilters = formatTrialSearchQuery(searchCriteriaObject);
+			const searchAction = getClinicalTrialsAction({
+				// 'from' is calculated from (res.searchCriteria.resultsPage * 10). BAD.
+				// And only when resultsPage > 0,
+				// otherwise it's null and gets set in the action from a default value. BAD.
+				// If the 'pn'/resultsPage parameter is...reasonably.. set to  1 for the first results page,
+				// instead of the 'null' it expects for some reason,
+				// the offset gets out of whack. BAD. VERY BAD.
+				// TODO:  queryStringToSearchCriteria should be updated to set a default value for the first page.
+				from: requestFilters.from,
+				requestFilters: requestFilters,
+			});
 
-	// When trial results come in, open up shop
+			ctsDispatch(setFetchActions(searchAction));
+
+			// Get a hash of the actions so that we can check= if the response data's
+			// 'originating hash' matches the current hash during render. Changes from
+			// the same route with different data will trigger a re-render with the
+			// old data before the spinner is displayed.
+			setCurrentActionsHash(convertObjectToBase64(searchAction));
+			// setScoHash(convertObjectToBase64(searchAction));
+			// Redux
+			dispatch(updateFormSearchCriteria(searchCriteriaObject));
+		}
+	}, [location]);
+
+	// If we have a search criteria object and paylaod, we have a successful fetch.
 	useEffect(() => {
-		if (isLoading && cache[currCacheKey] && cache[currCacheKey].total >= 0) {
-			initData();
-		}
-	}, [cache[currCacheKey]]);
+		if (
+			searchCriteriaObject &&
+			searchCriteriaObject.formType &&
+			payload &&
+			payload.length > 0
+		) {
+			// We've received the data. Scroll up.
+			// Store the data, and modify the loading states via the pageState reducer.
+			window.scrollTo(0, 0);
 
+			ctsDispatch({
+				type: 'SET_PROP',
+				prop: 'trialResults',
+				payload: payload[0],
+			});
+
+			// At this point, the wrapped view is going to handle this request.
+			ctsDispatch(setSuccessfulFetch(currentActionsHash, payload[0]));
+		}
+	}, [loading, payload, searchCriteriaObject]);
+
+	//Handle Analytics
 	useEffect(() => {
 		// This should also be dependent on the current route/url
 		if (isAllFetchingComplete()) {
-			const formData = formToTrackingData(searchCriteriaObject);
+			const trackingData = formToTrackingData(searchCriteriaObject);
 
 			handleTracking({
 				// These properties are required.
@@ -141,18 +247,24 @@ const ResultsPage = () => {
 				title: `Clinical Trials Search Results`,
 				status: 'success',
 				formType: searchCriteriaObject.formType,
-				numResults: resultsCount,
-				formData: formData,
+				numResults: trialResults.total,
+				formData: trackingData,
 				helperFormData: formDataConverter(
 					searchCriteriaObject.formType,
-					formData
+					trackingData
 				),
 			});
 			// Since we can page we need to prep isPageLoadReady
-			setIsPageLoadReady(false);
+			ctsDispatch({
+				type: 'SET_PROP',
+				prop: 'isPageLoadReady',
+				payload: false,
+			});
 		}
 	}, [isPageLoadReady, pageIsLoading, searchCriteriaObject]);
 
+	// TODO: Update this functionality to use a React context instead of Redux
+	//  See: https://github.com/NCIOCPL/clinical-trials-search-app/issues/342
 	//track usage of selected results for print
 	useEffect(() => {
 		// update cacheStore with new selectedResults Value
@@ -174,24 +286,12 @@ const ResultsPage = () => {
 		}
 	}, [selectedResults]);
 
-	const initData = () => {
-		window.scrollTo(0, 0);
-		//We are changing the results page, so
-		//queue up another load.
-		setSelectAll(false);
-		setPageIsLoading(false);
-		setIsLoading(false);
-		setTrialResults(cache[currCacheKey]);
-		setResultsCount(cache[currCacheKey].total);
-		setIsPageLoadReady(true);
-	};
-
 	const handleSelectAll = () => {
 		const pageResultIds = [
 			...new Set(
 				trialResults.trials.map((item) => {
 					let resItem = {
-						id: item.nciID,
+						id: item.nci_id,
 						fromPage: searchCriteriaObject.resultsPage + 1,
 					};
 					return resItem;
@@ -202,16 +302,25 @@ const ResultsPage = () => {
 		let simpleIds = pageResultIds.map(({ id }) => id);
 
 		if (!selectAll) {
-			setSelectAll(true);
+			ctsDispatch({
+				type: 'SET_PROP',
+				prop: 'selectAll',
+				payload: true,
+			});
 			setSelectedResults([...new Set([...selectedResults, ...pageResultIds])]);
 		} else {
-			setSelectAll(false);
+			ctsDispatch({
+				type: 'SET_PROP',
+				prop: 'selectAll',
+				payload: false,
+			});
 			setSelectedResults(
 				selectedResults.filter((item) => !simpleIds.includes(item.id))
 			);
 		}
 	};
 
+	// TODO: Uses Redux
 	const handleStartOver = (linkType) => {
 		handleTracking({
 			type: 'Other',
@@ -249,23 +358,33 @@ const ResultsPage = () => {
 	const printSelectedBtn = useRef(null);
 
 	const handlePagination = (currentPage) => {
-		if (currentPage !== pagerPage) {
-			setIsLoading(true);
-			// set currentPage and kick off fetch
-			setPagerPage(currentPage);
-			handleUpdate('resultsPage', currentPage);
+		if (currentPage != pagerPage) {
+			ctsDispatch({
+				type: 'SET_PROP',
+				prop: 'isLoading',
+				payload: true,
+			});
 
-			// update qs
+			ctsDispatch({
+				type: 'SET_PROP',
+				prop: 'pagerPage',
+				payload: currentPage,
+			});
+
+			ctsDispatch(
+				setSearchCriteriaObject({
+					...searchCriteriaObject,
+					resultsPage: currentPage,
+				})
+			);
+
 			const parsed = queryString.parse(location.search);
 			parsed.pn = currentPage + 1;
 			const newqs = queryString.stringify(parsed, { arrayFormat: 'none' });
-			setCurrCacheKey(newqs);
 			// Navigation below is relative, hence use of just the parameters in this case
 			navigate(`?${newqs}`);
-			fetchTrials(newqs);
 		}
 	};
-
 	const renderResultsListLoader = () => (
 		<div className="loader__results-list-wrapper">
 			<div className="loader__results-list">
@@ -343,7 +462,7 @@ const ResultsPage = () => {
 		const cbxId = isBottom ? 'select-all-cbx-bottom' : 'select-all-cbx-top';
 		return (
 			<>
-				{isLoading || resultsCount > 0 ? (
+				{isLoading || trialResults.total > 0 ? (
 					<div
 						className={`results-page__control ${
 							isBottom ? '--bottom' : '--top'
@@ -368,14 +487,16 @@ const ResultsPage = () => {
 									</button>
 								</div>
 								<div className="results-page__pager">
-									{trialResults && trialResults.total > 1 && (
-										<Pager
-											data={trialResults.trials}
-											callback={handlePagination}
-											startFromPage={resultsPage}
-											totalItems={trialResults.total}
-										/>
-									)}
+									{searchCriteriaObject &&
+										trialResults &&
+										trialResults.total > 1 && (
+											<Pager
+												data={trialResults.trials}
+												callback={handlePagination}
+												startFromPage={searchCriteriaObject.resultsPage}
+												totalItems={trialResults.total}
+											/>
+										)}
 								</div>
 							</>
 						)}
@@ -485,12 +606,12 @@ const ResultsPage = () => {
 					<>{renderInvalidZip()}</>
 				) : (
 					<>
-						{isLoading ? (
+						{isLoading || !searchCriteriaObject ? (
 							<div className="loader__pageheader"></div>
 						) : (
 							<ResultsPageHeader
-								resultsCount={resultsCount}
-								pageNum={resultsPage}
+								resultsCount={trialResults.total}
+								pageNum={searchCriteriaObject.resultsPage}
 								onModifySearchClick={handleRefineSearch}
 								onStartOverClick={handleStartOver}
 								searchCriteriaObject={searchCriteriaObject}
@@ -500,18 +621,21 @@ const ResultsPage = () => {
 						<div className="results-page__content">
 							{renderControls()}
 							<div className="results-page__list">
-								{isLoading ? (
+								{isLoading || !searchCriteriaObject ? (
 									<>{renderResultsListLoader()}</>
 								) : trialResults && trialResults.total === 0 ? (
 									<>{renderNoResults()}</>
 								) : (
 									<ResultsList
-										queryParams={currCacheKey}
+										queryParams={qs}
 										results={trialResults.trials}
 										selectedResults={selectedResults}
 										setSelectedResults={setSelectedResults}
-										setSelectAll={setSelectAll}
+										setSelectAll={(value) => {
+											ctsDispatch(setSelectAll(value));
+										}}
 										tracking={handleTracking}
+										searchCriteriaObject={searchCriteriaObject}
 									/>
 								)}
 
@@ -519,7 +643,6 @@ const ResultsPage = () => {
 									{renderDelighters()}
 								</aside>
 							</div>
-
 							{renderControls(true)}
 						</div>
 					</>

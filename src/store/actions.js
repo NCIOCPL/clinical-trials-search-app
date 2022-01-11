@@ -463,21 +463,3 @@ export function searchLeadOrg({ searchText, size = 10 } = {}) {
 		},
 	};
 }
-
-export function searchTrials({ cacheKey, data }) {
-	return {
-		type: '@@api/CTS',
-		payload: {
-			service: 'ctsSearch',
-			cacheKey: cacheKey,
-			requests: [
-				{
-					method: 'searchTrials',
-					requestParams: {
-						document: JSON.stringify(data),
-					},
-				},
-			],
-		},
-	};
-}

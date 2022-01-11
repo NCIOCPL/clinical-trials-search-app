@@ -21,6 +21,9 @@ describe('testing getClinicalTrials', () => {
 					'brief_summary',
 					'brief_title',
 					'current_trial_status',
+					'eligibility',
+					'eligibility.structured.minAgeInt',
+					'eligibility.structured.maxAgeInt',
 					'nci_id',
 					'nct_id',
 					'sites.org_name',
@@ -32,7 +35,7 @@ describe('testing getClinicalTrials', () => {
 				'arms.interventions.intervention_code': ['C1234'],
 				'primary_purpose.primary_purpose_code': 'treatment',
 				from: 0,
-				size: 50,
+				size: 10,
 			},
 		};
 
@@ -64,6 +67,9 @@ describe('testing getClinicalTrials', () => {
 					'brief_summary',
 					'brief_title',
 					'current_trial_status',
+					'eligibility',
+					'eligibility.structured.minAgeInt',
+					'eligibility.structured.maxAgeInt',
 					'nci_id',
 					'nct_id',
 					'sites.org_name',
@@ -73,13 +79,13 @@ describe('testing getClinicalTrials', () => {
 					'sites.recruitment_status',
 				],
 				from: 5,
-				size: 20,
+				size: 10,
 			},
 		};
 
 		const requestQuery = getClinicalTrialsAction({
 			from: 5,
-			size: 20,
+			size: 10,
 		});
 
 		expect(requestQuery).toMatchObject(expectedQuery);
