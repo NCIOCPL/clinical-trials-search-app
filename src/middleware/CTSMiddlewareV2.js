@@ -1,5 +1,8 @@
 import { receiveData } from '../store/actions';
-import { getLeadOrg } from '../services/api/clinical-trials-search-api';
+import {
+	getCountries,
+	getLeadOrg,
+} from '../services/api/clinical-trials-search-api';
 
 /**
  * This middleware serves two purposes (and could perhaps be broken into two pieces).
@@ -25,6 +28,9 @@ const createCTSMiddlewareV2 =
 
 				// Switch block for api calls with default case
 				switch (method) {
+					case 'getCountries': {
+						return getCountries(client, requestParams);
+					}
 					case 'getLeadOrg': {
 						return getLeadOrg(client, requestParams);
 					}
