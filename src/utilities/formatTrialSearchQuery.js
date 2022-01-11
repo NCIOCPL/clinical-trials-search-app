@@ -142,6 +142,8 @@ export const formatTrialSearchQuery = (form) => {
 		default:
 	}
 
+	// The trials API returns 10 results per page.
+	// Determine the offset based off the current page.
 	if (form.resultsPage > 0) {
 		filterCriteria.from = form.resultsPage * 10;
 	}

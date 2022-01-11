@@ -1,16 +1,15 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import ResultsListItem from './ResultsListItem';
-
 const ResultsList = ({
 	results,
 	selectedResults,
 	setSelectedResults,
 	setSelectAll,
 	queryParams,
+	searchCriteriaObject,
 }) => {
-	const { resultsPage, formType } = useSelector((store) => store.form);
+	const { resultsPage, formType } = searchCriteriaObject;
 
 	const handleOnCheckChange = (id) => {
 		let resultItem = {
@@ -36,14 +35,14 @@ const ResultsList = ({
 				return (
 					<ResultsListItem
 						queryParams={queryParams}
-						key={item.nciID}
-						id={item.nciID}
+						key={item.nci_id}
+						id={item.nci_id}
 						item={item}
 						itemIndex={idx}
 						resultsPage={resultsPage}
 						formType={formType}
 						isChecked={
-							selectedResults.find(({ id }) => id === item.nciID) !== undefined
+							selectedResults.find(({ id }) => id === item.nci_id) !== undefined
 						}
 						onCheckChange={handleOnCheckChange}
 					/>
@@ -54,6 +53,7 @@ const ResultsList = ({
 };
 
 ResultsList.propTypes = {
+	searchCriteriaObject: PropTypes.object,
 	setSelectedResults: PropTypes.func,
 	selectedResults: PropTypes.array,
 	results: PropTypes.array,

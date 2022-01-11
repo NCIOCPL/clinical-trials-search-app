@@ -10,8 +10,8 @@
 export const getClinicalTrialsAction = ({
 	from = 0,
 	requestFilters = {},
-	size = 50,
-}) => {
+	size = 10,
+} = {}) => {
 	// Set up query for Clinical Trials API.
 	// Include only active trial statuses, requestFilters, from, and size.
 	const requestQuery = {
@@ -27,6 +27,9 @@ export const getClinicalTrialsAction = ({
 			'brief_summary',
 			'brief_title',
 			'current_trial_status',
+			'eligibility',
+			'eligibility.structured.minAgeInt',
+			'eligibility.structured.maxAgeInt',
 			'nci_id',
 			'nct_id',
 			'sites.org_name',

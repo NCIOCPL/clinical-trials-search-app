@@ -36,7 +36,11 @@ import { useAppSettings } from '../../store/store';
  * @param {import('axios').AxiosInstance} clinicalTrialsSearchClient the axios client
  * @param {Array<ListingSupportRequestAction>} actions a collection of request items.
  */
-const internalFetch = async (clinicalTrialsSearchClient, actions) => {
+const internalFetch = async (
+	clinicalTrialsSearchClient,
+	clinicalTrialsSearchClientV2,
+	actions
+) => {
 	// TODO: Pass in an abort token to internalFetch
 	// We want this function to return a single object we can use
 	try {
@@ -47,16 +51,19 @@ const internalFetch = async (clinicalTrialsSearchClient, actions) => {
 				}
 				case 'trialDescription': {
 					return getClinicalTrialDescription(
-						clinicalTrialsSearchClient,
+						clinicalTrialsSearchClientV2,
 						req.payload
 					);
 				}
 				case 'ctsApiDiseaseFetcher': {
-					return ctsapiDiseaseFetcher(clinicalTrialsSearchClient, req.payload);
+					return ctsapiDiseaseFetcher(
+						clinicalTrialsSearchClientV2,
+						req.payload
+					);
 				}
 				case 'ctsApiInterventionFetcher': {
 					return ctsapiInterventionFetcher(
-						clinicalTrialsSearchClient,
+						clinicalTrialsSearchClientV2,
 						req.payload
 					);
 				}
@@ -87,7 +94,7 @@ const internalFetch = async (clinicalTrialsSearchClient, actions) => {
 export const useCtsApi = (fetchActions) => {
 	const [
 		{
-			apiClients: { clinicalTrialsSearchClientV2 },
+			apiClients: { clinicalTrialsSearchClient, clinicalTrialsSearchClientV2 },
 		},
 	] = useAppSettings();
 
@@ -125,6 +132,7 @@ export const useCtsApi = (fetchActions) => {
 		// or it will be an error object. This allows us to have one object
 		// that we return for the useCallback to "cache".
 		const response = await internalFetch(
+			clinicalTrialsSearchClient,
 			clinicalTrialsSearchClientV2,
 			fetchActions
 		);

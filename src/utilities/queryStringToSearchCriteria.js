@@ -237,7 +237,7 @@ export const queryStringToSearchCriteria = async (
 	// TODO: This should only be allowed on the results page
 	if (query['pn']) {
 		const pageNum = parseInt(query['pn']);
-		if (!Number.isNaN(pageNum) && pageNum > 0) {
+		if (!Number.isNaN(pageNum) && pageNum >= 0) {
 			rtnSearchCriteria = {
 				...rtnSearchCriteria,
 				resultsPage: pageNum,
