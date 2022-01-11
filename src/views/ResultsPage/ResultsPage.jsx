@@ -38,7 +38,6 @@ const ResultsPage = () => {
 		{
 			analyticsName,
 			canonicalHost,
-			services,
 			siteName,
 			zipConversionEndpoint,
 			apiClients: { clinicalTrialsSearchClientV2 },
@@ -70,7 +69,6 @@ const ResultsPage = () => {
 		cache['selectedTrialsForPrint'] || []
 	);
 	const tracking = useTracking();
-	const ctsapiclient = services.ctsSearch();
 
 	const handleUpdate = (field, value) => {
 		dispatch(
@@ -104,7 +102,6 @@ const ResultsPage = () => {
 				const { diseaseFetcher, interventionFetcher, zipFetcher } =
 					await runQueryFetchers(
 						clinicalTrialsSearchClientV2,
-						ctsapiclient,
 						zipConversionEndpoint
 					);
 				return await queryStringToSearchCriteria(
