@@ -41,6 +41,7 @@ const ResultsPage = () => {
 		{
 			analyticsName,
 			canonicalHost,
+			services,
 			siteName,
 			zipConversionEndpoint,
 			apiClients: { clinicalTrialsSearchClientV2 },
@@ -94,6 +95,7 @@ const ResultsPage = () => {
 
 	// Analytics
 	const tracking = useTracking();
+	const ctsapiclient = services.ctsSearch();
 
 	const handleTracking = (analyticsPayload) => {
 		tracking.trackEvent(analyticsPayload);
@@ -120,25 +122,18 @@ const ResultsPage = () => {
 
 	// Initialize the searchCriteriaObject. If the location changes, re-initialize it.
 	useEffect(() => {
-		ctsDispatch({
-			type: 'SET_PROP',
-			prop: 'isLoading',
-			payload: true,
-		});
-
 		const searchCriteria = async () => {
 			const { diseaseFetcher, interventionFetcher, zipFetcher } =
-				await runQueryFetchers(
-					clinicalTrialsSearchClientV2,
-					zipConversionEndpoint
-				);
+				await runQueryFetchers(ctsapiclient, zipConversionEndpoint);
 			return await queryStringToSearchCriteria(
 				qs,
+				clinicalTrialsSearchClientV2,
 				diseaseFetcher,
 				interventionFetcher,
 				zipFetcher
 			);
 		};
+
 		searchCriteria().then((res) => {
 			ctsDispatch(setSearchCriteriaObject(res.searchCriteria));
 

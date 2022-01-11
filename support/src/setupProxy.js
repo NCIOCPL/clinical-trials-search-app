@@ -36,6 +36,7 @@ module.exports = function (app) {
 	//CTS API V2 endpoints
 	app.use('/cts/mock-api/v2/trials', mockTrials);
 	app.use('/cts/mock-api/v2/diseases', mockDiseases);
+	app.use('/cts/mock-api/v2/interventions', mockInterventions);
 	app.use(
 		'/cts/proxy-api/v2',
 		createProxyMiddleware({

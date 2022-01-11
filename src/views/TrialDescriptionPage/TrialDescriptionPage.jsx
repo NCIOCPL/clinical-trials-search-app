@@ -65,12 +65,10 @@ const TrialDescriptionPage = () => {
 		{
 			analyticsName,
 			canonicalHost,
-			services,
 			zipConversionEndpoint,
 			apiClients: { clinicalTrialsSearchClientV2 },
 		},
 	] = useAppSettings();
-	const ctsapiclient = services.ctsSearch();
 	// enum for empty location checks
 	const noLocInfo = ['not yet active', 'in review', 'approved'];
 
@@ -130,7 +128,6 @@ const TrialDescriptionPage = () => {
 				const { diseaseFetcher, interventionFetcher, zipFetcher } =
 					await runQueryFetchers(
 						clinicalTrialsSearchClientV2,
-						ctsapiclient,
 						zipConversionEndpoint
 					);
 				return await queryStringToSearchCriteria(
