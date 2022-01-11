@@ -1,5 +1,6 @@
 export { default as default } from './clinicalTrialsSearchClientFactory';
-export { getClinicalTrialDescription } from './getClinicalTrialDescription';
-export { getClinicalTrials } from './getClinicalTrials';
-export { getLeadOrg } from './getLeadOrg';
 export { ctsapiDiseaseFetcher } from './ctsapiDiseaseFetcher';
+export { getClinicalTrials } from './getClinicalTrials';
+export { getClinicalTrialDescription } from './getClinicalTrialDescription';
+export { getCountries } from './getCountries';
+export { getLeadOrg } from './getLeadOrg';
