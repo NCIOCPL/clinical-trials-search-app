@@ -9,7 +9,8 @@ import {
 	Dropdown,
 	Autocomplete,
 } from '../../atomic';
-import { getCountries, searchHospital } from '../../../store/actions';
+import { searchHospital } from '../../../store/actions';
+import { getCountriesAction } from '../../../store/actionsV2';
 import {
 	matchItemToTerm,
 	sortItems,
@@ -52,6 +53,16 @@ const Location = ({ handleUpdate }) => {
 	const [stateVal, setStateVal] = useState({ value: '' });
 	const stateOptions = getStates();
 
+	const getCountriesFromAggregate = (aggregateData) => {
+		return aggregateData &&
+			aggregateData.aggregations &&
+			aggregateData.aggregations['sites.org_country']
+			? aggregateData.aggregations['sites.org_country']
+			: aggregateData;
+	};
+
+	const countryList = getCountriesFromAggregate(countries);
+
 	useEffect(() => {
 		if (hospitalName.value.length > 2) {
 			dispatch(searchHospital({ searchText: hospitalName.value }));
@@ -60,8 +71,8 @@ const Location = ({ handleUpdate }) => {
 
 	useEffect(() => {
 		handleUpdate('location', activeRadio);
-		if (activeRadio === 'search-location-country' && countries.length < 1) {
-			dispatch(getCountries());
+		if (activeRadio === 'search-location-country' && countryList.length < 1) {
+			dispatch(getCountriesAction());
 		}
 	}, [activeRadio, dispatch]);
 
@@ -221,8 +232,12 @@ const Location = ({ handleUpdate }) => {
 							label="Country"
 							action={handleCountryOnChange}
 							value={country}>
-							{countries.map((city) => {
-								return <option key={city} value={city}>{`${city}`}</option>;
+							{countryList.map((country) => {
+								return (
+									<option
+										key={country.key}
+										value={country.key}>{`${country.key}`}</option>
+								);
 							})}
 						</Dropdown>
 						<div

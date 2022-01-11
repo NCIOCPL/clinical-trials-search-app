@@ -279,34 +279,6 @@ export function getFindings({ ancestorId, size = 0, isDebug = false }) {
 	};
 }
 
-export function getCountries({ size = 100 } = {}) {
-	return {
-		type: '@@cache/RETRIEVE',
-		payload: {
-			service: 'ctsSearch',
-			cacheKey: 'countries',
-			requests: [
-				{
-					method: 'getTerms',
-					requestParams: {
-						termType: 'sites.org_country',
-						additionalParams: {
-							sort: 'term',
-							current_trial_statuses: ACTIVE_TRIAL_STATUSES,
-						},
-						size,
-					},
-					fetchHandlers: {
-						formatResponse: (terms) => {
-							return terms.map((term) => term.term);
-						},
-					},
-				},
-			],
-		},
-	};
-}
-
 /**
  * Gets hospital/institution to populate the Hospital/Institution field
  */
