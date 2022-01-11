@@ -23,8 +23,7 @@ Scenario: User has an option to limit results to VA facilities and all locations
             | va        | 1     |
             | loc       | 0     |
             | rl        | 2     |
-				# Line below commented out temporarily due to change in utility file isWithinRadius. Should be enabled again once results page has api key properties change which should be in PR #430
-        # And the 1 result item has a "Location:" info with "1390 locations, including 13 near you"
+        And the 1 result item has a "Location:" info with "1390 locations, including 13 near you"
         When user clicks on Modify Search Criteria button
         Then "Limit results to Veterans Affairs facilities" toggle is switched to "Yes"
         When user toggles "Limit results to Veterans Affairs facilities"
