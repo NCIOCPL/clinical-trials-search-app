@@ -95,6 +95,7 @@ export const resultsPageReducer = (state = {}, action) => {
 	if (action.type === SUCCESSFUL_FETCH) {
 		// Did the payload change, or are we trying to update
 		// the same object?
+		console.log('Succes fetch');
 		const newResponseHash = convertObjectToBase64(action.payload.fetchResponse);
 		const oldResponseHash = convertObjectToBase64(state.trialResults);
 		if (
@@ -102,7 +103,11 @@ export const resultsPageReducer = (state = {}, action) => {
 			action.payload.fetchActionsHash === state.actionsHash
 		) {
 			// Same status, same object, same state
-			return state;
+			return {
+				...state,
+
+				isLoading: false,
+			};
 		} else {
 			// Update the state
 			return {

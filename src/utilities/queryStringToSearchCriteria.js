@@ -70,6 +70,7 @@ const defaultState = {
 	resultsPage: 0,
 	formType: '', // (empty string (default) | basic | advanced)
 	location: 'search-location-all', // active location option (search-location-all | search-location-zip | search-location-country | search-location-hospital | search-location-nih)
+	qs: '', //store the incoming QS
 };
 
 /**
@@ -86,9 +87,15 @@ export const queryStringToSearchCriteria = async (
 	interventionsFetcher,
 	zipcodeFetcher
 ) => {
+	// Store the incoming queryString
 	// Setup the two items we will be modifying throughout the parsing.
 	let rtnErrorsList = [];
 	let rtnSearchCriteria = { ...defaultState };
+
+	rtnSearchCriteria = {
+		...rtnSearchCriteria,
+		qs: urlQuery,
+	};
 
 	const query = queryString.parse(urlQuery, {
 		parseBooleans: true,

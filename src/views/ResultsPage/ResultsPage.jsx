@@ -358,6 +358,7 @@ const ResultsPage = () => {
 	const printSelectedBtn = useRef(null);
 
 	const handlePagination = (currentPage) => {
+		console.log('loading page true');
 		if (currentPage != pagerPage) {
 			ctsDispatch({
 				type: 'SET_PROP',
