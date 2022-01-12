@@ -107,4 +107,5 @@ export const defaultSCOState = {
 	resultsPage: 0,
 	formType: '', // (empty string (default) | basic | advanced)
 	location: 'search-location-all', // active location option (search-location-all | search-location-zip | search-location-country | search-location-hospital | search-location-nih)
+	qs: '', // the query string associated with this SCO, defaults to loc=0&rl=1
 };

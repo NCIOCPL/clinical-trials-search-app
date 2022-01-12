@@ -36,7 +36,7 @@ import {
 	setSelectAll,
 	setFetchActions,
 	setSearchCriteriaObject,
-} from '../resultsPageReducer';
+} from './resultsPageReducer';
 
 import { useCtsApi } from '../../hooks/ctsApiSupport';
 import { getClinicalTrialsAction } from '../../services/api/actions';
@@ -635,7 +635,6 @@ const ResultsPage = () => {
 									<>{renderNoResults()}</>
 								) : (
 									<ResultsList
-										queryParams={qs}
 										results={trialResults.trials}
 										selectedResults={selectedResults}
 										setSelectedResults={setSelectedResults}
@@ -660,12 +659,14 @@ const ResultsPage = () => {
 					{renderDelighters()}
 				</aside>
 			</article>
-			<Modal isShowing={isShowing} hide={toggleModal}>
-				<PrintModalContent
-					selectedList={selectedResults}
-					searchCriteriaObject={searchCriteriaObject}
-				/>
-			</Modal>
+			{searchCriteriaObject && (
+				<Modal isShowing={isShowing} hide={toggleModal}>
+					<PrintModalContent
+						selectedList={selectedResults}
+						searchCriteriaObject={searchCriteriaObject}
+					/>
+				</Modal>
+			)}
 		</>
 	);
 };

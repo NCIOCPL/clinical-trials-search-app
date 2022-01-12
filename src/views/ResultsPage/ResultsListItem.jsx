@@ -1,5 +1,6 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import * as queryString from 'query-string';
+import { useDispatch } from 'react-redux';
 import { receiveData } from '../../store/actions';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -12,26 +13,26 @@ import {
 import { NIH_ZIPCODE } from '../../constants';
 import { useTracking } from 'react-tracking';
 import { useAppSettings } from '../../store/store.js';
-const queryString = require('query-string');
 
 const ResultsListItem = ({
 	id,
 	item,
 	isChecked,
 	onCheckChange,
-	queryParams,
+	searchCriteria,
 	itemIndex,
 	resultsPage,
 	formType,
 }) => {
 	const dispatch = useDispatch();
-	// TODO -- https://github.com/NCIOCPL/clinical-trials-search-app/issues/403
-	const { zipCoords, zipRadius, location, country, states, city, vaOnly } =
-		useSelector((store) => store.form);
+
+	const { zipCoords, zipRadius, location, country, states, city, vaOnly, qs } =
+		searchCriteria;
+
 	const [{ analyticsName }] = useAppSettings();
 	const tracking = useTracking();
 
-	const qsQbj = queryString.parse(queryParams);
+	const qsQbj = queryString.parse(qs);
 	qsQbj.id = item.nci_id;
 	const itemQueryString = queryString.stringify(qsQbj, {
 		arrayFormat: 'none',
@@ -300,7 +301,7 @@ ResultsListItem.propTypes = {
 	item: PropTypes.object,
 	isChecked: PropTypes.bool,
 	onCheckChange: PropTypes.func.isRequired,
-	queryParams: PropTypes.string,
+	searchCriteria: PropTypes.object,
 	itemIndex: PropTypes.number,
 	resultsPage: PropTypes.number,
 	formType: PropTypes.string,

@@ -6,7 +6,6 @@ const ResultsList = ({
 	selectedResults,
 	setSelectedResults,
 	setSelectAll,
-	queryParams,
 	searchCriteriaObject,
 }) => {
 	const { resultsPage, formType } = searchCriteriaObject;
@@ -34,7 +33,7 @@ const ResultsList = ({
 			{results.map((item, idx) => {
 				return (
 					<ResultsListItem
-						queryParams={queryParams}
+						searchCriteria={searchCriteriaObject}
 						key={item.nci_id}
 						id={item.nci_id}
 						item={item}
@@ -58,7 +57,6 @@ ResultsList.propTypes = {
 	selectedResults: PropTypes.array,
 	results: PropTypes.array,
 	setSelectAll: PropTypes.func,
-	queryParams: PropTypes.string,
 };
 
 ResultsList.defaultProps = {

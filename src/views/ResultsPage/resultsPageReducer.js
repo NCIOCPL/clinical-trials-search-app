@@ -1,4 +1,4 @@
-import { convertObjectToBase64 } from '../utilities/objects';
+import { convertObjectToBase64 } from '../../utilities/objects';
 
 // Action type declarations
 // Let's use some constants for our state var so we can handle
