@@ -156,6 +156,7 @@ describe('Adv - Interventions - queryStringToSearchCriteria maps query to form',
 				searchCriteria: {
 					...defaultState,
 					...additionalExpectedQuery,
+					qs: urlQuery,
 				},
 				errors: [],
 			};

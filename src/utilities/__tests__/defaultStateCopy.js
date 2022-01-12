@@ -44,6 +44,7 @@ export const defaultState = {
 
 	formType: '', // (empty string (default) | basic | advanced)
 	location: 'search-location-all', // active location option (search-location-all | search-location-zip | search-location-country | search-location-hospital | search-location-nih)
+	qs: '', // The query string associated with this SCO
 };
 describe('placeholder', () => {
 	it('placeholder', () => {
