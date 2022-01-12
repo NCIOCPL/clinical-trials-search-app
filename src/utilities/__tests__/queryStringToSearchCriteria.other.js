@@ -30,6 +30,7 @@ describe('Basic - queryStringToSearchCriteria maps query to form', () => {
 			searchCriteria: {
 				...defaultState,
 				formType: 'custom',
+				qs: 'r=1',
 			},
 			errors: [],
 		};
