@@ -7,7 +7,7 @@ import {
 	RECEIVE_DATA,
 } from './identifiers';
 
-import { ACTIVE_TRIAL_STATUSES, OTHER_MAIN_TYPES } from '../constants';
+import { ACTIVE_TRIAL_STATUSES } from '../constants';
 
 /**
  * Facade wrapping a ClinicalTrialsService instance to create app specific methods
@@ -108,59 +108,6 @@ export function getCancerTypeDescendents({ cacheKey, codes }) {
 				getStages({ ancestorId: codes }),
 				getSubtypes({ ancestorId: codes }),
 				getFindings({ ancestorId: codes }),
-			],
-		},
-	};
-}
-
-/**
- * Gets all primary cancer types
- */
-export function getMainType({ size = 0, isDebug = false }) {
-	return {
-		type: '@@cache/RETRIEVE',
-		payload: {
-			service: 'ctsSearch',
-			cacheKey: 'maintypeOptions',
-			requests: [
-				{
-					method: 'getDiseases',
-					requestParams: {
-						category: 'maintype',
-						ancestorId: undefined,
-						additionalParams: {
-							size,
-							current_trial_status: ACTIVE_TRIAL_STATUSES,
-						},
-					},
-					fetchHandlers: {
-						formatResponse: (res) => {
-							let types = [];
-							let otherTypes = [];
-
-							res.forEach((disease) => {
-								if (OTHER_MAIN_TYPES.includes(disease.codes.join('|'))) {
-									otherTypes.push(disease);
-								} else {
-									types.push(disease);
-								}
-							});
-
-							let diseases = [
-								{ name: 'All', codes: [] },
-								...types.concat(otherTypes),
-							];
-
-							if (isDebug) {
-								diseases.forEach(
-									(disease) =>
-										(disease.name += ' (' + disease.codes.join('|') + ')')
-								);
-							}
-							return diseases;
-						},
-					},
-				},
 			],
 		},
 	};
