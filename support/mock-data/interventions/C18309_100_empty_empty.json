@@ -1,16 +1,5 @@
 {
-	"terms": [
-		{
-			"name": "Ibuprofen",
-			"codes": [
-				"C561"
-			],
-			"synonyms": [
-				"Motrin"
-			],
-			"category": "agent",
-			"count": 3
-		},
+	"data": [
 		{
 			"name": "Polymorphism Analysis",
 			"codes": [
