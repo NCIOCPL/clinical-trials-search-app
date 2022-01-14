@@ -2,6 +2,7 @@ import { receiveData } from '../store/actions';
 import {
 	getCountries,
 	getLeadOrg,
+	getMainType,
 } from '../services/api/clinical-trials-search-api';
 
 /**
@@ -33,6 +34,9 @@ const createCTSMiddlewareV2 =
 					}
 					case 'getLeadOrg': {
 						return getLeadOrg(client, requestParams);
+					}
+					case 'getMainType': {
+						return getMainType(client, requestParams);
 					}
 					default: {
 						throw new Error(`Unknown CTS API request`);

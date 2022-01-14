@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { Fieldset, Autocomplete, InputLabel } from '../../atomic';
-import { getMainType, getCancerTypeDescendents } from '../../../store/actions';
+import { getCancerTypeDescendents } from '../../../store/actions';
+import { getMainTypeAction } from '../../../store/actionsV2';
 import { useCachedValues } from '../../../hooks';
 import { sortItemsByName } from '../../../utilities';
 import './CancerTypeCondition.scss';
@@ -73,7 +74,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
 	useEffect(() => {
 		// if maintypes is essentially empty, fetch mainTypes
 		if (maintypeOptions.length < 1 && ctMenuOpen) {
-			dispatch(getMainType({}));
+			dispatch(getMainTypeAction());
 		}
 
 		if (ctMenuOpen) {
@@ -103,7 +104,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
 	useEffect(() => {
 		if (
 			cache['maintypeOptions'] &&
-			cache['maintypeOptions'].length > 0 &&
+			cache['maintypeOptions'].data.length > 0 &&
 			refineSearch
 		) {
 			initRefineSearch();
@@ -129,7 +130,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
 				retrieveDescendents(cancerType.codes[0], cancerType.codes);
 			} else {
 				// use the parentDisease ID to select the primary cancer type
-				let parentCancer = cache['maintypeOptions'].find(
+				let parentCancer = cache['maintypeOptions'].data.find(
 					({ codes }) => codes[0] === cancerType.parentDiseaseID[0]
 				);
 
@@ -230,7 +231,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
 						labelHidden={true}
 						wrapperStyle={{ position: 'relative', display: 'inline-block' }}
 						open={true}
-						items={maintypeOptions}
+						items={maintypeOptions.data ? maintypeOptions.data : []}
 						getItemValue={(item) => item.name}
 						shouldItemRender={matchItemToTerm}
 						onChange={(event, value) => {
