@@ -1,7 +1,14 @@
-/**
+/*
+ *
  * Calculates whether the distance from a point (expressed as a latitude and longitude) is
  * within radius miles of this location.
+ *
  */
+
+function degreeToRadian(val) {
+	return (Math.PI / 180) * val;
+}
+
 export const isWithinRadius = (zipCoords, siteCoords, zipRadius) => {
 	// Calculate the difference between this point and the other in miles,
 	// using the Haversine formula.
@@ -20,9 +27,7 @@ export const isWithinRadius = (zipCoords, siteCoords, zipRadius) => {
 	 * @param val The value in degrees
 	 * @returns The value in radians.
 	 */
-	function degreeToRadian(val) {
-		return (Math.PI / 180) * val;
-	}
+
 	//Haversine formula
 	//distance = R * 2 * aTan2 ( square root of A, square root of 1 - A )
 	//                   where A = sinus squared (difference in latitude / 2) + (cosine of latitude 1 * cosine of latitude 2 * sinus squared (difference in longitude / 2))
@@ -42,6 +47,5 @@ export const isWithinRadius = (zipCoords, siteCoords, zipRadius) => {
 		avgRadiusOfEarth *
 		2 *
 		Math.atan2(Math.sqrt(aFormula), Math.sqrt(1 - aFormula));
-
 	return resultDistance <= zipRadius;
 };
