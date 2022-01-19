@@ -1,17 +1,15 @@
 /// <reference path="../../node_modules/@types/express/index.d.ts"/>
 const express = require('express');
-
+const { createProxyMiddleware } = require('http-proxy-middleware');
 const mockZipCodeLookup = require('./mock-zipcode-lookup');
-
 const mockClinicalTrial = require('./mock-clinical-trials/clinical-trial');
 const mockClinicalTrials = require('./mock-clinical-trials/clinical-trials');
 const mockInterventions = require('./mock-clinical-trials/interventions');
 const mockTerm = require('./mock-clinical-trials/term');
 const mockTerms = require('./mock-clinical-trials/terms');
 const mockDiseases = require('./mock-clinical-trials/diseases');
-const { createProxyMiddleware } = require('http-proxy-middleware');
-
 const mockTrials = require('./mock-clinical-trials/trials');
+const mockOrganizations = require('./mock-clinical-trials/organizations');
 
 module.exports = function (app) {
 	// Any posts done with application/json will have thier body convered as an object.
@@ -37,6 +35,7 @@ module.exports = function (app) {
 	app.use('/cts/mock-api/v2/trials', mockTrials);
 	app.use('/cts/mock-api/v2/diseases', mockDiseases);
 	app.use('/cts/mock-api/v2/interventions', mockInterventions);
+	app.use('/cts/mock-api/v2/organizations', mockOrganizations);
 	app.use(
 		'/cts/proxy-api/v2',
 		createProxyMiddleware({

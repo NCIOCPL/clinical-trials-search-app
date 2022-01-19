@@ -5,7 +5,7 @@ import Fieldset from '../../atomic/Fieldset';
 import { Autocomplete } from '../../atomic';
 import { getLeadOrgAction } from '../../../store/actionsV2';
 import {
-	createTermDataFromAggregate,
+	createTermDataFromArrayObj,
 	matchItemToTerm,
 	sortItems,
 } from '../../../utilities';
@@ -17,7 +17,10 @@ const LeadOrganization = ({ handleUpdate }) => {
 	// Forcibly limit results returned from api as there is currently
 	// no way to limit aggregate results returned.
 	const lead_org = leadorgs.aggregations
-		? createTermDataFromAggregate(leadorgs.aggregations.lead_org.slice(0, 10))
+		? createTermDataFromArrayObj(
+				leadorgs.aggregations.lead_org.slice(0, 10),
+				'key'
+		  )
 		: [];
 
 	const [orgName, setOrgName] = useState({ value: leadOrg.term });
