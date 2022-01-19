@@ -9,9 +9,12 @@ import {
 	Dropdown,
 	Autocomplete,
 } from '../../atomic';
-import { searchHospital } from '../../../store/actions';
-import { getCountriesAction } from '../../../store/actionsV2';
 import {
+	getCountriesAction,
+	getHospitalAction,
+} from '../../../store/actionsV2';
+import {
+	createTermDataFromArrayObj,
 	matchItemToTerm,
 	sortItems,
 	getStates,
@@ -26,9 +29,10 @@ const Location = ({ handleUpdate }) => {
 	//Hooks must always be rendered in same order.
 	const dispatch = useDispatch();
 	const [{ getZipCoords }] = useZipConversion(handleUpdate);
-	const { countries = [], hospitals = [] } = useSelector(
+	const { countries = [], hospitals = {} } = useSelector(
 		(store) => store.cache
 	);
+	const hospitalList = createTermDataFromArrayObj(hospitals.data, 'name');
 	const {
 		location,
 		zip,
@@ -65,7 +69,7 @@ const Location = ({ handleUpdate }) => {
 
 	useEffect(() => {
 		if (hospitalName.value.length > 2) {
-			dispatch(searchHospital({ searchText: hospitalName.value }));
+			dispatch(getHospitalAction({ searchText: hospitalName.value }));
 		}
 	}, [hospitalName, dispatch]);
 
@@ -327,7 +331,7 @@ const Location = ({ handleUpdate }) => {
 										position: 'relative',
 										display: 'inline-block',
 									}}
-									items={hospitals}
+									items={hospitalList}
 									getItemValue={(item) => item.term}
 									shouldItemRender={matchItemToTerm}
 									sortItems={sortItems}
@@ -342,7 +346,7 @@ const Location = ({ handleUpdate }) => {
 									renderMenu={(children) => (
 										<div className="cts-autocomplete__menu --hospitals">
 											{hospitalName.value.length > 2 ? (
-												hospitals.length ? (
+												hospitalList.length ? (
 													children
 												) : (
 													<div className="cts-autocomplete__menu-item">
