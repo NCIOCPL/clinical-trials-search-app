@@ -280,33 +280,6 @@ export function getFindings({ ancestorId, size = 0, isDebug = false }) {
 }
 
 /**
- * Gets hospital/institution to populate the Hospital/Institution field
- */
-export function searchHospital({ searchText, size = 10 }) {
-	return {
-		type: '@@api/CTS',
-		payload: {
-			service: 'ctsSearch',
-			cacheKey: 'hospitals',
-			requests: [
-				{
-					method: 'getTerms',
-					requestParams: {
-						category: 'sites.org_name',
-						additionalParams: {
-							term: searchText,
-							sort: 'term',
-							current_trial_statuses: ACTIVE_TRIAL_STATUSES,
-						},
-						size,
-					},
-				},
-			],
-		},
-	};
-}
-
-/**
  * Gets drugs intervention items for search field
  */
 export function searchDrugs({ searchText, isDebug = false, size = 10 } = {}) {

@@ -1,49 +1,45 @@
 /// <reference path="../../node_modules/@types/express/index.d.ts"/>
-const proxy = require('http-proxy-middleware');
 const express = require('express');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const mockZipCodeLookup = require('./mock-zipcode-lookup');
-
-
 const mockClinicalTrial = require('./mock-clinical-trials/clinical-trial');
 const mockClinicalTrials = require('./mock-clinical-trials/clinical-trials');
 const mockInterventions = require('./mock-clinical-trials/interventions');
 const mockTerm = require('./mock-clinical-trials/term');
 const mockTerms = require('./mock-clinical-trials/terms');
 const mockDiseases = require('./mock-clinical-trials/diseases');
-const  { createProxyMiddleware } = require('http-proxy-middleware');
-
 const mockTrials = require('./mock-clinical-trials/trials');
+const mockOrganizations = require('./mock-clinical-trials/organizations');
 
-module.exports = function(app) {
+module.exports = function (app) {
+	// Any posts done with application/json will have thier body convered as an object.
+	app.use(express.json());
 
-  // Any posts done with application/json will have thier body convered as an object.
-  app.use(express.json());
+	// CTS API V1 Mocks
+	// NOTE: The client does not allow us to change the base path.
+	// So
+	app.use('/v1/clinical-trial/:id', mockClinicalTrial);
+	app.use('/v1/clinical-trials', mockClinicalTrials);
+	app.use('/v1/interventions', mockInterventions);
+	app.use('/v1/term/:term_key', mockTerm);
+	app.use('/v1/terms', mockTerms);
+	app.use('/v1/diseases', mockDiseases);
 
-  // CTS API V1 Mocks
-  // NOTE: The client does not allow us to change the base path.
-  // So 
-  app.use('/v1/clinical-trial/:id', mockClinicalTrial);
-  app.use('/v1/clinical-trials', mockClinicalTrials);
-  app.use('/v1/interventions', mockInterventions);
-  app.use('/v1/term/:term_key', mockTerm);
-  app.use('/v1/terms', mockTerms);
-  app.use('/v1/diseases', mockDiseases);
-  
+	// Handle mock requests for the zip code lookup API
+	app.use('/mock-api/zip_code_lookup/:zip', mockZipCodeLookup);
 
-  // Handle mock requests for the zip code lookup API
-  app.use('/mock-api/zip_code_lookup/:zip', mockZipCodeLookup);
+	// The Zip Code API does not allow CORS headers, so we must proxy it for
+	// local development.
 
-  // The Zip Code API does not allow CORS headers, so we must proxy it for
-  // local development.
-
-  //CTS API V2 endpoints
-  app.use('/cts/mock-api/v2/trials', mockTrials);
-  app.use('/cts/mock-api/v2/diseases', mockDiseases);
-  app.use('/cts/mock-api/v2/interventions', mockInterventions);
-  app.use(
-    '/cts/proxy-api/v2',
-    createProxyMiddleware({
+	//CTS API V2 endpoints
+	app.use('/cts/mock-api/v2/trials', mockTrials);
+	app.use('/cts/mock-api/v2/diseases', mockDiseases);
+	app.use('/cts/mock-api/v2/interventions', mockInterventions);
+	app.use('/cts/mock-api/v2/organizations', mockOrganizations);
+	app.use(
+		'/cts/proxy-api/v2',
+		createProxyMiddleware({
 			target: 'https://clinicaltrialsapi.cancer.gov',
 			headers: {
 				'X-API-KEY': process.env.CTS_API_KEY,
@@ -71,5 +67,5 @@ module.exports = function(app) {
 			},
 			changeOrigin: true,
 		})
-  );
-}
+	);
+};
