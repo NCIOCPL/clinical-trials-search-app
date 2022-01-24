@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { Fieldset, Autocomplete, InputLabel } from '../../atomic';
 import { getCancerTypeDescendents } from '../../../store/actions';
-import { getMainTypeAction } from '../../../store/actionsV2';
+import { getMainTypeAction, getSubtypesAction } from '../../../store/actionsV2';
 import { useCachedValues } from '../../../hooks';
 import { sortItemsByName } from '../../../utilities';
 import './CancerTypeCondition.scss';
@@ -23,7 +24,6 @@ const CancerTypeCondition = ({ handleUpdate }) => {
 		stages = [],
 		stagesModified,
 		findings = [],
-		refineSearch,
 	} = useSelector((store) => store.form);
 	//typeahead states
 	const [subtype, setSubtype] = useState({ value: '' });
@@ -38,6 +38,10 @@ const CancerTypeCondition = ({ handleUpdate }) => {
 
 	const cache = useSelector((store) => store.cache);
 	const ctButton = useRef();
+	// we refactored how refining search is handled on results page
+	// therefore the correct way is to pull refineSearch from location object
+	const { state: locationState } = useLocation();
+	const { refineSearch } = locationState || {};
 
 	const focusCTButton = () => ctButton.current.blur();
 
@@ -48,7 +52,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
 	}, [cache]);
 
 	const populateSubmenus = (ctCode) => {
-		setSubtypeOptions(cache[ctCode].subtypeOptions);
+		setSubtypeOptions(cache['subtypeOptions']?.data);
 		setStageOptions(cache[ctCode].stageOptions);
 		setFindingsOptions(cache[ctCode].findingsOptions);
 	};
@@ -84,6 +88,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
 			removeClickListener();
 		}
 		if (cancerType.codes.length > 0 && !refineSearch) {
+			dispatch(getSubtypesAction(cancerType.codes));
 			dispatch(
 				getCancerTypeDescendents({
 					cacheKey: cancerType.codes[0],
@@ -112,6 +117,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
 	}, [cache['maintypeOptions']]);
 
 	const retrieveDescendents = (cacheKey, diseaseCodes) => {
+		dispatch(getSubtypesAction(diseaseCodes));
 		dispatch(
 			getCancerTypeDescendents({
 				cacheKey: cacheKey,

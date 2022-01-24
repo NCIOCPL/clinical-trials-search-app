@@ -4,6 +4,7 @@ import {
 	getHospitals,
 	getLeadOrg,
 	getMainType,
+	getSubtypes,
 } from '../services/api/clinical-trials-search-api';
 
 /**
@@ -41,6 +42,9 @@ const createCTSMiddlewareV2 =
 					}
 					case 'getMainType': {
 						return getMainType(client, requestParams);
+					}
+					case 'getSubtypes': {
+						return getSubtypes(client, requestParams);
 					}
 					default: {
 						throw new Error(`Unknown CTS API request`);
