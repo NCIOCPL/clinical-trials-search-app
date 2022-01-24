@@ -1,5 +1,5 @@
 {
-    "terms": [
+    "data": [
         {
             "name": "Adamantinomatous Craniopharyngioma",
             "codes": [
@@ -3692,5 +3692,6 @@
                 "subtype"
             ]
         }
-    ]
+    ],
+    "total": 212
 }

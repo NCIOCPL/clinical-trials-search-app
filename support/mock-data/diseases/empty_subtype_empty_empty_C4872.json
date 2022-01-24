@@ -1,5 +1,5 @@
 {
-    "terms": [
+    "data": [
         {
             "name": "Advanced Breast Adenocarcinoma",
             "codes": [
@@ -1111,5 +1111,6 @@
                 "subtype"
             ]
         }
-    ]
+    ],
+    "total": 73
 }
