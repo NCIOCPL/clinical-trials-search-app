@@ -1,7 +1,7 @@
 import queryString from 'query-string';
 import React, { useEffect, useReducer } from 'react';
 import { Helmet } from 'react-helmet';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTracking } from 'react-tracking';
 import { START_OVER_LINK } from '../../constants';
@@ -35,9 +35,11 @@ const TrialDescriptionPage = () => {
 	const parsed = queryString.parse(qs);
 	const currId = parsed.id;
 
-	const trialTitle = useSelector((store) => store.cache.currentTrialTitle);
+	// Note: Location state only exists if navigating.
+	// If the trial description is directly navigated to this will be empty
+	// on first render
+	const trialTitle = location.state ? location.state.result.brief_title : '';
 	const tracking = useTracking();
-
 	const initialState = {
 		errors: [],
 		fetchActions: [],
@@ -277,35 +279,42 @@ const TrialDescriptionPage = () => {
 	};
 
 	const renderTrialDescriptionHeader = (searchCriteriaObject) => {
-		return (
-			<div className="trial-description-page__header">
-				{searchCriteriaObject && searchCriteriaObject.formType != '' && (
-					<div className="back-to-search btnAsLink">
-						<span
-							onClick={() => navigate(-1)}
-							onKeyDown={() => navigate(-1)}
-							tabIndex="0"
-							role="button">
-							&lt; Back to search results
-						</span>
-					</div>
-				)}
-				{searchCriteriaObject && !hasSCOBeenUpdated(searchCriteriaObject) ? (
-					<>
-						<strong>This clinical trial matches:</strong>
-						<SearchCriteriaTableUpdated
-							searchCriteriaObject={searchCriteriaObject}
-						/>
-					</>
-				) : (
-					<>
-						<strong>This clinical trial matches: &quot;all trials&quot;</strong>{' '}
-						|{' '}
-					</>
-				)}
-				{renderStartOver(searchCriteriaObject)}
-			</div>
-		);
+		if (
+			searchCriteriaObject.formType === 'basic' ||
+			searchCriteriaObject.formType === 'advanced'
+		) {
+			return (
+				<div className="trial-description-page__header">
+					{searchCriteriaObject && searchCriteriaObject.formType != '' && (
+						<div className="back-to-search btnAsLink">
+							<span
+								onClick={() => navigate(-1)}
+								onKeyDown={() => navigate(-1)}
+								tabIndex="0"
+								role="button">
+								&lt; Back to search results
+							</span>
+						</div>
+					)}
+					{searchCriteriaObject && !hasSCOBeenUpdated(searchCriteriaObject) ? (
+						<>
+							<strong>This clinical trial matches:</strong>
+							<SearchCriteriaTableUpdated
+								searchCriteriaObject={searchCriteriaObject}
+							/>
+						</>
+					) : (
+						<>
+							<strong>
+								This clinical trial matches: &quot;all trials&quot;
+							</strong>{' '}
+							|{' '}
+						</>
+					)}
+					{renderStartOver(searchCriteriaObject)}
+				</div>
+			);
+		}
 	};
 
 	const renderEligibilityCriteria = () => {
@@ -472,12 +481,7 @@ const TrialDescriptionPage = () => {
 						) : (
 							<>
 								<h1>{trialDescription.brief_title}</h1>
-								{searchCriteriaObject.formType === 'basic' ||
-								searchCriteriaObject.formType === 'advanced' ? (
-									renderTrialDescriptionHeader(searchCriteriaObject)
-								) : (
-									<></>
-								)}
+								{renderTrialDescriptionHeader(searchCriteriaObject)}
 							</>
 						)}
 
