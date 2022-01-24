@@ -1,5 +1,5 @@
 {
-    "terms": [
+    "data": [
         {
             "name": "Locally Advanced Adrenal Cortex Carcinoma",
             "codes": [
@@ -48,5 +48,6 @@
                 "subtype"
             ]
         }
-    ]
+    ],
+    "total": 3
 }
