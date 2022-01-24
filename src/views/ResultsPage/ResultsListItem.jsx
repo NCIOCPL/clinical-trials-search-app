@@ -1,7 +1,5 @@
 import React from 'react';
 import * as queryString from 'query-string';
-import { useDispatch } from 'react-redux';
-import { receiveData } from '../../store/actions';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Checkbox from '../../components/atomic/Checkbox';
@@ -24,8 +22,6 @@ const ResultsListItem = ({
 	resultsPage,
 	formType,
 }) => {
-	const dispatch = useDispatch();
-
 	const { zipCoords, zipRadius, location, country, states, city, vaOnly, qs } =
 		searchCriteria;
 
@@ -233,10 +229,6 @@ const ResultsListItem = ({
 		}`;
 	};
 
-	const setCachedTitle = () => {
-		dispatch(receiveData('currentTrialTitle', item.brief_title));
-	};
-
 	const handleLinkClick = () => {
 		tracking.trackEvent({
 			// These properties are required.
@@ -250,7 +242,6 @@ const ResultsListItem = ({
 			formType,
 			linkName: 'UnknownLinkName',
 		});
-		setCachedTitle();
 	};
 
 	return (
@@ -270,6 +261,7 @@ const ResultsListItem = ({
 				<div className="results-list-item__title">
 					<Link
 						to={`/about-cancer/treatment/clinical-trials/search/v?${itemQueryString}`}
+						state={{ result: item }}
 						onClick={handleLinkClick}>
 						{item.brief_title}
 					</Link>
