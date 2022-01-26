@@ -104,48 +104,7 @@ export function getCancerTypeDescendents({ cacheKey, codes }) {
 		payload: {
 			service: 'ctsSearch',
 			cacheKey,
-			requests: [
-				getStages({ ancestorId: codes }),
-				getFindings({ ancestorId: codes }),
-			],
-		},
-	};
-}
-
-/**
- * Gets cancer stages for a given parent ID
- */
-export function getStages({ ancestorId, size = 0, isDebug = false }) {
-	return {
-		type: '@@cache/RETRIEVE',
-		payload: {
-			service: 'ctsSearch',
-			cacheKey: 'stageOptions',
-			requests: [
-				{
-					method: 'getDiseases',
-					requestParams: {
-						category: 'stage',
-						ancestorId: ancestorId,
-						additionalParams: {
-							size,
-							current_trial_status: ACTIVE_TRIAL_STATUSES,
-						},
-					},
-					fetchHandlers: {
-						formatResponse: (diseases) => {
-							// TODO: DEBUG
-							if (isDebug) {
-								diseases.forEach(
-									(disease) =>
-										(disease.name += ' (' + disease.codes.join('|') + ')')
-								);
-							}
-							return diseases;
-						},
-					},
-				},
-			],
+			requests: [getFindings({ ancestorId: codes })],
 		},
 	};
 }

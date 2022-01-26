@@ -4,7 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { Fieldset, Autocomplete, InputLabel } from '../../atomic';
 import { getCancerTypeDescendents } from '../../../store/actions';
-import { getMainTypeAction, getSubtypesAction } from '../../../store/actionsV2';
+import {
+	getMainTypeAction,
+	getSubtypesAction,
+	getStagesAction,
+} from '../../../store/actionsV2';
 import { useCachedValues } from '../../../hooks';
 import { sortItemsByName } from '../../../utilities';
 import './CancerTypeCondition.scss';
@@ -53,7 +57,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
 
 	const populateSubmenus = (ctCode) => {
 		setSubtypeOptions(cache['subtypeOptions']?.data);
-		setStageOptions(cache[ctCode].stageOptions);
+		setStageOptions(cache['stageOptions']?.data);
 		setFindingsOptions(cache[ctCode].findingsOptions);
 	};
 
@@ -89,6 +93,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
 		}
 		if (cancerType.codes.length > 0 && !refineSearch) {
 			dispatch(getSubtypesAction(cancerType.codes));
+			dispatch(getStagesAction(cancerType.codes));
 			dispatch(
 				getCancerTypeDescendents({
 					cacheKey: cancerType.codes[0],
@@ -118,6 +123,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
 
 	const retrieveDescendents = (cacheKey, diseaseCodes) => {
 		dispatch(getSubtypesAction(diseaseCodes));
+		dispatch(getStagesAction(diseaseCodes));
 		dispatch(
 			getCancerTypeDescendents({
 				cacheKey: cacheKey,
