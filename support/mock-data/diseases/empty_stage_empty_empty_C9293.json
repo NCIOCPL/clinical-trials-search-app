@@ -1,5 +1,5 @@
 {
-    "terms": [
+    "data": [
         {
             "name": "Recurrent Adamantinomatous Craniopharyngioma",
             "codes": [
@@ -694,5 +694,6 @@
                 "stage"
             ]
         }
-    ]
+    ],
+    "total": 39
 }
