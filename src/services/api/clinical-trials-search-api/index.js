@@ -8,3 +8,4 @@ export { getHospitals } from './getHospitals';
 export { getLeadOrg } from './getLeadOrg';
 export { getMainType } from './getMainType';
 export { getSubtypes } from './getSubtypes';
+export { getStages } from './getStages';
