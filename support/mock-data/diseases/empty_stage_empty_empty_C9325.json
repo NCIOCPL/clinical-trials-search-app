@@ -1,5 +1,5 @@
 {
-    "terms": [
+    "data": [
         {
             "name": "ENSAT Stage I Adrenal Cortex Cancer",
             "codes": [
@@ -116,5 +116,6 @@
                 "stage"
             ]
         }
-    ]
+    ],
+    "total": 7
 }

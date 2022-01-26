@@ -1,5 +1,5 @@
 {
-    "terms": [
+    "data": [
         {
             "name": "Breast Ductal Carcinoma In Situ, Intermediate Grade",
             "codes": [
@@ -412,5 +412,6 @@
                 "stage"
             ]
         }
-    ]
+    ],
+    "total": 25
 }

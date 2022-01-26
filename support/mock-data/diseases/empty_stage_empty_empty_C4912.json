@@ -1,5 +1,5 @@
 {
-    "terms": [
+    "data": [
         {
             "name": "Advanced Bladder Carcinoma",
             "codes": [
@@ -697,5 +697,6 @@
                 "subtype"
             ]
         }
-    ]
+    ],
+    "total": 46
 }
