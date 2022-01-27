@@ -1,37 +1,6 @@
 {
 	"data": [
 		{
-			"name": "22q11.2 Deletion Syndrome",
-			"codes": [
-				"C2989"
-			],
-			"ancestor_ids": [
-				"C2991"
-			],
-			"type": [
-				"subtype"
-			],
-			"parent_ids": [
-				"C2991"
-			],
-			"synonyms": [
-				"22q Deletion Syndrome(s)",
-				"22q11 deletion",
-				"CATCH-22",
-				"DGS1",
-				"DiGeorge Anomaly",
-				"DiGeorge Sequence",
-				"DiGeorge Syndrome",
-				"DiGeorge Syndrome Type 1",
-				"DiGeorge syndrome",
-				"DiGeorge's Syndrome",
-				"FACES",
-				"Shprintzen Syndrome",
-				"Shprintzen syndrome"
-			],
-			"count": 1
-		},
-		{
 			"name": "AIDS Related Immunoblastic Lymphoma",
 			"codes": [
 				"C8285"
@@ -250,6 +219,25 @@
 				"AIDS-related NHL",
 				"AIDS-related Non-Hodgkin lymphoma"
 			],
+			"count": 1
+		},
+		{
+			"name": "AIDS-Related Plasmablastic Lymphoma",
+			"codes": [
+				"C27859"
+			],
+			"ancestor_ids": [
+				"C27134",
+				"C3208",
+				"C3211"
+			],
+			"type": [
+				"subtype"
+			],
+			"parent_ids": [
+				"C3211"
+			],
+			"synonyms": [],
 			"count": 1
 		}
 	]
