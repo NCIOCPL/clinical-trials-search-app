@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Fieldset, Autocomplete } from '../../atomic';
-import { getDiseasesForSimpleTypeAhead } from '../../../store/actions';
+import { getDiseasesForTypeAheadAction } from '../../../store/actionsV2';
 import { sortItemsByName } from '../../../utilities';
 import PropTypes from 'prop-types';
 
 const CancerTypeKeyword = ({ handleUpdate }) => {
 	const dispatch = useDispatch();
 	const { keywordPhrases, cancerType } = useSelector((store) => store.form);
-	const { diseases = [] } = useSelector((store) => store.cache);
-
+	const { diseases = {} } = useSelector((store) => store.cache);
+	const diseaseList = diseases.data ? diseases.data : [];
 	const [CTK, setCTK] = useState({
 		value: cancerType.name ? cancerType.name : keywordPhrases,
 	});
 
 	useEffect(() => {
-		dispatch(getDiseasesForSimpleTypeAhead({ name: CTK.value }));
+		dispatch(getDiseasesForTypeAheadAction({ searchText: CTK.value }));
 	}, [CTK, dispatch]);
 
 	const matchItemToTerm = (item, value) => {
@@ -36,7 +36,7 @@ const CancerTypeKeyword = ({ handleUpdate }) => {
 					placeholder: 'Start typing to select a cancer type or keyword',
 				}}
 				wrapperStyle={{ position: 'relative', display: 'inline-block' }}
-				items={diseases}
+				items={diseaseList}
 				inputHelpText="Leave blank to search all cancer types or keywords."
 				getItemValue={(item) => item.name}
 				shouldItemRender={matchItemToTerm}

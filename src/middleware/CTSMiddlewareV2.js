@@ -1,6 +1,7 @@
 import { receiveData } from '../store/actions';
 import {
 	getCountries,
+	getDiseasesForTypeAhead,
 	getHospitals,
 	getLeadOrg,
 	getMainType,
@@ -33,6 +34,9 @@ const createCTSMiddlewareV2 =
 				switch (method) {
 					case 'getCountries': {
 						return getCountries(client, requestParams);
+					}
+					case 'getDiseases': {
+						return getDiseasesForTypeAhead(client, requestParams);
 					}
 					case 'getHospital': {
 						return getHospitals(client, requestParams);
