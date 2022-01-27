@@ -4,6 +4,7 @@ export { ctsapiInterventionFetcher } from './ctsapiInterventionFetcher';
 export { getClinicalTrials } from './getClinicalTrials';
 export { getClinicalTrialDescription } from './getClinicalTrialDescription';
 export { getCountries } from './getCountries';
+export { getDiseasesForTypeAhead } from './getDiseasesForTypeAhead';
 export { getHospitals } from './getHospitals';
 export { getLeadOrg } from './getLeadOrg';
 export { getMainType } from './getMainType';
