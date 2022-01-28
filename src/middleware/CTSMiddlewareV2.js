@@ -2,6 +2,7 @@ import { receiveData } from '../store/actions';
 import {
 	getCountries,
 	getDiseasesForTypeAhead,
+	getFindings,
 	getHospitals,
 	getLeadOrg,
 	getMainType,
@@ -38,6 +39,9 @@ const createCTSMiddlewareV2 =
 					}
 					case 'getDiseases': {
 						return getDiseasesForTypeAhead(client, requestParams);
+					}
+					case 'getFindings': {
+						return getFindings(client, requestParams);
 					}
 					case 'getHospital': {
 						return getHospitals(client, requestParams);
