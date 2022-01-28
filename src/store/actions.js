@@ -98,55 +98,6 @@ export function getDiseasesForSimpleTypeAhead({
 	};
 }
 
-export function getCancerTypeDescendents({ cacheKey, codes }) {
-	return {
-		type: '@@cache/RETRIEVE',
-		payload: {
-			service: 'ctsSearch',
-			cacheKey,
-			requests: [getFindings({ ancestorId: codes })],
-		},
-	};
-}
-
-/**
- * Gets cancer findings based on parent ID
- */
-export function getFindings({ ancestorId, size = 0, isDebug = false }) {
-	return {
-		type: '@@cache/RETRIEVE',
-		payload: {
-			service: 'ctsSearch',
-			cacheKey: 'findingsOptions',
-			requests: [
-				{
-					method: 'getDiseases',
-					requestParams: {
-						category: 'finding',
-						ancestorId: ancestorId,
-						additionalParams: {
-							size,
-							current_trial_status: ACTIVE_TRIAL_STATUSES,
-						},
-					},
-					fetchHandlers: {
-						formatResponse: (diseases) => {
-							// TODO: DEBUG
-							if (isDebug) {
-								diseases.forEach(
-									(disease) =>
-										(disease.name += ' (' + disease.codes.join('|') + ')')
-								);
-							}
-							return diseases;
-						},
-					},
-				},
-			],
-		},
-	};
-}
-
 /**
  * Gets drugs intervention items for search field
  */
