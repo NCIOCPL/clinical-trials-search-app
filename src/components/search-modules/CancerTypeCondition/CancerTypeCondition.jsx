@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { Fieldset, Autocomplete, InputLabel } from '../../atomic';
-import { getCancerTypeDescendents } from '../../../store/actions';
 import {
+	getFindingsAction,
 	getMainTypeAction,
 	getSubtypesAction,
 	getStagesAction,
@@ -50,15 +50,19 @@ const CancerTypeCondition = ({ handleUpdate }) => {
 	const focusCTButton = () => ctButton.current.blur();
 
 	useEffect(() => {
-		if (cache[cancerType.codes[0]]) {
-			populateSubmenus(cancerType.codes[0]);
+		if (
+			cache['subtypeOptions'] ||
+			cache['stageOptions'] ||
+			cache['findingsOptions']
+		) {
+			populateSubmenus();
 		}
 	}, [cache]);
 
-	const populateSubmenus = (ctCode) => {
+	const populateSubmenus = () => {
 		setSubtypeOptions(cache['subtypeOptions']?.data);
 		setStageOptions(cache['stageOptions']?.data);
-		setFindingsOptions(cache[ctCode].findingsOptions);
+		setFindingsOptions(cache['findingsOptions']?.data);
 	};
 
 	const menuDropdown = document.getElementById('NCI-CTS-root');
@@ -94,12 +98,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
 		if (cancerType.codes.length > 0 && !refineSearch) {
 			dispatch(getSubtypesAction(cancerType.codes));
 			dispatch(getStagesAction(cancerType.codes));
-			dispatch(
-				getCancerTypeDescendents({
-					cacheKey: cancerType.codes[0],
-					codes: cancerType.codes,
-				})
-			);
+			dispatch(getFindingsAction(cancerType.codes));
 		}
 	}, [ctMenuOpen, dispatch]);
 
@@ -123,13 +122,8 @@ const CancerTypeCondition = ({ handleUpdate }) => {
 
 	const retrieveDescendents = (cacheKey, diseaseCodes) => {
 		dispatch(getSubtypesAction(diseaseCodes));
+		dispatch(getFindingsAction(diseaseCodes));
 		dispatch(getStagesAction(diseaseCodes));
-		dispatch(
-			getCancerTypeDescendents({
-				cacheKey: cacheKey,
-				codes: diseaseCodes,
-			})
-		);
 	};
 
 	const initRefineSearch = () => {
