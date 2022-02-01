@@ -136,33 +136,6 @@ export function searchOtherInterventions({ searchText, size = 10 } = {}) {
 	};
 }
 
-/**
- * Gets trial investigators to populate the Trial Investigators field
- */
-export function searchTrialInvestigators({ searchText, size = 10 } = {}) {
-	return {
-		type: '@@api/CTS',
-		payload: {
-			service: 'ctsSearch',
-			cacheKey: 'tis',
-			requests: [
-				{
-					method: 'getTerms',
-					requestParams: {
-						category: 'principal_investigator',
-						additionalParams: {
-							term: searchText,
-							sort: 'term',
-							current_trial_statuses: ACTIVE_TRIAL_STATUSES,
-						},
-						size,
-					},
-				},
-			],
-		},
-	};
-}
-
 export function searchTrials({ cacheKey, data }) {
 	return {
 		type: '@@api/CTS',
