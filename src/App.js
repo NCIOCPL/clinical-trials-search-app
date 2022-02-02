@@ -12,6 +12,7 @@ import ResultsPage from './views/ResultsPage';
 import TrialDescriptionPage from './views/TrialDescriptionPage';
 import ErrorPage from './views/ErrorPage';
 import { useAppSettings } from './store/store.js';
+import { PrintContextProvider } from './store/printContext';
 import { useAppInitializer } from './hooks';
 import Layout from './views/Layout';
 
@@ -27,7 +28,7 @@ const App = ({ services, zipConversionEndpoint }) => {
 	return (
 		<>
 			{!appHasBeenInitialized ? (
-				// Is initializaing, show loading screen.
+				// Is initializing, show loading screen.
 				<></>
 			) : initErrorsList.length === 0 ? (
 				<>
@@ -35,10 +36,32 @@ const App = ({ services, zipConversionEndpoint }) => {
 						<Route
 							path="/about-cancer/treatment/clinical-trials/search"
 							element={<Layout />}>
-							<Route index element={<BasicSearchPage />} />
-							<Route path="r" element={<ResultsPage />} />
+							<Route
+								index
+								element={
+									<PrintContextProvider>
+										<BasicSearchPage />
+									</PrintContextProvider>
+								}
+							/>
+							<Route
+								path="r"
+								element={
+									<PrintContextProvider>
+										<ResultsPage />
+									</PrintContextProvider>
+								}
+							/>
+
 							<Route path="v" element={<TrialDescriptionPage />} />
-							<Route path="advanced" element={<AdvancedSearchPage />} />
+							<Route
+								path="advanced"
+								element={
+									<PrintContextProvider>
+										<AdvancedSearchPage />
+									</PrintContextProvider>
+								}
+							/>
 						</Route>
 					</Routes>
 				</>

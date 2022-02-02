@@ -1,13 +1,9 @@
 import React, { useState, useEffect, useRef, useReducer } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useTracking } from 'react-tracking';
-import {
-	updateFormSearchCriteria,
-	clearForm,
-	receiveData,
-} from '../../store/actions';
+import { updateFormSearchCriteria, clearForm } from '../../store/actions';
 import {
 	ChatOpener,
 	Delighter,
@@ -29,6 +25,7 @@ import ResultsPageHeader from './ResultsPageHeader';
 import ResultsList from './ResultsList';
 import PrintModalContent from './PrintModalContent';
 import { useAppSettings } from '../../store/store.js';
+import { usePrintContext } from '../../store/printContext';
 
 import {
 	resultsPageReducer,
@@ -57,10 +54,6 @@ const ResultsPage = () => {
 
 	// Redux
 	const dispatch = useDispatch();
-	// This is the used to derive formType when zip is invalid,
-	// and for selected print results.
-	// When the form store and print tickets are is completed this will be removed
-	const cache = useSelector((store) => store.cache);
 
 	// This is tightly coupled to the PageHeader.
 	// SCO.resultsPage is undefined on initialRender
@@ -102,10 +95,7 @@ const ResultsPage = () => {
 		pagerPage,
 	} = pageState;
 
-	// References Redux: To be removed in https://github.com/NCIOCPL/clinical-trials-search-app/issues/342
-	const [selectedResults, setSelectedResults] = useState(
-		cache['selectedTrialsForPrint'] || []
-	);
+	const { selectedResults, setSelectedResults } = usePrintContext();
 
 	// Analytics
 	const tracking = useTracking();
@@ -271,12 +261,8 @@ const ResultsPage = () => {
 		}
 	}, [isPageLoadReady, pageIsLoading, searchCriteriaObject]);
 
-	// TODO: Update this functionality to use a React context instead of Redux
-	//  See: https://github.com/NCIOCPL/clinical-trials-search-app/issues/342
 	//track usage of selected results for print
 	useEffect(() => {
-		// update cacheStore with new selectedResults Value
-		dispatch(receiveData('selectedTrialsForPrint', [...selectedResults]));
 		if (selectedResults.length > 100) {
 			//max number of print selections made
 			handleTracking({

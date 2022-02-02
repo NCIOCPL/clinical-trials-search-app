@@ -22,8 +22,7 @@ import {
 import {
 	updateForm,
 	updateFormField,
-	clearForm,
-	receiveData,
+	clearForm
 } from '../../store/actions';
 import { getMainTypeAction } from '../../store/actionsV2';
 import {
@@ -41,6 +40,7 @@ import { SEARCH_FORM_ID } from '../../constants';
 import { useGlobalBeforeUnload, useHasLocationChanged } from '../../hooks';
 import { useAppSettings } from '../../store/store.js';
 import { buildQueryString } from '../../utilities';
+import { usePrintContext } from '../../store/printContext';
 const queryString = require('query-string');
 
 // Module groups in arrays will be placed side-by-side in the form
@@ -80,6 +80,8 @@ const SearchPage = ({ formInit = 'basic' }) => {
 	const { state: locationState } = useLocation();
 	const { criteria, refineSearch } = locationState || {};
 	const { maintypeOptions } = useSelector((store) => store.cache);
+	// The selected trials for print
+	const { clearSelectedTrials } = usePrintContext();
 
 	const handleUpdate = (field, value) => {
 		dispatch(
@@ -205,7 +207,8 @@ const SearchPage = ({ formInit = 'basic' }) => {
 		e.preventDefault();
 		const { trackedFormSubmitted } = actions;
 		if (!hasFormError) {
-			dispatch(receiveData('selectedTrialsForPrint', []));
+			// Reset the selected trials to none
+			clearSelectedTrials();
 			tracking.trackEvent({
 				// These properties are required.
 				type: 'Other',
