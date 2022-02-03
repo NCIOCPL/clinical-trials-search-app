@@ -1,0 +1,13 @@
+{
+	"data": [
+		{
+			"name": "Ibuprofen",
+			"codes": ["C561"],
+			"category": ["agent"],
+			"type": ["drug"],
+			"synonyms": ["Ibuprofen", "Motrin"],
+			"count": 3
+		}
+	],
+	"total": 1
+}
