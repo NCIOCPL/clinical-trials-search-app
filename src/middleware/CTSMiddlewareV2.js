@@ -8,6 +8,7 @@ import {
 	getMainType,
 	getStages,
 	getSubtypes,
+	searchDrug,
 } from '../services/api/clinical-trials-search-api';
 
 /**
@@ -57,6 +58,9 @@ const createCTSMiddlewareV2 =
 					}
 					case 'getStages': {
 						return getStages(client, requestParams);
+					}
+					case 'searchDrug': {
+						return searchDrug(client, requestParams);
 					}
 					default: {
 						throw new Error(`Unknown CTS API request`);

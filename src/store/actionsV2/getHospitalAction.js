@@ -2,7 +2,7 @@ import { ACTIVE_TRIAL_STATUSES } from '../../constants';
 
 /**
  * Gets a list of hospitals from the CTS api matching the search text and request filters provided
- * @param {String} searchText - free text string matching lead org name
+ * @param {String} searchText - free text string matching hospital name
  * @param size - the number of results
  * @return {{payload: {cacheKey: string, method: string, service: string, requestParams: {current_trial_status: string[], size: number, name: *}}, type: string}}
  */

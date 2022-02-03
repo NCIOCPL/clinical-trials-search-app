@@ -99,44 +99,6 @@ export function getDiseasesForSimpleTypeAhead({
 }
 
 /**
- * Gets drugs intervention items for search field
- */
-export function searchDrugs({ searchText, isDebug = false, size = 10 } = {}) {
-	return {
-		type: '@@api/CTS',
-		payload: {
-			service: 'ctsSearch',
-			cacheKey: 'drugOptions',
-
-			requests: [
-				{
-					method: 'getInterventions',
-					requestParams: {
-						category: ['Agent', 'Agent Category'],
-						name: searchText,
-						size: size,
-						additionalParams: {
-							current_trial_status: ACTIVE_TRIAL_STATUSES,
-						},
-						sort: 'cancergov',
-					},
-					fetchHandlers: {
-						formatResponse: (drugs) => {
-							if (isDebug) {
-								drugs.forEach(
-									(drug) => (drug.name += ' (' + drug.codes.join('|') + ')')
-								);
-							}
-							return drugs;
-						},
-					},
-				},
-			],
-		},
-	};
-}
-
-/**
  * Gets other intervention items for search field
  */
 export function searchOtherInterventions({ searchText, size = 10 } = {}) {
