@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Fieldset, Autocomplete } from '../../atomic';
-import { searchDrugs, searchOtherInterventions } from '../../../store/actions';
-
+import { searchOtherInterventions } from '../../../store/actions';
+import { searchDrugAction } from '../../../store/actionsV2';
 import './DrugTreatment.scss';
 
 const DrugTreatment = ({ handleUpdate }) => {
@@ -20,11 +20,12 @@ const DrugTreatment = ({ handleUpdate }) => {
 	//input state
 	const [drugVal, setDrugVal] = useState({ value: '' });
 	const [treatmentVal, setTreatmentVal] = useState({ value: '' });
+	const drugOptionsData = drugOptions?.data ? drugOptions.data : [];
 
 	//based on drug field input
 	useEffect(() => {
 		if (drugVal.value.length > 2) {
-			dispatch(searchDrugs({ searchText: drugVal.value }));
+			dispatch(searchDrugAction({ searchText: drugVal.value }));
 		}
 	}, [drugVal, dispatch]);
 
@@ -102,14 +103,14 @@ const DrugTreatment = ({ handleUpdate }) => {
 				inputProps={{
 					placeholder: 'Start typing to select drugs and/or drug families',
 				}}
-				items={filterSelectedItems(drugOptions, drugs)}
+				items={filterSelectedItems(drugOptionsData, drugs)}
 				getItemValue={(item) => item.name}
 				shouldItemRender={() => true}
 				onChange={(event, value) => setDrugVal({ value })}
 				onSelect={(value) => {
 					handleUpdate('drugs', [
 						...drugs,
-						drugOptions.find(({ name }) => name === value),
+						drugOptionsData.find(({ name }) => name === value),
 					]);
 					setDrugVal({ value: '' });
 				}}
@@ -123,7 +124,7 @@ const DrugTreatment = ({ handleUpdate }) => {
 					return (
 						<div className="cts-autocomplete__menu --drugs">
 							{drugVal.value.length > 2 ? (
-								filterSelectedItems(drugOptions, drugs).length ? (
+								filterSelectedItems(drugOptionsData, drugs).length ? (
 									children
 								) : (
 									<div className="cts-autocomplete__menu-item">
