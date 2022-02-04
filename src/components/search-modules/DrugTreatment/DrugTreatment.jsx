@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Fieldset, Autocomplete } from '../../atomic';
-import { searchOtherInterventions } from '../../../store/actions';
-import { searchDrugAction } from '../../../store/actionsV2';
+import {
+	getOtherInterventionsAction,
+	searchDrugAction,
+} from '../../../store/actionsV2';
 import './DrugTreatment.scss';
 
 const DrugTreatment = ({ handleUpdate }) => {
@@ -15,7 +17,11 @@ const DrugTreatment = ({ handleUpdate }) => {
 	const { drugs, treatments } = useSelector((store) => store.form);
 
 	// cached options lists for drugs and treatments
-	const { drugOptions, treatmentOptions } = useSelector((store) => store.cache);
+	const { drugOptions, treatmentOptions = {} } = useSelector(
+		(store) => store.cache
+	);
+
+	const treatmentOptionsList = treatmentOptions.data || [];
 
 	//input state
 	const [drugVal, setDrugVal] = useState({ value: '' });
@@ -32,7 +38,7 @@ const DrugTreatment = ({ handleUpdate }) => {
 	//based on treatments field input
 	useEffect(() => {
 		if (treatmentVal.value.length > 2) {
-			dispatch(searchOtherInterventions({ searchText: treatmentVal.value }));
+			dispatch(getOtherInterventionsAction({ searchText: treatmentVal.value }));
 		}
 	}, [treatmentVal, dispatch]);
 
@@ -150,14 +156,14 @@ const DrugTreatment = ({ handleUpdate }) => {
 				value={treatmentVal.value}
 				inputProps={{ placeholder: 'Start typing to select other treatments' }}
 				inputHelpText="More than one selection may be made."
-				items={filterSelectedItems(treatmentOptions, treatments)}
+				items={filterSelectedItems(treatmentOptionsList, treatments)}
 				getItemValue={(item) => item.name}
 				shouldItemRender={() => true}
 				onChange={(event, value) => setTreatmentVal({ value })}
 				onSelect={(value) => {
 					handleUpdate('treatments', [
 						...treatments,
-						treatmentOptions.find(({ name }) => name === value),
+						treatmentOptionsList.find(({ name }) => name === value),
 					]);
 					setTreatmentVal({ value: '' });
 				}}
@@ -171,7 +177,7 @@ const DrugTreatment = ({ handleUpdate }) => {
 					return (
 						<div className="cts-autocomplete__menu --drugs">
 							{treatmentVal.value.length > 2 ? (
-								filterSelectedItems(treatmentOptions, treatments).length ? (
+								filterSelectedItems(treatmentOptionsList, treatments).length ? (
 									children
 								) : (
 									<div className="cts-autocomplete__menu-item">

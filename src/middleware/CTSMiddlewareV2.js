@@ -6,6 +6,7 @@ import {
 	getHospitals,
 	getLeadOrg,
 	getMainType,
+	getOtherInterventions,
 	getStages,
 	getSubtypes,
 	searchDrug,
@@ -47,6 +48,9 @@ const createCTSMiddlewareV2 =
 					}
 					case 'getHospital': {
 						return getHospitals(client, requestParams);
+					}
+					case 'getOtherInterventions': {
+						return getOtherInterventions(client, requestParams);
 					}
 					case 'getLeadOrg': {
 						return getLeadOrg(client, requestParams);
