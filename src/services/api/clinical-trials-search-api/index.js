@@ -9,6 +9,7 @@ export { getFindings } from './getFindings';
 export { getHospitals } from './getHospitals';
 export { getLeadOrg } from './getLeadOrg';
 export { getMainType } from './getMainType';
+export { getOtherInterventions } from './getOtherInterventions';
 export { getSubtypes } from './getSubtypes';
 export { getStages } from './getStages';
 export { searchDrug } from './searchDrug';
