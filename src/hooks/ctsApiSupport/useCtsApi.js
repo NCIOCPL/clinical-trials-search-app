@@ -87,7 +87,7 @@ const internalFetch = async (clinicalTrialsSearchClient, actions) => {
 export const useCtsApi = (fetchActions) => {
 	const [
 		{
-			apiClients: { clinicalTrialsSearchClient },
+			apiClients: { clinicalTrialsSearchClientV2 },
 		},
 	] = useAppSettings();
 
@@ -125,7 +125,7 @@ export const useCtsApi = (fetchActions) => {
 		// or it will be an error object. This allows us to have one object
 		// that we return for the useCallback to "cache".
 		const response = await internalFetch(
-			clinicalTrialsSearchClient,
+			clinicalTrialsSearchClientV2,
 			fetchActions
 		);
 

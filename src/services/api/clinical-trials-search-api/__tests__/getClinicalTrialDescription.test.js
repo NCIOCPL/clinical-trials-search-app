@@ -8224,7 +8224,7 @@ describe('getClinicalTrialDescription', () => {
 		};
 
 		const scope = nock('http://example.org')
-			.get(`/clinical-trial/${query.payload}`)
+			.get(`/trials/${query.payload}`)
 			.reply(200, result);
 		const response = await getClinicalTrialDescription(client, query.payload);
 		expect(response).toEqual(result);
@@ -8237,7 +8237,7 @@ describe('getClinicalTrialDescription', () => {
 		const query = getClinicalTrialDescriptionAction(trialId);
 
 		const scope = nock('http://example.org')
-			.get(`/clinical-trial/${query.payload}`)
+			.get(`/trials/${query.payload}`)
 			.reply(404);
 		await expect(
 			getClinicalTrialDescription(client, query.payload)
@@ -8253,7 +8253,7 @@ describe('getClinicalTrialDescription', () => {
 		const query = getClinicalTrialDescriptionAction(trialId);
 
 		const scope = nock('http://example.org')
-			.get(`/clinical-trial/${query.payload}`)
+			.get(`/trials/${query.payload}`)
 			.reply(500);
 		await expect(
 			getClinicalTrialDescription(client, query.payload)
@@ -8269,7 +8269,7 @@ describe('getClinicalTrialDescription', () => {
 		const query = getClinicalTrialDescriptionAction(trialId);
 
 		const scope = nock('http://example.org')
-			.get(`/clinical-trial/${query.payload}`)
+			.get(`/trials/${query.payload}`)
 			.replyWithError('connection refused');
 		await expect(
 			getClinicalTrialDescription(client, query.payload)
