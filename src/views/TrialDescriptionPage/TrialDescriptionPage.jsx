@@ -576,29 +576,23 @@ const TrialDescriptionPage = () => {
 													<p className="trial-phase">
 														<strong className="field-label">Trial Phase</strong>
 														{`${
-															trialDescription.phase.phase &&
-															trialDescription.phase.phase !== 'NA'
+															trialDescription.phase &&
+															trialDescription.phase !== 'NA'
 																? 'Phase ' +
-																  trialDescription.phase.phase.replace('_', '/')
+																  trialDescription.phase.replace('_', '/')
 																: 'No phase specified'
 														}`}
 													</p>
-													{trialDescription.primary_purpose
-														.primary_purpose_code &&
-														trialDescription.primary_purpose
-															.primary_purpose_code !== '' && (
+													{trialDescription.primary_purpose &&
+														trialDescription.primary_purpose !== '' && (
 															<p className="trial-type">
 																<strong className="field-label">
 																	Trial Type
 																</strong>
 																<span className="trial-type-name">
-																	{trialDescription.primary_purpose.primary_purpose_code.toLowerCase() ===
-																	'other'
-																		? trialDescription.primary_purpose
-																				.primary_purpose_other_text
-																		: trialDescription.primary_purpose.primary_purpose_code
-																				.toLowerCase()
-																				.replace(/_/g, ' ')}
+																	{trialDescription.primary_purpose
+																		.toLowerCase()
+																		.replace(/_/g, ' ')}
 																</span>
 															</p>
 														)}
