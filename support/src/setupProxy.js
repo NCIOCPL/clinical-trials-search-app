@@ -10,6 +10,7 @@ const mockTerm = require('./mock-clinical-trials/term');
 const mockTerms = require('./mock-clinical-trials/terms');
 const mockDiseases = require('./mock-clinical-trials/diseases');
 const mockTrials = require('./mock-clinical-trials/trials');
+const mockTrial = require('./mock-clinical-trials/trial');
 const mockOrganizations = require('./mock-clinical-trials/organizations');
 
 module.exports = function (app) {
@@ -33,6 +34,7 @@ module.exports = function (app) {
 	// local development.
 
 	//CTS API V2 endpoints
+	app.use('/cts/mock-api/v2/trials/:id', mockTrial);
 	app.use('/cts/mock-api/v2/trials', mockTrials);
 	app.use('/cts/mock-api/v2/diseases', mockDiseases);
 	app.use('/cts/mock-api/v2/interventions', mockInterventions);
