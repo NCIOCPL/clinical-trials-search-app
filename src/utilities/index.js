@@ -28,4 +28,5 @@ export { runQueryFetchers } from './runQueryFetchers';
 export { hasSCOBeenUpdated } from './hasSCOBeenUpdated';
 export { filterSitesByActiveRecruitment } from './filterSitesByActiveRecruitment';
 export { createTermDataFromArrayObj } from './createTermDataFromArrayObj';
+export { formatTrialSearchQueryV2 } from './formatTrialSearchQueryV2';
 export { getProductTestBase } from './getProductTestBase';

@@ -32,16 +32,16 @@ describe('testing getClinicalTrials', () => {
 					'sites.org_city',
 					'sites.recruitment_status',
 				],
-				'arms.interventions.intervention_code': ['C1234'],
-				'primary_purpose.primary_purpose_code': 'treatment',
+				'arms.interventions.nci_thesaurus_concept_id': ['C1234'],
+				primary_purpose: 'treatment',
 				from: 0,
 				size: 10,
 			},
 		};
 
 		const requestFilters = {
-			'arms.interventions.intervention_code': ['C1234'],
-			'primary_purpose.primary_purpose_code': 'treatment',
+			'arms.interventions.nci_thesaurus_concept_id': ['C1234'],
+			primary_purpose: 'treatment',
 		};
 
 		const requestQuery = getClinicalTrialsAction({

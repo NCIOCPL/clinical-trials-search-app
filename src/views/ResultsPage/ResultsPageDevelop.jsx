@@ -1,10 +1,20 @@
 import React, { useState, useEffect, useRef, useReducer } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useTracking } from 'react-tracking';
-import { updateFormSearchCriteria, clearForm } from '../../store/actions';
-import { ChatOpener, Delighter, Modal, Pager } from '../../components/atomic';
+import {
+	updateFormSearchCriteria,
+	clearForm,
+	receiveData,
+} from '../../store/actions';
+import {
+	ChatOpener,
+	Delighter,
+	Checkbox,
+	Modal,
+	Pager,
+} from '../../components/atomic';
 import { TRY_NEW_SEARCH_LINK } from '../../constants';
 import ErrorPage from '../ErrorPage';
 import {
@@ -19,8 +29,6 @@ import ResultsPageHeader from './ResultsPageHeader';
 import ResultsList from './ResultsList';
 import PrintModalContent from './PrintModalContent';
 import { useAppSettings } from '../../store/store.js';
-import { usePrintContext } from '../../store/printContext';
-import { useAppPaths } from '../../hooks/routing';
 
 import {
 	resultsPageReducer,
@@ -36,28 +44,27 @@ import { formatTrialSearchQuery } from '../../utilities/formatTrialSearchQuery';
 const queryString = require('query-string');
 
 const ResultsPage = () => {
-	// Load the global settings from our custom context
+	// Load our React context
 	const [
-		{
-			analyticsName,
-			canonicalHost,
-			siteName,
-			zipConversionEndpoint,
-			apiClients: { clinicalTrialsSearchClientV2 },
-		},
+		{ analyticsName, canonicalHost, services, siteName, zipConversionEndpoint },
 	] = useAppSettings();
 
 	// Redux
 	const dispatch = useDispatch();
+	// This is the used to derive formType when zip is invalid,
+	// and for selected print results.
+	// When the form store and print tickets are is completed this will be removed
+	const cache = useSelector((store) => store.cache);
 
+	// This is tightly coupled to the PageHeader.
+	// SCO.resultsPage is undefined on initialRender
+	// const { resultsPage } = useSelector((store) => store.form);
 	// Route Data/ Management
-	const navigate = useNavigate(); // Used for updating the nav bar on pagination / navigation
-	const location = useLocation(); // Used for accessing the querystring of the incoming search
+	const location = useLocation();
+	const navigate = useNavigate();
 	const qs = queryString.extract(location.search);
-	const { AdvancedSearchPagePath, BasicSearchPagePath, ResultsPagePath } =
-		useAppPaths();
 
-	//  Used as the initial state for the reducer.
+	// Initial Page state. Used as the initial state in the reducer.
 	const INITIAL_PAGE_STATE = {
 		selectAll: false,
 		pageIsLoading: true,
@@ -69,7 +76,7 @@ const ResultsPage = () => {
 		actionsHash: '',
 		fetchActions: [],
 		error: [],
-		currentPage: 1,
+		pagerPage: 0,
 	};
 
 	const [pageState, ctsDispatch] = useReducer(
@@ -86,14 +93,17 @@ const ResultsPage = () => {
 		trialResults,
 		searchCriteriaObject,
 		fetchActions,
-		currentPage,
+		pagerPage,
 	} = pageState;
 
-	// Clinical Trial results select by the user (for printing)
-	const { selectedResults, setSelectedResults } = usePrintContext();
+	// References Redux: To be removed in https://github.com/NCIOCPL/clinical-trials-search-app/issues/342
+	const [selectedResults, setSelectedResults] = useState(
+		cache['selectedTrialsForPrint'] || []
+	);
 
 	// Analytics
 	const tracking = useTracking();
+	const ctsapiclient = services.ctsSearch();
 
 	const handleTracking = (analyticsPayload) => {
 		tracking.trackEvent(analyticsPayload);
@@ -120,70 +130,80 @@ const ResultsPage = () => {
 
 	// Initialize the searchCriteriaObject. If the location changes, re-initialize it.
 	useEffect(() => {
-		ctsDispatch({
-			type: 'SET_PROP',
-			prop: 'isLoading',
-			payload: true,
-		});
-
-		const searchCriteria = async () => {
-			const { diseaseFetcher, interventionFetcher, zipFetcher } =
-				await runQueryFetchers(
-					clinicalTrialsSearchClientV2,
-					zipConversionEndpoint
+		if (!searchCriteriaObject) {
+			const searchCriteria = async () => {
+				const { diseaseFetcher, interventionFetcher, zipFetcher } =
+					await runQueryFetchers(ctsapiclient, zipConversionEndpoint);
+				return await queryStringToSearchCriteria(
+					qs,
+					diseaseFetcher,
+					interventionFetcher,
+					zipFetcher
 				);
-			return await queryStringToSearchCriteria(
-				qs,
-				diseaseFetcher,
-				interventionFetcher,
-				zipFetcher
-			);
-		};
-		searchCriteria().then((res) => {
-			ctsDispatch(setSearchCriteriaObject(res.searchCriteria));
+			};
+			searchCriteria().then((res) => {
+				ctsDispatch(setSearchCriteriaObject(res.searchCriteria));
 
-			// Default to PN #1( initial value)  if we don't have a PN parameter.`
-			// If we do have a PN and it's not the current one on initial load, set it.
-			// A null SCO is possible so guard against that scenario.
-			if (
-				res.searchCriteria &&
-				!Number.isNaN(res.searchCriteria.resultsPage) &&
-				currentPage != res.searchCriteria.resultsPage
-			) {
-				ctsDispatch({
-					type: 'SET_PROP',
-					prop: 'currentPage',
-					payload: res.searchCriteria.resultsPage,
-				});
-			}
+				// If we have an error bassed onthe qs / SCO paramaeters
+				// set the error and do not proceed with fetching the trials.
+				if (res.errors.length) {
+					ctsDispatch({
+						type: 'SET_PROP',
+						prop: 'error',
+						payload: res.errors,
+					});
+				} else {
+					const requestFilters = formatTrialSearchQuery(res.searchCriteria);
+					const searchAction = getClinicalTrialsAction({
+						// 'from' is calculated from (res.searchCriteria.resultsPage * 10). BAD.
+						// And only when resultsPage > 0,
+						// otherwise it's null and gets set in the action from a default value. BAD.
+						// If the 'pn'/resultsPage parameter is...reasonably.. set to  1 for the first results page,
+						// instead of the 'null' it expects for some reason,
+						// the offset gets out of whack. BAD. VERY BAD.
+						// TODO:  queryStringToSearchCriteria should be updated to set a default value for the first page.
+						from: requestFilters.from,
+						requestFilters: requestFilters,
+						size: 10,
+					});
 
-			// If we have an error based on the qs / SCO parameters
-			// set the error and do not proceed with fetching the trials.
-			if (res.errors.length) {
-				ctsDispatch({
-					type: 'SET_PROP',
-					prop: 'error',
-					payload: res.errors,
-				});
-			} else {
-				const requestFilters = formatTrialSearchQuery(res.searchCriteria);
-				const searchAction = getClinicalTrialsAction({
-					from: requestFilters.from,
-					requestFilters: requestFilters,
-					size: 10,
-				});
+					ctsDispatch(setFetchActions(searchAction));
 
-				ctsDispatch(setFetchActions(searchAction));
+					// Get a hash of the actions so that we can check= if the response data's
+					// 'originating hash' matches the current hash during render. Changes from
+					// the same route with different data will trigger a re-render with the
+					// old data before the spinner is displayed.
+					setCurrentActionsHash(convertObjectToBase64(searchAction));
+					// setScoHash(convertObjectToBase64(searchAction));
+					// Redux
+					dispatch(updateFormSearchCriteria(res.searchCriteria));
+				}
+			});
+		} else {
+			const requestFilters = formatTrialSearchQuery(searchCriteriaObject);
+			const searchAction = getClinicalTrialsAction({
+				// 'from' is calculated from (res.searchCriteria.resultsPage * 10). BAD.
+				// And only when resultsPage > 0,
+				// otherwise it's null and gets set in the action from a default value. BAD.
+				// If the 'pn'/resultsPage parameter is...reasonably.. set to  1 for the first results page,
+				// instead of the 'null' it expects for some reason,
+				// the offset gets out of whack. BAD. VERY BAD.
+				// TODO:  queryStringToSearchCriteria should be updated to set a default value for the first page.
+				from: requestFilters.from,
+				requestFilters: requestFilters,
+			});
 
-				// Get a hash of the actions so that we can check= if the response data's
-				// 'originating hash' matches the current hash during render. Changes from
-				// the same route with different data will trigger a re-render with the
-				// old data before the spinner is displayed.
-				setCurrentActionsHash(convertObjectToBase64(searchAction));
-				// Redux
-				dispatch(updateFormSearchCriteria(res.searchCriteria));
-			}
-		});
+			ctsDispatch(setFetchActions(searchAction));
+
+			// Get a hash of the actions so that we can check= if the response data's
+			// 'originating hash' matches the current hash during render. Changes from
+			// the same route with different data will trigger a re-render with the
+			// old data before the spinner is displayed.
+			setCurrentActionsHash(convertObjectToBase64(searchAction));
+			// setScoHash(convertObjectToBase64(searchAction));
+			// Redux
+			dispatch(updateFormSearchCriteria(searchCriteriaObject));
+		}
 	}, [location]);
 
 	// If we have a search criteria object and paylaod, we have a successful fetch.
@@ -209,7 +229,7 @@ const ResultsPage = () => {
 		}
 	}, [loading, payload, searchCriteriaObject]);
 
-	// Handle Analytics
+	//Handle Analytics
 	useEffect(() => {
 		// This should also be dependent on the current route/url
 		if (isAllFetchingComplete()) {
@@ -243,8 +263,12 @@ const ResultsPage = () => {
 		}
 	}, [isPageLoadReady, pageIsLoading, searchCriteriaObject]);
 
+	// TODO: Update this functionality to use a React context instead of Redux
+	//  See: https://github.com/NCIOCPL/clinical-trials-search-app/issues/342
 	//track usage of selected results for print
 	useEffect(() => {
+		// update cacheStore with new selectedResults Value
+		dispatch(receiveData('selectedTrialsForPrint', [...selectedResults]));
 		if (selectedResults.length > 100) {
 			//max number of print selections made
 			handleTracking({
@@ -265,10 +289,10 @@ const ResultsPage = () => {
 	const handleSelectAll = () => {
 		const pageResultIds = [
 			...new Set(
-				trialResults.data.map((item) => {
+				trialResults.trials.map((item) => {
 					let resItem = {
 						id: item.nci_id,
-						fromPage: searchCriteriaObject.resultsPage,
+						fromPage: searchCriteriaObject.resultsPage + 1,
 					};
 					return resItem;
 				})
@@ -321,7 +345,7 @@ const ResultsPage = () => {
 			formType: searchCriteriaObject.formType,
 			source: 'modify_search_criteria_link',
 		});
-		navigate(AdvancedSearchPagePath(), {
+		navigate('/about-cancer/treatment/clinical-trials/search/advanced', {
 			state: {
 				criteria: searchCriteriaObject,
 				refineSearch: true,
@@ -333,12 +357,8 @@ const ResultsPage = () => {
 	const { isShowing, toggleModal } = useModal();
 	const printSelectedBtn = useRef(null);
 
-	/**
-	 * @param {Object} Object The incoming pager object
-	 * @param {number} Object.page the new page number to navigate to
-	 */
-	const handlePagination = ({ page: newPageNumber }) => {
-		if (currentPage != newPageNumber) {
+	const handlePagination = (currentPage) => {
+		if (currentPage != pagerPage) {
 			ctsDispatch({
 				type: 'SET_PROP',
 				prop: 'isLoading',
@@ -347,24 +367,24 @@ const ResultsPage = () => {
 
 			ctsDispatch({
 				type: 'SET_PROP',
-				prop: 'currentPage',
-				payload: newPageNumber,
+				prop: 'pagerPage',
+				payload: currentPage,
 			});
 
 			ctsDispatch(
 				setSearchCriteriaObject({
 					...searchCriteriaObject,
-					resultsPage: newPageNumber,
+					resultsPage: currentPage,
 				})
 			);
 
 			const parsed = queryString.parse(location.search);
-			parsed.pn = newPageNumber;
+			parsed.pn = currentPage + 1;
 			const newqs = queryString.stringify(parsed, { arrayFormat: 'none' });
-			navigate(`${ResultsPagePath()}?${newqs}`);
+			// Navigation below is relative, hence use of just the parameters in this case
+			navigate(`?${newqs}`);
 		}
 	};
-
 	const renderResultsListLoader = () => (
 		<div className="loader__results-list-wrapper">
 			<div className="loader__results-list">
@@ -450,22 +470,14 @@ const ResultsPage = () => {
 						{!isLoading && trialResults.total !== 0 && (
 							<>
 								<div className="results-page__select-all">
-									<div className="cts-checkbox check-all">
-										<input
-											id={cbxId}
-											className="cts-checkbox__input"
-											classes="check-all"
-											type="checkbox"
-											name="select-all"
-											checked={selectAll}
-											onChange={handleSelectAll}
-											value={cbxId}
-										/>
-										<label className="cts-checkbox__label" htmlFor={cbxId}>
-											Select all on page
-										</label>
-									</div>
-
+									<Checkbox
+										id={cbxId}
+										name="select-all"
+										label="Select all on page"
+										checked={selectAll}
+										classes="check-all"
+										onChange={handleSelectAll}
+									/>
 									<button
 										className="results-page__print-button"
 										ref={printSelectedBtn}
@@ -479,13 +491,10 @@ const ResultsPage = () => {
 										trialResults &&
 										trialResults.total > 1 && (
 											<Pager
-												current={currentPage}
-												currentPageNeighbours={2}
-												nextLabel="Next >"
-												onPageNavigationChange={handlePagination}
-												previousLabel="< Previous"
-												resultsPerPage={10}
-												totalResults={trialResults.total}
+												data={trialResults.trials}
+												callback={handlePagination}
+												startFromPage={searchCriteriaObject.resultsPage}
+												totalItems={trialResults.total}
 											/>
 										)}
 								</div>
@@ -556,8 +565,8 @@ const ResultsPage = () => {
 					<Link
 						to={`${
 							searchCriteriaObject.formType === 'basic'
-								? BasicSearchPagePath()
-								: AdvancedSearchPagePath()
+								? '/about-cancer/treatment/clinical-trials/search'
+								: '/about-cancer/treatment/clinical-trials/search/advanced'
 						}`}
 						onClick={() => handleStartOver(TRY_NEW_SEARCH_LINK)}>
 						Try a new search
@@ -602,7 +611,7 @@ const ResultsPage = () => {
 						) : (
 							<ResultsPageHeader
 								resultsCount={trialResults.total}
-								pageNum={currentPage}
+								pageNum={searchCriteriaObject.resultsPage}
 								onModifySearchClick={handleRefineSearch}
 								onStartOverClick={handleStartOver}
 								searchCriteriaObject={searchCriteriaObject}
@@ -618,7 +627,7 @@ const ResultsPage = () => {
 									<>{renderNoResults()}</>
 								) : (
 									<ResultsList
-										results={trialResults.data}
+										results={trialResults.trials}
 										selectedResults={selectedResults}
 										setSelectedResults={setSelectedResults}
 										setSelectAll={(value) => {
