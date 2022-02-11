@@ -202,6 +202,7 @@ if (process.env.NODE_ENV !== 'production') {
 		...appParams,
 		ctsApiEndpointV2: 'http://localhost:3000/cts/proxy-api/v2',
 		...integrationTestOverrides,
+		zipConversionEndpoint: 'http://localhost:3000/mock-api/zip_code_lookup',
 	};
 	initialize(ctsSettings);
 } else if (window?.location?.host === 'react-app-dev.cancer.gov') {

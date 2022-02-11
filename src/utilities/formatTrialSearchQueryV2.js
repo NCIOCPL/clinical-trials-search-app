@@ -6,7 +6,7 @@ import {
 	NIH_ZIPCODE,
 } from '../constants';
 
-export const formatTrialSearchQuery = (form) => {
+export const formatTrialSearchQueryV2 = (form) => {
 	let filterCriteria = {};
 
 	//diseases
@@ -24,7 +24,7 @@ export const formatTrialSearchQuery = (form) => {
 	}
 
 	if (form.findings.length > 0) {
-		filterCriteria._findings = collapseConcepts(form.findings);
+		filterCriteria.finding = collapseConcepts(form.findings);
 	}
 
 	//Drugs and Treatments
@@ -52,7 +52,7 @@ export const formatTrialSearchQuery = (form) => {
 	let trialTypesChecked = form.trialTypes.filter((item) => item.checked);
 	//check if any are selected, none being the same as all
 	if (trialTypesChecked.length) {
-		filterCriteria.primary_purpose = [
+		filterCriteria['primary_purpose.primary_purpose_code'] = [
 			...new Set(trialTypesChecked.map((item) => item.value)),
 		];
 	}
@@ -78,7 +78,7 @@ export const formatTrialSearchQuery = (form) => {
 			}
 		}
 		if (phaseList.length > 0) {
-			filterCriteria.phase = phaseList;
+			filterCriteria['phase.phase'] = phaseList;
 		}
 	}
 
@@ -94,7 +94,7 @@ export const formatTrialSearchQuery = (form) => {
 
 	// add healthy volunteers filter
 	if (form.healthyVolunteers) {
-		filterCriteria['eligibility.structured.accepts_healthy_volunteers'] = true;
+		filterCriteria.accepts_healthy_volunteers_indicator = 'YES';
 	}
 
 	//gender filter goes here but it is not set within our app
@@ -134,18 +134,16 @@ export const formatTrialSearchQuery = (form) => {
 		}
 		case 'search-location-zip':
 			if (form.zipCoords.lat !== '' && form.zipCoords.long !== '') {
-				filterCriteria['sites.org_coordinates_lat'] = `${form.zipCoords.lat}`;
-				filterCriteria['sites.org_coordinates_lon'] = `${form.zipCoords.long}`;
+				filterCriteria['sites.org_coordinates_lat'] = form.zipCoords.lat;
+				filterCriteria['sites.org_coordinates_lon'] = form.zipCoords.long;
 				filterCriteria['sites.org_coordinates_dist'] = form.zipRadius + 'mi';
 			}
 			break;
 		default:
 	}
 
-	// The trials API returns 10 results per page.
-	// Determine the offset based off the current page.
 	if (form.resultsPage > 0) {
-		filterCriteria.from = (form.resultsPage - 1) * 10;
+		filterCriteria.from = form.resultsPage * 10;
 	}
 
 	// Adds criteria to only match locations that are actively recruiting sites. (CTSConstants.ActiveRecruitmentStatuses)
