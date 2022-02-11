@@ -32,4 +32,3 @@ describe('searchTrialInvestigatorsAction', () => {
 		}).toThrow('You must specify a trial investigator in order to fetch it.');
 	});
 });
-
