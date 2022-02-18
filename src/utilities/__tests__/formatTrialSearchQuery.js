@@ -16,6 +16,7 @@ import {
  */
 const BASE_EXPECTED_QUERY = {
 	current_trial_status: ACTIVE_TRIAL_STATUSES,
+	from: 0,
 	include: SEARCH_RETURNS_FIELDS,
 };
 
@@ -537,7 +538,7 @@ function getPhaseObject(phases) {
 }
 
 /**
- * Helper function to set enabled trial types.
+ * Helper function to set enab led trial types.
  *
  * @param array type
  *   List of trial types to enable

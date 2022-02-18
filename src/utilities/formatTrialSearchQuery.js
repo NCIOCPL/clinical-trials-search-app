@@ -145,7 +145,7 @@ export const formatTrialSearchQuery = (form) => {
 	// The trials API returns 10 results per page.
 	// Determine the offset based off the current page.
 	if (form.resultsPage > 0) {
-		filterCriteria.from = form.resultsPage * 10;
+		filterCriteria.from = (form.resultsPage - 1) * 10;
 	}
 
 	// Adds criteria to only match locations that are actively recruiting sites. (CTSConstants.ActiveRecruitmentStatuses)

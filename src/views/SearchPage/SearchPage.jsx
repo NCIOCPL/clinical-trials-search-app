@@ -19,11 +19,7 @@ import {
 	TrialType,
 	ZipCode,
 } from '../../components/search-modules';
-import {
-	updateForm,
-	updateFormField,
-	clearForm
-} from '../../store/actions';
+import { updateForm, updateFormField, clearForm } from '../../store/actions';
 import { getMainTypeAction } from '../../store/actionsV2';
 import {
 	getFieldInFocus,

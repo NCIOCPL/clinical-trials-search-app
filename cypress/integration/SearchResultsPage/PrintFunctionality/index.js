@@ -103,7 +103,7 @@ And('user clicks on {string} button', (buttonLabel) => {
 });
 
 When('user clicks on {string} pager button', (pgButton) => {
-	cy.get('.pager__arrow').contains(pgButton).click();
+	cy.get('.pager__button').contains(pgButton).click();
 });
 
 And('print modal displayes {string}', (text) => {

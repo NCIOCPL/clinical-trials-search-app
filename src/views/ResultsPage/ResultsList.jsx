@@ -13,7 +13,7 @@ const ResultsList = ({
 	const handleOnCheckChange = (id) => {
 		let resultItem = {
 			id: id,
-			fromPage: resultsPage + 1,
+			fromPage: resultsPage,
 		};
 
 		//if the new item does not already exist in the selected results, add it

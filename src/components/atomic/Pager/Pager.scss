@@ -1,67 +1,73 @@
+.pager__navigation,
 .pager__container {
-  margin-top: 0.6em;
-  margin-bottom: 0.6em;
+	display: block;
+	margin-left: 0;
+}
 
-  .pager__count p {
-    font-weight: bold;
-  }
+.pager__container {
+	.pager__navigation {
+		color: #25619b;
+		list-style-type: none;
 
-  .pager__nav {
-    margin-left: auto;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-  }
+		padding: 0;
+		margin-bottom: 0;
 
-  .pager__num,
-  .pager__arrow {
-    padding: 3px 6px;
-    border-radius: 3px;
-    font-weight: 400;
-    color: #2b7bba;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: all 150ms linear;
-  }
+		& > li {
+			align-items: center;
+			cursor: pointer;
+			display: inline-flex;
+			justify-content: center;
+			list-style-type: none;
+			margin: 0 2px 0;
+		}
 
-  .pager__num,
-  .pager__arrow {
-    &:focus {
-      background: #cbe8fc;
-    }
-  }
+			.pager__button {
+			border: none;
+			border-radius: 3px;
+			display: block;
+			min-width: 24px;
+			padding: 2px 6px;
+			background-color: #fff;
+			color: #2b7bba;
+			font-size: 100%;
+			font-family: Noto Sans, Century Gothic, Arial, sans-serif;
+			cursor: pointer;
+			text-decoration: none;
+			white-space: nowrap;
 
-  .pager__num,
-  .pager__arrow {
-    margin: 0 3px;
-  }
+			&.active {
+				background: #25619b;
+				color: #fff;
+				&:hover {
+					background: #25619b;
+				}
+			}
 
-  .pager__num,
-  .pager__arrow {
-    &:hover {
-      background: #cbe8fc;
-    }
-  }
+			&.hidden {
+				display: none;
+			}
 
-  .pager__ellipses {
-    &:hover,
-    &:focus {
-      background: white;
-      cursor: default;
-    }
-  }
+			&:hover {
+				background: #cbe8fc;
+			}
+		}
 
-  .pager__num--active {
-    background: #2a71a5;
-    color: white;
-    cursor: default;
-    user-select: none;
-    &:hover,
-    &:focus {
-      cursor: default;
-      background: #2a71a5;
-    }
-  }
+		.pager__ellipsis--right,
+		.pager__ellipsis--left {
+			padding: 2px 4px;
+			cursor: default;
+		}
+	}
+}
+
+@media only screen and (min-width: 641px) {
+	.pager__navigation,
+	.pager__container {
+		margin-left: auto;
+	}
+
+	.pager__container {
+		border: none;
+		margin-top: 0;
+	}
 }
