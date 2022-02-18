@@ -33,38 +33,46 @@ And('pager displays the following navigation options', (dataTable) => {
 		pagerItems.push(pages);
 	}
 	let counter = 0;
-	// Verify that pager displays correct number of page items
-	cy.get('.pager__container:first .pager__nav div:visible').should(
+	//verify that pager displays correct number of page items
+	cy.get('.pager__navigation:first li:visible').should(
 		'have.length',
 		pagerItems.length
 	);
-	cy.get('.pager__container:last .pager__nav div:visible').should(
+	cy.get('.pager__navigation:last li:visible').should(
 		'have.length',
 		pagerItems.length
 	);
 
-	// Verify that the order of displayed page items is correct
-	cy.get('.pager__container:first .pager__nav div:visible').each(($el) => {
+	//verify that the order of displayed page items is correct
+	cy.get('.pager__navigation:first li:visible').each(($el) => {
 		cy.wrap($el).should('have.text', pagerItems[counter]);
 		counter++;
 	});
 });
 
 And('the page {string} is highlighted', (pageNum) => {
-	cy.get('.pager__container:first .pager__nav div.pager__num--active').should(
+	cy.get('.pager__container:first .pager__navigation button.active').should(
 		'have.text',
 		pageNum
 	);
-	cy.get('.pager__container:last .pager__nav div.pager__num--active').should(
+	cy.get('.pager__container:last .pager__navigation button.active').should(
 		'have.text',
 		pageNum
 	);
 });
 
 When('user clicks on {string} button', (arrow) => {
-	cy.get('.pager__container:first .pager__nav > div').contains(arrow).click();
+	cy.get('.pager__navigation li').contains(arrow).click();
 });
 
 When('pager is not displayed', () => {
 	cy.get('.pager__navigation li').should('not.exist');
+});
+
+When('user clicks the browser back button', () => {
+	cy.go('back');
+});
+
+When('user clicks the browser forward button', () => {
+	cy.go('forward');
 });

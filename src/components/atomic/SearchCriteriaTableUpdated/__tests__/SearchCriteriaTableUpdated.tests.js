@@ -46,7 +46,7 @@ describe('<Search Criteria Table />', () => {
 			trialId: '', // (tid) Trial ID,
 			investigator: { term: '', termKey: '' }, // (in) Trial investigators ('in' is legacy but is a keyword and does not work well as a key name; be ready to handle both in query string)
 			leadOrg: { term: '', termKey: '' }, // (lo) Lead Organization
-			resultsPage: 0,
+			resultsPage: 1,
 
 			formType: '', // (empty string (default) | basic | advanced)
 			location: 'search-location-all', // active location option (search-location-all | search-location-zip | search-location-country | search-location-hospital | search-location-nih)
@@ -233,7 +233,7 @@ describe('<Search Criteria Table />', () => {
 			trialId: '', // (tid) Trial ID,
 			investigator: { term: '', termKey: '' }, // (in) Trial investigators ('in' is legacy but is a keyword and does not work well as a key name; be ready to handle both in query string)
 			leadOrg: { term: '', termKey: '' }, // (lo) Lead Organization
-			resultsPage: 0,
+			resultsPage: 1,
 
 			formType: 'basic', // (empty string (default) | basic | advanced)
 			location: 'search-location-zip', // active location option (search-location-all | search-location-zip | search-location-country | search-location-hospital | search-location-nih)
@@ -314,7 +314,7 @@ describe('<Search Criteria Table />', () => {
 			trialId: '', // (tid) Trial ID,
 			investigator: { term: '', termKey: '' }, // (in) Trial investigators ('in' is legacy but is a keyword and does not work well as a key name; be ready to handle both in query string)
 			leadOrg: { term: '', termKey: '' }, // (lo) Lead Organization
-			resultsPage: 0,
+			resultsPage: 1,
 
 			formType: 'advanced', // (empty string (default) | basic | advanced)
 			location: 'search-location-country', // active location option (search-location-all | search-location-zip | search-location-country | search-location-hospital | search-location-nih)
@@ -395,7 +395,7 @@ describe('<Search Criteria Table />', () => {
 			trialId: '', // (tid) Trial ID,
 			investigator: { term: '', termKey: '' }, // (in) Trial investigators ('in' is legacy but is a keyword and does not work well as a key name; be ready to handle both in query string)
 			leadOrg: { term: '', termKey: '' }, // (lo) Lead Organization
-			resultsPage: 0,
+			resultsPage: 1,
 
 			formType: 'advanced', // (empty string (default) | basic | advanced)
 			location: 'search-location-country', // active location option (search-location-all | search-location-zip | search-location-country | search-location-hospital | search-location-nih)
@@ -472,7 +472,7 @@ describe('<Search Criteria Table />', () => {
 			trialId: 'NCI-2015-00054', // (tid) Trial ID,
 			investigator: { term: '', termKey: '' }, // (in) Trial investigators ('in' is legacy but is a keyword and does not work well as a key name; be ready to handle both in query string)
 			leadOrg: { term: '', termKey: '' }, // (lo) Lead Organization
-			resultsPage: 0,
+			resultsPage: 1,
 
 			formType: 'advanced', // (empty string (default) | basic | advanced)
 			location: 'search-location-hospital', // active location option (search-location-all | search-location-zip | search-location-country | search-location-hospital | search-location-nih)
@@ -557,7 +557,7 @@ describe('<Search Criteria Table />', () => {
 			trialId: '', // (tid) Trial ID,
 			investigator: { term: '', termKey: '' }, // (in) Trial investigators ('in' is legacy but is a keyword and does not work well as a key name; be ready to handle both in query string)
 			leadOrg: { term: '', termKey: '' }, // (lo) Lead Organization
-			resultsPage: 0,
+			resultsPage: 1,
 
 			formType: 'advanced', // (empty string (default) | basic | advanced)
 			location: 'search-location-nih', // active location option (search-location-all | search-location-zip | search-location-country | search-location-hospital | search-location-nih)

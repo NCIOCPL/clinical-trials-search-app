@@ -6,7 +6,7 @@ export const hasSCOBeenUpdated = (searchCriteriaObject) => {
 	const SCOcomparator = {
 		...searchCriteriaObject,
 		formType: '',
-		resultsPage: 0,
+		resultsPage: 1,
 		qs: '',
 	};
 	return JSON.stringify(defaultSCOState) === JSON.stringify(SCOcomparator);
