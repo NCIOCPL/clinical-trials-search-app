@@ -237,7 +237,7 @@ const ResultsListItem = ({
 			analyticsName,
 			// Any additional properties fall into the "page.additionalDetails" bucket
 			// for the event.
-			pageNum: resultsPage + 1, // This is obviously 1 based.
+			pageNum: resultsPage, // This is obviously 1 based.
 			resultsPosition: itemIndex + 1, //This is 1 based.
 			formType,
 			linkName: 'UnknownLinkName',

@@ -41,7 +41,7 @@ import { formatTrialSearchQuery } from '../../utilities/formatTrialSearchQuery';
 const queryString = require('query-string');
 
 const ResultsPage = () => {
-	// Load our React context
+	// Load the global settings from our custom context
 	const [
 		{ analyticsName, canonicalHost, services, siteName, zipConversionEndpoint },
 	] = useAppSettings();
@@ -49,15 +49,12 @@ const ResultsPage = () => {
 	// Redux
 	const dispatch = useDispatch();
 
-	// This is tightly coupled to the PageHeader.
-	// SCO.resultsPage is undefined on initialRender
-	// const { resultsPage } = useSelector((store) => store.form);
 	// Route Data/ Management
-	const location = useLocation();
-	const navigate = useNavigate();
+	const navigate = useNavigate(); // Used for updating the nav bar on pagination / navigation
+	const location = useLocation(); // Used for accessing the querystring of the incoming search
 	const qs = queryString.extract(location.search);
 
-	// Initial Page state. Used as the initial state in the reducer.
+	//  Used as the initial state for the reducer.
 	const INITIAL_PAGE_STATE = {
 		selectAll: false,
 		pageIsLoading: true,
@@ -69,7 +66,7 @@ const ResultsPage = () => {
 		actionsHash: '',
 		fetchActions: [],
 		error: [],
-		pagerPage: 0,
+		currentPage: 1,
 	};
 
 	const [pageState, ctsDispatch] = useReducer(
@@ -86,9 +83,10 @@ const ResultsPage = () => {
 		trialResults,
 		searchCriteriaObject,
 		fetchActions,
-		pagerPage,
+		currentPage,
 	} = pageState;
 
+	// Clinical Trial results select by the user (for printing)
 	const { selectedResults, setSelectedResults } = usePrintContext();
 
 	// Analytics
@@ -120,80 +118,67 @@ const ResultsPage = () => {
 
 	// Initialize the searchCriteriaObject. If the location changes, re-initialize it.
 	useEffect(() => {
-		if (!searchCriteriaObject) {
-			const searchCriteria = async () => {
-				const { diseaseFetcher, interventionFetcher, zipFetcher } =
-					await runQueryFetchers(ctsapiclient, zipConversionEndpoint);
-				return await queryStringToSearchCriteria(
-					qs,
-					diseaseFetcher,
-					interventionFetcher,
-					zipFetcher
-				);
-			};
-			searchCriteria().then((res) => {
-				ctsDispatch(setSearchCriteriaObject(res.searchCriteria));
+		ctsDispatch({
+			type: 'SET_PROP',
+			prop: 'isLoading',
+			payload: true,
+		});
 
-				// If we have an error bassed onthe qs / SCO paramaeters
-				// set the error and do not proceed with fetching the trials.
-				if (res.errors.length) {
-					ctsDispatch({
-						type: 'SET_PROP',
-						prop: 'error',
-						payload: res.errors,
-					});
-				} else {
-					const requestFilters = formatTrialSearchQuery(res.searchCriteria);
-					const searchAction = getClinicalTrialsAction({
-						// 'from' is calculated from (res.searchCriteria.resultsPage * 10). BAD.
-						// And only when resultsPage > 0,
-						// otherwise it's null and gets set in the action from a default value. BAD.
-						// If the 'pn'/resultsPage parameter is...reasonably.. set to  1 for the first results page,
-						// instead of the 'null' it expects for some reason,
-						// the offset gets out of whack. BAD. VERY BAD.
-						// TODO:  queryStringToSearchCriteria should be updated to set a default value for the first page.
-						from: requestFilters.from,
-						requestFilters: requestFilters,
-						size: 10,
-					});
+		const searchCriteria = async () => {
+			const { diseaseFetcher, interventionFetcher, zipFetcher } =
+				await runQueryFetchers(ctsapiclient, zipConversionEndpoint);
+			return await queryStringToSearchCriteria(
+				qs,
+				diseaseFetcher,
+				interventionFetcher,
+				zipFetcher
+			);
+		};
+		searchCriteria().then((res) => {
+			ctsDispatch(setSearchCriteriaObject(res.searchCriteria));
 
-					ctsDispatch(setFetchActions(searchAction));
+			// Default to PN #1( initial value)  if we don't have a PN parameter.`
+			// If we do have a PN and it's not the current one on initial load, set it.
+			// A null SCO is possible so guard against that scenario.
+			if (
+				res.searchCriteria &&
+				!Number.isNaN(res.searchCriteria.resultsPage) &&
+				currentPage != res.searchCriteria.resultsPage
+			) {
+				ctsDispatch({
+					type: 'SET_PROP',
+					prop: 'currentPage',
+					payload: res.searchCriteria.resultsPage,
+				});
+			}
 
-					// Get a hash of the actions so that we can check= if the response data's
-					// 'originating hash' matches the current hash during render. Changes from
-					// the same route with different data will trigger a re-render with the
-					// old data before the spinner is displayed.
-					setCurrentActionsHash(convertObjectToBase64(searchAction));
-					// setScoHash(convertObjectToBase64(searchAction));
-					// Redux
-					dispatch(updateFormSearchCriteria(res.searchCriteria));
-				}
-			});
-		} else {
-			const requestFilters = formatTrialSearchQuery(searchCriteriaObject);
-			const searchAction = getClinicalTrialsAction({
-				// 'from' is calculated from (res.searchCriteria.resultsPage * 10). BAD.
-				// And only when resultsPage > 0,
-				// otherwise it's null and gets set in the action from a default value. BAD.
-				// If the 'pn'/resultsPage parameter is...reasonably.. set to  1 for the first results page,
-				// instead of the 'null' it expects for some reason,
-				// the offset gets out of whack. BAD. VERY BAD.
-				// TODO:  queryStringToSearchCriteria should be updated to set a default value for the first page.
-				from: requestFilters.from,
-				requestFilters: requestFilters,
-			});
+			// If we have an error based on the qs / SCO parameters
+			// set the error and do not proceed with fetching the trials.
+			if (res.errors.length) {
+				ctsDispatch({
+					type: 'SET_PROP',
+					prop: 'error',
+					payload: res.errors,
+				});
+			} else {
+				const requestFilters = formatTrialSearchQuery(res.searchCriteria);
+				const searchAction = getClinicalTrialsAction({
+					from: requestFilters.from,
+					requestFilters: requestFilters,
+					size: 10,
+				});
 
-			ctsDispatch(setFetchActions(searchAction));
+				ctsDispatch(setFetchActions(searchAction));
 
-			// Get a hash of the actions so that we can check= if the response data's
-			// 'originating hash' matches the current hash during render. Changes from
-			// the same route with different data will trigger a re-render with the
-			// old data before the spinner is displayed.
-			setCurrentActionsHash(convertObjectToBase64(searchAction));
-			// setScoHash(convertObjectToBase64(searchAction));
-			// Redux
-			dispatch(updateFormSearchCriteria(searchCriteriaObject));
-		}
+				// Get a hash of the actions so that we can check= if the response data's
+				// 'originating hash' matches the current hash during render. Changes from
+				// the same route with different data will trigger a re-render with the
+				// old data before the spinner is displayed.
+				setCurrentActionsHash(convertObjectToBase64(searchAction));
+				// Redux
+				dispatch(updateFormSearchCriteria(res.searchCriteria));
+			}
+		});
 	}, [location]);
 
 	// If we have a search criteria object and paylaod, we have a successful fetch.
@@ -278,7 +263,7 @@ const ResultsPage = () => {
 				trialResults.trials.map((item) => {
 					let resItem = {
 						id: item.nci_id,
-						fromPage: searchCriteriaObject.resultsPage + 1,
+						fromPage: searchCriteriaObject.resultsPage,
 					};
 					return resItem;
 				})
@@ -343,8 +328,12 @@ const ResultsPage = () => {
 	const { isShowing, toggleModal } = useModal();
 	const printSelectedBtn = useRef(null);
 
-	const handlePagination = (currentPage) => {
-		if (currentPage != pagerPage) {
+	/**
+	 * @param {Object} Object The incoming pager object
+	 * @param {number} Object.page the new page number to navigate to
+	 */
+	const handlePagination = ({ page: newPageNumber }) => {
+		if (currentPage != newPageNumber) {
 			ctsDispatch({
 				type: 'SET_PROP',
 				prop: 'isLoading',
@@ -353,19 +342,19 @@ const ResultsPage = () => {
 
 			ctsDispatch({
 				type: 'SET_PROP',
-				prop: 'pagerPage',
-				payload: currentPage,
+				prop: 'currentPage',
+				payload: newPageNumber,
 			});
 
 			ctsDispatch(
 				setSearchCriteriaObject({
 					...searchCriteriaObject,
-					resultsPage: currentPage,
+					resultsPage: newPageNumber,
 				})
 			);
 
 			const parsed = queryString.parse(location.search);
-			parsed.pn = currentPage + 1;
+			parsed.pn = newPageNumber;
 			const newqs = queryString.stringify(parsed, { arrayFormat: 'none' });
 			// Navigation below is relative, hence use of just the parameters in this case
 			navigate(`?${newqs}`);
@@ -477,10 +466,13 @@ const ResultsPage = () => {
 										trialResults &&
 										trialResults.total > 1 && (
 											<Pager
-												data={trialResults.trials}
-												callback={handlePagination}
-												startFromPage={searchCriteriaObject.resultsPage}
-												totalItems={trialResults.total}
+												current={currentPage}
+												currentPageNeighbours={2}
+												nextLabel="Next >"
+												onPageNavigationChange={handlePagination}
+												previousLabel="< Previous"
+												resultsPerPage={10}
+												totalResults={trialResults.total}
 											/>
 										)}
 								</div>
@@ -597,7 +589,7 @@ const ResultsPage = () => {
 						) : (
 							<ResultsPageHeader
 								resultsCount={trialResults.total}
-								pageNum={searchCriteriaObject.resultsPage}
+								pageNum={currentPage}
 								onModifySearchClick={handleRefineSearch}
 								onStartOverClick={handleStartOver}
 								searchCriteriaObject={searchCriteriaObject}

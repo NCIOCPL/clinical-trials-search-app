@@ -39,10 +39,8 @@ const ResultsPageHeader = ({
 				<div className="all-trials">
 					<strong>
 						Results{' '}
-						{`${pageNum * step + 1}-${
-							resultsCount <= step * (pageNum + 1)
-								? resultsCount
-								: step * (pageNum + 1)
+						{`${(pageNum - 1) * step + 1}-${
+							resultsCount <= step * pageNum ? resultsCount : step * pageNum
 						} `}{' '}
 						of {resultsCount} for your search{' '}
 						{searchCriteriaObject && hasSCOBeenUpdated(searchCriteriaObject) && (
