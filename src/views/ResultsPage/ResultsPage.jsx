@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useTracking } from 'react-tracking';
-import { updateFormSearchCriteria, clearForm } from '../../store/actions';
+import { updateFormSearchCriteria } from '../../store/actions';
 import {
 	ChatOpener,
 	Delighter,
@@ -294,7 +294,6 @@ const ResultsPage = () => {
 		}
 	};
 
-	// TODO: Uses Redux
 	const handleStartOver = (linkType) => {
 		handleTracking({
 			type: 'Other',
@@ -304,7 +303,6 @@ const ResultsPage = () => {
 			formType: searchCriteriaObject.formType,
 			source: linkType,
 		});
-		dispatch(clearForm());
 	};
 
 	const handleRefineSearch = () => {
