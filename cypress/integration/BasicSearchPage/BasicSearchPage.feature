@@ -331,6 +331,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/"
 
 
+
 	Scenario: As a user, I expect meta data to update accordingly when I search for criteria and modify my search
 		Given the user navigates to "/"
 		Then the page title is "Find NCI-Supported Clinical Trials"
