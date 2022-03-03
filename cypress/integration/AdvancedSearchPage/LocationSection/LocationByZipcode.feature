@@ -2,7 +2,7 @@ Feature: As a user, I want to be able to narrow down my search by specifying a z
 
 
 		Scenario: User has an option to limit results to zipcode and radius and refine search
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+        Given the user navigates to "/advanced"
         Then the page title is "Find NCI-Supported Clinical Trials"
         And "Limit results to Veterans Affairs facilities" toggle is switched to "No"
         When user selects "ZIP Code" radio button
@@ -42,13 +42,13 @@ Feature: As a user, I want to be able to narrow down my search by specifying a z
 				And the 1 result item has a "Location:" info with "1390 locations, including 39 near you"
 
 		Scenario: Negative: User is not able to search for an incorrect zip code AND is NOT able to search for empty zip
-			Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+			Given the user navigates to "/advanced"
 			Then the page title is "Find NCI-Supported Clinical Trials"
 			When user selects "ZIP Code" radio button
 			When user types "999g9" in "U.S. ZIP Code" field
 			Then alert "Please enter a valid 5 digit U.S. zip code" is displayed
 			And user clicks on "Find Trials" button
-			Then the search is not executed and path is "/about-cancer/treatment/clinical-trials/search/advanced"
+			Then the search is not executed and path is "/advanced"
 			When user clears "U.S. ZIP Code" input field
 			And user clicks on "Find Trials" button
 			Then text "Sorry, you seem to have entered invalid criteria. Please check the following, and try your search again:" is displayed
@@ -57,13 +57,13 @@ Feature: As a user, I want to be able to narrow down my search by specifying a z
 				| Zip      |
 			And text "For assistance, please contact the Cancer Information Service. You can chat online or call 1-800-4-CANCER (1-800-422-6237)." is displayed
 			And "chat online" has a link "https://livehelp.cancer.gov/app/chat/chat_landing"
-			And "Try a new search" link has a href "/about-cancer/treatment/clinical-trials/search/advanced"
+			And "Try a new search" link has a href "/advanced"
 
     Scenario: Negative: User is not able to search for an incorrect zip code
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+        Given the user navigates to "/advanced"
         Then the page title is "Find NCI-Supported Clinical Trials"
         When user selects "ZIP Code" radio button
         When user types "2016" in "U.S. ZIP Code" field
          And user clicks on "Find Trials" button
         Then alert "Please enter a valid 5 digit U.S. zip code" is displayed
-        Then the search is not executed and path is "/about-cancer/treatment/clinical-trials/search/advanced"
+        Then the search is not executed and path is "/advanced"

@@ -10,13 +10,13 @@ Feature: Clinical Trial Description Page
     And "channel" is set to "About Cancer"
     And "analyticsPublishedDate" is set to "02/02/2011"
     And "analyticsName" is set to "Clinical Trials"
-    When the user navigates to "/about-cancer/treatment/clinical-trials/search/v?id=NCI-2015-01918&loc=0&rl=1"
+    When the user navigates to "/v?id=NCI-2015-01918&loc=0&rl=1"
     And browser waits
     Then there should be an analytics event with the following details
       | key                                  | value                                                                                                            |
       | type                                 | PageLoad                                                                                                         |
       | event                                | ClinicalTrialsSearchApp:Load:TrialDescription                                                                    |
-      | page.name                            | www.cancer.gov/about-cancer/treatment/clinical-trials/search/v                                                   |
+      | page.name                            | www.cancer.gov/v                                                   																						  |
       | page.title                           | Weight Loss Interventions in Treating Overweight and Obese Women with a Higher Risk for Breast Cancer Recurrence |
       | page.metaTitle                       | Weight Loss Interventions in Treating Overweight and Obese Women with a Higher Risk for Breast Cancer Recurrence |
       | page.language                        | english                                                                                                          |
@@ -37,7 +37,7 @@ Feature: Clinical Trial Description Page
   And "analyticsPublishedDate" is set to "02/02/2011"
   And "analyticsName" is set to "Clinical Trials"
   Given screen breakpoint is set to "desktop"
-  When the user navigates to "/about-cancer/treatment/clinical-trials/search/v?id=NCI-2015-01918&loc=0&rl=1"
+  When the user navigates to "//v?id=NCI-2015-01918&loc=0&rl=1"
   And browser waits
   When user clicks on share by "Print" button
   Then there should be an analytics event with the following details
@@ -59,7 +59,7 @@ Feature: Clinical Trial Description Page
 #   And "analyticsPublishedDate" is set to "02/02/2011"
 #   And "analyticsName" is set to "Clinical Trials"
 #   Given screen breakpoint is set to "desktop"
-#   When the user navigates to "/about-cancer/treatment/clinical-trials/search/v?id=NCI-2015-01918&loc=0&rl=1"
+#   When the user navigates to "/v?id=NCI-2015-01918&loc=0&rl=1"
 #   And browser waits
 #   When user clicks on share by "Email" button
 #   Then there should be an analytics event with the following details

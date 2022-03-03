@@ -14,7 +14,8 @@ import ErrorPage from './views/ErrorPage';
 import { useAppSettings } from './store/store.js';
 import { PrintContextProvider } from './store/printContext';
 import { useAppInitializer } from './hooks';
-import Layout from './views/Layout';
+//import Layout from './views/Layout';
+import { useAppPaths } from './hooks';
 
 require('es6-promise').polyfill();
 
@@ -25,6 +26,13 @@ const App = ({ services, zipConversionEndpoint }) => {
 
 	useAppInitializer(ctsapiclient, zipConversionEndpoint);
 
+	const {
+		BasicSearchPagePath,
+		ResultsPagePath,
+		TrialDescriptionPagePath,
+		AdvancedSearchPagePath,
+	} = useAppPaths();
+
 	return (
 		<>
 			{!appHasBeenInitialized ? (
@@ -34,35 +42,33 @@ const App = ({ services, zipConversionEndpoint }) => {
 				<>
 					<Routes>
 						<Route
-							path="/about-cancer/treatment/clinical-trials/search"
-							element={<Layout />}>
-							<Route
-								index
-								element={
-									<PrintContextProvider>
-										<BasicSearchPage />
-									</PrintContextProvider>
-								}
-							/>
-							<Route
-								path="r"
-								element={
-									<PrintContextProvider>
-										<ResultsPage />
-									</PrintContextProvider>
-								}
-							/>
-
-							<Route path="v" element={<TrialDescriptionPage />} />
-							<Route
-								path="advanced"
-								element={
-									<PrintContextProvider>
-										<AdvancedSearchPage />
-									</PrintContextProvider>
-								}
-							/>
-						</Route>
+							path={ResultsPagePath()}
+							element={
+								<PrintContextProvider>
+									<ResultsPage />
+								</PrintContextProvider>
+							}
+						/>
+						<Route
+							path={TrialDescriptionPagePath()}
+							element={<TrialDescriptionPage />}
+						/>
+						<Route
+							path={AdvancedSearchPagePath()}
+							element={
+								<PrintContextProvider>
+									<AdvancedSearchPage />
+								</PrintContextProvider>
+							}
+						/>
+						<Route
+							path={BasicSearchPagePath()}
+							element={
+								<PrintContextProvider>
+									<BasicSearchPage />
+								</PrintContextProvider>
+							}
+						/>
 					</Routes>
 				</>
 			) : (

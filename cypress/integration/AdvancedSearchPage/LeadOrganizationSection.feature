@@ -2,7 +2,7 @@
 Feature: Advanced Clinical Trials Search Lead Organization Section
 
 	Scenario: User has an option to narrow down search criteria by lead org
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+		Given the user navigates to "/advanced"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And "Lead Organization" form section is displayed
 		And help icon is displayed in "Lead Organization" section with href "/about-cancer/treatment/clinical-trials/search/help#leadorganization"
@@ -10,7 +10,7 @@ Feature: Advanced Clinical Trials Search Lead Organization Section
 		And helper text "Search by lead organization." is displayed
 
 	Scenario: User has an option to search by lead org using autosuggest and refine search
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+		Given the user navigates to "/advanced"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And "Lead Organization" form section is displayed
 		When user clicks on "Lead organization" field
@@ -47,7 +47,7 @@ Feature: Advanced Clinical Trials Search Lead Organization Section
 
 
 	Scenario: User searches for investigators that does not exist
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+		Given the user navigates to "/advanced"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And "Lead Organization" form section is displayed
 		When user clicks on "Lead organization" field
@@ -56,7 +56,7 @@ Feature: Advanced Clinical Trials Search Lead Organization Section
 		Then autocomplete dropdown is displayed with "No results found" text
 
 	Scenario: User see results page when navigated directly to an url and modify search
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search/r?lo=Brown%20University&loc=0&rl=2"
+		Given the user navigates to "/r?lo=Brown%20University&loc=0&rl=2"
 		And trial info displayes "Results 1-2  of 2 for your search "
 		Then the criteria table displays the following
 			| Category           | Selection        |
@@ -65,7 +65,7 @@ Feature: Advanced Clinical Trials Search Lead Organization Section
 		Then "Lead organization" field has value "Brown University"
 
 	Scenario: User has an option to search for lead organization without using autosuggest
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+		Given the user navigates to "/advanced"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And "Lead Organization" form section is displayed
 		When user clicks on "Lead organization" field

@@ -26,6 +26,7 @@ import ResultsList from './ResultsList';
 import PrintModalContent from './PrintModalContent';
 import { useAppSettings } from '../../store/store.js';
 import { usePrintContext } from '../../store/printContext';
+import { useAppPaths } from '../../hooks/routing';
 
 import {
 	resultsPageReducer,
@@ -41,7 +42,7 @@ import { formatTrialSearchQuery } from '../../utilities/formatTrialSearchQuery';
 const queryString = require('query-string');
 
 const ResultsPage = () => {
-	// Load our React context
+	// Load the global settings from our custom context
 	const [
 		{ analyticsName, canonicalHost, services, siteName, zipConversionEndpoint },
 	] = useAppSettings();
@@ -56,6 +57,7 @@ const ResultsPage = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const qs = queryString.extract(location.search);
+	const { AdvancedSearchPagePath, BasicSearchPagePath } = useAppPaths();
 
 	// Initial Page state. Used as the initial state in the reducer.
 	const INITIAL_PAGE_STATE = {
@@ -331,7 +333,7 @@ const ResultsPage = () => {
 			formType: searchCriteriaObject.formType,
 			source: 'modify_search_criteria_link',
 		});
-		navigate('/about-cancer/treatment/clinical-trials/search/advanced', {
+		navigate(AdvancedSearchPagePath(), {
 			state: {
 				criteria: searchCriteriaObject,
 				refineSearch: true,
@@ -551,8 +553,8 @@ const ResultsPage = () => {
 					<Link
 						to={`${
 							searchCriteriaObject.formType === 'basic'
-								? '/about-cancer/treatment/clinical-trials/search'
-								: '/about-cancer/treatment/clinical-trials/search/advanced'
+								? BasicSearchPagePath()
+								: AdvancedSearchPagePath()
 						}`}
 						onClick={() => handleStartOver(TRY_NEW_SEARCH_LINK)}>
 						Try a new search

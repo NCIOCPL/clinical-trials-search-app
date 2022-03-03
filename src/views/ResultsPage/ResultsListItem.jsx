@@ -11,6 +11,7 @@ import {
 import { NIH_ZIPCODE } from '../../constants';
 import { useTracking } from 'react-tracking';
 import { useAppSettings } from '../../store/store.js';
+import { useAppPaths } from '../../hooks/routing';
 
 const ResultsListItem = ({
 	id,
@@ -33,6 +34,7 @@ const ResultsListItem = ({
 	const itemQueryString = queryString.stringify(qsQbj, {
 		arrayFormat: 'none',
 	});
+	const { TrialDescriptionPagePath } = useAppPaths();
 
 	//TODO: Add param comments for all of these
 
@@ -243,7 +245,6 @@ const ResultsListItem = ({
 			linkName: 'UnknownLinkName',
 		});
 	};
-
 	return (
 		<div className="results-list-item results-list__item">
 			<div className="results-list-item__checkbox">
@@ -260,7 +261,7 @@ const ResultsListItem = ({
 			<div className="results-list-item__contents">
 				<div className="results-list-item__title">
 					<Link
-						to={`/about-cancer/treatment/clinical-trials/search/v?${itemQueryString}`}
+						to={`${TrialDescriptionPagePath()}?${itemQueryString}`}
 						state={{ result: item }}
 						onClick={handleLinkClick}>
 						{item.brief_title}

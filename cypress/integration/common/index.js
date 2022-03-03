@@ -125,13 +125,13 @@ And('button {string} is displayed', (buttonLabel) => {
 });
 
 Then('the search is executed and results page is displayed', () => {
-	cy.location('pathname').should('contain', 'search/r');
+	cy.location('pathname').should('contain', '/r');
 	cy.get('h1').should('have.text', 'Clinical Trials Search Results');
 	cy.get('div[class="results-list"]').should('be.visible');
 });
 
 Then('the search is executed and no results page is displayed', () => {
-	cy.location('pathname').should('contain', 'search/r');
+	cy.location('pathname').should('contain', '/r');
 	cy.get('h1').should('have.text', 'Clinical Trials Search Results');
 	cy.get('div[class="results-list no-results"]').should('be.visible');
 });

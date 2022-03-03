@@ -2,7 +2,7 @@ Feature: As a user I want to be able to print trial search results
 
     Scenario Outline: as a user, I should be able to select a trial and print it
         Given screen breakpoint is set to "<breakpoint>"
-        And the user navigates to "/about-cancer/treatment/clinical-trials/search/r?loc=0&rl=1"
+        And the user navigates to "/r?loc=0&rl=1"
         Then the page title is "Clinical Trials Search Results"
         And result list is displayed
         When user checks "NCI-2015-01918" trial
@@ -18,7 +18,7 @@ Feature: As a user I want to be able to print trial search results
             | tablet     |
 
     Scenario: as a user, I should be able to multiple trials on multiple pages and print it
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/r?loc=0&rl=1"
+        Given the user navigates to "/r?loc=0&rl=1"
         Then the page title is "Clinical Trials Search Results"
         And result list is displayed
         And user checks "Select all on page" checkbox at the "top" of a page
@@ -46,7 +46,7 @@ Feature: As a user I want to be able to print trial search results
         And print modal appears
 
     Scenario: as a user, I want to see all of the selected trials retained after I navigate back to a previous page
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/r?loc=0&rl=1"
+        Given the user navigates to "/r?loc=0&rl=1"
         Then the page title is "Clinical Trials Search Results"
         And result list is displayed
         And user checks "Select all on page" checkbox at the "top" of a page
@@ -61,7 +61,7 @@ Feature: As a user I want to be able to print trial search results
         And all of the trials are selected
 
     Scenario: as a user, I will see a print modal error if I try to print without selecting any trials
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/r?loc=0&rl=1"
+        Given the user navigates to "/r?loc=0&rl=1"
         Then the page title is "Clinical Trials Search Results"
         And result list is displayed
         Then the checkbox "Select all on page" is not checked
@@ -80,7 +80,7 @@ Feature: As a user I want to be able to print trial search results
         And "channel" is set to "About Cancer"
         And "analyticsPublishedDate" is set to "02/02/2011"
         And "analyticsName" is set to "Clinical Trials"
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/r?loc=0&rl=1"
+        Given the user navigates to "/r?loc=0&rl=1"
         Then the page title is "Clinical Trials Search Results"
         And result list is displayed
         When user checks "Select all on page" checkbox on 11 pages

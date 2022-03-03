@@ -1,6 +1,6 @@
 Feature: Search Results Page Pagination
 	Scenario: user can page through results
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search/r?loc=0&rl=1"
+		Given the user navigates to "/r?loc=0&rl=1"
 		Then the page title is "Clinical Trials Search Results"
 		And result list is displayed
 		And pager displays the following navigation options
@@ -12,7 +12,7 @@ Feature: Search Results Page Pagination
 			| Next > |
 		And the page "1" is highlighted
 		When user clicks on "Next >" button
-		Then the user is redirected to "/about-cancer/treatment/clinical-trials/search/r" with query parameters "loc=0&pn=2&rl=1"
+		Then the user is redirected to "/r" with query parameters "loc=0&pn=2&rl=1"
 		And pager displays the following navigation options
 			| pages      |
 			| < Previous |
@@ -121,7 +121,7 @@ Feature: Search Results Page Pagination
 		And the page "679" is highlighted
 	Scenario: user can page through results on mobile
 		Given screen breakpoint is set to "mobile"
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search/r?loc=0&rl=1"
+		Given the user navigates to "/r?loc=0&rl=1"
 		Then the page title is "Clinical Trials Search Results"
 		And result list is displayed
 		And pager displays the following navigation options
@@ -133,7 +133,7 @@ Feature: Search Results Page Pagination
 			| Next > |
 		And the page "1" is highlighted
 		When user clicks on "Next >" button
-		Then the user is redirected to "/about-cancer/treatment/clinical-trials/search/r" with query parameters "loc=0&pn=2&rl=1"
+		Then the user is redirected to "/r" with query parameters "loc=0&pn=2&rl=1"
 		And pager displays the following navigation options
 			| pages      |
 			| < Previous |
