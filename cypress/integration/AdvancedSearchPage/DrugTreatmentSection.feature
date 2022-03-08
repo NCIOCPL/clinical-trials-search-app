@@ -136,7 +136,7 @@ Feature: Advanced Clinical Trials Search Drug Treatment Section
 			| rl        | 2                |
 
 	Scenario: User searches for drug/intervention via autosuggest on advanced form
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+		Given the user navigates to "/advanced"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And "Drug/Treatment" form section is displayed
     Then "Drug" input field has a placeholder "Start typing to select drugs and/or drug families"

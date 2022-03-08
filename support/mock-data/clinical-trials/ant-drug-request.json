@@ -1,5 +1,4 @@
 {
-	"arms.interventions.intervention_code": ["C274"],
 	"current_trial_status": [
 		"Active",
 		"Approved",
@@ -23,5 +22,10 @@
 		"sites.org_coordinates",
 		"sites.recruitment_status",
 		"diseases"
-	]
+	],
+	"arms.interventions.intervention_code": [
+		"C274"
+	],
+	"from": 0,
+	"size": 10
 }

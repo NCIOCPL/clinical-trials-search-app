@@ -4,13 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useTracking } from 'react-tracking';
 import { updateFormSearchCriteria, clearForm } from '../../store/actions';
-import {
-	ChatOpener,
-	Delighter,
-	Checkbox,
-	Modal,
-	Pager,
-} from '../../components/atomic';
+import { ChatOpener, Delighter, Modal, Pager } from '../../components/atomic';
 import { TRY_NEW_SEARCH_LINK } from '../../constants';
 import ErrorPage from '../ErrorPage';
 import {
@@ -455,14 +449,22 @@ const ResultsPage = () => {
 						{!isLoading && trialResults.total !== 0 && (
 							<>
 								<div className="results-page__select-all">
-									<Checkbox
-										id={cbxId}
-										name="select-all"
-										label="Select all on page"
-										checked={selectAll}
-										classes="check-all"
-										onChange={handleSelectAll}
-									/>
+									<div className="cts-checkbox check-all">
+										<input
+											id={cbxId}
+											className="cts-checkbox__input"
+											classes="check-all"
+											type="checkbox"
+											name="select-all"
+											checked={selectAll}
+											onChange={handleSelectAll}
+											value={cbxId}
+										/>
+										<label className="cts-checkbox__label" htmlFor={cbxId}>
+											Select all on page
+										</label>
+									</div>
+
 									<button
 										className="results-page__print-button"
 										ref={printSelectedBtn}
