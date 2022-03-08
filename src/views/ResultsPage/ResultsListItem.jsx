@@ -2,7 +2,6 @@ import React from 'react';
 import * as queryString from 'query-string';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Checkbox from '../../components/atomic/Checkbox';
 
 import {
 	filterSitesByActiveRecruitment,
@@ -248,15 +247,20 @@ const ResultsListItem = ({
 	return (
 		<div className="results-list-item results-list__item">
 			<div className="results-list-item__checkbox">
-				<Checkbox
-					id={id || item.nci_id}
-					name={item.nci_id}
-					checked={isChecked}
-					label="Select this article for print"
-					hideLabel
-					onChange={() => onCheckChange(id)}
-					disableTracking={true}
-				/>
+				<div className="cts-checkbox ">
+					<input
+						id={id || item.nci_id}
+						className="cts-checkbox__input"
+						type="checkbox"
+						onChange={() => onCheckChange(id)}
+						name={item.nci_id}
+						checked={isChecked}
+						value={item.nci_id}
+					/>
+					<label className="cts-checkbox__label" htmlFor={item.nci_id}>
+						<span className="show-for-sr">Select this article for print</span>
+					</label>
+				</div>
 			</div>
 			<div className="results-list-item__contents">
 				<div className="results-list-item__title">
