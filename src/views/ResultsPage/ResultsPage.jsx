@@ -57,7 +57,8 @@ const ResultsPage = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const qs = queryString.extract(location.search);
-	const { AdvancedSearchPagePath, BasicSearchPagePath } = useAppPaths();
+	const { AdvancedSearchPagePath, BasicSearchPagePath, ResultsPagePath } =
+		useAppPaths();
 
 	// Initial Page state. Used as the initial state in the reducer.
 	const INITIAL_PAGE_STATE = {
@@ -370,7 +371,7 @@ const ResultsPage = () => {
 			parsed.pn = currentPage + 1;
 			const newqs = queryString.stringify(parsed, { arrayFormat: 'none' });
 			// Navigation below is relative, hence use of just the parameters in this case
-			navigate(`?${newqs}`);
+			navigate(`${ResultsPagePath()}?${newqs}`);
 		}
 	};
 	const renderResultsListLoader = () => (
