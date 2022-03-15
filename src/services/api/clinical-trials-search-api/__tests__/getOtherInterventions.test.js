@@ -47,7 +47,7 @@ describe('getOtherInterventions', () => {
 					codes: ['C64263'],
 					category: ['other'],
 					type: ['other', 'procedure/surgery'],
-					synonyms: ['Laboratory Biomarker Analysis'],
+					synonyms: [],
 					count: 836,
 				},
 				{
@@ -55,7 +55,7 @@ describe('getOtherInterventions', () => {
 					codes: ['C70945'],
 					category: ['other'],
 					type: ['procedure/surgery', 'other'],
-					synonyms: ['Biological Sample Collection', 'Biospecimen Collection'],
+					synonyms: ['Biological Sample Collection'],
 					count: 465,
 				},
 			],
