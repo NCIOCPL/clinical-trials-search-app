@@ -22,7 +22,7 @@ Feature: Advanced Clinical Trials Search Drug Treatment Section
 		When user clicks on "Treatment" field
 		Then autocomplete dropdown is displayed with "Please enter 3 or more characters" text
 		And user types "polymo" in "Treatment" field
-		And user selects "Polymorphism AnalysisOther Names: Polymorphism AnalysisPolymorphism Detection" from dropdown
+		And user selects "Polymorphism AnalysisOther Names: Polymorphism Detection" from dropdown
 		When user clicks on "Find Trials" button
 		Then the search is executed and results page is displayed
 		And trial info displays "Results 1-4  of 4 for your search "
@@ -65,7 +65,7 @@ Feature: Advanced Clinical Trials Search Drug Treatment Section
 		And user selects "Bevacizumab" from dropdown
 		When user clicks on "Treatment" field
 		And user types "polymo" in "Treatment" field
-		And user selects "Polymorphism AnalysisOther Names: Polymorphism AnalysisPolymorphism Detection" from dropdown
+		And user selects "Polymorphism AnalysisOther Names: Polymorphism Detection" from dropdown
 		When user clicks on "Treatment" field
 		And user types "orc" in "Treatment" field
 		And user selects "Orchiectomy" from dropdown
