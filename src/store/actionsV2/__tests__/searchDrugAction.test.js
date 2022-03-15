@@ -11,6 +11,7 @@ describe('searchDrugAction', () => {
 			order: 'desc',
 			category: ['Agent', 'Agent Category'],
 			name: searchText,
+			size: 10,
 		};
 
 		const expectedAction = {

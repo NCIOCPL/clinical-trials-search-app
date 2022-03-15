@@ -37,6 +37,7 @@ describe('searchDrug', () => {
 			order: 'desc',
 			category: ['Agent', 'Agent Category'],
 			name: searchText,
+			size: 10,
 		};
 
 		const result = {
@@ -187,6 +188,7 @@ describe('searchDrug', () => {
 			order: 'desc',
 			category: ['Agent', 'Agent Category'],
 			name: searchText,
+			size: 10,
 		};
 
 		const scope = nock('http://example.org')
@@ -209,6 +211,7 @@ describe('searchDrug', () => {
 			order: 'desc',
 			category: ['Agent', 'Agent Category'],
 			name: searchText,
+			size: 10,
 		};
 
 		const scope = nock('http://example.org')
@@ -231,6 +234,7 @@ describe('searchDrug', () => {
 			order: 'desc',
 			category: ['Agent', 'Agent Category'],
 			name: searchText,
+			size: 10,
 		};
 
 		const scope = nock('http://example.org')
@@ -253,6 +257,7 @@ describe('searchDrug', () => {
 			order: 'desc',
 			category: ['Agent', 'Agent Category'],
 			name: searchText,
+			size: 10,
 		};
 
 		const scope = nock('http://example.org')
