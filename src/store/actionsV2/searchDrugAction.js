@@ -15,6 +15,7 @@ export const searchDrugAction = ({ searchText }) => {
 		order: 'desc',
 		category: ['Agent', 'Agent Category'],
 		name: searchText,
+		size: 10,
 	};
 
 	return {
