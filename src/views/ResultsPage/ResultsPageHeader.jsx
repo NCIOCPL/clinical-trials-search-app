@@ -5,6 +5,7 @@ import { SearchCriteriaTableUpdated } from '../../components/atomic';
 import { START_OVER_LINK } from '../../constants';
 
 import { hasSCOBeenUpdated } from '../../utilities';
+import { useAppPaths } from '../../hooks/routing';
 
 const ResultsPageHeader = ({
 	onModifySearchClick,
@@ -14,13 +15,15 @@ const ResultsPageHeader = ({
 	step = 10,
 	searchCriteriaObject,
 }) => {
+	const { BasicSearchPagePath, AdvancedSearchPagePath } = useAppPaths();
+
 	const renderStartOver = (searchCriteriaObject) => {
 		return (
 			<Link
 				to={`${
 					searchCriteriaObject?.formType === 'basic'
-						? '/about-cancer/treatment/clinical-trials/search'
-						: '/about-cancer/treatment/clinical-trials/search/advanced'
+						? BasicSearchPagePath()
+						: AdvancedSearchPagePath()
 				}`}
 				state={{ criteria: {}, refineSearch: false }}
 				onClick={() => onStartOverClick(START_OVER_LINK)}>
@@ -61,8 +64,8 @@ const ResultsPageHeader = ({
 						<Link
 							to={`${
 								searchCriteriaObject?.formType === 'basic'
-									? '/about-cancer/treatment/clinical-trials/search/'
-									: '/about-cancer/treatment/clinical-trials/search/advanced'
+									? BasicSearchPagePath()
+									: AdvancedSearchPagePath()
 							}`}
 							state={{ criteria: {}, refineSearch: false }}
 							onClick={() => onStartOverClick(START_OVER_LINK)}>

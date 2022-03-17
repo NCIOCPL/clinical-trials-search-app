@@ -1,7 +1,7 @@
 Feature: As a user, I want to be able to use autocomplete features to it's full extent
 
     Scenario: as a user, I should be able to select terms and start the search by using key from keyboard
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search"
+        Given the user navigates to "/"
         When user clicks on "Cancer Type/Keyword" field
         Then autocomplete dropdown is displayed
         When user types "Breast Cancer" in "Cancer Type/Keyword" field
@@ -21,7 +21,7 @@ Feature: As a user, I want to be able to use autocomplete features to it's full 
             | rl        | 1     |
 
     Scenario: as a user, I should be able to move to abother field with pressing tab
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search"
+        Given the user navigates to "/"
         When user clicks on "Cancer Type/Keyword" field
         Then autocomplete dropdown is displayed
         When user types "breast cancer" in "Cancer Type/Keyword" field
@@ -45,7 +45,7 @@ Feature: As a user, I want to be able to use autocomplete features to it's full 
             | a         | 40    |
 
     Scenario: as a user, I should be able to search without using mouse
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search"
+        Given the user navigates to "/"
         When user clicks on "Cancer Type/Keyword" field
         Then autocomplete dropdown is displayed
         When user types "aids" in "Cancer Type/Keyword" field
@@ -73,7 +73,7 @@ Feature: As a user, I want to be able to use autocomplete features to it's full 
             | z         | 22182 |
 
     Scenario: as a user, I should be able to search for a keyword without selecting a term
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search"
+        Given the user navigates to "/"
         When user clicks on "Cancer Type/Keyword" field
         Then autocomplete dropdown is displayed
         When user types "bre" in "Cancer Type/Keyword" field
@@ -89,7 +89,7 @@ Feature: As a user, I want to be able to use autocomplete features to it's full 
             | q         | bre   |
 
     Scenario: as a user, I should be able to touch screen to select item
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search"
+        Given the user navigates to "/"
         When user types "breast cancer" in "Cancer Type/Keyword" field
         When user selects "Bilateral Breast Cancer" by touching the menu
         And user clicks on "Find Trials" button

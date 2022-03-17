@@ -10,7 +10,7 @@ beforeEach(() => {
 			analyticsName: 'Clinical Trials',
 			appId: '@@/DEFAULT_CTS_APP_ID',
 			baseHost: 'http://localhost:3000',
-			basePath: '/about-cancer/treatment/clinical-trials/search',
+			basePath: '/',
 			canonicalHost: 'https://www.cancer.gov',
 			ctsApiEndpointV1: '/v1',
 			ctsApiEndpointV2: '/cts/mock-api/v2',

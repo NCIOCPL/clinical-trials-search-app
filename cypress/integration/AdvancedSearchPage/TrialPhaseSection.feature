@@ -1,7 +1,7 @@
 Feature: Advanced Clinical Trials Search Trial Phase Section
 
     Scenario: User has an option to narrow down search criteria by trial phase
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+        Given the user navigates to "/advanced"
         Then the page title is "Find NCI-Supported Clinical Trials"
         And "Trial Phase" form section is displayed
         And help icon is displayed in "Trial Phase" section with href "/about-cancer/treatment/clinical-trials/search/help#trialphase"
@@ -15,7 +15,7 @@ Feature: Advanced Clinical Trials Search Trial Phase Section
             | Phase IV  | tp_iv  |
 
     Scenario: User has an option to narrow down search criteria by selecting trial phase
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+        Given the user navigates to "/advanced"
         Then the page title is "Find NCI-Supported Clinical Trials"
         And "Trial Phase" form section is displayed
         And user checks "Phase I" checkbox
@@ -50,7 +50,7 @@ Feature: Advanced Clinical Trials Search Trial Phase Section
             | tp  | ii |
 
     Scenario: User has an option to go to search results url directly and modify search
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/r?loc=0&rl=2&tp=i"
+        Given the user navigates to "/r?loc=0&rl=2&tp=i"
         Then the page title is "Clinical Trials Search Results"
         And trial info displayes "Results 1-10  of 2470 for your search "
         And the criteria table displays the following

@@ -8,6 +8,7 @@ import { TRY_NEW_SEARCH_LINK } from '../../constants';
 // Context API store
 import { updateCTXGlobalValue } from '../../store/ctx-actions';
 import { useAppSettings } from '../../store/store.js';
+import { useAppPaths } from '../../hooks/routing';
 
 import './ErrorPage.scss';
 
@@ -15,6 +16,7 @@ const ErrorPage = ({ initErrorsList }) => {
 	const formSnapshot = useSelector((store) => store.form);
 	const tracking = useTracking();
 	const [{ dispatch, analyticsName, canonicalHost }] = useAppSettings();
+	const { AdvancedSearchPagePath, BasicSearchPagePath } = useAppPaths();
 
 	useEffect(() => {
 		const pageTitle = 'Errors Occurred';
@@ -149,8 +151,8 @@ const ErrorPage = ({ initErrorsList }) => {
 									<a
 										href={`${
 											formSnapshot.formType === 'basic'
-												? '/about-cancer/treatment/clinical-trials/search'
-												: '/about-cancer/treatment/clinical-trials/search/advanced'
+												? BasicSearchPagePath()
+												: AdvancedSearchPagePath()
 										}`}
 										onClick={handleStartOver}>
 										Try a new search

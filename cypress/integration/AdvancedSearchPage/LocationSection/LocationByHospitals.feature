@@ -2,7 +2,7 @@ Feature: As a user, I want to be able to narrow down my search by specifying a h
 
 
       Scenario: User has an option to limit results to Hospitals and refine search
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+        Given the user navigates to "/advanced"
         Then the page title is "Find NCI-Supported Clinical Trials"
         And "Limit results to Veterans Affairs facilities" toggle is switched to "No"
         When user selects "Hospitals/Institutions" radio button
@@ -38,7 +38,7 @@ Feature: As a user, I want to be able to narrow down my search by specifying a h
             | hos       | Erlanger Medical Center |
 
     Scenario: User has an option naviagte directly to url with Hospitals and refine search
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/r?hos=Erlanger%20Medical%20Center&loc=3&rl=2"
+        Given the user navigates to "/r?hos=Erlanger%20Medical%20Center&loc=3&rl=2"
         And trial info displayes "Results 1-1  of 1 for your search "
         And the criteria table displays the following
             | Category                | Selection               |
@@ -67,7 +67,7 @@ Feature: As a user, I want to be able to narrow down my search by specifying a h
 
 
     Scenario: User has an option to search for a Hospital without using autosuggest
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+        Given the user navigates to "/advanced"
         Then the page title is "Find NCI-Supported Clinical Trials"
         And "Limit results to Veterans Affairs facilities" toggle is switched to "No"
         When user selects "Hospitals/Institutions" radio button

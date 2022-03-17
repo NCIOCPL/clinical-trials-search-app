@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTracking } from 'react-tracking';
 import { Delighter, StickySubmitBlock } from '../../components/atomic';
 import {
@@ -33,7 +33,11 @@ import {
 	getFieldError,
 } from '../../store/modules/form/form.selectors';
 import { SEARCH_FORM_ID } from '../../constants';
-import { useGlobalBeforeUnload, useHasLocationChanged } from '../../hooks';
+import {
+	useGlobalBeforeUnload,
+	useHasLocationChanged,
+	useAppPaths,
+} from '../../hooks';
 import { useAppSettings } from '../../store/store.js';
 import { buildQueryString } from '../../utilities';
 import { usePrintContext } from '../../store/printContext';
@@ -57,8 +61,9 @@ const SearchPage = ({ formInit = 'basic' }) => {
 	const dispatch = useDispatch();
 	const location = useLocation().pathname;
 	const navigate = useNavigate();
+	const { AdvancedSearchPagePath, BasicSearchPagePath, ResultsPagePath } =
+		useAppPaths();
 	const sentinelRef = useRef(null);
-	const [formFactor] = useState(formInit);
 	const fieldInFocus = useSelector(getFieldInFocus);
 	const formInFocus = useSelector(getFormInFocus);
 	const hasDispatchedFormInteractionEvent = useSelector(
@@ -75,6 +80,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
 	//this is SCO passed in from search results page
 	const { state: locationState } = useLocation();
 	const { criteria, refineSearch } = locationState || {};
+	const pageType = criteria?.formType ? criteria.formType : formInit;
 	const { maintypeOptions } = useSelector((store) => store.cache);
 	// The selected trials for print
 	const { clearSelectedTrials } = usePrintContext();
@@ -87,10 +93,11 @@ const SearchPage = ({ formInit = 'basic' }) => {
 			})
 		);
 	};
+
 	//will populate the form from search criteria object
 	const populateForm = () => {
-		const { formType, cancerType, age, zip, keywordPhrases } = criteria;
-		if (formType === 'basic') {
+		const { cancerType, age, zip, keywordPhrases } = criteria;
+		if (criteria && pageType === 'basic') {
 			//prefetch stuff
 			if (!maintypeOptions || maintypeOptions.length < 1) {
 				dispatch(getMainTypeAction());
@@ -109,6 +116,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
 			}
 			criteria.formType = 'advanced';
 		}
+
 		dispatch(updateForm({ ...criteria, refineSearch: refineSearch }));
 	};
 
@@ -116,12 +124,19 @@ const SearchPage = ({ formInit = 'basic' }) => {
 	useEffect(() => {
 		window.scrollTo(0, 0);
 		//updating the form data with passed in SCO
-		if (refineSearch) {
-			populateForm();
-		} else if (criteria && criteria == {}) {
-			dispatch(clearForm());
+		if (criteria) {
+			// we navigated here
+			if (refineSearch) {
+				//coming from MODIFY SEARCH
+				populateForm();
+			} else {
+				// coming from start over
+				dispatch(clearForm());
+				// need to update the formtype because the clear sets it to an empty string in the default store
+				handleUpdate('formType', pageType);
+			}
 		} else {
-			handleUpdate('formType', formInit);
+			handleUpdate('formType', pageType);
 		}
 		setIsPageLoadReady(true);
 	}, []);
@@ -132,16 +147,16 @@ const SearchPage = ({ formInit = 'basic' }) => {
 				// These properties are required.
 				type: 'PageLoad',
 				event: `ClinicalTrialsSearchApp:Load:${
-					formFactor === 'advanced' ? 'AdvancedSearch' : 'BasicSearch'
+					pageType === 'advanced' ? 'AdvancedSearch' : 'BasicSearch'
 				}`,
 				analyticsName,
-				formType: formFactor,
+				formType: pageType,
 				name: canonicalHost.replace('https://', '') + window.location.pathname,
 				title: `Find NCI-Supported Clinical Trials${
-					formFactor === 'advanced' ? ' - Advanced Search' : ''
+					pageType === 'advanced' ? ' - Advanced Search' : ''
 				}`,
 				metaTitle: `Find NCI-Supported Clinical Trials - ${
-					formFactor === 'advanced' ? 'Advanced Search - ' : ''
+					pageType === 'advanced' ? 'Advanced Search - ' : ''
 				}${siteName}`,
 				// Any additional properties fall into the "page.additionalDetails" bucket
 				// for the event.
@@ -153,7 +168,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
 		// Init form tracking store
 		dispatch(
 			addFormToTracking({
-				formType: formFactor,
+				formType: pageType,
 			})
 		);
 	}, [location]);
@@ -165,10 +180,10 @@ const SearchPage = ({ formInit = 'basic' }) => {
 				type: 'Other',
 				event: 'ClinicalTrialsSearchApp:Other:FormAbandon',
 				analyticsName,
-				linkName: `formAnalysis|clinicaltrials_${formFactor}|abandon`,
+				linkName: `formAnalysis|clinicaltrials_${pageType}|abandon`,
 				// Any additional properties fall into the "page.additionalDetails" bucket
 				// for the event.
-				formType: formFactor,
+				formType: pageType,
 				field: fieldInFocus.id,
 			});
 		}
@@ -185,10 +200,10 @@ const SearchPage = ({ formInit = 'basic' }) => {
 				type: 'Other',
 				event: 'ClinicalTrialsSearchApp:Other:FormInteractionStart',
 				analyticsName,
-				linkName: `formAnalysis|clinicaltrials_${formFactor}|start`,
+				linkName: `formAnalysis|clinicaltrials_${pageType}|start`,
 				// Any additional properties fall into the "page.additionalDetails" bucket
 				// for the event.
-				formType: formFactor,
+				formType: pageType,
 				field: fieldInFocus.id,
 			});
 			const { dispatchedFormInteractionEvent } = actions;
@@ -197,7 +212,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
 	}, [hasUserInteractedWithForm]);
 
 	let formModules =
-		formFactor === 'advanced' ? advancedFormModules : basicFormModules;
+		pageType === 'advanced' ? advancedFormModules : basicFormModules;
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -210,15 +225,15 @@ const SearchPage = ({ formInit = 'basic' }) => {
 				type: 'Other',
 				event: 'ClinicalTrialsSearchApp:Other:FormSubmissionComplete',
 				analyticsName,
-				linkName: `formAnalysis|clinicaltrials_${formFactor}|complete`,
+				linkName: `formAnalysis|clinicaltrials_${pageType}|complete`,
 				// Any additional properties fall into the "page.additionalDetails" bucket
 				// for the event.
-				formType: formFactor,
+				formType: pageType,
 				status: 'complete',
 			});
 			dispatch(trackedFormSubmitted(true));
 			const urlQuery = queryString.stringify(buildQueryString(currentForm));
-			navigate(`/about-cancer/treatment/clinical-trials/search/r?${urlQuery}`);
+			navigate(`${ResultsPagePath()}?${urlQuery}`); // this my be the issue, hardcoding the url instead of using the dyanmic route
 			return;
 		}
 		tracking.trackEvent({
@@ -226,10 +241,10 @@ const SearchPage = ({ formInit = 'basic' }) => {
 			type: 'Other',
 			event: 'ClinicalTrialsSearchApp:Other:FormSubmissionError',
 			analyticsName,
-			linkName: `formAnalysis|clinicaltrials_${formFactor}|error`,
+			linkName: `formAnalysis|clinicaltrials_${pageType}|error`,
 			// Any additional properties fall into the "page.additionalDetails" bucket
 			// for the event.
-			formType: formFactor,
+			formType: pageType,
 			status: 'error',
 			fieldError: fieldError,
 		});
@@ -285,20 +300,20 @@ const SearchPage = ({ formInit = 'basic' }) => {
 			</div>
 			<div className="cts-search-tip__body">
 				<strong>Search Tip:</strong>
-				{formFactor === 'basic' ? (
+				{pageType === 'basic' ? (
 					<>{` For more search options, use our `}</>
 				) : (
 					<>{` All fields are optional. Skip any items that are unknown or not applicable or try our `}</>
 				)}
-				<a
-					href={`${
-						formFactor === 'advanced'
-							? '/about-cancer/treatment/clinical-trials/search'
-							: '/about-cancer/treatment/clinical-trials/search/advanced'
+				<Link
+					to={`${
+						pageType === 'advanced'
+							? BasicSearchPagePath()
+							: AdvancedSearchPagePath()
 					}`}
 					onClick={toggleForm}>
-					{formFactor === 'basic' ? 'advanced search' : 'basic search'}
-				</a>
+					{pageType === 'basic' ? 'advanced search' : 'basic search'}
+				</Link>
 				.
 			</div>
 		</div>
@@ -309,37 +324,41 @@ const SearchPage = ({ formInit = 'basic' }) => {
 			<Helmet>
 				<title>
 					{`Find NCI-Supported Clinical Trials - ${
-						formFactor === 'advanced' ? 'Advanced Search - ' : ''
+						pageType === 'advanced' ? 'Advanced Search - ' : ''
 					}National Cancer Institute`}
 				</title>
 				<link
 					rel="canonical"
 					href={`https://www.cancer.gov/about-cancer/treatment/clinical-trials/search${
-						formFactor === 'basic' ? '' : '/advanced'
+						pageType === 'basic'
+							? BasicSearchPagePath()
+							: AdvancedSearchPagePath()
 					}`}
 				/>
 				<meta
 					name="description"
 					content={`${
-						formFactor === 'basic' ? 'F' : 'Use our advanced search to f'
+						pageType === 'basic' ? 'F' : 'Use our advanced search to f'
 					}ind an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one.`}
 				/>
 				<meta
 					property="og:title"
 					content={`Find NCI-Supported Clinical Trials${
-						formFactor === 'advanced' ? ' - Advanced Search' : ''
+						pageType === 'advanced' ? ' - Advanced Search' : ''
 					}`}
 				/>
 				<meta
 					property="og:url"
 					content={`https://www.cancer.gov/about-cancer/treatment/clinical-trials/search${
-						formFactor === 'basic' ? '' : '/advanced'
+						pageType === 'basic'
+							? BasicSearchPagePath()
+							: AdvancedSearchPagePath()
 					}`}
 				/>
 				<meta
 					property="og:description"
 					content={`${
-						formFactor === 'basic' ? 'F' : 'Use our advanced search to f'
+						pageType === 'basic' ? 'F' : 'Use our advanced search to f'
 					}ind an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one.`}
 				/>
 			</Helmet>
@@ -362,7 +381,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
 				<form
 					id={SEARCH_FORM_ID}
 					onSubmit={handleSubmit}
-					className={`search-page__form ${formFactor}`}>
+					className={`search-page__form ${pageType}`}>
 					{formModules.map((Module, idx) => {
 						if (Array.isArray(Module)) {
 							return (
@@ -386,9 +405,9 @@ const SearchPage = ({ formInit = 'basic' }) => {
 							);
 						}
 					})}
-					{formFactor === 'advanced' ? (
+					{pageType === 'advanced' ? (
 						<StickySubmitBlock
-							formType={formFactor}
+							formType={pageType}
 							sentinel={sentinelRef}
 							onSubmit={handleSubmit}
 						/>

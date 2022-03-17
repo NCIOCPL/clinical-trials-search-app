@@ -14,6 +14,7 @@ import createCTSMiddleware from './middleware/CTSMiddleware';
 import createCTSMiddlewareV2 from './middleware/CTSMiddlewareV2';
 import cacheMiddleware from './middleware/cacheMiddleware';
 import { ClinicalTrialsServiceFactory } from '@nciocpl/clinical-trials-search-client.js';
+import { getProductTestBase } from './utilities';
 
 import { AnalyticsProvider, EddlAnalyticsProvider } from './tracking';
 
@@ -39,7 +40,7 @@ const initialize = ({
 	analyticsPublishedDate = 'unknown',
 	appId = '@@/DEFAULT_CTS_APP_ID',
 	baseHost = 'http://localhost:3000',
-	basePath = '/about-cancer/treatment/clinical-trials/search',
+	basePath = '/',
 	canonicalHost = 'https://www.cancer.gov',
 	ctsApiEndpointV1,
 	ctsApiEndpointV2,
@@ -196,6 +197,7 @@ window.CTSApp = initialize;
 const appParams = window.APP_PARAMS || {};
 const integrationTestOverrides = window.INT_TEST_APP_PARAMS || {};
 if (process.env.NODE_ENV !== 'production') {
+	// This is LOCAL DEV
 	const ctsSettings = {
 		...appParams,
 		ctsApiEndpointV2: 'http://localhost:3000/cts/proxy-api/v2',
@@ -207,6 +209,7 @@ if (process.env.NODE_ENV !== 'production') {
 	const ctsSettings = {
 		...appParams,
 		...integrationTestOverrides,
+		...{ basePath: getProductTestBase() },
 	};
 	initialize(ctsSettings);
 }

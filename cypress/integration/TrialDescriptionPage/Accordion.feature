@@ -1,7 +1,7 @@
 Feature: As a user, I want to be able to get even more details about the trial via the accordion styled sections
 
   Scenario: User is able to see the trial description via the accordion
-    Given the user navigates to "/about-cancer/treatment/clinical-trials/search/v?a=40&id=NCI-2014-01507&loc=0&rl=2"
+    Given the user navigates to "/v?a=40&id=NCI-2014-01507&loc=0&rl=2"
     Then the page title is "Crizotinib in Treating Patients with Stage IB-IIIA Non-small Cell Lung Cancer That Has Been Removed by Surgery and ALK Fusion Mutations (An ALCHEMIST Treatment Trial)"
     And trial description accordion is displayed
     And the following accordion sections are displayed
@@ -35,7 +35,7 @@ Feature: As a user, I want to be able to get even more details about the trial v
       | Trial IDs                    | false        |
 
   Scenario: user is able to get more information from sections of accordion
-    Given the user navigates to "/about-cancer/treatment/clinical-trials/search/v?a=40&id=NCI-2014-01507&loc=0&rl=2"
+    Given the user navigates to "/v?a=40&id=NCI-2014-01507&loc=0&rl=2"
     Then the page title is "Crizotinib in Treating Patients with Stage IB-IIIA Non-small Cell Lung Cancer That Has Been Removed by Surgery and ALK Fusion Mutations (An ALCHEMIST Treatment Trial)"
     And trial description accordion is displayed
     When user clicks on "Locations & Contacts" section of accordion
@@ -56,7 +56,7 @@ Feature: As a user, I want to be able to get even more details about the trial v
     And "NCT02201992" link has a href "http://clinicaltrials.gov/show/NCT02201992"
 
   Scenario: user is able to see trial's location that is near searched zipcode
-    Given the user navigates to "/about-cancer/treatment/clinical-trials/search/v?id=NCI-2014-01507&loc=1&rl=1&z=22182"
+    Given the user navigates to "/v?id=NCI-2014-01507&loc=1&rl=1&z=22182"
     Then the page title is "Crizotinib in Treating Patients with Stage IB-IIIA Non-small Cell Lung Cancer That Has Been Removed by Surgery and ALK Fusion Mutations (An ALCHEMIST Treatment Trial)"
     And trial description accordion is displayed
     When user clicks on "Locations & Contacts" section of accordion
@@ -76,7 +76,7 @@ Feature: As a user, I want to be able to get even more details about the trial v
     And "All" option is selected
 
   Scenario: as a user I want to see locations that are near me based on my search criteria
-    Given the user navigates to "/about-cancer/treatment/clinical-trials/search/v?id=NCI-2020-08103&loc=1&rl=2&va=1&z=20165&zp=200"
+    Given the user navigates to "/v?id=NCI-2020-08103&loc=1&rl=2&va=1&z=20165&zp=200"
     Then the page title is "Testing the Use of Targeted Treatment (AMG 510) for KRAS G12C Mutated Advanced Non-squamous Non-small Cell Lung Cancer (A Lung-MAP Treatment Trial)"
     And trial description accordion is displayed
     When user clicks on "Locations & Contacts" section of accordion
@@ -103,7 +103,7 @@ Feature: As a user, I want to be able to get even more details about the trial v
 
 
   Scenario: as a user I want to see locations that are near me based on my search criteria and select a different country if available
-    Given the user navigates to "/about-cancer/treatment/clinical-trials/search/v?id=NCI-2014-02057&lcnty=United%20States&loc=2&lst=AL&rl=2"
+    Given the user navigates to "/v?id=NCI-2014-02057&lcnty=United%20States&loc=2&lst=AL&rl=2"
     Then the page title is "Project: Every Child for Younger Patients with Cancer"
     And trial description accordion is displayed
     When user clicks on "Locations & Contacts" section of accordion
@@ -122,7 +122,7 @@ Feature: As a user, I want to be able to get even more details about the trial v
       | Email: research4kids@ucalgary.ca |
 
   Scenario: as a user I want to see locations that are near me based on my search criteria and select OTHER  country when available
-    Given the user navigates to "/about-cancer/treatment/clinical-trials/search/v?id=NCI-2014-02057&lcnty=United%20States&loc=2&lst=AL&rl=2"
+    Given the user navigates to "/v?id=NCI-2014-02057&lcnty=United%20States&loc=2&lst=AL&rl=2"
     Then the page title is "Project: Every Child for Younger Patients with Cancer"
     And trial description accordion is displayed
     When user clicks on "Locations & Contacts" section of accordion
@@ -142,7 +142,7 @@ Feature: As a user, I want to be able to get even more details about the trial v
 
 
   Scenario: as a user I wont be able to see locations near me if the state provided is no longer hosting that trial, but I still can see all locations
-    Given the user navigates to "/about-cancer/treatment/clinical-trials/search/v?id=NCI-2014-02057&lcnty=United%20States&loc=2&lst=WY&rl=2"
+    Given the user navigates to "/v?id=NCI-2014-02057&lcnty=United%20States&loc=2&lst=WY&rl=2"
     Then the page title is "Project: Every Child for Younger Patients with Cancer"
     And trial description accordion is displayed
     When user clicks on "Locations & Contacts" section of accordion
@@ -152,7 +152,7 @@ Feature: As a user, I want to be able to get even more details about the trial v
     Then alphabetically sorted list of states appears
 
   Scenario: as a user I want to see locations that are located at NIH only
-    Given the user navigates to "/about-cancer/treatment/clinical-trials/search/v?id=NCI-2015-00054&loc=4&rl=2"
+    Given the user navigates to "/v?id=NCI-2015-00054&loc=4&rl=2"
     Then the page title is "Targeted Therapy Directed by Genetic Testing in Treating Patients with Advanced Refractory Solid Tumors, Lymphomas, or Multiple Myeloma (The MATCH Screening Trial)"
     And trial description accordion is displayed
     When user clicks on "Locations & Contacts" section of accordion
@@ -172,7 +172,7 @@ Feature: As a user, I want to be able to get even more details about the trial v
     And "All" option is selected
 
   Scenario: as a user I want to see locations that are near me when I searched for all trials filtered by veterans affairs only
-    Given the user navigates to "/about-cancer/treatment/clinical-trials/search/v?id=NCI-2018-01615&loc=0&rl=2&va=1"
+    Given the user navigates to "/v?id=NCI-2018-01615&loc=0&rl=2&va=1"
     Then the page title is "Biomarker Analysis in Samples Collected during Bronchoscopy in Patients with Dysplasia"
     And trial description accordion is displayed
     When user clicks on "Locations & Contacts" section of accordion
@@ -188,7 +188,7 @@ Feature: As a user, I want to be able to get even more details about the trial v
       | Phone: 720-723-6429                       |
 
   Scenario: as a user I can filter location by state
-    Given the user navigates to "/about-cancer/treatment/clinical-trials/search/v?a=40&id=NCI-2014-01507&loc=0&rl=2"
+    Given the user navigates to "/v?a=40&id=NCI-2014-01507&loc=0&rl=2"
     Then the page title is "Crizotinib in Treating Patients with Stage IB-IIIA Non-small Cell Lung Cancer That Has Been Removed by Surgery and ALK Fusion Mutations (An ALCHEMIST Treatment Trial)"
     And trial description accordion is displayed
     When user clicks on "Locations & Contacts" section of accordion
@@ -220,7 +220,7 @@ Feature: As a user, I want to be able to get even more details about the trial v
     And all locations in "United States" are displayed
 
   Scenario: as a user I will be offered to visit clinicaltrials.gov to explore locations if they are not finalized yet for a trial
-    Given the user navigates to "/about-cancer/treatment/clinical-trials/search/v?id=NCI-2015-00045&loc=0&rl=2"
+    Given the user navigates to "/v?id=NCI-2015-00045&loc=0&rl=2"
     Then the page title is "A Single-arm Safety Study of Transplantation Using Umbilical Cord Blood and Human Placental-derived Stem Cells From Partially Matched Related Donors in Persons With Certain Malignant Blood Diseases and Non-malignant Disorders"
     And trial description accordion is displayed
     When user clicks on "Locations & Contacts" section of accordion
@@ -228,7 +228,7 @@ Feature: As a user, I want to be able to get even more details about the trial v
     And "ClinicalTrials.gov" link has a href "https://www.clinicaltrials.gov/show/NCT00596999"
 
   Scenario: as a user I will not see locations if I searched for a trial in a country that does not exist/host that trial
-    Given the user navigates to "/about-cancer/treatment/clinical-trials/search/v?id=NCI-2018-01903&lcnty=zimbabue&loc=2&rl=2"
+    Given the user navigates to "/v?id=NCI-2018-01903&lcnty=zimbabue&loc=2&rl=2"
     Then the page title is "Standard Chemotherapy and Radiation Therapy with or without Paclitaxel and Carboplatin in Treating HIV-Positive Women with Locally Advanced Cervical Cancer"
     And trial description accordion is displayed
     When user clicks on "Locations & Contacts" section of accordion

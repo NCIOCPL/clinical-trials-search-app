@@ -26,6 +26,7 @@ import ResultsList from './ResultsList';
 import PrintModalContent from './PrintModalContent';
 import { useAppSettings } from '../../store/store.js';
 import { usePrintContext } from '../../store/printContext';
+import { useAppPaths } from '../../hooks/routing';
 
 import {
 	resultsPageReducer,
@@ -59,6 +60,8 @@ const ResultsPage = () => {
 	const navigate = useNavigate(); // Used for updating the nav bar on pagination / navigation
 	const location = useLocation(); // Used for accessing the querystring of the incoming search
 	const qs = queryString.extract(location.search);
+	const { AdvancedSearchPagePath, BasicSearchPagePath, ResultsPagePath } =
+		useAppPaths();
 
 	//  Used as the initial state for the reducer.
 	const INITIAL_PAGE_STATE = {
@@ -324,7 +327,7 @@ const ResultsPage = () => {
 			formType: searchCriteriaObject.formType,
 			source: 'modify_search_criteria_link',
 		});
-		navigate('/about-cancer/treatment/clinical-trials/search/advanced', {
+		navigate(AdvancedSearchPagePath(), {
 			state: {
 				criteria: searchCriteriaObject,
 				refineSearch: true,
@@ -364,8 +367,7 @@ const ResultsPage = () => {
 			const parsed = queryString.parse(location.search);
 			parsed.pn = newPageNumber;
 			const newqs = queryString.stringify(parsed, { arrayFormat: 'none' });
-			// Navigation below is relative, hence use of just the parameters in this case
-			navigate(`?${newqs}`);
+			navigate(`${ResultsPagePath()}?${newqs}`);
 		}
 	};
 	const renderResultsListLoader = () => (
@@ -551,8 +553,8 @@ const ResultsPage = () => {
 					<Link
 						to={`${
 							searchCriteriaObject.formType === 'basic'
-								? '/about-cancer/treatment/clinical-trials/search'
-								: '/about-cancer/treatment/clinical-trials/search/advanced'
+								? BasicSearchPagePath()
+								: AdvancedSearchPagePath()
 						}`}
 						onClick={() => handleStartOver(TRY_NEW_SEARCH_LINK)}>
 						Try a new search

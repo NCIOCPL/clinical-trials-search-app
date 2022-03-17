@@ -20,6 +20,7 @@ import SitesList from './SitesList';
 import './TrialDescriptionPage.scss';
 import { updateFormSearchCriteria } from '../../store/actions';
 import { useAppSettings } from '../../store/store.js';
+import { useAppPaths } from '../../hooks/routing';
 import {
 	filterSitesByActiveRecruitment,
 	hasSCOBeenUpdated,
@@ -58,6 +59,8 @@ const TrialDescriptionPage = () => {
 	} = localState;
 
 	const { error, loading, payload } = useCtsApi(fetchActions);
+
+	const { BasicSearchPagePath, AdvancedSearchPagePath } = useAppPaths();
 
 	const [
 		{
@@ -268,8 +271,8 @@ const TrialDescriptionPage = () => {
 			<Link
 				to={`${
 					searchCriteriaObject?.formType === 'basic'
-						? '/about-cancer/treatment/clinical-trials/search/'
-						: '/about-cancer/treatment/clinical-trials/search/advanced'
+						? BasicSearchPagePath()
+						: AdvancedSearchPagePath()
 				}`}
 				state={{ criteria: {}, refineSearch: false }}
 				onClick={() => handleStartOver(START_OVER_LINK)}>
@@ -574,23 +577,29 @@ const TrialDescriptionPage = () => {
 													<p className="trial-phase">
 														<strong className="field-label">Trial Phase</strong>
 														{`${
-															trialDescription.phase &&
-															trialDescription.phase !== 'NA'
+															trialDescription.phase.phase &&
+															trialDescription.phase.phase !== 'NA'
 																? 'Phase ' +
-																  trialDescription.phase.replace('_', '/')
+																  trialDescription.phase.phase.replace('_', '/')
 																: 'No phase specified'
 														}`}
 													</p>
-													{trialDescription.primary_purpose &&
-														trialDescription.primary_purpose !== '' && (
+													{trialDescription.primary_purpose
+														.primary_purpose_code &&
+														trialDescription.primary_purpose
+															.primary_purpose_code !== '' && (
 															<p className="trial-type">
 																<strong className="field-label">
 																	Trial Type
 																</strong>
 																<span className="trial-type-name">
-																	{trialDescription.primary_purpose
-																		.toLowerCase()
-																		.replace(/_/g, ' ')}
+																	{trialDescription.primary_purpose.primary_purpose_code.toLowerCase() ===
+																	'other'
+																		? trialDescription.primary_purpose
+																				.primary_purpose_other_text
+																		: trialDescription.primary_purpose.primary_purpose_code
+																				.toLowerCase()
+																				.replace(/_/g, ' ')}
 																</span>
 															</p>
 														)}
