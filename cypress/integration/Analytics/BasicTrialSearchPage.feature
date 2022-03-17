@@ -10,14 +10,14 @@ Feature: Clinical Trials Search Page - Basic
     And "channel" is set to "About Cancer"
     And "analyticsPublishedDate" is set to "02/02/2011"
     And "analyticsName" is set to "Clinical Trials"
-    When the user navigates to "/about-cancer/treatment/clinical-trials/search"
+    When the user navigates to "/"
     Then the page title is "Find NCI-Supported Clinical Trials"
     And browser waits
     Then there should be an analytics event with the following details
       | key                                  | value                                                          |
       | type                                 | PageLoad                                                       |
       | event                                | ClinicalTrialsSearchApp:Load:BasicSearch                       |
-      | page.name                            | www.cancer.gov/about-cancer/treatment/clinical-trials/search  |
+      | page.name                            | www.cancer.gov/  																						  |
       | page.title                           | Find NCI-Supported Clinical Trials                             |
       | page.metaTitle                       | Find NCI-Supported Clinical Trials - National Cancer Institute |
       | page.language                        | english                                                        |
@@ -37,7 +37,7 @@ Feature: Clinical Trials Search Page - Basic
     And "channel" is set to "About Cancer"
     And "analyticsPublishedDate" is set to "02/02/2011"
     And "analyticsName" is set to "Clinical Trials"
-    When the user navigates to "/about-cancer/treatment/clinical-trials/search"
+    When the user navigates to "/"
     Then the page title is "Find NCI-Supported Clinical Trials"
     And browser waits
     When user clicks on "CancerTypeKeyword" field
@@ -58,7 +58,7 @@ Feature: Clinical Trials Search Page - Basic
     And "channel" is set to "About Cancer"
     And "analyticsPublishedDate" is set to "02/02/2011"
     And "analyticsName" is set to "Clinical Trials"
-    When the user navigates to "/about-cancer/treatment/clinical-trials/search"
+    When the user navigates to "/"
     Then the page title is "Find NCI-Supported Clinical Trials"
     And browser waits
     When user types "234" in "Age" field
@@ -81,7 +81,7 @@ Feature: Clinical Trials Search Page - Basic
     And "channel" is set to "About Cancer"
     And "analyticsPublishedDate" is set to "02/02/2011"
     And "analyticsName" is set to "Clinical Trials"
-    When the user navigates to "/about-cancer/treatment/clinical-trials/search"
+    When the user navigates to "/"
     Then the page title is "Find NCI-Supported Clinical Trials"
     And browser waits
     When user types "999g9" in "Zipcode" field
@@ -104,7 +104,7 @@ Feature: Clinical Trials Search Page - Basic
     And "channel" is set to "About Cancer"
     And "analyticsPublishedDate" is set to "02/02/2011"
     And "analyticsName" is set to "Clinical Trials"
-    When the user navigates to "/about-cancer/treatment/clinical-trials/search"
+    When the user navigates to "/"
     Then the page title is "Find NCI-Supported Clinical Trials"
     And browser waits
     When user types "234" in "Age" field
@@ -128,7 +128,7 @@ Feature: Clinical Trials Search Page - Basic
     And "channel" is set to "About Cancer"
     And "analyticsPublishedDate" is set to "02/02/2011"
     And "analyticsName" is set to "Clinical Trials"
-    When the user navigates to "/about-cancer/treatment/clinical-trials/search"
+    When the user navigates to "/"
     Then the page title is "Find NCI-Supported Clinical Trials"
     And browser waits
     When user clicks on "Find Trials" button
@@ -150,7 +150,7 @@ Feature: Clinical Trials Search Page - Basic
     And "channel" is set to "About Cancer"
     And "analyticsPublishedDate" is set to "02/02/2011"
     And "analyticsName" is set to "Clinical Trials"
-    When the user navigates to "/about-cancer/treatment/clinical-trials/search/r?loc=0&rl=1"
+    When the user navigates to "/r?loc=0&rl=1"
     Then the page title is "Clinical Trials Search Results"
     And browser waits
     When user clicks on "Start Over" link
@@ -171,14 +171,14 @@ Feature: Clinical Trials Search Page - Basic
     And "channel" is set to "About Cancer"
     And "analyticsPublishedDate" is set to "02/02/2011"
     And "analyticsName" is set to "Clinical Trials"
-    When the user navigates to "/about-cancer/treatment/clinical-trials/search/r?a=40&loc=0&rl=1&t=C4872"
+    When the user navigates to "/r?a=40&loc=0&rl=1&t=C4872"
     Then the page title is "Clinical Trials Search Results"
     And browser waits
     Then there should be an analytics event with the following details
       | key                                                   | value                                                          |
       | type                                                  | PageLoad                                                       |
       | event                                                 | ClinicalTrialsSearchApp:Load:Results                           |
-      | page.name                                             | www.cancer.gov/about-cancer/treatment/clinical-trials/search/r |
+      | page.name                                             | www.cancer.gov/r 																							 |
       | page.title                                            | Clinical Trials Search Results                                 |
       | page.metaTitle                                        | Clinical Trials Search Results - National Cancer Institute     |
       | page.language                                         | english                                                        |
@@ -205,7 +205,7 @@ Feature: Clinical Trials Search Page - Basic
     And "channel" is set to "About Cancer"
     And "analyticsPublishedDate" is set to "02/02/2011"
     And "analyticsName" is set to "Clinical Trials"
-    When the user navigates to "/about-cancer/treatment/clinical-trials/search/r?loc=0&rl=1"
+    When the user navigates to "/r?loc=0&rl=1"
     Then the page title is "Clinical Trials Search Results"
     And browser waits
     When user clicks on 1 trial result
@@ -228,7 +228,7 @@ Feature: Clinical Trials Search Page - Basic
     And "channel" is set to "About Cancer"
     And "analyticsPublishedDate" is set to "02/02/2011"
     And "analyticsName" is set to "Clinical Trials"
-    When the user navigates to "/about-cancer/treatment/clinical-trials/search"
+    When the user navigates to "/"
     Then the page title is "Find NCI-Supported Clinical Trials"
     And browser waits
     When user types "22182" in "Zipcode" field
@@ -238,7 +238,7 @@ Feature: Clinical Trials Search Page - Basic
       | key                                                   | value                                                          |
       | type                                                  | PageLoad                                                       |
       | event                                                 | ClinicalTrialsSearchApp:Load:Results                           |
-      | page.name                                             | www.cancer.gov/about-cancer/treatment/clinical-trials/search/r |
+      | page.name                                             | www.cancer.gov/r 																							 |
       | page.title                                            | Clinical Trials Search Results                                 |
       | page.metaTitle                                        | Clinical Trials Search Results - National Cancer Institute     |
       | page.language                                         | english                                                        |
@@ -267,8 +267,8 @@ Feature: Clinical Trials Search Page - Basic
     And "channel" is set to "About Cancer"
     And "analyticsPublishedDate" is set to "02/02/2011"
     And "analyticsName" is set to "Clinical Trials"
-    When the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
-    When the user navigates to "/about-cancer/treatment/clinical-trials/search"
+    When the user navigates to "/advanced"
+    When the user navigates to "/"
     Then the page title is "Find NCI-Supported Clinical Trials"
     And browser waits
     When user types "22" in "Age" field

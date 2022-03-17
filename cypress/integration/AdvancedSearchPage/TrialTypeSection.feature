@@ -1,7 +1,7 @@
 Feature: Advanced Clinical Trials Search Trial Type Section
 
     Scenario: User has an option to narrow down search criteria by selecting all trial types
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+        Given the user navigates to "/advanced"
         Then the page title is "Find NCI-Supported Clinical Trials"
         And "Trial Type" form section is displayed
         And help icon is displayed in "Trial Type" section with href "/about-cancer/treatment/clinical-trials/search/help#trialtype"
@@ -37,7 +37,7 @@ Feature: Advanced Clinical Trials Search Trial Type Section
             | tt  | other                    |
 
     Scenario: User has an option to narrow down search criteria by healthy volunteers and selected trial types and then refine search
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+        Given the user navigates to "/advanced"
         Then the page title is "Find NCI-Supported Clinical Trials"
         When user toggles "Healthy Volunteers"
         And "Healthy Volunteers" toggle is switched to "Yes"
@@ -77,7 +77,7 @@ Feature: Advanced Clinical Trials Search Trial Type Section
             | tt  | diagnostic |
 
     Scenario: User has an option to search by healthy volunteers and all trial types and refine search
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+        Given the user navigates to "/advanced"
         Then the page title is "Find NCI-Supported Clinical Trials"
         When user toggles "Healthy Volunteers"
         Then "Healthy Volunteers" toggle is switched to "Yes"
@@ -112,7 +112,7 @@ Feature: Advanced Clinical Trials Search Trial Type Section
             | tt  | diagnostic |
 
     Scenario: User has an option to go to search results url directly and modify search
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/r?hv=1&loc=0&rl=2&tt=treatment"
+        Given the user navigates to "/r?hv=1&loc=0&rl=2&tt=treatment"
         Then the page title is "Clinical Trials Search Results"
         And trial info displays "Results 1-10  of 66 for your search "
         And the criteria table displays the following

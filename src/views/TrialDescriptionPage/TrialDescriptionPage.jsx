@@ -20,6 +20,7 @@ import SitesList from './SitesList';
 import './TrialDescriptionPage.scss';
 import { updateFormSearchCriteria } from '../../store/actions';
 import { useAppSettings } from '../../store/store.js';
+import { useAppPaths } from '../../hooks/routing';
 import {
 	filterSitesByActiveRecruitment,
 	hasSCOBeenUpdated,
@@ -58,6 +59,8 @@ const TrialDescriptionPage = () => {
 	} = localState;
 
 	const { error, loading, payload } = useCtsApi(fetchActions);
+
+	const { BasicSearchPagePath, AdvancedSearchPagePath } = useAppPaths();
 
 	const [{ analyticsName, canonicalHost, services, zipConversionEndpoint }] =
 		useAppSettings();
@@ -260,8 +263,8 @@ const TrialDescriptionPage = () => {
 			<Link
 				to={`${
 					searchCriteriaObject?.formType === 'basic'
-						? '/about-cancer/treatment/clinical-trials/search/'
-						: '/about-cancer/treatment/clinical-trials/search/advanced'
+						? BasicSearchPagePath()
+						: AdvancedSearchPagePath()
 				}`}
 				state={{ criteria: {}, refineSearch: false }}
 				onClick={() => handleStartOver(START_OVER_LINK)}>

@@ -1,7 +1,7 @@
 Feature: Advanced Clinical Trials Search Trial Investigators Section
 
 	Scenario: User has an option to narrow down search criteria by Trial Investigators
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+		Given the user navigates to "/advanced"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And "Trial Investigators" form section is displayed
 		And help icon is displayed in "TrialInvestigators" section with href "/about-cancer/treatment/clinical-trials/search/help#trialinvestigators"
@@ -9,7 +9,7 @@ Feature: Advanced Clinical Trials Search Trial Investigators Section
 		And helper text "Search by trial investigator." is displayed
 
 	Scenario: User has an option to search by Trial Investigators using autosuggest
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+		Given the user navigates to "/advanced"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And "Trial Investigators" form section is displayed
 		When user clicks on "TrialInvestigator" field
@@ -30,7 +30,7 @@ Feature: Advanced Clinical Trials Search Trial Investigators Section
 			| rl        | 2           |
 
 	Scenario: User searches for investigators that does not exist
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+		Given the user navigates to "/advanced"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And "Trial Investigators" form section is displayed
 		When user clicks on "TrialInvestigator" field
@@ -39,7 +39,7 @@ Feature: Advanced Clinical Trials Search Trial Investigators Section
 		Then autocomplete dropdown is displayed with "No results found" text
 
 	Scenario: User has an option to go to search results url directly and modify search
-		Given the user navigates to "about-cancer/treatment/clinical-trials/search/r?in=Grace%20Smith&loc=0&rl=2"
+		Given the user navigates to "r?in=Grace%20Smith&loc=0&rl=2"
 		Then the page title is "Clinical Trials Search Results"
 		And trial info displayes "Results 1-1  of 1 for your search "
 		And the criteria table displays the following
@@ -62,7 +62,7 @@ Feature: Advanced Clinical Trials Search Trial Investigators Section
 			| rl        | 2     |
 
 	Scenario: User is able to search for a specific investigators and refine search
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+		Given the user navigates to "/advanced"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And "Trial Investigators" form section is displayed
 		And user types "grace sm" in "TrialInvestigator" field

@@ -1,7 +1,7 @@
 Feature: As a user, I want to be able to specify my search by cancer type or condition, so that more relevant results can be returned
 
     Scenario: User is able to search for cancer type via autosuggest
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+        Given the user navigates to "/advanced"
         And "Cancer Type/Condition" form section is displayed
         And help icon is displayed with href "/about-cancer/treatment/clinical-trials/search/help#cancertype"
         And info text "Select a cancer type/condition, then include subtypes, stages or other attributes, if applicable." is displayed in the "cancer-type-condition" section body
@@ -10,7 +10,7 @@ Feature: As a user, I want to be able to specify my search by cancer type or con
         And "CancerTypeCondition" input field has a placeholder "Start typing to narrow options below"
 
     Scenario: User is able to execute search for cancer type via autosuggest
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+        Given the user navigates to "/advanced"
         When user clicks on "All" button
         And user types "breast cancer" in "CancerTypeCondition" field
         And user selects "Breast Cancer" from dropdown
@@ -27,7 +27,7 @@ Feature: As a user, I want to be able to specify my search by cancer type or con
             | rl        | 2     |
 
     Scenario: User searches for a cancer type, modifies primary cancer type it and searches again
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+        Given the user navigates to "/advanced"
         When user clicks on "All" button
         And user types "breast cancer" in "CancerTypeCondition" field
         And user selects "Breast Cancer" from dropdown
@@ -59,7 +59,7 @@ Feature: As a user, I want to be able to specify my search by cancer type or con
             | rl        | 2     |
 
     Scenario: After selecting cancer type, Subtype, Stage, Side Effects fields appear
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+        Given the user navigates to "/advanced"
         When user clicks on "All" button
         And user types "breast cancer" in "CancerTypeCondition" field
         And user selects "Breast Cancer" from dropdown
@@ -71,7 +71,7 @@ Feature: As a user, I want to be able to specify my search by cancer type or con
         And "SideEffects" input field has helper text "More than one selection may be made."
 
     Scenario: User is able to execute search for Cancer type and subtype
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+        Given the user navigates to "/advanced"
         When user clicks on "All" button
         And user types "breast cancer" in "CancerTypeCondition" field
         And user selects "Breast Cancer" from dropdown
@@ -93,7 +93,7 @@ Feature: As a user, I want to be able to specify my search by cancer type or con
             | st        | C8287 |
 
     Scenario: User is able to execute search for Cancer type, subtype and stage
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+        Given the user navigates to "/advanced"
         When user clicks on "All" button
         And user types "breast cancer" in "CancerTypeCondition" field
         And user selects "Breast Cancer" from dropdown
@@ -119,7 +119,7 @@ Feature: As a user, I want to be able to specify my search by cancer type or con
             | stg       | C94774 |
 
     Scenario: User is able to execute search for Cancer type, subtype, stage and side effects
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+        Given the user navigates to "/advanced"
         When user clicks on "All" button
         And user types "breast cancer" in "CancerTypeCondition" field
         And user selects "Breast Cancer" from dropdown
@@ -148,7 +148,7 @@ Feature: As a user, I want to be able to specify my search by cancer type or con
             | fin       | C18673 |
 
     Scenario: User is able to execute search with specific subtype then modify search and get expected results again
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+        Given the user navigates to "/advanced"
         When user clicks on "All" button
         And user types "breast cancer" in "CancerTypeCondition" field
         And user selects "Breast Cancer" from dropdown
@@ -191,7 +191,7 @@ Feature: As a user, I want to be able to specify my search by cancer type or con
             | t         | C4872 |
 
     Scenario: User is able to execute search with specific stage then modify search and get expected results again
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+        Given the user navigates to "/advanced"
         When user clicks on "All" button
         And user types "breast cancer" in "CancerTypeCondition" field
         And user selects "Breast Cancer" from dropdown
@@ -236,7 +236,7 @@ Feature: As a user, I want to be able to specify my search by cancer type or con
 
 
     Scenario: User is able to execute search with specific side effects then modify search and get expected results again
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+        Given the user navigates to "/advanced"
         When user clicks on "All" button
         And user types "breast cancer" in "CancerTypeCondition" field
         And user selects "Breast Cancer" from dropdown
@@ -279,7 +279,7 @@ Feature: As a user, I want to be able to specify my search by cancer type or con
             | t         | C4872  |
 
     Scenario: User is able to refine search results brought up from basic form
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/r?loc=0&rl=1&t=C2924"
+        Given the user navigates to "/r?loc=0&rl=1&t=C2924"
         And the criteria table displays the following
             | Category                      | Selection                       |
             | Primary Cancer Type/Condition | Ductal Carcinoma In Situ (DCIS) |
@@ -302,7 +302,7 @@ Feature: As a user, I want to be able to specify my search by cancer type or con
             | t         | C4872 |
 
     Scenario: User is able to refine search results brought up from basic form searching for stage
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/r?loc=0&rl=1&t=C140421%7CC7898"
+        Given the user navigates to "/r?loc=0&rl=1&t=C140421%7CC7898"
         And trial info displayes "Results 1-10  of 99 for your search "
         And the criteria table displays the following
             | Category                      | Selection                |

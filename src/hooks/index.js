@@ -6,3 +6,4 @@ export { useZipConversion } from './useZipConversion';
 export { useAppInitializer } from './useAppInitializer';
 export { useGlobalBeforeUnload, useWindowEvent } from './useWindowEvent';
 export { useHasLocationChanged } from './useReactRouter';
+export { useAppPaths } from './routing';

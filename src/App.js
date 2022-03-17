@@ -14,7 +14,7 @@ import ErrorPage from './views/ErrorPage';
 import { useAppSettings } from './store/store.js';
 import { PrintContextProvider } from './store/printContext';
 import { useAppInitializer } from './hooks';
-import Layout from './views/Layout';
+import { useAppPaths } from './hooks';
 
 require('es6-promise').polyfill();
 
@@ -25,46 +25,33 @@ const App = ({ services, zipConversionEndpoint }) => {
 
 	useAppInitializer(ctsapiclient, zipConversionEndpoint);
 
+	const {
+		BasicSearchPagePath,
+		ResultsPagePath,
+		TrialDescriptionPagePath,
+		AdvancedSearchPagePath,
+	} = useAppPaths();
+
 	return (
 		<>
 			{!appHasBeenInitialized ? (
 				// Is initializing, show loading screen.
 				<></>
 			) : initErrorsList.length === 0 ? (
-				<>
+				<PrintContextProvider>
 					<Routes>
+						<Route path={ResultsPagePath()} element={<ResultsPage />} />
 						<Route
-							path="/about-cancer/treatment/clinical-trials/search"
-							element={<Layout />}>
-							<Route
-								index
-								element={
-									<PrintContextProvider>
-										<BasicSearchPage />
-									</PrintContextProvider>
-								}
-							/>
-							<Route
-								path="r"
-								element={
-									<PrintContextProvider>
-										<ResultsPage />
-									</PrintContextProvider>
-								}
-							/>
-
-							<Route path="v" element={<TrialDescriptionPage />} />
-							<Route
-								path="advanced"
-								element={
-									<PrintContextProvider>
-										<AdvancedSearchPage />
-									</PrintContextProvider>
-								}
-							/>
-						</Route>
+							path={TrialDescriptionPagePath()}
+							element={<TrialDescriptionPage />}
+						/>
+						<Route
+							path={AdvancedSearchPagePath()}
+							element={<AdvancedSearchPage />}
+						/>
+						<Route path={BasicSearchPagePath()} element={<BasicSearchPage />} />
 					</Routes>
-				</>
+				</PrintContextProvider>
 			) : (
 				<ErrorPage initErrorsList={initErrorsList} />
 			)}

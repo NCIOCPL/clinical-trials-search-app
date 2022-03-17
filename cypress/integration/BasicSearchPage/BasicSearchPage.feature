@@ -2,17 +2,17 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 
 	Scenario Outline: When user visits Basic Search page, all page items are present in different breakpoints
 		Given screen breakpoint is set to "<breakpoint>"
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search"
+		Given the user navigates to "/"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And the text "NCI-supported clinical trials are those sponsored or otherwise financially supported by NCI. See our guide, Steps to Find a Clinical Trial, to learn about options for finding trials not included in NCI's collection." appears below the title
 		And "Steps to Find a Clinical Trial" link has a href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/trial-guide"
 		And Search tip icon is displayed and text "Search Tip: For more search options, use our advanced search." appears
-		And "advanced search" link has a href "/about-cancer/treatment/clinical-trials/search/advanced"
+		And "advanced search" link has a href "/advanced"
 		And the following delighters are displayed
-			| delighter    | href                                                       | title                              | text                                                                  |
-			| cts-livehelp | /contact                                                   | Have a question?We're here to help | Chat with us: LiveHelpCall us: 1-800-4-CANCER(1-800-422-6237)         |
-			| cts-what     | /about-cancer/treatment/clinical-trials/what-are-trials    | What Are Cancer Clinical Trials?   | Learn what they are and what you should know about them.              |
-			| cts-which    | /about-cancer/treatment/clinical-trials/search/trial-guide | Which trials are right for you?    | Use the checklist in our guide to gather the information you’ll need. |
+			| delighter    | href                                                       | title                              																		| text                                                                  |
+			| cts-livehelp | /contact            | Have a question?We're here to help 	| Chat with us: LiveHelpCall us: 1-800-4-CANCER(1-800-422-6237)         |
+			| cts-what     | /about-cancer/treatment/clinical-trials/what-are-trials    | What Are Cancer Clinical Trials?   																		| Learn what they are and what you should know about them.              |
+			| cts-which    | /about-cancer/treatment/clinical-trials/search/trial-guide | Which trials are right for you?    																		| Use the checklist in our guide to gather the information you’ll need. |
 
 		Examples:
 			| breakpoint |
@@ -22,7 +22,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 
 	Scenario Outline: all form fields are displayed with its components
 		Given screen breakpoint is set to "<breakpoint>"
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search"
+		Given the user navigates to "/"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And "Cancer Type/Keyword" form section is displayed
 		And help icon is displayed in "Cancer Type/Keyword" section with href "/about-cancer/treatment/clinical-trials/search/help#basicsearch"
@@ -44,7 +44,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 
 	Scenario: User is able to search for and use autosuggested items for cancer type/keyword
 		Given screen breakpoint is set to "desktop"
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search"
+		Given the user navigates to "/"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And "Cancer Type/Keyword" input field has a placeholder "Start typing to select a cancer type or keyword"
 		When user clicks on "Cancer Type/Keyword" field
@@ -83,7 +83,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 
 	Scenario: Negative: user is searching for a keyword that does not exist
 		Given screen breakpoint is set to "tablet"
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search"
+		Given the user navigates to "/"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And "Cancer Type/Keyword" input field has a placeholder "Start typing to select a cancer type or keyword"
 		When user clicks on "Cancer Type/Keyword" field
@@ -100,7 +100,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 
 	Scenario: User is able to search for a specific age
 		Given screen breakpoint is set to "mobile"
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search"
+		Given the user navigates to "/"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And "Age" form section is displayed
 		When user types "40" in "Age" field
@@ -133,7 +133,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 
 
 	Scenario: Negative: User is not able to search for age out of boundaries
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search"
+		Given the user navigates to "/"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And "Age" form section is displayed
 		When user types "0" in "Age" field
@@ -143,11 +143,11 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 		When user types "121" in "Age" field
 		Then alert "Please enter a number between 1 and 120." is displayed in "Age" section
 		When user clicks on "Find Trials" button
-		Then the search is not executed and path is "/about-cancer/treatment/clinical-trials/search"
+		Then the search is not executed and path is "/"
 
 	Scenario: User is able to search for a specific zip code
 		Given screen breakpoint is set to "tablet"
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search"
+		Given the user navigates to "/"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And "U.S. Zip Code" form section is displayed
 		When user types "22182" in "U.S. Zip Code" field
@@ -180,18 +180,18 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 			| zp        | 100   |
 
 	Scenario: Negative: User is not able to search for an incorrect zip code
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search"
+		Given the user navigates to "/"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And "U.S. Zip Code" form section is displayed
 		When user types "999g9" in "U.S. Zip Code" field
 		Then alert "Please enter a valid 5 digit U.S. zip code" is displayed in "U.S. Zip Code" section
 		And user clicks on "Find Trials" button
-		Then the search is not executed and path is "/about-cancer/treatment/clinical-trials/search"
+		Then the search is not executed and path is "/"
 
 
 	Scenario: User is able to search for a trials using age and keyword and then refine search
 		Given screen breakpoint is set to "desktop"
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search"
+		Given the user navigates to "/"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		When user types "breast cancer" in "Cancer Type/Keyword" field
 		And user selects "Breast Cancer" from dropdown
@@ -229,7 +229,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 			| a         | 70    |
 
 	Scenario: User is able to search for all trials without specifying any criteria
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search"
+		Given the user navigates to "/"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And user clicks on "Find Trials" button
 		Then the search is executed and results page is displayed
@@ -241,7 +241,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 
 
 	Scenario: User has an option to go to search results url directly and modify search
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search/r?a=30&loc=1&q=aids&rl=1&z=22182"
+		Given the user navigates to "/r?a=30&loc=1&q=aids&rl=1&z=22182"
 		Then trial info displays "Results 1-10  of 17 for your search "
 		And the criteria table displays the following
 			| Category         | Selection |
@@ -273,7 +273,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 
 
 	Scenario: User is able to search for everything and modify search
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search"
+		Given the user navigates to "/"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		When user types "30" in "Age" field
 		When user types "22182" in "U.S. Zip Code" field
@@ -317,7 +317,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 	### meta data
 
 	Scenario: As a search engine I want to have access to the meta data on a basic search page
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search"
+		Given the user navigates to "/"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And the title tag should be "Find NCI-Supported Clinical Trials - National Cancer Institute"
 		And the page contains meta tags with the following names
@@ -326,12 +326,13 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 		And the page contains meta tags with the following properties
 			| property       | content                                                                                                                       |
 			| og:title       | Find NCI-Supported Clinical Trials                                                                                            |
-			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search                                                          |
+			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/                                                         |
 			| og:description | Find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one. |
-		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search"
+		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/"
+
 
 	Scenario: As a user, I expect meta data to update accordingly when I search for criteria and modify my search
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search"
+		Given the user navigates to "/"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		When user types "30" in "Age" field
 		When user types "22182" in "U.S. Zip Code" field
@@ -377,8 +378,9 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 			| og:description | Find an NCI-supported clinical trial - Search results                                                        |
 		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=40&loc=1&q=aids&rl=2&z=22182&zp=100"
 
+
 	Scenario: As a user, I expect meta data to update accordingly when I navigate to search results directly and modify my search
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search/r?a=30&loc=1&q=aids&rl=1&z=22182"
+		Given the user navigates to "/r?a=30&loc=1&q=aids&rl=1&z=22182"
 		Then trial info displays "Results 1-10  of 17 for your search "
 		And the page contains meta tags with the following names
 			| name        | content                                               |
