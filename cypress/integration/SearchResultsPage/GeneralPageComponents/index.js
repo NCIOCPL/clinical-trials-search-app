@@ -84,15 +84,9 @@ When('user clicks on {string} link', (link) => {
 });
 Then('user is taken back to {string} search page', (searchType) => {
 	if (searchType.toLowerCase().includes('advanced')) {
-		cy.location('pathname').should(
-			'eq',
-			'/about-cancer/treatment/clinical-trials/search/advanced'
-		);
+		cy.location('pathname').should('eq', '/advanced');
 	} else if (searchType.toLowerCase().includes('basic')) {
-		cy.location('pathname').should(
-			'eq',
-			'/about-cancer/treatment/clinical-trials/search/'
-		);
+		cy.location('pathname').should('eq', '/');
 	} else {
 		throw new Error('please provide either Basic or Advanced search page');
 	}

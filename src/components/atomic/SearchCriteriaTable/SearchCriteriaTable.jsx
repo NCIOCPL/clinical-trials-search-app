@@ -8,6 +8,7 @@ import './SearchCriteriaTable.scss';
 import { Accordion, AccordionItem, Table } from '../../atomic';
 import { START_OVER_LINK } from '../../../constants';
 import { updateFormField } from '../../../store/actions';
+import { useAppPaths } from '../../../hooks/routing';
 
 const SearchCriteriaTable = ({
 	placement = 'results',
@@ -42,6 +43,8 @@ const SearchCriteriaTable = ({
 		location,
 		formType,
 	} = useSelector((store) => store.form);
+
+	const { BasicSearchPagePath, AdvancedSearchPagePath } = useAppPaths();
 
 	SearchCriteriaTable.propTypes = {
 		placement: PropTypes.string,
@@ -311,9 +314,7 @@ const SearchCriteriaTable = ({
 			{placement === 'trial' ? (
 				<Link
 					to={`${
-						formType === 'basic'
-							? '/about-cancer/treatment/clinical-trials/search/'
-							: '/about-cancer/treatment/clinical-trials/search/advanced'
+						formType === 'basic' ? BasicSearchPagePath : AdvancedSearchPagePath
 					}`}
 					onClick={() => handleReset(START_OVER_LINK)}>
 					<strong>Start Over</strong>
@@ -323,8 +324,8 @@ const SearchCriteriaTable = ({
 					<Link
 						to={`${
 							formType === 'basic'
-								? '/about-cancer/treatment/clinical-trials/search/'
-								: '/about-cancer/treatment/clinical-trials/search/advanced'
+								? BasicSearchPagePath
+								: AdvancedSearchPagePath
 						}`}
 						onClick={() => handleReset(START_OVER_LINK)}>
 						Start Over
@@ -346,8 +347,8 @@ const SearchCriteriaTable = ({
 					<Link
 						to={`${
 							formType === 'basic'
-								? '/about-cancer/treatment/clinical-trials/search/'
-								: '/about-cancer/treatment/clinical-trials/search/advanced'
+								? BasicSearchPagePath
+								: AdvancedSearchPagePath
 						}`}
 						onClick={() => handleReset(START_OVER_LINK)}>
 						<strong>Start Over</strong>

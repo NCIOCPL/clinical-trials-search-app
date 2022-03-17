@@ -1,7 +1,7 @@
 Feature: Advanced Clinical Trials Search Drug Treatment Section
 
 	Scenario: User has an option to narrow down search criteria by Drug or treatment
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+		Given the user navigates to "/advanced"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And "Drug/Treatment" form section is displayed
 		And help icon is displayed in "Drug/Treatment" section with href "/about-cancer/treatment/clinical-trials/search/help#drugtreatment"
@@ -12,7 +12,7 @@ Feature: Advanced Clinical Trials Search Drug Treatment Section
 		And helper text "More than one selection may be made." is displayed
 
 	Scenario: User has an option to search by Drug and treatment using autosuggest and refine search
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+		Given the user navigates to "/advanced"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And "Drug/Treatment" form section is displayed
 		When user clicks on "Drug" field
@@ -53,7 +53,7 @@ Feature: Advanced Clinical Trials Search Drug Treatment Section
 			| i         | C18309 |
 
 	Scenario: User has an option to search for multiple Drug and treatment using autosuggest and then refine search
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+		Given the user navigates to "/advanced"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And "Drug/Treatment" form section is displayed
 		When user clicks on "Drug" field
@@ -103,7 +103,7 @@ Feature: Advanced Clinical Trials Search Drug Treatment Section
 			| i         | C18309 |
 
 	Scenario: User enters keyword that does not return a match for drug and intervention
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+		Given the user navigates to "/advanced"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And "Drug/Treatment" form section is displayed
 		When user clicks on "Drug" field
@@ -116,7 +116,7 @@ Feature: Advanced Clinical Trials Search Drug Treatment Section
 		Then autocomplete dropdown is displayed with "No results found" text
 
 	Scenario: User is searching for a drug by it's preferred name
-		Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+		Given the user navigates to "/advanced"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And "Drug/Treatment" form section is displayed
 		When user clicks on "Drug" field

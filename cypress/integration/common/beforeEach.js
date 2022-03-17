@@ -10,7 +10,7 @@ beforeEach(() => {
 			analyticsName: 'Clinical Trials',
 			appId: '@@/DEFAULT_CTS_APP_ID',
 			baseHost: 'http://localhost:3000',
-			basePath: '/about-cancer/treatment/clinical-trials/search',
+			basePath: '/',
 			canonicalHost: 'https://www.cancer.gov',
 			ctsTitle: 'Find NCI-Supported Clinical Trials',
 			language: 'en',

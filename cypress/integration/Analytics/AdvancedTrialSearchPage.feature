@@ -8,14 +8,14 @@ Feature: Clinical Trials Search Page - Advanced
     And "channel" is set to "About Cancer"
     And "analyticsPublishedDate" is set to "02/02/2011"
     And "analyticsName" is set to "Clinical Trials"
-    When the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+    When the user navigates to "/advanced"
     Then the page title is "Find NCI-Supported Clinical Trials"
     And browser waits
     Then there should be an analytics event with the following details
         | key                                  | value                                                                            |
         | type                                 | PageLoad                                                                         |
         | event                                | ClinicalTrialsSearchApp:Load:AdvancedSearch                                      |
-        | page.name                            | www.cancer.gov/about-cancer/treatment/clinical-trials/search/advanced            |
+        | page.name                            | www.cancer.gov/advanced            																							|
         | page.title                           | Find NCI-Supported Clinical Trials - Advanced Search                             |
         | page.metaTitle                       | Find NCI-Supported Clinical Trials - Advanced Search - National Cancer Institute |
         | page.language                        | english                                                                          |
@@ -34,7 +34,7 @@ Feature: Clinical Trials Search Page - Advanced
     And "channel" is set to "About Cancer"
     And "analyticsPublishedDate" is set to "02/02/2011"
     And "analyticsName" is set to "Clinical Trials"
-    When the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+    When the user navigates to "/advanced"
     Then the page title is "Find NCI-Supported Clinical Trials"
     And browser waits
     When user clicks on "All" button
@@ -58,7 +58,7 @@ Feature: Clinical Trials Search Page - Advanced
     And "channel" is set to "About Cancer"
     And "analyticsPublishedDate" is set to "02/02/2011"
     And "analyticsName" is set to "Clinical Trials"
-    When the user navigates to "/about-cancer/treatment/clinical-trials/search/r?loc=0&rl=2"
+    When the user navigates to "/r?loc=0&rl=2"
     Then the page title is "Clinical Trials Search Results"
     And browser waits
     When user clicks on 1 trial result
@@ -80,14 +80,14 @@ Feature: Clinical Trials Search Page - Advanced
     And "channel" is set to "About Cancer"
     And "analyticsPublishedDate" is set to "02/02/2011"
     And "analyticsName" is set to "Clinical Trials"
-    When the user navigates to "/about-cancer/treatment/clinical-trials/search/r?loc=0&rl=2&stg=C94774&t=C4872"
+    When the user navigates to "/r?loc=0&rl=2&stg=C94774&t=C4872"
     Then the page title is "Clinical Trials Search Results"
     And browser waits
     Then there should be an analytics event with the following details
       | key                                                   | value                                                          |
       | type                                                  | PageLoad                                                       |
       | event                                                 | ClinicalTrialsSearchApp:Load:Results                           |
-      | page.name                                             | www.cancer.gov/about-cancer/treatment/clinical-trials/search/r |
+      | page.name                                             | www.cancer.gov/r 																							 |
       | page.title                                            | Clinical Trials Search Results                                 |
       | page.metaTitle                                        | Clinical Trials Search Results - National Cancer Institute     |
       | page.language                                         | english                                                        |
@@ -116,14 +116,14 @@ Feature: Clinical Trials Search Page - Advanced
     And "channel" is set to "About Cancer"
     And "analyticsPublishedDate" is set to "02/02/2011"
     And "analyticsName" is set to "Clinical Trials"
-    When the user navigates to "/about-cancer/treatment/clinical-trials/search/r?a=40&loc=4&q=psa&rl=2"
+    When the user navigates to "/r?a=40&loc=4&q=psa&rl=2"
     Then the page title is "Clinical Trials Search Results"
     And browser waits
     Then there should be an analytics event with the following details
       | key                                                   | value                                                          |
       | type                                                  | PageLoad                                                       |
       | event                                                 | ClinicalTrialsSearchApp:Load:Results                           |
-      | page.name                                             | www.cancer.gov/about-cancer/treatment/clinical-trials/search/r |
+      | page.name                                             | www.cancer.gov/r 																							 |
       | page.title                                            | Clinical Trials Search Results                                 |
       | page.metaTitle                                        | Clinical Trials Search Results - National Cancer Institute     |
       | page.language                                         | english                                                        |
@@ -152,14 +152,14 @@ Feature: Clinical Trials Search Page - Advanced
     And "channel" is set to "About Cancer"
     And "analyticsPublishedDate" is set to "02/02/2011"
     And "analyticsName" is set to "Clinical Trials"
-    When the user navigates to "/about-cancer/treatment/clinical-trials/search/r?lcnty=United%20States&loc=2&lst=WA&rl=2&va=1"
+    When the user navigates to "/r?lcnty=United%20States&loc=2&lst=WA&rl=2&va=1"
     Then the page title is "Clinical Trials Search Results"
     And browser waits
     Then there should be an analytics event with the following details
       | key                                                   | value                                                          |
       | type                                                  | PageLoad                                                       |
       | event                                                 | ClinicalTrialsSearchApp:Load:Results                           |
-      | page.name                                             | www.cancer.gov/about-cancer/treatment/clinical-trials/search/r |
+      | page.name                                             | www.cancer.gov/r 																							 |
       | page.title                                            | Clinical Trials Search Results                                 |
       | page.metaTitle                                        | Clinical Trials Search Results - National Cancer Institute     |
       | page.language                                         | english                                                        |
@@ -189,14 +189,14 @@ Feature: Clinical Trials Search Page - Advanced
     And "channel" is set to "About Cancer"
     And "analyticsPublishedDate" is set to "02/02/2011"
     And "analyticsName" is set to "Clinical Trials"
-    When the user navigates to "/about-cancer/treatment/clinical-trials/search/r?hos=UM%20Baltimore%20Washington%20Medical%20Center%20%2F%20Tate%20Cancer%20Center&loc=3&rl=2"
+    When the user navigates to "/r?hos=UM%20Baltimore%20Washington%20Medical%20Center%20%2F%20Tate%20Cancer%20Center&loc=3&rl=2"
     Then the page title is "Clinical Trials Search Results"
     And browser waits
     Then there should be an analytics event with the following details
       | key                                                   | value                                                           |
       | type                                                  | PageLoad                                                        |
       | event                                                 | ClinicalTrialsSearchApp:Load:Results                            |
-      | page.name                                             | www.cancer.gov/about-cancer/treatment/clinical-trials/search/r  |
+      | page.name                                             | www.cancer.gov/r  																							|
       | page.title                                            | Clinical Trials Search Results                                  |
       | page.metaTitle                                        | Clinical Trials Search Results - National Cancer Institute      |
       | page.language                                         | english                                                         |
@@ -224,14 +224,14 @@ Feature: Clinical Trials Search Page - Advanced
     And "channel" is set to "About Cancer"
     And "analyticsPublishedDate" is set to "02/02/2011"
     And "analyticsName" is set to "Clinical Trials"
-    When the user navigates to "/about-cancer/treatment/clinical-trials/search/r?hv=1&loc=0&rl=2&tt=treatment&tt=prevention&tt=supportive_care&tt=health_services_research&tt=diagnostic&tt=screening&tt=basic_science&tt=other"
+    When the user navigates to "/r?hv=1&loc=0&rl=2&tt=treatment&tt=prevention&tt=supportive_care&tt=health_services_research&tt=diagnostic&tt=screening&tt=basic_science&tt=other"
     Then the page title is "Clinical Trials Search Results"
     And browser waits
     Then there should be an analytics event with the following details
       | key                                                   | value                                                                                                       |
       | type                                                  | PageLoad                                                                                                    |
       | event                                                 | ClinicalTrialsSearchApp:Load:Results                                                                        |
-      | page.name                                             | www.cancer.gov/about-cancer/treatment/clinical-trials/search/r                                              |
+      | page.name                                             | www.cancer.gov/r                                              																							|
       | page.title                                            | Clinical Trials Search Results                                                                              |
       | page.metaTitle                                        | Clinical Trials Search Results - National Cancer Institute                                                  |
       | page.language                                         | english                                                                                                     |
@@ -260,14 +260,14 @@ Feature: Clinical Trials Search Page - Advanced
     And "channel" is set to "About Cancer"
     And "analyticsPublishedDate" is set to "02/02/2011"
     And "analyticsName" is set to "Clinical Trials"
-    When the user navigates to "/about-cancer/treatment/clinical-trials/search/r?d=C599&i=C18309&loc=0&rl=2&tp=i&tp=ii&tp=iii&tp=iv"
+    When the user navigates to "/r?d=C599&i=C18309&loc=0&rl=2&tp=i&tp=ii&tp=iii&tp=iv"
     Then the page title is "Clinical Trials Search Results"
     And browser waits
     Then there should be an analytics event with the following details
       | key                                                   | value                                                          |
       | type                                                  | PageLoad                                                       |
       | event                                                 | ClinicalTrialsSearchApp:Load:Results                           |
-      | page.name                                             | www.cancer.gov/about-cancer/treatment/clinical-trials/search/r |
+      | page.name                                             | www.cancer.gov/r 																							 |
       | page.title                                            | Clinical Trials Search Results                                 |
       | page.metaTitle                                        | Clinical Trials Search Results - National Cancer Institute     |
       | page.language                                         | english                                                        |
@@ -298,14 +298,14 @@ Feature: Clinical Trials Search Page - Advanced
     And "channel" is set to "About Cancer"
     And "analyticsPublishedDate" is set to "02/02/2011"
     And "analyticsName" is set to "Clinical Trials"
-    When the user navigates to "/about-cancer/treatment/clinical-trials/search/r?in=Jarushka%20Naidoo&lo=ECOG-ACRIN%20Cancer%20Research%20Group&loc=0&rl=2&tid=NCI-2018-02825"
+    When the user navigates to "/r?in=Jarushka%20Naidoo&lo=ECOG-ACRIN%20Cancer%20Research%20Group&loc=0&rl=2&tid=NCI-2018-02825"
     Then the page title is "Clinical Trials Search Results"
     And browser waits
     Then there should be an analytics event with the following details
       | key                                                   | value                                                                          |
       | type                                                  | PageLoad                                                                       |
       | event                                                 | ClinicalTrialsSearchApp:Load:Results                                           |
-      | page.name                                             | www.cancer.gov/about-cancer/treatment/clinical-trials/search/r                 |
+      | page.name                                             | www.cancer.gov/r                 																							 |
       | page.title                                            | Clinical Trials Search Results                                                 |
       | page.metaTitle                                        | Clinical Trials Search Results - National Cancer Institute                     |
       | page.language                                         | english                                                                        |
@@ -336,7 +336,7 @@ Feature: Clinical Trials Search Page - Advanced
   And "channel" is set to "About Cancer"
   And "analyticsPublishedDate" is set to "02/02/2011"
   And "analyticsName" is set to "Clinical Trials"
-  When the user navigates to "/about-cancer/treatment/clinical-trials/search/r?a=40&loc=0&rl=2"
+  When the user navigates to "/r?a=40&loc=0&rl=2"
   Then the page title is "Clinical Trials Search Results"
   And browser waits
   When user clicks on "Modify Search Criteria" button
@@ -359,7 +359,7 @@ Scenario: Click event fires when user selects all on page and click print
   And "channel" is set to "About Cancer"
   And "analyticsPublishedDate" is set to "02/02/2011"
   And "analyticsName" is set to "Clinical Trials"
-  When the user navigates to "/about-cancer/treatment/clinical-trials/search/r?loc=0&rl=2"
+  When the user navigates to "/r?loc=0&rl=2"
   Then the page title is "Clinical Trials Search Results"
   And browser waits
   When user checks "Select all on page" checkbox
@@ -386,7 +386,7 @@ Scenario: Click event fires when user selects all on page and click print
 #   And "channel" is set to "About Cancer"
 #   And "analyticsPublishedDate" is set to "02/02/2011"
 #   And "analyticsName" is set to "Clinical Trials"
-#   When the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+#   When the user navigates to "/advanced"
 #   Then the page title is "Find NCI-Supported Clinical Trials"
 #   And browser waits
 #   When user scrolls to middle of screen
@@ -409,7 +409,7 @@ Scenario: Click event fires when user clicks on Clear Form button
   And "channel" is set to "About Cancer"
   And "analyticsPublishedDate" is set to "02/02/2011"
   And "analyticsName" is set to "Clinical Trials"
-  When the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+  When the user navigates to "/advanced"
   Then the page title is "Find NCI-Supported Clinical Trials"
   And browser waits
   When user clears form
@@ -429,7 +429,7 @@ Scenario: Click event fires when user tries to print without selecting any trial
   And "channel" is set to "About Cancer"
   And "analyticsPublishedDate" is set to "02/02/2011"
   And "analyticsName" is set to "Clinical Trials"
-  When the user navigates to "/about-cancer/treatment/clinical-trials/search/r?loc=0&rl=2"
+  When the user navigates to "/r?loc=0&rl=2"
   Then the page title is "Clinical Trials Search Results"
   And browser waits
   And user clicks on "Print Selected" button
@@ -451,7 +451,7 @@ Scenario: Click event fires when user reaches max number of selected trials
   And "channel" is set to "About Cancer"
   And "analyticsPublishedDate" is set to "02/02/2011"
   And "analyticsName" is set to "Clinical Trials"
-  When the user navigates to "/about-cancer/treatment/clinical-trials/search/r?loc=0&rl=2"
+  When the user navigates to "/r?loc=0&rl=2"
   Then the page title is "Clinical Trials Search Results"
   And browser waits
   When user checks "Select all on page" checkbox on 11 pages

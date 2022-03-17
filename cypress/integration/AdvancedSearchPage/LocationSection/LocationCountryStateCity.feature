@@ -2,7 +2,7 @@ Feature: As a user, I want to be able to narrow down my search by specifying cou
 
 
     Scenario: User has an option to limit results to Country, State and City and refine search
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+        Given the user navigates to "/advanced"
         Then the page title is "Find NCI-Supported Clinical Trials"
         And "Limit results to Veterans Affairs facilities" toggle is switched to "No"
         When user selects "Country, State, City" radio button
@@ -46,7 +46,7 @@ Feature: As a user, I want to be able to narrow down my search by specifying cou
 
 
     Scenario: User has an option to limit results to a foreign Country and city
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+        Given the user navigates to "/advanced"
         Then the page title is "Find NCI-Supported Clinical Trials"
         And "Limit results to Veterans Affairs facilities" toggle is switched to "No"
         When user selects "Country, State, City" radio button
@@ -75,7 +75,7 @@ Feature: As a user, I want to be able to narrow down my search by specifying cou
         And the matched location "city" is "London"
 
     Scenario: User has an option to limit results to the US and city and refines search
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+        Given the user navigates to "/advanced"
         Then the page title is "Find NCI-Supported Clinical Trials"
         And "Limit results to Veterans Affairs facilities" toggle is switched to "No"
         When user selects "Country, State, City" radio button
@@ -118,7 +118,7 @@ Feature: As a user, I want to be able to narrow down my search by specifying cou
         And the 1 result item has a "Location:" info with "1390 locations, including 2 near you"
 
     Scenario: User has an option to search for multiple states and refine search
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+        Given the user navigates to "/advanced"
         Then the page title is "Find NCI-Supported Clinical Trials"
         And "Limit results to Veterans Affairs facilities" toggle is switched to "No"
         When user selects "Country, State, City" radio button
@@ -161,7 +161,7 @@ Feature: As a user, I want to be able to narrow down my search by specifying cou
         And the 1 result item has a "Location:" info with "1390 locations, including 2 near you"
 
     Scenario: User has an option to navigate direclt to url with Country, State and City and refine search
-        Given the user navigates to "about-cancer/treatment/clinical-trials/search/r?lcnty=United%20States&lcty=Richmond&loc=2&lst=VA&rl=2"
+        Given the user navigates to "/r?lcnty=United%20States&lcty=Richmond&loc=2&lst=VA&rl=2"
         And trial info displayes "Results 1-10  of 191 for your search "
         And the criteria table displays the following
             | Category | Selection     |
@@ -216,7 +216,7 @@ Feature: As a user, I want to be able to narrow down my search by specifying cou
         And the 1 result item has a "Location:" info with "1390 locations, including 2 near you"
 
     Scenario: User has an option navigate directly to url with a country that doesn't return a match
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/r?lcnty=Russia&loc=2&rl=2"
+        Given the user navigates to "/r?lcnty=Russia&loc=2&rl=2"
         And "No clinical trials matched your search." no trial info is displayed
         And the criteria table displays the following
             | Category | Selection |

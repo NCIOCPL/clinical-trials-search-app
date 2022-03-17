@@ -2,7 +2,7 @@ Feature: As a user, I want to be able to narrow down my search by location
 
 
     Scenario: User has an option to narrow down search criteria by location
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+        Given the user navigates to "/advanced"
         Then the page title is "Find NCI-Supported Clinical Trials"
         And "Location" form section is displayed
         And help icon is displayed in "Location" section with href "/about-cancer/treatment/clinical-trials/search/help#location"
@@ -12,7 +12,7 @@ Feature: As a user, I want to be able to narrow down my search by location
         And "Search All Locations" radio button is checked
 
     Scenario: User has an option to limit results to show trials at NIH only
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/advanced"
+        Given the user navigates to "/advanced"
         Then the page title is "Find NCI-Supported Clinical Trials"
         And "Limit results to Veterans Affairs facilities" toggle is switched to "No"
         When user selects "At NIH (only show trials at the NIH Clinical Center in Bethesda, MD)" radio button
@@ -29,7 +29,7 @@ Feature: As a user, I want to be able to narrow down my search by location
         And the 1 result item has a "Location:" info with "Location information is not yet available"
 
     Scenario: User has an option to navigate directly to a url which shows trials at NIH only
-        Given the user navigates to "/about-cancer/treatment/clinical-trials/search/r?loc=4&rl=2"
+        Given the user navigates to "/r?loc=4&rl=2"
         Then the search is executed and results page is displayed
         And trial info displayes "Results 1-10  of 283 for your search "
 				And the criteria table displays the following
