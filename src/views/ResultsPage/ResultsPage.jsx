@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useTracking } from 'react-tracking';
-import { updateFormSearchCriteria, clearForm } from '../../store/actions';
+import { updateFormSearchCriteria } from '../../store/actions';
 import { ChatOpener, Delighter, Modal, Pager } from '../../components/atomic';
 import { TRY_NEW_SEARCH_LINK } from '../../constants';
 import ErrorPage from '../ErrorPage';
@@ -299,7 +299,6 @@ const ResultsPage = () => {
 			formType: searchCriteriaObject.formType,
 			source: linkType,
 		});
-		dispatch(clearForm());
 	};
 
 	const handleRefineSearch = () => {
