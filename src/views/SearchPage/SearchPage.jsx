@@ -5,6 +5,8 @@ import { Helmet } from 'react-helmet';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTracking } from 'react-tracking';
 import { Delighter, StickySubmitBlock } from '../../components/atomic';
+import { convertObjectToBase64 } from '../../utilities/objects';
+
 import {
 	Age,
 	CancerTypeCondition,
@@ -45,6 +47,7 @@ import {
 import { useAppSettings } from '../../store/store.js';
 import { buildQueryString } from '../../utilities';
 import { usePrintContext } from '../../store/printContext';
+
 const queryString = require('query-string');
 
 // Module groups in arrays will be placed side-by-side in the form
@@ -88,6 +91,14 @@ const SearchPage = ({ formInit = 'basic' }) => {
 	const { maintypeOptions } = useSelector((store) => store.cache);
 	// The selected trials for print
 	const { clearSelectedTrials } = usePrintContext();
+
+	const [locationHash, setLocationHash] = useState(
+		convertObjectToBase64(currentForm)
+	);
+
+	useEffect(() => {
+		setLocationHash(convertObjectToBase64(locationState));
+	}, [locationState]);
 
 	const handleUpdate = (field, value) => {
 		dispatch(
@@ -382,50 +393,55 @@ const SearchPage = ({ formInit = 'basic' }) => {
 			</div>
 
 			<div className="search-page__content">
-				<form
-					id={SEARCH_FORM_ID}
-					onSubmit={handleSubmit}
-					className={`search-page__form ${pageType}`}>
-					{formModules.map((Module, idx) => {
-						if (Array.isArray(Module)) {
-							return (
-								<div key={`formAdvanced-${idx}`} className="side-by-side">
-									{Module.map((Mod, i) => (
-										<Mod
-											key={`formAdvanced-${idx}-${i}`}
-											handleUpdate={handleUpdate}
-											tracking={tracking}
-										/>
-									))}
-								</div>
-							);
-						} else {
-							return (
-								<Module
-									key={`formAdvanced-${idx}`}
-									handleUpdate={handleUpdate}
-									tracking={tracking}
-								/>
-							);
-						}
-					})}
-					{pageType === 'advanced' ? (
-						<StickySubmitBlock
-							formType={pageType}
-							sentinel={sentinelRef}
-							onSubmit={handleSubmit}
-						/>
-					) : (
-						<div className="static-submit-block">
-							<button
-								type="submit"
-								className="btn-submit faux-btn-submit"
-								onClick={handleSubmit}>
-								Find Trials
-							</button>
-						</div>
-					)}
-				</form>
+				{!refineSearch &&
+				convertObjectToBase64(locationState) !== locationHash ? (
+					<></>
+				) : (
+					<form
+						id={SEARCH_FORM_ID}
+						onSubmit={handleSubmit}
+						className={`search-page__form ${pageType}`}>
+						{formModules.map((Module, idx) => {
+							if (Array.isArray(Module)) {
+								return (
+									<div key={`formAdvanced-${idx}`} className="side-by-side">
+										{Module.map((Mod, i) => (
+											<Mod
+												key={`formAdvanced-${idx}-${i}`}
+												handleUpdate={handleUpdate}
+												tracking={tracking}
+											/>
+										))}
+									</div>
+								);
+							} else {
+								return (
+									<Module
+										key={`formAdvanced-${idx}`}
+										handleUpdate={handleUpdate}
+										tracking={tracking}
+									/>
+								);
+							}
+						})}
+						{pageType === 'advanced' ? (
+							<StickySubmitBlock
+								formType={pageType}
+								sentinel={sentinelRef}
+								onSubmit={handleSubmit}
+							/>
+						) : (
+							<div className="static-submit-block">
+								<button
+									type="submit"
+									className="btn-submit faux-btn-submit"
+									onClick={handleSubmit}>
+									Find Trials
+								</button>
+							</div>
+						)}
+					</form>
+				)}
 				<aside className="search-page__aside">{renderDelighters()}</aside>
 			</div>
 
