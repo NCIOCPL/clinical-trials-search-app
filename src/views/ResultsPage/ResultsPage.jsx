@@ -178,7 +178,7 @@ const ResultsPage = () => {
 		});
 	}, [location]);
 
-	// If we have a search criteria object and paylaod, we have a successful fetch.
+	// If we have a search criteria object and payload, we have a successful fetch.
 	useEffect(() => {
 		if (
 			searchCriteriaObject &&
@@ -198,6 +198,7 @@ const ResultsPage = () => {
 
 			// At this point, the wrapped view is going to handle this request.
 			ctsDispatch(setSuccessfulFetch(currentActionsHash, payload[0]));
+			//The search Query is correctly constructed, but the payload is being returned as null
 		}
 	}, [loading, payload, searchCriteriaObject]);
 
@@ -533,6 +534,38 @@ const ResultsPage = () => {
 		return <ErrorPage initErrorsList={error} />;
 	};
 
+	const checkIfInvalidPage = () => {
+		return isLoading && currentPage > 1 && trialResults === null;
+	};
+
+	const renderInvalidPageNumber = () => {
+		return (
+			<div className="results-list no-results">
+				<p>
+					<strong>
+						No clinical trials matched your search. Page {currentPage} is
+						invalid.
+					</strong>
+				</p>
+				<div>
+					For assistance, please contact the Cancer Information Service. You can{' '}
+					<ChatOpener /> or call 1-800-4-CANCER (1-800-422-6237).
+				</div>
+				<p>
+					<Link
+						to={`${
+							searchCriteriaObject.formType === 'basic'
+								? BasicSearchPagePath()
+								: AdvancedSearchPagePath()
+						}`}
+						onClick={() => handleStartOver(TRY_NEW_SEARCH_LINK)}>
+						Try a new search
+					</Link>
+				</p>
+			</div>
+		);
+	};
+
 	const renderNoResults = () => {
 		return (
 			<div className="results-list no-results">
@@ -588,7 +621,9 @@ const ResultsPage = () => {
 					<>{renderInvalidZip()}</>
 				) : (
 					<>
-						{isLoading || !searchCriteriaObject ? (
+						{checkIfInvalidPage() ? (
+							<></>
+						) : isLoading || !searchCriteriaObject ? (
 							<div className="loader__pageheader"></div>
 						) : (
 							<ResultsPageHeader
@@ -597,13 +632,16 @@ const ResultsPage = () => {
 								onModifySearchClick={handleRefineSearch}
 								onStartOverClick={handleStartOver}
 								searchCriteriaObject={searchCriteriaObject}
+								isLoading={isLoading}
+								trialResults={trialResults}
 							/>
 						)}
-
 						<div className="results-page__content">
-							{renderControls()}
+							{checkIfInvalidPage() ? <> </> : <>{renderControls()}</>}
 							<div className="results-page__list">
-								{isLoading || !searchCriteriaObject ? (
+								{checkIfInvalidPage() ? (
+									<>{renderInvalidPageNumber()}</>
+								) : isLoading || !searchCriteriaObject ? (
 									<>{renderResultsListLoader()}</>
 								) : trialResults && trialResults.total === 0 ? (
 									<>{renderNoResults()}</>
@@ -624,7 +662,7 @@ const ResultsPage = () => {
 									{renderDelighters()}
 								</aside>
 							</div>
-							{renderControls(true)}
+							{checkIfInvalidPage() ? <> </> : <>{renderControls(true)}</>}
 						</div>
 					</>
 				)}
