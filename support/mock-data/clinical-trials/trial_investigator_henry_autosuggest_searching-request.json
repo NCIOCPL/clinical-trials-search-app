@@ -1,5 +1,5 @@
 {
-	"principal_investigator_fulltext": "henry",
+
 	"current_trial_status": [
 		"Active",
 		"Approved",
@@ -24,6 +24,7 @@
 		"sites.recruitment_status",
 		"diseases"
 	],
+	"principal_investigator._fulltext": "henry",
 	"from":0,
 	"size":10
 }

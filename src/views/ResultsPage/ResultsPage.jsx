@@ -148,7 +148,7 @@ const ResultsPage = () => {
 			if (
 				res.searchCriteria &&
 				!Number.isNaN(res.searchCriteria.resultsPage) &&
-				currentPage != res.searchCriteria.resultsPage
+				currentPage !== res.searchCriteria.resultsPage
 			) {
 				ctsDispatch({
 					type: 'SET_PROP',

@@ -23,7 +23,7 @@
 		"sites.recruitment_status",
 		"diseases"
 	],
-	"arms.interventions.intervention_code": [
+	"arms.interventions.nci_thesaurus_concept_id": [
 		"C274"
 	],
 	"from": 0,

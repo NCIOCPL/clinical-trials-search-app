@@ -1,8 +1,4 @@
 {
-    "primary_purpose.primary_purpose_code": [
-        "treatment",
-        "diagnostic"
-    ],
     "current_trial_status": [
         "Active",
         "Approved",
@@ -27,6 +23,10 @@
         "sites.recruitment_status",
         "diseases"
     ],
+	"primary_purpose": [
+		"treatment",
+		"diagnostic"
+	],
 	"from":0,
 	"size":10
 }

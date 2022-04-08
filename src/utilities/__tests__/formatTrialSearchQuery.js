@@ -293,8 +293,8 @@ const mappingTestCases = [
 			zipCoords: { lat: 39.0897, long: -77.1798 },
 		},
 		{
-			'sites.org_coordinates_lat': 39.0897,
-			'sites.org_coordinates_lon': -77.1798,
+			'sites.org_coordinates_lat': '39.0897',
+			'sites.org_coordinates_lon': '-77.1798',
 			'sites.org_coordinates_dist': '500mi',
 			'sites.recruitment_status': ACTIVE_RECRUITMENT_STATUSES,
 		},

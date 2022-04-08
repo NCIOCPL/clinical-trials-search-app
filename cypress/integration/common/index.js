@@ -27,7 +27,7 @@ Then('the page title is {string}', (title) => {
 });
 
 And('browser waits', () => {
-	cy.wait(2000);
+	cy.wait(6000);
 });
 
 Given('screen breakpoint is set to {string}', (screenSize) => {
