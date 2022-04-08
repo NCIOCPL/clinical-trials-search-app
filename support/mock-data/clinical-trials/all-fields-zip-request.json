@@ -27,8 +27,8 @@
     "_trialids": [
         "NCI-2017-00476"
     ],
-    "sites.org_coordinates_lat": 33.7984,
-    "sites.org_coordinates_lon": -84.3883,
+    "sites.org_coordinates_lat": "33.7984",
+    "sites.org_coordinates_lon": "-84.3883",
     "sites.org_coordinates_dist": "100mi",
     "sites.recruitment_status": [
         "active",
