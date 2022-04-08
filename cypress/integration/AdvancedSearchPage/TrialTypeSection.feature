@@ -20,7 +20,7 @@ Feature: Advanced Clinical Trials Search Trial Type Section
         Then "All" checkbox is not checked
         When user clicks on "Find Trials" button
         Then the search is executed and results page is displayed
-        And trial info displays "Results 1-10  of 7292 for your search "
+        And trial info displays "Results 1-10  of 6306 for your search "
         And the criteria table displays the following
             | Category   | Selection                                                                                                     |
             | Trial Type | Treatment, Prevention, Supportive Care, Health Services Research, Diagnostic, Screening, Basic Science, Other |

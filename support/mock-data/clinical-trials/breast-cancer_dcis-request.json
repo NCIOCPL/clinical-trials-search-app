@@ -1,10 +1,5 @@
 {
-    "_maintypes": [
-        "C4872"
-    ],
-    "_subtypes": [
-        "C2924"
-    ],
+
     "current_trial_status": [
         "Active",
         "Approved",
@@ -29,6 +24,12 @@
         "sites.recruitment_status",
         "diseases"
     ],
+	"maintype": [
+		"C4872"
+	],
+	"subtype": [
+		"C2924"
+	],
 	"from":0,
 	"size":10
 }

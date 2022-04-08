@@ -19,7 +19,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 			| desktop    |
 			| mobile     |
 			| tablet     |
-
+#
 	Scenario Outline: all form fields are displayed with its components
 		Given screen breakpoint is set to "<breakpoint>"
 		Given the user navigates to "/"
@@ -42,6 +42,8 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 			| mobile     |
 			| tablet     |
 
+	# c9293-request.json
+	# breast-cancer-request.json
 	Scenario: User is able to search for and use autosuggested items for cancer type/keyword
 		Given screen breakpoint is set to "desktop"
 		Given the user navigates to "/"
@@ -81,6 +83,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 			| rl        | 2     |
 
 
+#	basic_bogus_phrase-request.json
 	Scenario: Negative: user is searching for a keyword that does not exist
 		Given screen breakpoint is set to "tablet"
 		Given the user navigates to "/"
@@ -131,7 +134,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 			| loc       | 0     |
 			| rl        | 2     |
 
-
+#
 	Scenario: Negative: User is not able to search for age out of boundaries
 		Given the user navigates to "/"
 		Then the page title is "Find NCI-Supported Clinical Trials"
@@ -144,7 +147,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 		Then alert "Please enter a number between 1 and 120." is displayed in "Age" section
 		When user clicks on "Find Trials" button
 		Then the search is not executed and path is "/"
-
+ #zip-22182-request.json
 	Scenario: User is able to search for a specific zip code
 		Given screen breakpoint is set to "tablet"
 		Given the user navigates to "/"
@@ -188,7 +191,9 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 		And user clicks on "Find Trials" button
 		Then the search is not executed and path is "/"
 
-
+ #breast-cancer-70-request.json
+	#breastCancer_40yrs-request.json
+	#
 	Scenario: User is able to search for a trials using age and keyword and then refine search
 		Given screen breakpoint is set to "desktop"
 		Given the user navigates to "/"
@@ -232,6 +237,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 		Given the user navigates to "/"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And user clicks on "Find Trials" button
+	  And browser waits
 		Then the search is executed and results page is displayed
 		And trial info displays "Results 1-10  of 6821 for your search for: \"all trials\"   |  Start Over"
 		And the url query has the following corresponding code
@@ -239,7 +245,8 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 			| loc       | 0     |
 			| rl        | 1     |
 
-
+#	aids_30yrs_zip-22182-request.json
+#	aids_40yrs_zip-22182-request.json
 	Scenario: User has an option to go to search results url directly and modify search
 		Given the user navigates to "/r?a=30&loc=1&q=aids&rl=1&z=22182"
 		Then trial info displays "Results 1-10  of 17 for your search "
@@ -313,8 +320,8 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 			| z         | 22182 |
 			| zp        | 100   |
 
-
-	### meta data
+#
+#	### meta data
 
 	Scenario: As a search engine I want to have access to the meta data on a basic search page
 		Given the user navigates to "/"
