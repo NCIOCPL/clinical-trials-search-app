@@ -225,10 +225,21 @@ Feature: Clinical Trials Search Results Page Components
 			| Zip      |
 		And text "For assistance, please contact the Cancer Information Service. You can chat online or call 1-800-4-CANCER (1-800-422-6237)." is displayed
 		And "chat online" has a link "https://livehelp.cancer.gov/app/chat/chat_landing"
-		And "Try a new search" link has a href "/advanced"
+		And "Try a new search" link has a href "/"
 		When user clicks on chat online button
 		Then the chat is opened
 
+	Scenario: When user is on a no trials found page because of invalid url parameters with advanced form
+		Given the user navigates to "/r?loc=1&rl=2&z=200"
+		And text "Sorry, you seem to have entered invalid criteria. Please check the following, and try your search again:" is displayed
+		And the invalid criteria table displays the following
+			| Criteria |
+			| Zip      |
+		And text "For assistance, please contact the Cancer Information Service. You can chat online or call 1-800-4-CANCER (1-800-422-6237)." is displayed
+		And "chat online" has a link "https://livehelp.cancer.gov/app/chat/chat_landing"
+		And "Try a new search" link has a href "/advanced"
+		When user clicks on chat online button
+		Then the chat is opened
 	### meta data
 
 	Scenario: As a user, I expect meta data to update accordingly when I search for criteria and modify my search
