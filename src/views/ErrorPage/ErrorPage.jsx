@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { ChatOpener, Delighter } from '../../components/atomic';
 import { useTracking } from 'react-tracking';
@@ -11,12 +10,27 @@ import { useAppSettings } from '../../store/store.js';
 import { useAppPaths } from '../../hooks/routing';
 
 import './ErrorPage.scss';
+import * as queryString from 'query-string';
+import { useLocation } from 'react-router-dom';
 
 const ErrorPage = ({ initErrorsList }) => {
-	const formSnapshot = useSelector((store) => store.form);
 	const tracking = useTracking();
 	const [{ dispatch, analyticsName, canonicalHost }] = useAppSettings();
 	const { AdvancedSearchPagePath, BasicSearchPagePath } = useAppPaths();
+
+	// Determine the original formType
+	const location = useLocation();
+	const qs = queryString.extract(location.search);
+	const query = queryString.parse(qs, {
+		parseBooleans: true,
+		parseNumbers: false,
+		arrayFormat: 'none',
+	});
+
+	let originalFormType = 'basic';
+	if (query['rl'] && query['rl'] === '2') {
+		originalFormType = 'advanced';
+	}
 
 	useEffect(() => {
 		const pageTitle = 'Errors Occurred';
@@ -150,9 +164,9 @@ const ErrorPage = ({ initErrorsList }) => {
 								<p>
 									<a
 										href={`${
-											formSnapshot.formType === 'basic'
-												? BasicSearchPagePath()
-												: AdvancedSearchPagePath()
+											originalFormType === 'advanced'
+												? AdvancedSearchPagePath()
+												: BasicSearchPagePath()
 										}`}
 										onClick={handleStartOver}>
 										Try a new search
