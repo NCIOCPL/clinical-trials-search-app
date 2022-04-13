@@ -78,7 +78,7 @@ Feature: As a user, I want to be able to use autocomplete features to it's full 
         Then autocomplete dropdown is displayed
         When user types "bre" in "Cancer Type/Keyword" field
         When user presses "enter" key from "Cancer Type/Keyword" field
-        Then "No clinical trials matched your search." no trial info is displayed
+			 Then "No clinical trials matched your search.For assistance, please contact the Cancer Information Service. You can chat online or call 1-800-4-CANCER (1-800-422-6237).Try a new search" no trial info is displayed
         And the criteria table displays the following
             | Category         | Selection |
             | Keywords/Phrases | bre       |

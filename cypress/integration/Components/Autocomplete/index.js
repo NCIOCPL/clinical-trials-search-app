@@ -81,7 +81,7 @@ And('the criteria table displays the following', (dataTable) => {
 });
 
 And('{string} no trial info is displayed', (noTrialsText) => {
-	cy.get('.no-trials-found').should('have.text', noTrialsText);
+	cy.get('.no-results').should('have.text', noTrialsText);
 });
 
 When('user selects {string} by touching the menu', (value) => {

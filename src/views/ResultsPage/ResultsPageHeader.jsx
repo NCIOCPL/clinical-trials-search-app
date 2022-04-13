@@ -34,11 +34,7 @@ const ResultsPageHeader = ({
 
 	return (
 		<div className="cts-results-header">
-			{resultsCount === 0 ? (
-				<div className="no-trials-found">
-					<strong>No clinical trials matched your search.</strong>
-				</div>
-			) : (
+			{resultsCount !== 0 && (
 				<div className="all-trials">
 					<strong>
 						Results{' '}
