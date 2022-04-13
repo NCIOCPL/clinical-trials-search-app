@@ -217,7 +217,7 @@ Feature: As a user, I want to be able to narrow down my search by specifying cou
 
     Scenario: User has an option navigate directly to url with a country that doesn't return a match
         Given the user navigates to "/r?lcnty=Russia&loc=2&rl=2"
-        And "No clinical trials matched your search." no trial info is displayed
+        And "No clinical trials matched your search.For assistance, please contact the Cancer Information Service. You can chat online or call 1-800-4-CANCER (1-800-422-6237).Try a new search" no trial info is displayed
         And the criteria table displays the following
             | Category | Selection |
             | Country  | Russia    |

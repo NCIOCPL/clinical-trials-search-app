@@ -67,7 +67,7 @@ And('user types {string} in {string} field', (text, fieldLabel) => {
 });
 
 And('{string} no trial info is displayed', (noTrialsText) => {
-	cy.get('.no-trials-found').should('have.text', noTrialsText);
+	cy.get('.no-results').should('have.text', noTrialsText);
 });
 
 And('{string} text is displayed as results header', (resHeader) => {

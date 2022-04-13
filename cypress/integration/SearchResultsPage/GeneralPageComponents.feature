@@ -188,7 +188,7 @@ Feature: Clinical Trials Search Results Page Components
 	#### no results page ######
 	Scenario: user navigates to no Trials found page, modifies search and able to see results found
 		Given the user navigates to "/r?fin=C18673&loc=0&rl=2&st=C8287&stg=C94774&t=C4872"
-		And "No clinical trials matched your search." no trial info is displayed
+		And "No clinical trials matched your search.For assistance, please contact the Cancer Information Service. You can chat online or call 1-800-4-CANCER (1-800-422-6237).Try a new search" no trial info is displayed
 		And the criteria table displays the following
 			| Category                                           | Selection                 |
 			| Primary Cancer Type/Condition                      | Breast Cancer             |
