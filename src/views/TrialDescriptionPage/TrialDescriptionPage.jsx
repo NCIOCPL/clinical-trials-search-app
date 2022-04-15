@@ -27,6 +27,7 @@ import {
 	queryStringToSearchCriteria,
 	runQueryFetchers,
 } from '../../utilities';
+import ErrorPage from '../ErrorPage';
 
 const TrialDescriptionPage = () => {
 	const rdx_dispatch = useDispatch();
@@ -132,8 +133,17 @@ const TrialDescriptionPage = () => {
 			};
 			searchCriteria().then((res) => {
 				setSearchCriteriaObject(res.searchCriteria);
-				setFetchActions(getClinicalTrialDescriptionAction(currId));
-				rdx_dispatch(updateFormSearchCriteria(res.searchCriteria));
+
+				if (res.errors.length) {
+					ls_dispatch({
+						type: 'SET_ERRORS',
+						payload: res.errors,
+					});
+					rdx_dispatch(res.errors);
+				} else {
+					setFetchActions(getClinicalTrialDescriptionAction(currId));
+					rdx_dispatch(updateFormSearchCriteria(res.searchCriteria));
+				}
 			});
 		}
 	}, [loading, payload, searchCriteriaObject]);
@@ -382,6 +392,10 @@ const TrialDescriptionPage = () => {
 		);
 	};
 
+	const renderInvalidSearchCriteria = () => {
+		return <ErrorPage initErrorsList={localState.errors} />;
+	};
+
 	const prettifyDescription = () => {
 		let formattedStr =
 			'<p>' +
@@ -438,6 +452,7 @@ const TrialDescriptionPage = () => {
 
 	return (
 		<>
+			{localState.errors.length !== 0 && <>{renderInvalidSearchCriteria()}</>}
 			{!isTrialLoading && error && <>Error Occurred!</>}
 			{!error && (
 				<>
@@ -658,5 +673,4 @@ const TrialDescriptionPage = () => {
 		</>
 	);
 };
-
 export default TrialDescriptionPage;

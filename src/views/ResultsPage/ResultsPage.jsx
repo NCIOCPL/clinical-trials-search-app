@@ -615,7 +615,6 @@ const ResultsPage = () => {
 				/>
 			</Helmet>
 			<article className="results-page">
-				<h1>Clinical Trials Search Results</h1>
 				{error.length && error.filter((err) => err.fieldName === 'zip') ? (
 					<>{renderInvalidZip()}</>
 				) : (
@@ -625,15 +624,19 @@ const ResultsPage = () => {
 						) : isLoading || !searchCriteriaObject ? (
 							<div className="loader__pageheader"></div>
 						) : (
-							<ResultsPageHeader
-								resultsCount={trialResults.total}
-								pageNum={currentPage}
-								onModifySearchClick={handleRefineSearch}
-								onStartOverClick={handleStartOver}
-								searchCriteriaObject={searchCriteriaObject}
-								isLoading={isLoading}
-								trialResults={trialResults}
-							/>
+							<>
+								<h1>Clinical Trials Search Results</h1>
+
+								<ResultsPageHeader
+									resultsCount={trialResults.total}
+									pageNum={currentPage}
+									onModifySearchClick={handleRefineSearch}
+									onStartOverClick={handleStartOver}
+									searchCriteriaObject={searchCriteriaObject}
+									isLoading={isLoading}
+									trialResults={trialResults}
+								/>
+							</>
 						)}
 						<div className="results-page__content">
 							{checkIfInvalidPage() ? <> </> : <>{renderControls()}</>}
