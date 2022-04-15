@@ -46,7 +46,7 @@ Feature: As a user, I want to be able to narrow down my search by specifying a z
 			Then the page title is "Find NCI-Supported Clinical Trials"
 			When user selects "ZIP Code" radio button
 			When user types "999g9" in "U.S. ZIP Code" field
-			Then alert "Please enter a valid 5 digit U.S. zip code" is displayed
+			Then alert "Please enter a valid 5 digit U.S. ZIP code" is displayed
 			And user clicks on "Find Trials" button
 			Then the search is not executed and path is "/advanced"
 			When user clears "U.S. ZIP Code" input field
@@ -65,5 +65,5 @@ Feature: As a user, I want to be able to narrow down my search by specifying a z
         When user selects "ZIP Code" radio button
         When user types "2016" in "U.S. ZIP Code" field
          And user clicks on "Find Trials" button
-        Then alert "Please enter a valid 5 digit U.S. zip code" is displayed
+        Then alert "Please enter a valid 5 digit U.S. ZIP code" is displayed
         Then the search is not executed and path is "/advanced"

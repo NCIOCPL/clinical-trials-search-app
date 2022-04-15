@@ -5,7 +5,7 @@ import { And, Then, When } from 'cypress-cucumber-preprocessor/steps';
 const labelFieldMap = {
 	Age: 'age',
 	'Cancer Type/Keyword': 'type',
-	'U.S. Zip Code': 'zip',
+	'U.S. ZIP Code': 'zip',
 	'Cancer Type/Condition': 'ct',
 	'Keywords/Phrases': 'keywordPhrases',
 };
@@ -14,7 +14,7 @@ const inputFieldMap = {
 	Age: 'age',
 	'Cancer Type/Keyword': 'ctk',
 	'Primary Cancer Type/Condition': 'ct-searchTerm',
-	'U.S. Zip Code': 'zip',
+	'U.S. ZIP Code': 'zip',
 	'Cancer Type/Condition': 'ct',
 	'Keywords/Phrases': 'keywordPhrases',
 };
