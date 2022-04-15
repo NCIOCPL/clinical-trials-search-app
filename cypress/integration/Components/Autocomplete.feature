@@ -56,8 +56,8 @@ Feature: As a user, I want to be able to use autocomplete features to it's full 
         And user types "30" in "Age" field
         When user presses "tab" key from "Cancer Type/Keyword" field
         When user presses "tab" key from "Cancer Type/Keyword" field
-        When user types "22182" in "U.S. Zip Code" field
-        And user presses "enter" key from "U.S. Zip Code" field
+        When user types "22182" in "U.S. ZIP Code" field
+        And user presses "enter" key from "U.S. ZIP Code" field
         Then trial info displays "Results 1-10  of 17 for your search "
         And the criteria table displays the following
             | Category         | Selection |

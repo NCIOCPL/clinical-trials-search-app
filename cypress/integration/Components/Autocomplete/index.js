@@ -3,7 +3,7 @@ import { And, Then, When } from 'cypress-cucumber-preprocessor/steps';
 
 const inputFieldMap = {
 	Age: 'age',
-	'U.S. Zip Code': 'zip',
+	'U.S. ZIP Code': 'zip',
 	'Cancer Type/Keyword': 'ctk',
 	'Primary Cancer Type/Condition': 'ct-searchTerm',
 	'Cancer Type/Condition': 'ct',

@@ -31,8 +31,8 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 		And "Age" form section is displayed
 		And help icon is displayed in "Age" section with href "/about-cancer/treatment/clinical-trials/search/help#age"
 		And helper text "Your age helps determine which trials are right for you." is displayed
-		And "U.S. Zip Code" form section is displayed
-		And help icon is displayed in "U.S. Zip Code" section with href "/about-cancer/treatment/clinical-trials/search/help#basicsearch"
+		And "U.S. ZIP Code" form section is displayed
+		And help icon is displayed in "U.S. ZIP Code" section with href "/about-cancer/treatment/clinical-trials/search/help#basicsearch"
 		And helper text "Show trials near this U.S. ZIP code." is displayed
 		And button "Find Trials" is displayed
 
@@ -149,8 +149,8 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 		Given screen breakpoint is set to "tablet"
 		Given the user navigates to "/"
 		Then the page title is "Find NCI-Supported Clinical Trials"
-		And "U.S. Zip Code" form section is displayed
-		When user types "22182" in "U.S. Zip Code" field
+		And "U.S. ZIP Code" form section is displayed
+		When user types "22182" in "U.S. ZIP Code" field
 		And user clicks on "Find Trials" button
 		Then the search is executed and results page is displayed
 		And trial info displays "Results 1-10  of 1130 for your search "
@@ -163,9 +163,9 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 			| loc       | 1     |
 			| rl        | 1     |
 		When user clicks on Modify Search Criteria button
-		Then "U.S. Zip Code" input field has a value "22182"
-		When user clears "U.S. Zip Code" input field
-		When user types "22180" in "U.S. Zip Code" field
+		Then "U.S. ZIP Code" input field has a value "22182"
+		When user clears "U.S. ZIP Code" input field
+		When user types "22180" in "U.S. ZIP Code" field
 		When user clicks on "Find Trials" button
 		Then the search is executed and results page is displayed
 		And trial info displays "Results 1-10  of 1183 for your search "
@@ -182,9 +182,9 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 	Scenario: Negative: User is not able to search for an incorrect zip code
 		Given the user navigates to "/"
 		Then the page title is "Find NCI-Supported Clinical Trials"
-		And "U.S. Zip Code" form section is displayed
-		When user types "999g9" in "U.S. Zip Code" field
-		Then alert "Please enter a valid 5 digit U.S. zip code" is displayed in "U.S. Zip Code" section
+		And "U.S. ZIP Code" form section is displayed
+		When user types "999g9" in "U.S. ZIP Code" field
+		Then alert "Please enter a valid 5 digit U.S. ZIP code" is displayed in "U.S. ZIP Code" section
 		And user clicks on "Find Trials" button
 		Then the search is not executed and path is "/"
 
@@ -251,7 +251,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 		When user clicks on Modify Search Criteria button
 		Then "Age" input field has a value "30"
 		And "Keywords/Phrases" input field has a value "aids"
-		And "U.S. Zip Code" input field has a value "22182"
+		And "U.S. ZIP Code" input field has a value "22182"
 		When user clears "Age" input field
 		And user types "40" in "Age" field
 		And user clicks on "Find Trials" button
@@ -276,7 +276,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 		Given the user navigates to "/"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		When user types "30" in "Age" field
-		When user types "22182" in "U.S. Zip Code" field
+		When user types "22182" in "U.S. ZIP Code" field
 		When user types "aids" in "Cancer Type/Keyword" field
 		And user clicks on "Find Trials" button
 		Then the search is executed and results page is displayed
@@ -335,7 +335,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 		Given the user navigates to "/"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		When user types "30" in "Age" field
-		When user types "22182" in "U.S. Zip Code" field
+		When user types "22182" in "U.S. ZIP Code" field
 		When user types "aids" in "Cancer Type/Keyword" field
 		And user clicks on "Find Trials" button
 		Then the search is executed and results page is displayed
