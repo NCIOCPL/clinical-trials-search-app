@@ -145,13 +145,22 @@ const ResultsListItem = ({
 		// NOTE: Displays for count should be ONLY US sites
 		// unless it is a country search and the country
 		// is not US.
-		const sitesListAllUnfiltered =
-			location === 'search-location-country' && country !== 'United States'
+		const sitesListAllUnfiltered = () => {
+			// Early exit and return an empty array if sites doesn't exist
+			if (!item.sites) {
+				return [];
+			}
+
+			return location === 'search-location-country' &&
+				country !== 'United States'
 				? item.sites
 				: item.sites.filter((site) => site.org_country === 'United States');
+		};
 
 		// Filter the sites by active recruitment.
-		const sitesListAll = filterSitesByActiveRecruitment(sitesListAllUnfiltered);
+		const sitesListAll = filterSitesByActiveRecruitment(
+			sitesListAllUnfiltered()
+		);
 
 		// If there are no sites we need to display special information
 		if (sitesListAll.length === 0) {
@@ -286,7 +295,7 @@ const ResultsListItem = ({
 				</div>
 				<div className="results-list-item__category">
 					<span>Location:</span>
-					{item.sites && getLocationDisplay()}
+					{getLocationDisplay()}
 				</div>
 			</div>
 		</div>
