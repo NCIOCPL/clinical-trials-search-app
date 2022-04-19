@@ -99,9 +99,17 @@ const Location = ({ handleUpdate }) => {
 	};
 
 	const handleCountryOnChange = (e) => {
-		const country = e.target.value;
-		handleUpdate('country', country);
-		if (country === 'United States') {
+		const selectedCountry = e.target.value;
+		// Add check here to compare selected value with old value,
+		// and clear state and city when values differ, and only handle update
+		// if currently selected country differs from old value.
+		if (selectedCountry !== country) {
+			handleUpdate('city', '');
+			handleUpdate('states', []);
+			handleUpdate('country', selectedCountry);
+		}
+
+		if (selectedCountry === 'United States') {
 			setShowStateField(true);
 		} else {
 			setShowStateField(false);

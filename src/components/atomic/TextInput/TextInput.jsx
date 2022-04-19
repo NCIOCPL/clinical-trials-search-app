@@ -73,7 +73,14 @@ class TextInput extends React.Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		// If a errorMessage is passed after initial render, adjust the state accordingly
+		if (prevProps.value !== this.props.value) {
+			this.setState({
+				...this.state,
+				value: this.props.value,
+			});
+		}
+
+		// If an errorMessage is passed after initial render, adjust the state accordingly
 		if (prevProps.errorMessage !== this.props.errorMessage) {
 			this.setState({
 				isPristine: false,
