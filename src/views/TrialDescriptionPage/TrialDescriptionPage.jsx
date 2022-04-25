@@ -1,7 +1,6 @@
 import queryString from 'query-string';
 import React, { useEffect, useReducer } from 'react';
 import { Helmet } from 'react-helmet';
-import { useDispatch } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTracking } from 'react-tracking';
 import { START_OVER_LINK } from '../../constants';
@@ -16,9 +15,7 @@ import {
 import { useCtsApi } from '../../hooks/ctsApiSupport';
 import { getClinicalTrialDescriptionAction } from '../../services/api/actions';
 import SitesList from './SitesList';
-
 import './TrialDescriptionPage.scss';
-import { updateFormSearchCriteria } from '../../store/actions';
 import { useAppSettings } from '../../store/store.js';
 import { useAppPaths } from '../../hooks/routing';
 import {
@@ -30,7 +27,6 @@ import {
 import ErrorPage from '../ErrorPage';
 
 const TrialDescriptionPage = () => {
-	const rdx_dispatch = useDispatch();
 	const location = useLocation();
 	const navigate = useNavigate();
 	const qs = queryString.extract(location.search);
@@ -139,10 +135,8 @@ const TrialDescriptionPage = () => {
 						type: 'SET_ERRORS',
 						payload: res.errors,
 					});
-					rdx_dispatch(res.errors);
 				} else {
 					setFetchActions(getClinicalTrialDescriptionAction(currId));
-					rdx_dispatch(updateFormSearchCriteria(res.searchCriteria));
 				}
 			});
 		}
