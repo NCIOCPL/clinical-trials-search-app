@@ -1,11 +1,5 @@
 {
-    "_maintypes": [
-        "C4912"
-    ],
-    "_stages": [
-        "C140421",
-        "C7898"
-    ],
+
     "current_trial_status": [
         "Active",
         "Approved",
@@ -30,6 +24,13 @@
         "sites.recruitment_status",
         "diseases"
     ],
+	"maintype": [
+		"C4912"
+	],
+	"stage": [
+		"C140421",
+		"C7898"
+	],
 	"from":0,
 	"size":10
 }

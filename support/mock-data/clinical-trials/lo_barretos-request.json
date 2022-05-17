@@ -1,5 +1,4 @@
 {
-    "lead_org_fulltext": "Barretos Cancer Hospital",
     "current_trial_status": [
         "Active",
         "Approved",
@@ -24,6 +23,8 @@
         "sites.recruitment_status",
         "diseases"
     ],
+	"lead_org._fulltext": "Barretos Cancer Hospital",
+
 	"from":0,
 	"size":10
 }

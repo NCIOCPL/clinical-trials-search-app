@@ -1,42 +1,4 @@
 {
-    "_maintypes": [
-        "C4872"
-    ],
-    "_subtypes": [
-        "C2924"
-    ],
-    "_stages": [
-        "C94774"
-    ],
-    "arms.interventions.intervention_code": [
-        "C798",
-        "C15313"
-    ],
-    "eligibility.structured.max_age_in_years_gte": 50,
-    "eligibility.structured.min_age_in_years_lte": 50,
-    "_fulltext": "Breast",
-    "primary_purpose.primary_purpose_code": [
-        "treatment"
-    ],
-    "phase.phase": [
-        "iii",
-        "ii_iii"
-    ],
-    "principal_investigator_fulltext": "Benjamin David Smith",
-    "lead_org_fulltext": "M D Anderson Cancer Center",
-    "_trialids": [
-        "NCI-2017-00476"
-    ],
-    "sites.org_coordinates_lat": "33.7984",
-    "sites.org_coordinates_lon": "-84.3883",
-    "sites.org_coordinates_dist": "100mi",
-    "sites.recruitment_status": [
-        "active",
-        "approved",
-        "enrolling_by_invitation",
-        "in_review",
-        "temporarily_closed_to_accrual"
-    ],
     "current_trial_status": [
         "Active",
         "Approved",
@@ -61,6 +23,44 @@
         "sites.recruitment_status",
         "diseases"
     ],
+	"maintype": [
+		"C4872"
+	],
+	"subtype": [
+		"C2924"
+	],
+	"stage": [
+		"C94774"
+	],
+	"arms.interventions.nci_thesaurus_concept_id": [
+		"C798",
+		"C15313"
+	],
+	"eligibility.structured.max_age_in_years_gte": 50,
+	"eligibility.structured.min_age_in_years_lte": 50,
+	"keyword": "Breast",
+	"primary_purpose": [
+		"treatment"
+	],
+	"phase": [
+		"iii",
+		"ii_iii"
+	],
+	"principal_investigator._fulltext": "Benjamin David Smith",
+	"lead_org._fulltext": "M D Anderson Cancer Center",
+	"trial_ids": [
+		"NCI-2017-00476"
+	],
+	"sites.org_coordinates_lat": "33.7984",
+	"sites.org_coordinates_lon": "-84.3883",
+	"sites.org_coordinates_dist": "100mi",
+	"sites.recruitment_status": [
+		"active",
+		"approved",
+		"enrolling_by_invitation",
+		"in_review",
+		"temporarily_closed_to_accrual"
+	],
 	"from":0,
 	"size":10
 }

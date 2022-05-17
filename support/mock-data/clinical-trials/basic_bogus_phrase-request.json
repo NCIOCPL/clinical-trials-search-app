@@ -1,5 +1,4 @@
 {
-	"_fulltext": "asdf",
 	"current_trial_status": [
 		"Active",
 		"Approved",
@@ -24,6 +23,7 @@
 		"sites.recruitment_status",
 		"diseases"
 	],
+	"keyword": "asdf",
 	"from":0,
 	"size":10
 }
