@@ -1,6 +1,6 @@
 {
    "total":27,
-   "trials":[
+   "data":[
       {
          "current_trial_status":"Active",
          "nct_id":"NCT03077841",
@@ -433,7 +433,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C9480",
                "display_name":"Invasive Carcinoma",
@@ -626,7 +626,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -642,7 +642,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -676,7 +676,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -752,7 +752,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C27269",
                "display_name":"Glandular Cell Intraepithelial Neoplasia",
@@ -972,7 +972,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7662",
                "display_name":"High Grade Glandular Intraepithelial Neoplasia",
@@ -1076,17 +1076,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"NO",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -1127,7 +1127,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7348",
                "display_name":"High Grade Intraepithelial Neoplasia",
@@ -1333,23 +1333,23 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"YES",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -2156,7 +2156,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C9480",
                "display_name":"Invasive Carcinoma",
@@ -2190,7 +2190,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -2243,7 +2243,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -2374,17 +2374,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"YES",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -2678,23 +2678,23 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"NO",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -2800,7 +2800,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -3386,7 +3386,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -3506,7 +3506,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C36076",
                "display_name":"Malignant Reproductive System Neoplasm",
@@ -3626,7 +3626,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C27815",
                "display_name":"Malignant Endometrial Neoplasm",
@@ -3643,7 +3643,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C156482",
                "display_name":"Genitourinary System Neoplasm",
@@ -3660,7 +3660,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C164141",
                "display_name":"Genitourinary System Carcinoma",
@@ -3698,17 +3698,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"YES",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -4036,23 +4036,23 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"NO",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -4302,7 +4302,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -4899,7 +4899,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -5038,7 +5038,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -5179,17 +5179,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"YES",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -5285,7 +5285,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -5405,17 +5405,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"NO",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -5487,7 +5487,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -5503,7 +5503,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C9480",
                "display_name":"Invasive Carcinoma",
@@ -6524,17 +6524,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"NO",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -6655,17 +6655,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"YES",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -6764,7 +6764,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7348",
                "display_name":"High Grade Intraepithelial Neoplasia",
@@ -6801,7 +6801,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7662",
                "display_name":"High Grade Glandular Intraepithelial Neoplasia",
@@ -6818,7 +6818,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C9480",
                "display_name":"Invasive Carcinoma",
@@ -6835,7 +6835,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -6978,7 +6978,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -7194,7 +7194,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -7280,7 +7280,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C27269",
                "display_name":"Glandular Cell Intraepithelial Neoplasia",
@@ -7557,7 +7557,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -8332,7 +8332,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -8348,17 +8348,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"NO",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -8380,7 +8380,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -8413,7 +8413,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -8471,17 +8471,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"YES",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -8651,7 +8651,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -8873,7 +8873,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C9480",
                "display_name":"Invasive Carcinoma",
@@ -9542,7 +9542,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -9601,7 +9601,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -9658,7 +9658,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -9862,17 +9862,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"NO",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -10231,7 +10231,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -10247,17 +10247,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"YES",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             }
          ],
@@ -10544,23 +10544,23 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"YES",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -10576,7 +10576,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -11059,7 +11059,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -11145,7 +11145,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -11161,17 +11161,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"NO",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -11585,7 +11585,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -11831,17 +11831,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"YES",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -11952,17 +11952,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"NO",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -12050,7 +12050,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -12211,7 +12211,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -12227,7 +12227,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -12804,17 +12804,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"YES",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -12845,7 +12845,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -12897,17 +12897,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"NO",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -12968,7 +12968,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -13156,7 +13156,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -13212,7 +13212,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -13306,7 +13306,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C9480",
                "display_name":"Invasive Carcinoma",

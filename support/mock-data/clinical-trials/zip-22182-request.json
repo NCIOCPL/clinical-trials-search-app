@@ -1,22 +1,12 @@
 {
-  "sites.org_coordinates_lat": "38.928",
-  "sites.org_coordinates_lon": "-77.2649",
-  "sites.org_coordinates_dist": "100mi",
-  "sites.recruitment_status": [
-    "active",
-    "approved",
-    "enrolling_by_invitation",
-    "in_review",
-    "temporarily_closed_to_accrual"
-  ],
-  "current_trial_status": [
-    "Active",
-    "Approved",
-    "Enrolling by Invitation",
-    "In Review",
-    "Temporarily Closed to Accrual",
-    "Temporarily Closed to Accrual and Intervention"
-  ],
+	"current_trial_status": [
+		"Active",
+		"Approved",
+		"Enrolling by Invitation",
+		"In Review",
+		"Temporarily Closed to Accrual",
+		"Temporarily Closed to Accrual and Intervention"
+	],
   "include": [
     "nci_id",
     "nct_id",
@@ -33,6 +23,16 @@
     "sites.recruitment_status",
     "diseases"
   ],
-	"from": 0,
+	"sites.org_coordinates_lat": "38.928",
+	"sites.org_coordinates_lon": "-77.2649",
+	"sites.org_coordinates_dist": "100mi",
+	"from":0,
+	"sites.recruitment_status": [
+		"active",
+		"approved",
+		"enrolling_by_invitation",
+		"in_review",
+		"temporarily_closed_to_accrual"
+	],
 	"size": 10
 }

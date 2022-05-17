@@ -141,9 +141,11 @@ export const formatTrialSearchQueryV2 = (form) => {
 			break;
 		default:
 	}
-
+	// TODO: This presumes the offset will always be 10 --- no magic numbers
 	if (form.resultsPage > 0) {
 		filterCriteria.from = form.resultsPage * 10;
+	} else {
+		filterCriteria.from = 0;
 	}
 
 	// Adds criteria to only match locations that are actively recruiting sites. (CTSConstants.ActiveRecruitmentStatuses)
