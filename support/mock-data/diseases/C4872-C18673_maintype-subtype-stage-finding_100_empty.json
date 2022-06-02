@@ -1,25 +1,26 @@
 {
-	"terms": [
+	"data": [
 		{
 			"name": "Breast Cancer",
-			"codes": [
-				"C4872"
+			"codes": ["C4872"],
+			"ancestor_ids": [],
+			"parent_ids": [],
+			"type": ["maintype"],
+			"synonyms": [
+				"Breast Carcinoma",
+				"Breast cancer, NOS",
+				"Cancer of Breast",
+				"Cancer of the Breast",
+				"Carcinoma of Breast",
+				"Carcinoma of the Breast",
+				"Mammary Carcinoma",
+				"breast cancer"
 			],
-			"ancestor_ids": [
-
-			],
-			"parent_ids": [
-
-			],
-			"type": [
-				"maintype"
-			]
+			"count": 986
 		},
 		{
 			"name": "Cancer Survivor",
-			"codes": [
-				"C18673"
-			],
+			"codes": ["C18673"],
 			"ancestor_ids": [
 				"C127153",
 				"C136478",
@@ -56,12 +57,10 @@
 				"C9238",
 				"C9292"
 			],
-			"parent_ids": [
-
-			],
-			"type": [
-				"finding"
-			]
+			"parent_ids": [],
+			"type": ["finding"],
+			"synonyms": ["Survivor, Cancer"],
+			"count": 4
 		}
 	]
 }

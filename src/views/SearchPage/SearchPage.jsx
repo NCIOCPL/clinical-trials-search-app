@@ -21,12 +21,8 @@ import {
 	TrialType,
 	ZipCode,
 } from '../../components/search-modules';
-import {
-	updateForm,
-	updateFormField,
-	clearForm,
-	getMainType,
-} from '../../store/actions';
+import { updateForm, updateFormField, clearForm } from '../../store/actions';
+import { getMainTypeAction } from '../../store/actionsV2';
 import {
 	getFieldInFocus,
 	getFormInFocus,
@@ -47,7 +43,6 @@ import {
 import { useAppSettings } from '../../store/store.js';
 import { buildQueryString } from '../../utilities';
 import { usePrintContext } from '../../store/printContext';
-
 const queryString = require('query-string');
 
 // Module groups in arrays will be placed side-by-side in the form
@@ -115,7 +110,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
 		if (criteria && pageType === 'basic') {
 			//prefetch stuff
 			if (!maintypeOptions || maintypeOptions.length < 1) {
-				dispatch(getMainType({}));
+				dispatch(getMainTypeAction());
 			}
 			if (cancerType.name !== '') {
 				criteria.cancerTypeModified = true;

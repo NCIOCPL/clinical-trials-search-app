@@ -10,6 +10,8 @@ import reducer from './reducer';
 import {
 	getClinicalTrialDescription,
 	getClinicalTrials,
+	ctsapiDiseaseFetcher,
+	ctsapiInterventionFetcher,
 } from '../../services/api/clinical-trials-search-api';
 import { convertObjectToBase64 } from '../../utilities/objects';
 import { useAppSettings } from '../../store/store';
@@ -34,18 +36,30 @@ import { useAppSettings } from '../../store/store';
  * @param {import('axios').AxiosInstance} clinicalTrialsSearchClient the axios client
  * @param {Array<ListingSupportRequestAction>} actions a collection of request items.
  */
-const internalFetch = async (clinicalTrialsSearchClient, actions) => {
+const internalFetch = async (clinicalTrialsSearchClientV2, actions) => {
 	// TODO: Pass in an abort token to internalFetch
 	// We want this function to return a single object we can use
 	try {
 		const requests = actions.map((req) => {
 			switch (req.type) {
 				case 'getClinicalTrials': {
-					return getClinicalTrials(clinicalTrialsSearchClient, req.payload);
+					return getClinicalTrials(clinicalTrialsSearchClientV2, req.payload);
 				}
 				case 'trialDescription': {
 					return getClinicalTrialDescription(
-						clinicalTrialsSearchClient,
+						clinicalTrialsSearchClientV2,
+						req.payload
+					);
+				}
+				case 'ctsApiDiseaseFetcher': {
+					return ctsapiDiseaseFetcher(
+						clinicalTrialsSearchClientV2,
+						req.payload
+					);
+				}
+				case 'ctsApiInterventionFetcher': {
+					return ctsapiInterventionFetcher(
+						clinicalTrialsSearchClientV2,
 						req.payload
 					);
 				}
@@ -76,7 +90,7 @@ const internalFetch = async (clinicalTrialsSearchClient, actions) => {
 export const useCtsApi = (fetchActions) => {
 	const [
 		{
-			apiClients: { clinicalTrialsSearchClient },
+			apiClients: { clinicalTrialsSearchClientV2 },
 		},
 	] = useAppSettings();
 
@@ -114,7 +128,7 @@ export const useCtsApi = (fetchActions) => {
 		// or it will be an error object. This allows us to have one object
 		// that we return for the useCallback to "cache".
 		const response = await internalFetch(
-			clinicalTrialsSearchClient,
+			clinicalTrialsSearchClientV2,
 			fetchActions
 		);
 

@@ -1,5 +1,5 @@
 {
-	"_fulltext": "chronic kidney disease due to hypertension",
+
 	"current_trial_status": [
 		"Active",
 		"Approved",
@@ -24,6 +24,7 @@
 		"sites.recruitment_status",
 		"diseases"
 	],
+	"keyword": "chronic kidney disease due to hypertension",
 	"from": 0,
 	"size": 10
 }
