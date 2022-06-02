@@ -1,14 +1,28 @@
+import { zipcodeFetcher } from './index';
+import {
+	getCtsApiDiseaseFetcherAction,
+	getCtsApiInterventionFetcherAction,
+} from '../services/api/actions';
 import {
 	ctsapiDiseaseFetcher,
 	ctsapiInterventionFetcher,
-	zipcodeFetcher,
-} from './index';
+} from '../services/api/clinical-trials-search-api';
 
-export const runQueryFetchers = async (ctsapiclient, zipcodeEndpoint) => {
-	const diseaseFetcher = async (ids) =>
-		await ctsapiDiseaseFetcher(ctsapiclient, ids);
-	const interventionFetcher = async (ids) =>
-		await ctsapiInterventionFetcher(ctsapiclient, ids);
+export const runQueryFetchers = async (
+	clinicalTrialsSearchClientV2,
+	zipcodeEndpoint
+) => {
+	const diseaseFetcher = async (ids) => {
+		const { payload } = getCtsApiDiseaseFetcherAction(ids);
+		return await ctsapiDiseaseFetcher(clinicalTrialsSearchClientV2, payload);
+	};
+	const interventionFetcher = async (ids) => {
+		const { payload } = getCtsApiInterventionFetcherAction(ids);
+		return await ctsapiInterventionFetcher(
+			clinicalTrialsSearchClientV2,
+			payload
+		);
+	};
 	const zipFetcher = async (zipcode) =>
 		await zipcodeFetcher(zipcodeEndpoint, zipcode);
 

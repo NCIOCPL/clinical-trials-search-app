@@ -1,6 +1,6 @@
 {
    "total":1,
-   "trials":[
+   "data":[
       {
          "current_trial_status":"Active",
          "nct_id":"NCT04438382",
@@ -98,7 +98,7 @@
                   }
                ],
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C156671",
                "display_name":"Steroid-Refractory Pneumonitis",
@@ -114,7 +114,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C35755",
                "display_name":"Non-Neoplastic Respiratory System Disorder",
@@ -193,7 +193,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -283,7 +283,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -344,7 +344,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C113159",
                "display_name":"Pneumonitis",
@@ -398,17 +398,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"NO",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -463,17 +463,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"YES",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {

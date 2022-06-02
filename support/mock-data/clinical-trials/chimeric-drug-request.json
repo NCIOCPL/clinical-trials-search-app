@@ -1,8 +1,5 @@
 {
-    "arms.interventions.intervention_code": [
-        "C137999",
-        "C126102"
-    ],
+
     "current_trial_status": [
         "Active",
         "Approved",
@@ -27,6 +24,10 @@
         "sites.recruitment_status",
         "diseases"
     ],
+	"arms.interventions.nci_thesaurus_concept_id": [
+		"C137999",
+		"C126102"
+	],
 		"from":0,
 		"size":10
 }

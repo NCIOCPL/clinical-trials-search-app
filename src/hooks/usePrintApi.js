@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 // fetches cache id for clinical trials print service
-export const usePrintApi = (idList = {}, printAPIUrl = '') => {
+export const usePrintApi = (printObj = {}, printAPIUrl = '') => {
 	const [data, setData] = useState({});
 	const [isError, setIsError] = useState(false);
 	const [url, setUrl] = useState();
@@ -16,7 +16,7 @@ export const usePrintApi = (idList = {}, printAPIUrl = '') => {
 				'Content-Type': 'application/json',
 			};
 			try {
-				const result = await axios.post(url, idList, {
+				const result = await axios.post(url, printObj, {
 					headers: headers,
 				});
 				setData(result.data);

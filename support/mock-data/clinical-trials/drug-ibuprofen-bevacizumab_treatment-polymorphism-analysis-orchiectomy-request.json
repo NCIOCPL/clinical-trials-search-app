@@ -1,10 +1,5 @@
 {
-	"arms.interventions.intervention_code": [
-		"C561",
-		"C2039",
-		"C18309",
-		"C15288"
-	],
+
 	"current_trial_status": [
 		"Active",
 		"Approved",
@@ -28,6 +23,12 @@
 		"sites.org_coordinates",
 		"sites.recruitment_status",
 		"diseases"
+	],
+	"arms.interventions.nci_thesaurus_concept_id": [
+		"C561",
+		"C2039",
+		"C18309",
+		"C15288"
 	],
 	"from":0,
 	"size":10

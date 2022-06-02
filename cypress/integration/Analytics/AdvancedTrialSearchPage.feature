@@ -189,7 +189,7 @@ Feature: Clinical Trials Search Page - Advanced
     And "channel" is set to "About Cancer"
     And "analyticsPublishedDate" is set to "02/02/2011"
     And "analyticsName" is set to "Clinical Trials"
-    When the user navigates to "/r?hos=UM%20Baltimore%20Washington%20Medical%20Center%20%2F%20Tate%20Cancer%20Center&loc=3&rl=2"
+    When the user navigates to "/r?hos=UM%20Baltimore%20Washington%20Medical%20Center%2FTate%20Cancer%20Center&loc=3&rl=2"
     Then the page title is "Clinical Trials Search Results"
     And browser waits
     Then there should be an analytics event with the following details
@@ -208,11 +208,11 @@ Feature: Clinical Trials Search Page - Advanced
       | page.additionalDetails.formType                       | advanced                                                        |
       | page.additionalDetails.numResults                     | (int)29                                                         |
       | page.additionalDetails.status                         | success                                                         |
-      | page.additionalDetails.formData.hospital              | UM Baltimore Washington Medical Center / Tate Cancer Center     |
+      | page.additionalDetails.formData.hospital              | UM Baltimore Washington Medical Center/Tate Cancer Center     |
       | page.additionalDetails.formData.location              | search-location-hospital                                        |
       | page.additionalDetails.helperFormData.canTypeKwPhrAge | all\|all\|all\|all\|none\|none                                  |
       | page.additionalDetails.helperFormData.fieldUsage      | loc:hos                                                         |
-      | page.additionalDetails.helperFormData.loc             | hi\|UM Baltimore Washington Medical Center / Tate Cancer Center |
+      | page.additionalDetails.helperFormData.loc             | hi\|UM Baltimore Washington Medical Center/Tate Cancer Center |
       | page.additionalDetails.helperFormData.tpTidInvLo      | all\|none\|none\|none                                           |
       | page.additionalDetails.helperFormData.ttDrugTreat     | all\|none\|none                                                 |
 

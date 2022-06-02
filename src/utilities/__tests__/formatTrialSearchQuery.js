@@ -23,7 +23,7 @@ const BASE_EXPECTED_QUERY = {
 // For these tests the parameters are:
 // - The test name
 // - Any overrides to the default state, e.g. { keywordPhrases: "chicken" }
-// - The expected API query params over the default ones, e.g {"_fulltext": "chicken"}
+// - The expected API query params over the default ones, e.g {"keyword": "chicken"}
 // The test will then merge the defaultState with the params to make the input
 // and merge the additional query params with the base query to make the
 // expected object.
@@ -38,14 +38,14 @@ const mappingTestCases = [
 		},
 	],
 	/* TODO: GENDER MAPPING TEST */
-	['phrase parameter', { keywordPhrases: 'chicken' }, { _fulltext: 'chicken' }],
+	['phrase parameter', { keywordPhrases: 'chicken' }, { keyword: 'chicken' }],
 	[
 		'single trial type',
 		{
 			trialTypes: getTrialTypesObject(['treatment']),
 		},
 		{
-			'primary_purpose.primary_purpose_code': ['treatment'],
+			primary_purpose: ['treatment'],
 		},
 	],
 	[
@@ -54,7 +54,7 @@ const mappingTestCases = [
 			trialTypes: getTrialTypesObject(['treatment', 'supportive_care']),
 		},
 		{
-			'primary_purpose.primary_purpose_code': ['treatment', 'supportive_care'],
+			primary_purpose: ['treatment', 'supportive_care'],
 		},
 	],
 	[
@@ -63,7 +63,7 @@ const mappingTestCases = [
 			investigator: { term: 'Sophia Smith', termKey: 'Sophia Smith' },
 		},
 		{
-			principal_investigator_fulltext: 'Sophia Smith',
+			['principal_investigator._fulltext']: 'Sophia Smith',
 		},
 	],
 	[
@@ -72,7 +72,7 @@ const mappingTestCases = [
 			leadOrg: { term: 'Mayo Clinic', termKey: 'Mayo Clinic' },
 		},
 		{
-			lead_org_fulltext: 'Mayo Clinic',
+			['lead_org._fulltext']: 'Mayo Clinic',
 		},
 	],
 	[
@@ -81,7 +81,7 @@ const mappingTestCases = [
 			trialId: 'NCI-2015-00054',
 		},
 		{
-			_trialids: ['NCI-2015-00054'],
+			trial_ids: ['NCI-2015-00054'],
 		},
 	],
 	[
@@ -90,7 +90,7 @@ const mappingTestCases = [
 			trialId: 'SWOG, CCOG',
 		},
 		{
-			_trialids: ['SWOG', 'CCOG'],
+			trial_ids: ['SWOG', 'CCOG'],
 		},
 	],
 	[
@@ -99,10 +99,10 @@ const mappingTestCases = [
 			healthyVolunteers: true,
 		},
 		{
-			accepts_healthy_volunteers_indicator: 'YES',
+			['eligibility.structured.accepts_healthy_volunteers']: true,
 		},
 		// NOTE: New code does not support a way to indicate
-		// accepts_healthy_volunteers_indicator: "NO"
+		// eligibility.structured.accepts_healthy_volunteers: false
 	],
 	/************************
 	 * Phase Tests
@@ -113,7 +113,7 @@ const mappingTestCases = [
 			trialPhases: getPhaseObject(['i']),
 		},
 		{
-			'phase.phase': ['i', 'i_ii'],
+			phase: ['i', 'i_ii'],
 		},
 	],
 	[
@@ -122,7 +122,7 @@ const mappingTestCases = [
 			trialPhases: getPhaseObject(['ii']),
 		},
 		{
-			'phase.phase': ['ii', 'i_ii', 'ii_iii'],
+			phase: ['ii', 'i_ii', 'ii_iii'],
 		},
 	],
 	[
@@ -131,7 +131,7 @@ const mappingTestCases = [
 			trialPhases: getPhaseObject(['iii']),
 		},
 		{
-			'phase.phase': ['iii', 'ii_iii'],
+			phase: ['iii', 'ii_iii'],
 		},
 	],
 	[
@@ -140,7 +140,7 @@ const mappingTestCases = [
 			trialPhases: getPhaseObject(['iv']),
 		},
 		{
-			'phase.phase': ['iv'],
+			phase: ['iv'],
 		},
 	],
 	[
@@ -149,7 +149,7 @@ const mappingTestCases = [
 			trialPhases: getPhaseObject(['i', 'ii', 'iii', 'iv']),
 		},
 		{
-			'phase.phase': ['i', 'ii', 'iii', 'iv', 'i_ii', 'ii_iii'],
+			phase: ['i', 'ii', 'iii', 'iv', 'i_ii', 'ii_iii'],
 		},
 	],
 
@@ -186,7 +186,7 @@ const mappingTestCases = [
 			location: 'search-location-hospital',
 		},
 		{
-			'sites.org_name_fulltext': 'M D Anderson Cancer Center',
+			'sites.org_name._fulltext': 'M D Anderson Cancer Center',
 			'sites.recruitment_status': ACTIVE_RECRUITMENT_STATUSES,
 		},
 	],
@@ -293,8 +293,8 @@ const mappingTestCases = [
 			zipCoords: { lat: 39.0897, long: -77.1798 },
 		},
 		{
-			'sites.org_coordinates_lat': 39.0897,
-			'sites.org_coordinates_lon': -77.1798,
+			'sites.org_coordinates_lat': '39.0897',
+			'sites.org_coordinates_lon': '-77.1798',
 			'sites.org_coordinates_dist': '500mi',
 			'sites.recruitment_status': ACTIVE_RECRUITMENT_STATUSES,
 		},
@@ -308,7 +308,7 @@ const mappingTestCases = [
 			cancerType: { name: 'Breast Cancer', codes: ['C4872'] },
 		},
 		{
-			_maintypes: ['C4872'],
+			maintype: ['C4872'],
 		},
 	],
 	[
@@ -317,7 +317,7 @@ const mappingTestCases = [
 			cancerType: { name: 'TEST Cancer', codes: ['C4872', 'C6789'] },
 		},
 		{
-			_maintypes: ['C4872', 'C6789'],
+			maintype: ['C4872', 'C6789'],
 		},
 	],
 	[
@@ -326,7 +326,7 @@ const mappingTestCases = [
 			subtypes: [{ name: 'Inflammatory Breast Cancer', codes: ['C4001'] }],
 		},
 		{
-			_subtypes: ['C4001'],
+			subtype: ['C4001'],
 		},
 	],
 	[
@@ -335,7 +335,7 @@ const mappingTestCases = [
 			subtypes: [{ name: 'Test Subtype Cancer', codes: ['C5678', 'C1234'] }],
 		},
 		{
-			_subtypes: ['C5678', 'C1234'],
+			subtype: ['C5678', 'C1234'],
 		},
 	],
 	[
@@ -347,7 +347,7 @@ const mappingTestCases = [
 			],
 		},
 		{
-			_subtypes: ['C4001', 'C5678', 'C1234'],
+			subtype: ['C4001', 'C5678', 'C1234'],
 		},
 	],
 	[
@@ -358,7 +358,7 @@ const mappingTestCases = [
 			],
 		},
 		{
-			_stages: ['C9246'],
+			stage: ['C9246'],
 		},
 	],
 	[
@@ -367,7 +367,7 @@ const mappingTestCases = [
 			stages: [{ name: 'Test Cancer Stage', codes: ['C12345', 'C678910'] }],
 		},
 		{
-			_stages: ['C12345', 'C678910'],
+			stage: ['C12345', 'C678910'],
 		},
 	],
 	[
@@ -379,7 +379,7 @@ const mappingTestCases = [
 			],
 		},
 		{
-			_stages: ['C9246', 'C12345', 'C678910'],
+			stage: ['C9246', 'C12345', 'C678910'],
 		},
 	],
 	[
@@ -423,7 +423,7 @@ const mappingTestCases = [
 			drugs: [{ name: 'Trastuzumab', codes: ['C1674'] }],
 		},
 		{
-			'arms.interventions.intervention_code': ['C1674'],
+			'arms.interventions.nci_thesaurus_concept_id': ['C1674'],
 		},
 	],
 	[
@@ -432,7 +432,7 @@ const mappingTestCases = [
 			drugs: [{ name: 'Immunotherapy', codes: ['C308', 'C15262'] }],
 		},
 		{
-			'arms.interventions.intervention_code': ['C308', 'C15262'],
+			'arms.interventions.nci_thesaurus_concept_id': ['C308', 'C15262'],
 		},
 	],
 	[
@@ -444,7 +444,11 @@ const mappingTestCases = [
 			],
 		},
 		{
-			'arms.interventions.intervention_code': ['C1674', 'C308', 'C15262'],
+			'arms.interventions.nci_thesaurus_concept_id': [
+				'C1674',
+				'C308',
+				'C15262',
+			],
 		},
 	],
 	[
@@ -453,7 +457,7 @@ const mappingTestCases = [
 			treatments: [{ name: 'Surgery', codes: ['C17173'] }],
 		},
 		{
-			'arms.interventions.intervention_code': ['C17173'],
+			'arms.interventions.nci_thesaurus_concept_id': ['C17173'],
 		},
 	],
 	[
@@ -467,7 +471,7 @@ const mappingTestCases = [
 			],
 		},
 		{
-			'arms.interventions.intervention_code': ['C308', 'C15262'],
+			'arms.interventions.nci_thesaurus_concept_id': ['C308', 'C15262'],
 		},
 	],
 	[
@@ -482,7 +486,11 @@ const mappingTestCases = [
 			],
 		},
 		{
-			'arms.interventions.intervention_code': ['C17173', 'C308', 'C15262'],
+			'arms.interventions.nci_thesaurus_concept_id': [
+				'C17173',
+				'C308',
+				'C15262',
+			],
 		},
 	],
 	[
@@ -492,7 +500,11 @@ const mappingTestCases = [
 			treatments: [{ name: 'Surgery', codes: ['C17173'] }],
 		},
 		{
-			'arms.interventions.intervention_code': ['C308', 'C15262', 'C17173'],
+			'arms.interventions.nci_thesaurus_concept_id': [
+				'C308',
+				'C15262',
+				'C17173',
+			],
 		},
 	],
 ];

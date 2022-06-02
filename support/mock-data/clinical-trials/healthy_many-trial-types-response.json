@@ -1,6 +1,6 @@
 {
    "total":508,
-   "trials":[
+   "data":[
       {
          "current_trial_status":"Active",
          "nct_id":"NCT03779854",
@@ -463,7 +463,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -499,7 +499,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -553,7 +553,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C45240",
                "display_name":"Cutaneous Hematopoietic and Lymphoid Cell Neoplasm",
@@ -738,17 +738,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"NO",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -925,7 +925,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -1156,17 +1156,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"YES",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -1205,7 +1205,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -1687,7 +1687,7 @@
                   }
                ],
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C148363",
                "display_name":"Recurrent Myelodysplastic Syndrome",
@@ -1774,7 +1774,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -1877,23 +1877,23 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"NO",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C172132",
                "display_name":"Recurrent Myeloid Neoplasm",
@@ -2381,7 +2381,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C172132",
                "display_name":"Recurrent Myeloid Neoplasm",
@@ -2398,7 +2398,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -2459,7 +2459,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -2475,17 +2475,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"YES",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -2543,7 +2543,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -2649,7 +2649,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C148425",
                "display_name":"Recurrent Leukemia",
@@ -2666,7 +2666,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C148429",
                "display_name":"Recurrent Acute Leukemia",
@@ -3088,7 +3088,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -3195,7 +3195,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -3324,7 +3324,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C172132",
                "display_name":"Recurrent Myeloid Neoplasm",
@@ -3341,7 +3341,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -3373,7 +3373,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C148429",
                "display_name":"Recurrent Acute Leukemia",
@@ -3559,17 +3559,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"NO",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -3652,7 +3652,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C148425",
                "display_name":"Recurrent Leukemia",
@@ -3731,7 +3731,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C172281",
                "display_name":"Refractory Myeloid Neoplasm",
@@ -3793,17 +3793,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"YES",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -4004,7 +4004,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C148431",
                "display_name":"Refractory Acute Leukemia",
@@ -4112,7 +4112,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -4280,7 +4280,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -4313,17 +4313,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"YES",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -5128,7 +5128,7 @@
                   }
                ],
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C150091",
                "display_name":"Refractory Ovarian Carcinoma",
@@ -5285,7 +5285,7 @@
                   }
                ],
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C156096",
                "display_name":"Metastatic Colorectal Carcinoma",
@@ -5425,7 +5425,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C96413",
                "display_name":"Brain Disorder",
@@ -5481,7 +5481,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C170726",
                "display_name":"Recurrent Malignant Breast Neoplasm",
@@ -5538,7 +5538,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C165253",
                "display_name":"Recurrent Neuroendocrine Carcinoma",
@@ -5608,7 +5608,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C150527",
                "display_name":"Refractory Malignant Female Reproductive System Neoplasm",
@@ -5682,7 +5682,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -5781,7 +5781,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C8511",
                "display_name":"Refractory Carcinoma",
@@ -6022,7 +6022,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C26801",
                "display_name":"Intestinal Disorder",
@@ -6038,7 +6038,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -6200,7 +6200,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C150540",
                "display_name":"Recurrent Malignant Endocrine Neoplasm",
@@ -6305,7 +6305,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -6343,7 +6343,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C148425",
                "display_name":"Recurrent Leukemia",
@@ -6360,7 +6360,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C176711",
                "display_name":"Recurrent Lung Neuroendocrine Neoplasm",
@@ -6416,17 +6416,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"NO",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -6573,7 +6573,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C156711",
                "display_name":"Malignant Peritoneal and Retroperitoneal Neoplasm",
@@ -6667,7 +6667,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C148429",
                "display_name":"Recurrent Acute Leukemia",
@@ -6701,7 +6701,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C53553",
                "display_name":"Breast Carcinoma by Gene Expression Profile",
@@ -6912,7 +6912,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C172132",
                "display_name":"Recurrent Myeloid Neoplasm",
@@ -7034,7 +7034,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C157130",
                "display_name":"Recurrent Neuroendocrine Neoplasm",
@@ -7144,7 +7144,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3322",
                "display_name":"Peritoneal Neoplasm",
@@ -7545,7 +7545,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C148431",
                "display_name":"Refractory Acute Leukemia",
@@ -7581,7 +7581,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C150526",
                "display_name":"Recurrent Malignant Female Reproductive System Neoplasm",
@@ -7665,17 +7665,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"YES",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -7763,7 +7763,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C36076",
                "display_name":"Malignant Reproductive System Neoplasm",
@@ -7799,7 +7799,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C162255",
                "display_name":"Metastatic Malignant Digestive System Neoplasm",
@@ -8008,7 +8008,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C156482",
                "display_name":"Genitourinary System Neoplasm",
@@ -8114,7 +8114,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C162780",
                "display_name":"Metastatic Malignant Colorectal Neoplasm",
@@ -8282,7 +8282,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C164141",
                "display_name":"Genitourinary System Carcinoma",
@@ -8333,7 +8333,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C172281",
                "display_name":"Refractory Myeloid Neoplasm",
@@ -8350,7 +8350,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C173385",
                "display_name":"Neuroendocrine Carcinoma, Excluding Head and Neck",
@@ -8508,7 +8508,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C172342",
                "display_name":"Herpesvirus Infection",
@@ -8597,17 +8597,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"YES",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -8743,7 +8743,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -8793,7 +8793,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3055",
                "display_name":"Giant Cell Tumor",
@@ -8810,7 +8810,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C121926",
                "display_name":"Intermediate Bone Neoplasm",
@@ -8826,7 +8826,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7069",
                "display_name":"Giant Cell Neoplasm",
@@ -8939,7 +8939,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C36030",
                "display_name":"Osteolytic Neoplasm",
@@ -8955,7 +8955,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -8971,17 +8971,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"YES",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -9176,7 +9176,7 @@
                   }
                ],
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C167168",
                "display_name":"Obesity-Related Malignant Neoplasm",
@@ -9217,7 +9217,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -9261,17 +9261,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"YES",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -10289,7 +10289,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -10508,7 +10508,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -10755,17 +10755,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"YES",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -10858,7 +10858,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -11055,17 +11055,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"NO",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -11278,7 +11278,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -11503,7 +11503,7 @@
                   }
                ],
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C134157",
                "display_name":"Recurrent Lymphoma",
@@ -11532,7 +11532,7 @@
                   }
                ],
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C160619",
                "display_name":"Recurrent Malignant Ovarian Granulosa Cell Tumor",
@@ -11561,7 +11561,7 @@
                   }
                ],
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C162441",
                "display_name":"Recurrent Colorectal Adenocarcinoma",
@@ -11710,7 +11710,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C36076",
                "display_name":"Malignant Reproductive System Neoplasm",
@@ -11727,7 +11727,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C26801",
                "display_name":"Intestinal Disorder",
@@ -11990,7 +11990,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C159565",
                "display_name":"Recurrent Adenocarcinoma",
@@ -12135,7 +12135,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C150526",
                "display_name":"Recurrent Malignant Female Reproductive System Neoplasm",
@@ -12452,23 +12452,23 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"NO",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -12542,17 +12542,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"YES",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -12643,7 +12643,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C172133",
                "display_name":"Recurrent Malignant Lymphoid Neoplasm",
@@ -12876,7 +12876,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -13036,7 +13036,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C147861",
                "display_name":"Recurrent Lymphoproliferative Disorder",
@@ -13165,7 +13165,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -13181,7 +13181,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C156482",
                "display_name":"Genitourinary System Neoplasm",

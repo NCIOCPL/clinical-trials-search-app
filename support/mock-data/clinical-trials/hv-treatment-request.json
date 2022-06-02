@@ -1,8 +1,5 @@
 {
-    "primary_purpose.primary_purpose_code": [
-        "treatment"
-    ],
-    "accepts_healthy_volunteers_indicator": "YES",
+
     "current_trial_status": [
         "Active",
         "Approved",
@@ -27,6 +24,9 @@
         "sites.recruitment_status",
         "diseases"
     ],
-	"from":0,
+	"primary_purpose": [
+		"treatment"
+	],
+	"eligibility.structured.accepts_healthy_volunteers": true,	"from":0,
 	"size":10
 }

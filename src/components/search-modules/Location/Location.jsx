@@ -9,8 +9,12 @@ import {
 	Dropdown,
 	Autocomplete,
 } from '../../atomic';
-import { getCountries, searchHospital } from '../../../store/actions';
 import {
+	getCountriesAction,
+	getHospitalAction,
+} from '../../../store/actionsV2';
+import {
+	createTermDataFromArrayObj,
 	matchItemToTerm,
 	sortItems,
 	getStates,
@@ -25,9 +29,10 @@ const Location = ({ handleUpdate }) => {
 	//Hooks must always be rendered in same order.
 	const dispatch = useDispatch();
 	const [{ getZipCoords }] = useZipConversion(handleUpdate);
-	const { countries = [], hospitals = [] } = useSelector(
+	const { countries = [], hospitals = {} } = useSelector(
 		(store) => store.cache
 	);
+	const hospitalList = createTermDataFromArrayObj(hospitals.data, 'name');
 	const {
 		location,
 		zip,
@@ -52,16 +57,26 @@ const Location = ({ handleUpdate }) => {
 	const [stateVal, setStateVal] = useState({ value: '' });
 	const stateOptions = getStates();
 
+	const getCountriesFromAggregate = (aggregateData) => {
+		return aggregateData &&
+			aggregateData.aggregations &&
+			aggregateData.aggregations['sites.org_country']
+			? aggregateData.aggregations['sites.org_country']
+			: aggregateData;
+	};
+
+	const countryList = getCountriesFromAggregate(countries);
+
 	useEffect(() => {
 		if (hospitalName.value.length > 2) {
-			dispatch(searchHospital({ searchText: hospitalName.value }));
+			dispatch(getHospitalAction({ searchText: hospitalName.value }));
 		}
 	}, [hospitalName, dispatch]);
 
 	useEffect(() => {
 		handleUpdate('location', activeRadio);
-		if (activeRadio === 'search-location-country' && countries.length < 1) {
-			dispatch(getCountries());
+		if (activeRadio === 'search-location-country' && countryList.length < 1) {
+			dispatch(getCountriesAction());
 		}
 	}, [activeRadio, dispatch]);
 
@@ -221,8 +236,12 @@ const Location = ({ handleUpdate }) => {
 							label="Country"
 							action={handleCountryOnChange}
 							value={country}>
-							{countries.map((city) => {
-								return <option key={city} value={city}>{`${city}`}</option>;
+							{countryList.map((country) => {
+								return (
+									<option
+										key={country.key}
+										value={country.key}>{`${country.key}`}</option>
+								);
 							})}
 						</Dropdown>
 						<div
@@ -312,7 +331,7 @@ const Location = ({ handleUpdate }) => {
 										position: 'relative',
 										display: 'inline-block',
 									}}
-									items={hospitals}
+									items={hospitalList}
 									getItemValue={(item) => item.term}
 									shouldItemRender={matchItemToTerm}
 									sortItems={sortItems}
@@ -327,7 +346,7 @@ const Location = ({ handleUpdate }) => {
 									renderMenu={(children) => (
 										<div className="cts-autocomplete__menu --hospitals">
 											{hospitalName.value.length > 2 ? (
-												hospitals.length ? (
+												hospitalList.length ? (
 													children
 												) : (
 													<div className="cts-autocomplete__menu-item">
