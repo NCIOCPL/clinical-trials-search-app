@@ -15,7 +15,9 @@ import {
 import { useCtsApi } from '../../hooks/ctsApiSupport';
 import { getClinicalTrialDescriptionAction } from '../../services/api/actions';
 import SitesList from './SitesList';
+
 import './TrialDescriptionPage.scss';
+// import { updateFormSearchCriteria } from '../../store/actions';
 import { useAppSettings } from '../../store/store.js';
 import { useAppPaths } from '../../hooks/routing';
 import {
@@ -27,6 +29,7 @@ import {
 import ErrorPage from '../ErrorPage';
 
 const TrialDescriptionPage = () => {
+	// const rdx_dispatch = useDispatch();
 	const location = useLocation();
 	const navigate = useNavigate();
 	const qs = queryString.extract(location.search);
@@ -59,9 +62,14 @@ const TrialDescriptionPage = () => {
 
 	const { BasicSearchPagePath, AdvancedSearchPagePath } = useAppPaths();
 
-	const [{ analyticsName, canonicalHost, services, zipConversionEndpoint }] =
-		useAppSettings();
-	const ctsapiclient = services.ctsSearch();
+	const [
+		{
+			analyticsName,
+			canonicalHost,
+			zipConversionEndpoint,
+			apiClients: { clinicalTrialsSearchClientV2 },
+		},
+	] = useAppSettings();
 	// enum for empty location checks
 	const noLocInfo = ['not yet active', 'in review', 'approved'];
 
@@ -119,7 +127,10 @@ const TrialDescriptionPage = () => {
 		} else if (!searchCriteriaObject) {
 			const searchCriteria = async () => {
 				const { diseaseFetcher, interventionFetcher, zipFetcher } =
-					await runQueryFetchers(ctsapiclient, zipConversionEndpoint);
+					await runQueryFetchers(
+						clinicalTrialsSearchClientV2,
+						zipConversionEndpoint
+					);
 				return await queryStringToSearchCriteria(
 					qs,
 					diseaseFetcher,
@@ -667,4 +678,5 @@ const TrialDescriptionPage = () => {
 		</>
 	);
 };
+
 export default TrialDescriptionPage;

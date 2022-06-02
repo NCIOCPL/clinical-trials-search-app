@@ -1,6 +1,6 @@
 {
-    "sites.org_coordinates_lat": 38.8935,
-    "sites.org_coordinates_lon": -77.2532,
+    "sites.org_coordinates_lat": "38.8935",
+    "sites.org_coordinates_lon": "-77.2532",
     "sites.org_coordinates_dist": "100mi",
     "sites.recruitment_status": [
         "active",

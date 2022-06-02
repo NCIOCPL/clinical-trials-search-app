@@ -1,8 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { Fieldset, Autocomplete, InputLabel } from '../../atomic';
-import { getMainType, getCancerTypeDescendents } from '../../../store/actions';
+import {
+	getFindingsAction,
+	getMainTypeAction,
+	getSubtypesAction,
+	getStagesAction,
+} from '../../../store/actionsV2';
 import { useCachedValues } from '../../../hooks';
 import { sortItemsByName } from '../../../utilities';
 import './CancerTypeCondition.scss';
@@ -22,7 +28,6 @@ const CancerTypeCondition = ({ handleUpdate }) => {
 		stages = [],
 		stagesModified,
 		findings = [],
-		refineSearch,
 	} = useSelector((store) => store.form);
 	//typeahead states
 	const [subtype, setSubtype] = useState({ value: '' });
@@ -37,19 +42,27 @@ const CancerTypeCondition = ({ handleUpdate }) => {
 
 	const cache = useSelector((store) => store.cache);
 	const ctButton = useRef();
+	// we refactored how refining search is handled on results page
+	// therefore the correct way is to pull refineSearch from location object
+	const { state: locationState } = useLocation();
+	const { refineSearch } = locationState || {};
 
 	const focusCTButton = () => ctButton.current.blur();
 
 	useEffect(() => {
-		if (cache[cancerType.codes[0]]) {
-			populateSubmenus(cancerType.codes[0]);
+		if (
+			cache['subtypeOptions'] ||
+			cache['stageOptions'] ||
+			cache['findingsOptions']
+		) {
+			populateSubmenus();
 		}
 	}, [cache]);
 
-	const populateSubmenus = (ctCode) => {
-		setSubtypeOptions(cache[ctCode].subtypeOptions);
-		setStageOptions(cache[ctCode].stageOptions);
-		setFindingsOptions(cache[ctCode].findingsOptions);
+	const populateSubmenus = () => {
+		setSubtypeOptions(cache['subtypeOptions']?.data);
+		setStageOptions(cache['stageOptions']?.data);
+		setFindingsOptions(cache['findingsOptions']?.data);
 	};
 
 	const menuDropdown = document.getElementById('NCI-CTS-root');
@@ -73,7 +86,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
 	useEffect(() => {
 		// if maintypes is essentially empty, fetch mainTypes
 		if (maintypeOptions.length < 1 && ctMenuOpen) {
-			dispatch(getMainType({}));
+			dispatch(getMainTypeAction());
 		}
 
 		if (ctMenuOpen) {
@@ -83,12 +96,9 @@ const CancerTypeCondition = ({ handleUpdate }) => {
 			removeClickListener();
 		}
 		if (cancerType.codes.length > 0 && !refineSearch) {
-			dispatch(
-				getCancerTypeDescendents({
-					cacheKey: cancerType.codes[0],
-					codes: cancerType.codes,
-				})
-			);
+			dispatch(getSubtypesAction(cancerType.codes));
+			dispatch(getStagesAction(cancerType.codes));
+			dispatch(getFindingsAction(cancerType.codes));
 		}
 	}, [ctMenuOpen, dispatch]);
 
@@ -103,7 +113,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
 	useEffect(() => {
 		if (
 			cache['maintypeOptions'] &&
-			cache['maintypeOptions'].length > 0 &&
+			cache['maintypeOptions'].data.length > 0 &&
 			refineSearch
 		) {
 			initRefineSearch();
@@ -111,12 +121,9 @@ const CancerTypeCondition = ({ handleUpdate }) => {
 	}, [cache['maintypeOptions']]);
 
 	const retrieveDescendents = (cacheKey, diseaseCodes) => {
-		dispatch(
-			getCancerTypeDescendents({
-				cacheKey: cacheKey,
-				codes: diseaseCodes,
-			})
-		);
+		dispatch(getSubtypesAction(diseaseCodes));
+		dispatch(getFindingsAction(diseaseCodes));
+		dispatch(getStagesAction(diseaseCodes));
 	};
 
 	const initRefineSearch = () => {
@@ -129,7 +136,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
 				retrieveDescendents(cancerType.codes[0], cancerType.codes);
 			} else {
 				// use the parentDisease ID to select the primary cancer type
-				let parentCancer = cache['maintypeOptions'].find(
+				let parentCancer = cache['maintypeOptions'].data.find(
 					({ codes }) => codes[0] === cancerType.parentDiseaseID[0]
 				);
 
@@ -230,7 +237,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
 						labelHidden={true}
 						wrapperStyle={{ position: 'relative', display: 'inline-block' }}
 						open={true}
-						items={maintypeOptions}
+						items={maintypeOptions.data ? maintypeOptions.data : []}
 						getItemValue={(item) => item.name}
 						shouldItemRender={matchItemToTerm}
 						onChange={(event, value) => {

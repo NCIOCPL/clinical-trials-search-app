@@ -1,10 +1,5 @@
 {
-    "phase.phase": [
-        "i",
-        "ii",
-        "i_ii",
-        "ii_iii"
-    ],
+
     "current_trial_status": [
         "Active",
         "Approved",
@@ -29,6 +24,12 @@
         "sites.recruitment_status",
         "diseases"
     ],
+	"phase": [
+		"i",
+		"ii",
+		"i_ii",
+		"ii_iii"
+	],
 	"from":0,
 	"size":10
 }

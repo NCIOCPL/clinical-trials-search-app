@@ -85,11 +85,27 @@ And('result list is displayed', () => {
 Then('print modal appears', () => {
 	cy.get('.cts-modal').should('be.visible');
 });
+And('the request is sent with the following details', (dataTable) => {
+	cy.get('@print').then((xhr) => {
+		for (const {
+			link_template,
+			new_search_link,
+			search_criteria,
+		} of dataTable.hashes()) {
+			expect(xhr.request.body.link_template).to.eq(link_template);
+			expect(xhr.request.body.new_search_link).to.eq(new_search_link);
+			if (search_criteria === 'notNull')
+				expect(xhr.request.body.search_criteria).to.not.be.null;
+			else expect(xhr.request.body.search_criteria).to.be.null;
+		}
+	});
+});
+
 And('the request is sent with the following trial ids', (dataTable) => {
 	cy.wait('@print').then((xhr) => {
-		const allIds = xhr.request.body.TrialIDs;
+		const allIds = xhr.request.body.trial_ids;
 		let count = 0;
-		expect(xhr.request.body.TrialIDs).to.have.length(dataTable.rows().length);
+		expect(xhr.request.body.trial_ids).to.have.length(dataTable.rows().length);
 		for (const { trialId } of dataTable.hashes()) {
 			expect(allIds[count]).to.include(trialId);
 			count++;

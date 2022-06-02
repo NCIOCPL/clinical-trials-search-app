@@ -1,5 +1,5 @@
 {
-	"terms": [
+	"data": [
 		{
 			"name": "Brain/Spinal Cord Tumor",
 			"codes": [
@@ -14,7 +14,23 @@
 			"type": [
 				"maintype",
 				"subtype"
-			]
+			],
+			"synonyms": [
+                "CNS Neoplasm",
+                "CNS Tumor",
+                "CNS tumor",
+                "Central Nervous System Neoplasm",
+                "Central Nervous System Tumor",
+                "Neoplasm of CNS",
+                "Neoplasm of Central Nervous System",
+                "Neoplasm of the Central Nervous System",
+                "Tumor of CNS",
+                "Tumor of Central Nervous System",
+                "Tumor of the CNS",
+                "Tumor of the Central Nervous System",
+                "central nervous system tumor"
+            ],
+            "count": 629
 		}
 	]
 }

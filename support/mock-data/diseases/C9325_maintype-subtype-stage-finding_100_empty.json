@@ -1,5 +1,5 @@
 {
-	"terms":[
+	"data":[
 		{
 			"name":"Adrenal Cortex Cancer",
 			"codes":[
@@ -14,7 +14,27 @@
 			"type":[
 				"maintype",
 				"subtype"
-			]
+			],
+			"synonyms": [
+                "Adenocarcinoma, Adrenocortical, Malignant",
+                "Adrenal Cortex Adenocarcinoma",
+                "Adrenal Cortex Carcinoma",
+                "Adrenal Cortical Adenocarcinoma",
+                "Adrenal Cortical Carcinoma",
+                "Adrenal cortical adenocarcinoma",
+                "Adrenal cortical carcinoma",
+                "Adrenocortical Carcinoma",
+                "Adrenocortical carcinoma",
+                "Adrenocortical carcinoma, NOS",
+                "CARCINOMA, ADRENOCORTICAL, MALIGNANT",
+                "Carcinoma of Adrenal Cortex",
+                "Carcinoma of the Adrenal Cortex",
+                "Cortical Cell Carcinoma",
+                "adrenocortical cancer",
+                "adrenocortical carcinoma",
+                "cancer of the adrenal cortex"
+            ],
+            "count": 13
 		}
 	]
 }

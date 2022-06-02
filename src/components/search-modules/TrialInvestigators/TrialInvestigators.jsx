@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Fieldset, Autocomplete } from '../../atomic';
-import { searchTrialInvestigators } from '../../../store/actions';
+import { createTermDataFromArrayObj } from '../../../utilities';
+import { searchTrialInvestigatorsAction } from '../../../store/actionsV2';
 import { matchItemToTerm, sortItems } from '../../../utilities';
 
 const TrialInvestigators = ({ handleUpdate }) => {
@@ -10,13 +11,16 @@ const TrialInvestigators = ({ handleUpdate }) => {
 
 	//store vals
 	const { investigator } = useSelector((store) => store.form);
-	const { tis = [] } = useSelector((store) => store.cache);
+	const { tis = {} } = useSelector((store) => store.cache);
 
 	const [tiName, setTiName] = useState({ value: investigator.term });
+	const tisAggregations = tis.aggregations
+		? createTermDataFromArrayObj(tis.aggregations.principal_investigator, 'key')
+		: [];
 
 	useEffect(() => {
 		if (tiName.value.length > 2) {
-			dispatch(searchTrialInvestigators({ searchText: tiName.value }));
+			dispatch(searchTrialInvestigatorsAction({ searchText: tiName.value }));
 		}
 	}, [tiName, dispatch]);
 
@@ -33,7 +37,7 @@ const TrialInvestigators = ({ handleUpdate }) => {
 				value={tiName.value}
 				inputProps={{ id: 'investigator', placeholder: 'Investigator name' }}
 				wrapperStyle={{ position: 'relative', display: 'inline-block' }}
-				items={tis}
+				items={tisAggregations}
 				getItemValue={(item) => item.term}
 				shouldItemRender={matchItemToTerm}
 				sortItems={sortItems}
@@ -48,7 +52,7 @@ const TrialInvestigators = ({ handleUpdate }) => {
 				renderMenu={(children) => (
 					<div className="cts-autocomplete__menu --trialInvestigators">
 						{tiName.value.length > 2 ? (
-							tis.length ? (
+							tisAggregations.length ? (
 								children
 							) : (
 								<div className="cts-autocomplete__menu-item">

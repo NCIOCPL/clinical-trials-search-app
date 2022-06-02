@@ -1,5 +1,5 @@
 {
-	"terms": [
+	"data": [
 		{
 			"name": "Bilateral Breast Cancer",
 			"codes": [
@@ -13,7 +13,11 @@
 			],
 			"type": [
 				"subtype"
-			]
+			],
+			"synonyms": [
+                "Bilateral Breast Carcinoma"
+            ],
+            "count": 9
 		}
 	]
 }

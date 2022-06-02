@@ -11,16 +11,16 @@ export const formatTrialSearchQuery = (form) => {
 
 	//diseases
 	if (form.cancerType.codes.length > 0) {
-		filterCriteria._maintypes = form.cancerType.codes;
+		filterCriteria.maintype = form.cancerType.codes;
 	}
 
 	// Reduce the subtypes into a list of ids.
 	if (form.subtypes.length > 0) {
-		filterCriteria._subtypes = collapseConcepts(form.subtypes);
+		filterCriteria.subtype = collapseConcepts(form.subtypes);
 	}
 
 	if (form.stages.length > 0) {
-		filterCriteria._stages = collapseConcepts(form.stages);
+		filterCriteria.stage = collapseConcepts(form.stages);
 	}
 
 	if (form.findings.length > 0) {
@@ -32,7 +32,7 @@ export const formatTrialSearchQuery = (form) => {
 		const drugIds = form.drugs.length > 0 ? collapseConcepts(form.drugs) : [];
 		const otherIds =
 			form.treatments.length > 0 ? collapseConcepts(form.treatments) : [];
-		filterCriteria['arms.interventions.intervention_code'] = [
+		filterCriteria['arms.interventions.nci_thesaurus_concept_id'] = [
 			...new Set([...drugIds, ...otherIds]),
 		];
 	}
@@ -45,14 +45,14 @@ export const formatTrialSearchQuery = (form) => {
 
 	// keywords
 	if (form.keywordPhrases !== '') {
-		filterCriteria._fulltext = form.keywordPhrases;
+		filterCriteria.keyword = form.keywordPhrases;
 	}
 
 	// trialTypes
 	let trialTypesChecked = form.trialTypes.filter((item) => item.checked);
 	//check if any are selected, none being the same as all
 	if (trialTypesChecked.length) {
-		filterCriteria['primary_purpose.primary_purpose_code'] = [
+		filterCriteria.primary_purpose = [
 			...new Set(trialTypesChecked.map((item) => item.value)),
 		];
 	}
@@ -78,23 +78,23 @@ export const formatTrialSearchQuery = (form) => {
 			}
 		}
 		if (phaseList.length > 0) {
-			filterCriteria['phase.phase'] = phaseList;
+			filterCriteria.phase = phaseList;
 		}
 	}
 
 	// investigator
 	if (form.investigator.term !== '') {
-		filterCriteria.principal_investigator_fulltext = form.investigator.term;
+		filterCriteria['principal_investigator._fulltext'] = form.investigator.term;
 	}
 
 	// leadOrg
 	if (form.leadOrg.term !== '') {
-		filterCriteria.lead_org_fulltext = form.leadOrg.term;
+		filterCriteria['lead_org._fulltext'] = form.leadOrg.term;
 	}
 
 	// add healthy volunteers filter
 	if (form.healthyVolunteers) {
-		filterCriteria.accepts_healthy_volunteers_indicator = 'YES';
+		filterCriteria['eligibility.structured.accepts_healthy_volunteers'] = true;
 	}
 
 	//gender filter goes here but it is not set within our app
@@ -103,7 +103,7 @@ export const formatTrialSearchQuery = (form) => {
 	//trial ids
 	if (form.trialId !== '') {
 		// Split up the ids on a comma, trimming the items.
-		filterCriteria._trialids = form.trialId.split(',').map((s) => s.trim());
+		filterCriteria.trial_ids = form.trialId.split(',').map((s) => s.trim());
 	}
 
 	// VA only
@@ -118,7 +118,7 @@ export const formatTrialSearchQuery = (form) => {
 			filterCriteria['sites.org_postal_code'] = NIH_ZIPCODE;
 			break;
 		case 'search-location-hospital':
-			filterCriteria['sites.org_name_fulltext'] = form.hospital.term;
+			filterCriteria['sites.org_name._fulltext'] = form.hospital.term;
 			break;
 		case 'search-location-country': {
 			filterCriteria['sites.org_country'] = form.country;
@@ -134,8 +134,8 @@ export const formatTrialSearchQuery = (form) => {
 		}
 		case 'search-location-zip':
 			if (form.zipCoords.lat !== '' && form.zipCoords.long !== '') {
-				filterCriteria['sites.org_coordinates_lat'] = form.zipCoords.lat;
-				filterCriteria['sites.org_coordinates_lon'] = form.zipCoords.long;
+				filterCriteria['sites.org_coordinates_lat'] = `${form.zipCoords.lat}`;
+				filterCriteria['sites.org_coordinates_lon'] = `${form.zipCoords.long}`;
 				filterCriteria['sites.org_coordinates_dist'] = form.zipRadius + 'mi';
 			}
 			break;

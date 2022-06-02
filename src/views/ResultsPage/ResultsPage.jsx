@@ -38,7 +38,13 @@ const queryString = require('query-string');
 const ResultsPage = () => {
 	// Load the global settings from our custom context
 	const [
-		{ analyticsName, canonicalHost, services, siteName, zipConversionEndpoint },
+		{
+			analyticsName,
+			canonicalHost,
+			siteName,
+			zipConversionEndpoint,
+			apiClients: { clinicalTrialsSearchClientV2 },
+		},
 	] = useAppSettings();
 
 	// Redux
@@ -88,7 +94,6 @@ const ResultsPage = () => {
 
 	// Analytics
 	const tracking = useTracking();
-	const ctsapiclient = services.ctsSearch();
 
 	const handleTracking = (analyticsPayload) => {
 		tracking.trackEvent(analyticsPayload);
@@ -123,7 +128,10 @@ const ResultsPage = () => {
 
 		const searchCriteria = async () => {
 			const { diseaseFetcher, interventionFetcher, zipFetcher } =
-				await runQueryFetchers(ctsapiclient, zipConversionEndpoint);
+				await runQueryFetchers(
+					clinicalTrialsSearchClientV2,
+					zipConversionEndpoint
+				);
 			return await queryStringToSearchCriteria(
 				qs,
 				diseaseFetcher,
@@ -140,7 +148,7 @@ const ResultsPage = () => {
 			if (
 				res.searchCriteria &&
 				!Number.isNaN(res.searchCriteria.resultsPage) &&
-				currentPage != res.searchCriteria.resultsPage
+				currentPage !== res.searchCriteria.resultsPage
 			) {
 				ctsDispatch({
 					type: 'SET_PROP',
@@ -198,11 +206,10 @@ const ResultsPage = () => {
 
 			// At this point, the wrapped view is going to handle this request.
 			ctsDispatch(setSuccessfulFetch(currentActionsHash, payload[0]));
-			//The search Query is correctly constructed, but the payload is being returned as null
 		}
 	}, [loading, payload, searchCriteriaObject]);
 
-	//Handle Analytics
+	// Handle Analytics
 	useEffect(() => {
 		// This should also be dependent on the current route/url
 		if (isAllFetchingComplete()) {
@@ -258,7 +265,7 @@ const ResultsPage = () => {
 	const handleSelectAll = () => {
 		const pageResultIds = [
 			...new Set(
-				trialResults.trials.map((item) => {
+				trialResults.data.map((item) => {
 					let resItem = {
 						id: item.nci_id,
 						fromPage: searchCriteriaObject.resultsPage,
@@ -649,7 +656,7 @@ const ResultsPage = () => {
 									<>{renderNoResults()}</>
 								) : (
 									<ResultsList
-										results={trialResults.trials}
+										results={trialResults.data}
 										selectedResults={selectedResults}
 										setSelectedResults={setSelectedResults}
 										setSelectAll={(value) => {
