@@ -1,7 +1,5 @@
 {
-	"_trialids": [
-		"ecog"
-	],
+
 	"current_trial_status": [
 		"Active",
 		"Approved",
@@ -25,6 +23,9 @@
 		"sites.org_coordinates",
 		"sites.recruitment_status",
 		"diseases"
+	],
+	"trial_ids": [
+		"ecog"
 	],
 	"from":0,
 	"size":10

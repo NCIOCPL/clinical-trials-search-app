@@ -1,14 +1,5 @@
 {
-    "primary_purpose.primary_purpose_code": [
-        "treatment",
-        "prevention",
-        "supportive_care",
-        "health_services_research",
-        "diagnostic",
-        "screening",
-        "basic_science",
-        "other"
-    ],
+
     "current_trial_status": [
         "Active",
         "Approved",
@@ -33,6 +24,16 @@
         "sites.recruitment_status",
         "diseases"
     ],
+	"primary_purpose": [
+		"treatment",
+		"prevention",
+		"supportive_care",
+		"health_services_research",
+		"diagnostic",
+		"screening",
+		"basic_science",
+		"other"
+	],
 	"from":0,
 	"size":10
 }

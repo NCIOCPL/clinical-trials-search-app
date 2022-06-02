@@ -20,8 +20,6 @@ export {
 export { keyHandler } from './keyHandler';
 export { uniqueIdForComponent } from './uniqueIdForComponent';
 export { sortItems, sortItemsByName } from './sortItems';
-export { ctsapiDiseaseFetcher } from './ctsapiDiseaseFetcher';
-export { ctsapiInterventionFetcher } from './ctsapiInterventionFetcher';
 export { zipcodeFetcher } from './zipcodeFetcher';
 export { queryStringToSearchCriteria } from './queryStringToSearchCriteria';
 export { formToTrackingData } from './formToTrackingData';
@@ -29,4 +27,7 @@ export { EDDLAnalyticsHandler } from './eddl-analytics-handler';
 export { runQueryFetchers } from './runQueryFetchers';
 export { hasSCOBeenUpdated } from './hasSCOBeenUpdated';
 export { filterSitesByActiveRecruitment } from './filterSitesByActiveRecruitment';
+export { createTermDataFromArrayObj } from './createTermDataFromArrayObj';
+export { formatTrialSearchQueryV2 } from './formatTrialSearchQueryV2';
+// #TODO Remove below
 export { getProductTestBase } from './getProductTestBase';

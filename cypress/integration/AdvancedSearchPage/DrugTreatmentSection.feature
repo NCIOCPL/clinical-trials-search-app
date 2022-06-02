@@ -134,3 +134,24 @@ Feature: Advanced Clinical Trials Search Drug Treatment Section
 			| d         | C137999\|C126102 |
 			| loc       | 0                |
 			| rl        | 2                |
+
+	Scenario: User searches for drug/intervention via autosuggest on advanced form
+		Given the user navigates to "/advanced"
+		Then the page title is "Find NCI-Supported Clinical Trials"
+		And "Drug/Treatment" form section is displayed
+    Then "Drug" input field has a placeholder "Start typing to select drugs and/or drug families"
+    When user clicks on "Drug" field
+		Then autocomplete dropdown is displayed with "Please enter 3 or more characters" text
+    And user types "ant" in "Drug" field
+		And user selects "Other Names: Anti-Cancer Agents" from dropdown
+		When user clicks on "Find Trials" button
+		Then the search is executed and results page is displayed
+		And trial info displays "Results 1-10  of 4154 for your search "
+		And the criteria table displays the following
+			| Category         | Selection            |
+			| Drug/Drug Family | Antineoplastic Agent |
+		And the url query has the following corresponding code
+			| parameter | value            |
+			| d         | C274						 |
+			| loc       | 0                |
+			| rl        | 2                |
