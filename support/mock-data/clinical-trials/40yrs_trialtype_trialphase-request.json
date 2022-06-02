@@ -1,13 +1,5 @@
 {
-    "eligibility.structured.max_age_in_years_gte": 40,
-    "eligibility.structured.min_age_in_years_lte": 40,
-    "primary_purpose.primary_purpose_code": [
-        "treatment"
-    ],
-    "phase.phase": [
-        "i",
-        "i_ii"
-    ],
+
     "current_trial_status": [
         "Active",
         "Approved",
@@ -32,6 +24,15 @@
         "sites.recruitment_status",
         "diseases"
     ],
+	"eligibility.structured.max_age_in_years_gte": 40,
+	"eligibility.structured.min_age_in_years_lte": 40,
+	"primary_purpose": [
+		"treatment"
+	],
+	"phase": [
+		"i",
+		"i_ii"
+	],
 	"from":0,
 	"size":10
 }

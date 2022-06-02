@@ -1,49 +1,55 @@
 Feature: As a user I want to be able to print trial search results
 
-    Scenario Outline: as a user, I should be able to select a trial and print it
-        Given screen breakpoint is set to "<breakpoint>"
-        And the user navigates to "/r?loc=0&rl=1"
-        Then the page title is "Clinical Trials Search Results"
-        And result list is displayed
-        When user checks "NCI-2015-01918" trial
-        And user clicks on "Print Selected" button
-        Then the request is sent with the following trial ids
-            | trialId        |
-            | NCI-2015-01918 |
-        And print modal appears
-        Examples:
-            | breakpoint |
-            | desktop    |
-            | mobile     |
-            | tablet     |
+	Scenario Outline: as a user, I should be able to select a trial and print it
+		Given screen breakpoint is set to "<breakpoint>"
+		And the user navigates to "/r?loc=0&rl=1&a=39"
+		Then the page title is "Clinical Trials Search Results"
+		And result list is displayed
+		When user checks "NCI-2014-01507" trial
+		And user clicks on "Print Selected" button
+		Then the request is sent with the following trial ids
+			| trialId        |
+			| NCI-2014-01507 |
+		And the request is sent with the following details
+			| link_template                    | new_search_link | search_criteria |
+			| /v?a=39&loc=0&rl=1&id=<TRIAL_ID> | /               | notNull         |
+		And print modal appears
+		Examples:
+			| breakpoint |
+			| desktop    |
+			| mobile     |
+			| tablet     |
 
-    Scenario: as a user, I should be able to multiple trials on multiple pages and print it
-        Given the user navigates to "/r?loc=0&rl=1"
-        Then the page title is "Clinical Trials Search Results"
-        And result list is displayed
-        And user checks "Select all on page" checkbox at the "top" of a page
-        Then the checkbox "Select all on page" is checked
-        And user checks "Select all on page" checkbox at the "top" of a page
-        Then the checkbox "Select all on page" is not checked
-        And user checks "Select all on page" checkbox at the "top" of a page
-        And all of the trials are selected
-        When user clicks on "Next >" pager button
-        And user checks "NCI-2017-01425" trial
-        When user clicks on "Print Selected" button
-        Then the request is sent with the following trial ids
-            | trialId        |
-            | NCI-2015-01918 |
-            | NCI-2014-01507 |
-            | NCI-2015-00054 |
-            | NCI-2015-00128 |
-            | NCI-2020-00751 |
-            | NCI-2018-03695 |
-            | NCI-2013-00875 |
-            | NCI-2019-01034 |
-            | NCI-2016-01041 |
-            | NCI-2014-01820 |
-            | NCI-2017-01425 |
-        And print modal appears
+	Scenario: as a user, I should be able to multiple trials on multiple pages and print it
+		Given the user navigates to "/r?loc=0&rl=2"
+		Then the page title is "Clinical Trials Search Results"
+		And result list is displayed
+		And user checks "Select all on page" checkbox at the "top" of a page
+		Then the checkbox "Select all on page" is checked
+		And user checks "Select all on page" checkbox at the "top" of a page
+		Then the checkbox "Select all on page" is not checked
+		And user checks "Select all on page" checkbox at the "top" of a page
+		And all of the trials are selected
+		When user clicks on "Next >" pager button
+		And user checks "NCI-2017-01425" trial
+		When user clicks on "Print Selected" button
+		Then the request is sent with the following trial ids
+			| trialId        |
+			| NCI-2015-01918 |
+			| NCI-2014-01507 |
+			| NCI-2015-00054 |
+			| NCI-2015-00128 |
+			| NCI-2020-00751 |
+			| NCI-2018-03695 |
+			| NCI-2013-00875 |
+			| NCI-2019-01034 |
+			| NCI-2016-01041 |
+			| NCI-2014-01820 |
+			| NCI-2017-01425 |
+		And the request is sent with the following details
+			| link_template                    | new_search_link | search_criteria |
+			| /v?loc=0&pn=2&rl=2&id=<TRIAL_ID> | /advanced       | null            |
+		And print modal appears
 
     Scenario: as a user, I want to see all of the selected trials retained after I navigate back to a previous page
         Given the user navigates to "/r?loc=0&rl=1"

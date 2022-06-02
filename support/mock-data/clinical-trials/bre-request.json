@@ -1,5 +1,5 @@
 {
-    "_fulltext": "bre",
+
     "current_trial_status": [
         "Active",
         "Approved",
@@ -24,6 +24,7 @@
         "sites.recruitment_status",
         "diseases"
     ],
+	"keyword": "bre",
 	"from":0,
 	"size":10
 }

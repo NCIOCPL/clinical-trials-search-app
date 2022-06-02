@@ -1,6 +1,6 @@
 {
    "total":17,
-   "trials":[
+   "data":[
       {
          "current_trial_status":"Active",
          "nct_id":"NCT02362451",
@@ -70,7 +70,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C36076",
                "display_name":"Malignant Reproductive System Neoplasm",
@@ -127,7 +127,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C164141",
                "display_name":"Genitourinary System Carcinoma",
@@ -236,7 +236,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C9480",
                "display_name":"Invasive Carcinoma",
@@ -323,7 +323,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -362,7 +362,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C156482",
                "display_name":"Genitourinary System Neoplasm",
@@ -516,7 +516,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -551,17 +551,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"YES",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -728,7 +728,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -783,7 +783,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -799,7 +799,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C9480",
                "display_name":"Invasive Carcinoma",
@@ -816,17 +816,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"NO",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -900,7 +900,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C156482",
                "display_name":"Genitourinary System Neoplasm",
@@ -1022,7 +1022,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -1038,7 +1038,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C164141",
                "display_name":"Genitourinary System Carcinoma",
@@ -1083,7 +1083,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C156482",
                "display_name":"Genitourinary System Neoplasm",
@@ -1159,7 +1159,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C164141",
                "display_name":"Genitourinary System Carcinoma",
@@ -1194,7 +1194,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C150533",
                "display_name":"Recurrent Malignant Male Reproductive System Neoplasm",
@@ -1259,7 +1259,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -1549,17 +1549,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"YES",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -1629,7 +1629,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C36076",
                "display_name":"Malignant Reproductive System Neoplasm",
@@ -1713,7 +1713,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C36076",
                "display_name":"Malignant Reproductive System Neoplasm",
@@ -2246,23 +2246,23 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"YES",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -2298,7 +2298,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -2585,7 +2585,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C156482",
                "display_name":"Genitourinary System Neoplasm",
@@ -2695,17 +2695,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"NO",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -2788,7 +2788,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C156482",
                "display_name":"Genitourinary System Neoplasm",
@@ -2821,7 +2821,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C36076",
                "display_name":"Malignant Reproductive System Neoplasm",
@@ -2838,7 +2838,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -2871,7 +2871,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C164141",
                "display_name":"Genitourinary System Carcinoma",
@@ -2983,7 +2983,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C150534",
                "display_name":"Refractory Malignant Male Reproductive System Neoplasm",
@@ -3017,7 +3017,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C8511",
                "display_name":"Refractory Carcinoma",
@@ -3239,7 +3239,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C150533",
                "display_name":"Recurrent Malignant Male Reproductive System Neoplasm",
@@ -3256,7 +3256,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C164141",
                "display_name":"Genitourinary System Carcinoma",
@@ -3273,7 +3273,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C36076",
                "display_name":"Malignant Reproductive System Neoplasm",
@@ -3290,7 +3290,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -3386,7 +3386,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C167255",
                "display_name":"Refractory Prostate Carcinoma",
@@ -3845,7 +3845,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C164141",
                "display_name":"Genitourinary System Carcinoma",
@@ -3928,7 +3928,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C36076",
                "display_name":"Malignant Reproductive System Neoplasm",
@@ -3945,7 +3945,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C156482",
                "display_name":"Genitourinary System Neoplasm",
@@ -3999,7 +3999,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C35497",
                "display_name":"Lymph Node Neoplasm",
@@ -4034,7 +4034,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C156482",
                "display_name":"Genitourinary System Neoplasm",
@@ -4107,7 +4107,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C167255",
                "display_name":"Refractory Prostate Carcinoma",
@@ -4191,7 +4191,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -4301,7 +4301,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -4334,7 +4334,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C164141",
                "display_name":"Genitourinary System Carcinoma",
@@ -4395,7 +4395,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C35346",
                "display_name":"Lymph Node Disorder",
@@ -4411,7 +4411,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C8511",
                "display_name":"Refractory Carcinoma",
@@ -4455,7 +4455,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C166357",
                "display_name":"Malignant Musculoskeletal Neoplasm",
@@ -4552,7 +4552,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C150534",
                "display_name":"Refractory Malignant Male Reproductive System Neoplasm",
@@ -4569,7 +4569,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C36076",
                "display_name":"Malignant Reproductive System Neoplasm",
@@ -4664,7 +4664,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -4680,17 +4680,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"YES",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -5434,17 +5434,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"NO",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -5540,7 +5540,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -5771,7 +5771,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C9480",
                "display_name":"Invasive Carcinoma",
@@ -5809,7 +5809,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C36076",
                "display_name":"Malignant Reproductive System Neoplasm",
@@ -5826,17 +5826,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"YES",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -5958,7 +5958,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -5974,7 +5974,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -6055,7 +6055,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C156482",
                "display_name":"Genitourinary System Neoplasm",
@@ -6124,7 +6124,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C164141",
                "display_name":"Genitourinary System Carcinoma",
@@ -6346,23 +6346,23 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"YES",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -6466,7 +6466,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C150533",
                "display_name":"Recurrent Malignant Male Reproductive System Neoplasm",
@@ -6483,7 +6483,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C156482",
                "display_name":"Genitourinary System Neoplasm",
@@ -6622,7 +6622,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -6800,7 +6800,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C36076",
                "display_name":"Malignant Reproductive System Neoplasm",
@@ -6862,7 +6862,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C164141",
                "display_name":"Genitourinary System Carcinoma",
@@ -7134,7 +7134,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C36076",
                "display_name":"Malignant Reproductive System Neoplasm",
@@ -7193,7 +7193,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C150534",
                "display_name":"Refractory Malignant Male Reproductive System Neoplasm",
@@ -7243,7 +7243,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C164141",
                "display_name":"Genitourinary System Carcinoma",
@@ -7295,7 +7295,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C9480",
                "display_name":"Invasive Carcinoma",
@@ -7330,7 +7330,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -7402,7 +7402,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C8511",
                "display_name":"Refractory Carcinoma",
@@ -7608,7 +7608,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C167255",
                "display_name":"Refractory Prostate Carcinoma",
@@ -7626,7 +7626,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -7669,7 +7669,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -7705,7 +7705,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C156482",
                "display_name":"Genitourinary System Neoplasm",
@@ -7800,7 +7800,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C156482",
                "display_name":"Genitourinary System Neoplasm",
@@ -7834,7 +7834,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C36076",
                "display_name":"Malignant Reproductive System Neoplasm",
@@ -7978,7 +7978,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C164141",
                "display_name":"Genitourinary System Carcinoma",
@@ -8078,7 +8078,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -8114,17 +8114,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"NO",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -8189,17 +8189,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"YES",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -8511,7 +8511,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -8544,7 +8544,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C36076",
                "display_name":"Malignant Reproductive System Neoplasm",
@@ -8664,23 +8664,23 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"NO",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C164141",
                "display_name":"Genitourinary System Carcinoma",
@@ -8974,7 +8974,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C156482",
                "display_name":"Genitourinary System Neoplasm",
@@ -9250,7 +9250,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C36076",
                "display_name":"Malignant Reproductive System Neoplasm",
@@ -9283,7 +9283,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -9362,7 +9362,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -9397,17 +9397,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"YES",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -9485,7 +9485,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C167255",
                "display_name":"Refractory Prostate Carcinoma",
@@ -9503,7 +9503,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C8511",
                "display_name":"Refractory Carcinoma",
@@ -9520,7 +9520,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -9701,7 +9701,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C164141",
                "display_name":"Genitourinary System Carcinoma",
@@ -9735,7 +9735,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C156482",
                "display_name":"Genitourinary System Neoplasm",
@@ -9786,7 +9786,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C150534",
                "display_name":"Refractory Malignant Male Reproductive System Neoplasm",
@@ -10336,17 +10336,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"NO",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -10446,7 +10446,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C164141",
                "display_name":"Genitourinary System Carcinoma",
@@ -10496,17 +10496,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"YES",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -10583,7 +10583,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C156482",
                "display_name":"Genitourinary System Neoplasm",
@@ -10700,7 +10700,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C36076",
                "display_name":"Malignant Reproductive System Neoplasm",
@@ -10740,7 +10740,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -10798,7 +10798,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C164141",
                "display_name":"Genitourinary System Carcinoma",
@@ -10848,7 +10848,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -11034,7 +11034,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -11221,7 +11221,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C36076",
                "display_name":"Malignant Reproductive System Neoplasm",
@@ -11283,7 +11283,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C156482",
                "display_name":"Genitourinary System Neoplasm",
@@ -11342,7 +11342,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -11805,17 +11805,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"YES",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -11838,7 +11838,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -11921,7 +11921,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C156482",
                "display_name":"Genitourinary System Neoplasm",
@@ -12100,7 +12100,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7062",
                "display_name":"Neoplasm by Special Category",
@@ -12116,17 +12116,17 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C7057",
                "display_name":"Disease, Disorder or Finding",
                "type":[
-                  
+
                ],
                "lead_disease_indicator":"NO",
                "preferred_name":"Disease, Disorder or Finding",
                "parents":[
-                  
+
                ]
             },
             {
@@ -12233,7 +12233,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C156482",
                "display_name":"Genitourinary System Neoplasm",
@@ -12359,7 +12359,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",
@@ -12434,7 +12434,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C164141",
                "display_name":"Genitourinary System Carcinoma",
@@ -12530,7 +12530,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C164141",
                "display_name":"Genitourinary System Carcinoma",
@@ -12547,7 +12547,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C36076",
                "display_name":"Malignant Reproductive System Neoplasm",
@@ -12745,7 +12745,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C9480",
                "display_name":"Invasive Carcinoma",
@@ -12932,7 +12932,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C150533",
                "display_name":"Recurrent Malignant Male Reproductive System Neoplasm",
@@ -12949,7 +12949,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C36076",
                "display_name":"Malignant Reproductive System Neoplasm",
@@ -12966,7 +12966,7 @@
             {
                "inclusion_indicator":"TREE",
                "synonyms":[
-                  
+
                ],
                "nci_thesaurus_concept_id":"C3263",
                "display_name":"Neoplasm by Site",

@@ -26,7 +26,7 @@ describe('testing getClinicalTrials', () => {
 
 	it('makes a request to api and returns 57 trials, for trastuzumab', async () => {
 		const requestFilters = {
-			'arms.interventions.intervention_code': ['C1647'],
+			'arms.interventions.nci_thesaurus_concept_id': ['C1647'],
 		};
 
 		const query = getClinicalTrialsAction({
@@ -34,8 +34,8 @@ describe('testing getClinicalTrials', () => {
 		});
 
 		const scope = nock('http://example.org')
-			.post('/clinical-trials', query.payload)
-			.reply(200, { total: 57, trials: [{}] });
+			.post('/trials', query.payload)
+			.reply(200, { total: 57, data: [{}] });
 		const response = await getClinicalTrials(client, query.payload);
 		expect(response.total).toEqual(57);
 		scope.isDone();
@@ -45,11 +45,11 @@ describe('testing getClinicalTrials', () => {
 		['empty object', {}],
 		['null total', { total: null }],
 		['count with null trials', { total: 32 }],
-		['count with empty trials', { total: 32, trials: [] }],
-		['zero count with trials', { total: 0, trials: [1] }],
+		['count with empty trials', { total: 32, data: [] }],
+		['zero count with trials', { total: 0, data: [1] }],
 	])('Invalid trial responses - %s', async (testCase, resObj) => {
 		const requestFilters = {
-			'arms.interventions.intervention_code': ['C1647'],
+			'arms.interventions.nci_thesaurus_concept_id': ['C1647'],
 		};
 
 		const query = getClinicalTrialsAction({
@@ -57,7 +57,7 @@ describe('testing getClinicalTrials', () => {
 		});
 
 		const scope = nock('http://example.org')
-			.post('/clinical-trials', query.payload)
+			.post('/trials', query.payload)
 			.reply(200, resObj);
 
 		await expect(getClinicalTrials(client, query.payload)).rejects.toThrow(
@@ -76,7 +76,7 @@ describe('testing getClinicalTrials', () => {
 		});
 
 		const scope = nock('http://example.org')
-			.post('/clinical-trials', query.payload)
+			.post('/trials', query.payload)
 			.reply(201);
 		await expect(getClinicalTrials(client, query.payload)).rejects.toThrow(
 			'Unexpected status 201 for fetching clinical trials'
@@ -86,7 +86,7 @@ describe('testing getClinicalTrials', () => {
 
 	it('throws a 500 error status', async () => {
 		const requestFilters = {
-			'arms.interventions.intervention_code': ['C1647'],
+			'arms.interventions.nci_thesaurus_concept_id': ['C1647'],
 		};
 
 		const query = getClinicalTrialsAction({
@@ -94,7 +94,7 @@ describe('testing getClinicalTrials', () => {
 		});
 
 		const scope = nock('http://example.org')
-			.post('/clinical-trials', query.payload)
+			.post('/trials', query.payload)
 			.reply(500);
 		await expect(getClinicalTrials(client, query.payload)).rejects.toThrow(
 			'Unexpected status 500 for fetching clinical trials'
@@ -104,7 +104,7 @@ describe('testing getClinicalTrials', () => {
 
 	it('handles an error thrown by http client', async () => {
 		const requestFilters = {
-			'arms.interventions.intervention_code': ['C1647'],
+			'arms.interventions.nci_thesaurus_concept_id': ['C1647'],
 		};
 
 		const query = getClinicalTrialsAction({
@@ -112,7 +112,7 @@ describe('testing getClinicalTrials', () => {
 		});
 
 		const scope = nock('http://example.org')
-			.post('/clinical-trials', query.payload)
+			.post('/trials', query.payload)
 			.replyWithError('connection refused');
 		await expect(getClinicalTrials(client, query.payload)).rejects.toThrow(
 			'connection refused'

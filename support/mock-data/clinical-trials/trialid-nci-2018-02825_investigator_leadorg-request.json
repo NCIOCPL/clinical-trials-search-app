@@ -1,7 +1,4 @@
 {
-  "principal_investigator_fulltext": "Jarushka Naidoo",
-  "lead_org_fulltext": "ECOG-ACRIN Cancer Research Group",
-  "_trialids": ["NCI-2018-02825"],
   "current_trial_status": [
     "Active",
     "Approved",
@@ -26,6 +23,9 @@
     "sites.recruitment_status",
     "diseases"
   ],
+	"principal_investigator._fulltext": "Jarushka Naidoo",
+	"lead_org._fulltext": "ECOG-ACRIN Cancer Research Group",
+	"trial_ids": ["NCI-2018-02825"],
 	"from":0,
 	"size":10
 }

@@ -1,9 +1,5 @@
 {
-	"_trialids": [
-		"NCI-2018-02825",
-		"NCI-2015-00054",
-		"NCI-2014-01507"
-	],
+
 	"current_trial_status": [
 		"Active",
 		"Approved",
@@ -27,6 +23,11 @@
 		"sites.org_coordinates",
 		"sites.recruitment_status",
 		"diseases"
+	],
+	"trial_ids": [
+		"NCI-2018-02825",
+		"NCI-2015-00054",
+		"NCI-2014-01507"
 	],
 	"from":0,
 	"size":10

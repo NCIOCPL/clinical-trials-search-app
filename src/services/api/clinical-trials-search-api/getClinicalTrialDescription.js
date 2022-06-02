@@ -6,7 +6,7 @@
  */
 export const getClinicalTrialDescription = async (client, query) => {
 	try {
-		const res = await client.get(`/clinical-trial/${query}`);
+		const res = await client.get(`/trials/${query}`);
 		if (res.status === 200) {
 			return res.data;
 		} else {
