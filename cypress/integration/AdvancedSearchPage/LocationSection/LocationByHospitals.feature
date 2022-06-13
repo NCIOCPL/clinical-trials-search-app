@@ -7,21 +7,21 @@ Feature: As a user, I want to be able to narrow down my search by specifying a h
         And "Limit results to Veterans Affairs facilities" toggle is switched to "No"
         When user selects "Hospitals/Institutions" radio button
         And user types "um b" in "Hospitals/Institutions" autosuggest field
-        And user selects "UM Baltimore Washington Medical Center / Tate Cancer Center" from dropdown
+        And user selects "UM Baltimore Washington Medical Center/Tate Cancer Center" from dropdown
         When user clicks on "Find Trials" button
         Then the search is executed and results page is displayed
         And trial info displayes "Results 1-10  of 29 for your search "
         And the criteria table displays the following
             | Category                | Selection                                                   |
-            | At Hospital/Institution | UM Baltimore Washington Medical Center / Tate Cancer Center |
+            | At Hospital/Institution | UM Baltimore Washington Medical Center/Tate Cancer Center |
         And the url query has the following corresponding code
             | parameter | value                                                       |
             | loc       | 3                                                           |
             | rl        | 2                                                           |
-            | hos       | UM Baltimore Washington Medical Center / Tate Cancer Center |
+            | hos       | UM Baltimore Washington Medical Center/Tate Cancer Center |
         And the 1 result item has a "Location:" info with "1382 locations"
         When user clicks on Modify Search Criteria button
-        Then "Hospitals/Institutions" input field has a value "UM Baltimore Washington Medical Center / Tate Cancer Center"
+        Then "Hospitals/Institutions" input field has a value "UM Baltimore Washington Medical Center/Tate Cancer Center"
         And user clears "Hospitals/Institutions" input field
         And user types "erl" in "Hospitals/Institutions" autosuggest field
         And user selects "Erlanger Medical Center" from dropdown
@@ -51,18 +51,18 @@ Feature: As a user, I want to be able to narrow down my search by specifying a h
         When user clicks on Modify Search Criteria button
         And user clears "Hospitals/Institutions" input field
         And user types "um b" in "Hospitals/Institutions" autosuggest field
-        And user selects "UM Baltimore Washington Medical Center / Tate Cancer Center" from dropdown
+        And user selects "UM Baltimore Washington Medical Center/Tate Cancer Center" from dropdown
         When user clicks on "Find Trials" button
         Then the search is executed and results page is displayed
         And trial info displayes "Results 1-10  of 29 for your search "
         And the criteria table displays the following
             | Category                | Selection                                                   |
-            | At Hospital/Institution | UM Baltimore Washington Medical Center / Tate Cancer Center |
+            | At Hospital/Institution | UM Baltimore Washington Medical Center/Tate Cancer Center |
         And the url query has the following corresponding code
             | parameter | value                                                       |
             | loc       | 3                                                           |
             | rl        | 2                                                           |
-            | hos       | UM Baltimore Washington Medical Center / Tate Cancer Center |
+            | hos       | UM Baltimore Washington Medical Center/Tate Cancer Center |
         And the 1 result item has a "Location:" info with "1382 locations"
 
 

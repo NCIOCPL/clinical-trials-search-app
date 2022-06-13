@@ -1,5 +1,4 @@
 {
-    "sites.org_name_fulltext": "mayo",
     "sites.recruitment_status": [
         "active",
         "approved",
@@ -31,6 +30,7 @@
         "sites.recruitment_status",
         "diseases"
     ],
+	"sites.org_name._fulltext": "mayo",
 	"from":0,
 	"size":10
 }

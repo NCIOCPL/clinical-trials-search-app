@@ -3,7 +3,7 @@ import { And, Then, When } from 'cypress-cucumber-preprocessor/steps';
 
 And('user selects {string} from dropdown', (autosuggestTerm) => {
 	cy.get('div.cts-autocomplete__menu.--leadOrg').should('be.visible');
-	cy.get('div.cts-autocomplete__menu.--leadOrg div:visible')
+	cy.get('div.cts-autocomplete__menu.--leadOrg div.highlighted:visible')
 		.should('have.text', autosuggestTerm)
 		.click();
 });

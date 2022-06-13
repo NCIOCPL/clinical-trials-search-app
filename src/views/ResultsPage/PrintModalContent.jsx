@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { usePrintApi } from '../../hooks';
-import { buildQueryString } from '../../utilities';
+import { buildQueryString, hasSCOBeenUpdated } from '../../utilities';
 import { useAppSettings } from '../../store/store.js';
 
 const queryString = require('query-string');
@@ -13,24 +13,23 @@ const PrintModalContent = ({ selectedList, searchCriteriaObject }) => {
 
 	const queryParams = buildQueryString(searchCriteriaObject);
 
-	// Support for legacy things
-	const queryParamsModified = {
-		...queryParams,
-		tp: queryParams['tp']
-			? queryParams['tp'].map((tp) => tp.toUpperCase())
-			: [],
-	};
+	const { rl } = queryParams;
 
-	const queryParamsString = queryString.stringify(queryParamsModified, {
-		arrayFormat: 'none',
-	});
+	const new_search_link = rl === 1 ? `/` : `/advanced`;
 
-	const printIds = selectedList.map(({ id }) => id);
+	const trial_ids = selectedList.map(({ id }) => id);
+
+	const link_template = `/v?${queryString.stringify(
+		queryParams
+	)}&id=<TRIAL_ID>`;
+
+	const search_criteria = !hasSCOBeenUpdated(searchCriteriaObject)
+		? searchCriteriaObject
+		: null;
+
 	const [{ data, isLoading, isError, doPrint }] = usePrintApi(
-		{ TrialIDs: printIds },
-		// Make sure URL gets query params for search criteria on
-		// print!!!
-		queryParamsString.length > 0 ? printUrl + '?' + queryParamsString : printUrl
+		{ trial_ids, link_template, new_search_link, search_criteria },
+		printUrl
 	);
 
 	// on component mount, check for selected IDs,
@@ -119,6 +118,6 @@ const PrintModalContent = ({ selectedList, searchCriteriaObject }) => {
 };
 PrintModalContent.propTypes = {
 	selectedList: PropTypes.array.isRequired,
-	searchCriteriaObject: PropTypes.object.isRequired,
+	searchCriteriaObject: PropTypes.object,
 };
 export default PrintModalContent;

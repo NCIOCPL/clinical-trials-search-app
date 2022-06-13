@@ -1,7 +1,7 @@
 {
     "sites.org_va": true,
-    "sites.org_coordinates_lat": 39.0472,
-    "sites.org_coordinates_lon": -77.3866,
+    "sites.org_coordinates_lat": "39.0472",
+    "sites.org_coordinates_lon": "-77.3866",
     "sites.org_coordinates_dist": "200mi",
     "sites.recruitment_status": [
         "active",

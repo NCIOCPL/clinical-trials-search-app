@@ -47,7 +47,7 @@ const interventionsGet = async (req, res, next) => {
 
   // TODO: This needs to be sanitized.
 	const name_fragment = name ? name.replace(/\s/g, '-').toLowerCase() : "empty";
-  const code_fragment = code && Array.isArray(code) && code.length > 0 ? code.join('-') : "empty";
+  const code_fragment = code && !Array.isArray(code) ? code : code && Array.isArray(code) && code.length > 0 ? code.join('-') : "empty";
   const size_fragment = size ? size : "empty";
   const sort_fragment = sort ? sort : "empty";
   const order_fragment = order ? order : "empty";
