@@ -1,5 +1,4 @@
 Feature:  As a user, I want to be able to view trial description page with all its components
-
 	Scenario: User is able to navigate to trial description page from all trials search results page
 		Given screen breakpoint is set to "desktop"
 		Given the user navigates to "/r?loc=0&rl=2"
@@ -232,6 +231,25 @@ Feature:  As a user, I want to be able to view trial description page with all i
 			| Age      | 40        |
 		When user clicks on Print button
 		Then print window opens
+
+		Scenario: User clicks on modify search, and is presented search criteria
+		Given the user navigates to "/advanced"
+		Then the page title is "Find NCI-Supported Clinical Trials"
+		And "Drug/Treatment" form section is displayed
+		When user clicks on "Drug" field
+		And user types "ibup" in "Drug" field
+		And user selects "Ibuprofen" from dropdown
+		When user clicks on "Treatment" field
+		And user types "polymo" in "Treatment" field
+		And user selects "Polymorphism AnalysisOther Names: Polymorphism Detection" from dropdown
+		When user clicks on "Find Trials" button
+		Then the search is executed and results page is displayed
+		When user clicks on 1 trial result
+		Then the page title is "Flotetuzumab for the Treatment of Relapsed or Refractory Advanced CD123-Positive Hematological Malignancies"
+		And "< Back to search results" button as link is displayed
+		When user clicks on Modify Search Criteria button
+		Then "Drug" input field has a value "Ibuprofen"
+		Then "Treatment" input field has a value "Polymorphism Analysis"
 
 	#this should be enabled by https://github.com/NCIOCPL/clinical-trials-search-app/issues/297
 	# Scenario: User is able to to email trial info

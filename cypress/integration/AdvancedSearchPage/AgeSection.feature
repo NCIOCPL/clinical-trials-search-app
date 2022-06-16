@@ -72,6 +72,6 @@ Feature: Clinical Trials Advanced Search Page age section
     Scenario: User has an option to go to search results url directly and modify search
         Given the user navigates to "/r?loc=0&rl=2&a=40"
         Then the page title is "Clinical Trials Search Results"
-        And trial info displayes "Results 1-10  of 6306 for your search "
+        And trial info displays "Results 1-10  of 6306 for your search "
         When user clicks on Modify Search Criteria button
         Then age field has value "40"

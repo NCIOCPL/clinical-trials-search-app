@@ -1,5 +1,6 @@
 /// <reference types="Cypress" />
 import { And, Then, When } from 'cypress-cucumber-preprocessor/steps';
+import { fieldMap } from '../../../utils/ctsFields.js';
 
 And('{string} button as link is displayed', (btnText) => {
 	cy.get('div[class*="btnAsLink"]')
@@ -60,6 +61,26 @@ When('user clicks on Print button', () => {
 	});
 
 	cy.get('.share-btn.cts-share-print').click();
+});
+
+When('user clicks on Modify Search Criteria button', () => {
+	cy.get('button.btnAsLink').contains('Modify Search Criteria').click();
+});
+
+Then('{string} input field has a value {string}', (fieldLabel, value) => {
+	if (fieldLabel.toLowerCase().includes('drug')) {
+		cy.get(`input#${fieldMap[fieldLabel]}`)
+			.parent()
+			.find('span')
+			.first()
+			.should('have.text', value);
+	} else {
+		cy.get(`input#${fieldMap[fieldLabel]}`)
+			.parent()
+			.find('span')
+			.first()
+			.should('have.text', value);
+	}
 });
 
 Then('print window opens', () => {

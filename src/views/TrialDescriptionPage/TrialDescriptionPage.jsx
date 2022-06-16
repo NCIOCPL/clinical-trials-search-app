@@ -277,16 +277,31 @@ const TrialDescriptionPage = () => {
 
 	const renderStartOver = (searchCriteriaObject) => {
 		return (
-			<Link
-				to={`${
-					searchCriteriaObject?.formType === 'basic'
-						? BasicSearchPagePath()
-						: AdvancedSearchPagePath()
-				}`}
-				state={{ criteria: {}, refineSearch: false }}
-				onClick={() => handleStartOver(START_OVER_LINK)}>
-				<strong>Start Over</strong>
-			</Link>
+			<>
+				<Link
+					to={`${
+						searchCriteriaObject?.formType === 'basic'
+							? BasicSearchPagePath()
+							: AdvancedSearchPagePath()
+					}`}
+					state={{ criteria: {}, refineSearch: false }}
+					onClick={() => handleStartOver(START_OVER_LINK)}>
+					<strong>Start Over</strong>
+				</Link>
+				{!hasSCOBeenUpdated(searchCriteriaObject) && (
+					<>
+						<span aria-hidden="true" className="separator">
+							|
+						</span>
+						<button
+							type="button"
+							className="btnAsLink"
+							onClick={handleRefineSearch}>
+							Modify Search Criteria
+						</button>
+					</>
+				)}
+			</>
 		);
 	};
 
@@ -450,6 +465,26 @@ const TrialDescriptionPage = () => {
 		});
 		contents.forEach((item) => {
 			item.setAttribute('aria-hidden', true);
+		});
+	};
+
+	const handleRefineSearch = () => {
+		tracking.trackEvent({
+			// These properties are required.
+			type: 'Other',
+			event: 'ClinicalTrialsSearchApp:Other:ModifySearchCriteriaLinkClick',
+			analyticsName,
+			linkName: 'CTSModifyClick',
+			// Any additional properties fall into the "page.additionalDetails" bucket
+			// for the event.
+			formType: searchCriteriaObject.formType,
+			source: 'modify_search_criteria_link',
+		});
+		navigate(AdvancedSearchPagePath(), {
+			state: {
+				criteria: searchCriteriaObject,
+				refineSearch: true,
+			},
 		});
 	};
 
