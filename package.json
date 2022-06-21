@@ -1,236 +1,240 @@
 {
-  "name": "@nciocpl/clinical-trials-search-app",
-  "version": "1.2.1",
-  "author": "National Cancer Institute",
-  "license": "ISC",
-  "main": "build/static/js/main.js",
-  "bugs": {
-    "url": "https://github.com/NCIOCPL/clinical-trials-search-app/issues"
-  },
-  "homepage": ".",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
-  "description": "",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/NCIOCPL/clinical-trials-search-app.git"
-  },
-  "keywords": [],
-  "contributors": [],
-  "dependencies": {
-    "@nciocpl/clinical-trials-search-client.js": "^1.8.0",
-    "@svgr/webpack": "4.3.2",
-    "axios": "^0.21.4",
-    "camelcase": "^5.2.0",
-    "case-sensitive-paths-webpack-plugin": "2.2.0",
-    "css-loader": "2.1.1",
-    "dom-scroll-into-view": "^2.0.1",
-    "dotenv": "6.2.0",
-    "dotenv-expand": "4.2.0",
-    "es6-promise": "^4.2.8",
-    "file-loader": "3.0.1",
-    "fs-extra": "7.0.1",
-    "history": "^5.0.1",
-    "html-webpack-plugin": "4.0.0-beta.5",
-    "identity-obj-proxy": "3.0.0",
-    "intersection-observer": "^0.7.0",
-    "is-wsl": "^1.1.0",
-    "mini-css-extract-plugin": "0.5.0",
-    "optimize-css-assets-webpack-plugin": "5.0.3",
-    "pnp-webpack-plugin": "1.5.0",
-    "postcss-flexbugs-fixes": "4.1.0",
-    "postcss-loader": "3.0.0",
-    "postcss-normalize": "7.0.1",
-    "postcss-preset-env": "6.7.0",
-    "postcss-safe-parser": "4.0.1",
-    "query-string": "^6.8.3",
-    "raf": "^3.4.1",
-    "react": "^16.14.0",
-    "react-app-polyfill": "^1.0.2",
-    "react-dev-utils": "^9.0.3",
-    "react-dom": "^16.14.0",
-    "react-helmet": "^5.2.1",
-    "react-redux": "^7.1.1",
-    "react-router": "^6.0.0-beta.7",
-    "react-router-dom": "^6.0.0-beta.7",
-    "react-tracking": "^7.2.1",
-    "redux": "^4.0.4",
-    "reselect": "^4.0.0",
-    "resolve": "1.12.0",
-    "resolve-url-loader": "^3.1.2",
-    "sass-loader": "7.2.0",
-    "semver": "6.3.0",
-    "style-loader": "1.0.0",
-    "terser-webpack-plugin": "^1.4.1",
-    "ts-pnp": "1.1.2",
-    "url-loader": "2.1.0",
-    "webpack": "4.39.1",
-    "webpack-dev-server": "^3.11.0",
-    "webpack-manifest-plugin": "2.0.4",
-    "workbox-webpack-plugin": "4.3.1"
-  },
-  "scripts": {
-    "start": "node scripts/start.js",
-    "start:silent": "BROWSER=none npm start",
-    "build": "node scripts/build.js",
-    "test": "npm run unit-tests && npm run cy:ci && npm run merge-coverage",
-    "test:it": "NODE_ENV=test cypress open",
-    "cy:ci": "start-server-and-test start:silent http://localhost:3000 integration-tests",
-    "unit-tests": "jest",
-    "integration-tests": "NODE_ENV=test cypress run && nyc report -t coverage/cypress --reporter text --report-dir coverage/cypress",
-    "merge-coverage": "npm run mc:pre && npm run mc:merge && npm run mc:report",
-    "mc:pre": "node scripts/pre-merge-coverage",
-    "mc:merge": "nyc merge coverage/tmp coverage/merged/coverage-final.json",
-    "mc:report": "nyc report --nycrc-path=merged.nyc.config.js",
-    "test:ci": "npm test -- --coverage --watchAll=false",
-    "test:cvg": "npm run test:ci -- --watchAll",
-    "lint": "npm run lint:src && npm run lint:cypress",
-    "lint:src": "eslint src --ext .js,.jsx",
-    "lint:cypress": "eslint cypress/integration --ext .js,.jsx",
-    "lint:fix": "npm run lint:src:fix && npm run lint:cypress:fix",
-    "lint:src:fix": "eslint src --ext .js,.jsx --fix",
-    "lint:cypress:fix": "eslint cypress/integration --ext .js,.jsx --fix",
-    "lint:diff:develop": "eslint $(git diff --diff-filter=A --name-only develop HEAD '***.js' '***.jsx' | xargs)",
-    "lint:diff:develop:fix": "eslint --fix $(git diff --diff-filter=A --name-only develop HEAD '***.js' '***.jsx' | xargs)",
-    "plop": "plop --plopfile .plop/index.js",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all",
-      "ie 11"
-    ],
-    "development": [
-      "ie 11",
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "jest": {
-    "roots": [
-      "<rootDir>/src"
-    ],
-    "collectCoverage": true,
-    "coverageDirectory": "coverage/jest",
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,ts,tsx}",
-      "!src/**/*.d.ts",
-      "!cypress/**/*.{spec,test}.{js,jsx,ts,tsx}"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "statements": 0,
-        "branches": 0,
-        "functions": 0,
-        "lines": 0
-      }
-    },
-    "setupFiles": [
-      "react-app-polyfill/jsdom",
-      "<rootDir>/jest-test-setup.js"
-    ],
-    "setupFilesAfterEnv": [
-      "<rootDir>/src/setupTests.js"
-    ],
-    "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
-      "<rootDir>/src/**/*.test.{js,jsx,ts,tsx}"
-    ],
-    "testEnvironment": "jest-environment-jsdom-global",
-    "transform": {
-      "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
-      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
-    },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
-      "^.+\\.module\\.(css|sass|scss)$"
-    ],
-    "modulePaths": [],
-    "moduleNameMapper": {
-      "^react-native$": "react-native-web",
-      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
-    },
-    "moduleFileExtensions": [
-      "web.js",
-      "js",
-      "web.ts",
-      "ts",
-      "web.tsx",
-      "tsx",
-      "json",
-      "web.jsx",
-      "jsx",
-      "node"
-    ],
-    "watchPlugins": [
-      "jest-watch-typeahead/filename",
-      "jest-watch-typeahead/testname"
-    ]
-  },
-  "cypress-cucumber-preprocessor": {
-    "nonGlobalStepDefinitions": true
-  },
-  "nyc": {
-    "report-dir": "coverage/cypress",
-    "check-coverage": false,
-    "reporter": [
-      "html",
-      "json",
-      "lcov"
-    ],
-    "exclude": [
-      "cypress/**/*.js",
-      "jest-test-setup.js",
-      "src/setupTests.js"
-    ]
-  },
-  "devDependencies": {
-    "@babel/core": "^7.9.0",
-    "@cypress/code-coverage": "^3.9.10",
-    "@nciocpl/eslint-config-react": "^0.7.0",
-    "@testing-library/jest-dom": "^5.11.9",
-    "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^12.8.3",
-    "@types/express": "^4.17.11",
-    "@typescript-eslint/eslint-plugin": "^4.15.2",
-    "@typescript-eslint/parser": "^4.15.2",
-    "babel-eslint": "^10.1.0",
-    "babel-jest": "^27.0.6",
-    "babel-loader": "^8.1.0",
-    "babel-plugin-istanbul": "^6.0.0",
-    "babel-plugin-named-asset-import": "^0.3.6",
-    "babel-preset-react-app": "^9.1.2",
-    "cypress": "^8.5.0",
-    "cypress-cucumber-preprocessor": "^4.2.0",
-    "cypress-plugin-tab": "^1.0.5",
-    "eslint": "^7.20.0",
-    "eslint-loader": "^4.0.2",
-    "http-proxy-middleware": "^2.0.1",
-    "jest": "^27.0.6",
-    "jest-environment-jsdom": "^27.0.6",
-    "jest-environment-jsdom-global": "^2.0.4",
-    "jest-resolve": "^27.0.6",
-    "jest-watch-typeahead": "^0.4.2",
-    "nock": "^11.7.0",
-    "node-sass": "^4.14.1",
-    "prop-types": "^15.7.2",
-    "redux-devtools-extension": "^2.13.8",
-    "redux-mock-store": "^1.5.3",
-    "sinon": "^7.4.2",
-    "start-server-and-test": "^1.11.6"
-  },
-  "babel": {
-    "presets": [
-      "react-app"
-    ]
-  }
+	"name": "@nciocpl/clinical-trials-search-app",
+	"version": "1.2.1",
+	"author": "National Cancer Institute",
+	"license": "ISC",
+	"main": "build/static/js/main.js",
+	"bugs": {
+		"url": "https://github.com/NCIOCPL/clinical-trials-search-app/issues"
+	},
+	"homepage": ".",
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/"
+	},
+	"description": "",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/NCIOCPL/clinical-trials-search-app.git"
+	},
+	"keywords": [],
+	"contributors": [],
+	"dependencies": {
+		"@nciocpl/clinical-trials-search-client.js": "^1.8.0",
+		"@svgr/webpack": "4.3.2",
+		"axios": "^0.21.4",
+		"camelcase": "^5.2.0",
+		"case-sensitive-paths-webpack-plugin": "2.2.0",
+		"css-loader": "2.1.1",
+		"dom-scroll-into-view": "^2.0.1",
+		"dotenv": "6.2.0",
+		"dotenv-expand": "4.2.0",
+		"es6-promise": "^4.2.8",
+		"file-loader": "3.0.1",
+		"fs-extra": "7.0.1",
+		"history": "^5.0.1",
+		"html-webpack-plugin": "4.0.0-beta.5",
+		"identity-obj-proxy": "3.0.0",
+		"intersection-observer": "^0.7.0",
+		"is-wsl": "^1.1.0",
+		"mini-css-extract-plugin": "0.5.0",
+		"optimize-css-assets-webpack-plugin": "5.0.3",
+		"pnp-webpack-plugin": "1.5.0",
+		"postcss-flexbugs-fixes": "4.1.0",
+		"postcss-loader": "3.0.0",
+		"postcss-normalize": "7.0.1",
+		"postcss-preset-env": "6.7.0",
+		"postcss-safe-parser": "4.0.1",
+		"query-string": "^6.8.3",
+		"raf": "^3.4.1",
+		"react": "^16.14.0",
+		"react-app-polyfill": "^1.0.2",
+		"react-dev-utils": "^9.0.3",
+		"react-dom": "^16.14.0",
+		"react-helmet": "^5.2.1",
+		"react-redux": "^7.1.1",
+		"react-router": "^6.0.0-beta.7",
+		"react-router-dom": "^6.0.0-beta.7",
+		"react-tracking": "^7.2.1",
+		"redux": "^4.0.4",
+		"reselect": "^4.0.0",
+		"resolve": "1.12.0",
+		"resolve-url-loader": "^3.1.2",
+		"sass-loader": "7.2.0",
+		"semver": "6.3.0",
+		"style-loader": "1.0.0",
+		"terser-webpack-plugin": "^1.4.1",
+		"ts-pnp": "1.1.2",
+		"url-loader": "2.1.0",
+		"webpack": "4.39.1",
+		"webpack-dev-server": "^3.11.0",
+		"webpack-manifest-plugin": "2.0.4",
+		"workbox-webpack-plugin": "4.3.1"
+	},
+	"scripts": {
+		"start": "node scripts/start.js",
+		"start:silent": "BROWSER=none npm start",
+		"preinstall": "npx force-resolutions",
+		"build": "node scripts/build.js",
+		"test": "npm run unit-tests && npm run cy:ci && npm run merge-coverage",
+		"test:it": "NODE_ENV=test cypress open",
+		"cy:ci": "start-server-and-test start:silent http://localhost:3000 integration-tests",
+		"unit-tests": "jest",
+		"integration-tests": "NODE_ENV=test cypress run && nyc report -t coverage/cypress --reporter text --report-dir coverage/cypress",
+		"merge-coverage": "npm run mc:pre && npm run mc:merge && npm run mc:report",
+		"mc:pre": "node scripts/pre-merge-coverage",
+		"mc:merge": "nyc merge coverage/tmp coverage/merged/coverage-final.json",
+		"mc:report": "nyc report --nycrc-path=merged.nyc.config.js",
+		"test:ci": "npm test -- --coverage --watchAll=false",
+		"test:cvg": "npm run test:ci -- --watchAll",
+		"lint": "npm run lint:src && npm run lint:cypress",
+		"lint:src": "eslint src --ext .js,.jsx",
+		"lint:cypress": "eslint cypress/integration --ext .js,.jsx",
+		"lint:fix": "npm run lint:src:fix && npm run lint:cypress:fix",
+		"lint:src:fix": "eslint src --ext .js,.jsx --fix",
+		"lint:cypress:fix": "eslint cypress/integration --ext .js,.jsx --fix",
+		"lint:diff:develop": "eslint $(git diff --diff-filter=A --name-only develop HEAD '***.js' '***.jsx' | xargs)",
+		"lint:diff:develop:fix": "eslint --fix $(git diff --diff-filter=A --name-only develop HEAD '***.js' '***.jsx' | xargs)",
+		"plop": "plop --plopfile .plop/index.js",
+		"storybook": "start-storybook -p 6006",
+		"build-storybook": "build-storybook"
+	},
+	"eslintConfig": {
+		"extends": "react-app"
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all",
+			"ie 11"
+		],
+		"development": [
+			"ie 11",
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"jest": {
+		"roots": [
+			"<rootDir>/src"
+		],
+		"collectCoverage": true,
+		"coverageDirectory": "coverage/jest",
+		"collectCoverageFrom": [
+			"src/**/*.{js,jsx,ts,tsx}",
+			"!src/**/*.d.ts",
+			"!cypress/**/*.{spec,test}.{js,jsx,ts,tsx}"
+		],
+		"coverageThreshold": {
+			"global": {
+				"statements": 0,
+				"branches": 0,
+				"functions": 0,
+				"lines": 0
+			}
+		},
+		"setupFiles": [
+			"react-app-polyfill/jsdom",
+			"<rootDir>/jest-test-setup.js"
+		],
+		"setupFilesAfterEnv": [
+			"<rootDir>/src/setupTests.js"
+		],
+		"testMatch": [
+			"<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
+			"<rootDir>/src/**/*.test.{js,jsx,ts,tsx}"
+		],
+		"testEnvironment": "jest-environment-jsdom-global",
+		"transform": {
+			"^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
+			"^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+			"^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+		},
+		"transformIgnorePatterns": [
+			"[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
+			"^.+\\.module\\.(css|sass|scss)$"
+		],
+		"modulePaths": [],
+		"moduleNameMapper": {
+			"^react-native$": "react-native-web",
+			"^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
+		},
+		"moduleFileExtensions": [
+			"web.js",
+			"js",
+			"web.ts",
+			"ts",
+			"web.tsx",
+			"tsx",
+			"json",
+			"web.jsx",
+			"jsx",
+			"node"
+		],
+		"watchPlugins": [
+			"jest-watch-typeahead/filename",
+			"jest-watch-typeahead/testname"
+		]
+	},
+	"cypress-cucumber-preprocessor": {
+		"nonGlobalStepDefinitions": true
+	},
+	"nyc": {
+		"report-dir": "coverage/cypress",
+		"check-coverage": false,
+		"reporter": [
+			"html",
+			"json",
+			"lcov"
+		],
+		"exclude": [
+			"cypress/**/*.js",
+			"jest-test-setup.js",
+			"src/setupTests.js"
+		]
+	},
+	"devDependencies": {
+		"@babel/core": "^7.9.0",
+		"@cypress/code-coverage": "^3.9.10",
+		"@nciocpl/eslint-config-react": "^0.7.0",
+		"@testing-library/jest-dom": "^5.11.9",
+		"@testing-library/react": "^12.1.2",
+		"@testing-library/user-event": "^12.8.3",
+		"@types/express": "^4.17.11",
+		"@typescript-eslint/eslint-plugin": "^4.15.2",
+		"@typescript-eslint/parser": "^4.15.2",
+		"babel-eslint": "^10.1.0",
+		"babel-jest": "^27.0.6",
+		"babel-loader": "^8.1.0",
+		"babel-plugin-istanbul": "^6.0.0",
+		"babel-plugin-named-asset-import": "^0.3.6",
+		"babel-preset-react-app": "^9.1.2",
+		"cypress": "^8.5.0",
+		"cypress-cucumber-preprocessor": "^4.2.0",
+		"cypress-plugin-tab": "^1.0.5",
+		"eslint": "^7.20.0",
+		"eslint-loader": "^4.0.2",
+		"http-proxy-middleware": "^2.0.1",
+		"jest": "^27.0.6",
+		"jest-environment-jsdom": "^27.0.6",
+		"jest-environment-jsdom-global": "^2.0.4",
+		"jest-resolve": "^27.0.6",
+		"jest-watch-typeahead": "^0.4.2",
+		"nock": "^11.7.0",
+		"node-sass": "^4.14.1",
+		"prop-types": "^15.7.2",
+		"redux-devtools-extension": "^2.13.8",
+		"redux-mock-store": "^1.5.3",
+		"sinon": "^7.4.2",
+		"start-server-and-test": "^1.11.6"
+	},
+	"resolutions": {
+		"istanbul-lib-coverage": "3.2.0"
+	},
+	"babel": {
+		"presets": [
+			"react-app"
+		]
+	}
 }
