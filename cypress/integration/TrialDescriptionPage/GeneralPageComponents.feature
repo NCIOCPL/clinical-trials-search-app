@@ -141,7 +141,7 @@ Feature:  As a user, I want to be able to view trial description page with all i
 		Given screen breakpoint is set to "desktop"
 		Given the user navigates to "/r?loc=0&rl=2"
 		Then the page title is "Clinical Trials Search Results"
-		And the title tag should be "Clinical Trials Search Results - National Cancer Institute"
+		And the title tag should be "Clinical Trials Search Results - NCI"
 		And the page contains meta tags with the following names
 			| name        | content                                               |
 			| description | Find an NCI-supported clinical trial - Search results |
@@ -166,7 +166,7 @@ Feature:  As a user, I want to be able to view trial description page with all i
 			| parameter | value |
 			| loc       | 0     |
 			| rl        | 2     |
-		And the title tag should be "Clinical Trials Search Results - National Cancer Institute"
+		And the title tag should be "Clinical Trials Search Results - NCI"
 		And the page contains meta tags with the following names
 			| name        | content                                               |
 			| description | Find an NCI-supported clinical trial - Search results |
@@ -188,7 +188,7 @@ Feature:  As a user, I want to be able to view trial description page with all i
 		When user clicks on "Start Over" link
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And the url is "/advanced"
-		And the title tag should be "Find NCI-Supported Clinical Trials - Advanced Search - National Cancer Institute"
+		And the title tag should be "Find NCI-Supported Clinical Trials - Advanced Search - NCI"
 		And the page contains meta tags with the following names
 			| name        | content                                                                                                                                                  |
 			| description | Use our advanced search to find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one. |
@@ -210,7 +210,7 @@ Feature:  As a user, I want to be able to view trial description page with all i
 		When user clicks on "Start Over" link
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And the url is "/"
-		And the title tag should be "Find NCI-Supported Clinical Trials - National Cancer Institute"
+		And the title tag should be "Find NCI-Supported Clinical Trials - NCI"
 		And the page contains meta tags with the following names
 			| name        | content                                                                                                                       |
 			| description | Find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one. |

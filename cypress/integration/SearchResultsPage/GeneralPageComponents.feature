@@ -250,7 +250,7 @@ Feature: Clinical Trials Search Results Page Components
 		And user clicks on "Find Trials" button
 		Then the search is executed and results page is displayed
 		And trial info displayes "Results 1-10  of 6306 for your search "
-		And the title tag should be "Clinical Trials Search Results - National Cancer Institute"
+		And the title tag should be "Clinical Trials Search Results - NCI"
 		And the page contains meta tags with the following names
 			| name        | content                                               |
 			| description | Find an NCI-supported clinical trial - Search results |
@@ -263,7 +263,7 @@ Feature: Clinical Trials Search Results Page Components
 		When user clicks on Modify Search Criteria button
 		When user clears "Age" input field
 		And user types "39" in "Age" field
-		And the title tag should be "Find NCI-Supported Clinical Trials - Advanced Search - National Cancer Institute"
+		And the title tag should be "Find NCI-Supported Clinical Trials - Advanced Search - NCI"
 		And the page contains meta tags with the following names
 			| name        | content                                                                                                                                                  |
 			| description | Use our advanced search to find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one. |
@@ -276,7 +276,7 @@ Feature: Clinical Trials Search Results Page Components
 		And user clicks on "Find Trials" button
 		Then the search is executed and results page is displayed
 		And trial info displayes "Results 1-10  of 6731 for your search "
-		And the title tag should be "Clinical Trials Search Results - National Cancer Institute"
+		And the title tag should be "Clinical Trials Search Results - NCI"
 		And the page contains meta tags with the following names
 			| name        | content                                               |
 			| description | Find an NCI-supported clinical trial - Search results |
@@ -291,7 +291,7 @@ Feature: Clinical Trials Search Results Page Components
 	Scenario: As a user, I expect meta data to update accordingly when I navigate to search results directly and modify my search
 		Given the user navigates to "/r?a=50&d=C798&i=C15313&in=Benjamin%20David%20Smith&lcnty=United%20States&lcty=Atlanta&lo=M%20D%20Anderson%20Cancer%20Center&loc=2&lst=GA&q=Breast&rl=2&st=C2924&stg=C94774&t=C4872&tid=NCI-2017-00476&tp=iii&tt=treatment"
 		And trial info displayes "Results 1-1  of 1 for your search "
-		And the title tag should be "Clinical Trials Search Results - National Cancer Institute"
+		And the title tag should be "Clinical Trials Search Results - NCI"
 		And the page contains meta tags with the following names
 			| name        | content                                               |
 			| description | Find an NCI-supported clinical trial - Search results |
@@ -304,7 +304,7 @@ Feature: Clinical Trials Search Results Page Components
 		When user clicks on Modify Search Criteria button
 		And user selects "Zip" radio button
 		And user types "30309" in "Zipcode" field
-		And the title tag should be "Find NCI-Supported Clinical Trials - Advanced Search - National Cancer Institute"
+		And the title tag should be "Find NCI-Supported Clinical Trials - Advanced Search - NCI"
 		And the page contains meta tags with the following names
 			| name        | content                                                                                                                                                  |
 			| description | Use our advanced search to find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one. |
@@ -317,7 +317,7 @@ Feature: Clinical Trials Search Results Page Components
 		And user clicks on "Find Trials" button
 		Then the search is executed and results page is displayed
 		And trial info displayes "Results 1-1  of 1 for your search "
-		And the title tag should be "Clinical Trials Search Results - National Cancer Institute"
+		And the title tag should be "Clinical Trials Search Results - NCI"
 		And the page contains meta tags with the following names
 			| name        | content                                               |
 			| description | Find an NCI-supported clinical trial - Search results |

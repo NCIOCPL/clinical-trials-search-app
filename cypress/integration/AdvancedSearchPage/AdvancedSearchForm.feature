@@ -54,7 +54,7 @@ Feature: As a user, I want to be able to search for a clinical trial using advan
 		Scenario: As a search engine I want to have access to the meta data on a page
 		Given the user navigates to "/advanced"
 		Then the page title is "Find NCI-Supported Clinical Trials"
-		And the title tag should be "Find NCI-Supported Clinical Trials - Advanced Search - National Cancer Institute"
+		And the title tag should be "Find NCI-Supported Clinical Trials - Advanced Search - NCI"
 		And the page contains meta tags with the following names
 			| name        | content                                                                                                                                                  |
 			| description | Use our advanced search to find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one. |

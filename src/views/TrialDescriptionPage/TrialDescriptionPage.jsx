@@ -67,6 +67,7 @@ const TrialDescriptionPage = () => {
 		{
 			analyticsName,
 			canonicalHost,
+			siteName,
 			zipConversionEndpoint,
 			apiClients: { clinicalTrialsSearchClientV2 },
 		},
@@ -500,7 +501,9 @@ const TrialDescriptionPage = () => {
 				<>
 					{!isTrialLoading && (
 						<Helmet>
-							<title>{trialDescription.brief_title}</title>
+							<title>
+								{trialDescription.brief_title} - {siteName}
+							</title>{' '}
 							<meta
 								property="og:title"
 								content={trialDescription.brief_title}

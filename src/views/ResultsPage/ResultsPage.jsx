@@ -600,9 +600,7 @@ const ResultsPage = () => {
 	return (
 		<>
 			<Helmet>
-				<title>
-					Clinical Trials Search Results - National Cancer Institute
-				</title>
+				<title>Clinical Trials Search Results - {siteName}</title>
 				<meta property="og:title" content="Clinical Trials Search Results" />
 				<link
 					rel="canonical"

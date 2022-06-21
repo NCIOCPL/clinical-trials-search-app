@@ -17,7 +17,7 @@ beforeEach(() => {
 			ctsTitle: 'Find NCI-Supported Clinical Trials',
 			language: 'en',
 			rootId: 'NCI-CTS-root',
-			siteName: 'National Cancer Institute',
+			siteName: 'NCI',
 			title: 'NCI Drug Dictionary',
 			contentGroup: 'Clinical Trials',
 			zipConversionEndpoint: '/mock-api/zip_code_lookup',

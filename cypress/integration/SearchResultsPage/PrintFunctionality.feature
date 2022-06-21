@@ -82,7 +82,7 @@ Feature: As a user I want to be able to print trial search results
         Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
         And "baseHost" is set to "http://localhost:3000"
         And "canonicalHost" is set to "https://www.cancer.gov"
-        And "siteName" is set to "National Cancer Institute"
+        And "siteName" is set to "NCI"
         And "channel" is set to "About Cancer"
         And "analyticsPublishedDate" is set to "02/02/2011"
         And "analyticsName" is set to "Clinical Trials"

@@ -15,7 +15,8 @@ import { useLocation } from 'react-router-dom';
 
 const ErrorPage = ({ initErrorsList }) => {
 	const tracking = useTracking();
-	const [{ dispatch, analyticsName, canonicalHost }] = useAppSettings();
+	const [{ dispatch, analyticsName, canonicalHost, siteName }] =
+		useAppSettings();
 	const { AdvancedSearchPagePath, BasicSearchPagePath } = useAppPaths();
 
 	// Determine the original formType
@@ -128,7 +129,7 @@ const ErrorPage = ({ initErrorsList }) => {
 	return (
 		<>
 			<Helmet>
-				<title>Clinical Trials Search - National Cancer Institute</title>
+				<title>Clinical Trials Search - {siteName}</title>
 				<meta property="og:title" content="Clinical Trials Search" />
 
 				<meta
