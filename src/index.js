@@ -49,7 +49,7 @@ const initialize = ({
 	language = 'en',
 	printCacheEndpoint = '/CTS.Print/GenCache',
 	rootId = 'NCI-CTS-root',
-	siteName = 'National Cancer Institute',
+	siteName = 'NCI',
 	useSessionStorage = true,
 	zipConversionEndpoint = '/cts_api/zip_code_lookup',
 	// These have been added in to support integration testing.

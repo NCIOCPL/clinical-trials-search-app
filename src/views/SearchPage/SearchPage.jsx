@@ -335,7 +335,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
 				<title>
 					{`Find NCI-Supported Clinical Trials - ${
 						pageType === 'advanced' ? 'Advanced Search - ' : ''
-					}National Cancer Institute`}
+					}${siteName}`}
 				</title>
 				<link
 					rel="canonical"

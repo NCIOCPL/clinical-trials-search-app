@@ -9,10 +9,10 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 		And Search tip icon is displayed and text "Search Tip: For more search options, use our advanced search." appears
 		And "advanced search" link has a href "/advanced"
 		And the following delighters are displayed
-			| delighter    | href                                                       | title                              																		| text                                                                  |
-			| cts-livehelp | /contact            | Have a question?We're here to help 	| Chat with us: LiveHelpCall us: 1-800-4-CANCER(1-800-422-6237)         |
-			| cts-what     | /about-cancer/treatment/clinical-trials/what-are-trials    | What Are Cancer Clinical Trials?   																		| Learn what they are and what you should know about them.              |
-			| cts-which    | /about-cancer/treatment/clinical-trials/search/trial-guide | Which trials are right for you?    																		| Use the checklist in our guide to gather the information you’ll need. |
+			| delighter    | href                                                       | title                              | text                                                                  |
+			| cts-livehelp | /contact                                                   | Have a question?We're here to help | Chat with us: LiveHelpCall us: 1-800-4-CANCER(1-800-422-6237)         |
+			| cts-what     | /about-cancer/treatment/clinical-trials/what-are-trials    | What Are Cancer Clinical Trials?   | Learn what they are and what you should know about them.              |
+			| cts-which    | /about-cancer/treatment/clinical-trials/search/trial-guide | Which trials are right for you?    | Use the checklist in our guide to gather the information you’ll need. |
 
 		Examples:
 			| breakpoint |
@@ -326,7 +326,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 	Scenario: As a search engine I want to have access to the meta data on a basic search page
 		Given the user navigates to "/"
 		Then the page title is "Find NCI-Supported Clinical Trials"
-		And the title tag should be "Find NCI-Supported Clinical Trials - National Cancer Institute"
+		And the title tag should be "Find NCI-Supported Clinical Trials - NCI"
 		And the page contains meta tags with the following names
 			| name        | content                                                                                                                       |
 			| description | Find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one. |
@@ -347,7 +347,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 		And user clicks on "Find Trials" button
 		Then the search is executed and results page is displayed
 		Then trial info displays "Results 1-10  of 17 for your search "
-		And the title tag should be "Clinical Trials Search Results - National Cancer Institute"
+		And the title tag should be "Clinical Trials Search Results - NCI"
 		And the page contains meta tags with the following names
 			| name        | content                                               |
 			| description | Find an NCI-supported clinical trial - Search results |
@@ -360,7 +360,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 		When user clicks on Modify Search Criteria button
 		When user clears "Age" input field
 		And user types "40" in "Age" field
-		And the title tag should be "Find NCI-Supported Clinical Trials - Advanced Search - National Cancer Institute"
+		And the title tag should be "Find NCI-Supported Clinical Trials - Advanced Search - NCI"
 		And the page contains meta tags with the following names
 			| name        | content                                                                                                                                                  |
 			| description | Use our advanced search to find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one. |
@@ -374,7 +374,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 		And browser waits
 		Then the search is executed and results page is displayed
 		And trial info displays "Results 1-10  of 18 for your search "
-		And the title tag should be "Clinical Trials Search Results - National Cancer Institute"
+		And the title tag should be "Clinical Trials Search Results - NCI"
 		And the page contains meta tags with the following names
 			| name        | content                                               |
 			| description | Find an NCI-supported clinical trial - Search results |
@@ -398,12 +398,12 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=30&loc=1&q=aids&rl=1&z=22182 |
 			| og:description | Find an NCI-supported clinical trial - Search results                                                 |
 		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=30&loc=1&q=aids&rl=1&z=22182"
-		And the title tag should be "Clinical Trials Search Results - National Cancer Institute"
+		And the title tag should be "Clinical Trials Search Results - NCI"
 		When user clicks on Modify Search Criteria button
 		When user clears "Age" input field
 		And user types "40" in "Age" field
 		And browser waits
-		And the title tag should be "Find NCI-Supported Clinical Trials - Advanced Search - National Cancer Institute"
+		And the title tag should be "Find NCI-Supported Clinical Trials - Advanced Search - NCI"
 		And the page contains meta tags with the following names
 			| name        | content                                                                                                                                                  |
 			| description | Use our advanced search to find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one. |
@@ -426,4 +426,4 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 			| og:description | Find an NCI-supported clinical trial - Search results                                                        |
 		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=40&loc=1&q=aids&rl=2&z=22182&zp=100"
 		And browser waits
-		And the title tag should be "Clinical Trials Search Results - National Cancer Institute"
+		And the title tag should be "Clinical Trials Search Results - NCI"
