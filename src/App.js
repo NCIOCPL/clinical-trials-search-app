@@ -18,12 +18,10 @@ import { useAppPaths } from './hooks';
 
 require('es6-promise').polyfill();
 
-const App = ({ services, zipConversionEndpoint }) => {
+const App = ({ zipConversionEndpoint }) => {
 	const [{ appHasBeenInitialized, initErrorsList }] = useAppSettings();
 
-	const ctsapiclient = services.ctsSearch();
-
-	useAppInitializer(ctsapiclient, zipConversionEndpoint);
+	useAppInitializer(zipConversionEndpoint);
 
 	const {
 		BasicSearchPagePath,

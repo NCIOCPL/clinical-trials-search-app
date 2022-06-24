@@ -10,10 +10,8 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import * as reducers from './store/reducers';
 import { loadStateFromSessionStorage } from './utilities';
-import createCTSMiddleware from './middleware/CTSMiddleware';
 import createCTSMiddlewareV2 from './middleware/CTSMiddlewareV2';
 import cacheMiddleware from './middleware/cacheMiddleware';
-import { ClinicalTrialsServiceFactory } from '@nciocpl/clinical-trials-search-client.js';
 import { getProductTestBase } from './utilities';
 
 import { AnalyticsProvider, EddlAnalyticsProvider } from './tracking';
@@ -42,7 +40,6 @@ const initialize = ({
 	baseHost = 'http://localhost:3000',
 	basePath = '/',
 	canonicalHost = 'https://www.cancer.gov',
-	ctsApiEndpointV1,
 	ctsApiEndpointV2,
 	ctsTitle = 'Find NCI-Supported Clinical Trials',
 	initErrorsList = [],
@@ -64,26 +61,12 @@ const initialize = ({
 
 	let cachedState;
 
-	const services = {};
-	const ctsSearch = () => {
-		const service = ClinicalTrialsServiceFactory.create(
-			ctsHostname,
-			'v1',
-			ctsProtocol,
-			ctsPort
-		);
-		return service;
-	};
-	services.ctsSearch = ctsSearch;
-	const clinicalTrialsSearchClient =
-		clinicalTrialsSearchClientFactory(ctsApiEndpointV1);
 	const clinicalTrialsSearchClientV2 =
 		clinicalTrialsSearchClientFactory(ctsApiEndpointV2);
 
 	// Populate global state with init params
 	const initialState = {
 		apiClients: {
-			clinicalTrialsSearchClient,
 			clinicalTrialsSearchClientV2,
 		},
 		appHasBeenVisited,
@@ -101,7 +84,6 @@ const initialize = ({
 		language,
 		printCacheEndpoint,
 		rootId,
-		services,
 		siteName,
 		useSessionStorage,
 		zipConversionEndpoint,
@@ -117,9 +99,8 @@ const initialize = ({
 	// Set up middleware chain for redux dispatch.
 	// const historyMiddleware = createHistoryMiddleware(history);
 
-	const ctsMiddleware = createCTSMiddleware(services);
 	const ctsMiddlewareV2 = createCTSMiddlewareV2(clinicalTrialsSearchClientV2);
-	const middleware = [cacheMiddleware, ctsMiddleware, ctsMiddlewareV2];
+	const middleware = [cacheMiddleware, ctsMiddlewareV2];
 
 	const store = createStore(
 		combineReducers(reducers),
@@ -169,10 +150,7 @@ const initialize = ({
 				<Provider store={store}>
 					<AnalyticsHoC>
 						<Router>
-							<App
-								services={services}
-								zipConversionEndpoint={zipConversionEndpoint}
-							/>
+							<App zipConversionEndpoint={zipConversionEndpoint} />
 						</Router>
 					</AnalyticsHoC>
 				</Provider>
