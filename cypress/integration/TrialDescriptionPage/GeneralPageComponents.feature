@@ -39,7 +39,7 @@ Feature:  As a user, I want to be able to view trial description page with all i
 		Given screen breakpoint is set to "<breakpoint>"
 		Given the user navigates to "/v?a=40&id=NCI-2014-01507&loc=0&rl=2"
 		Then the page title is "Crizotinib in Treating Patients with Stage IB-IIIA Non-small Cell Lung Cancer That Has Been Removed by Surgery and ALK Fusion Mutations (An ALCHEMIST Treatment Trial)"
-		And "< Back to search results" button as link is displayed
+		And back to search results link does not exist
 		And "This clinical trial matches:" appears below the title
 		When user clicks on "Show Search Criteria" button
 		Then button "Hide Search Criteria" is displayed

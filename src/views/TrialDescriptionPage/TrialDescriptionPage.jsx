@@ -320,17 +320,19 @@ const TrialDescriptionPage = () => {
 		) {
 			return (
 				<div className="trial-description-page__header">
-					{searchCriteriaObject && searchCriteriaObject.formType != '' && (
-						<div className="back-to-search btnAsLink">
-							<span
-								onClick={() => navigate(-1)}
-								onKeyDown={() => navigate(-1)}
-								tabIndex="0"
-								role="button">
-								&lt; Back to search results
-							</span>
-						</div>
-					)}
+					{searchCriteriaObject &&
+						searchCriteriaObject.formType != '' &&
+						location.state && (
+							<div className="back-to-search btnAsLink">
+								<span
+									onClick={() => navigate(-1)}
+									onKeyDown={() => navigate(-1)}
+									tabIndex="0"
+									role="button">
+									&lt; Back to search results
+								</span>
+							</div>
+						)}
 					{searchCriteriaObject && !hasSCOBeenUpdated(searchCriteriaObject) ? (
 						<>
 							<strong>This clinical trial matches:</strong>
