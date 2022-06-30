@@ -275,3 +275,5 @@ Feature:  As a user, I want to be able to view trial description page with all i
 			| /v?id=NCI-2016-00007 | Disulfiram and Chemotherapy in Treating Patients with Refractory Solid Tumors or Metastatic Pancreatic Cancer | temporarily closed to accrual |
 			| /v?id=NCI-2018-00273 | Tesetaxel Plus Reduced Dose of Capecitabine vs. Capecitabine in HER2 Negative, HR Positive, LA/MBC            | administratively complete     |
 			| /v?id=NCI-2018-03722 | Open Label Study of IV Brincidofovir in Adult Transplant Recipients With Adenovirus Viremia                   | withdrawn                     |
+
+
