@@ -28,6 +28,7 @@ import {
 	runQueryFetchers,
 } from '../../utilities';
 import ErrorPage from '../ErrorPage';
+import PageNotFound from '../PageNotFound/PageNotFound';
 
 const TrialDescriptionPage = () => {
 	// const rdx_dispatch = useDispatch();
@@ -121,10 +122,16 @@ const TrialDescriptionPage = () => {
 		}
 	}
 
+	const pageNotFoundRender = () => {
+		return null;
+	};
+
 	// scroll to top on mount
 	useEffect(() => {
 		window.scrollTo(0, 0);
-		if (isAllFetchingComplete()) {
+		if (payload == null) {
+			pageNotFoundRender();
+		} else if (isAllFetchingComplete()) {
 			initTrialData();
 		} else if (!searchCriteriaObject) {
 			const searchCriteria = async () => {
@@ -497,7 +504,7 @@ const TrialDescriptionPage = () => {
 		<>
 			{localState.errors.length !== 0 && <>{renderInvalidSearchCriteria()}</>}
 			{!isTrialLoading && error && <>Error Occurred!</>}
-			{!error && (
+			{payload != null && payload.length > 0 && !error && (
 				<>
 					{!isTrialLoading && (
 						<Helmet>
@@ -715,6 +722,7 @@ const TrialDescriptionPage = () => {
 					</article>
 				</>
 			)}
+			{payload == null && error !== null && <PageNotFound></PageNotFound>}
 		</>
 	);
 };

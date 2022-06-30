@@ -49,6 +49,10 @@ When('user clicks on {string} button as link', (btn) => {
 When('user clicks on {string} link', (linkText) => {
 	cy.get('a').contains(linkText).parent().click();
 });
+When('user clicks on the {string} as a link', (linkText) => {
+	cy.get('a').contains(linkText).click({ force: true });
+	cy.location('https://www.cancer.gov', { timeout: 60000 });
+});
 
 And('the url is {string}', (path) => {
 	cy.location('pathname').should('eq', path);
@@ -106,4 +110,19 @@ And('{string} does not appear below the title', () => {
 
 And('{string} link does not exist', (linkText) => {
 	cy.get('a').contains(linkText).should('not.exist');
+});
+
+Then(
+	'the user types {string} in the {string} field',
+	(searchText, inputType) => {
+		cy.get(`input[aria-label="${inputType}"]`).type(searchText);
+	}
+);
+
+When('the user clicks on the Search button', () => {
+	cy.get('input[id=btnSearch]').contains('Search').click();
+});
+
+And('button {string} is hidden', (btn) => {
+	cy.get('input').contains(btn).should('not.exist');
 });
