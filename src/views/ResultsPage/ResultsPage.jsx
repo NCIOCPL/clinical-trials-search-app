@@ -564,6 +564,7 @@ const ResultsPage = () => {
 								? BasicSearchPagePath()
 								: AdvancedSearchPagePath()
 						}`}
+						state={{ criteria: {} }}
 						onClick={() => handleStartOver(TRY_NEW_SEARCH_LINK)}>
 						Try a new search
 					</Link>
@@ -589,6 +590,7 @@ const ResultsPage = () => {
 								? BasicSearchPagePath()
 								: AdvancedSearchPagePath()
 						}`}
+						state={{ criteria: {} }}
 						onClick={() => handleStartOver(TRY_NEW_SEARCH_LINK)}>
 						Try a new search
 					</Link>
