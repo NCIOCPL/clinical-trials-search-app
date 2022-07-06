@@ -8,9 +8,9 @@ const queryString = require('query-string');
 
 const PrintModalContent = ({ selectedList, searchCriteriaObject }) => {
 	// in dev use
-	const [{ printCacheEndpoint }] = useAppSettings();
-	const printUrl = printCacheEndpoint;
-
+	const [{ printApiBase }] = useAppSettings();
+	const genCacheUrl = `${printApiBase}/GenCache`;
+	const printDisplayUrl = `${printApiBase}/Display`;
 	const queryParams = buildQueryString(searchCriteriaObject);
 
 	const { rl } = queryParams;
@@ -29,7 +29,7 @@ const PrintModalContent = ({ selectedList, searchCriteriaObject }) => {
 
 	const [{ data, isLoading, isError, doPrint }] = usePrintApi(
 		{ trial_ids, link_template, new_search_link, search_criteria },
-		printUrl
+		genCacheUrl
 	);
 
 	// on component mount, check for selected IDs,
@@ -42,7 +42,7 @@ const PrintModalContent = ({ selectedList, searchCriteriaObject }) => {
 	useEffect(() => {
 		if (!isLoading && data.printID) {
 			//success
-			window.location.href = `https://www.cancer.gov/CTS.Print/Display?printid=${data.printID}`;
+			window.location.href = `${printDisplayUrl}?printid=${data.printID}`;
 		}
 	}, [isLoading, isError, data]);
 
