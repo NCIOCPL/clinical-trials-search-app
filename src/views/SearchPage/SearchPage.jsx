@@ -161,7 +161,9 @@ const SearchPage = ({ formInit = 'basic' }) => {
 				}`,
 				analyticsName,
 				formType: pageType,
-				name: canonicalHost.replace('https://', '') + window.location.pathname,
+				name:
+					canonicalHost.replace(/https:\/\/|http:\/\//, '') +
+					window.location.pathname,
 				title: `Find NCI-Supported Clinical Trials${
 					pageType === 'advanced' ? ' - Advanced Search' : ''
 				}`,
