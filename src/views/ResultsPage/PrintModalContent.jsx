@@ -99,7 +99,7 @@ const PrintModalContent = ({ selectedList, searchCriteriaObject }) => {
 	);
 
 	return (
-		<>
+		<div id="modal-root">
 			{selectedList.length === 0 ? (
 				renderNoItemsSelected()
 			) : selectedList.length >= 100 ? (
@@ -113,7 +113,7 @@ const PrintModalContent = ({ selectedList, searchCriteriaObject }) => {
 					)}
 				</>
 			)}
-		</>
+		</div>
 	);
 };
 PrintModalContent.propTypes = {
