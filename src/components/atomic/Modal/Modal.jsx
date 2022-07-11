@@ -44,7 +44,7 @@ const Modal = ({ children, isShowing, hide }) => {
 						</div>
 					</div>
 				</React.Fragment>,
-				document.getElementById('modal-root')
+				document.querySelector('article .resize-content')
 		  )
 		: null;
 };
