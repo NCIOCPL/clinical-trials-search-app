@@ -623,65 +623,64 @@ const ResultsPage = () => {
 					content="Find an NCI-supported clinical trial - Search results"
 				/>
 			</Helmet>
-			<article className="results-page">
-				{error.length && error.filter((err) => err.fieldName === 'zip') ? (
-					<>{renderInvalidZip()}</>
-				) : (
-					<>
-						{checkIfInvalidPage() ? (
-							<></>
-						) : isLoading || !searchCriteriaObject ? (
-							<div className="loader__pageheader"></div>
-						) : (
-							<>
-								<h1>Clinical Trials Search Results</h1>
 
-								<ResultsPageHeader
-									resultsCount={trialResults.total}
-									pageNum={currentPage}
-									onModifySearchClick={handleRefineSearch}
-									onStartOverClick={handleStartOver}
+			{error.length && error.filter((err) => err.fieldName === 'zip') ? (
+				<article className="results-page">{renderInvalidZip()}</article>
+			) : (
+				<article className="results-page">
+					{checkIfInvalidPage() ? (
+						<></>
+					) : isLoading || !searchCriteriaObject ? (
+						<div className="loader__pageheader"></div>
+					) : (
+						<>
+							<h1>Clinical Trials Search Results</h1>
+
+							<ResultsPageHeader
+								resultsCount={trialResults.total}
+								pageNum={currentPage}
+								onModifySearchClick={handleRefineSearch}
+								onStartOverClick={handleStartOver}
+								searchCriteriaObject={searchCriteriaObject}
+								isLoading={isLoading}
+								trialResults={trialResults}
+							/>
+						</>
+					)}
+					<div className="results-page__content">
+						{checkIfInvalidPage() ? <> </> : <>{renderControls()}</>}
+						<div className="results-page__list">
+							{checkIfInvalidPage() ? (
+								<>{renderInvalidPageNumber()}</>
+							) : isLoading || !searchCriteriaObject ? (
+								<>{renderResultsListLoader()}</>
+							) : trialResults && trialResults.total === 0 ? (
+								<>{renderNoResults()}</>
+							) : (
+								<ResultsList
+									results={trialResults.data}
+									selectedResults={selectedResults}
+									setSelectedResults={setSelectedResults}
+									setSelectAll={(value) => {
+										ctsDispatch(setSelectAll(value));
+									}}
+									tracking={handleTracking}
 									searchCriteriaObject={searchCriteriaObject}
-									isLoading={isLoading}
-									trialResults={trialResults}
 								/>
-							</>
-						)}
-						<div className="results-page__content">
-							{checkIfInvalidPage() ? <> </> : <>{renderControls()}</>}
-							<div className="results-page__list">
-								{checkIfInvalidPage() ? (
-									<>{renderInvalidPageNumber()}</>
-								) : isLoading || !searchCriteriaObject ? (
-									<>{renderResultsListLoader()}</>
-								) : trialResults && trialResults.total === 0 ? (
-									<>{renderNoResults()}</>
-								) : (
-									<ResultsList
-										results={trialResults.data}
-										selectedResults={selectedResults}
-										setSelectedResults={setSelectedResults}
-										setSelectAll={(value) => {
-											ctsDispatch(setSelectAll(value));
-										}}
-										tracking={handleTracking}
-										searchCriteriaObject={searchCriteriaObject}
-									/>
-								)}
+							)}
 
-								<aside className="results-page__aside --side">
-									{renderDelighters()}
-								</aside>
-							</div>
-							{checkIfInvalidPage() ? <> </> : <>{renderControls(true)}</>}
+							<aside className="results-page__aside --side">
+								{renderDelighters()}
+							</aside>
 						</div>
-					</>
-				)}
+						{checkIfInvalidPage() ? <> </> : <>{renderControls(true)}</>}
+					</div>
+					<aside className="results-page__aside --bottom">
+						{renderDelighters()}
+					</aside>
+				</article>
+			)}
 
-				<aside className="results-page__aside --bottom">
-					{renderDelighters()}
-				</aside>
-			</article>
 			{searchCriteriaObject && (
 				<Modal isShowing={isShowing} hide={toggleModal}>
 					<PrintModalContent
