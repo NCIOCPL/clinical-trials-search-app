@@ -195,9 +195,8 @@ export const queryStringToSearchCriteria = async (
 	if (query['q']) {
 		// URL parsing will split params into an array on commas.
 		// string param needs to rejoin.
-		const phrase = Array.isArray(query['q'])
-			? query['q'].join(',')
-			: query['q'];
+		let phrase = Array.isArray(query['q']) ? query['q'].join(',') : query['q'];
+		phrase = phrase.replace(/['"]+/g, '');
 		rtnSearchCriteria = {
 			...rtnSearchCriteria,
 			keywordPhrases: phrase,
