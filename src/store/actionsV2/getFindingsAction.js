@@ -12,7 +12,7 @@ export const getFindingsAction = (ancestorIds) => {
 	const requestQuery = {
 		type: 'finding',
 		current_trial_status: ACTIVE_TRIAL_STATUSES,
-		ancestor_ids: ancestorIds,
+		maintype: ancestorIds,
 	};
 	return {
 		type: '@@api/CTSv2',

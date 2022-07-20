@@ -2186,7 +2186,7 @@ describe('getFindings', () => {
 		const requestQuery = {
 			type: 'finding',
 			current_trial_status: ACTIVE_TRIAL_STATUSES,
-			ancestor_ids: ancestorIds,
+			maintype: ancestorIds,
 		};
 
 		const scope = nock('http://example.org')
@@ -2204,7 +2204,7 @@ describe('getFindings', () => {
 		const requestQuery = {
 			type: 'finding',
 			current_trial_status: ACTIVE_TRIAL_STATUSES,
-			ancestor_ids: ancestorIds,
+			maintype: ancestorIds,
 		};
 
 		const scope = nock('http://example.org')
@@ -2223,7 +2223,7 @@ describe('getFindings', () => {
 		const requestQuery = {
 			type: 'finding',
 			current_trial_status: ACTIVE_TRIAL_STATUSES,
-			ancestor_ids: ancestorIds,
+			maintype: ancestorIds,
 		};
 
 		const scope = nock('http://example.org')
@@ -2242,7 +2242,7 @@ describe('getFindings', () => {
 		const requestQuery = {
 			type: 'finding',
 			current_trial_status: ACTIVE_TRIAL_STATUSES,
-			ancestor_ids: ancestorIds,
+			maintype: ancestorIds,
 		};
 
 		const scope = nock('http://example.org')
@@ -2261,7 +2261,7 @@ describe('getFindings', () => {
 		const requestQuery = {
 			type: 'finding',
 			current_trial_status: ACTIVE_TRIAL_STATUSES,
-			ancestor_ids: ancestorIds,
+			maintype: ancestorIds,
 		};
 
 		const scope = nock('http://example.org')

@@ -8,7 +8,7 @@ describe('getFindingsAction', () => {
 		const requestQuery = {
 			type: 'finding',
 			current_trial_status: ACTIVE_TRIAL_STATUSES,
-			ancestor_ids: ancestorIds,
+			maintype: ancestorIds,
 		};
 
 		const expectedAction = {
