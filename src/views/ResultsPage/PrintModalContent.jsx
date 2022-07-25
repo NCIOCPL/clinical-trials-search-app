@@ -15,11 +15,14 @@ const PrintModalContent = ({ selectedList, searchCriteriaObject }) => {
 
 	const { rl } = queryParams;
 
-	const new_search_link = rl === 1 ? `/` : `/advanced`;
+	const new_search_link =
+		rl === 1
+			? `/about-cancer/treatment/clinical-trials/search`
+			: `/about-cancer/treatment/clinical-trials/search/advanced`;
 
 	const trial_ids = selectedList.map(({ id }) => id);
 
-	const link_template = `/v?${queryString.stringify(
+	const link_template = `/about-cancer/treatment/clinical-trials/search/v?${queryString.stringify(
 		queryParams
 	)}&id=<TRIAL_ID>`;
 
