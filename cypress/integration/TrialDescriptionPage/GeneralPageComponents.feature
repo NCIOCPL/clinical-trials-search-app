@@ -74,7 +74,7 @@ Feature:  As a user, I want to be able to view trial description page with all i
 			| mobile     |
 			| tablet     |
 
-	Scenario: User is able to navigate to trial description page directly without being on a searh
+	Scenario: User is able to navigate to trial description page directly without being on a search
 		Given screen breakpoint is set to "desktop"
 		And the user navigates to "/v?id=NCI-2014-01507"
 		Then the page title is "Crizotinib in Treating Patients with Stage IB-IIIA Non-small Cell Lung Cancer That Has Been Removed by Surgery and ALK Fusion Mutations (An ALCHEMIST Treatment Trial)"
@@ -105,7 +105,7 @@ Feature:  As a user, I want to be able to view trial description page with all i
 			| og:description | Crizotinib in Treating Patients with Stage IB-IIIA Non-small Cell Lung Cancer That Has Been Removed by Surgery and ALK Fusion Mutations (An ALCHEMIST Treatment Trial) - NCT02201992 |
 		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/v?id=NCI-2014-01507"
 
-	Scenario: User is able to navigate to trial description page directly without being on a searh using NCT id
+	Scenario: User is able to navigate to trial description page directly without being on a search using NCT id
 		Given screen breakpoint is set to "mobile"
 		And the user navigates to "/v?id=NCT02201992"
 		Then the page title is "Crizotinib in Treating Patients with Stage IB-IIIA Non-small Cell Lung Cancer That Has Been Removed by Surgery and ALK Fusion Mutations (An ALCHEMIST Treatment Trial)"
@@ -276,4 +276,7 @@ Feature:  As a user, I want to be able to view trial description page with all i
 			| /v?id=NCI-2018-00273 | Tesetaxel Plus Reduced Dose of Capecitabine vs. Capecitabine in HER2 Negative, HR Positive, LA/MBC            | administratively complete     |
 			| /v?id=NCI-2018-03722 | Open Label Study of IV Brincidofovir in Adult Transplant Recipients With Adenovirus Viremia                   | withdrawn                     |
 
-
+	Scenario: User is able to view friendly text for trial phases with type 'OTHER'
+		Given screen breakpoint is set to "desktop"
+		And the user navigates to "/v?id=NCI-2018-02261"
+	  Then the trial type displays "Not provided by clinicaltrials.gov" as text

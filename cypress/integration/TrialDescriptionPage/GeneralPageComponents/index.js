@@ -126,3 +126,9 @@ When('the user clicks on the Search button', () => {
 And('button {string} is hidden', (btn) => {
 	cy.get('input').contains(btn).should('not.exist');
 });
+
+Then('the trial type displays {string} as text', (trialTypeText) => {
+	cy.get('.trial-type-name')
+		.get('.non-formatted-tt')
+		.should('have.text', trialTypeText);
+});

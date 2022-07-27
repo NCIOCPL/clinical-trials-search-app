@@ -203,7 +203,9 @@
 .trial-type-name {
 	text-transform: capitalize;
 }
-
+.non-formatted-tt{
+	text-transform: none;
+}
 .sites-nearby,
 .sites-all {
 	margin-top: 1em;
