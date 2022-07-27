@@ -430,6 +430,29 @@ const TrialDescriptionPage = () => {
 		return <ErrorPage initErrorsList={localState.errors} />;
 	};
 
+	const formatPrimaryPurpose = () => {
+		let formatted_purpose = '';
+		if (
+			trialDescription.primary_purpose &&
+			trialDescription.primary_purpose !== ''
+		) {
+			formatted_purpose = trialDescription.primary_purpose
+				.toLowerCase()
+				.replace(/_/g, ' ');
+
+			// Trial type for trials that return primary_purpose: "OTHER" need
+			// to say "Not provided by ClinicalTrials.gov"
+			if (formatted_purpose === 'other') {
+				formatted_purpose = (
+					<span className="non-formatted-tt">
+						Not provided by clinicaltrials.gov
+					</span>
+				);
+			}
+		}
+		return formatted_purpose;
+	};
+
 	const prettifyDescription = () => {
 		let formattedStr =
 			'<p>' +
@@ -654,9 +677,7 @@ const TrialDescriptionPage = () => {
 																	Trial Type
 																</strong>
 																<span className="trial-type-name">
-																	{trialDescription.primary_purpose
-																		.toLowerCase()
-																		.replace(/_/g, ' ')}
+																	{formatPrimaryPurpose()}
 																</span>
 															</p>
 														)}
