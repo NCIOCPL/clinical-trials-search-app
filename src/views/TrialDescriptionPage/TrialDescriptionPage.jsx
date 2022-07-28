@@ -393,10 +393,10 @@ const TrialDescriptionPage = () => {
 		secIDFields.forEach((idField) => {
 			if (idField === 'other_ids') {
 				if (
-					trialDescription.otherTrialIDs &&
-					trialDescription.otherTrialIDs.length > 0
+					trialDescription.other_ids &&
+					trialDescription.other_ids.length > 0
 				) {
-					trialDescription.otherTrialIDs.forEach((item) => {
+					trialDescription.other_ids.forEach((item) => {
 						secArr.push(item.value);
 					});
 				}
