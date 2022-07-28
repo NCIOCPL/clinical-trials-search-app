@@ -14,6 +14,7 @@ const ResultsPageHeader = ({
 	pageNum,
 	step = 10,
 	searchCriteriaObject,
+	pagerExists,
 }) => {
 	const { BasicSearchPagePath, AdvancedSearchPagePath } = useAppPaths();
 
@@ -33,7 +34,7 @@ const ResultsPageHeader = ({
 	};
 
 	return (
-		<div className="cts-results-header">
+		<div className={`cts-results-header${pagerExists ? `` : `--no__pages`}`}>
 			{resultsCount !== 0 && (
 				<div className="all-trials">
 					<strong>
@@ -90,5 +91,6 @@ ResultsPageHeader.propTypes = {
 	pageNum: PropTypes.number,
 	step: PropTypes.number,
 	searchCriteriaObject: PropTypes.object,
+	pagerExists: PropTypes.bool,
 };
 export default ResultsPageHeader;

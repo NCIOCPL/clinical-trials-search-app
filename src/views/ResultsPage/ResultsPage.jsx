@@ -98,6 +98,7 @@ const ResultsPage = () => {
 	const handleTracking = (analyticsPayload) => {
 		tracking.trackEvent(analyticsPayload);
 	};
+	const resultsPerPage = 10;
 
 	const [currentActionsHash, setCurrentActionsHash] = useState('');
 
@@ -437,6 +438,8 @@ const ResultsPage = () => {
 			</Delighter>
 		</div>
 	);
+	const pagerExists =
+		trialResults != null && trialResults.total / resultsPerPage > 1;
 
 	const renderControls = (isBottom = false) => {
 		const cbxId = isBottom ? 'select-all-cbx-bottom' : 'select-all-cbx-top';
@@ -474,7 +477,10 @@ const ResultsPage = () => {
 										Print Selected
 									</button>
 								</div>
-								<div className="results-page__pager">
+								<div
+									className={`results-page__pager${
+										pagerExists ? `` : `--no_pages`
+									}`}>
 									{searchCriteriaObject &&
 										trialResults &&
 										trialResults.total > 1 && (
@@ -484,7 +490,7 @@ const ResultsPage = () => {
 												nextLabel="Next >"
 												onPageNavigationChange={handlePagination}
 												previousLabel="< Previous"
-												resultsPerPage={10}
+												resultsPerPage={resultsPerPage}
 												totalResults={trialResults.total}
 											/>
 										)}
@@ -644,6 +650,7 @@ const ResultsPage = () => {
 								searchCriteriaObject={searchCriteriaObject}
 								isLoading={isLoading}
 								trialResults={trialResults}
+								pagerExists={pagerExists}
 							/>
 						</>
 					)}
@@ -666,6 +673,8 @@ const ResultsPage = () => {
 									}}
 									tracking={handleTracking}
 									searchCriteriaObject={searchCriteriaObject}
+									isLoading={isLoading}
+									trialResults={trialResults}
 								/>
 							)}
 
