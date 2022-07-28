@@ -11,6 +11,7 @@ import { BasicSearchPage, AdvancedSearchPage } from './views/SearchPage';
 import ResultsPage from './views/ResultsPage';
 import TrialDescriptionPage from './views/TrialDescriptionPage';
 import ErrorPage from './views/ErrorPage';
+import PageNotFound from './views/PageNotFound/PageNotFound';
 import { useAppSettings } from './store/store.js';
 import { PrintContextProvider } from './store/printContext';
 import { useAppInitializer } from './hooks';
@@ -48,6 +49,7 @@ const App = ({ zipConversionEndpoint }) => {
 							element={<AdvancedSearchPage />}
 						/>
 						<Route path={BasicSearchPagePath()} element={<BasicSearchPage />} />
+						<Route path="/*" element={<PageNotFound />} />
 					</Routes>
 				</PrintContextProvider>
 			) : (
