@@ -25,14 +25,14 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 		Given the user navigates to "/"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And "Cancer Type/Keyword" form section is displayed
-		And help icon is displayed in "Cancer Type/Keyword" section with href "/about-cancer/treatment/clinical-trials/search/help#basicsearch"
+		And help icon is displayed in "Cancer Type/Keyword" section with href "/about-cancer/treatment/clinical-trials/search/help#how-to-find-clinical-trials-using-the-basic-search-form"
 		And "Cancer Type/Keyword" input field has a placeholder "Start typing to select a cancer type or keyword"
 		And helper text "Leave blank to search all cancer types or keywords." is displayed
 		And "Age" form section is displayed
 		And help icon is displayed in "Age" section with href "/about-cancer/treatment/clinical-trials/search/help#age"
 		And helper text "Your age helps determine which trials are right for you." is displayed
 		And "U.S. ZIP Code" form section is displayed
-		And help icon is displayed in "U.S. ZIP Code" section with href "/about-cancer/treatment/clinical-trials/search/help#basicsearch"
+		And help icon is displayed in "U.S. ZIP Code" section with href "/about-cancer/treatment/clinical-trials/search/help#how-to-find-clinical-trials-using-the-basic-search-form"
 		And helper text "Show trials near this U.S. ZIP code." is displayed
 		And button "Find Trials" is displayed
 
