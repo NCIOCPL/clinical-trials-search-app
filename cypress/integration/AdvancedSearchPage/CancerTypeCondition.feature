@@ -247,7 +247,7 @@ Feature: As a user, I want to be able to specify my search by cancer type or con
         And user selects "Endocervical Cancer" from dropdown
         And user clicks on "Find Trials" button
         Then the search is executed and results page is displayed
-        And trial info displayes "Results 1-3  of 3 for your search "
+        And trial info displayes "Results 1-1  of 1 for your search "
         And the criteria table displays the following
             | Category                                           | Selection                            |
             | Primary Cancer Type/Condition                      | Breast Cancer                        |

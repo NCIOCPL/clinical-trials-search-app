@@ -24,7 +24,7 @@ export const formatTrialSearchQuery = (form) => {
 	}
 
 	if (form.findings.length > 0) {
-		filterCriteria._findings = collapseConcepts(form.findings);
+		filterCriteria.finding = collapseConcepts(form.findings);
 	}
 
 	//Drugs and Treatments

@@ -388,7 +388,7 @@ const mappingTestCases = [
 			findings: [{ name: 'Test Finding', codes: ['C1234'] }],
 		},
 		{
-			_findings: ['C1234'],
+			finding: ['C1234'],
 		},
 	],
 	[
@@ -397,7 +397,7 @@ const mappingTestCases = [
 			findings: [{ name: 'Test Finding 2', codes: ['C2345', 'C3456'] }],
 		},
 		{
-			_findings: ['C2345', 'C3456'],
+			finding: ['C2345', 'C3456'],
 		},
 	],
 	[
@@ -409,7 +409,7 @@ const mappingTestCases = [
 			],
 		},
 		{
-			_findings: ['C1234', 'C2345', 'C3456'],
+			finding: ['C1234', 'C2345', 'C3456'],
 		},
 	],
 	//TODO: Handle combo

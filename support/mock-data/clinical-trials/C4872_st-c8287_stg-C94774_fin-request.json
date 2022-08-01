@@ -33,7 +33,7 @@
 	"stage": [
 		"C94774"
 	],
-	"_findings": [
+	"finding": [
 		"C18673"
 	],
 		"from":0,
