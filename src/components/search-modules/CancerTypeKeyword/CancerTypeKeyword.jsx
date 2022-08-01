@@ -26,7 +26,7 @@ const CancerTypeKeyword = ({ handleUpdate }) => {
 		<Fieldset
 			id="type"
 			legend="Cancer Type/Keyword"
-			helpUrl="/about-cancer/treatment/clinical-trials/search/help#basicsearch">
+			helpUrl="/about-cancer/treatment/clinical-trials/search/help#how-to-find-clinical-trials-using-the-basic-search-form">
 			<Autocomplete
 				id="ctk"
 				label="Cancer Type/Keyword"
