@@ -295,7 +295,7 @@ const ResultsListItem = ({
 				</div>
 				<div className="results-list-item__category">
 					<span>Location:</span>
-					{item.sites && getLocationDisplay()}
+					{getLocationDisplay()}
 				</div>
 			</div>
 		</div>
