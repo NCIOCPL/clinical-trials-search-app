@@ -2,7 +2,7 @@
     "maintype": [
         "C4872"
     ],
-    "_findings": [
+    "finding": [
         "C18673"
     ],
     "current_trial_status": [
