@@ -5,17 +5,17 @@ import '../tracking.defs';
  * @returns {Object}
  */
 export class FieldTrackingObject {
-    constructor() {
-        return this;
-    }
+	constructor() {
+		return this;
+	}
 
-    get() {
-        return {
-            errorMessage: '',
-            hasError: false,
-            id: '',
-            isFocused: false,
-            value: ''
-        }
-    };
-};
+	get() {
+		return {
+			errorMessage: '',
+			hasError: false,
+			id: '',
+			isFocused: false,
+			value: '',
+		};
+	}
+}

@@ -1,12 +1,4 @@
 {
-    "sites.org_name_fulltext": "UM Baltimore Washington Medical Center / Tate Cancer Center",
-    "sites.recruitment_status": [
-      "active",
-      "approved",
-      "enrolling_by_invitation",
-      "in_review",
-      "temporarily_closed_to_accrual"
-    ],
     "current_trial_status": [
       "Active",
       "Approved",
@@ -30,5 +22,15 @@
       "sites.org_coordinates",
       "sites.recruitment_status",
       "diseases"
-    ]
+    ],
+	"sites.org_name._fulltext": "UM Baltimore Washington Medical Center/Tate Cancer Center",
+	"from":0,
+	"sites.recruitment_status": [
+		"active",
+		"approved",
+		"enrolling_by_invitation",
+		"in_review",
+		"temporarily_closed_to_accrual"
+	],
+	"size":10
   }

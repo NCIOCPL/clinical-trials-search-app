@@ -10,6 +10,7 @@
 /cypress/video
 /cypress/screenshots
 /cypress/fixtures/example.json
+.nyc_output/
 
 # production
 /build

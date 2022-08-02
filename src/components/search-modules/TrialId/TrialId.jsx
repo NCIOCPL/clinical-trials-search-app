@@ -4,29 +4,28 @@ import PropTypes from 'prop-types';
 import { Fieldset, TextInput } from '../../atomic';
 
 const TrialId = ({ handleUpdate }) => {
-  const trialId = useSelector(store => store.form.trialId);
+	const trialId = useSelector((store) => store.form.trialId);
 
-  return (
-    <Fieldset
-      id="trialid"
-      legend="Trial ID"
-      helpUrl="/about-cancer/treatment/clinical-trials/search/help#trialid"
-    >
-      <TextInput
-        action={e => handleUpdate(e.target.id, e.target.value)}
-        value={trialId}
-        id="trialId"
-        type="text"
-        label="Trial ID"
-        labelHidden
-        inputHelpText="Separate multiple IDs with commas."
-      />
-    </Fieldset>
-  );
+	return (
+		<Fieldset
+			id="trialid"
+			legend="Trial ID"
+			helpUrl="/about-cancer/treatment/clinical-trials/search/help#trialid">
+			<TextInput
+				action={(e) => handleUpdate(e.target.id, e.target.value)}
+				value={trialId}
+				id="trialId"
+				type="text"
+				label="Trial ID"
+				labelHidden
+				inputHelpText="Separate multiple IDs with commas."
+			/>
+		</Fieldset>
+	);
 };
 
 TrialId.propTypes = {
-  handleUpdate: PropTypes.func,
+	handleUpdate: PropTypes.func,
 };
 
 export default TrialId;

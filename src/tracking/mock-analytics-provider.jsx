@@ -14,21 +14,21 @@ import WrapperComponent from './wrapper-component';
  * @param {function} props.analyticsHandler - The function for handling tracking dispatches
  */
 const MockAnalyticsProvider = ({
-                                 children,
-                                 data = {},
-                                 analyticsHandler = () => {},
-                               }) => {
-  const TrackingWrapper = track(data, {
-    dispatch: analyticsHandler,
-  })(WrapperComponent);
+	children,
+	data = {},
+	analyticsHandler = () => {},
+}) => {
+	const TrackingWrapper = track(data, {
+		dispatch: analyticsHandler,
+	})(WrapperComponent);
 
-  return <TrackingWrapper>{children}Î</TrackingWrapper>;
+	return <TrackingWrapper>{children}Î</TrackingWrapper>;
 };
 
 MockAnalyticsProvider.propTypes = {
-  children: PropTypes.node,
-  data: PropTypes.object,
-  analyticsHandler: PropTypes.func,
+	children: PropTypes.node,
+	data: PropTypes.object,
+	analyticsHandler: PropTypes.func,
 };
 
 export default MockAnalyticsProvider;

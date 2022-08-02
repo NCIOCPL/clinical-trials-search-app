@@ -1,121 +1,126 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import { usePrintApi } from '../../hooks';
-import { buildQueryString } from '../../utilities';
+import { buildQueryString, hasSCOBeenUpdated } from '../../utilities';
+import { useAppSettings } from '../../store/store.js';
+
 const queryString = require('query-string');
 
-const PrintModalContent = ({ selectedList = [], handleClose = () => {} }) => {
-  // in dev use
-  const printUrl = useSelector(store => store.globals.printCacheEndpoint);
-  const formSnapshot = useSelector(store => store.form);
+const PrintModalContent = ({ selectedList, searchCriteriaObject }) => {
+	// in dev use
+	const [{ printApiBase }] = useAppSettings();
+	const genCacheUrl = `${printApiBase}/GenCache`;
+	const printDisplayUrl = `${printApiBase}/Display`;
+	const queryParams = buildQueryString(searchCriteriaObject);
 
-  const queryParams = buildQueryString(formSnapshot);
+	const { rl } = queryParams;
 
-  // Support for legacy things
-  const queryParamsModified = {
-    ...queryParams,
-    tp: queryParams['tp']? queryParams['tp'].map(tp=>tp.toUpperCase()) : []
-  };
-  
-  const queryParamsString = queryString.stringify(queryParamsModified, {
-    arrayFormat: 'none',
-  })
+	const new_search_link =
+		rl === 1
+			? `/about-cancer/treatment/clinical-trials/search`
+			: `/about-cancer/treatment/clinical-trials/search/advanced`;
 
-  const printIds =  selectedList.map(({id})=> id);
-  const [{ data, isLoading, isError, doPrint }] = usePrintApi(
-    { TrialIDs: printIds },
-    // Make sure URL gets query params for search criteria on
-    // print!!!
-    queryParamsString.length > 0 ? printUrl + '?' + queryParamsString : printUrl
-  );
+	const trial_ids = selectedList.map(({ id }) => id);
 
-  // on component mount, check for selected IDs,
-  useEffect(() => {
-    if (selectedList.length > 0 && selectedList.length <= 100) {
-      doPrint();
-    }
-  }, [selectedList]);
+	const link_template = `/about-cancer/treatment/clinical-trials/search/v?${queryString.stringify(
+		queryParams
+	)}&id=<TRIAL_ID>`;
 
-  useEffect(() => {
-    if (!isLoading && data.printID) {
-      //success
-      window.location.href = `https://www.cancer.gov/CTS.Print/Display?printid=${data.printID}`;
-    }
-  }, [isLoading, isError, data]);
+	const search_criteria = !hasSCOBeenUpdated(searchCriteriaObject)
+		? searchCriteriaObject
+		: null;
 
-  const closeModal = () => {
-    handleClose();
-  };
+	const [{ data, isLoading, isError, doPrint }] = usePrintApi(
+		{ trial_ids, link_template, new_search_link, search_criteria },
+		genCacheUrl
+	);
 
-  const renderNoItemsSelected = () => (
-    <>
-      <div className="icon-warning" aria-hidden="true">
-        !
-      </div>
-      <p>
-        You have not selected any trials. Please select at least one trial to
-        print.
-      </p>
-    </>
-  );
-  const renderPrintError = () => (
-    <>
-      <div className="icon-warning" aria-hidden="true">
-        !
-      </div>
-      <p>
-        An error occurred while generating your document. Please try again
-        later.
-      </p>
-    </>
-  );
+	// on component mount, check for selected IDs,
+	useEffect(() => {
+		if (selectedList.length > 0 && selectedList.length <= 100) {
+			doPrint();
+		}
+	}, [selectedList]);
 
-  const renderTooManyItemsSelected = () => (
-    <>
-      <div className="icon-warning" aria-hidden="true">
-        !
-      </div>
-      <p>
-        You have selected the maximum number of clinical trials (100) that can
-        be printed at one time.
-      </p>
-      <p>
-        Print your current selection and then return to your search results to
-        select more trials to print.
-      </p>
-    </>
-  );
+	useEffect(() => {
+		if (!isLoading && data.printID) {
+			//success
+			window.location.href = `${printDisplayUrl}?printid=${data.printID}`;
+		}
+	}, [isLoading, isError, data]);
 
-  const renderPrintInterstitial = () => (
-    <>
-      <div className="spinkit spinner">
-        <div className="dot1"></div>
-        <div className="dot2"></div>
-      </div>
-      <p>
-        You will automatically be directed to your print results in just a
-        moment...
-      </p>
-    </>
-  );
+	const renderNoItemsSelected = () => (
+		<>
+			<div className="icon-warning" aria-hidden="true">
+				!
+			</div>
+			<p>
+				You have not selected any trials. Please select at least one trial to
+				print.
+			</p>
+		</>
+	);
+	const renderPrintError = () => (
+		<>
+			<div className="icon-warning" aria-hidden="true">
+				!
+			</div>
+			<p>
+				An error occurred while generating your document. Please try again
+				later.
+			</p>
+		</>
+	);
 
-  return (
-    <>
-      {selectedList.length === 0 ? (
-        renderNoItemsSelected()
-      ) : selectedList.length >= 100 ? (
-        renderTooManyItemsSelected()
-      ) : (
-        <>
-          {!isError ? (
-            <>{renderPrintInterstitial()}</>
-          ) : (
-            <>{renderPrintError()}</>
-          )}
-        </>
-      )}
-    </>
-  );
+	const renderTooManyItemsSelected = () => (
+		<>
+			<div className="icon-warning" aria-hidden="true">
+				!
+			</div>
+			<p>
+				You have selected the maximum number of clinical trials (100) that can
+				be printed at one time.
+			</p>
+			<p>
+				Print your current selection and then return to your search results to
+				select more trials to print.
+			</p>
+		</>
+	);
+
+	const renderPrintInterstitial = () => (
+		<>
+			<div className="spinkit spinner">
+				<div className="dot1"></div>
+				<div className="dot2"></div>
+			</div>
+			<p>
+				You will automatically be directed to your print results in just a
+				moment...
+			</p>
+		</>
+	);
+
+	return (
+		<>
+			{selectedList.length === 0 ? (
+				renderNoItemsSelected()
+			) : selectedList.length >= 100 ? (
+				renderTooManyItemsSelected()
+			) : (
+				<>
+					{!isError ? (
+						<>{renderPrintInterstitial()}</>
+					) : (
+						<>{renderPrintError()}</>
+					)}
+				</>
+			)}
+		</>
+	);
 };
-
+PrintModalContent.propTypes = {
+	selectedList: PropTypes.array.isRequired,
+	searchCriteriaObject: PropTypes.object,
+};
 export default PrintModalContent;

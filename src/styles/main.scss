@@ -55,7 +55,7 @@
   '../components/atomic/Dropdown/Dropdown.scss',
   '../components/atomic/Fieldset/Fieldset',
   '../components/atomic/InputLabel/InputLabel',
-  '../components/atomic/Modal/Modal', 
+  '../components/atomic/Modal/Modal',
   '../components/atomic/Pager/Pager',
   '../components/atomic/Radio/Radio',
   '../components/atomic/RemovableTag/RemovableTag',
@@ -75,8 +75,10 @@
   '../components/search-modules/TrialType/TrialType';
 
 // Views
-@import 
+@import
   '../views/ErrorPage/ErrorPage',
-  '../views/ResultsPage/ResultsPage', 
+  '../views/ResultsPage/ResultsPage',
   '../views/SearchPage/SearchPage',
-  '../views/TrialDescriptionPage/TrialDescriptionPage';
+	'../views/TrialDescriptionPage/TrialDescriptionPage',
+	'../views/PageNotFound/PageNotFound';
+

@@ -5,7 +5,7 @@ import { createSelector } from 'reselect';
  * @param {State} store
  * @returns {Object} formData
  */
-export const getFormData = state => state.form;
+export const getFormData = (state) => state.form;
 
 /**
  * getHasInvalidAge - Returns boolean flag if an invalid age has been entered in the form
@@ -13,8 +13,8 @@ export const getFormData = state => state.form;
  * @returns {boolean} hasInvalidAge
  */
 export const getHasInvalidAge = createSelector(
-    getFormData,
-    formData => formData.hasInvalidAge
+	getFormData,
+	(formData) => formData.hasInvalidAge
 );
 
 /**
@@ -23,8 +23,8 @@ export const getHasInvalidAge = createSelector(
  * @returns {boolean} hasInvalidZip
  */
 export const getHasInvalidZip = createSelector(
-    getFormData,
-    formData => formData.hasInvalidZip
+	getFormData,
+	(formData) => formData.hasInvalidZip
 );
 
 /**
@@ -34,13 +34,20 @@ export const getHasInvalidZip = createSelector(
  * @returns {boolean} hasFormError
  */
 export const getHasFormError = createSelector(
-    getHasInvalidAge,
-    getHasInvalidZip,
-    (hasInvalidAge, hasInvalidZip) => hasInvalidAge || hasInvalidZip
+	getHasInvalidAge,
+	getHasInvalidZip,
+	(hasInvalidAge, hasInvalidZip) => hasInvalidAge || hasInvalidZip
 );
 
 export const getFieldError = createSelector(
-    getHasInvalidAge,
-    getHasInvalidZip,
-    (hasInvalidAge, hasInvalidZip) =>  hasInvalidZip && hasInvalidAge? 'a,z' : hasInvalidZip ? 'z' : hasInvalidAge? 'a' : ''
+	getHasInvalidAge,
+	getHasInvalidZip,
+	(hasInvalidAge, hasInvalidZip) =>
+		hasInvalidZip && hasInvalidAge
+			? 'a,z'
+			: hasInvalidZip
+			? 'z'
+			: hasInvalidAge
+			? 'a'
+			: ''
 );

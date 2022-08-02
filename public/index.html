@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="%PUBLIC_URL%/index.css" />
     <link rel="stylesheet" href="%PUBLIC_URL%/__nci-dev__common.css" />
     <title>
-      Find NCI-Supported Clinical Trials - National Cancer Institute
+      Find NCI-Supported Clinical Trials - NCI
     </title>
     <script type="text/javascript">
       // Only setup the handler if this is not running under cypress.
@@ -66,13 +66,15 @@
           analyticsContentGroup: 'Clinical Trials',
           appId: '@@/DEFAULT_CTS_APP_ID',
           baseHost: 'http://localhost:3000',
-          basePath: '/about-cancer/treatment/clinical-trials/search',
+					basePath:'/',
           canonicalHost: 'https://www.cancer.gov',
+					ctsApiEndpointV1: 'https://clinicaltrialsapi.cancer.gov/v1',
+					ctsApiEndpointV2: 'https://clinicaltrialsapi.cancer.gov/api/v2',
           language: 'en',
-          printCacheEndpoint: '/CTS.Print/GenCache',
+          printApiBase: 'https://www.cancer.gov/CTS.Print',
           rootId: 'NCI-CTS-root',
           services: {},
-          siteName: 'National Cancer Institute',
+          siteName: 'NCI',
           useSessionStorage: true,
           zipConversionEndpoint: '/cts_api/zip_code_lookup'
         },
@@ -84,10 +86,13 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <main id="main-content">
-      <div id="modal-root"></div>
       <div class="general-page-body-container">
         <div class="content-container contentzone">
-          <div id="NCI-CTS-root"></div>
+						<article>
+								<div class="resize-content">
+									<div id="NCI-CTS-root"></div>
+								</div>
+						</article>
         </div>
       </div>
     </main>

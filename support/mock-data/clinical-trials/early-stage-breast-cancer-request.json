@@ -1,6 +1,5 @@
 {
-  "_maintypes": ["C4872"],
-  "_stages": ["C94774"],
+
   "current_trial_status": [
     "Active",
     "Approved",
@@ -24,5 +23,9 @@
     "sites.org_coordinates",
     "sites.recruitment_status",
     "diseases"
-  ]
+  ],
+	"maintype": ["C4872"],
+	"stage": ["C94774"],
+	"from":0,
+	"size":10
 }

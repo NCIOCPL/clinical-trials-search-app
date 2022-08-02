@@ -2,63 +2,64 @@ import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Route, Routes } from 'react-router-dom';
 
 import './styles/main.scss';
 
-import {BasicSearchPage, AdvancedSearchPage} from './views/SearchPage';
+import { BasicSearchPage, AdvancedSearchPage } from './views/SearchPage';
 import ResultsPage from './views/ResultsPage';
 import TrialDescriptionPage from './views/TrialDescriptionPage';
 import ErrorPage from './views/ErrorPage';
-
+import PageNotFound from './views/PageNotFound/PageNotFound';
+import { useAppSettings } from './store/store.js';
+import { PrintContextProvider } from './store/printContext';
 import { useAppInitializer } from './hooks';
+import { useAppPaths } from './hooks';
+
 require('es6-promise').polyfill();
 
-const App = ({ services, zipConversionEndpoint }) => {
+const App = ({ zipConversionEndpoint }) => {
+	const [{ appHasBeenInitialized, initErrorsList }] = useAppSettings();
 
-  const appHasBeenInitialized = useSelector(
-    store => store.globals.appHasBeenInitialized
-  );
+	useAppInitializer(zipConversionEndpoint);
 
-  const initErrorsList = useSelector(store => store.globals.initErrorsList);
+	const {
+		BasicSearchPagePath,
+		ResultsPagePath,
+		TrialDescriptionPagePath,
+		AdvancedSearchPagePath,
+	} = useAppPaths();
 
-  const ctsapiclient = services.ctsSearch();
-
-  useAppInitializer(ctsapiclient, zipConversionEndpoint);
-
-  return (
-    <>
-      {!appHasBeenInitialized ? (
-        // Is initializaing, show loading screen.
-        <></>
-      ) : initErrorsList.length === 0 ? (
-        <>
-          <Switch>
-            <Route
-              path="/about-cancer/treatment/clinical-trials/search/r"
-              component={ResultsPage}
-            />
-            <Route
-              path="/about-cancer/treatment/clinical-trials/search/v"
-              component={TrialDescriptionPage}
-            />
-            <Route
-              exact
-              path="/about-cancer/treatment/clinical-trials/search/advanced"
-              component={AdvancedSearchPage}
-            />
-            <Route
-              path="/about-cancer/treatment/clinical-trials/search/"
-              component={BasicSearchPage}
-            />
-          </Switch>
-        </>
-      ) : (
-        <ErrorPage initErrorsList={initErrorsList} />
-      )}
-    </>
-  );
+	return (
+		<>
+			{!appHasBeenInitialized ? (
+				// Is initializing, show loading screen.
+				<></>
+			) : initErrorsList.length === 0 ? (
+				<PrintContextProvider>
+					<Routes>
+						<Route path={ResultsPagePath()} element={<ResultsPage />} />
+						<Route
+							path={TrialDescriptionPagePath()}
+							element={<TrialDescriptionPage />}
+						/>
+						<Route
+							path={AdvancedSearchPagePath()}
+							element={<AdvancedSearchPage />}
+						/>
+						<Route path={BasicSearchPagePath()} element={<BasicSearchPage />} />
+						<Route path="/*" element={<PageNotFound />} />
+					</Routes>
+				</PrintContextProvider>
+			) : (
+				<ErrorPage initErrorsList={initErrorsList} />
+			)}
+		</>
+	);
 };
-
+App.propTypes = {
+	services: PropTypes.object,
+	zipConversionEndpoint: PropTypes.string,
+};
 export default App;

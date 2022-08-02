@@ -5,20 +5,20 @@ import '../tracking.defs';
  * @returns {form}
  */
 export class FormTrackingObject {
-    constructor() {
-        return this;
-    }
+	constructor() {
+		return this;
+	}
 
-    get() {
-      return {
-          attemptedSubmit: false,
-          formType: '',
-          fields: [],
-          isFocused: false,
-          isPristine: true,
-          isSubmitted: false,
-          name: '',
-          previousFieldName: ''
-      }
-    };
-};
+	get() {
+		return {
+			attemptedSubmit: false,
+			formType: '',
+			fields: [],
+			isFocused: false,
+			isPristine: true,
+			isSubmitted: false,
+			name: '',
+			previousFieldName: '',
+		};
+	}
+}

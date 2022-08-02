@@ -22,6 +22,7 @@ export const EDDLAnalyticsHandler = (window, isDebugging) => {
 					// the App level. Meta title at the page level. Who knows. We should
 					// offer flexibility and remove noise.  This way the data element can
 					// be build up through the nested components as well.
+					/* eslint-disable no-unused-vars */
 					name,
 					title,
 					metaTitle,
@@ -30,6 +31,7 @@ export const EDDLAnalyticsHandler = (window, isDebugging) => {
 					channel,
 					contentGroup,
 					publishedDate,
+					/* eslint-enable no-unused-vars */
 					// The rest should be the data.
 					...data
 				} = payload;
@@ -40,7 +42,9 @@ export const EDDLAnalyticsHandler = (window, isDebugging) => {
 					data: data ? data : {},
 				};
 				window.NCIDataLayer.push(eventData);
-				if (isDebugging) { console.log(eventData); }
+				if (isDebugging) {
+					console.log(eventData);
+				}
 				break;
 			}
 			case 'PageLoad': {
@@ -66,7 +70,7 @@ export const EDDLAnalyticsHandler = (window, isDebugging) => {
 						metaTitle,
 						language,
 						type: 'nciAppModulePage',
-						...(audience && {audience}),
+						...(audience && { audience }),
 						channel,
 						contentGroup,
 						publishedDate,
@@ -74,7 +78,9 @@ export const EDDLAnalyticsHandler = (window, isDebugging) => {
 					},
 				};
 				window.NCIDataLayer.push(eventData);
-				if (isDebugging) { console.log(eventData); }
+				if (isDebugging) {
+					console.log(eventData);
+				}
 				break;
 			}
 			default: {

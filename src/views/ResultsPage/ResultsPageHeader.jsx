@@ -1,110 +1,96 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { useTracking } from 'react-tracking';
-
-import { SearchCriteriaTable } from '../../components/atomic';
+import { SearchCriteriaTableUpdated } from '../../components/atomic';
 import { START_OVER_LINK } from '../../constants';
-import { history } from '../../services/history.service';
-import { getMainType } from '../../store/actions';
+
+import { hasSCOBeenUpdated } from '../../utilities';
+import { useAppPaths } from '../../hooks/routing';
 
 const ResultsPageHeader = ({
-  handleUpdate,
-  handleReset,
-  resultsCount,
-  pageNum,
-  step = 10,
+	onModifySearchClick,
+	onStartOverClick,
+	resultsCount,
+	pageNum,
+	step = 10,
+	searchCriteriaObject,
+	pagerExists,
 }) => {
-  const dispatch = useDispatch();
-  const {
-    formType,
-    cancerType,
-    age,
-    zip,
-    keywordPhrases,
-    isDirty,
-  } = useSelector(store => store.form);
-  const tracking = useTracking();
-  const { analyticsName } = useSelector(store => store.globals);
+	const { BasicSearchPagePath, AdvancedSearchPagePath } = useAppPaths();
 
-  const { maintypeOptions } = useSelector(store => store.cache);
+	const renderStartOver = (searchCriteriaObject) => {
+		return (
+			<Link
+				to={`${
+					searchCriteriaObject?.formType === 'basic'
+						? BasicSearchPagePath()
+						: AdvancedSearchPagePath()
+				}`}
+				state={{ criteria: {}, refineSearch: false }}
+				onClick={() => onStartOverClick(START_OVER_LINK)}>
+				Start Over
+			</Link>
+		);
+	};
 
-  const handleRefineSearch = () => {
-
-    if (formType === 'basic') {
-      //prefetch stuff
-      if (!maintypeOptions || maintypeOptions.length < 1) {
-        dispatch(getMainType({}));
-      }
-      if (cancerType.name !== '') {
-        handleUpdate('cancerTypeModified', true);
-      }
-      if (age !== '') {
-        handleUpdate('ageModified', true);
-      }
-      if (zip !== '') {
-        handleUpdate('zipModified', true);
-      }
-      if (keywordPhrases !== '') {
-        handleUpdate('keywordPhrasesModified', true);
-      }
-      handleUpdate('formType', 'advanced');
-    }
-
-    handleUpdate('refineSearch', true);
-    tracking.trackEvent({
-      // These properties are required.
-      type: 'Other',
-      event: 'ClinicalTrialsSearchApp:Other:ModifySearchCriteriaLinkClick',
-      analyticsName,
-      linkName: 'CTSModifyClick',
-      // Any additional properties fall into the "page.additionalDetails" bucket
-      // for the event.
-      formType,
-      source: 'modify_search_criteria_link'
-    });
-    history.push('/about-cancer/treatment/clinical-trials/search/advanced');
-  
-  };
-
-  return (
-    <div className="cts-results-header">
-      {resultsCount === 0 ? (
-        <div className="no-trials-found">
-          <strong>No clinical trials matched your search.</strong>
-        </div>
-      ) : (
-        <div className="all-trials">
-          <strong>
-            Results{' '}
-            {`${pageNum * step + 1}-${
-              resultsCount <= step * (pageNum + 1)
-                ? resultsCount
-                : step * (pageNum + 1)
-            } `}{' '}
-            of {resultsCount} for your search{' '}
-            {!isDirty ? (
-              <>
-                for: "all trials" &nbsp; | &nbsp;
-                <Link
-                  to={`${formType === 'basic' ? '/about-cancer/treatment/clinical-trials/search' : '/about-cancer/treatment/clinical-trials/search/advanced'}`}
-                  onClick={() => handleReset(START_OVER_LINK)}
-                >
-                  Start Over
-                </Link>
-              </>
-            ) : (
-              ''
-            )}
-          </strong>
-        </div>
-      )}
-      <SearchCriteriaTable
-        handleRefine={handleRefineSearch}
-        handleReset={handleReset}
-      />
-    </div>
-  );
+	return (
+		<div className={`cts-results-header${pagerExists ? `` : `--no__pages`}`}>
+			{resultsCount !== 0 && (
+				<div className="all-trials">
+					<strong>
+						Results{' '}
+						{`${(pageNum - 1) * step + 1}-${
+							resultsCount <= step * pageNum ? resultsCount : step * pageNum
+						} `}{' '}
+						of {resultsCount} for your search{' '}
+						{searchCriteriaObject && hasSCOBeenUpdated(searchCriteriaObject) && (
+							<>
+								for: &quot;all trials&quot; &nbsp; | &nbsp;
+								{renderStartOver(searchCriteriaObject)}
+							</>
+						)}
+					</strong>
+				</div>
+			)}
+			{searchCriteriaObject && !hasSCOBeenUpdated(searchCriteriaObject) && (
+				<>
+					<SearchCriteriaTableUpdated
+						searchCriteriaObject={searchCriteriaObject}
+					/>
+					<div className="reset-form">
+						<Link
+							to={`${
+								searchCriteriaObject?.formType === 'basic'
+									? BasicSearchPagePath()
+									: AdvancedSearchPagePath()
+							}`}
+							state={{ criteria: {}, refineSearch: false }}
+							onClick={() => onStartOverClick(START_OVER_LINK)}>
+							Start Over
+						</Link>
+						<span aria-hidden="true" className="separator">
+							|
+						</span>
+						<button
+							type="button"
+							className="btnAsLink"
+							onClick={onModifySearchClick}>
+							Modify Search Criteria
+						</button>
+					</div>
+				</>
+			)}
+		</div>
+	);
 };
 
+ResultsPageHeader.propTypes = {
+	onStartOverClick: PropTypes.func,
+	onModifySearchClick: PropTypes.func,
+	resultsCount: PropTypes.number,
+	pageNum: PropTypes.number,
+	step: PropTypes.number,
+	searchCriteriaObject: PropTypes.object,
+	pagerExists: PropTypes.bool,
+};
 export default ResultsPageHeader;
