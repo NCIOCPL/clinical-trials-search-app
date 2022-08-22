@@ -3,6 +3,7 @@ const express = require('express');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const mockZipCodeLookup = require('./mock-zipcode-lookup');
+const { mockGenCache, mockDisplay } = require('./mock-cts-print');
 const mockClinicalTrial = require('./mock-clinical-trials/clinical-trial');
 const mockClinicalTrials = require('./mock-clinical-trials/clinical-trials');
 const mockInterventions = require('./mock-clinical-trials/interventions');
@@ -29,6 +30,10 @@ module.exports = function (app) {
 
 	// Handle mock requests for the zip code lookup API
 	app.use('/mock-api/zip_code_lookup/:zip', mockZipCodeLookup);
+
+	// Handle mock requests from the CTS.Print API
+	app.use('/mock-api/cts-print/GenCache', mockGenCache);
+	app.use('/mock-api/cts-print/Display', mockDisplay);
 
 	// The Zip Code API does not allow CORS headers, so we must proxy it for
 	// local development.
