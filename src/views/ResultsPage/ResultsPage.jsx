@@ -457,7 +457,6 @@ const ResultsPage = () => {
 										<input
 											id={cbxId}
 											className="cts-checkbox__input"
-											classes="check-all"
 											type="checkbox"
 											name="select-all"
 											checked={selectAll}
