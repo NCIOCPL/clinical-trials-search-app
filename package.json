@@ -90,10 +90,10 @@
     "test:cvg": "npm run test:ci -- --watchAll",
     "lint": "npm run lint:src && npm run lint:cypress",
     "lint:src": "eslint src --ext .js,.jsx",
-    "lint:cypress": "eslint cypress/integration --ext .js,.jsx",
+    "lint:cypress": "eslint cypress/e2e --ext .js,.jsx",
     "lint:fix": "npm run lint:src:fix && npm run lint:cypress:fix",
     "lint:src:fix": "eslint src --ext .js,.jsx --fix",
-    "lint:cypress:fix": "eslint cypress/integration --ext .js,.jsx --fix",
+    "lint:cypress:fix": "eslint cypress/e2e --ext .js,.jsx --fix",
     "lint:diff:develop": "eslint $(git diff --diff-filter=A --name-only develop HEAD '***.js' '***.jsx' | xargs)",
     "lint:diff:develop:fix": "eslint --fix $(git diff --diff-filter=A --name-only develop HEAD '***.js' '***.jsx' | xargs)",
     "plop": "plop --plopfile .plop/index.js",
@@ -179,9 +179,11 @@
       "jest-watch-typeahead/testname"
     ]
   },
-  "cypress-cucumber-preprocessor": {
-    "nonGlobalStepDefinitions": true
-  },
+	"cypress-cucumber-preprocessor": {
+		"nonGlobalStepDefinitions": true,
+		"stepDefinitions": "cypress/e2e",
+		"commonPath": "cypress/e2e/common"
+	},
   "nyc": {
     "report-dir": "coverage/cypress",
     "check-coverage": false,
@@ -198,7 +200,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
-    "@cypress/code-coverage": "^3.9.10",
+    "@cypress/code-coverage": "^3.10.0",
     "@nciocpl/eslint-config-react": "^0.7.0",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^12.1.2",
@@ -212,8 +214,8 @@
     "babel-plugin-istanbul": "^6.0.0",
     "babel-plugin-named-asset-import": "^0.3.6",
     "babel-preset-react-app": "^9.1.2",
-    "cypress": "^8.5.0",
-    "cypress-cucumber-preprocessor": "^4.2.0",
+    "cypress": "^10.9.0",
+    "cypress-cucumber-preprocessor": "^4.3.1",
     "cypress-plugin-tab": "^1.0.5",
     "eslint": "^7.20.0",
     "eslint-loader": "^4.0.2",
