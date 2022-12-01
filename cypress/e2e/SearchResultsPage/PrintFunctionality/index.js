@@ -114,7 +114,7 @@ And('the request is sent with the following trial ids', (dataTable) => {
 });
 
 And('user clicks on {string} button', (buttonLabel) => {
-	cy.intercept('POST', '/CTS.Print/GenCache*').as('print');
+	cy.intercept('POST', '/mock-api/cts-print/GenCache*').as('print');
 	cy.get('button').contains(buttonLabel).click({ force: true });
 });
 

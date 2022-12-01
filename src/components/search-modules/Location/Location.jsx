@@ -45,10 +45,11 @@ const Location = ({ handleUpdate }) => {
 		hospital,
 		vaOnly,
 	} = useSelector((store) => store.form);
+	const defaultCountryValue = country === 'United States';
 	const [activeRadio, setActiveRadio] = useState(location);
 	const [inputtedZip, setInputtedZip] = useState(zip);
 	const [limitToVA, setLimitToVA] = useState(vaOnly);
-	const [showStateField, setShowStateField] = useState(true);
+	const [showStateField, setShowStateField] = useState(defaultCountryValue);
 
 	//hospital
 	const [hospitalName, setHospitalName] = useState({ value: hospital.term });
@@ -108,7 +109,6 @@ const Location = ({ handleUpdate }) => {
 			handleUpdate('states', []);
 			handleUpdate('country', selectedCountry);
 		}
-
 		if (selectedCountry === 'United States') {
 			setShowStateField(true);
 		} else {

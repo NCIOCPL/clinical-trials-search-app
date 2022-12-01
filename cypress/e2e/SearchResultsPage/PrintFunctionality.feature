@@ -13,7 +13,7 @@ Feature: As a user I want to be able to print trial search results
 		And the request is sent with the following details
 			| link_template                                                                  | new_search_link                                | search_criteria |
 			| /about-cancer/treatment/clinical-trials/search/v?a=39&loc=0&rl=1&id=<TRIAL_ID> | /about-cancer/treatment/clinical-trials/search | notNull         |
-		And print modal appears
+		And the page title is "CTS.Print/Display"
 		Examples:
 			| breakpoint |
 			| desktop    |
@@ -49,7 +49,7 @@ Feature: As a user I want to be able to print trial search results
 		And the request is sent with the following details
 			| link_template                                                                  | new_search_link                                         | search_criteria |
 			| /about-cancer/treatment/clinical-trials/search/v?loc=0&pn=2&rl=2&id=<TRIAL_ID> | /about-cancer/treatment/clinical-trials/search/advanced | null            |
-		And print modal appears
+		And the page title is "CTS.Print/Display"
 
 	Scenario: as a user, I want to see all of the selected trials retained after I navigate back to a previous page
 		Given the user navigates to "/r?loc=0&rl=1"

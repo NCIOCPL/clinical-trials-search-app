@@ -54,7 +54,7 @@ Feature: As a user, I want to be able to narrow down my search by specifying a z
 			Then text "Sorry, you seem to have entered invalid criteria. Please check the following, and try your search again:" is displayed
 			And the invalid criteria table displays the following
 				| Criteria |
-				| Zip      |
+				| ZIP Code |
 			And text "For assistance, please contact the Cancer Information Service. You can chat online or call 1-800-4-CANCER (1-800-422-6237)." is displayed
 			And "chat online" has a link "https://livehelp.cancer.gov/app/chat/chat_landing"
 			And "Try a new search" link has a href "/advanced"

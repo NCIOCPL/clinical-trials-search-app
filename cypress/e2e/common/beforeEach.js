@@ -15,6 +15,7 @@ beforeEach(() => {
 			ctsApiEndpointV1: '/v1',
 			ctsApiEndpointV2: '/cts/mock-api/v2',
 			ctsTitle: 'Find NCI-Supported Clinical Trials',
+			printApiBase: '/mock-api/cts-print',
 			language: 'en',
 			rootId: 'NCI-CTS-root',
 			siteName: 'NCI',
