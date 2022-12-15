@@ -16,7 +16,6 @@ const safePostCssParser = require('postcss-safe-parser');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
-const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
 const paths = require('./paths');
@@ -24,7 +23,6 @@ const modules = require('./modules');
 const getClientEnvironment = require('./env');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
-const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 
 const postcssNormalize = require('postcss-normalize');
 
@@ -57,7 +55,7 @@ module.exports = function (webpackEnv) {
 		: isEnvDevelopment && '/';
 	// Some apps do not use client-side routing with pushState.
 	// For these, "homepage" can be set to "." to enable relative asset paths.
-	const shouldUseRelativeAssetPaths = publicPath === './';
+	const shouldUseRelativeAssetPaths = publicPath.startsWith('.');
 
 	// `publicUrl` is just like `publicPath`, but we will provide it to our app
 	// as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
@@ -107,12 +105,20 @@ module.exports = function (webpackEnv) {
 			},
 		].filter(Boolean);
 		if (preProcessor) {
-			loaders.push({
-				loader: require.resolve(preProcessor),
-				options: {
-					sourceMap: isEnvProduction && shouldUseSourceMap,
+			loaders.push(
+				{
+					loader: require.resolve('resolve-url-loader'),
+					options: {
+						sourceMap: isEnvProduction && shouldUseSourceMap,
+					},
 				},
-			});
+				{
+					loader: require.resolve(preProcessor),
+					options: {
+						sourceMap: true,
+					},
+				}
+			);
 		}
 		return loaders;
 	};
@@ -186,7 +192,7 @@ module.exports = function (webpackEnv) {
 					terserOptions: {
 						parse: {
 							// we want terser to parse ecma 8 code. However, we don't want it
-							// to apply any minfication steps that turns valid ecma 5 code
+							// to apply any minification steps that turns valid ecma 5 code
 							// into invalid ecma 5 code. This is why the 'compress' and 'output'
 							// sections only apply transformations that are ecma 5 safe
 							// https://github.com/facebook/create-react-app/pull/4234
@@ -202,7 +208,7 @@ module.exports = function (webpackEnv) {
 							comparisons: false,
 							// Disabled because of an issue with Terser breaking valid code:
 							// https://github.com/facebook/create-react-app/issues/5250
-							// Pending futher investigation:
+							// Pending further investigation:
 							// https://github.com/terser-js/terser/issues/120
 							inline: 2,
 						},
@@ -306,13 +312,16 @@ module.exports = function (webpackEnv) {
 					use: [
 						{
 							options: {
+								cache: true,
 								formatter: require.resolve('react-dev-utils/eslintFormatter'),
 								eslintPath: require.resolve('eslint'),
+								resolvePluginsRelativeTo: __dirname,
 							},
 							loader: require.resolve('eslint-loader'),
 						},
 					],
 					include: paths.appSrc,
+					exclude: paths.appExcludeFromBuild,
 				},
 				{
 					// "oneOf" will traverse all following loaders until one will
@@ -428,8 +437,9 @@ module.exports = function (webpackEnv) {
 							use: getStyleLoaders({
 								importLoaders: 1,
 								sourceMap: isEnvProduction && shouldUseSourceMap,
-								modules: true,
-								getLocalIdent: getCSSModuleLocalIdent,
+								modules: {
+									getLocalIdent: getCSSModuleLocalIdent,
+								},
 							}),
 						},
 						// Opt-in support for SASS (using .scss or .sass extensions).
@@ -457,10 +467,11 @@ module.exports = function (webpackEnv) {
 							test: sassModuleRegex,
 							use: getStyleLoaders(
 								{
-									importLoaders: 2,
+									importLoaders: 3,
 									sourceMap: isEnvProduction && shouldUseSourceMap,
-									modules: true,
-									getLocalIdent: getCSSModuleLocalIdent,
+									modules: {
+										getLocalIdent: getCSSModuleLocalIdent,
+									},
 								},
 								'sass-loader'
 							),
@@ -541,12 +552,6 @@ module.exports = function (webpackEnv) {
 			// a plugin that prints an error when you attempt to do this.
 			// See https://github.com/facebook/create-react-app/issues/240
 			isEnvDevelopment && new CaseSensitivePathsPlugin(),
-			// If you require a missing module and then `npm install` it, you still have
-			// to restart the development server for Webpack to discover it. This plugin
-			// makes the discovery automatic so you don't have to restart.
-			// See https://github.com/facebook/create-react-app/issues/186
-			isEnvDevelopment &&
-				new WatchMissingNodeModulesPlugin(paths.appNodeModules),
 			isEnvProduction &&
 				new MiniCssExtractPlugin({
 					// Options similar to the same options in webpackOptions.output
@@ -618,8 +623,6 @@ module.exports = function (webpackEnv) {
 					],
 					watch: paths.appSrc,
 					silent: true,
-					// The formatter is invoked directly in WebpackDevServerUtils during development
-					formatter: isEnvProduction ? typescriptFormatter : undefined,
 				}),
 		].filter(Boolean),
 		// Some libraries import Node modules but don't use them in the browser.
