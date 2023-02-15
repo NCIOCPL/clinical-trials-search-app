@@ -193,3 +193,13 @@ And('the following delighters are displayed', (dataTable) => {
 Then('help icon is displayed with href {string}', (helpHref) => {
 	cy.get('a.text-icon-help').should('have.attr', 'href', helpHref);
 });
+
+Then(
+	'the Age for result {int} displays the following {string}',
+	(resultItemNum, ageText) => {
+		cy.get('.results-list__item span')
+			.eq(resultItemNum - 1)
+			.get('.results-list-item__category')
+			.contains(ageText);
+	}
+);

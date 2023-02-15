@@ -115,29 +115,33 @@ const ResultsListItem = ({
 	};
 
 	const getAgeDisplay = () => {
-		if (
-			item.eligibility.structured.min_age_number === 0 &&
-			item.eligibility.structured.max_age_number > 120
-		) {
+		const minAge = item.eligibility.structured.min_age_number;
+		const maxAge = item.eligibility.structured.max_age_number;
+
+		const minAgeUnit = item.eligibility.structured.min_age_unit.toLowerCase();
+		const maxAgeUnit = item.eligibility.structured.max_age_unit.toLowerCase();
+
+		// CASE: Not specified / the incoming age range is out of bounds
+		if (minAge === 0 && maxAge > 120) {
 			return 'Not Specified';
 		}
-		if (
-			item.eligibility.structured.min_age_number === 0 &&
-			item.eligibility.structured.max_age_number < 120
-		) {
-			return `${item.eligibility.structured.min_age_number} years and younger`;
+
+		// CASE: No minimum age for trial
+		if (minAge === 0 && maxAge < 120) {
+			return `${maxAge} ${maxAgeUnit} and younger`;
 		}
-		if (
-			item.eligibility.structured.min_age_number > 0 &&
-			item.eligibility.structured.max_age_number < 120
-		) {
-			return `${item.eligibility.structured.min_age_number} to ${item.eligibility.structured.max_age_number} years`;
+		// CASE: No maximum age for trial
+		if (minAge > 0 && maxAge > 120) {
+			return `${minAge} ${minAgeUnit} and over`;
 		}
-		if (
-			item.eligibility.structured.min_age_number > 0 &&
-			item.eligibility.structured.max_age_number > 120
-		) {
-			return `${item.eligibility.structured.min_age_number} years and over`;
+		// CASE: Bound age range for trial
+		if (minAge > 0 && maxAge < 120) {
+			// If the units are the same we omit the minAgeUnit
+			if (minAgeUnit === maxAgeUnit) {
+				return `${minAge} to ${maxAge} ${maxAgeUnit}`;
+			}
+			// Base Case
+			return `${minAge} ${minAgeUnit} to ${maxAge} ${maxAgeUnit}`;
 		}
 	};
 
