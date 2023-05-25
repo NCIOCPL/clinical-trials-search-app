@@ -75,3 +75,28 @@ Feature: Clinical Trials Advanced Search Page age section
         And trial info displays "Results 1-10  of 6306 for your search "
         When user clicks on Modify Search Criteria button
         Then age field has value "40"
+
+	Scenario: User is able to view trial results which have varying age criteria
+		Given the user navigates to "/advanced"
+		Then the page title is "Find NCI-Supported Clinical Trials"
+		And "Age" form section is displayed
+		When user types "NCI-2019-02289, NCI-2019-06216, NCI-2019-08622, NCI-2019-00399, NCI-2021-06711, NCI-2014-00677, NCI-2016-01734" in "TrialID" field
+		And user clicks on "Find Trials" button
+		Then the search is executed and results page is displayed
+		And the criteria table displays the following
+			| Category | Selection                                    |
+			| Trial ID | NCI-2019-02289, NCI-2019-06216, NCI-2019-08622, NCI-2019-00399, NCI-2021-06711, NCI-2014-00677, NCI-2016-01734|
+		# Maximum Age - Years
+		And the Age for result 1 displays the following "50 years and younger"
+		# Maximum Age - Months
+		And the Age for result 2 displays the following "18 months and younger"
+		# Days to Years
+		And the Age for result 3 displays the following "365 days to 30 years"
+		# Months to Year
+		And the Age for result 4 displays the following "12 months to 21 years"
+		# Years to Years
+		And the Age for result 5 displays the following "1 to 30 years"
+		# Minimum Age
+		And the Age for result 6 displays the following "1 years and over"
+		# Not specified
+		And the Age for result 7 displays the following "Not Specified"
