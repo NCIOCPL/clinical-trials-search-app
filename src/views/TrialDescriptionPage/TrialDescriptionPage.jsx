@@ -641,7 +641,7 @@ const TrialDescriptionPage = () => {
 													<p>
 														See trial information on{' '}
 														<a
-															href={`https://www.clinicaltrials.gov/show/${trialDescription.nct_id}`}
+															href={`https://www.clinicaltrials.gov/study/${trialDescription.nct_id}`}
 															target="_blank"
 															rel="noopener noreferrer">
 															ClinicalTrials.gov
@@ -721,7 +721,7 @@ const TrialDescriptionPage = () => {
 															ClinicalTrials.gov ID
 														</strong>
 														<a
-															href={`http://clinicaltrials.gov/show/${trialDescription.nct_id}`}
+															href={`http://clinicaltrials.gov/study/${trialDescription.nct_id}`}
 															target="_blank"
 															rel="noopener noreferrer">
 															{trialDescription.nct_id}
