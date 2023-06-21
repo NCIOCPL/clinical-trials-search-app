@@ -53,7 +53,7 @@ Feature: As a user, I want to be able to get even more details about the trial v
       | Primary ID            |
       | Secondary IDs         |
       | ClinicalTrials.gov ID |
-    And "NCT02201992" link has a href "http://clinicaltrials.gov/show/NCT02201992"
+    And "NCT02201992" link has a href "http://clinicaltrials.gov/study/NCT02201992"
 
   Scenario: user is able to see trial's location that is near searched zipcode
     Given the user navigates to "/v?id=NCI-2014-01507&loc=1&rl=1&z=22182"
@@ -225,7 +225,7 @@ Feature: As a user, I want to be able to get even more details about the trial v
     And trial description accordion is displayed
     When user clicks on "Locations & Contacts" section of accordion
     Then text "See trial information on ClinicalTrials.gov for a list of participating sites." is displayed
-    And "ClinicalTrials.gov" link has a href "https://www.clinicaltrials.gov/show/NCT00596999"
+    And "ClinicalTrials.gov" link has a href "https://www.clinicaltrials.gov/study/NCT00596999"
 
   Scenario: as a user I will not see locations if I searched for a trial in a country that does not exist/host that trial
     Given the user navigates to "/v?id=NCI-2018-01903&lcnty=zimbabue&loc=2&rl=2"

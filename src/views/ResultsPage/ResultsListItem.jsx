@@ -180,7 +180,7 @@ const ResultsListItem = ({
 					<>
 						See{' '}
 						<a
-							href={`https://www.clinicaltrials.gov/show/${item.nct_id}`}
+							href={`https://www.clinicaltrials.gov/study/${item.nct_id}`}
 							target="_blank"
 							rel="noopener noreferrer">
 							ClinicalTrials.gov
