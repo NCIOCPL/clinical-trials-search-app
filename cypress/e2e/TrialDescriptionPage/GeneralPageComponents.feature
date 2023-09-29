@@ -20,9 +20,9 @@ Feature:  As a user, I want to be able to view trial description page with all i
 		And button "Print" is displayed
 		And button "Email" is displayed
 		And the following delighters are displayed
-			| delighter    | href                                                       | title                              | text                                                                  |
-			| cts-livehelp | /contact                                                   | Have a question?We're here to help | Chat with us: LiveHelpCall us: 1-800-4-CANCER(1-800-422-6237)         |
-			| cts-which    | /about-cancer/treatment/clinical-trials/search/trial-guide | Which trials are right for you?    | Use the checklist in our guide to gather the information you’ll need. |
+			| delighter    | href                                                                         | title                              | text                                                                  |
+			| cts-livehelp | /contact                                                                     | Have a question?We're here to help | Chat with us: LiveHelpCall us: 1-800-4-CANCER(1-800-422-6237)         |
+			| cts-which    | /research/participate/clinical-trials-search/steps         | Which trials are right for you?    | Use the checklist in our guide to gather the information you’ll need. |
 		And the title tag should be "Weight Loss Interventions in Treating Overweight and Obese Women with a Higher Risk for Breast Cancer Recurrence"
 		And the page contains meta tags with the following names
 			| name        | content                                                                                                          |
@@ -56,9 +56,9 @@ Feature:  As a user, I want to be able to view trial description page with all i
 		And button "Print" is not displayed
 		And button "Email" is displayed
 		And the following delighters are displayed
-			| delighter    | href                                                       | title                              | text                                                                  |
-			| cts-livehelp | /contact                                                   | Have a question?We're here to help | Chat with us: LiveHelpCall us: 1-800-4-CANCER(1-800-422-6237)         |
-			| cts-which    | /about-cancer/treatment/clinical-trials/search/trial-guide | Which trials are right for you?    | Use the checklist in our guide to gather the information you’ll need. |
+			| delighter    | href                                                                         | title                              | text                                                                  |
+			| cts-livehelp | /contact                                                                     | Have a question?We're here to help | Chat with us: LiveHelpCall us: 1-800-4-CANCER(1-800-422-6237)         |
+			| cts-which    | /research/participate/clinical-trials-search/steps         | Which trials are right for you?    | Use the checklist in our guide to gather the information you’ll need. |
 		And the title tag should be "Crizotinib in Treating Patients with Stage IB-IIIA Non-small Cell Lung Cancer That Has Been Removed by Surgery and ALK Fusion Mutations (An ALCHEMIST Treatment Trial)"
 		And the page contains meta tags with the following names
 			| name        | content                                                                                                                                                                |
@@ -91,9 +91,9 @@ Feature:  As a user, I want to be able to view trial description page with all i
 		And button "Print" is displayed
 		And button "Email" is displayed
 		And the following delighters are displayed
-			| delighter    | href                                                       | title                              | text                                                                  |
-			| cts-livehelp | /contact                                                   | Have a question?We're here to help | Chat with us: LiveHelpCall us: 1-800-4-CANCER(1-800-422-6237)         |
-			| cts-which    | /about-cancer/treatment/clinical-trials/search/trial-guide | Which trials are right for you?    | Use the checklist in our guide to gather the information you’ll need. |
+			| delighter    | href                                                                         | title                              | text                                                                  |
+			| cts-livehelp | /contact                                                                     | Have a question?We're here to help | Chat with us: LiveHelpCall us: 1-800-4-CANCER(1-800-422-6237)         |
+			| cts-which    | /research/participate/clinical-trials-search/steps         | Which trials are right for you?    | Use the checklist in our guide to gather the information you’ll need. |
 		And the title tag should be "Crizotinib in Treating Patients with Stage IB-IIIA Non-small Cell Lung Cancer That Has Been Removed by Surgery and ALK Fusion Mutations (An ALCHEMIST Treatment Trial)"
 		And the page contains meta tags with the following names
 			| name        | content                                                                                                                                                                |
@@ -124,7 +124,7 @@ Feature:  As a user, I want to be able to view trial description page with all i
 		And the following delighters are displayed
 			| delighter    | href                                                       | title                              | text                                                                  |
 			| cts-livehelp | /contact                                                   | Have a question?We're here to help | Chat with us: LiveHelpCall us: 1-800-4-CANCER(1-800-422-6237)         |
-			| cts-which    | /about-cancer/treatment/clinical-trials/search/trial-guide | Which trials are right for you?    | Use the checklist in our guide to gather the information you’ll need. |
+			| cts-which    | /research/participate/clinical-trials-search/steps         | Which trials are right for you?    | Use the checklist in our guide to gather the information you’ll need. |
 		And the title tag should be "Crizotinib in Treating Patients with Stage IB-IIIA Non-small Cell Lung Cancer That Has Been Removed by Surgery and ALK Fusion Mutations (An ALCHEMIST Treatment Trial)"
 		And the page contains meta tags with the following names
 			| name        | content                                                                                                                                                                |

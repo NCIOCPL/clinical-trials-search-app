@@ -5,10 +5,13 @@ import { useSelector } from 'react-redux';
 
 import { Fieldset, TextInput } from '../../atomic';
 
+import { useAppSettings } from '../../../store/store.js';
+
 const Age = ({ handleUpdate }) => {
 	const { age, ageModified, formType } = useSelector((store) => store.form);
 	const [inputtedAge, setInputtedAge] = useState(age);
 	const [errorMessage, setErrorMessage] = useState('');
+	const [{ helpUrl }] = useAppSettings();
 
 	const validateAgeEntry = (a) => {
 		const invalidAgeText = 'Please enter a number between 1 and 120.';
@@ -33,10 +36,7 @@ const Age = ({ handleUpdate }) => {
 			: 'Enter the age of the participant.';
 
 	return (
-		<Fieldset
-			id="age"
-			legend="Age"
-			helpUrl="/about-cancer/treatment/clinical-trials/search/help#age">
+		<Fieldset id="age" legend="Age" helpUrl={helpUrl + '#age'}>
 			<TextInput
 				action={(e) => validateAgeEntry(e.target.value)}
 				id="age"

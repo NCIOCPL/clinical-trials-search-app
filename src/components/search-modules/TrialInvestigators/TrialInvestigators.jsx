@@ -5,6 +5,7 @@ import { Fieldset, Autocomplete } from '../../atomic';
 import { createTermDataFromArrayObj } from '../../../utilities';
 import { searchTrialInvestigatorsAction } from '../../../store/actionsV2';
 import { matchItemToTerm, sortItems } from '../../../utilities';
+import { useAppSettings } from '../../../store/store.js';
 
 const TrialInvestigators = ({ handleUpdate }) => {
 	const dispatch = useDispatch();
@@ -12,6 +13,8 @@ const TrialInvestigators = ({ handleUpdate }) => {
 	//store vals
 	const { investigator } = useSelector((store) => store.form);
 	const { tis = {} } = useSelector((store) => store.cache);
+
+	const [{ helpUrl }] = useAppSettings();
 
 	const [tiName, setTiName] = useState({ value: investigator.term });
 	const tisAggregations = tis.aggregations
@@ -28,7 +31,7 @@ const TrialInvestigators = ({ handleUpdate }) => {
 		<Fieldset
 			id="trialInvestigators"
 			legend="Trial Investigators"
-			helpUrl="/about-cancer/treatment/clinical-trials/search/help#trialinvestigators">
+			helpUrl={helpUrl + '#trialinvestigators'}>
 			<Autocomplete
 				id="inv"
 				label="Trial investigators"

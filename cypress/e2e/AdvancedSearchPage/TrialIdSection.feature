@@ -4,7 +4,7 @@ Feature: Advanced Clinical Trials Search Trial ID Section
 		Given the user navigates to "/advanced"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And "Trial ID" form section is displayed
-		And help icon is displayed in "TrialID" section with href "/about-cancer/treatment/clinical-trials/search/help#trialid"
+		And help icon is displayed in "TrialID" section with href "/research/participate/clinical-trials-search/help#trialid"
 		And helper text "Separate multiple IDs with commas." is displayed
 
 	Scenario: User enters trial id and searches

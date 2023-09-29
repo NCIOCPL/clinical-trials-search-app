@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Checkbox, Fieldset, Toggle } from '../../atomic';
+import { useAppSettings } from '../../../store/store.js';
 import './TrialType.scss';
 
 const TrialType = ({ handleUpdate }) => {
@@ -9,6 +10,7 @@ const TrialType = ({ handleUpdate }) => {
 	const { trialTypes, healthyVolunteers } = useSelector((store) => store.form);
 	const [trials, setTrials] = useState(trialTypes);
 	const [hvToggle, setHvToggle] = useState(healthyVolunteers);
+	const [{ helpUrl }] = useAppSettings();
 
 	useEffect(() => {
 		updateStore();
@@ -51,7 +53,7 @@ const TrialType = ({ handleUpdate }) => {
 			id="trialtype"
 			legend="Trial Type"
 			classes="trial-type"
-			helpUrl="/about-cancer/treatment/clinical-trials/search/help#trialtype">
+			helpUrl={helpUrl + '#trialtype'}>
 			<p>
 				Select the type of trial for your search. You may check more than one
 				box or select &quot;All&quot;. You may choose to limit results to trials

@@ -78,7 +78,15 @@ const SearchPage = ({ formInit = 'basic' }) => {
 	const [isPageLoadReady, setIsPageLoadReady] = useState(false);
 	const { addFormToTracking } = actions;
 	const tracking = useTracking();
-	const [{ analyticsName, canonicalHost, siteName }] = useAppSettings();
+	const [
+		{
+			analyticsName,
+			canonicalHost,
+			siteName,
+			whatAreTrialsUrl,
+			whichTrialsUrl,
+		},
+	] = useAppSettings();
 	//this is SCO passed in from search results page
 	const { state: locationState } = useLocation();
 	const { criteria, refineSearch } = locationState || {};
@@ -285,14 +293,14 @@ const SearchPage = ({ formInit = 'basic' }) => {
 
 			<Delighter
 				classes="cts-what"
-				url="/about-cancer/treatment/clinical-trials/what-are-trials"
+				url={whatAreTrialsUrl}
 				titleText={<>What Are Cancer Clinical Trials?</>}>
 				<p>Learn what they are and what you should know about them.</p>
 			</Delighter>
 
 			<Delighter
 				classes="cts-which"
-				url="/about-cancer/treatment/clinical-trials/search/trial-guide"
+				url={whichTrialsUrl}
 				titleText={<>Which trials are right for you?</>}>
 				<p>
 					Use the checklist in our guide to gather the information you’ll need.
@@ -380,7 +388,7 @@ const SearchPage = ({ formInit = 'basic' }) => {
 				<p>
 					NCI-supported clinical trials are those sponsored or otherwise
 					financially supported by NCI. See our guide,{' '}
-					<a href="https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/trial-guide">
+					<a href={canonicalHost + whichTrialsUrl}>
 						Steps to Find a Clinical Trial
 					</a>
 					, to learn about options for finding trials not included in NCI&apos;s

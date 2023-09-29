@@ -4,7 +4,7 @@ Feature: Advanced Clinical Trials Search Trial Type Section
         Given the user navigates to "/advanced"
         Then the page title is "Find NCI-Supported Clinical Trials"
         And "Trial Type" form section is displayed
-        And help icon is displayed in "Trial Type" section with href "/about-cancer/treatment/clinical-trials/search/help#trialtype"
+        And help icon is displayed in "Trial Type" section with href "/research/participate/clinical-trials-search/help#trialtype"
         And info text "Select the type of trial for your search. You may check more than one box or select \"All\". You may choose to limit results to trials accepting healthy volunteers." is displayed in the "Trial Type" section body
         And "Healthy Volunteers" toggle is displayed with label "Limit results to Veterans Affairs facilities"
         And "Healthy Volunteers" toggle is switched to "No"

@@ -2,11 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Fieldset, TextInput } from '../../atomic';
+import { useAppSettings } from '../../../store/store.js';
 
 const KeywordsPhrases = ({ handleUpdate }) => {
 	const { keywordPhrases, keywordPhrasesModified } = useSelector(
 		(store) => store.form
 	);
+
+	const [{ helpUrl }] = useAppSettings();
 
 	const handleKeywordUpdate = (e) => {
 		handleUpdate(e.target.id, e.target.value);
@@ -17,7 +20,7 @@ const KeywordsPhrases = ({ handleUpdate }) => {
 		<Fieldset
 			id="keyword"
 			legend="Keywords/Phrases"
-			helpUrl="/about-cancer/treatment/clinical-trials/search/help#keywords">
+			helpUrl={helpUrl + '#keywords'}>
 			<TextInput
 				action={handleKeywordUpdate}
 				id="keywordPhrases"

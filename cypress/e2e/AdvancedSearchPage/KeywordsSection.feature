@@ -5,7 +5,7 @@ Feature: Clinical Trials Advanced Search Page
         Given the user navigates to "/advanced"
         Then the page title is "Find NCI-Supported Clinical Trials"
         And "Keywords/Phrases" form section is displayed
-        And help icon is displayed in "Keywords" section with href "/about-cancer/treatment/clinical-trials/search/help#keywords"
+        And help icon is displayed in "Keywords" section with href "/research/participate/clinical-trials-search/help#keywords"
         And "KeywordsPhrases" input field has a placeholder "Examples: PSA, 'Paget disease'"
         And helper text "Search by word or phrase (use quotation marks with phrases)." is displayed
         Examples:
