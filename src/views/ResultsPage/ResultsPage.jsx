@@ -42,6 +42,7 @@ const ResultsPage = () => {
 			analyticsName,
 			canonicalHost,
 			siteName,
+			whichTrialsUrl,
 			zipConversionEndpoint,
 			apiClients: { clinicalTrialsSearchClientV2 },
 		},
@@ -430,7 +431,7 @@ const ResultsPage = () => {
 
 			<Delighter
 				classes="cts-which"
-				url="/about-cancer/treatment/clinical-trials/search/trial-guide"
+				url={whichTrialsUrl}
 				titleText={<>Which trials are right for you?</>}>
 				<p>
 					Use the checklist in our guide to gather the information you’ll need.

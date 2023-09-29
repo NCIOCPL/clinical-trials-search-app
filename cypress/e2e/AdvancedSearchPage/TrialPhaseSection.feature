@@ -4,7 +4,7 @@ Feature: Advanced Clinical Trials Search Trial Phase Section
         Given the user navigates to "/advanced"
         Then the page title is "Find NCI-Supported Clinical Trials"
         And "Trial Phase" form section is displayed
-        And help icon is displayed in "Trial Phase" section with href "/about-cancer/treatment/clinical-trials/search/help#trialphase"
+        And help icon is displayed in "Trial Phase" section with href "/research/participate/clinical-trials-search/help#trialphase"
         And info text "Select the trial phases for your search. You may check more than one box or select \"All\"." is displayed in the section body
         And the following checkboxes are displayed
             | label     | value  |

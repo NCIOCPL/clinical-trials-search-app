@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Fieldset from '../../atomic/Fieldset';
 import { Autocomplete } from '../../atomic';
 import { getLeadOrgAction } from '../../../store/actionsV2';
+import { useAppSettings } from '../../../store/store.js';
 import {
 	createTermDataFromArrayObj,
 	matchItemToTerm,
@@ -24,6 +25,7 @@ const LeadOrganization = ({ handleUpdate }) => {
 		: [];
 
 	const [orgName, setOrgName] = useState({ value: leadOrg.term });
+	const [{ helpUrl }] = useAppSettings();
 
 	useEffect(() => {
 		if (orgName.value.length > 2) {
@@ -35,7 +37,7 @@ const LeadOrganization = ({ handleUpdate }) => {
 		<Fieldset
 			id="lead_organization"
 			legend="Lead Organization"
-			helpUrl="/about-cancer/treatment/clinical-trials/search/help#leadorganization">
+			helpUrl={helpUrl + '#leadorganization'}>
 			<Autocomplete
 				label="Lead organization"
 				labelHidden

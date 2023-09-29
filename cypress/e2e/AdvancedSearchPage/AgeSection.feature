@@ -3,7 +3,7 @@ Feature: Clinical Trials Advanced Search Page age section
         Given the user navigates to "/advanced"
         Then the page title is "Find NCI-Supported Clinical Trials"
         And "Age" form section is displayed
-        And help icon is displayed in "Age" section with href "/about-cancer/treatment/clinical-trials/search/help#age"
+        And help icon is displayed in "Age" section with href "/research/participate/clinical-trials-search/help#age"
         And helper text "Enter the age of the participant." is displayed
 
     Scenario: User is able to search for a specific age
