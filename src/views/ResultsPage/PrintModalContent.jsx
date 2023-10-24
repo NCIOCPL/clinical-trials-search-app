@@ -8,21 +8,18 @@ const queryString = require('query-string');
 
 const PrintModalContent = ({ selectedList, searchCriteriaObject }) => {
 	// in dev use
-	const [{ printApiBase }] = useAppSettings();
+	const [{ printApiBase, searchUrl, advancedSearchUrl }] = useAppSettings();
 	const genCacheUrl = `${printApiBase}/GenCache`;
 	const printDisplayUrl = `${printApiBase}/Display`;
 	const queryParams = buildQueryString(searchCriteriaObject);
 
 	const { rl } = queryParams;
 
-	const new_search_link =
-		rl === 1
-			? `/about-cancer/treatment/clinical-trials/search`
-			: `/about-cancer/treatment/clinical-trials/search/advanced`;
+	const new_search_link = rl === 1 ? searchUrl : advancedSearchUrl;
 
 	const trial_ids = selectedList.map(({ id }) => id);
 
-	const link_template = `/about-cancer/treatment/clinical-trials/search/v?${queryString.stringify(
+	const link_template = `${searchUrl}/v?${queryString.stringify(
 		queryParams
 	)}&id=<TRIAL_ID>`;
 

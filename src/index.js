@@ -48,6 +48,8 @@ const initialize = ({
 	whatAreTrialsUrl = '/research/participate/clinical-trials/what-are-clinical-trials',
 	whichTrialsUrl = '/research/participate/clinical-trials-search/steps',
 	helpUrl = '/research/participate/clinical-trials-search/help',
+	searchUrl = '/research/participate/clinical-trials-search',
+	advancedSearchUrl = '/research/participate/clinical-trials-search/advanced',
 	rootId = 'NCI-CTS-root',
 	siteName = 'NCI',
 	useSessionStorage = true,
@@ -55,9 +57,6 @@ const initialize = ({
 	// These have been added in to support integration testing.
 	// This should default to being the hardcoded default.
 	// (Which should not be the proxy...)
-	ctsHostname = 'clinicaltrialsapi.cancer.gov',
-	ctsProtocol = 'https',
-	ctsPort = null,
 } = {}) => {
 	const appRootDOMNode = document.getElementById(rootId);
 	const isRehydrating = appRootDOMNode.getAttribute('data-isRehydrating');
@@ -89,13 +88,12 @@ const initialize = ({
 		whatAreTrialsUrl,
 		whichTrialsUrl,
 		helpUrl,
+		searchUrl,
+		advancedSearchUrl,
 		rootId,
 		siteName,
 		useSessionStorage,
 		zipConversionEndpoint,
-		ctsHostname,
-		ctsProtocol,
-		ctsPort,
 	};
 
 	if (process.env.NODE_ENV !== 'development' && useSessionStorage === true) {
