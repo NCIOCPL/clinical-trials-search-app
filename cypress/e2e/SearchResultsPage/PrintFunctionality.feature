@@ -11,8 +11,8 @@ Feature: As a user I want to be able to print trial search results
 			| trialId        |
 			| NCI-2014-01507 |
 		And the request is sent with the following details
-			| link_template                                                                  | new_search_link                                | search_criteria |
-			| /about-cancer/treatment/clinical-trials/search/v?a=39&loc=0&rl=1&id=<TRIAL_ID> | /about-cancer/treatment/clinical-trials/search | notNull         |
+			| link_template                                                                | new_search_link                              | search_criteria |
+			| /research/participate/clinical-trials-search/v?a=39&loc=0&rl=1&id=<TRIAL_ID> | /research/participate/clinical-trials-search | notNull         |
 		And the page title is "CTS.Print/Display"
 		Examples:
 			| breakpoint |
@@ -47,8 +47,8 @@ Feature: As a user I want to be able to print trial search results
 			| NCI-2014-01820 |
 			| NCI-2017-01425 |
 		And the request is sent with the following details
-			| link_template                                                                  | new_search_link                                         | search_criteria |
-			| /about-cancer/treatment/clinical-trials/search/v?loc=0&pn=2&rl=2&id=<TRIAL_ID> | /about-cancer/treatment/clinical-trials/search/advanced | null            |
+			| link_template                                                                | new_search_link                                         | search_criteria |
+			| /research/participate/clinical-trials-search/v?loc=0&pn=2&rl=2&id=<TRIAL_ID> | /research/participate/clinical-trials-search/advanced | null            |
 		And the page title is "CTS.Print/Display"
 
 	Scenario: as a user, I want to see all of the selected trials retained after I navigate back to a previous page
