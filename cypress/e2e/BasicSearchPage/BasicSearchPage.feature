@@ -5,14 +5,14 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 		Given the user navigates to "/"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And the text "NCI-supported clinical trials are those sponsored or otherwise financially supported by NCI. See our guide, Steps to Find a Clinical Trial, to learn about options for finding trials not included in NCI's collection." appears below the title
-		And "Steps to Find a Clinical Trial" link has a href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/trial-guide"
+		And "Steps to Find a Clinical Trial" link has a href "https://www.cancer.gov/research/participate/clinical-trials-search/steps"
 		And Search tip icon is displayed and text "Search Tip: For more search options, use our advanced search." appears
 		And "advanced search" link has a href "/advanced"
 		And the following delighters are displayed
-			| delighter    | href                                                       | title                              | text                                                                  |
-			| cts-livehelp | /contact                                                   | Have a question?We're here to help | Chat with us: LiveHelpCall us: 1-800-4-CANCER(1-800-422-6237)         |
-			| cts-what     | /about-cancer/treatment/clinical-trials/what-are-trials    | What Are Cancer Clinical Trials?   | Learn what they are and what you should know about them.              |
-			| cts-which    | /about-cancer/treatment/clinical-trials/search/trial-guide | Which trials are right for you?    | Use the checklist in our guide to gather the information you’ll need. |
+			| delighter    | href                                                              | title                              | text                                                                  |
+			| cts-livehelp | /contact                                                          | Have a question?We're here to help | Chat with us: LiveHelpCall us: 1-800-4-CANCER(1-800-422-6237)         |
+			| cts-what     | /research/participate/clinical-trials/what-are-clinical-trials    | What Are Cancer Clinical Trials?   | Learn what they are and what you should know about them.              |
+			| cts-which    | /research/participate/clinical-trials-search/steps                | Which trials are right for you?    | Use the checklist in our guide to gather the information you’ll need. |
 
 		Examples:
 			| breakpoint |
@@ -25,14 +25,14 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 		Given the user navigates to "/"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And "Cancer Type/Keyword" form section is displayed
-		And help icon is displayed in "Cancer Type/Keyword" section with href "/about-cancer/treatment/clinical-trials/search/help#how-to-find-clinical-trials-using-the-basic-search-form"
+		And help icon is displayed in "Cancer Type/Keyword" section with href "/research/participate/clinical-trials-search/help#how-to-find-clinical-trials-using-the-basic-search-form"
 		And "Cancer Type/Keyword" input field has a placeholder "Start typing to select a cancer type or keyword"
 		And helper text "Leave blank to search all cancer types or keywords." is displayed
 		And "Age" form section is displayed
-		And help icon is displayed in "Age" section with href "/about-cancer/treatment/clinical-trials/search/help#age"
+		And help icon is displayed in "Age" section with href "/research/participate/clinical-trials-search/help#age"
 		And helper text "Your age helps determine which trials are right for you." is displayed
 		And "U.S. ZIP Code" form section is displayed
-		And help icon is displayed in "U.S. ZIP Code" section with href "/about-cancer/treatment/clinical-trials/search/help#how-to-find-clinical-trials-using-the-basic-search-form"
+		And help icon is displayed in "U.S. ZIP Code" section with href "/research/participate/clinical-trials-search/help#how-to-find-clinical-trials-using-the-basic-search-form"
 		And helper text "Show trials near this U.S. ZIP code." is displayed
 		And button "Find Trials" is displayed
 

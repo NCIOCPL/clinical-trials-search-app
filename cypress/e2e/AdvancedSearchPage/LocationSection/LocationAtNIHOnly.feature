@@ -5,7 +5,7 @@ Feature: As a user, I want to be able to narrow down my search by location
         Given the user navigates to "/advanced"
         Then the page title is "Find NCI-Supported Clinical Trials"
         And "Location" form section is displayed
-        And help icon is displayed in "Location" section with href "/about-cancer/treatment/clinical-trials/search/help#location"
+        And help icon is displayed in "Location" section with href "/research/participate/clinical-trials-search/help#location"
         And info text "Search for trials near a specific zip code; or in a country, state and city; or at a particular institution. The default selection will search for trials in all available locations. You may choose to limit results to Veterans Affairs facilities." is displayed in the section body
         And "Limit results to Veterans Affairs facilities" toggle is displayed with label "Limit results to Veterans Affairs facilities"
         And "Limit results to Veterans Affairs facilities" toggle is switched to "No"

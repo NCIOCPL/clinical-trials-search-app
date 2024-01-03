@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Fieldset, Autocomplete } from '../../atomic';
 import { getDiseasesForTypeAheadAction } from '../../../store/actionsV2';
+import { useAppSettings } from '../../../store/store.js';
 import { sortItemsByName } from '../../../utilities';
 import PropTypes from 'prop-types';
 
@@ -13,6 +14,7 @@ const CancerTypeKeyword = ({ handleUpdate }) => {
 	const [CTK, setCTK] = useState({
 		value: cancerType.name ? cancerType.name : keywordPhrases,
 	});
+	const [{ helpUrl }] = useAppSettings();
 
 	useEffect(() => {
 		dispatch(getDiseasesForTypeAheadAction({ searchText: CTK.value }));
@@ -26,7 +28,9 @@ const CancerTypeKeyword = ({ handleUpdate }) => {
 		<Fieldset
 			id="type"
 			legend="Cancer Type/Keyword"
-			helpUrl="/about-cancer/treatment/clinical-trials/search/help#how-to-find-clinical-trials-using-the-basic-search-form">
+			helpUrl={
+				helpUrl + '#how-to-find-clinical-trials-using-the-basic-search-form'
+			}>
 			<Autocomplete
 				id="ctk"
 				label="Cancer Type/Keyword"

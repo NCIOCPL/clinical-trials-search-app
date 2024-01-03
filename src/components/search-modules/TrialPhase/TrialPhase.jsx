@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Fieldset, Checkbox } from '../../atomic';
+import { useAppSettings } from '../../../store/store.js';
 import './TrialPhase.scss';
 
 const TrialPhase = ({ handleUpdate }) => {
 	const { trialPhases } = useSelector((store) => store.form);
 	const [phases, setPhases] = useState(trialPhases);
+
+	const [{ helpUrl }] = useAppSettings();
 
 	useEffect(() => {
 		updateStore();
@@ -44,7 +47,7 @@ const TrialPhase = ({ handleUpdate }) => {
 			id="trialphase"
 			classes="trial-phase"
 			legend="Trial Phase"
-			helpUrl="/about-cancer/treatment/clinical-trials/search/help#trialphase">
+			helpUrl={helpUrl + '#trialphase'}>
 			<p>
 				Select the trial phases for your search. You may check more than one box
 				or select &quot;All&quot;.

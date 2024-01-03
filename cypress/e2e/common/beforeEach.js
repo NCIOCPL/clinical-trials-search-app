@@ -22,9 +22,6 @@ beforeEach(() => {
 			title: 'NCI Drug Dictionary',
 			contentGroup: 'Clinical Trials',
 			zipConversionEndpoint: '/mock-api/zip_code_lookup',
-			ctsHostname: 'localhost',
-			ctsProtocol: 'http',
-			ctsPort: 3000,
 		};
 		console.log(win.INT_TEST_APP_PARAMS);
 	});

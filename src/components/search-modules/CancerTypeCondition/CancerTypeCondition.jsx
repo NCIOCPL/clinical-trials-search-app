@@ -11,6 +11,7 @@ import {
 } from '../../../store/actionsV2';
 import { useCachedValues } from '../../../hooks';
 import { sortItemsByName } from '../../../utilities';
+import { useAppSettings } from '../../../store/store.js';
 import './CancerTypeCondition.scss';
 
 require('../../../polyfills/closest');
@@ -18,6 +19,7 @@ require('../../../polyfills/closest');
 const CancerTypeCondition = ({ handleUpdate }) => {
 	const dispatch = useDispatch();
 	const [searchText, setSearchText] = useState({ value: '' });
+	const [{ helpUrl }] = useAppSettings();
 
 	//store values
 	const {
@@ -201,7 +203,7 @@ const CancerTypeCondition = ({ handleUpdate }) => {
 		<Fieldset
 			id="type"
 			legend="Cancer Type/Condition"
-			helpUrl="/about-cancer/treatment/clinical-trials/search/help#cancertype"
+			helpUrl={helpUrl + '#cancertype'}
 			classes="cancer-type-condition">
 			<p>
 				Select a cancer type/condition, then include subtypes, stages or other

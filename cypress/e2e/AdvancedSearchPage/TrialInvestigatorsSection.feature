@@ -4,7 +4,7 @@ Feature: Advanced Clinical Trials Search Trial Investigators Section
 		Given the user navigates to "/advanced"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And "Trial Investigators" form section is displayed
-		And help icon is displayed in "TrialInvestigators" section with href "/about-cancer/treatment/clinical-trials/search/help#trialinvestigators"
+		And help icon is displayed in "TrialInvestigators" section with href "/research/participate/clinical-trials-search/help#trialinvestigators"
 		And "TrialInvestigator" input field has a placeholder "Investigator name"
 		And helper text "Search by trial investigator." is displayed
 

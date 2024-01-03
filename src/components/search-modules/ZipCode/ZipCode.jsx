@@ -4,11 +4,13 @@ import { useSelector } from 'react-redux';
 import { Fieldset, TextInput } from '../../atomic';
 import { useZipConversion } from '../../../hooks';
 import { INVALID_ZIP_TEXT } from '../../../constants';
+import { useAppSettings } from '../../../store/store.js';
 
 const ZipCode = ({ handleUpdate }) => {
 	const { zip, hasInvalidZip } = useSelector((store) => store.form);
 	const [inputtedZip, setInputtedZip] = useState('');
 	const [{ getZipCoords }] = useZipConversion(handleUpdate);
+	const [{ helpUrl }] = useAppSettings();
 
 	useEffect(() => {
 		if (inputtedZip.length === 5) {
@@ -50,7 +52,9 @@ const ZipCode = ({ handleUpdate }) => {
 		<Fieldset
 			id="zip"
 			legend="U.S. ZIP Code"
-			helpUrl="/about-cancer/treatment/clinical-trials/search/help#how-to-find-clinical-trials-using-the-basic-search-form">
+			helpUrl={
+				helpUrl + '#how-to-find-clinical-trials-using-the-basic-search-form'
+			}>
 			<TextInput
 				action={handleZipUpdate}
 				id="zip"

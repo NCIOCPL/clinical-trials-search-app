@@ -3,7 +3,7 @@ Feature: As a user, I want to be able to specify my search by cancer type or con
     Scenario: User is able to search for cancer type via autosuggest
         Given the user navigates to "/advanced"
         And "Cancer Type/Condition" form section is displayed
-        And help icon is displayed with href "/about-cancer/treatment/clinical-trials/search/help#cancertype"
+        And help icon is displayed with href "/research/participate/clinical-trials-search/help#cancertype"
         And info text "Select a cancer type/condition, then include subtypes, stages or other attributes, if applicable." is displayed in the "cancer-type-condition" section body
         When user clicks on "All" button
         And autocomplete dropdown is displayed

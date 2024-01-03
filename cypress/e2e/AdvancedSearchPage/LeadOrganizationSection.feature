@@ -5,7 +5,7 @@ Feature: Advanced Clinical Trials Search Lead Organization Section
 		Given the user navigates to "/advanced"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And "Lead Organization" form section is displayed
-		And help icon is displayed in "Lead Organization" section with href "/about-cancer/treatment/clinical-trials/search/help#leadorganization"
+		And help icon is displayed in "Lead Organization" section with href "/research/participate/clinical-trials-search/help#leadorganization"
 		And "Lead organization" input field has a placeholder "Organization name"
 		And helper text "Search by lead organization." is displayed
 

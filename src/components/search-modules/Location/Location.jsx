@@ -24,6 +24,7 @@ import {
 import { useZipConversion } from '../../../hooks';
 import './Location.scss';
 import { INVALID_ZIP_TEXT } from '../../../constants';
+import { useAppSettings } from '../../../store/store.js';
 
 const Location = ({ handleUpdate }) => {
 	//Hooks must always be rendered in same order.
@@ -50,6 +51,8 @@ const Location = ({ handleUpdate }) => {
 	const [inputtedZip, setInputtedZip] = useState(zip);
 	const [limitToVA, setLimitToVA] = useState(vaOnly);
 	const [showStateField, setShowStateField] = useState(defaultCountryValue);
+
+	const [{ helpUrl }] = useAppSettings();
 
 	//hospital
 	const [hospitalName, setHospitalName] = useState({ value: hospital.term });
@@ -170,7 +173,7 @@ const Location = ({ handleUpdate }) => {
 		<Fieldset
 			id="location"
 			legend="Location"
-			helpUrl="/about-cancer/treatment/clinical-trials/search/help#location"
+			helpUrl={helpUrl + '#location'}
 			classes="search-location">
 			<p>
 				Search for trials near a specific zip code; or in a country, state and

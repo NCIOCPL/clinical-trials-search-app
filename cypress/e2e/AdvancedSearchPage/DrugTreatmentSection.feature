@@ -4,7 +4,7 @@ Feature: Advanced Clinical Trials Search Drug Treatment Section
 		Given the user navigates to "/advanced"
 		Then the page title is "Find NCI-Supported Clinical Trials"
 		And "Drug/Treatment" form section is displayed
-		And help icon is displayed in "Drug/Treatment" section with href "/about-cancer/treatment/clinical-trials/search/help#drugtreatment"
+		And help icon is displayed in "Drug/Treatment" section with href "/research/participate/clinical-trials-search/help#drugtreatment"
 		And info text "Search for a specific drug or intervention." is displayed in the section body
 		And "Drug" input field has a placeholder "Start typing to select drugs and/or drug families"
 		And helper text "You can use the drug's generic or brand name. More than one selection may be made." is displayed

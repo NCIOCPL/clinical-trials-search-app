@@ -15,7 +15,7 @@ import { useLocation } from 'react-router-dom';
 
 const ErrorPage = ({ initErrorsList }) => {
 	const tracking = useTracking();
-	const [{ dispatch, analyticsName, canonicalHost, siteName }] =
+	const [{ dispatch, analyticsName, canonicalHost, siteName, whichTrialsUrl }] =
 		useAppSettings();
 	const { AdvancedSearchPagePath, BasicSearchPagePath } = useAppPaths();
 
@@ -123,7 +123,7 @@ const ErrorPage = ({ initErrorsList }) => {
 
 			<Delighter
 				classes="cts-which"
-				url="/about-cancer/treatment/clinical-trials/search/trial-guide"
+				url={whichTrialsUrl}
 				titleText={<>Which trials are right for you?</>}>
 				<p>
 					Use the checklist in our guide to gather the information you’ll need.

@@ -7,12 +7,14 @@ import {
 	searchDrugAction,
 } from '../../../store/actionsV2';
 import './DrugTreatment.scss';
+import { useAppSettings } from '../../../store/store.js';
 
 const DrugTreatment = ({ handleUpdate }) => {
 	const placeholderText = 'Please enter 3 or more characters';
 	const dispatch = useDispatch();
 
 	//store vals
+	const [{ helpUrl }] = useAppSettings();
 	// list of selected drugs and treatments
 	const { drugs, treatments } = useSelector((store) => store.form);
 
@@ -98,7 +100,7 @@ const DrugTreatment = ({ handleUpdate }) => {
 		<Fieldset
 			id="drug-trtmt"
 			legend="Drug/Treatment"
-			helpUrl="/about-cancer/treatment/clinical-trials/search/help#drugtreatment">
+			helpUrl={helpUrl + '#drugtreatment'}>
 			<p>Search for a specific drug or intervention.</p>
 
 			<Autocomplete
