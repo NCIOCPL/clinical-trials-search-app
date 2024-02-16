@@ -34,6 +34,7 @@ const ErrorPage = ({ initErrorsList }) => {
 	}
 
 	useEffect(() => {
+		window.scrollTo(0, 0);
 		const pageTitle = 'Errors Occurred';
 
 		// Fire off page load event
