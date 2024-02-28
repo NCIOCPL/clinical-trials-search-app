@@ -66,8 +66,7 @@ const initialize = ({
 
 	let cachedState;
 
-	const clinicalTrialsSearchClientV2 =
-		clinicalTrialsSearchClientFactory(ctsApiEndpointV2);
+	const clinicalTrialsSearchClientV2 = clinicalTrialsSearchClientFactory(ctsApiEndpointV2);
 
 	// Populate global state with init params
 	const initialState = {
@@ -109,11 +108,7 @@ const initialize = ({
 	const ctsMiddlewareV2 = createCTSMiddlewareV2(clinicalTrialsSearchClientV2);
 	const middleware = [cacheMiddleware, ctsMiddlewareV2];
 
-	const store = createStore(
-		combineReducers(reducers),
-		cachedState,
-		composeWithDevTools(applyMiddleware(...middleware))
-	);
+	const store = createStore(combineReducers(reducers), cachedState, composeWithDevTools(applyMiddleware(...middleware)));
 
 	// With the store now created, we want to subscribe to updates.
 	// This implementation updates session storage backup on each store change.
@@ -132,19 +127,11 @@ const initialize = ({
 	// their own custom handler.
 	const AnalyticsHoC = ({ children }) =>
 		analyticsHandler === 'EddlAnalyticsHandler' ? (
-			<EddlAnalyticsProvider
-				pageLanguage={language === 'es' ? 'spanish' : 'english'}
-				pageChannel={analyticsChannel}
-				pageContentGroup={analyticsContentGroup}
-				pageName={analyticsName}
-				publishedDate={analyticsPublishedDate}
-				analyticsName={analyticsName}>
+			<EddlAnalyticsProvider pageLanguage={language === 'es' ? 'spanish' : 'english'} pageChannel={analyticsChannel} pageContentGroup={analyticsContentGroup} pageName={analyticsName} publishedDate={analyticsPublishedDate} analyticsName={analyticsName}>
 				{children}
 			</EddlAnalyticsProvider>
 		) : (
-			<AnalyticsProvider analyticsHandler={analyticsHandler}>
-				{children}
-			</AnalyticsProvider>
+			<AnalyticsProvider analyticsHandler={analyticsHandler}>{children}</AnalyticsProvider>
 		);
 
 	AnalyticsHoC.propTypes = {

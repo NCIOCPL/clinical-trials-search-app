@@ -55,8 +55,7 @@ const ResultsPage = () => {
 	const navigate = useNavigate(); // Used for updating the nav bar on pagination / navigation
 	const location = useLocation(); // Used for accessing the querystring of the incoming search
 	const qs = queryString.extract(location.search);
-	const { AdvancedSearchPagePath, BasicSearchPagePath, ResultsPagePath } =
-		useAppPaths();
+	const { AdvancedSearchPagePath, BasicSearchPagePath, ResultsPagePath } = useAppPaths();
 
 	//  Used as the initial state for the reducer.
 	const INITIAL_PAGE_STATE = {
@@ -73,22 +72,9 @@ const ResultsPage = () => {
 		currentPage: 1,
 	};
 
-	const [pageState, ctsDispatch] = useReducer(
-		resultsPageReducer,
-		INITIAL_PAGE_STATE
-	);
+	const [pageState, ctsDispatch] = useReducer(resultsPageReducer, INITIAL_PAGE_STATE);
 
-	const {
-		pageIsLoading,
-		isLoading,
-		isPageLoadReady,
-		error,
-		selectAll,
-		trialResults,
-		searchCriteriaObject,
-		fetchActions,
-		currentPage,
-	} = pageState;
+	const { pageIsLoading, isLoading, isPageLoadReady, error, selectAll, trialResults, searchCriteriaObject, fetchActions, currentPage } = pageState;
 
 	// Clinical Trial results select by the user (for printing)
 	const { selectedResults, setSelectedResults } = usePrintContext();
@@ -106,15 +92,7 @@ const ResultsPage = () => {
 	// This all needs to be reconciled once new fetching is implemented
 	// One loading state to rule them all
 	const isAllFetchingComplete = () => {
-		const isFetchingComplete =
-			!isLoading &&
-			isPageLoadReady &&
-			!pageIsLoading &&
-			searchCriteriaObject &&
-			searchCriteriaObject.formType &&
-			payload &&
-			payload.length &&
-			!loading;
+		const isFetchingComplete = !isLoading && isPageLoadReady && !pageIsLoading && searchCriteriaObject && searchCriteriaObject.formType && payload && payload.length && !loading;
 		return isFetchingComplete;
 	};
 
@@ -129,17 +107,8 @@ const ResultsPage = () => {
 		});
 
 		const searchCriteria = async () => {
-			const { diseaseFetcher, interventionFetcher, zipFetcher } =
-				await runQueryFetchers(
-					clinicalTrialsSearchClientV2,
-					zipConversionEndpoint
-				);
-			return await queryStringToSearchCriteria(
-				qs,
-				diseaseFetcher,
-				interventionFetcher,
-				zipFetcher
-			);
+			const { diseaseFetcher, interventionFetcher, zipFetcher } = await runQueryFetchers(clinicalTrialsSearchClientV2, zipConversionEndpoint);
+			return await queryStringToSearchCriteria(qs, diseaseFetcher, interventionFetcher, zipFetcher);
 		};
 		searchCriteria().then((res) => {
 			ctsDispatch(setSearchCriteriaObject(res.searchCriteria));
@@ -147,11 +116,7 @@ const ResultsPage = () => {
 			// Default to PN #1( initial value)  if we don't have a PN parameter.`
 			// If we do have a PN and it's not the current one on initial load, set it.
 			// A null SCO is possible so guard against that scenario.
-			if (
-				res.searchCriteria &&
-				!Number.isNaN(res.searchCriteria.resultsPage) &&
-				currentPage !== res.searchCriteria.resultsPage
-			) {
+			if (res.searchCriteria && !Number.isNaN(res.searchCriteria.resultsPage) && currentPage !== res.searchCriteria.resultsPage) {
 				ctsDispatch({
 					type: 'SET_PROP',
 					prop: 'currentPage',
@@ -190,12 +155,7 @@ const ResultsPage = () => {
 
 	// If we have a search criteria object and payload, we have a successful fetch.
 	useEffect(() => {
-		if (
-			searchCriteriaObject &&
-			searchCriteriaObject.formType &&
-			payload &&
-			payload.length > 0
-		) {
+		if (searchCriteriaObject && searchCriteriaObject.formType && payload && payload.length > 0) {
 			// We've received the data. Scroll up.
 			// Store the data, and modify the loading states via the pageState reducer.
 			window.scrollTo(0, 0);
@@ -222,9 +182,7 @@ const ResultsPage = () => {
 				type: 'PageLoad',
 				event: `ClinicalTrialsSearchApp:Load:Results`,
 				analyticsName,
-				name:
-					canonicalHost.replace(/https:\/\/|http:\/\//, '') +
-					window.location.pathname,
+				name: canonicalHost.replace(/https:\/\/|http:\/\//, '') + window.location.pathname,
 				// Any additional properties fall into the "page.additionalDetails" bucket
 				// for the event.
 				metaTitle: `Clinical Trials Search Results - ${siteName}`,
@@ -233,10 +191,7 @@ const ResultsPage = () => {
 				formType: searchCriteriaObject.formType,
 				numResults: trialResults.total,
 				formData: trackingData,
-				helperFormData: formDataConverter(
-					searchCriteriaObject.formType,
-					trackingData
-				),
+				helperFormData: formDataConverter(searchCriteriaObject.formType, trackingData),
 			});
 			// Since we can page we need to prep isPageLoadReady
 			ctsDispatch({
@@ -294,9 +249,7 @@ const ResultsPage = () => {
 				prop: 'selectAll',
 				payload: false,
 			});
-			setSelectedResults(
-				selectedResults.filter((item) => !simpleIds.includes(item.id))
-			);
+			setSelectedResults(selectedResults.filter((item) => !simpleIds.includes(item.id)));
 		}
 	};
 
@@ -429,72 +382,34 @@ const ResultsPage = () => {
 				</p>
 			</Delighter>
 
-			<Delighter
-				classes="cts-which"
-				url={whichTrialsUrl}
-				titleText={<>Which trials are right for you?</>}>
-				<p>
-					Use the checklist in our guide to gather the information you’ll need.
-				</p>
+			<Delighter classes="cts-which" url={whichTrialsUrl} titleText={<>Which trials are right for you?</>}>
+				<p>Use the checklist in our guide to gather the information you’ll need.</p>
 			</Delighter>
 		</div>
 	);
-	const pagerExists =
-		trialResults != null && trialResults.total / resultsPerPage > 1;
+	const pagerExists = trialResults != null && trialResults.total / resultsPerPage > 1;
 
 	const renderControls = (isBottom = false) => {
 		const cbxId = isBottom ? 'select-all-cbx-bottom' : 'select-all-cbx-top';
 		return (
 			<>
 				{isLoading || trialResults.total > 0 ? (
-					<div
-						className={`results-page__control ${
-							isBottom ? '--bottom' : '--top'
-						}`}>
+					<div className={`results-page__control ${isBottom ? '--bottom' : '--top'}`}>
 						{!isLoading && trialResults.total !== 0 && (
 							<>
 								<div className="results-page__select-all">
 									<div className="cts-checkbox check-all">
-										<input
-											id={cbxId}
-											className="cts-checkbox__input"
-											type="checkbox"
-											name="select-all"
-											checked={selectAll}
-											onChange={handleSelectAll}
-											value={cbxId}
-										/>
+										<input id={cbxId} className="cts-checkbox__input" type="checkbox" name="select-all" checked={selectAll} onChange={handleSelectAll} value={cbxId} />
 										<label className="cts-checkbox__label" htmlFor={cbxId}>
 											Select all on page
 										</label>
 									</div>
 
-									<button
-										className="results-page__print-button"
-										ref={printSelectedBtn}
-										onClick={handlePrintSelected}
-										data-pos={isBottom ? 'bottom' : 'top'}>
+									<button className="results-page__print-button" ref={printSelectedBtn} onClick={handlePrintSelected} data-pos={isBottom ? 'bottom' : 'top'}>
 										Print Selected
 									</button>
 								</div>
-								<div
-									className={`results-page__pager${
-										pagerExists ? `` : `--no_pages`
-									}`}>
-									{searchCriteriaObject &&
-										trialResults &&
-										trialResults.total > 1 && (
-											<Pager
-												current={currentPage}
-												currentPageNeighbours={2}
-												nextLabel="Next >"
-												onPageNavigationChange={handlePagination}
-												previousLabel="< Previous"
-												resultsPerPage={resultsPerPage}
-												totalResults={trialResults.total}
-											/>
-										)}
-								</div>
+								<div className={`results-page__pager${pagerExists ? `` : `--no_pages`}`}>{searchCriteriaObject && trialResults && trialResults.total > 1 && <Pager current={currentPage} currentPageNeighbours={2} nextLabel="Next >" onPageNavigationChange={handlePagination} previousLabel="< Previous" resultsPerPage={resultsPerPage} totalResults={trialResults.total} />}</div>
 							</>
 						)}
 					</div>
@@ -535,9 +450,7 @@ const ResultsPage = () => {
 				buttonPos,
 				selectAll,
 				selectedCount: selectedResults.length,
-				pagesWithSelected: [
-					...new Set(selectedResults.map(({ fromPage }) => fromPage)),
-				],
+				pagesWithSelected: [...new Set(selectedResults.map(({ fromPage }) => fromPage))],
 			});
 		}
 
@@ -556,24 +469,13 @@ const ResultsPage = () => {
 		return (
 			<div className="results-list no-results">
 				<p>
-					<strong>
-						No clinical trials matched your search. Page {currentPage} is
-						invalid.
-					</strong>
+					<strong>No clinical trials matched your search. Page {currentPage} is invalid.</strong>
 				</p>
 				<div>
-					For assistance, please contact the Cancer Information Service. You can{' '}
-					<ChatOpener /> or call 1-800-4-CANCER (1-800-422-6237).
+					For assistance, please contact the Cancer Information Service. You can <ChatOpener /> or call 1-800-4-CANCER (1-800-422-6237).
 				</div>
 				<p>
-					<Link
-						to={`${
-							searchCriteriaObject.formType === 'basic'
-								? BasicSearchPagePath()
-								: AdvancedSearchPagePath()
-						}`}
-						state={{ criteria: {} }}
-						onClick={() => handleStartOver(TRY_NEW_SEARCH_LINK)}>
+					<Link to={`${searchCriteriaObject.formType === 'basic' ? BasicSearchPagePath() : AdvancedSearchPagePath()}`} state={{ criteria: {} }} onClick={() => handleStartOver(TRY_NEW_SEARCH_LINK)}>
 						Try a new search
 					</Link>
 				</p>
@@ -588,18 +490,10 @@ const ResultsPage = () => {
 					<strong>No clinical trials matched your search.</strong>
 				</p>
 				<div>
-					For assistance, please contact the Cancer Information Service. You can{' '}
-					<ChatOpener /> or call 1-800-4-CANCER (1-800-422-6237).
+					For assistance, please contact the Cancer Information Service. You can <ChatOpener /> or call 1-800-4-CANCER (1-800-422-6237).
 				</div>
 				<p>
-					<Link
-						to={`${
-							searchCriteriaObject.formType === 'basic'
-								? BasicSearchPagePath()
-								: AdvancedSearchPagePath()
-						}`}
-						state={{ criteria: {} }}
-						onClick={() => handleStartOver(TRY_NEW_SEARCH_LINK)}>
+					<Link to={`${searchCriteriaObject.formType === 'basic' ? BasicSearchPagePath() : AdvancedSearchPagePath()}`} state={{ criteria: {} }} onClick={() => handleStartOver(TRY_NEW_SEARCH_LINK)}>
 						Try a new search
 					</Link>
 				</p>
@@ -612,22 +506,10 @@ const ResultsPage = () => {
 			<Helmet>
 				<title>Clinical Trials Search Results - {siteName}</title>
 				<meta property="og:title" content="Clinical Trials Search Results" />
-				<link
-					rel="canonical"
-					href={`https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?${qs}`}
-				/>
-				<meta
-					property="og:url"
-					content={`https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?${qs}`}
-				/>
-				<meta
-					name="description"
-					content="Find an NCI-supported clinical trial - Search results"
-				/>
-				<meta
-					property="og:description"
-					content="Find an NCI-supported clinical trial - Search results"
-				/>
+				<link rel="canonical" href={`https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?${qs}`} />
+				<meta property="og:url" content={`https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?${qs}`} />
+				<meta name="description" content="Find an NCI-supported clinical trial - Search results" />
+				<meta property="og:description" content="Find an NCI-supported clinical trial - Search results" />
 			</Helmet>
 
 			{error.length && error.filter((err) => err.fieldName === 'zip') ? (
@@ -642,16 +524,7 @@ const ResultsPage = () => {
 						<>
 							<h1>Clinical Trials Search Results</h1>
 
-							<ResultsPageHeader
-								resultsCount={trialResults.total}
-								pageNum={currentPage}
-								onModifySearchClick={handleRefineSearch}
-								onStartOverClick={handleStartOver}
-								searchCriteriaObject={searchCriteriaObject}
-								isLoading={isLoading}
-								trialResults={trialResults}
-								pagerExists={pagerExists}
-							/>
+							<ResultsPageHeader resultsCount={trialResults.total} pageNum={currentPage} onModifySearchClick={handleRefineSearch} onStartOverClick={handleStartOver} searchCriteriaObject={searchCriteriaObject} isLoading={isLoading} trialResults={trialResults} pagerExists={pagerExists} />
 						</>
 					)}
 					<div className="results-page__content">
@@ -678,24 +551,17 @@ const ResultsPage = () => {
 								/>
 							)}
 
-							<aside className="results-page__aside --side">
-								{renderDelighters()}
-							</aside>
+							<aside className="results-page__aside --side">{renderDelighters()}</aside>
 						</div>
 						{checkIfInvalidPage() ? <> </> : <>{renderControls(true)}</>}
 					</div>
-					<aside className="results-page__aside --bottom">
-						{renderDelighters()}
-					</aside>
+					<aside className="results-page__aside --bottom">{renderDelighters()}</aside>
 				</article>
 			)}
 
 			{searchCriteriaObject && (
 				<Modal isShowing={isShowing} hide={toggleModal}>
-					<PrintModalContent
-						selectedList={selectedResults}
-						searchCriteriaObject={searchCriteriaObject}
-					/>
+					<PrintModalContent selectedList={selectedResults} searchCriteriaObject={searchCriteriaObject} />
 				</Modal>
 			)}
 		</>
