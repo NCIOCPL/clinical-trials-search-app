@@ -78,8 +78,8 @@ const initialize = ({
 	advancedSearchPageTitle = 'Find Cancer Clinical Trials - Advanced Search',
 	basicSearchMetaDescription = 'Find cancer clinical trials—and learn how to locate other research studies—that may be right for you or a loved one.',
 	advancedSearchMetaDescription = 'Find cancer clinical trials—and learn how to locate other research studies—that may be right for you or a loved one.',
-	basicSearchIntroText = 'Search for NCI-funded clinical trials near you, across the United States, and internationally, in addition to trials at NCI-Designated Cancer Centers supported by other organizations. See our guide, <a href="/steps">Steps to Find a Clinical Trial</a>, to learn about options for finding trials not included in NCI\'s collection.',
-	advancedSearchIntroText = 'Search for NCI-funded clinical trials near you, across the United States, and internationally, in addition to trials at NCI-Designated Cancer Centers supported by other organizations. See our guide, <a href="/steps">Steps to Find a Clinical Trial</a>, to learn about options for finding trials not included in NCI\'s collection.',
+	basicSearchIntroText = 'Search for NCI-funded clinical trials near you, across the United States, and internationally, in addition to trials at NCI-Designated Cancer Centers supported by other organizations. See our guide, <a href="/research/participate/clinical-trials-search/steps">Steps to Find a Clinical Trial</a>, to learn about options for finding trials not included in NCI\'s collection.',
+	advancedSearchIntroText = 'Search for NCI-funded clinical trials near you, across the United States, and internationally, in addition to trials at NCI-Designated Cancer Centers supported by other organizations. See our guide, <a href="/research/participate/clinical-trials-search/steps">Steps to Find a Clinical Trial</a>, to learn about options for finding trials not included in NCI\'s collection.',
 	resultsPageTitle = 'Clinical Trials Search Results',
 	resultsPageMetaDescription = 'Find Cancer Clinical Trials - Search Results',
 } = {}) => {
@@ -88,8 +88,7 @@ const initialize = ({
 
 	let cachedState;
 
-	const clinicalTrialsSearchClientV2 =
-		clinicalTrialsSearchClientFactory(ctsApiEndpointV2);
+	const clinicalTrialsSearchClientV2 = clinicalTrialsSearchClientFactory(ctsApiEndpointV2);
 
 	// Populate global state with init params
 	const initialState = {
@@ -141,11 +140,7 @@ const initialize = ({
 	const ctsMiddlewareV2 = createCTSMiddlewareV2(clinicalTrialsSearchClientV2);
 	const middleware = [cacheMiddleware, ctsMiddlewareV2];
 
-	const store = createStore(
-		combineReducers(reducers),
-		cachedState,
-		composeWithDevTools(applyMiddleware(...middleware))
-	);
+	const store = createStore(combineReducers(reducers), cachedState, composeWithDevTools(applyMiddleware(...middleware)));
 
 	// With the store now created, we want to subscribe to updates.
 	// This implementation updates session storage backup on each store change.
@@ -164,19 +159,11 @@ const initialize = ({
 	// their own custom handler.
 	const AnalyticsHoC = ({ children }) =>
 		analyticsHandler === 'EddlAnalyticsHandler' ? (
-			<EddlAnalyticsProvider
-				pageLanguage={language === 'es' ? 'spanish' : 'english'}
-				pageChannel={analyticsChannel}
-				pageContentGroup={analyticsContentGroup}
-				pageName={analyticsName}
-				publishedDate={analyticsPublishedDate}
-				analyticsName={analyticsName}>
+			<EddlAnalyticsProvider pageLanguage={language === 'es' ? 'spanish' : 'english'} pageChannel={analyticsChannel} pageContentGroup={analyticsContentGroup} pageName={analyticsName} publishedDate={analyticsPublishedDate} analyticsName={analyticsName}>
 				{children}
 			</EddlAnalyticsProvider>
 		) : (
-			<AnalyticsProvider analyticsHandler={analyticsHandler}>
-				{children}
-			</AnalyticsProvider>
+			<AnalyticsProvider analyticsHandler={analyticsHandler}>{children}</AnalyticsProvider>
 		);
 
 	AnalyticsHoC.propTypes = {
@@ -213,24 +200,34 @@ export default initialize;
 window.CTSApp = initialize;
 
 // The following lets us run the app in dev not in situ as would normally be the case.
-const rawAppParams = window.APP_PARAMS || {};
-const appParams = processConfigText(rawAppParams);
-const integrationTestOverrides = window.INT_TEST_APP_PARAMS || {};
-if (process.env.NODE_ENV !== 'production') {
-	// This is LOCAL DEV
-	const ctsSettings = {
-		...appParams,
-		ctsApiEndpointV2: 'http://localhost:3000/cts/proxy-api/v2',
-		...integrationTestOverrides,
-		zipConversionEndpoint: 'http://localhost:3000/mock-api/zip_code_lookup',
-	};
-	initialize(ctsSettings);
-} else if (window?.location?.host === 'react-app-dev.cancer.gov') {
-	// This is for product testing
-	const ctsSettings = {
-		...appParams,
-		...integrationTestOverrides,
-		...{ basePath: getProductTestBase() },
-	};
-	initialize(ctsSettings);
+try {
+	const rawAppParams = window.APP_PARAMS || {};
+	const appParams = processConfigText(rawAppParams);
+	const integrationTestOverrides = window.INT_TEST_APP_PARAMS || {};
+
+	if (process.env.NODE_ENV !== 'production') {
+		// This is LOCAL DEV
+		const ctsSettings = {
+			...appParams,
+			ctsApiEndpointV2: 'http://localhost:3000/cts/proxy-api/v2',
+			...integrationTestOverrides,
+			zipConversionEndpoint: 'http://localhost:3000/mock-api/zip_code_lookup',
+		};
+		initialize(ctsSettings);
+	} else if (window?.location?.host === 'react-app-dev.cancer.gov') {
+		// This is for product testing
+		const ctsSettings = {
+			...appParams,
+			...integrationTestOverrides,
+			...{ basePath: getProductTestBase() },
+		};
+		initialize(ctsSettings);
+	}
+} catch (error) {
+	console.error('Error initializing app:', error);
+	// Try to show error in the DOM
+	const rootElement = document.getElementById('NCI-CTS-root');
+	if (rootElement) {
+		rootElement.innerHTML = `<div style="color: red; padding: 20px;">Error initializing app: ${error.message}</div>`;
+	}
 }
