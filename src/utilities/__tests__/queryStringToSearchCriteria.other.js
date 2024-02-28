@@ -6,25 +6,44 @@ describe('Basic - queryStringToSearchCriteria maps query to form', () => {
 	const interventionsFetcher = async () => [];
 	const zipcodeFetcher = async () => null;
 
+	// Store original location
+	const originalLocation = window.location;
+
+	beforeEach(() => {
+		// Reset to a default location before each test
+		delete window.location;
+		window.location = {
+			...originalLocation,
+			pathname: '/',
+		};
+	});
+
+	afterAll(() => {
+		// Restore original location
+		window.location = originalLocation;
+	});
+
+	it('placeholder', () => {
+		expect(true).toBe(true);
+	});
+
 	it('No Query works for details', async () => {
 		const expected = {
 			searchCriteria: defaultState,
 			errors: [],
 		};
 
-		const actual = await queryStringToSearchCriteria(
-			'',
-			diseaseFetcher,
-			interventionsFetcher,
-			zipcodeFetcher
-		);
+		const actual = await queryStringToSearchCriteria('', diseaseFetcher, interventionsFetcher, zipcodeFetcher);
 		expect(actual).toEqual(expected);
 	});
 
 	it('R=1 param works for details', async () => {
-		global.jsdom.reconfigure({
-			url: 'https://www.cancer.gov/research/participate/clinical-trials-search/v?id=NCI1234&r=1',
-		});
+		// Set up window.location for details page
+		delete window.location;
+		window.location = {
+			...originalLocation,
+			pathname: '/research/participate/clinical-trials-search/v',
+		};
 
 		const expected = {
 			searchCriteria: {
@@ -35,19 +54,17 @@ describe('Basic - queryStringToSearchCriteria maps query to form', () => {
 			errors: [],
 		};
 
-		const actual = await queryStringToSearchCriteria(
-			'r=1',
-			diseaseFetcher,
-			interventionsFetcher,
-			zipcodeFetcher
-		);
+		const actual = await queryStringToSearchCriteria('r=1', diseaseFetcher, interventionsFetcher, zipcodeFetcher);
 		expect(actual).toEqual(expected);
 	});
 
 	it('R=1 param fails for results', async () => {
-		global.jsdom.reconfigure({
-			url: 'https://www.cancer.gov/research/participate/clinical-trials-search/r?r=1',
-		});
+		// Set up window.location for results page
+		delete window.location;
+		window.location = {
+			...originalLocation,
+			pathname: '/research/participate/clinical-trials-search/r',
+		};
 
 		const expected = {
 			searchCriteria: null,
@@ -59,19 +76,17 @@ describe('Basic - queryStringToSearchCriteria maps query to form', () => {
 			],
 		};
 
-		const actual = await queryStringToSearchCriteria(
-			'r=1',
-			diseaseFetcher,
-			interventionsFetcher,
-			zipcodeFetcher
-		);
+		const actual = await queryStringToSearchCriteria('r=1', diseaseFetcher, interventionsFetcher, zipcodeFetcher);
 		expect(actual).toEqual(expected);
 	});
 
 	it('No rl fails for results', async () => {
-		global.jsdom.reconfigure({
-			url: 'https://www.cancer.gov/research/participate/clinical-trials-search/r',
-		});
+		// Set up window.location for results page
+		delete window.location;
+		window.location = {
+			...originalLocation,
+			pathname: '/research/participate/clinical-trials-search/r',
+		};
 
 		const expected = {
 			searchCriteria: null,
@@ -83,12 +98,7 @@ describe('Basic - queryStringToSearchCriteria maps query to form', () => {
 			],
 		};
 
-		const actual = await queryStringToSearchCriteria(
-			'',
-			diseaseFetcher,
-			interventionsFetcher,
-			zipcodeFetcher
-		);
+		const actual = await queryStringToSearchCriteria('', diseaseFetcher, interventionsFetcher, zipcodeFetcher);
 		expect(actual).toEqual(expected);
 	});
 });
