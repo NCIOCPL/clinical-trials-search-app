@@ -1,7 +1,6 @@
 import queryString from 'query-string';
 import React, { useEffect, useReducer } from 'react';
 import { Helmet } from 'react-helmet';
-// import { useDispatch } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTracking } from 'react-tracking';
 import { START_OVER_LINK } from '../../constants';
@@ -18,7 +17,6 @@ import { getClinicalTrialDescriptionAction } from '../../services/api/actions';
 import SitesList from './SitesList';
 
 import './TrialDescriptionPage.scss';
-// import { updateFormSearchCriteria } from '../../store/actions';
 import { useAppSettings } from '../../store/store.js';
 import { useAppPaths } from '../../hooks/routing';
 import {
@@ -27,11 +25,11 @@ import {
 	queryStringToSearchCriteria,
 	runQueryFetchers,
 } from '../../utilities';
-import ErrorPage from '../ErrorPage';
-import PageNotFound from '../PageNotFound/PageNotFound';
+import InvalidCriteriaPage from '../InvalidCriteriaPage/index.jsx';
+import PageNotFound from '../ErrorBoundary/PageNotFound.jsx';
+import GenericErrorPage from '../ErrorBoundary/GenericErrorPage.jsx';
 
 const TrialDescriptionPage = () => {
-	// const rdx_dispatch = useDispatch();
 	const location = useLocation();
 	const navigate = useNavigate();
 	const qs = queryString.extract(location.search);
@@ -135,18 +133,25 @@ const TrialDescriptionPage = () => {
 		} else if (isAllFetchingComplete()) {
 			initTrialData();
 		} else if (!searchCriteriaObject) {
-			const searchCriteria = async () => {
-				const { diseaseFetcher, interventionFetcher, zipFetcher } =
-					await runQueryFetchers(
-						clinicalTrialsSearchClientV2,
-						zipConversionEndpoint
+			const searchCriteria = async (res) => {
+				try {
+					const { diseaseFetcher, interventionFetcher, zipFetcher } =
+						await runQueryFetchers(
+							clinicalTrialsSearchClientV2,
+							zipConversionEndpoint
+						);
+					return await queryStringToSearchCriteria(
+						qs,
+						diseaseFetcher,
+						interventionFetcher,
+						zipFetcher
 					);
-				return await queryStringToSearchCriteria(
-					qs,
-					diseaseFetcher,
-					interventionFetcher,
-					zipFetcher
-				);
+				} catch (error) {
+					ls_dispatch({
+						type: 'SET_ERRORS',
+						payload: res.errors,
+					});
+				}
 			};
 			searchCriteria().then((res) => {
 				setSearchCriteriaObject(res.searchCriteria);
@@ -428,7 +433,7 @@ const TrialDescriptionPage = () => {
 	};
 
 	const renderInvalidSearchCriteria = () => {
-		return <ErrorPage initErrorsList={localState.errors} />;
+		return <InvalidCriteriaPage initErrorsList={localState.errors} />;
 	};
 
 	const formatPrimaryPurpose = () => {
@@ -531,7 +536,7 @@ const TrialDescriptionPage = () => {
 	return (
 		<>
 			{localState.errors.length !== 0 && <>{renderInvalidSearchCriteria()}</>}
-			{!isTrialLoading && error && <>Error Occurred!</>}
+			{error && !(error.toString().indexOf('404') > -1) && <GenericErrorPage />}
 			{payload != null && payload.length > 0 && !error && (
 				<>
 					{!isTrialLoading && (
@@ -742,7 +747,9 @@ const TrialDescriptionPage = () => {
 					</article>
 				</>
 			)}
-			{payload == null && error !== null && <PageNotFound></PageNotFound>}
+			{payload == null &&
+				error !== null &&
+				error.toString().indexOf('404') > -1 && <PageNotFound></PageNotFound>}
 		</>
 	);
 };

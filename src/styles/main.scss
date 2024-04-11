@@ -76,9 +76,10 @@
 
 // Views
 @import
-  '../views/ErrorPage/ErrorPage',
+  '../views/InvalidCriteriaPage/InvalidCriteriaPage',
   '../views/ResultsPage/ResultsPage',
   '../views/SearchPage/SearchPage',
 	'../views/TrialDescriptionPage/TrialDescriptionPage',
-	'../views/PageNotFound/PageNotFound';
+	'../views/ErrorBoundary/PageNotFound',
+  '../views/ErrorBoundary/GenericErrorPage';
 

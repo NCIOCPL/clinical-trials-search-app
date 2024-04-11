@@ -6,7 +6,7 @@ import { useTracking } from 'react-tracking';
 import { updateFormSearchCriteria } from '../../store/actions';
 import { ChatOpener, Delighter, Modal, Pager } from '../../components/atomic';
 import { TRY_NEW_SEARCH_LINK } from '../../constants';
-import ErrorPage from '../ErrorPage';
+import InvalidCriteriaPage from '../InvalidCriteriaPage/index.jsx';
 import {
 	formDataConverter,
 	formToTrackingData,
@@ -545,7 +545,7 @@ const ResultsPage = () => {
 	};
 
 	const renderInvalidZip = () => {
-		return <ErrorPage initErrorsList={error} />;
+		return <InvalidCriteriaPage initErrorsList={error} />;
 	};
 
 	const checkIfInvalidPage = () => {
