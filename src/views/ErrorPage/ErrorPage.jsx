@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
-import { ChatOpener, Delighter } from '../../components/atomic';
+import { ChatOpener, Delighter } from '../../components/atomic/index.js';
 import { useTracking } from 'react-tracking';
-import { TRY_NEW_SEARCH_LINK } from '../../constants';
+import { TRY_NEW_SEARCH_LINK } from '../../constants/index.js';
 // Context API store
-import { updateCTXGlobalValue } from '../../store/ctx-actions';
+import { updateCTXGlobalValue } from '../../store/ctx-actions.js';
 import { useAppSettings } from '../../store/store.js';
-import { useAppPaths } from '../../hooks/routing';
+import { useAppPaths } from '../../hooks/routing.js';
 
 import './ErrorPage.scss';
 import * as queryString from 'query-string';

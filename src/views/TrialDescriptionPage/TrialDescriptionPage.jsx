@@ -28,7 +28,7 @@ import {
 	runQueryFetchers,
 } from '../../utilities';
 import ErrorPage from '../ErrorPage';
-import PageNotFound from '../PageNotFound/PageNotFound';
+import PageNotFound from '../ErrorBoundary/PageNotFound.jsx';
 
 const TrialDescriptionPage = () => {
 	// const rdx_dispatch = useDispatch();

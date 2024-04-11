@@ -15,6 +15,7 @@ import cacheMiddleware from './middleware/cacheMiddleware';
 import { getProductTestBase } from './utilities';
 
 import { AnalyticsProvider, EddlAnalyticsProvider } from './tracking';
+import { ErrorBoundary } from './views/ErrorBoundary';
 
 // Global Context
 import { StateProvider } from './store/store';
@@ -154,7 +155,9 @@ const initialize = ({
 				<Provider store={store}>
 					<AnalyticsHoC>
 						<Router>
-							<App zipConversionEndpoint={zipConversionEndpoint} />
+							<ErrorBoundary>
+								<App zipConversionEndpoint={zipConversionEndpoint} />
+							</ErrorBoundary>
 						</Router>
 					</AnalyticsHoC>
 				</Provider>
