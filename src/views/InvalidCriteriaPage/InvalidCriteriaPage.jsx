@@ -9,11 +9,11 @@ import { updateCTXGlobalValue } from '../../store/ctx-actions.js';
 import { useAppSettings } from '../../store/store.js';
 import { useAppPaths } from '../../hooks/routing.js';
 
-import './ErrorPage.scss';
+import './InvalidCriteriaPage.scss';
 import * as queryString from 'query-string';
 import { useLocation } from 'react-router-dom';
 
-const ErrorPage = ({ initErrorsList }) => {
+const InvalidCriteriaPage = ({ initErrorsList }) => {
 	const tracking = useTracking();
 	const [{ dispatch, analyticsName, canonicalHost, siteName, whichTrialsUrl }] =
 		useAppSettings();
@@ -193,7 +193,7 @@ const ErrorPage = ({ initErrorsList }) => {
 		</>
 	);
 };
-ErrorPage.propTypes = {
+InvalidCriteriaPage.propTypes = {
 	initErrorsList: PropTypes.array,
 };
-export default ErrorPage;
+export default InvalidCriteriaPage;

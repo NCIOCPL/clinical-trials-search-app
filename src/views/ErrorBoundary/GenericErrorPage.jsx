@@ -4,7 +4,7 @@ import { useTracking } from 'react-tracking';
 
 import { useAppSettings } from '../../store/store';
 
-const ErrorsOccurredPage = () => {
+const GenericErrorPage = () => {
 	const [{ canonicalHost }] = useAppSettings();
 	const tracking = useTracking();
 
@@ -20,6 +20,7 @@ const ErrorsOccurredPage = () => {
 			type: 'PageLoad',
 		});
 	}, []);
+
 
 	const renderHelmet = () => {
 		return (
@@ -42,4 +43,4 @@ const ErrorsOccurredPage = () => {
 	);
 };
 
-export default ErrorsOccurredPage;
+export default GenericErrorPage;

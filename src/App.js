@@ -10,14 +10,12 @@ import './styles/main.scss';
 import { BasicSearchPage, AdvancedSearchPage } from './views/SearchPage';
 import ResultsPage from './views/ResultsPage';
 import TrialDescriptionPage from './views/TrialDescriptionPage';
-import ErrorPage from './views/ErrorPage';
-//import PageNotFound from './views/ErrorBoundary/PageNotFound.jsx';
-import { ErrorBoundary } from './views/ErrorBoundary/index.jsx';
+import InvalidCriteriaPage from './views/InvalidCriteriaPage';
+import PageNotFound from './views/ErrorBoundary/PageNotFound';
 import { useAppSettings } from './store/store.js';
 import { PrintContextProvider } from './store/printContext';
 import { useAppInitializer } from './hooks';
 import { useAppPaths } from './hooks';
-//import { ErrorsOccurredPage } from './views/ErrorBoundary/index.jsx';
 
 require('es6-promise').polyfill();
 
@@ -51,11 +49,11 @@ const App = ({ zipConversionEndpoint }) => {
 							element={<AdvancedSearchPage />}
 						/>
 						<Route path={BasicSearchPagePath()} element={<BasicSearchPage />} />
-						<Route path="/*" element={<ErrorBoundary />} />
+						<Route path="/*" element={<PageNotFound />} />
 					</Routes>
 				</PrintContextProvider>
 			) : (
-				<ErrorPage initErrorsList={initErrorsList} />
+				<InvalidCriteriaPage initErrorsList={initErrorsList} />
 			)}
 		</>
 	);

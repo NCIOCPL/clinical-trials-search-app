@@ -75,11 +75,10 @@
   '../components/search-modules/TrialType/TrialType';
 
 // Views
-@import
-  '../views/ErrorPage/ErrorPage',
+@import '../views/InvalidCriteriaPage/InvalidCriteriaPage',
   '../views/ResultsPage/ResultsPage',
   '../views/SearchPage/SearchPage',
 	'../views/TrialDescriptionPage/TrialDescriptionPage',
 	'../views/ErrorBoundary/PageNotFound',
-  '../views/ErrorBoundary/ErrorsOccurredPage';
+'../views/ErrorBoundary/GenericErrorPage';
 

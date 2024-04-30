@@ -40,9 +40,12 @@ export const setSuccessfulFetch = (fetchActionsHash, fetchResponse) => {
 	};
 };
 
-export const setFailedFetch = () => {
+export const setFailedFetch = (error) => {
 	return {
 		type: ERROR_OCCURRED,
+		payload:{
+			error
+		}
 	};
 };
 

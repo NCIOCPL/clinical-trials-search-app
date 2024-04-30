@@ -8,6 +8,21 @@ cy.on('uncaught:exception', () => {
 	return false;
 });
 
+// Intercepts CTS API Calls
+Cypress.Commands.add('triggerServerError', () => {
+	cy.intercept('/cts/mock-api/v2/*', {
+		statusCode: 500,
+	}).as('mockApiError');
+
+	cy.intercept('/cts/proxy-api/v2/*', {
+		statusCode: 500,
+	}).as('proxyApiError');
+
+	cy.intercept('https://clinicaltrialsapi.cancer.gov/api/v2/*', {
+		statusCode: 500,
+	}).as('ctsApiError');
+});
+
 Given('the user navigates to {string}', (destURL) => {
 	cy.visit(destURL);
 });
@@ -203,3 +218,7 @@ Then(
 			.contains(ageText);
 	}
 );
+
+And('the CTS API is responding with a server error', () => {
+	cy.triggerServerError();
+});

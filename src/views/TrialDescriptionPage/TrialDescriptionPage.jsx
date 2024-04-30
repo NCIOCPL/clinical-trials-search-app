@@ -1,7 +1,6 @@
 import queryString from 'query-string';
 import React, { useEffect, useReducer } from 'react';
 import { Helmet } from 'react-helmet';
-// import { useDispatch } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTracking } from 'react-tracking';
 import { START_OVER_LINK } from '../../constants';
@@ -18,7 +17,6 @@ import { getClinicalTrialDescriptionAction } from '../../services/api/actions';
 import SitesList from './SitesList';
 
 import './TrialDescriptionPage.scss';
-// import { updateFormSearchCriteria } from '../../store/actions';
 import { useAppSettings } from '../../store/store.js';
 import { useAppPaths } from '../../hooks/routing';
 import {
@@ -27,20 +25,17 @@ import {
 	queryStringToSearchCriteria,
 	runQueryFetchers,
 } from '../../utilities';
-import ErrorPage from '../ErrorPage';
+import GenericErrorPage from '../ErrorBoundary/GenericErrorPage';
 import PageNotFound from '../ErrorBoundary/PageNotFound.jsx';
+import InvalidCriteriaPage from "../InvalidCriteriaPage";
 
 const TrialDescriptionPage = () => {
-	// const rdx_dispatch = useDispatch();
 	const location = useLocation();
 	const navigate = useNavigate();
 	const qs = queryString.extract(location.search);
 	const parsed = queryString.parse(qs);
 	const currId = parsed.id;
 
-	// Note: Location state only exists if navigating.
-	// If the trial description is directly navigated to this will be empty
-	// on first render
 	const trialTitle = location.state ? location.state.result.brief_title : '';
 	const tracking = useTracking();
 	const initialState = {
@@ -74,7 +69,6 @@ const TrialDescriptionPage = () => {
 			apiClients: { clinicalTrialsSearchClientV2 },
 		},
 	] = useAppSettings();
-	// enum for empty location checks
 	const noLocInfo = ['not yet active', 'in review', 'approved'];
 
 	const setFetchActions = (fetchAction) => {
@@ -136,18 +130,26 @@ const TrialDescriptionPage = () => {
 			initTrialData();
 		} else if (!searchCriteriaObject) {
 			const searchCriteria = async () => {
-				const { diseaseFetcher, interventionFetcher, zipFetcher } =
-					await runQueryFetchers(
-						clinicalTrialsSearchClientV2,
-						zipConversionEndpoint
+				try {
+					const { diseaseFetcher, interventionFetcher, zipFetcher } =
+						await runQueryFetchers(
+							clinicalTrialsSearchClientV2,
+							zipConversionEndpoint
+						);
+					return await queryStringToSearchCriteria(
+						qs,
+						diseaseFetcher,
+						interventionFetcher,
+						zipFetcher
 					);
-				return await queryStringToSearchCriteria(
-					qs,
-					diseaseFetcher,
-					interventionFetcher,
-					zipFetcher
-				);
+				} catch (error) {
+					ls_dispatch({
+						type: 'SET_ERRORS',
+						payload: res.errors,
+					});
+				}
 			};
+
 			searchCriteria().then((res) => {
 				setSearchCriteriaObject(res.searchCriteria);
 
@@ -428,7 +430,7 @@ const TrialDescriptionPage = () => {
 	};
 
 	const renderInvalidSearchCriteria = () => {
-		return <ErrorPage initErrorsList={localState.errors} />;
+		return <InvalidCriteriaPage initErrorsList={localState.errors} />;
 	};
 
 	const formatPrimaryPurpose = () => {
@@ -527,6 +529,24 @@ const TrialDescriptionPage = () => {
 	const activeRecruitmentSites = !isTrialLoading
 		? filterSitesByActiveRecruitment(trialDescription.sites)
 		: [];
+
+	useEffect(() => {
+		if (error) {
+			if (error.response && error.response.status === 404) {
+				return <PageNotFound />;
+			} else {
+				return <GenericErrorPage />;
+			}
+		}
+	}, [error]);
+
+	if (error) {
+		if (error.response && error.response.status === 404) {
+			return <PageNotFound />;
+		} else {
+			return <GenericErrorPage />;
+		}
+	}
 
 	return (
 		<>

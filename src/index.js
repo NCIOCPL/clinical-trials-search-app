@@ -16,6 +16,8 @@ import { getProductTestBase } from './utilities';
 
 import { AnalyticsProvider, EddlAnalyticsProvider } from './tracking';
 import { ErrorBoundary } from './views/ErrorBoundary';
+import { PageNotFound } from './views/ErrorBoundary';
+import { GenericErrorPage } from './views/ErrorBoundary';
 
 // Global Context
 import { StateProvider } from './store/store';
@@ -145,9 +147,18 @@ const initialize = ({
 			</AnalyticsProvider>
 		);
 
+
 	AnalyticsHoC.propTypes = {
 		children: PropTypes.node,
 	};
+
+
+	const [error, setError] = useState(null);
+
+	if (error) {
+		return <GenericErrorPage />;
+	}
+
 
 	const AppBlock = () => {
 		return (

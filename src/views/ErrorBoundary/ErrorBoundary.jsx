@@ -1,7 +1,8 @@
+// ErrorBoundary.jsx
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import ErrorsOccurredPage from './ErrorsOccurredPage';
+import GenericErrorPage from './GenericErrorPage';
 import PageNotFound from './PageNotFound';
 
 class ErrorBoundary extends Component {
@@ -14,22 +15,27 @@ class ErrorBoundary extends Component {
 	}
 
 	static getDerivedStateFromError(error) {
-		// Update state so the next render will show the error page.
 		return {
 			error,
 			hasError: true,
 		};
 	}
 
+	componentDidCatch(error, errorInfo) {
+		console.error('Error caught by ErrorBoundary:', error, errorInfo);
+	}
+
 	render() {
 		const { error, hasError } = this.state;
 
 		if (hasError) {
-			const showPageNotFound =
-				typeof error === 'string' && error.indexOf('404') > -1;
-			return showPageNotFound ? <PageNotFound /> : <ErrorsOccurredPage />;
+			if (error.response && error.response.status === 404) {
+				return <PageNotFound />;
+			} else {
+				return <GenericErrorPage />;
+			}
 		}
-		console.log(this.props.children);
+
 		return this.props.children;
 	}
 }
