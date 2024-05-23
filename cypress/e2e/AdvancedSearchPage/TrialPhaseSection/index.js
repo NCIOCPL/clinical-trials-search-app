@@ -1,19 +1,19 @@
 /// <reference types="Cypress" />
-import { And, Then, When } from 'cypress-cucumber-preprocessor/steps';
+import {Then, When, Given } from "@badeball/cypress-cucumber-preprocessor";
 
-And('info text {string} is displayed in the section body', (infoText) => {
+Given('info text {string} is displayed in the section body', (infoText) => {
 	cy.get('#fieldset--trialphase').find('p').should('have.text', infoText);
 });
 
-And('the following checkboxes are displayed', (dataTable) => {
+Given('the following checkboxes are displayed', (dataTable) => {
 	for (const { label, value } of dataTable.hashes()) {
 		cy.get(`#fieldset--trialphase label[for='${value}']`)
 			.should('have.text', label)
-			.and('have.attr', 'for', value);
+			.Given('have.attr', 'for', value);
 	}
 });
 
-And(
+Given(
 	'help icon is displayed in {string} section with href {string}',
 	(section, href) => {
 		cy.get(`#fieldset--${section.replace(' ', '').toLowerCase()}`)
@@ -26,7 +26,7 @@ When('user clicks on Modify Search Criteria button', () => {
 	cy.get('button.btnAsLink').contains('Modify Search Criteria').click();
 });
 
-And('trial info displayes {string}', (infoText) => {
+Given('trial info displayes {string}', (infoText) => {
 	cy.get('.all-trials').should('have.text', infoText);
 });
 
@@ -55,18 +55,18 @@ When('user checks {string} checkbox', (label) => {
 		.check({ force: true });
 });
 
-And('trial info displayes {string}', (infoText) => {
+Given('trial info displayes {string}', (infoText) => {
 	cy.get('.all-trials').should('have.text', infoText);
 });
 
-And('the criteria table displays the following', (dataTable) => {
+Given('the criteria table displays the following', (dataTable) => {
 	for (const { Category, Selection } of dataTable.hashes()) {
 		cy.get('tbody tr th').should('have.text', Category);
 		cy.get('tbody tr td').should('have.text', Selection);
 	}
 });
 
-And(
+Given(
 	'the url query has the following corresponding code with duplicated keys',
 	(dataTable) => {
 		cy.location('href').then((url) => {

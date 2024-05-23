@@ -1,14 +1,14 @@
 /// <reference types="Cypress" />
-import { Then, When, And } from 'cypress-cucumber-preprocessor/steps';
+import {Then, When, Given } from "@badeball/cypress-cucumber-preprocessor";
 import { fieldMap } from '../../../utils/ctsFields.js';
 
-And(
+Given(
 	'help icon is displayed in {string} section with href {string}',
 	(fieldLabel, helpHref) => {
 		cy.get('#fieldset--trialInvestigators')
 			.find('a.text-icon-help')
 			.should('be.visible', fieldLabel)
-			.and('have.attr', 'href', helpHref);
+			.Given('have.attr', 'href', helpHref);
 	}
 );
 
@@ -26,7 +26,7 @@ Then('autocomplete dropdown is displayed', () => {
 	cy.get('div.cts-autocomplete__menu-item:visible').should('be.visible');
 });
 
-And('user selects {string} from dropdown', (autosuggestTerm) => {
+Given('user selects {string} from dropdown', (autosuggestTerm) => {
 	cy.get('div.cts-autocomplete__menu.--trialInvestigators').should(
 		'be.visible'
 	);
@@ -37,11 +37,11 @@ And('user selects {string} from dropdown', (autosuggestTerm) => {
 		.click();
 });
 
-And('trial info displayes {string}', (infoText) => {
+Given('trial info displayes {string}', (infoText) => {
 	cy.get('.all-trials').should('have.text', infoText);
 });
 
-And('the criteria table displays the following', (dataTable) => {
+Given('the criteria table displays the following', (dataTable) => {
 	for (const { Category, Selection } of dataTable.hashes()) {
 		cy.get('tbody tr th').should('have.text', Category);
 		cy.get('tbody tr td').should('have.text', Selection);

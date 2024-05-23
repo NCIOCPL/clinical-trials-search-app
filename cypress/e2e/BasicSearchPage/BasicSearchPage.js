@@ -1,5 +1,5 @@
 /// <reference types="Cypress" />
-import { And, Then, When } from 'cypress-cucumber-preprocessor/steps';
+import {Then, When, Given } from "@badeball/cypress-cucumber-preprocessor";
 
 // Local field map as labels are not used in the shared field map.
 const labelFieldMap = {
@@ -19,11 +19,11 @@ const inputFieldMap = {
 	'Keywords/Phrases': 'keywordPhrases',
 };
 
-And('the text {string} appears below the title', (introtext) => {
+Given('the text {string} appears below the title', (introtext) => {
 	cy.get('.search-page__header > p').should('contain', introtext);
 });
 
-And('Search tip icon is displayed and text {string} appears', (tiptext) => {
+Given('Search tip icon is displayed and text {string} appears', (tiptext) => {
 	cy.get('.cts-search-tip__icon').should('be.visible');
 	cy.get('.cts-search-tip__body').should('contain', tiptext);
 });
@@ -37,15 +37,15 @@ Then(
 	}
 );
 
-And('autocomplete dropdown is displayed', () => {
+Given('autocomplete dropdown is displayed', () => {
 	cy.get('.cts-autocomplete .menu-anchor :visible').should('exist');
 });
 
-And('user selects {string} from dropdown', (keyword) => {
+Given('user selects {string} from dropdown', (keyword) => {
 	cy.get('.cts-autocomplete__menu-item').contains(keyword).click();
 });
 
-And('results info has text {string}', (resultsInfo) => {
+Given('results info has text {string}', (resultsInfo) => {
 	cy.get('.cts-results-header .all-trials').should('have.text', resultsInfo);
 });
 
@@ -67,12 +67,12 @@ When('user clicks on {string} field', (fieldLabel) => {
 Then('{string} input field has a value {string}', (fieldLabel, value) => {
 	cy.get(`input#${inputFieldMap[fieldLabel]}`).should('have.value', value);
 });
+//
+// When('user types {string} in {string} field', (inputText, fieldLabel) => {
+// 	cy.get(`input#${inputFieldMap[fieldLabel]}`).type(inputText, { force: true });
+// });
 
-When('user types {string} in {string} field', (inputText, fieldLabel) => {
-	cy.get(`input#${inputFieldMap[fieldLabel]}`).type(inputText, { force: true });
-});
-
-And('trial info displays {string}', (infoText) => {
+Given('trial info displays {string}', (infoText) => {
 	cy.get('.all-trials').should('have.text', infoText);
 });
 
@@ -99,7 +99,7 @@ When('user clears {string} input field', (fieldLabel) => {
 	cy.get(`input#${inputFieldMap[fieldLabel]}`).clear();
 });
 
-And('the criteria table displays the following', (dataTable) => {
+Given('the criteria table displays the following', (dataTable) => {
 	let index = 0;
 	for (const { Category, Selection } of dataTable.hashes()) {
 		cy.get('tbody tr th').eq(index).should('have.text', Category);
@@ -116,9 +116,6 @@ When('user clicks on Start Over button', () => {
 	cy.get('.all-trials a').contains('Start Over').click();
 });
 
-When('user types {string} in {string} field', (inputText, fieldLabel) => {
-	cy.get(`input#${inputFieldMap[fieldLabel]}`).type(inputText);
-});
 
 Then('the title tag should be {string}', (expectedTitle) => {
 	cy.get('head>title')

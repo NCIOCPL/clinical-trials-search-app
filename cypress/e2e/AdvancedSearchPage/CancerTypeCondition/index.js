@@ -1,23 +1,23 @@
 /// <reference types="Cypress" />
-import { And, Then, When } from 'cypress-cucumber-preprocessor/steps';
+import {Then, When, Given } from "@badeball/cypress-cucumber-preprocessor";
 import { fieldMap } from '../../../utils/ctsFields';
 
-And(
+Given(
 	'info text {string} is displayed in the {string} section body',
 	(infoText, fieldSet) => {
 		cy.get(`fieldset.${fieldSet}`).find('p').should('contain.text', infoText);
 	}
 );
 
-And('autocomplete dropdown is displayed', () => {
+Given('autocomplete dropdown is displayed', () => {
 	cy.get('.cts-autocomplete .menu-anchor :visible').should('exist');
 });
 
-And('user selects {string} from dropdown', (keyword) => {
+Given('user selects {string} from dropdown', (keyword) => {
 	cy.get('.cts-autocomplete__menu-item').contains(keyword).click();
 });
 
-And(
+Given(
 	'{string} input field has helper text {string}',
 	(fieldLabel, helperText) => {
 		cy.get(`input#${fieldMap[fieldLabel]}`)
@@ -27,10 +27,10 @@ And(
 	}
 );
 
-And('trial info displayes {string}', (infoText) => {
+Given('trial info displayes {string}', (infoText) => {
 	cy.get('.all-trials').should('have.text', infoText);
 });
-And(
+Given(
 	'the url query has the following corresponding code with duplicated keys',
 	(dataTable) => {
 		cy.location('href').then((url) => {
@@ -77,7 +77,7 @@ When('user clicks on Modify Search Criteria button', () => {
 	cy.get('button.btnAsLink').contains('Modify Search Criteria').click();
 });
 
-And('the criteria table displays the following', (dataTable) => {
+Given('the criteria table displays the following', (dataTable) => {
 	let index = 0;
 	for (const { Category, Selection } of dataTable.hashes()) {
 		cy.get('tbody tr th').eq(index).should('have.text', Category);

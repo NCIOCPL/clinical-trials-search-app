@@ -1,17 +1,17 @@
 /// <reference types="Cypress" />
-import { Then, When, And } from 'cypress-cucumber-preprocessor/steps';
+import {Then, When, Given } from "@badeball/cypress-cucumber-preprocessor";
 import { fieldMap } from '../../../utils/ctsFields.js';
 
-And('the text {string} appears below the title', (introtext) => {
+Given('the text {string} appears below the title', (introtext) => {
 	cy.get('.search-page__header > p').should('contain', introtext);
 });
 
-And('Search tip icon is displayed and text {string} appears', (tiptext) => {
+Given('Search tip icon is displayed and text {string} appears', (tiptext) => {
 	cy.get('.cts-search-tip__icon').should('be.visible');
 	cy.get('.cts-search-tip__body').should('contain', tiptext);
 });
 
-And(
+Given(
 	'sticky block is displayed with {string} and {string} buttons',
 	(findbtn, clearbtn) => {
 		cy.get('.sticky-block').should('be.visible');

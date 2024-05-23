@@ -1,5 +1,5 @@
 /// <reference types="Cypress" />
-import { And, Then, When } from 'cypress-cucumber-preprocessor/steps';
+import {Then, When, Given } from "@badeball/cypress-cucumber-preprocessor";
 
 Then(
 	'user checks {string} checkbox at the {string} of a page',
@@ -78,14 +78,14 @@ Then('the checkbox {string} is not checked', (checkBox) => {
 		.should('not.be.checked');
 });
 
-And('result list is displayed', () => {
+Given('result list is displayed', () => {
 	cy.get('div.results-list').should('be.visible');
 });
 
 Then('print modal appears', () => {
 	cy.get('.cts-modal').should('be.visible');
 });
-And('the request is sent with the following details', (dataTable) => {
+Given('the request is sent with the following details', (dataTable) => {
 	cy.get('@print').then((xhr) => {
 		for (const {
 			link_template,
@@ -101,7 +101,7 @@ And('the request is sent with the following details', (dataTable) => {
 	});
 });
 
-And('the request is sent with the following trial ids', (dataTable) => {
+Given('the request is sent with the following trial ids', (dataTable) => {
 	cy.wait('@print').then((xhr) => {
 		const allIds = xhr.request.body.trial_ids;
 		let count = 0;
@@ -113,7 +113,7 @@ And('the request is sent with the following trial ids', (dataTable) => {
 	});
 });
 
-And('user clicks on {string} button', (buttonLabel) => {
+Given('user clicks on {string} button', (buttonLabel) => {
 	cy.intercept('POST', '/mock-api/cts-print/GenCache*').as('print');
 	cy.get('button').contains(buttonLabel).click({ force: true });
 });
@@ -122,7 +122,7 @@ When('user clicks on {string} pager button', (pgButton) => {
 	cy.get('.pager__button').contains(pgButton).click();
 });
 
-And('print modal displayes {string}', (text) => {
+Given('print modal displayes {string}', (text) => {
 	cy.get('.cts-modal').find('p').should('have.text', text);
 });
 

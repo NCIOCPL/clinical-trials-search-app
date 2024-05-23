@@ -1,5 +1,6 @@
 /// <reference types="Cypress" />
-import { And, Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
+import {Then, When, Given } from "@badeball/cypress-cucumber-preprocessor";
+
 import { fieldMap } from '../../utils/ctsFields.js';
 
 cy.on('uncaught:exception', () => {
@@ -18,15 +19,11 @@ Given('{string} is set to {string}', (key, param) => {
 	});
 });
 
-When('the user navigates to {string}', (def) => {
-	cy.visit(def);
-});
-
 Then('the page title is {string}', (title) => {
 	cy.get('h1').should('contain', title);
 });
 
-And('browser waits', () => {
+Given('browser waits', () => {
 	cy.wait(6000);
 });
 
@@ -36,9 +33,9 @@ Given('screen breakpoint is set to {string}', (screenSize) => {
 	else if (screenSize === 'tablet') cy.viewport(800, 900);
 });
 
-When('user clicks on {string} field', (fieldLabel) => {
-	cy.get(`input#${fieldMap[fieldLabel]}`).click();
-});
+// When('user clicks on {string} field', (fieldLabel) => {
+// 	cy.get(`input#${fieldMap[fieldLabel]}`).click();
+// });
 
 When('user types {string} in {string} field', (inputText, fieldLabel) => {
 	cy.get(`input#${fieldMap[fieldLabel]}`).type(inputText);
@@ -54,21 +51,21 @@ When('user clicks on {int} trial result', (resultItem) => {
 		.click();
 });
 
-And('user clicks on {string} button', (buttonLabel) => {
+Given('user clicks on {string} button', (buttonLabel) => {
 	cy.get('button').contains(buttonLabel).click();
 });
 
-And('user clicks on {string} link', (linkText) => {
+Given('user clicks on {string} link', (linkText) => {
 	cy.get('a').contains(linkText).click({ followRedirect: false });
 });
 
-And('user navigates back to the previous page', () => {
+Given('user navigates back to the previous page', () => {
 	cy.window().then((win) => {
 		cy.NCIDataLayer = Object.assign(win.NCIDataLayer);
 	});
 	cy.go('back'), { followRedirect: false };
 });
-And('user clears form', () => {
+Given('user clears form', () => {
 	cy.window().then((win) => {
 		cy.NCIDataLayer = Object.assign(win.NCIDataLayer);
 	});
@@ -116,11 +113,11 @@ When('user clicks on share by {string} button', (option) => {
 	}
 });
 
-And('{string} form section is displayed', (sectionLabel) => {
+Given('{string} form section is displayed', (sectionLabel) => {
 	cy.get('legend').contains(sectionLabel).should('be.visible');
 });
 
-And('button {string} is displayed', (buttonLabel) => {
+Given('button {string} is displayed', (buttonLabel) => {
 	cy.get('button').contains(buttonLabel).should('be.visible');
 });
 
@@ -136,7 +133,7 @@ Then('the search is executed and no results page is displayed', () => {
 	cy.get('div[class="results-list no-results"]').should('be.visible');
 });
 
-And('the url query has the following corresponding code', (dataTable) => {
+Given('the url query has the following corresponding code', (dataTable) => {
 	cy.location('href').then((url) => {
 		const params = new URL(url).searchParams;
 		//verify num of url params matches expected
@@ -152,20 +149,20 @@ And('the url query has the following corresponding code', (dataTable) => {
 	});
 });
 
-And('helper text {string} is displayed', (helperText) => {
+Given('helper text {string} is displayed', (helperText) => {
 	cy.get('span').contains(helperText).should('be.visible');
 });
 
-Then(
-	'{string} input field has a placeholder {string}',
-	(fieldLabel, placeholderText) => {
-		cy.get(`input#${fieldMap[fieldLabel]}`).should(
-			'have.attr',
-			'placeholder',
-			placeholderText
-		);
-	}
-);
+// Then(
+// 	'{string} input field has a placeholder {string}',
+// 	(fieldLabel, placeholderText) => {
+// 		cy.get(`input#${fieldMap[fieldLabel]}`).should(
+// 			'have.attr',
+// 			'placeholder',
+// 			placeholderText
+// 		);
+// 	}
+// );
 
 Then(
 	'autocomplete dropdown is displayed with {string} text',
@@ -177,11 +174,11 @@ Then(
 	}
 );
 
-And('{string} link has a href {string}', (linkText, linkHref) => {
+Given('{string} link has a href {string}', (linkText, linkHref) => {
 	cy.get('a').contains(linkText).should('have.attr', 'href', linkHref);
 });
 
-And('the following delighters are displayed', (dataTable) => {
+Given('the following delighters are displayed', (dataTable) => {
 	for (const { delighter, href, title, text } of dataTable.hashes()) {
 		cy.get(`div[class="delighter ${delighter}"]`).as('delighter');
 		cy.get('@delighter').find('a').should('have.attr', 'href', href);

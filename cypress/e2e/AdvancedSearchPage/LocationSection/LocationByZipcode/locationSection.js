@@ -1,5 +1,5 @@
 /// <reference types="Cypress" />
-import { And, Then, When } from 'cypress-cucumber-preprocessor/steps';
+import {Then, When, Given } from "@badeball/cypress-cucumber-preprocessor";
 
 const fieldMap = {
 	'Limit results to Veterans Affairs facilities': 'search-location-toggle',
@@ -23,11 +23,11 @@ const dropDown = {
 	Country: 'country',
 };
 
-And('trial info displays {string}', (infoText) => {
+Given('trial info displays {string}', (infoText) => {
 	cy.get('.all-trials').should('have.text', infoText);
 });
 
-And('the criteria table displays the following', (dataTable) => {
+Given('the criteria table displays the following', (dataTable) => {
 	cy.get('tbody > tr').should('have.length', dataTable.hashes().length);
 	//index assures correct order
 	let index = 0;
@@ -38,11 +38,11 @@ And('the criteria table displays the following', (dataTable) => {
 	}
 });
 
-And('info text {string} is displayed in the section body', (infoText) => {
+Given('info text {string} is displayed in the section body', (infoText) => {
 	cy.get('#fieldset--location').find('p').should('have.text', infoText);
 });
 
-And('trial info displayes {string}', (infoText) => {
+Given('trial info displayes {string}', (infoText) => {
 	cy.get('.all-trials').should('include.text', infoText);
 });
 
@@ -50,41 +50,41 @@ When('user clicks on Modify Search Criteria button', () => {
 	cy.get('button.btnAsLink').contains('Modify Search Criteria').click();
 });
 
-And('user selects {string} radio button', (label) => {
+Given('user selects {string} radio button', (label) => {
 	cy.get(`input#${radioButtons[label]}`).click({ force: true });
 });
 
-And('user selects {string} from dropdown', (keyword) => {
+Given('user selects {string} from dropdown', (keyword) => {
 	cy.get('.cts-autocomplete__menu-item').contains(keyword).click();
 });
 
-And('user types {string} in {string} autosuggest field', (text, fieldLabel) => {
+Given('user types {string} in {string} autosuggest field', (text, fieldLabel) => {
 	cy.get(`input[aria-label="${fieldMap[fieldLabel]}"]`).type(text);
 });
 
-And('user types {string} in {string} field', (text, fieldLabel) => {
+Given('user types {string} in {string} field', (text, fieldLabel) => {
 	cy.get(`input#${fieldMap[fieldLabel]}`).type(text);
 });
 
-And('{string} no trial info is displayed', (noTrialsText) => {
+Given('{string} no trial info is displayed', (noTrialsText) => {
 	cy.get('.no-results').should('have.text', noTrialsText);
 });
 
-And('{string} text is displayed as results header', (resHeader) => {
+Given('{string} text is displayed as results header', (resHeader) => {
 	cy.get('div[class="results-list no-results"]').should(
 		'include.text',
 		resHeader
 	);
 });
 
-And('the invalid criteria table displays the following', (dataTable) => {
+Given('the invalid criteria table displays the following', (dataTable) => {
 	cy.get('ul > li').should('have.length', dataTable.rows().length);
 	for (const { Criteria } of dataTable.hashes()) {
 		cy.get('ul > li').contains(`${Criteria}`).should('exist');
 	}
 });
 
-And(
+Given(
 	'help icon is displayed in {string} section with href {string}',
 	(section, href) => {
 		cy.get(`#fieldset--${section.replace(' ', '').toLowerCase()}`)
@@ -93,14 +93,14 @@ And(
 	}
 );
 
-And('{string} toggle is displayed with label {string}', (fieldLabel, text) => {
+Given('{string} toggle is displayed with label {string}', (fieldLabel, text) => {
 	cy.get(`input#${fieldMap[fieldLabel]}`)
 		.siblings()
 		.get('.cts-toggle__label')
 		.should('have.attr', 'aria-label', text);
 });
 
-And('{string} toggle is switched to {string}', (fieldLabel, value) => {
+Given('{string} toggle is switched to {string}', (fieldLabel, value) => {
 	const checked = value.toLowerCase() === 'yes' ? true : false;
 	if (checked) {
 		cy.get(`input#${fieldMap[fieldLabel]}`).should('be.checked');
@@ -113,11 +113,11 @@ When('user toggles {string}', (fieldLabel) => {
 	cy.get(`label[for="${fieldMap[fieldLabel]}"]`).click({ force: true });
 });
 
-And('{string} radio button is checked', (lbl) => {
+Given('{string} radio button is checked', (lbl) => {
 	cy.get(`input#${radioButtons[lbl]}`).should('be.checked');
 });
 
-And('the following radio buttons are displayed', (dataTable) => {
+Given('the following radio buttons are displayed', (dataTable) => {
 	cy.get('#fieldset--location')
 		.find('div.cts-radio label')
 		.should('have.length', dataTable.hashes().length);
@@ -128,7 +128,7 @@ And('the following radio buttons are displayed', (dataTable) => {
 	}
 });
 
-And('user selects {string} from {string} dropdown', (selection, dropdown) => {
+Given('user selects {string} from {string} dropdown', (selection, dropdown) => {
 	cy.get(`#${dropDown[dropdown]}`).select(selection);
 });
 
@@ -180,7 +180,7 @@ When('user clears {string} input field', (fieldLabel) => {
 	}
 });
 
-And(
+Given(
 	'the url query has the following corresponding code with duplicated keys',
 	(dataTable) => {
 		cy.location('href').then((url) => {
@@ -193,7 +193,7 @@ And(
 	}
 );
 
-And(
+Given(
 	'the {int} result item has a {string} info with {string}',
 	(itemIndex, infoCategory, infoText) => {
 		cy.get('.results-list-item.results-list__item')
@@ -204,7 +204,7 @@ And(
 	}
 );
 
-And('the matched location {string} is {string}', (category, name) => {
+Given('the matched location {string} is {string}', (category, name) => {
 	if (category.toLowerCase() === 'country') {
 		cy.get('.sites-nearby h3').should('have.text', name);
 	} else if (category.toLowerCase() === 'state') {
@@ -226,15 +226,15 @@ When('user clicks on {string} section of accordion', (section) => {
 		.click();
 });
 
-And('text {string} is displayed', (text) => {
+Given('text {string} is displayed', (text) => {
 	cy.get('p').contains(text).should('be.visible');
 });
 
-And('search criteria table is not displayed', () => {
+Given('search criteria table is not displayed', () => {
 	cy.get('div.cts-accordion.table-dropdown').should('not.exist');
 });
 
-And('{string} has a link {string}', (link, href) => {
+Given('{string} has a link {string}', (link, href) => {
 	cy.get('form').should('have.attr', 'action', href);
 	cy.get('form button').should('have.text', link);
 });

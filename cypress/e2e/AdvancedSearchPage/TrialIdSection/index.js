@@ -2,21 +2,21 @@
 import { Then, When, And } from 'cypress-cucumber-preprocessor/steps';
 import { fieldMap } from '../../../utils/ctsFields.js';
 
-And(
+Given(
 	'help icon is displayed in {string} section with href {string}',
 	(fieldLabel, helpHref) => {
 		cy.get('#fieldset--trialid')
 			.find('a.text-icon-help')
 			.should('be.visible', fieldLabel)
-			.and('have.attr', 'href', helpHref);
+			.Given('have.attr', 'href', helpHref);
 	}
 );
 
-And('trial info displays {string}', (infoText) => {
+Given('trial info displays {string}', (infoText) => {
 	cy.get('.all-trials').should('have.text', infoText);
 });
 
-And('the criteria table displays the following', (dataTable) => {
+Given('the criteria table displays the following', (dataTable) => {
 	for (const { Category, Selection } of dataTable.hashes()) {
 		cy.get('tbody tr th').should('have.text', Category);
 		cy.get('tbody tr td').should('have.text', Selection);
@@ -28,7 +28,7 @@ When('user clicks on Modify Search Criteria button', () => {
 });
 
 Then('{string} field has value {string}', (field, value) => {
-	cy.get('input#trialId').should('be.visible', field).and('have.value', value);
+	cy.get('input#trialId').should('be.visible', field).Given('have.value', value);
 });
 
 When('user clears {string} input field', (fieldLabel) => {

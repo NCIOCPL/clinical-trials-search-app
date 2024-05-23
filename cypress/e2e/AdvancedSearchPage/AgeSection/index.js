@@ -1,5 +1,5 @@
 /// <reference types="Cypress" />
-import { Then, When, And } from 'cypress-cucumber-preprocessor/steps';
+import {Then, When, Given } from "@badeball/cypress-cucumber-preprocessor";
 import { fieldMap } from '../../../utils/ctsFields.js';
 
 Then(
@@ -30,7 +30,7 @@ Then('{string} field has value {string}', (label, value) => {
 	cy.get(`input#${label.toLowerCase()}`).should('have.value', value);
 });
 
-And('trial info displayes {string}', (infoText) => {
+Given('trial info displayes {string}', (infoText) => {
 	cy.get('.all-trials').should('have.text', infoText);
 });
 Then('age field has value {string}', (value) => {
@@ -41,7 +41,7 @@ Then('the search is not executed and path is {string}', (path) => {
 	cy.location('pathname').should('equal', path);
 });
 
-And('the criteria table displays the following', (dataTable) => {
+Given('the criteria table displays the following', (dataTable) => {
 	for (const { Category, Selection } of dataTable.hashes()) {
 		cy.get('tbody tr th').should('have.text', Category);
 		cy.get('tbody tr td').should('have.text', Selection);

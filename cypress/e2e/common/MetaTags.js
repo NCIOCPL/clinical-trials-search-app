@@ -1,12 +1,11 @@
 /// <reference types="Cypress" />
-import { Then } from 'cypress-cucumber-preprocessor/steps';
-
+import {Then} from "@badeball/cypress-cucumber-preprocessor";
 Then('the page contains meta tags with the following names', (dataTable) => {
 	for (const { name, content } of dataTable.hashes()) {
 		const locator = `meta[name='${name}']`;
 		//find element, ensure it has attribute content
 		//compare content's value with expected one
-		cy.get(locator).should('have.attr', 'content').and('be.eq', content);
+		cy.get(locator).should('have.attr', 'content').Given('be.eq', content);
 	}
 });
 
@@ -18,12 +17,12 @@ Then(
 				const locator = `META[name='${property}']`;
 				//find element, ensure it has attribute content
 				//compare content's value with expected one
-				cy.get(locator).should('have.attr', 'content').and('be.eq', content);
+				cy.get(locator).should('have.attr', 'content').Given('be.eq', content);
 			} else {
 				const locator = `META[property='${property}']`;
 				//find element, ensure it has attribute content
 				//compare content's value with expected one
-				cy.get(locator).should('have.attr', 'content').and('be.eq', content);
+				cy.get(locator).should('have.attr', 'content').Given('be.eq', content);
 			}
 		}
 	}
@@ -34,9 +33,9 @@ Then('there is a canonical link with the href {string}', (href) => {
 		//verify there is only one link
 		.should('have.length', 1)
 		//verify it has attribute 'href
-		.and('have.attr', 'href')
+		.Given('have.attr', 'href')
 		//href attr contains expected url
-		.and('be.eq', href);
+		.Given('be.eq', href);
 });
 
 Then('the title tag should be {string}', (expectedTitle) => {
@@ -54,7 +53,7 @@ Then('there are alternate links with the following', (dataTable) => {
 			//assert it has the hreflang attr
 			.should('have.attr', 'hreflang')
 			//hreflang value is matching expected
-			.and('be.eq', hreflang);
+			.Given('be.eq', hreflang);
 	}
 });
 

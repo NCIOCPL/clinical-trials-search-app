@@ -1,13 +1,13 @@
 /// <reference types="Cypress" />
-import { And, Then, When } from 'cypress-cucumber-preprocessor/steps';
+import {Then, When, Given } from "@badeball/cypress-cucumber-preprocessor";
 
-And('trial description accordion is displayed', () => {
+Given('trial description accordion is displayed', () => {
 	cy.get('.trial-description-page__content  .cts-accordion').should(
 		'be.visible'
 	);
 });
 
-And('the following accordion sections are displayed', (dataTable) => {
+Given('the following accordion sections are displayed', (dataTable) => {
 	for (const { section, ariaExpanded } of dataTable.hashes()) {
 		cy.get('div[class="cts-accordion  "] button.cts-accordion__button')
 			.contains(section)
@@ -45,28 +45,28 @@ Then('alphabetically sorted list appears', () => {
 	});
 });
 
-And('{string} option is selected', (selectedOption) => {
+Given('{string} option is selected', (selectedOption) => {
 	cy.get('select.cts-select option:selected').should(
 		'have.text',
 		selectedOption
 	);
 });
 
-And('trial ids are displayed in the following format', (dataTable) => {
+Given('trial ids are displayed in the following format', (dataTable) => {
 	for (const { id } of dataTable.hashes()) {
 		cy.get('ul.trial-ids li').contains(id).should('be.visible');
 	}
 });
 
-And('{string} button as link is displayed', (buttonAsLink) => {
+Given('{string} button as link is displayed', (buttonAsLink) => {
 	cy.get('div.btnAsLink').contains(buttonAsLink).should('be.visible');
 });
 
-And('text {string} is displayed', (text) => {
+Given('text {string} is displayed', (text) => {
 	cy.get('p').contains(text).should('be.visible');
 });
 
-And('the matched location {string} is {string}', (category, name) => {
+Given('the matched location {string} is {string}', (category, name) => {
 	if (category.toLowerCase() === 'country') {
 		cy.get('.sites-nearby h3').should('have.text', name);
 	} else if (category.toLowerCase() === 'state') {
@@ -76,7 +76,7 @@ And('the matched location {string} is {string}', (category, name) => {
 	}
 });
 
-And('the matched location displays the following information', (dataTable) => {
+Given('the matched location displays the following information', (dataTable) => {
 	cy.get('.sites-nearby .location').as('nearLocation');
 	cy.get('@nearLocation')
 		.find('strong')
@@ -93,7 +93,7 @@ When('user selects {string} from the state dropdown list', (state) => {
 	cy.get('select.cts-select').select(state);
 });
 
-And(
+Given(
 	'the filtered by state location number {int} displays the following information',
 	(index, dataTable) => {
 		cy.get('.location-city')
@@ -168,7 +168,7 @@ When('user selects {string} from countries list', (country) => {
 	cy.get('select.cts-select').eq(0).select(country);
 });
 
-And(
+Given(
 	'the filtered by country location number {int} displays the following information',
 	(index, dataTable) => {
 		cy.get('.location-city:visible')
@@ -190,10 +190,10 @@ And(
 	}
 );
 
-And('button {string} is not displayed', (button) => {
+Given('button {string} is not displayed', (button) => {
 	cy.get('.btnAsLink').contains(button).should('not.exist');
 });
 
-And('all locations in {string} are displayed', (country) => {
+Given('all locations in {string} are displayed', (country) => {
 	cy.get('.sites-all h3').should('have.text', country);
 });
