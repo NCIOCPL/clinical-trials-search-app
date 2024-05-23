@@ -11,10 +11,25 @@
 
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
-const cucumber = require('cypress-cucumber-preprocessor').default;
- 
+const cucumber = require('@badeball/cypress-cucumber-preprocessor');
+
 module.exports = (on, config) => {
   require('@cypress/code-coverage/task')(on, config);
   on('file:preprocessor', cucumber());
   return config;
+}
+const createBundler = require('@badeball/cypress-cucumber-preprocessor/webpackr')
+const addCucumberPreprocessorPlugin = require('@badeball/cypress-cucumber-preprocessor').addCucumberPreprocessorPlugin
+
+module.exports = async (on, config) => {
+	await addCucumberPreprocessorPlugin(on, config)
+
+	on(
+		'file:preprocessor',
+		createBundler({
+			plugins: [],
+		})
+	)
+
+	return config
 }

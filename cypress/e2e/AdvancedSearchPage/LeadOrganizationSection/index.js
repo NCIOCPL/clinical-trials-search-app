@@ -1,7 +1,7 @@
 /// <reference types="Cypress" />
-import { And, Then, When } from 'cypress-cucumber-preprocessor/steps';
+import {Then, When, Given } from "@badeball/cypress-cucumber-preprocessor";
 
-And('user selects {string} from dropdown', (autosuggestTerm) => {
+Given('user selects {string} from dropdown', (autosuggestTerm) => {
 	cy.get('div.cts-autocomplete__menu.--leadOrg').should('be.visible');
 	cy.get('div.cts-autocomplete__menu.--leadOrg div.highlighted:visible')
 		.should('have.text', autosuggestTerm)
@@ -22,7 +22,7 @@ Then(
 	}
 );
 
-And(
+Given(
 	'help icon is displayed in {string} section with href {string}',
 	(fieldLabel, href) => {
 		cy.get(`a[href="${href}"]`)
@@ -55,7 +55,7 @@ When('user clicks on Modify Search Criteria button', () => {
 	cy.get('button.btnAsLink').contains('Modify Search Criteria').click();
 });
 
-And('the criteria table displays the following', (dataTable) => {
+Given('the criteria table displays the following', (dataTable) => {
 	cy.get('tbody > tr').should('have.length', dataTable.hashes().length);
 	//index assures correct order
 	let index = 0;
@@ -66,7 +66,7 @@ And('the criteria table displays the following', (dataTable) => {
 	}
 });
 
-And('trial info displayes {string}', (infoText) => {
+Given('trial info displayes {string}', (infoText) => {
 	cy.get('.all-trials').should('include.text', infoText);
 });
 
@@ -78,6 +78,6 @@ When('user clears {string} input field', (fieldLabel) => {
 	cy.get(`input[aria-label="${fieldLabel}"]`).clear();
 });
 
-And('user clicks on {string} button', (buttonLabel) => {
+Given('user clicks on {string} button', (buttonLabel) => {
 	cy.get('button').contains(buttonLabel).click({ force: true });
 });

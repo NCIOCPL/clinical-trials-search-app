@@ -1,18 +1,18 @@
 /// <reference types="Cypress" />
-import { Then, When, And } from 'cypress-cucumber-preprocessor/steps';
+import {Then, When, Given } from "@badeball/cypress-cucumber-preprocessor";
 import { fieldMap } from '../../../utils/ctsFields.js';
 
-And(
+Given(
 	'help icon is displayed in {string} section with href {string}',
 	(fieldLabel, helpHref) => {
 		cy.get('#fieldset--drug-trtmt')
 			.find('a.text-icon-help')
 			.should('be.visible', fieldLabel)
-			.and('have.attr', 'href', helpHref);
+			.Given('have.attr', 'href', helpHref);
 	}
 );
 
-And('info text {string} is displayed in the section body', (infoText) => {
+Given('info text {string} is displayed in the section body', (infoText) => {
 	cy.get('#fieldset--drug-trtmt').find('p').should('have.text', infoText);
 });
 
@@ -26,7 +26,7 @@ Then(
 	}
 );
 
-And('user selects {string} from dropdown', (autosuggestTerm) => {
+Given('user selects {string} from dropdown', (autosuggestTerm) => {
 	cy.contains(
 		'#fieldset--drug-trtmt .cts-autocomplete__menu-item',
 		autosuggestTerm,
@@ -36,11 +36,11 @@ And('user selects {string} from dropdown', (autosuggestTerm) => {
 	).click({ force: true, timeout: 7000 });
 });
 
-And('trial info displays {string}', (infoText) => {
+Given('trial info displays {string}', (infoText) => {
 	cy.get('.all-trials').should('have.text', infoText);
 });
 
-And('the criteria table displays the following', (dataTable) => {
+Given('the criteria table displays the following', (dataTable) => {
 	cy.get('tbody > tr').should('have.length', dataTable.hashes().length);
 	//index assures correct order
 	let index = 0;
@@ -81,7 +81,7 @@ When(
 	}
 );
 
-And(
+Given(
 	'the url query has the following corresponding code with duplicated keys',
 	(dataTable) => {
 		cy.location('href').then((url) => {

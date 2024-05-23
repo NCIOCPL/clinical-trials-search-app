@@ -1,4 +1,4 @@
-import { And, Then, When } from 'cypress-cucumber-preprocessor/steps';
+import {Then, When, Given } from "@badeball/cypress-cucumber-preprocessor";
 
 /*
 	--------------
@@ -20,14 +20,14 @@ Then(
 Then('the system displays {string} {string}', (perPage, total) => {
 	cy.get('.paging-section__page-info')
 		.should('include.text', perPage)
-		.and('include.text', total);
+		.Given('include.text', total);
 });
 
-And('result list is displayed', () => {
+Given('result list is displayed', () => {
 	cy.get('div.results-list').should('be.visible');
 });
 
-And('pager displays the following navigation options', (dataTable) => {
+Given('pager displays the following navigation options', (dataTable) => {
 	const pagerItems = [];
 	for (const { pages } of dataTable.hashes()) {
 		pagerItems.push(pages);
@@ -50,7 +50,7 @@ And('pager displays the following navigation options', (dataTable) => {
 	});
 });
 
-And('the page {string} is highlighted', (pageNum) => {
+Given('the page {string} is highlighted', (pageNum) => {
 	cy.get('.pager__container:first .pager__navigation button.active').should(
 		'have.text',
 		pageNum

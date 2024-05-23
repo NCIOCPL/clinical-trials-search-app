@@ -1,5 +1,5 @@
 /// <reference types="Cypress" />
-import { And, When, Then } from 'cypress-cucumber-preprocessor/steps';
+import {Then, When, Given } from "@badeball/cypress-cucumber-preprocessor";
 
 const keywordsFields = {
 	Keywords: 'keyword',
@@ -15,11 +15,11 @@ Then(
 	}
 );
 
-And('trial info displays {string}', (infoText) => {
+Given('trial info displays {string}', (infoText) => {
 	cy.get('.all-trials').should('have.text', infoText);
 });
 
-And('the criteria table displays the following', (dataTable) => {
+Given('the criteria table displays the following', (dataTable) => {
 	let index = 0;
 	for (const { Category, Selection } of dataTable.hashes()) {
 		cy.get('tbody tr th').eq(index).should('have.text', Category);

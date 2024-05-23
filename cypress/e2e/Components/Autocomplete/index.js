@@ -1,5 +1,5 @@
 /// <reference types="Cypress" />
-import { And, Then, When } from 'cypress-cucumber-preprocessor/steps';
+import {Then, When, Given } from "@badeball/cypress-cucumber-preprocessor";
 
 const inputFieldMap = {
 	Age: 'age',
@@ -9,11 +9,11 @@ const inputFieldMap = {
 	'Cancer Type/Condition': 'ct',
 };
 
-And('autocomplete dropdown is displayed', () => {
+Given('autocomplete dropdown is displayed', () => {
 	cy.get('.cts-autocomplete .menu-anchor :visible').should('exist');
 });
 
-And('user selects {string} from dropdown', (keyword) => {
+Given('user selects {string} from dropdown', (keyword) => {
 	cy.get('.cts-autocomplete__menu-item').contains(keyword).click();
 });
 
@@ -33,7 +33,7 @@ When('user clears {string} input field', (fieldLabel) => {
 	cy.get(`input#${inputFieldMap[fieldLabel]}`).clear();
 });
 
-And(
+Given(
 	'user presses {string} key in {string} field to select {string}',
 	(key, fieldLabel, term) => {
 		let res = '';
@@ -59,7 +59,7 @@ And(
 	}
 );
 
-And('user presses {string} key from {string} field', (key, fieldLabel) => {
+Given('user presses {string} key from {string} field', (key, fieldLabel) => {
 	if (key.includes('tab')) {
 		cy.focused().tab();
 	} else {
@@ -67,11 +67,11 @@ And('user presses {string} key from {string} field', (key, fieldLabel) => {
 	}
 });
 
-And('trial info displays {string}', (infoText) => {
+Given('trial info displays {string}', (infoText) => {
 	cy.get('.all-trials').should('have.text', infoText);
 });
 
-And('the criteria table displays the following', (dataTable) => {
+Given('the criteria table displays the following', (dataTable) => {
 	let index = 0;
 	for (const { Category, Selection } of dataTable.hashes()) {
 		cy.get('tbody tr th').eq(index).should('have.text', Category);
@@ -80,7 +80,7 @@ And('the criteria table displays the following', (dataTable) => {
 	}
 });
 
-And('{string} no trial info is displayed', (noTrialsText) => {
+Given('{string} no trial info is displayed', (noTrialsText) => {
 	cy.get('.no-results').should('have.text', noTrialsText);
 });
 

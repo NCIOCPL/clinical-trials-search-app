@@ -1,22 +1,22 @@
 /// <reference types="Cypress" />
-import { And } from 'cypress-cucumber-preprocessor/steps';
+import {Then, When, Given } from "@badeball/cypress-cucumber-preprocessor";
 
 cy.on('uncaught:exception', () => {
 	// returning false here prevents Cypress from
 	// failing the test
 	return false;
 });
-And('{string} button as link is displayed', (btnText) => {
+Given('{string} button as link is displayed', (btnText) => {
 	cy.get('div[class*="btnAsLink"]')
 		.should('have.text', btnText)
-		.and('be.visible');
+		.Given('be.visible');
 });
 
-And('the text {string} appears on the page', (text) => {
+Given('the text {string} appears on the page', (text) => {
 	cy.get('div.error-container').should('contain', text);
 });
 
-And('the following links and texts exist on the page', (dataTable) => {
+Given('the following links and texts exist on the page', (dataTable) => {
 	// Split the data table into array of pairs
 	const rawTable = dataTable.rawTable.slice();
 
@@ -27,6 +27,6 @@ And('the following links and texts exist on the page', (dataTable) => {
 	}
 });
 
-And('the search bar appears below', () => {
+Given('the search bar appears below', () => {
 	cy.get('input#keywords').should('be.visible');
 });
