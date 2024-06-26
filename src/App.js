@@ -10,8 +10,8 @@ import './styles/main.scss';
 import { BasicSearchPage, AdvancedSearchPage } from './views/SearchPage';
 import ResultsPage from './views/ResultsPage';
 import TrialDescriptionPage from './views/TrialDescriptionPage';
-import ErrorPage from './views/ErrorPage';
-import PageNotFound from './views/PageNotFound/PageNotFound';
+import InvalidCriteriaPage from './views/InvalidCriteriaPage';
+import { PageNotFound } from './views/ErrorBoundary';
 import { useAppSettings } from './store/store.js';
 import { PrintContextProvider } from './store/printContext';
 import { useAppInitializer } from './hooks';
@@ -53,7 +53,7 @@ const App = ({ zipConversionEndpoint }) => {
 					</Routes>
 				</PrintContextProvider>
 			) : (
-				<ErrorPage initErrorsList={initErrorsList} />
+				<InvalidCriteriaPage initErrorsList={initErrorsList} />
 			)}
 		</>
 	);

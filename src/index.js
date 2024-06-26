@@ -24,6 +24,9 @@ import App from './App';
 import './index.css';
 import clinicalTrialsSearchClientFactory from './services/api/clinical-trials-search-api';
 
+import { ErrorBoundary } from 'react-error-boundary';
+import { NCIErrorBoundary } from './views/ErrorBoundary';
+
 const initialize = ({
 	appHasBeenVisited = false,
 	appHasBeenInitialized = false,
@@ -154,7 +157,9 @@ const initialize = ({
 				<Provider store={store}>
 					<AnalyticsHoC>
 						<Router>
-							<App zipConversionEndpoint={zipConversionEndpoint} />
+							<ErrorBoundary FallbackComponent={NCIErrorBoundary}>
+								<App zipConversionEndpoint={zipConversionEndpoint} />
+							</ErrorBoundary>
 						</Router>
 					</AnalyticsHoC>
 				</Provider>

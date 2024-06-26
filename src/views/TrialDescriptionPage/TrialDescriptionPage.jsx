@@ -1,7 +1,6 @@
 import queryString from 'query-string';
 import React, { useEffect, useReducer } from 'react';
 import { Helmet } from 'react-helmet';
-// import { useDispatch } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTracking } from 'react-tracking';
 import { START_OVER_LINK } from '../../constants';
@@ -18,7 +17,6 @@ import { getClinicalTrialDescriptionAction } from '../../services/api/actions';
 import SitesList from './SitesList';
 
 import './TrialDescriptionPage.scss';
-// import { updateFormSearchCriteria } from '../../store/actions';
 import { useAppSettings } from '../../store/store.js';
 import { useAppPaths } from '../../hooks/routing';
 import {
@@ -27,11 +25,11 @@ import {
 	queryStringToSearchCriteria,
 	runQueryFetchers,
 } from '../../utilities';
-import ErrorPage from '../ErrorPage';
-import PageNotFound from '../PageNotFound/PageNotFound';
+import { useErrorBoundary } from 'react-error-boundary';
+import InvalidCriteriaPage from '../InvalidCriteriaPage';
+import { NotFoundError, ApiServerError } from '../ErrorBoundary/NCIError';
 
 const TrialDescriptionPage = () => {
-	// const rdx_dispatch = useDispatch();
 	const location = useLocation();
 	const navigate = useNavigate();
 	const qs = queryString.extract(location.search);
@@ -44,7 +42,7 @@ const TrialDescriptionPage = () => {
 	const trialTitle = location.state ? location.state.result.brief_title : '';
 	const tracking = useTracking();
 	const initialState = {
-		errors: [],
+		localErrors: false,
 		fetchActions: [],
 		isTrialLoading: true,
 		searchCriteriaObject: null,
@@ -58,9 +56,11 @@ const TrialDescriptionPage = () => {
 		isTrialLoading,
 		searchCriteriaObject,
 		trialDescription,
+		localErrors,
 	} = localState;
 
-	const { error, loading, payload } = useCtsApi(fetchActions);
+	const { showBoundary } = useErrorBoundary();
+	const { error: apiError, loading, payload } = useCtsApi(fetchActions);
 
 	const { BasicSearchPagePath, AdvancedSearchPagePath } = useAppPaths();
 
@@ -106,10 +106,17 @@ const TrialDescriptionPage = () => {
 		});
 	};
 
+	const setErrors = (localErrors) => {
+		ls_dispatch({
+			type: 'SET_ERRORS',
+			payload: localErrors,
+		});
+	};
+
 	function stateReducer(state, action) {
 		switch (action.type) {
 			case 'SET_ERRORS':
-				return { ...state, errors: action.payload };
+				return { ...state, localErrors: action.payload };
 			case 'SET_FETCH_ACTIONS':
 				return { ...state, fetchActions: action.payload };
 			case 'SET_LOADING_STATE':
@@ -123,49 +130,58 @@ const TrialDescriptionPage = () => {
 		}
 	}
 
-	const pageNotFoundRender = () => {
-		return null;
+	const handleApiError = (error) => {
+		const status = error.response?.status;
+		if (status === 404) {
+			showBoundary(new NotFoundError(error.message, status));
+		} else {
+			showBoundary(new ApiServerError(error.message, status));
+		}
+	};
+
+	const fetchSearchCriteria = async () => {
+		try {
+			const { diseaseFetcher, interventionFetcher, zipFetcher } =
+				await runQueryFetchers(
+					clinicalTrialsSearchClientV2,
+					zipConversionEndpoint
+				);
+			const res = await queryStringToSearchCriteria(
+				qs,
+				diseaseFetcher,
+				interventionFetcher,
+				zipFetcher
+			);
+
+			setSearchCriteriaObject(res.searchCriteria);
+
+			if (res.errors.length) {
+				setErrors(res.errors);
+			} else {
+				setFetchActions(getClinicalTrialDescriptionAction(currId));
+			}
+		} catch (error) {
+			setErrors([error]);
+		}
 	};
 
 	// scroll to top on mount
 	useEffect(() => {
 		window.scrollTo(0, 0);
-		if (payload == null) {
-			pageNotFoundRender();
+
+		if (apiError) {
+			handleApiError(apiError);
+		} else if (!loading && payload === null) {
+			showBoundary(new NotFoundError('Trial not found', 404));
 		} else if (isAllFetchingComplete()) {
 			initTrialData();
 		} else if (!searchCriteriaObject) {
-			const searchCriteria = async () => {
-				const { diseaseFetcher, interventionFetcher, zipFetcher } =
-					await runQueryFetchers(
-						clinicalTrialsSearchClientV2,
-						zipConversionEndpoint
-					);
-				return await queryStringToSearchCriteria(
-					qs,
-					diseaseFetcher,
-					interventionFetcher,
-					zipFetcher
-				);
-			};
-			searchCriteria().then((res) => {
-				setSearchCriteriaObject(res.searchCriteria);
-
-				if (res.errors.length) {
-					ls_dispatch({
-						type: 'SET_ERRORS',
-						payload: res.errors,
-					});
-				} else {
-					setFetchActions(getClinicalTrialDescriptionAction(currId));
-					//TODO rdx_dispatch(updateFormSearchCriteria(res.searchCriteria));
-				}
-			});
+			fetchSearchCriteria();
 		}
-	}, [loading, payload, searchCriteriaObject]);
+	}, [loading, payload, searchCriteriaObject, apiError]);
 
 	useEffect(() => {
-		if (!error && !isTrialLoading) {
+		if (!apiError && !localErrors && !isTrialLoading) {
 			tracking.trackEvent({
 				// These properties are required.
 				type: 'PageLoad',
@@ -182,7 +198,7 @@ const TrialDescriptionPage = () => {
 				nctId: trialDescription.nct_id,
 			});
 		}
-	}, [error, isTrialLoading]);
+	}, [apiError, localErrors, isTrialLoading]);
 
 	const initTrialData = () => {
 		setTrialDescription(payload);
@@ -190,9 +206,7 @@ const TrialDescriptionPage = () => {
 	};
 
 	const isAllFetchingComplete = () => {
-		const isFetchingComplete =
-			!loading && payload.length && searchCriteriaObject;
-		return isFetchingComplete;
+		return !loading && payload.length && searchCriteriaObject;
 	};
 
 	const trackShare = (shareType) => ({
@@ -427,10 +441,6 @@ const TrialDescriptionPage = () => {
 		);
 	};
 
-	const renderInvalidSearchCriteria = () => {
-		return <ErrorPage initErrorsList={localState.errors} />;
-	};
-
 	const formatPrimaryPurpose = () => {
 		let formatted_purpose = '';
 		if (
@@ -528,11 +538,14 @@ const TrialDescriptionPage = () => {
 		? filterSitesByActiveRecruitment(trialDescription.sites)
 		: [];
 
+	// Handle user input errors in the component
+	if (localErrors) {
+		return <InvalidCriteriaPage initErrorsList={localErrors} />;
+	}
+
 	return (
 		<>
-			{localState.errors.length !== 0 && <>{renderInvalidSearchCriteria()}</>}
-			{!isTrialLoading && error && <>Error Occurred!</>}
-			{payload != null && payload.length > 0 && !error && (
+			{!isTrialLoading && payload != null && payload.length > 0 && (
 				<>
 					{!isTrialLoading && (
 						<Helmet>
@@ -742,7 +755,6 @@ const TrialDescriptionPage = () => {
 					</article>
 				</>
 			)}
-			{payload == null && error !== null && <PageNotFound></PageNotFound>}
 		</>
 	);
 };
