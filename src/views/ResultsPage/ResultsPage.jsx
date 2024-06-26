@@ -6,7 +6,6 @@ import { useTracking } from 'react-tracking';
 import { updateFormSearchCriteria } from '../../store/actions';
 import { ChatOpener, Delighter, Modal, Pager } from '../../components/atomic';
 import { TRY_NEW_SEARCH_LINK } from '../../constants';
-import ErrorPage from '../ErrorPage';
 import {
 	formDataConverter,
 	formToTrackingData,
@@ -23,16 +22,17 @@ import { usePrintContext } from '../../store/printContext';
 import { useAppPaths } from '../../hooks/routing';
 
 import {
-	resultsPageReducer,
 	setSuccessfulFetch,
 	setSelectAll,
 	setFetchActions,
 	setSearchCriteriaObject,
-} from './resultsPageReducer';
+} from './resultsPageActions';
 
+import resultsPageReducer from './resultsPageReducer';
 import { useCtsApi } from '../../hooks/ctsApiSupport';
 import { getClinicalTrialsAction } from '../../services/api/actions';
 import { formatTrialSearchQuery } from '../../utilities/formatTrialSearchQuery';
+import InvalidCriteriaPage from '../InvalidCriteriaPage';
 const queryString = require('query-string');
 
 const ResultsPage = () => {
@@ -545,7 +545,7 @@ const ResultsPage = () => {
 	};
 
 	const renderInvalidZip = () => {
-		return <ErrorPage initErrorsList={error} />;
+		return <InvalidCriteriaPage initErrorsList={error} />;
 	};
 
 	const checkIfInvalidPage = () => {
