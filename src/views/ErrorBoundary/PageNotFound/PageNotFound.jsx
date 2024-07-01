@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useTracking } from 'react-tracking';
 
-import TextInput from '../../components/atomic/TextInput';
-import { useAppSettings } from '../../store/store';
+import TextInput from '../../../components/atomic/TextInput';
+import { useAppSettings } from '../../../store/store';
 
 const PageNotFound = () => {
 	const [{ canonicalHost }] = useAppSettings();

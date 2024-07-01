@@ -1,6 +1,6 @@
 {
   "name": "@nciocpl/clinical-trials-search-app",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "author": "National Cancer Institute",
   "license": "ISC",
   "main": "build/static/js/main.js",
@@ -50,6 +50,7 @@
     "react": "^16.14.0",
     "react-app-polyfill": "^1.0.2",
     "react-dom": "^16.14.0",
+    "react-error-boundary": "^4.0.13",
     "react-helmet": "^5.2.1",
     "react-redux": "^7.1.1",
     "react-router": "^6.0.0-beta.7",

@@ -2,10 +2,31 @@
 import { And, Given, Then, When } from 'cypress-cucumber-preprocessor/steps';
 import { fieldMap } from '../../utils/ctsFields.js';
 
+// https://docs.cypress.io/guides/guides/error-handling#Handling-uncaught-exceptions
+// May have issues with async code. Explicitly handle as needed. Also, this hides errors.
 cy.on('uncaught:exception', () => {
 	// returning false here prevents Cypress from
 	// failing the test
 	return false;
+});
+
+// Intercepts CTS API Calls
+Cypress.Commands.add('triggerServerError', () => {
+	cy.intercept('/cts/mock-api/v2/*', {
+		statusCode: 500,
+	}).as('mockApiError');
+
+	cy.intercept('/cts/mock-api/v2/trials/NCI-2014-01507', {
+		statusCode: 500,
+	}).as('mockApiError');
+
+	cy.intercept('/cts/proxy-api/v2/*', {
+		statusCode: 500,
+	}).as('proxyApiError');
+
+	cy.intercept('https://clinicaltrialsapi.cancer.gov/api/v2/*', {
+		statusCode: 500,
+	}).as('ctsApiError');
 });
 
 Given('the user navigates to {string}', (destURL) => {
@@ -23,6 +44,13 @@ When('the user navigates to {string}', (def) => {
 });
 
 Then('the page title is {string}', (title) => {
+	cy.get('h1').should('contain', title);
+});
+
+Then('page title on error page is {string}', (title) => {
+	Cypress.on('uncaught:exception', () => {
+		return false;
+	});
 	cy.get('h1').should('contain', title);
 });
 
@@ -203,3 +231,7 @@ Then(
 			.contains(ageText);
 	}
 );
+
+Given('the CTS API is responding with a server error', () => {
+	cy.triggerServerError();
+});
