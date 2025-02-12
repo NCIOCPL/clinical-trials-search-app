@@ -204,7 +204,7 @@
             "min_age_unit": "Years",
             "max_age_unit": "Years",
             "max_age_in_years": 999,
-            "gender": "FEMALE",
+            "sex": "FEMALE",
             "min_age": "18 Years",
             "accepts_healthy_volunteers": false,
             "min_age_number": 18,

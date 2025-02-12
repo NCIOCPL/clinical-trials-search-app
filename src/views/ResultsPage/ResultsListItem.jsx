@@ -109,6 +109,7 @@ const ResultsListItem = ({
 		const displays = {
 			MALE: 'Male',
 			FEMALE: 'Female',
+			ALL: 'Male or Female',
 			BOTH: 'Male or Female',
 		};
 		return displays[genderVal];
@@ -293,9 +294,12 @@ const ResultsListItem = ({
 					{getAgeDisplay()}
 				</div>
 				<div className="results-list-item__category">
-					<span>Gender:</span>
+					<span>Sex:</span>
 					{item.eligibility &&
-						getGenderDisplay(item.eligibility.structured.gender)}
+						getGenderDisplay(
+							item.eligibility.structured.sex ||
+								item.eligibility.structured.gender
+						)}
 				</div>
 				<div className="results-list-item__category">
 					<span>Location:</span>

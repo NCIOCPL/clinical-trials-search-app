@@ -327,3 +327,19 @@ Feature: Clinical Trials Search Results Page Components
 			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=50&d=C798&i=C15313&in=Benjamin%20David%20Smith&lo=M%20D%20Anderson%20Cancer%20Center&loc=1&q=Breast&rl=2&st=C2924&stg=C94774&t=C4872&tid=NCI-2017-00476&tp=iii&tt=treatment&z=30309&zp=100 |
 			| og:description | Find an NCI-supported clinical trial - Search results                                                                                                                                                                                                               |
 		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=50&d=C798&i=C15313&in=Benjamin%20David%20Smith&lo=M%20D%20Anderson%20Cancer%20Center&loc=1&q=Breast&rl=2&st=C2924&stg=C94774&t=C4872&tid=NCI-2017-00476&tp=iii&tt=treatment&z=30309&zp=100"
+
+
+	Scenario Outline: As a user, I expect the sex-based eligibility display to function regardless of the API's data structure.
+		Given the user navigates to "<path>"
+		Then trial info displayes "Results 1-1  of 1 for your search "
+		And the trial's sex-based eligibility displays "<sex>"
+		Examples:
+			| path                              | sex              |
+      # These three return eligibility.structured.gender
+      | /r?loc=0&rl=2&tid=NCI-2021-08397  | Male or Female   |
+      | /r?loc=0&rl=2&tid=NCI-2023-04529  | Female           |
+      | /r?loc=0&rl=2&tid=NCI-2020-04705  | Male             |
+      # These three return eligibility.structured.sex
+      | /r?loc=0&rl=2&tid=NCI-2014-02674  | Male or Female   |
+      | /r?loc=0&rl=2&tid=NCI-2017-02047  | Female           |
+      | /r?loc=0&rl=2&tid=NCI-2024-04336  | Male             |
