@@ -214,3 +214,14 @@ When('user clicks on chat online button', () => {
 Then('the chat is opened', () => {
 	expect(stub).to.be.calledOnce;
 });
+
+And("the trial's sex-based eligibility displays {string}", (sex) => {
+	// Look for the existence of a span containing the text "Sex:",
+	// followed by sex.
+	cy.get('.results-list-item')
+		.find('.results-list-item__category')
+		.filter(':contains("Sex:")')
+		.each(($el) => {
+			expect($el.text()).to.include(sex);
+		});
+});

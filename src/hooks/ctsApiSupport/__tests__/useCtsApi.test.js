@@ -391,7 +391,6 @@ describe('tests for useCtsApi', () => {
 				],
 				eligibility: {
 					structured: {
-						gender: 'BOTH',
 						max_age: '999 Years',
 						max_age_number: 999,
 						max_age_unit: 'Years',
@@ -400,6 +399,7 @@ describe('tests for useCtsApi', () => {
 						min_age_unit: 'Years',
 						max_age_in_years: 999,
 						min_age_in_years: 18,
+						sex: 'ALL',
 					},
 					unstructured: [
 						{

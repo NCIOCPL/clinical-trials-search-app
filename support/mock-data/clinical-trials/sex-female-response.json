@@ -1,0 +1,6232 @@
+{
+	"total": 1,
+	"data": [
+			{
+					"current_trial_status": "Active",
+					"nct_id": "NCT03488693",
+					"brief_title": "Regional Radiation Therapy with or without Whole Breast Irradiation in Treating Patients with Estrogen Receptor Positive, HER2 Negative Low Risk Breast Cancer Who Have Undergone Breast Conserving Surgery or Mastectomy",
+					"eligibility": {
+							"structured": {
+									"max_age": "999 Years",
+									"max_age_number": 999.0,
+									"min_age_unit": "Years",
+									"max_age_unit": "Years",
+									"max_age_in_years": 999.0,
+									"sex": "FEMALE",
+									"accepts_healthy_volunteers": false,
+									"min_age": "35 Years",
+									"min_age_number": 35.0,
+									"min_age_in_years": 35.0
+							}
+					},
+					"diseases": [
+							{
+									"inclusion_indicator": "TRIAL",
+									"is_lead_disease": false,
+									"synonyms": [
+											"Anatomic Stage I Breast Cancer AJCC v8",
+											"Anatomic Stage I Breast Carcinoma AJCC v8"
+									],
+									"nci_thesaurus_concept_id": "C139535",
+									"name": "Stage I Breast Cancer",
+									"type": [
+											"stage"
+									],
+									"parents": [
+											"C139533"
+									]
+							},
+							{
+									"inclusion_indicator": "TRIAL",
+									"is_lead_disease": false,
+									"synonyms": [
+											"Anatomic Stage II Breast Cancer AJCC v8",
+											"Anatomic Stage II Breast Carcinoma AJCC v8"
+									],
+									"nci_thesaurus_concept_id": "C139538",
+									"name": "Stage II Breast Cancer",
+									"type": [
+											"stage"
+									],
+									"parents": [
+											"C139533"
+									]
+							},
+							{
+									"inclusion_indicator": "TRIAL",
+									"is_lead_disease": true,
+									"synonyms": [
+											"Stage I Breast Cancer AJCC v7"
+									],
+									"nci_thesaurus_concept_id": "C88375",
+									"name": "Stage I Breast Cancer",
+									"type": [
+											"stage"
+									],
+									"parents": [
+											"C91230"
+									]
+							},
+							{
+									"inclusion_indicator": "TRIAL",
+									"is_lead_disease": false,
+									"synonyms": [
+											"infiltrating breast cancer",
+											"Infiltrating Breast Carcinoma",
+											"Infiltrating Carcinoma of Breast",
+											"Infiltrating Carcinoma of the Breast",
+											"Invasive Breast Carcinoma",
+											"Invasive Carcinoma of Breast",
+											"Invasive Carcinoma of the Breast",
+											"Invasive Mammary Carcinoma"
+									],
+									"nci_thesaurus_concept_id": "C9245",
+									"name": "Invasive Breast Cancer",
+									"type": [
+											"subtype"
+									],
+									"parents": [
+											"C4872",
+											"C9480"
+									]
+							},
+							{
+									"inclusion_indicator": "TREE",
+									"is_lead_disease": true,
+									"synonyms": [
+											"Breast Carcinoma by AJCC v7 Stage"
+									],
+									"nci_thesaurus_concept_id": "C91230",
+									"name": "Breast Cancer by AJCC v7 Stage",
+									"type": [
+											"stage"
+									],
+									"parents": [
+											"C4872"
+									]
+							},
+							{
+									"inclusion_indicator": "TREE",
+									"is_lead_disease": true,
+									"synonyms": [
+											"Breast Tumor",
+											"Neoplasm of Breast",
+											"Neoplasm of the Breast",
+											"Tumor of Breast",
+											"Tumor of the Breast"
+									],
+									"nci_thesaurus_concept_id": "C2910",
+									"name": "Breast Neoplasm",
+									"type": [
+											"subtype"
+									],
+									"parents": [
+											"C26709",
+											"C3263"
+									]
+							},
+							{
+									"inclusion_indicator": "TREE",
+									"is_lead_disease": true,
+									"synonyms": [],
+									"nci_thesaurus_concept_id": "C3263",
+									"name": "Neoplasm by Site",
+									"type": [
+											"subtype"
+									],
+									"parents": [
+											"C3262"
+									]
+							},
+							{
+									"inclusion_indicator": "TREE",
+									"is_lead_disease": true,
+									"synonyms": [
+											"Malignant Breast Tumor",
+											"Malignant Neoplasm of Breast",
+											"Malignant Neoplasm of the Breast",
+											"Malignant Tumor of Breast",
+											"Malignant Tumor of the Breast"
+									],
+									"nci_thesaurus_concept_id": "C9335",
+									"name": "Malignant Breast Neoplasm",
+									"type": [
+											"subtype"
+									],
+									"parents": [
+											"C2910",
+											"C9305"
+									]
+							},
+							{
+									"inclusion_indicator": "TREE",
+									"is_lead_disease": true,
+									"synonyms": [
+											"Carcinoma",
+											"CARCINOMA, MALIGNANT",
+											"Carcinoma, NOS",
+											"Epithelial Carcinoma",
+											"Epithelial tumor, malignant",
+											"Epithelioma Malignant",
+											"Malignant Epithelial Neoplasm",
+											"Malignant Epithelial Tumor",
+											"Malignant Epithelioma"
+									],
+									"nci_thesaurus_concept_id": "C2916",
+									"name": "Other Carcinoma",
+									"type": [
+											"maintype"
+									],
+									"parents": [
+											"C9305",
+											"C3709"
+									]
+							},
+							{
+									"inclusion_indicator": "TREE",
+									"is_lead_disease": true,
+									"synonyms": [
+											"Condition",
+											"Diagnosis",
+											"Disease",
+											"Disease or Disorder",
+											"Disease or Disorder, Non-Neoplastic",
+											"disease term",
+											"disease type",
+											"disease_term",
+											"disease_type",
+											"Diseases",
+											"Diseases and Disorders",
+											"Disorder",
+											"Disorders"
+									],
+									"nci_thesaurus_concept_id": "C2991",
+									"name": "Other Disease",
+									"type": [
+											"maintype"
+									],
+									"parents": []
+							},
+							{
+									"inclusion_indicator": "TREE",
+									"is_lead_disease": true,
+									"synonyms": [
+											"Disease by Site"
+									],
+									"nci_thesaurus_concept_id": "C27551",
+									"name": "Disorder by Site",
+									"type": [
+											"subtype"
+									],
+									"parents": [
+											"C2991"
+									]
+							},
+							{
+									"inclusion_indicator": "TREE",
+									"is_lead_disease": true,
+									"synonyms": [
+											"Neoplasia",
+											"Neoplasm",
+											"Neoplasm, NOS",
+											"Neoplasms, NOS",
+											"Neoplastic Disease",
+											"Neoplastic Growth",
+											"tumor",
+											"Tumor, NOS"
+									],
+									"nci_thesaurus_concept_id": "C3262",
+									"name": "Other Neoplasm",
+									"type": [
+											"maintype"
+									],
+									"parents": [
+											"C2991"
+									]
+							},
+							{
+									"inclusion_indicator": "TREE",
+									"is_lead_disease": true,
+									"synonyms": [],
+									"nci_thesaurus_concept_id": "C7057",
+									"name": "Disease, Disorder or Finding",
+									"type": [
+											"finding"
+									],
+									"parents": []
+							},
+							{
+									"inclusion_indicator": "TREE",
+									"is_lead_disease": true,
+									"synonyms": [
+											"Epithelial Neoplasms, NOS",
+											"Epithelioma",
+											"Epithelioma, malignant"
+									],
+									"nci_thesaurus_concept_id": "C3709",
+									"name": "Epithelial Neoplasm",
+									"type": [
+											"subtype"
+									],
+									"parents": [
+											"C4741"
+									]
+							},
+							{
+									"inclusion_indicator": "TREE",
+									"is_lead_disease": true,
+									"synonyms": [],
+									"nci_thesaurus_concept_id": "C7062",
+									"name": "Neoplasm by Special Category",
+									"type": [
+											"subtype"
+									],
+									"parents": [
+											"C3262"
+									]
+							},
+							{
+									"inclusion_indicator": "TREE",
+									"is_lead_disease": true,
+									"synonyms": [
+											"Breast Disease",
+											"Breast Diseases"
+									],
+									"nci_thesaurus_concept_id": "C26709",
+									"name": "Breast Disorder",
+									"type": [
+											"subtype"
+									],
+									"parents": [
+											"C27551"
+									]
+							},
+							{
+									"inclusion_indicator": "TREE",
+									"is_lead_disease": true,
+									"synonyms": [
+											"Breast cancer, NOS",
+											"Breast Carcinoma",
+											"Cancer of Breast",
+											"Cancer of the Breast",
+											"Carcinoma of Breast",
+											"Carcinoma of the Breast",
+											"Mammary Carcinoma"
+									],
+									"nci_thesaurus_concept_id": "C4872",
+									"name": "Breast Cancer",
+									"type": [
+											"maintype"
+									],
+									"parents": [
+											"C2916",
+											"C9335"
+									]
+							},
+							{
+									"inclusion_indicator": "TREE",
+									"is_lead_disease": true,
+									"synonyms": [
+											"CA",
+											"Cancer",
+											"Malignancy",
+											"Malignant Growth",
+											"Malignant Neoplastic Disease",
+											"Malignant Tumor",
+											"Neoplasm, malignant",
+											"Tumor, malignant, NOS",
+											"Unclassified tumor, malignant"
+									],
+									"nci_thesaurus_concept_id": "C9305",
+									"name": "Malignant Neoplasm",
+									"type": [
+											"subtype"
+									],
+									"parents": [
+											"C7062"
+									]
+							},
+							{
+									"inclusion_indicator": "TREE",
+									"is_lead_disease": true,
+									"synonyms": [
+											"Tumor Morphology",
+											"Tumor_Morphology"
+									],
+									"nci_thesaurus_concept_id": "C4741",
+									"name": "Neoplasm by Morphology",
+									"type": [
+											"subtype"
+									],
+									"parents": [
+											"C3262"
+									]
+							},
+							{
+									"inclusion_indicator": "TREE",
+									"is_lead_disease": false,
+									"synonyms": [
+											"Breast Carcinoma by AJCC v8 Stage"
+									],
+									"nci_thesaurus_concept_id": "C139532",
+									"name": "Breast Cancer by AJCC v8 Stage",
+									"type": [
+											"stage"
+									],
+									"parents": [
+											"C4872"
+									]
+							},
+							{
+									"inclusion_indicator": "TREE",
+									"is_lead_disease": false,
+									"synonyms": [
+											"Breast Carcinoma by AJCC v8 Anatomic Stage"
+									],
+									"nci_thesaurus_concept_id": "C139533",
+									"name": "Breast Cancer by AJCC v8 Anatomic Stage",
+									"type": [
+											"stage"
+									],
+									"parents": [
+											"C139532"
+									]
+							},
+							{
+									"inclusion_indicator": "TREE",
+									"is_lead_disease": false,
+									"synonyms": [
+											"infiltrating cancer",
+											"Infiltrating Malignant Neoplasm",
+											"invasive cancer"
+									],
+									"nci_thesaurus_concept_id": "C8505",
+									"name": "Invasive Malignant Neoplasm",
+									"type": [
+											"subtype"
+									],
+									"parents": [
+											"C9305"
+									]
+							},
+							{
+									"inclusion_indicator": "TREE",
+									"is_lead_disease": false,
+									"synonyms": [],
+									"nci_thesaurus_concept_id": "C9480",
+									"name": "Invasive Carcinoma",
+									"type": [
+											"subtype"
+									],
+									"parents": [
+											"C2916",
+											"C8505"
+									]
+							}
+					],
+					"sites": [
+							{
+									"org_state_or_province": "OH",
+									"org_city": "Cleveland",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "MetroHealth Medical Center",
+									"org_postal_code": "44109",
+									"org_coordinates": {
+											"lon": -81.697,
+											"lat": 41.4454
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NY",
+									"org_city": "Brooklyn",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "New York-Presbyterian/Brooklyn Methodist Hospital",
+									"org_postal_code": "11215",
+									"org_coordinates": {
+											"lon": -73.985,
+											"lat": 40.6678
+									},
+									"recruitment_status": "TEMPORARILY_CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "FL",
+									"org_city": "Fort Lauderdale",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Broward Health Medical Center",
+									"org_postal_code": "33316",
+									"org_coordinates": {
+											"lon": -80.132,
+											"lat": 26.0999
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "MO",
+									"org_city": "Jefferson City",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "MU Health Care Goldschmidt Cancer Center",
+									"org_postal_code": "65109",
+									"org_coordinates": {
+											"lon": -92.2945,
+											"lat": 38.5621
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IL",
+									"org_city": "Peoria",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "OSF Saint Francis Medical Center",
+									"org_postal_code": "61637",
+									"org_coordinates": {
+											"lon": -89.5906,
+											"lat": 40.7018
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "TX",
+									"org_city": "Conroe",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "MD Anderson in The Woodlands",
+									"org_postal_code": "77384",
+									"org_coordinates": {
+											"lon": -95.5058,
+											"lat": 30.2373
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "TX",
+									"org_city": "Houston",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "M D Anderson Cancer Center",
+									"org_postal_code": "77030",
+									"org_coordinates": {
+											"lon": -95.4026,
+											"lat": 29.7059
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "TX",
+									"org_city": "League City",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "MD Anderson League City",
+									"org_postal_code": "77573",
+									"org_coordinates": {
+											"lon": -95.1021,
+											"lat": 29.4885
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "TX",
+									"org_city": "Houston",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "MD Anderson West Houston",
+									"org_postal_code": "77079",
+									"org_coordinates": {
+											"lon": -95.6037,
+											"lat": 29.7757
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "TX",
+									"org_city": "Sugar Land",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "MD Anderson in Sugar Land",
+									"org_postal_code": "77478",
+									"org_coordinates": {
+											"lon": -95.6056,
+											"lat": 29.6152
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "KS",
+									"org_city": "Olathe",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "The University of Kansas Cancer Center - Olathe",
+									"org_postal_code": "66061",
+									"org_coordinates": {
+											"lon": -94.8713,
+											"lat": 38.8932
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NM",
+									"org_city": "Albuquerque",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Lovelace Radiation Oncology",
+									"org_postal_code": "87109",
+									"org_coordinates": {
+											"lon": -106.5756,
+											"lat": 35.1531
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "KY",
+									"org_city": "Fort Thomas",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Saint Elizabeth Healthcare Fort Thomas",
+									"org_postal_code": "41075",
+									"org_coordinates": {
+											"lon": -84.4516,
+											"lat": 39.0785
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "KY",
+									"org_city": "Edgewood",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Saint Elizabeth Healthcare Edgewood",
+									"org_postal_code": "41017",
+									"org_coordinates": {
+											"lon": -84.5635,
+											"lat": 39.0279
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MD",
+									"org_city": "Baltimore",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "MedStar Good Samaritan Hospital",
+									"org_postal_code": "21239",
+									"org_coordinates": {
+											"lon": -76.5875,
+											"lat": 39.3649
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MS",
+									"org_city": "Southhaven",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Baptist Memorial Hospital and Cancer Center-Desoto",
+									"org_postal_code": "38671",
+									"org_coordinates": {
+											"lon": -89.9817,
+											"lat": 34.9597
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "TN",
+									"org_city": "Memphis",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Baptist Memorial Hospital and Cancer Center-Memphis",
+									"org_postal_code": "38120",
+									"org_coordinates": {
+											"lon": -89.8645,
+											"lat": 35.1212
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CA",
+									"org_city": "Corona",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "City of Hope Corona",
+									"org_postal_code": "92879",
+									"org_coordinates": {
+											"lon": -117.5398,
+											"lat": 33.8787
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CA",
+									"org_city": "Duarte",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "City of Hope Comprehensive Cancer Center",
+									"org_postal_code": "91010",
+									"org_coordinates": {
+											"lon": -117.9655,
+											"lat": 34.1357
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CA",
+									"org_city": "Lancaster",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "City of Hope Antelope Valley",
+									"org_postal_code": "93534",
+									"org_coordinates": {
+											"lon": -118.1508,
+											"lat": 34.7349
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CA",
+									"org_city": "Upland",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "City of Hope Upland",
+									"org_postal_code": "91786",
+									"org_coordinates": {
+											"lon": -117.6625,
+											"lat": 34.1048
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CA",
+									"org_city": "South Pasadena",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "City of Hope South Pasadena",
+									"org_postal_code": "91030",
+									"org_coordinates": {
+											"lon": -118.1575,
+											"lat": 34.1101
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CO",
+									"org_city": "Loveland",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Banner McKee Medical Center",
+									"org_postal_code": "80539",
+									"org_coordinates": {
+											"lon": -105.0747,
+											"lat": 40.3979
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CO",
+									"org_city": "Greeley",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Banner North Colorado Medical Center",
+									"org_postal_code": "80631",
+									"org_coordinates": {
+											"lon": -104.6861,
+											"lat": 40.4475
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MD",
+									"org_city": "Bethesda",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Suburban Hospital",
+									"org_postal_code": "20814",
+									"org_coordinates": {
+											"lon": -77.1009,
+											"lat": 39.0051
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "TX",
+									"org_city": "Houston",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Baylor College of Medicine/Dan L Duncan Comprehensive Cancer Center",
+									"org_postal_code": "77030",
+									"org_coordinates": {
+											"lon": -95.4026,
+											"lat": 29.7059
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "OH",
+									"org_city": "Akron",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Cleveland Clinic Akron General",
+									"org_postal_code": "44307",
+									"org_coordinates": {
+											"lon": -81.5458,
+											"lat": 41.0707
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "FL",
+									"org_city": "Weston",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Cleveland Clinic-Weston",
+									"org_postal_code": "33331",
+									"org_coordinates": {
+											"lon": -80.3691,
+											"lat": 26.0551
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "TX",
+									"org_city": "Dallas",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Parkland Memorial Hospital",
+									"org_postal_code": "75235",
+									"org_coordinates": {
+											"lon": -96.8477,
+											"lat": 32.8302
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "TX",
+									"org_city": "Dallas",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UT Southwestern/Simmons Cancer Center-Dallas",
+									"org_postal_code": "75390",
+									"org_coordinates": {
+											"lon": -96.7016,
+											"lat": 32.8432
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CT",
+									"org_city": "New Haven",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Yale University",
+									"org_postal_code": "06520",
+									"org_coordinates": {
+											"lon": -72.9291,
+											"lat": 41.31
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "CT",
+									"org_city": "Guilford",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Smilow Cancer Hospital Care Center - Guilford",
+									"org_postal_code": "06437",
+									"org_coordinates": {
+											"lon": -72.7006,
+											"lat": 41.335
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "CT",
+									"org_city": "Hamden",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Smilow Cancer Hospital-Hamden Care Center",
+									"org_postal_code": "06518",
+									"org_coordinates": {
+											"lon": -72.9138,
+											"lat": 41.4267
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "CT",
+									"org_city": "Waterford",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Smilow Cancer Hospital Care Center - Waterford",
+									"org_postal_code": "06385",
+									"org_coordinates": {
+											"lon": -72.1558,
+											"lat": 41.3583
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "CT",
+									"org_city": "Trumbull",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Smilow Cancer Hospital Care Center-Trumbull",
+									"org_postal_code": "06611",
+									"org_coordinates": {
+											"lon": -73.2099,
+											"lat": 41.2599
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "NY",
+									"org_city": "Cooperstown",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Mary Imogene Bassett Hospital",
+									"org_postal_code": "13326",
+									"org_coordinates": {
+											"lon": -74.8929,
+											"lat": 42.7228
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IL",
+									"org_city": "Chicago",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "University of Chicago Comprehensive Cancer Center",
+									"org_postal_code": "60637",
+									"org_coordinates": {
+											"lon": -87.6021,
+											"lat": 41.781
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IL",
+									"org_city": "New Lenox",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UC Comprehensive Cancer Center at Silver Cross",
+									"org_postal_code": "60451",
+									"org_coordinates": {
+											"lon": -87.9609,
+											"lat": 41.5052
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IL",
+									"org_city": "Orland Park",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "University of Chicago Medicine-Orland Park",
+									"org_postal_code": "60462",
+									"org_coordinates": {
+											"lon": -87.8577,
+											"lat": 41.6163
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IN",
+									"org_city": "Crown Point",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UChicago Medicine Northwest Indiana",
+									"org_postal_code": "46307",
+									"org_coordinates": {
+											"lon": -87.3294,
+											"lat": 41.4039
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NY",
+									"org_city": "New York",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "NYP/Columbia University Medical Center/Herbert Irving Comprehensive Cancer Center",
+									"org_postal_code": "10032",
+									"org_coordinates": {
+											"lon": -73.9425,
+											"lat": 40.839
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NC",
+									"org_city": "Chapel Hill",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UNC Lineberger Comprehensive Cancer Center",
+									"org_postal_code": "27599",
+									"org_coordinates": {
+											"lon": -79.0561,
+											"lat": 35.9134
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "FL",
+									"org_city": "Orlando",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Orlando Health Cancer Institute",
+									"org_postal_code": "32806",
+									"org_coordinates": {
+											"lon": -81.3614,
+											"lat": 28.5125
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "CA",
+									"org_city": "La Jolla",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UC San Diego Moores Cancer Center",
+									"org_postal_code": "92093",
+									"org_coordinates": {
+											"lon": -117.2575,
+											"lat": 32.8339
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "La Crosse",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Gundersen Lutheran Medical Center",
+									"org_postal_code": "54601",
+									"org_coordinates": {
+											"lon": -91.145,
+											"lat": 43.8
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "UT",
+									"org_city": "South Jordan",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "South Jordan Health Center",
+									"org_postal_code": "84009",
+									"org_coordinates": {
+											"lon": -112.018,
+											"lat": 40.5554
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "UT",
+									"org_city": "Farmington",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Farmington Health Center",
+									"org_postal_code": "84025",
+									"org_coordinates": {
+											"lon": -111.8755,
+											"lat": 40.9772
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "UT",
+									"org_city": "Salt Lake City",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Huntsman Cancer Institute/University of Utah",
+									"org_postal_code": "84112",
+									"org_coordinates": {
+											"lon": -111.842,
+											"lat": 40.7658
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "UT",
+									"org_city": "Salt Lake City",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "University of Utah Sugarhouse Health Center",
+									"org_postal_code": "84106",
+									"org_coordinates": {
+											"lon": -111.8559,
+											"lat": 40.7063
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IL",
+									"org_city": "Chicago",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Northwestern University",
+									"org_postal_code": "60611",
+									"org_coordinates": {
+											"lon": -87.6187,
+											"lat": 41.8946
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IA",
+									"org_city": "Clive",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Mercy Cancer Center-West Lakes",
+									"org_postal_code": "50325",
+									"org_coordinates": {
+											"lon": -93.7732,
+											"lat": 41.6083
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IA",
+									"org_city": "Des Moines",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Mercy Medical Center - Des Moines",
+									"org_postal_code": "50314",
+									"org_coordinates": {
+											"lon": -93.6272,
+											"lat": 41.6078
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IA",
+									"org_city": "Creston",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Greater Regional Medical Center",
+									"org_postal_code": "50801",
+									"org_coordinates": {
+											"lon": -94.3908,
+											"lat": 41.0799
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NH",
+									"org_city": "Lebanon",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Dartmouth Hitchcock Medical Center/Dartmouth Cancer Center",
+									"org_postal_code": "03756",
+									"org_coordinates": {
+											"lon": -72.2895,
+											"lat": 43.7029
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "VT",
+									"org_city": "Saint Johnsbury",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Dartmouth Cancer Center - North",
+									"org_postal_code": "05819",
+									"org_coordinates": {
+											"lon": -71.9767,
+											"lat": 44.4161
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WV",
+									"org_city": "Morgantown",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "West Virginia University Healthcare",
+									"org_postal_code": "26506",
+									"org_coordinates": {
+											"lon": -79.9572,
+											"lat": 39.6496
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IL",
+									"org_city": "Lake Forest",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Northwestern Medicine Lake Forest Hospital",
+									"org_postal_code": "60045",
+									"org_coordinates": {
+											"lon": -87.8684,
+											"lat": 42.2369
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NY",
+									"org_city": "Mineola",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "NYU Langone Hospital - Long Island",
+									"org_postal_code": "11501",
+									"org_coordinates": {
+											"lon": -73.6388,
+											"lat": 40.7469
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NY",
+									"org_city": "New York",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Laura and Isaac Perlmutter Cancer Center at NYU Langone",
+									"org_postal_code": "10016",
+									"org_coordinates": {
+											"lon": -73.9782,
+											"lat": 40.7445
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Washington",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UPMC Washington Hospital Radiation Oncology",
+									"org_postal_code": "15301",
+									"org_coordinates": {
+											"lon": -80.2549,
+											"lat": 40.1606
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "Ontario",
+									"org_city": "Kingston",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "Kingston Health Sciences Centre",
+									"org_postal_code": "K7L 2V7",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NY",
+									"org_city": "New York",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Mount Sinai Chelsea",
+									"org_postal_code": "10011",
+									"org_coordinates": {
+											"lon": -73.9997,
+											"lat": 40.7409
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "NY",
+									"org_city": "New York",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Mount Sinai Union Square",
+									"org_postal_code": "10003",
+									"org_coordinates": {
+											"lon": -73.9891,
+											"lat": 40.7316
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "NY",
+									"org_city": "Astoria",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Mount Sinai Queens",
+									"org_postal_code": "11102",
+									"org_coordinates": {
+											"lon": -73.926,
+											"lat": 40.7715
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "NY",
+									"org_city": "New York",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Mount Sinai Hospital",
+									"org_postal_code": "10029",
+									"org_coordinates": {
+											"lon": -73.9439,
+											"lat": 40.7917
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "NY",
+									"org_city": "New York",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Mount Sinai West",
+									"org_postal_code": "10019",
+									"org_coordinates": {
+											"lon": -73.9853,
+											"lat": 40.7652
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "MD",
+									"org_city": "Easton",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "University of Maryland Shore Medical Center at Easton",
+									"org_postal_code": "21601",
+									"org_coordinates": {
+											"lon": -76.0783,
+											"lat": 38.7965
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NM",
+									"org_city": "Albuquerque",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "New Mexico Oncology Hematology Consultants",
+									"org_postal_code": "87109",
+									"org_coordinates": {
+											"lon": -106.5756,
+											"lat": 35.1531
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CA",
+									"org_city": "Berkeley",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Alta Bates Summit Medical Center-Herrick Campus",
+									"org_postal_code": "94704",
+									"org_coordinates": {
+											"lon": -122.2584,
+											"lat": 37.8697
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "CA",
+									"org_city": "Vallejo",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Sutter Solano Medical Center/Cancer Center",
+									"org_postal_code": "94589",
+									"org_coordinates": {
+											"lon": -122.2502,
+											"lat": 38.1438
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "TX",
+									"org_city": "Galveston",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "University of Texas Medical Branch",
+									"org_postal_code": "77555-0565",
+									"org_coordinates": {
+											"lon": -94.7926,
+											"lat": 29.2992
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "OH",
+									"org_city": "Canton",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Aultman Health Foundation",
+									"org_postal_code": "44710",
+									"org_coordinates": {
+											"lon": -81.4236,
+											"lat": 40.7898
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Johnson Creek",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "University of Wisconsin Carbone Cancer Center - Johnson Creek",
+									"org_postal_code": "53038",
+									"org_coordinates": {
+											"lon": -88.7603,
+											"lat": 43.0611
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Madison",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "University of Wisconsin Carbone Cancer Center - Eastpark Medical Center",
+									"org_postal_code": "53718",
+									"org_coordinates": {
+											"lon": -89.2692,
+											"lat": 43.108
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Madison",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "University of Wisconsin Carbone Cancer Center - University Hospital",
+									"org_postal_code": "53792",
+									"org_coordinates": {
+											"lon": -89.4329,
+											"lat": 43.0769
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IL",
+									"org_city": "Harvey",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Ingalls Memorial Hospital",
+									"org_postal_code": "60426",
+									"org_coordinates": {
+											"lon": -87.6495,
+											"lat": 41.6125
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CA",
+									"org_city": "Anaheim",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Kaiser Permanente-Anaheim",
+									"org_postal_code": "92806",
+									"org_coordinates": {
+											"lon": -117.8708,
+											"lat": 33.8393
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CA",
+									"org_city": "Bellflower",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Kaiser Permanente-Bellflower",
+									"org_postal_code": "90706",
+									"org_coordinates": {
+											"lon": -118.1274,
+											"lat": 33.8879
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CA",
+									"org_city": "Los Angeles",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Kaiser Permanente Los Angeles Medical Center",
+									"org_postal_code": "90027",
+									"org_coordinates": {
+											"lon": -118.292,
+											"lat": 34.1252
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "FL",
+									"org_city": "Tampa",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Moffitt Cancer Center",
+									"org_postal_code": "33612",
+									"org_coordinates": {
+											"lon": -82.45,
+											"lat": 28.0508
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IL",
+									"org_city": "Chicago",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Rush University Medical Center",
+									"org_postal_code": "60612",
+									"org_coordinates": {
+											"lon": -87.6877,
+											"lat": 41.8804
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "Ontario",
+									"org_city": "Toronto",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "University Health Network-Princess Margaret Hospital",
+									"org_postal_code": "M5G 2M9",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "Quebec",
+									"org_city": "Sherbrooke",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "Centre Hospitalier Universitaire de Sherbrooke-Fleurimont",
+									"org_postal_code": "J1H 5N4",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MI",
+									"org_city": "Kalamazoo",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "West Michigan Cancer Center",
+									"org_postal_code": "49007",
+									"org_coordinates": {
+											"lon": -85.5882,
+											"lat": 42.3015
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MI",
+									"org_city": "Traverse City",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Munson Medical Center",
+									"org_postal_code": "49684",
+									"org_coordinates": {
+											"lon": -85.6942,
+											"lat": 44.7515
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MI",
+									"org_city": "Grand Rapids",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Trinity Health Grand Rapids Hospital",
+									"org_postal_code": "49503",
+									"org_coordinates": {
+											"lon": -85.6569,
+											"lat": 42.9643
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MI",
+									"org_city": "Wyoming",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "University of Michigan Health - West",
+									"org_postal_code": "49519",
+									"org_coordinates": {
+											"lon": -85.7181,
+											"lat": 42.9041
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MI",
+									"org_city": "Muskegon",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Trinity Health Muskegon Hospital",
+									"org_postal_code": "49444",
+									"org_coordinates": {
+											"lon": -86.1901,
+											"lat": 43.1832
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MI",
+									"org_city": "Grand Rapids",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Corewell Health Grand Rapids Hospitals - Butterworth Hospital",
+									"org_postal_code": "49503",
+									"org_coordinates": {
+											"lon": -85.6569,
+											"lat": 42.9643
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MI",
+									"org_city": "Bay City",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "McLaren Cancer Institute-Bay City",
+									"org_postal_code": "48706",
+									"org_coordinates": {
+											"lon": -83.9583,
+											"lat": 43.5968
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MI",
+									"org_city": "Petoskey",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "McLaren Cancer Institute-Northern Michigan",
+									"org_postal_code": "49770",
+									"org_coordinates": {
+											"lon": -84.8827,
+											"lat": 45.3433
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MI",
+									"org_city": "Mount Pleasant",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "McLaren Cancer Institute-Central Michigan",
+									"org_postal_code": "48858",
+									"org_coordinates": {
+											"lon": -84.7949,
+											"lat": 43.6172
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MI",
+									"org_city": "Flint",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "McLaren Cancer Institute-Flint",
+									"org_postal_code": "48532",
+									"org_coordinates": {
+											"lon": -83.7908,
+											"lat": 43.0113
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MI",
+									"org_city": "Lansing",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Karmanos Cancer Institute at McLaren Greater Lansing",
+									"org_postal_code": "48910",
+									"org_coordinates": {
+											"lon": -84.5354,
+											"lat": 42.7004
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MI",
+									"org_city": "Port Huron",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "McLaren-Port Huron",
+									"org_postal_code": "48060",
+									"org_coordinates": {
+											"lon": -82.4643,
+											"lat": 42.9793
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MI",
+									"org_city": "Clarkston",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "McLaren Cancer Institute-Clarkston",
+									"org_postal_code": "48346",
+									"org_coordinates": {
+											"lon": -83.4167,
+											"lat": 42.7227
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MI",
+									"org_city": "Mount Clemens",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "McLaren Cancer Institute-Macomb",
+									"org_postal_code": "48043",
+									"org_coordinates": {
+											"lon": -82.8814,
+											"lat": 42.5974
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Hershey",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Penn State Milton S Hershey Medical Center",
+									"org_postal_code": "17033-0850",
+									"org_coordinates": {
+											"lon": -76.626,
+											"lat": 40.2634
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "KY",
+									"org_city": "Louisville",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UofL Health Medical Center Northeast",
+									"org_postal_code": "40245",
+									"org_coordinates": {
+											"lon": -85.4479,
+											"lat": 38.2638
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Monroeville",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UPMC Cancer Center - Monroeville",
+									"org_postal_code": "15146",
+									"org_coordinates": {
+											"lon": -79.7596,
+											"lat": 40.4264
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Farrell",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UPMC Cancer Center at UPMC Horizon",
+									"org_postal_code": "16121",
+									"org_coordinates": {
+											"lon": -80.5011,
+											"lat": 41.2068
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "TX",
+									"org_city": "Baytown",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Houston Methodist San Jacinto Hospital",
+									"org_postal_code": "77521",
+									"org_coordinates": {
+											"lon": -94.9681,
+											"lat": 29.7979
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NY",
+									"org_city": "Rochester",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Pluta Cancer Center",
+									"org_postal_code": "14623",
+									"org_coordinates": {
+											"lon": -77.6328,
+											"lat": 43.0873
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Carlisle",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Carlisle Regional Cancer Center",
+									"org_postal_code": "17015",
+									"org_coordinates": {
+											"lon": -77.1891,
+											"lat": 40.2015
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "TX",
+									"org_city": "Houston",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Methodist Willowbrook Hospital",
+									"org_postal_code": "77070",
+									"org_coordinates": {
+											"lon": -95.5741,
+											"lat": 29.9805
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CO",
+									"org_city": "Denver",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UCHealth - Cherry Creek",
+									"org_postal_code": "80206",
+									"org_coordinates": {
+											"lon": -104.9524,
+											"lat": 39.7333
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "ME",
+									"org_city": "Bath",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "MaineHealth Coastal Cancer Treatment Center",
+									"org_postal_code": "04530",
+									"org_coordinates": {
+											"lon": -69.8408,
+											"lat": 43.8797
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CO",
+									"org_city": "Greeley",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UCHealth Greeley Hospital",
+									"org_postal_code": "80631",
+									"org_coordinates": {
+											"lon": -104.6861,
+											"lat": 40.4475
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "TX",
+									"org_city": "Nassau Bay",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Houston Methodist Saint John Hospital",
+									"org_postal_code": "77058",
+									"org_coordinates": {
+											"lon": -95.0861,
+											"lat": 29.5828
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Chambersburg",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Chambersburg Hospital",
+									"org_postal_code": "17201",
+									"org_coordinates": {
+											"lon": -77.6382,
+											"lat": 39.9544
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "OH",
+									"org_city": "Westlake",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UH Seidman Cancer Center at Saint John Medical Center",
+									"org_postal_code": "44145",
+									"org_coordinates": {
+											"lon": -81.9298,
+											"lat": 41.4525
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "OH",
+									"org_city": "Elyria",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Mercy Cancer Center-Elyria",
+									"org_postal_code": "44035",
+									"org_coordinates": {
+											"lon": -82.1314,
+											"lat": 41.3603
+									},
+									"recruitment_status": "TEMPORARILY_CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "OH",
+									"org_city": "Mentor",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UH Seidman Cancer Center at Lake Health Mentor Campus",
+									"org_postal_code": "44060",
+									"org_coordinates": {
+											"lon": -81.3297,
+											"lat": 41.6763
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "OH",
+									"org_city": "Middleburg Heights",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UH Seidman Cancer Center at Southwest General Hospital",
+									"org_postal_code": "44130",
+									"org_coordinates": {
+											"lon": -81.7863,
+											"lat": 41.3776
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "OH",
+									"org_city": "Parma",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "University Hospitals Parma Medical Center",
+									"org_postal_code": "44129",
+									"org_coordinates": {
+											"lon": -81.7338,
+											"lat": 41.3919
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "OH",
+									"org_city": "Sandusky",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UH Seidman Cancer Center at Firelands Regional Medical Center",
+									"org_postal_code": "44870",
+									"org_coordinates": {
+											"lon": -82.7181,
+											"lat": 41.4028
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "OH",
+									"org_city": "Ravenna",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "University Hospitals Portage Medical Center",
+									"org_postal_code": "44266",
+									"org_coordinates": {
+											"lon": -81.1686,
+											"lat": 41.1736
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "OH",
+									"org_city": "Wadsworth",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "University Hospitals Sharon Health Center",
+									"org_postal_code": "44281",
+									"org_coordinates": {
+											"lon": -81.7404,
+											"lat": 41.0524
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "OH",
+									"org_city": "Cleveland",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Case Western Reserve University",
+									"org_postal_code": "44106",
+									"org_coordinates": {
+											"lon": -81.6065,
+											"lat": 41.5063
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "OH",
+									"org_city": "Westlake",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UHHS-Westlake Medical Center",
+									"org_postal_code": "44145",
+									"org_coordinates": {
+											"lon": -81.9298,
+											"lat": 41.4525
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "OH",
+									"org_city": "Beachwood",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UHHS-Chagrin Highlands Medical Center",
+									"org_postal_code": "44122",
+									"org_coordinates": {
+											"lon": -81.5121,
+											"lat": 41.4698
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "OH",
+									"org_city": "Chardon",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Geauga Hospital",
+									"org_postal_code": "44024",
+									"org_coordinates": {
+											"lon": -81.1919,
+											"lat": 41.5761
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "Manitoba",
+									"org_city": "Winnipeg",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "CancerCare Manitoba",
+									"org_postal_code": "R3E 0V9",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Wexford",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Wexford Health and Wellness Pavilion",
+									"org_postal_code": "15090",
+									"org_coordinates": {
+											"lon": -80.0614,
+											"lat": 40.6275
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Jefferson Hills",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Jefferson Hospital",
+									"org_postal_code": "15025",
+									"org_coordinates": {
+											"lon": -79.9241,
+											"lat": 40.2958
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IL",
+									"org_city": "Geneva",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Northwestern Medicine Cancer Center Delnor",
+									"org_postal_code": "60134",
+									"org_coordinates": {
+											"lon": -88.3401,
+											"lat": 41.8815
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IL",
+									"org_city": "DeKalb",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Northwestern Medicine Cancer Center Kishwaukee",
+									"org_postal_code": "60115",
+									"org_coordinates": {
+											"lon": -88.7558,
+											"lat": 41.8888
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IL",
+									"org_city": "Warrenville",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Northwestern Medicine Cancer Center Warrenville",
+									"org_postal_code": "60555",
+									"org_coordinates": {
+											"lon": -88.2281,
+											"lat": 41.832
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Reading",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Penn State Health Saint Joseph Medical Center",
+									"org_postal_code": "19605",
+									"org_coordinates": {
+											"lon": -75.9335,
+											"lat": 40.3999
+									},
+									"recruitment_status": "TEMPORARILY_CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "NY",
+									"org_city": "Bronx",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Montefiore Medical Center - Moses Campus",
+									"org_postal_code": "10467",
+									"org_coordinates": {
+											"lon": -73.8721,
+											"lat": 40.8778
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NY",
+									"org_city": "Bronx",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Montefiore Medical Center-Einstein Campus",
+									"org_postal_code": "10461",
+									"org_coordinates": {
+											"lon": -73.8398,
+											"lat": 40.8469
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "Quebec",
+									"org_city": "Montreal",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "The Research Institute of the McGill University Health Centre (MUHC)",
+									"org_postal_code": "H3H 2R9",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Green Bay",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Saint Vincent Hospital Cancer Center at Saint Mary's",
+									"org_postal_code": "54303",
+									"org_coordinates": {
+											"lon": -88.0507,
+											"lat": 44.539
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Sturgeon Bay",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Saint Vincent Hospital Cancer Center at Sturgeon Bay",
+									"org_postal_code": "54235-1495",
+									"org_coordinates": {
+											"lon": -87.4464,
+											"lat": 44.7888
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Eau Claire",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "HSHS Sacred Heart Hospital",
+									"org_postal_code": "54701",
+									"org_coordinates": {
+											"lon": -91.5038,
+											"lat": 44.7381
+									},
+									"recruitment_status": "TEMPORARILY_CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Green Bay",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Saint Vincent Hospital Cancer Center Green Bay",
+									"org_postal_code": "54301",
+									"org_coordinates": {
+											"lon": -88.0196,
+											"lat": 44.4814
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Sheboygan",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "HSHS Saint Nicholas Hospital",
+									"org_postal_code": "53081",
+									"org_coordinates": {
+											"lon": -87.7387,
+											"lat": 43.7072
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MA",
+									"org_city": "Lowell",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Lowell General Hospital",
+									"org_postal_code": "01854",
+									"org_coordinates": {
+											"lon": -71.3545,
+											"lat": 42.6505
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Erie",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UPMC Hillman Cancer Center Erie",
+									"org_postal_code": "16505",
+									"org_coordinates": {
+											"lon": -80.1558,
+											"lat": 42.108
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Indiana",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "IRMC Cancer Center",
+									"org_postal_code": "15701",
+									"org_coordinates": {
+											"lon": -79.1593,
+											"lat": 40.6222
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Mechanicsburg",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UPMC Hillman Cancer Center at Rocco And Nancy Ortenzio Cancer Pavilion",
+									"org_postal_code": "17050",
+									"org_coordinates": {
+											"lon": -77.0142,
+											"lat": 40.2485
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "SC",
+									"org_city": "Charleston",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Medical University of South Carolina",
+									"org_postal_code": "29425",
+									"org_coordinates": {
+											"lon": -79.9416,
+											"lat": 32.7799
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "TX",
+									"org_city": "The Woodlands",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Houston Methodist The Woodlands Hospital",
+									"org_postal_code": "77385",
+									"org_coordinates": {
+											"lon": -95.4223,
+											"lat": 30.1879
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NM",
+									"org_city": "Albuquerque",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "University of New Mexico Cancer Center",
+									"org_postal_code": "87106",
+									"org_coordinates": {
+											"lon": -106.616,
+											"lat": 35.0525
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "Quebec",
+									"org_city": "Montreal",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "CHUM - Centre Hospitalier de l'Universite de Montreal",
+									"org_postal_code": "H2X 3E4",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CO",
+									"org_city": "Boulder",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Rocky Mountain Cancer Centers-Boulder",
+									"org_postal_code": "80304",
+									"org_coordinates": {
+											"lon": -105.2884,
+											"lat": 40.0428
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IN",
+									"org_city": "Indianapolis",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Indiana University/Melvin and Bren Simon Cancer Center",
+									"org_postal_code": "46202",
+									"org_coordinates": {
+											"lon": -86.163,
+											"lat": 39.7837
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IN",
+									"org_city": "Avon",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "IU Health West Hospital",
+									"org_postal_code": "46123",
+									"org_coordinates": {
+											"lon": -86.4093,
+											"lat": 39.7623
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IN",
+									"org_city": "Carmel",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "IU Health North Hospital",
+									"org_postal_code": "46032",
+									"org_coordinates": {
+											"lon": -86.1603,
+											"lat": 39.9701
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IN",
+									"org_city": "Indianapolis",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "IU Health Methodist Hospital",
+									"org_postal_code": "46202",
+									"org_coordinates": {
+											"lon": -86.163,
+											"lat": 39.7837
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "OH",
+									"org_city": "Columbus",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Ohio State University Comprehensive Cancer Center",
+									"org_postal_code": "43210",
+									"org_coordinates": {
+											"lon": -83.0218,
+											"lat": 40.0051
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "Ontario",
+									"org_city": "Sudbury",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "Health Sciences North",
+									"org_postal_code": "P3E 5J1",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MD",
+									"org_city": "Towson",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UM Saint Joseph Medical Center",
+									"org_postal_code": "21204",
+									"org_coordinates": {
+											"lon": -76.6344,
+											"lat": 39.4025
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "OH",
+									"org_city": "Grove City",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Mount Carmel Grove City Hospital",
+									"org_postal_code": "43123",
+									"org_coordinates": {
+											"lon": -83.1183,
+											"lat": 39.8683
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "OH",
+									"org_city": "Columbus",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "The Mark H Zangmeister Center",
+									"org_postal_code": "43219",
+									"org_coordinates": {
+											"lon": -82.923,
+											"lat": 40.0079
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "OH",
+									"org_city": "Perrysburg",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Mercy Health - Perrysburg Hospital",
+									"org_postal_code": "43551",
+									"org_coordinates": {
+											"lon": -83.5671,
+											"lat": 41.5209
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "OH",
+									"org_city": "Westerville",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Saint Ann's Hospital",
+									"org_postal_code": "43081",
+									"org_coordinates": {
+											"lon": -82.9191,
+											"lat": 40.1219
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CT",
+									"org_city": "Norwalk",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Norwalk Hospital",
+									"org_postal_code": "06856",
+									"org_coordinates": {
+											"lon": -73.4214,
+											"lat": 41.1108
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "FL",
+									"org_city": "Tampa",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Saint Joseph's Hospital/Children's Hospital-Tampa",
+									"org_postal_code": "33607",
+									"org_coordinates": {
+											"lon": -82.5019,
+											"lat": 27.963
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "OH",
+									"org_city": "Columbus",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Grant Medical Center",
+									"org_postal_code": "43215",
+									"org_coordinates": {
+											"lon": -83.0,
+											"lat": 39.9651
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "OH",
+									"org_city": "Mansfield",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "OhioHealth Mansfield Hospital",
+									"org_postal_code": "44903",
+									"org_coordinates": {
+											"lon": -82.5216,
+											"lat": 40.7789
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "OH",
+									"org_city": "Dublin",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Dublin Methodist Hospital",
+									"org_postal_code": "43016",
+									"org_coordinates": {
+											"lon": -83.0956,
+											"lat": 40.1249
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "OH",
+									"org_city": "Columbus",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Riverside Methodist Hospital",
+									"org_postal_code": "43214",
+									"org_coordinates": {
+											"lon": -83.02,
+											"lat": 40.0525
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "OH",
+									"org_city": "Delaware",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Delaware Health Center-Grady Cancer Center",
+									"org_postal_code": "43015",
+									"org_coordinates": {
+											"lon": -83.0602,
+											"lat": 40.3029
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MD",
+									"org_city": "Baltimore",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Johns Hopkins University/Sidney Kimmel Cancer Center",
+									"org_postal_code": "21287",
+									"org_coordinates": {
+											"lon": -76.5621,
+											"lat": 39.3021
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "DC",
+									"org_city": "Washington",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Sibley Memorial Hospital",
+									"org_postal_code": "20016",
+									"org_coordinates": {
+											"lon": -77.0912,
+											"lat": 38.9381
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Antigo",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Langlade Hospital and Cancer Center",
+									"org_postal_code": "54409",
+									"org_coordinates": {
+											"lon": -89.1724,
+											"lat": 45.1268
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NJ",
+									"org_city": "New Brunswick",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Saint Peter's University Hospital",
+									"org_postal_code": "08901",
+									"org_coordinates": {
+											"lon": -74.4473,
+											"lat": 40.4861
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MI",
+									"org_city": "Southfield",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Henry Ford Health Providence Southfield Hospital",
+									"org_postal_code": "48075",
+									"org_coordinates": {
+											"lon": -83.2309,
+											"lat": 42.462
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MI",
+									"org_city": "Novi",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Henry Ford Health Providence Novi Hospital",
+									"org_postal_code": "48374",
+									"org_coordinates": {
+											"lon": -83.5253,
+											"lat": 42.4713
+									},
+									"recruitment_status": "TEMPORARILY_CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "NM",
+									"org_city": "Las Cruces",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Memorial Medical Center - Las Cruces",
+									"org_postal_code": "88011",
+									"org_coordinates": {
+											"lon": -106.6262,
+											"lat": 32.2687
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Harrisburg",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UPMC Pinnacle Cancer Center/Community Osteopathic Campus",
+									"org_postal_code": "17109",
+									"org_coordinates": {
+											"lon": -76.8217,
+											"lat": 40.2909
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "SC",
+									"org_city": "Spartanburg",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Spartanburg Medical Center",
+									"org_postal_code": "29303",
+									"org_coordinates": {
+											"lon": -81.9647,
+											"lat": 35.0096
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CA",
+									"org_city": "South San Francisco",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Kaiser Permanente Cancer Treatment Center",
+									"org_postal_code": "94080",
+									"org_coordinates": {
+											"lon": -122.4257,
+											"lat": 37.6562
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CA",
+									"org_city": "Rancho Cordova",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Kaiser Permanente-Rancho Cordova Cancer Center",
+									"org_postal_code": "95670",
+									"org_coordinates": {
+											"lon": -121.2825,
+											"lat": 38.5857
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CA",
+									"org_city": "Fresno",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Fresno Cancer Center",
+									"org_postal_code": "93720",
+									"org_coordinates": {
+											"lon": -119.7635,
+											"lat": 36.8642
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CA",
+									"org_city": "Roseville",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "The Permanente Medical Group-Roseville Radiation Oncology",
+									"org_postal_code": "95678",
+									"org_coordinates": {
+											"lon": -121.2874,
+											"lat": 38.7639
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CA",
+									"org_city": "Rohnert Park",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Rohnert Park Cancer Center",
+									"org_postal_code": "94928",
+									"org_coordinates": {
+											"lon": -122.6948,
+											"lat": 38.349
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CA",
+									"org_city": "Oakland",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Kaiser Permanente Oakland-Broadway",
+									"org_postal_code": "94611",
+									"org_coordinates": {
+											"lon": -122.2081,
+											"lat": 37.8286
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CA",
+									"org_city": "Santa Clara",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Kaiser Permanente Medical Center - Santa Clara",
+									"org_postal_code": "95051",
+									"org_coordinates": {
+											"lon": -121.9847,
+											"lat": 37.3486
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MO",
+									"org_city": "Lee's Summit",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "University of Kansas Cancer Center - Lee's Summit",
+									"org_postal_code": "64064",
+									"org_coordinates": {
+											"lon": -94.3634,
+											"lat": 38.9847
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MO",
+									"org_city": "Kansas City",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "University of Kansas Cancer Center - North",
+									"org_postal_code": "64154",
+									"org_coordinates": {
+											"lon": -94.631,
+											"lat": 39.2774
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "KS",
+									"org_city": "Overland Park",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "University of Kansas Cancer Center-Overland Park",
+									"org_postal_code": "66210",
+									"org_coordinates": {
+											"lon": -94.7059,
+											"lat": 38.9245
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "KS",
+									"org_city": "Kansas City",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "University of Kansas Cancer Center",
+									"org_postal_code": "66160",
+									"org_coordinates": {
+											"lon": -94.6108,
+											"lat": 39.0552
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "DE",
+									"org_city": "Newark",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Christiana Care Health System-Christiana Hospital",
+									"org_postal_code": "19718",
+									"org_coordinates": {
+											"lon": -75.7048,
+											"lat": 39.6705
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "DE",
+									"org_city": "Newark",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Helen F Graham Cancer Center",
+									"org_postal_code": "19713",
+									"org_coordinates": {
+											"lon": -75.7117,
+											"lat": 39.6702
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Chadds Ford",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Christiana Care Health System-Concord Health Center",
+									"org_postal_code": "19317",
+									"org_coordinates": {
+											"lon": -75.6288,
+											"lat": 39.8557
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "IN",
+									"org_city": "Indianapolis",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Community Cancer Center South",
+									"org_postal_code": "46227",
+									"org_coordinates": {
+											"lon": -86.1316,
+											"lat": 39.6749
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IN",
+									"org_city": "Indianapolis",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Community Cancer Center North",
+									"org_postal_code": "46256",
+									"org_coordinates": {
+											"lon": -86.0135,
+											"lat": 39.9049
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IN",
+									"org_city": "Indianapolis",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Community Cancer Center East",
+									"org_postal_code": "46219",
+									"org_coordinates": {
+											"lon": -86.044,
+											"lat": 39.7828
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NJ",
+									"org_city": "Toms River",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Community Medical Center",
+									"org_postal_code": "08755",
+									"org_coordinates": {
+											"lon": -74.2231,
+											"lat": 40.0075
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "MA",
+									"org_city": "Burlington",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Lahey Hospital and Medical Center",
+									"org_postal_code": "01805",
+									"org_coordinates": {
+											"lon": -71.1964,
+											"lat": 42.5044
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "IL",
+									"org_city": "Rockford",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UW Health Carbone Cancer Center Rockford",
+									"org_postal_code": "61114",
+									"org_coordinates": {
+											"lon": -88.9937,
+											"lat": 42.308
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "LA",
+									"org_city": "Shreveport",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "LSU Health Sciences Center at Shreveport",
+									"org_postal_code": "71103",
+									"org_coordinates": {
+											"lon": -93.7712,
+											"lat": 32.4909
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "MT",
+									"org_city": "Missoula",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Community Medical Center",
+									"org_postal_code": "59804",
+									"org_coordinates": {
+											"lon": -114.2358,
+											"lat": 46.8709
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "ID",
+									"org_city": "Post Falls",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Kootenai Clinic Cancer Services - Post Falls",
+									"org_postal_code": "83854",
+									"org_coordinates": {
+											"lon": -116.9576,
+											"lat": 47.7405
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MT",
+									"org_city": "Great Falls",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Benefis Sletten Cancer Institute",
+									"org_postal_code": "59405",
+									"org_coordinates": {
+											"lon": -111.2521,
+											"lat": 47.3449
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "ID",
+									"org_city": "Coeur D'Alene",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Kootenai Health - Coeur d'Alene",
+									"org_postal_code": "83814",
+									"org_coordinates": {
+											"lon": -116.7792,
+											"lat": 47.6847
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "SC",
+									"org_city": "Greenville",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Saint Francis Cancer Center",
+									"org_postal_code": "29607",
+									"org_coordinates": {
+											"lon": -82.3328,
+											"lat": 34.8105
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "FL",
+									"org_city": "Saint Petersburg",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Saint Anthony's Hospital Cancer Care Center",
+									"org_postal_code": "33705",
+									"org_coordinates": {
+											"lon": -82.6461,
+											"lat": 27.7373
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MN",
+									"org_city": "Minneapolis",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Hennepin County Medical Center",
+									"org_postal_code": "55415",
+									"org_coordinates": {
+											"lon": -93.2576,
+											"lat": 44.9746
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MN",
+									"org_city": "Minneapolis",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Abbott-Northwestern Hospital",
+									"org_postal_code": "55407",
+									"org_coordinates": {
+											"lon": -93.2527,
+											"lat": 44.9355
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "New Richmond",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Cancer Center of Western Wisconsin",
+									"org_postal_code": "54017",
+									"org_coordinates": {
+											"lon": -92.551,
+											"lat": 45.1804
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IL",
+									"org_city": "Effingham",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Crossroads Cancer Center",
+									"org_postal_code": "62401",
+									"org_coordinates": {
+											"lon": -88.6059,
+											"lat": 39.1183
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IL",
+									"org_city": "Decatur",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Decatur Memorial Hospital",
+									"org_postal_code": "62526",
+									"org_coordinates": {
+											"lon": -88.9645,
+											"lat": 39.9062
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NC",
+									"org_city": "Asheville",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Mission Hospital",
+									"org_postal_code": "28801",
+									"org_coordinates": {
+											"lon": -82.5572,
+											"lat": 35.5948
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NC",
+									"org_city": "Asheville",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Hope Women's Cancer Centers-Asheville",
+									"org_postal_code": "28816",
+									"org_coordinates": {
+											"lon": -82.6048,
+											"lat": 35.5834
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Two Rivers",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Vince Lombardi Cancer Clinic-Two Rivers",
+									"org_postal_code": "54241",
+									"org_coordinates": {
+											"lon": -87.5999,
+											"lat": 44.2198
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Sheboygan",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Vince Lombardi Cancer Clinic-Sheboygan",
+									"org_postal_code": "53081",
+									"org_coordinates": {
+											"lon": -87.7387,
+											"lat": 43.7072
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Grafton",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Aurora Cancer Care-Grafton",
+									"org_postal_code": "53024",
+									"org_coordinates": {
+											"lon": -87.9299,
+											"lat": 43.3305
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "West Allis",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Aurora West Allis Medical Center",
+									"org_postal_code": "53227",
+									"org_coordinates": {
+											"lon": -88.0426,
+											"lat": 42.996
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Milwaukee",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Aurora Saint Luke's Medical Center",
+									"org_postal_code": "53215",
+									"org_coordinates": {
+											"lon": -87.9467,
+											"lat": 42.9995
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Kenosha",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Aurora Cancer Care-Kenosha South",
+									"org_postal_code": "53142",
+									"org_coordinates": {
+											"lon": -87.9203,
+											"lat": 42.5328
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Green Bay",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Aurora BayCare Medical Center",
+									"org_postal_code": "54311",
+									"org_coordinates": {
+											"lon": -87.887,
+											"lat": 44.4827
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Milwaukee",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Aurora Sinai Medical Center",
+									"org_postal_code": "53233",
+									"org_coordinates": {
+											"lon": -87.9342,
+											"lat": 43.0374
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Summit",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Aurora Medical Center in Summit",
+									"org_postal_code": "53066",
+									"org_coordinates": {
+											"lon": -88.4931,
+											"lat": 43.114
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Oshkosh",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Vince Lombardi Cancer Clinic - Oshkosh",
+									"org_postal_code": "54904",
+									"org_coordinates": {
+											"lon": -88.6465,
+											"lat": 43.9694
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Marinette",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Aurora Bay Area Medical Group-Marinette",
+									"org_postal_code": "54143",
+									"org_coordinates": {
+											"lon": -87.6718,
+											"lat": 45.0918
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Lancaster",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Lancaster General Ann B Barshinger Cancer Institute",
+									"org_postal_code": "17601",
+									"org_coordinates": {
+											"lon": -76.3168,
+											"lat": 40.0734
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Lancaster",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Lancaster General Hospital",
+									"org_postal_code": "17602",
+									"org_coordinates": {
+											"lon": -76.2452,
+											"lat": 40.0158
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "SC",
+									"org_city": "Greenwood",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Self Regional Healthcare",
+									"org_postal_code": "29646",
+									"org_coordinates": {
+											"lon": -82.1464,
+											"lat": 34.1438
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "OR",
+									"org_city": "Bend",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Saint Charles Health System",
+									"org_postal_code": "97701",
+									"org_coordinates": {
+											"lon": -121.282,
+											"lat": 44.1187
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "UT",
+									"org_city": "Logan",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Logan Regional Hospital",
+									"org_postal_code": "84321",
+									"org_coordinates": {
+											"lon": -111.6435,
+											"lat": 41.6898
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "UT",
+									"org_city": "Cedar City",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Sandra L Maxwell Cancer Center",
+									"org_postal_code": "84720",
+									"org_coordinates": {
+											"lon": -113.2197,
+											"lat": 37.7617
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "UT",
+									"org_city": "Provo",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Utah Valley Regional Medical Center",
+									"org_postal_code": "84604",
+									"org_coordinates": {
+											"lon": -111.6073,
+											"lat": 40.3402
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "UT",
+									"org_city": "Ogden",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "McKay-Dee Hospital Center",
+									"org_postal_code": "84403",
+									"org_coordinates": {
+											"lon": -111.9156,
+											"lat": 41.1783
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "UT",
+									"org_city": "Salt Lake City",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "LDS Hospital",
+									"org_postal_code": "84143",
+									"org_coordinates": {
+											"lon": -111.8799,
+											"lat": 40.7785
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "UT",
+									"org_city": "Murray",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Intermountain Medical Center",
+									"org_postal_code": "84107",
+									"org_coordinates": {
+											"lon": -111.8836,
+											"lat": 40.6583
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "UT",
+									"org_city": "Riverton",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Riverton Hospital",
+									"org_postal_code": "84065",
+									"org_coordinates": {
+											"lon": -111.9627,
+											"lat": 40.5353
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "UT",
+									"org_city": "American Fork",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "American Fork Hospital / Huntsman Intermountain Cancer Center",
+									"org_postal_code": "84003",
+									"org_coordinates": {
+											"lon": -111.814,
+											"lat": 40.4102
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "UT",
+									"org_city": "Saint George",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Saint George Regional Medical Center",
+									"org_postal_code": "84770",
+									"org_coordinates": {
+											"lon": -113.7959,
+											"lat": 37.1317
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "FL",
+									"org_city": "Hollywood",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Memorial Regional Hospital/Joe DiMaggio Children's Hospital",
+									"org_postal_code": "33021",
+									"org_coordinates": {
+											"lon": -80.1869,
+											"lat": 26.0228
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MN",
+									"org_city": "Bemidji",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Sanford Joe Lueken Cancer Center",
+									"org_postal_code": "56601",
+									"org_coordinates": {
+											"lon": -94.7611,
+											"lat": 47.5271
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "ND",
+									"org_city": "Bismarck",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Sanford Bismarck Medical Center",
+									"org_postal_code": "58501",
+									"org_coordinates": {
+											"lon": -100.7748,
+											"lat": 46.8193
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Rice Lake",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Marshfield Medical Center-Rice Lake",
+									"org_postal_code": "54868",
+									"org_coordinates": {
+											"lon": -91.7231,
+											"lat": 45.5296
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Weston",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Marshfield Medical Center - Weston",
+									"org_postal_code": "54476",
+									"org_coordinates": {
+											"lon": -89.5403,
+											"lat": 44.9014
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Marshfield",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Marshfield Medical Center-Marshfield",
+									"org_postal_code": "54449",
+									"org_coordinates": {
+											"lon": -90.1945,
+											"lat": 44.6413
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Eau Claire",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Marshfield Medical Center-EC Cancer Center",
+									"org_postal_code": "54701",
+									"org_coordinates": {
+											"lon": -91.5038,
+											"lat": 44.7381
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Minocqua",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Marshfield Medical Center - Minocqua",
+									"org_postal_code": "54548",
+									"org_coordinates": {
+											"lon": -89.8777,
+											"lat": 45.8538
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Stevens Point",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Marshfield Medical Center-River Region at Stevens Point",
+									"org_postal_code": "54482",
+									"org_coordinates": {
+											"lon": -89.5034,
+											"lat": 44.5323
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Weston",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Diagnostic and Treatment Center",
+									"org_postal_code": "54476",
+									"org_coordinates": {
+											"lon": -89.5403,
+											"lat": 44.9014
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "SD",
+									"org_city": "Sioux Falls",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Sanford USD Medical Center - Sioux Falls",
+									"org_postal_code": "57117-5134",
+									"org_coordinates": {
+											"lon": -96.7245,
+											"lat": 43.5513
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NJ",
+									"org_city": "Sewell",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Sidney Kimmel Cancer Center Washington Township",
+									"org_postal_code": "08080",
+									"org_coordinates": {
+											"lon": -75.1094,
+											"lat": 39.7561
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Philadelphia",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Jefferson Torresdale Hospital",
+									"org_postal_code": "19114",
+									"org_coordinates": {
+											"lon": -75.0042,
+											"lat": 40.0685
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Philadelphia",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Thomas Jefferson University Hospital",
+									"org_postal_code": "19107",
+									"org_coordinates": {
+											"lon": -75.1581,
+											"lat": 39.9516
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Willow Grove",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Asplundh Cancer Pavilion",
+									"org_postal_code": "19090",
+									"org_coordinates": {
+											"lon": -75.1216,
+											"lat": 40.1476
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "OK",
+									"org_city": "Oklahoma City",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "University of Oklahoma Health Sciences Center",
+									"org_postal_code": "73104",
+									"org_coordinates": {
+											"lon": -97.5038,
+											"lat": 35.4753
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IL",
+									"org_city": "Springfield",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Springfield Memorial Hospital",
+									"org_postal_code": "62781",
+									"org_coordinates": {
+											"lon": -89.6574,
+											"lat": 39.8103
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NC",
+									"org_city": "Hendersonville",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Margaret R Pardee Memorial Hospital",
+									"org_postal_code": "28791",
+									"org_coordinates": {
+											"lon": -82.5083,
+											"lat": 35.3558
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "OH",
+									"org_city": "Sylvania",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "ProMedica Flower Hospital",
+									"org_postal_code": "43560",
+									"org_coordinates": {
+											"lon": -83.7379,
+											"lat": 41.6992
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WA",
+									"org_city": "Seattle",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Swedish Medical Center-First Hill",
+									"org_postal_code": "98122",
+									"org_coordinates": {
+											"lon": -122.3028,
+											"lat": 47.6108
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CO",
+									"org_city": "Wheat Ridge",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Intermountain Health Lutheran Hospital",
+									"org_postal_code": "80401",
+									"org_coordinates": {
+											"lon": -105.2437,
+											"lat": 39.7164
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CO",
+									"org_city": "Golden",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Lutheran Hospital - Cancer Centers of Colorado",
+									"org_postal_code": "80401",
+									"org_coordinates": {
+											"lon": -105.2437,
+											"lat": 39.7164
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "TX",
+									"org_city": "San Antonio",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "University of Texas Health Science Center at San Antonio",
+									"org_postal_code": "78229",
+									"org_coordinates": {
+											"lon": -98.5725,
+											"lat": 29.5052
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "IA",
+									"org_city": "Cedar Rapids",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Saint Luke's Hospital",
+									"org_postal_code": "52402",
+									"org_coordinates": {
+											"lon": -91.6586,
+											"lat": 42.0226
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "Quebec",
+									"org_city": "Quebec City",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "CHU de Quebec-L'Hotel-Dieu de Quebec (HDQ)",
+									"org_postal_code": "G1R 2J6",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MT",
+									"org_city": "Billings",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Billings Clinic Cancer Center",
+									"org_postal_code": "59101",
+									"org_coordinates": {
+											"lon": -108.3519,
+											"lat": 45.6311
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IL",
+									"org_city": "Urbana",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Carle Cancer Center",
+									"org_postal_code": "61801",
+									"org_coordinates": {
+											"lon": -88.2119,
+											"lat": 40.1093
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Appleton",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "ThedaCare Regional Cancer Center",
+									"org_postal_code": "54911",
+									"org_coordinates": {
+											"lon": -88.3849,
+											"lat": 44.2816
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "CO",
+									"org_city": "Littleton",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Littleton Adventist Hospital",
+									"org_postal_code": "80122",
+									"org_coordinates": {
+											"lon": -104.9554,
+											"lat": 39.5807
+									},
+									"recruitment_status": "TEMPORARILY_CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "CO",
+									"org_city": "Denver",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "AdventHealth Porter",
+									"org_postal_code": "80210",
+									"org_coordinates": {
+											"lon": -104.9622,
+											"lat": 39.6783
+									},
+									"recruitment_status": "TEMPORARILY_CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "CO",
+									"org_city": "Colorado Springs",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Saint Francis Cancer Center",
+									"org_postal_code": "80923",
+									"org_coordinates": {
+											"lon": -104.6992,
+											"lat": 38.8995
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "KY",
+									"org_city": "Lexington",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Saint Joseph Hospital East",
+									"org_postal_code": "40509",
+									"org_coordinates": {
+											"lon": -84.3712,
+											"lat": 37.9935
+									},
+									"recruitment_status": "TEMPORARILY_CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "CO",
+									"org_city": "Colorado Springs",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Penrose-Saint Francis Healthcare",
+									"org_postal_code": "80907",
+									"org_coordinates": {
+											"lon": -104.8266,
+											"lat": 38.8792
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CA",
+									"org_city": "Sacramento",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Mercy Cancer Center - Sacramento",
+									"org_postal_code": "95816",
+									"org_coordinates": {
+											"lon": -121.4671,
+											"lat": 38.5712
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NE",
+									"org_city": "Omaha",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Alegent Health Bergan Mercy Medical Center",
+									"org_postal_code": "68124",
+									"org_coordinates": {
+											"lon": -96.0513,
+											"lat": 41.2346
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "KY",
+									"org_city": "Lexington",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Saint Joseph Radiation Oncology Resource Center",
+									"org_postal_code": "40504",
+									"org_coordinates": {
+											"lon": -84.5411,
+											"lat": 38.0418
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Mukwonago",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "ProHealth D N Greenwald Center",
+									"org_postal_code": "53149",
+									"org_coordinates": {
+											"lon": -88.3526,
+											"lat": 42.8738
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "SC",
+									"org_city": "West Columbia",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Lexington Medical Center",
+									"org_postal_code": "29169",
+									"org_coordinates": {
+											"lon": -81.0998,
+											"lat": 33.9973
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MD",
+									"org_city": "Annapolis",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Luminis Health Anne Arundel Medical Center",
+									"org_postal_code": "21401",
+									"org_coordinates": {
+											"lon": -76.5325,
+											"lat": 38.9915
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WA",
+									"org_city": "Gig Harbor",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "MultiCare Gig Harbor Medical Park",
+									"org_postal_code": "98335",
+									"org_coordinates": {
+											"lon": -122.6169,
+											"lat": 47.2986
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WA",
+									"org_city": "Tacoma",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "MultiCare Tacoma General Hospital",
+									"org_postal_code": "98405",
+									"org_coordinates": {
+											"lon": -122.4718,
+											"lat": 47.2461
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WA",
+									"org_city": "Auburn",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "MultiCare Auburn Medical Center",
+									"org_postal_code": "98001",
+									"org_coordinates": {
+											"lon": -122.2668,
+											"lat": 47.31
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NV",
+									"org_city": "Las Vegas",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Radiation Oncology Centers of Nevada Central",
+									"org_postal_code": "89106",
+									"org_coordinates": {
+											"lon": -115.1639,
+											"lat": 36.181
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NV",
+									"org_city": "Las Vegas",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Radiation Oncology Centers of Nevada Southeast",
+									"org_postal_code": "89119",
+									"org_coordinates": {
+											"lon": -115.1471,
+											"lat": 36.0849
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "KS",
+									"org_city": "Wichita",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Ascension Via Christi Hospitals Wichita",
+									"org_postal_code": "67214",
+									"org_coordinates": {
+											"lon": -97.3175,
+											"lat": 37.7072
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "VT",
+									"org_city": "Burlington",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "University of Vermont Medical Center",
+									"org_postal_code": "05401",
+									"org_coordinates": {
+											"lon": -73.2278,
+											"lat": 44.4872
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MO",
+									"org_city": "Cape Girardeau",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Saint Francis Medical Center",
+									"org_postal_code": "63703",
+									"org_coordinates": {
+											"lon": -89.5501,
+											"lat": 37.2882
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NJ",
+									"org_city": "Somerville",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Robert Wood Johnson University Hospital Somerset",
+									"org_postal_code": "08876",
+									"org_coordinates": {
+											"lon": -74.6608,
+											"lat": 40.5554
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "MI",
+									"org_city": "Ann Arbor",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "University of Michigan Comprehensive Cancer Center",
+									"org_postal_code": "48109",
+									"org_coordinates": {
+											"lon": -83.7144,
+											"lat": 42.2909
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "ID",
+									"org_city": "Boise",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Saint Alphonsus Cancer Care Center-Boise",
+									"org_postal_code": "83706",
+									"org_coordinates": {
+											"lon": -116.1911,
+											"lat": 43.5886
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "OR",
+									"org_city": "Corvallis",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Good Samaritan Hospital",
+									"org_postal_code": "97330",
+									"org_coordinates": {
+											"lon": -123.2804,
+											"lat": 44.6364
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "MA",
+									"org_city": "Springfield",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Baystate Medical Center",
+									"org_postal_code": "01199",
+									"org_coordinates": {
+											"lon": -72.6055,
+											"lat": 42.1198
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NC",
+									"org_city": "Gastonia",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "CaroMont Regional Medical Center",
+									"org_postal_code": "28054",
+									"org_coordinates": {
+											"lon": -81.1487,
+											"lat": 35.2631
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NY",
+									"org_city": "Rochester",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Rochester General Hospital",
+									"org_postal_code": "14621",
+									"org_coordinates": {
+											"lon": -77.604,
+											"lat": 43.1888
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "OR",
+									"org_city": "Portland",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Oregon Health and Science University",
+									"org_postal_code": "97239",
+									"org_coordinates": {
+											"lon": -122.6915,
+											"lat": 45.4923
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Newtown Square",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Bryn Mawr Health Center",
+									"org_postal_code": "19073",
+									"org_coordinates": {
+											"lon": -75.4369,
+											"lat": 39.9794
+									},
+									"recruitment_status": "TEMPORARILY_CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Bryn Mawr",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Bryn Mawr Hospital",
+									"org_postal_code": "19010",
+									"org_coordinates": {
+											"lon": -75.3301,
+											"lat": 40.0226
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Paoli",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Paoli Memorial Hospital",
+									"org_postal_code": "19301",
+									"org_coordinates": {
+											"lon": -75.48,
+											"lat": 40.0429
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Media",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Riddle  Memorial  Hospital",
+									"org_postal_code": "19063",
+									"org_coordinates": {
+											"lon": -75.4181,
+											"lat": 39.9207
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Wynnewood",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Lankenau Medical Center",
+									"org_postal_code": "19096",
+									"org_coordinates": {
+											"lon": -75.2742,
+											"lat": 39.9976
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "AZ",
+									"org_city": "Tucson",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "University of Arizona Cancer Center-North Campus",
+									"org_postal_code": "85719",
+									"org_coordinates": {
+											"lon": -110.9484,
+											"lat": 32.2456
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CA",
+									"org_city": "Orange",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UC Irvine Health/Chao Family Comprehensive Cancer Center",
+									"org_postal_code": "92868",
+									"org_coordinates": {
+											"lon": -117.8683,
+											"lat": 33.7886
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "GA",
+									"org_city": "Savannah",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Lewis Cancer and Research Pavilion at Saint Joseph's/Candler",
+									"org_postal_code": "31405",
+									"org_coordinates": {
+											"lon": -81.1669,
+											"lat": 32.0352
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "SC",
+									"org_city": "Hilton Head Island",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "The Radiation Oncology Center-Hilton Head/Bluffton",
+									"org_postal_code": "29926",
+									"org_coordinates": {
+											"lon": -80.7332,
+											"lat": 32.2222
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "SC",
+									"org_city": "Bluffton",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Saint Joseph's/Candler - Bluffton Campus",
+									"org_postal_code": "29910",
+									"org_coordinates": {
+											"lon": -80.9033,
+											"lat": 32.2133
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NE",
+									"org_city": "Omaha",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "University of Nebraska Medical Center",
+									"org_postal_code": "68198",
+									"org_coordinates": {
+											"lon": -95.9773,
+											"lat": 41.2551
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "CA",
+									"org_city": "Los Angeles",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Los Angeles General Medical Center",
+									"org_postal_code": "90033",
+									"org_coordinates": {
+											"lon": -118.211,
+											"lat": 34.0504
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "KY",
+									"org_city": "Owensboro",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Owensboro Health Mitchell Memorial Cancer Center",
+									"org_postal_code": "42303",
+									"org_coordinates": {
+											"lon": -87.0519,
+											"lat": 37.762
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "AK",
+									"org_city": "Fairbanks",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Fairbanks Memorial Hospital",
+									"org_postal_code": "99701",
+									"org_coordinates": {
+											"lon": -147.6591,
+											"lat": 64.5037
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NY",
+									"org_city": "Dansville",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Noyes Memorial Hospital/Myers Cancer Center",
+									"org_postal_code": "14437",
+									"org_coordinates": {
+											"lon": -77.738,
+											"lat": 42.567
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NY",
+									"org_city": "Webster",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Wilmot Cancer Institute at Webster",
+									"org_postal_code": "14580",
+									"org_coordinates": {
+											"lon": -77.4462,
+											"lat": 43.22
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "ME",
+									"org_city": "Scarborough",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Maine Medical Center- Scarborough Campus",
+									"org_postal_code": "04074",
+									"org_coordinates": {
+											"lon": -70.3693,
+											"lat": 43.5917
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NJ",
+									"org_city": "Englewood",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Englewood Hospital and Medical Center",
+									"org_postal_code": "07631",
+									"org_coordinates": {
+											"lon": -73.9736,
+											"lat": 40.8918
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "DC",
+									"org_city": "Washington",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "MedStar Georgetown University Hospital",
+									"org_postal_code": "20007",
+									"org_coordinates": {
+											"lon": -77.0771,
+											"lat": 38.9147
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "DC",
+									"org_city": "Washington",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "MedStar Washington Hospital Center",
+									"org_postal_code": "20010",
+									"org_coordinates": {
+											"lon": -77.028,
+											"lat": 38.9322
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "ME",
+									"org_city": "Sanford",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "MaineHealth Cancer Care Center of York County",
+									"org_postal_code": "04073",
+									"org_coordinates": {
+											"lon": -70.7398,
+											"lat": 43.4132
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "ME",
+									"org_city": "Portland",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Maine Medical Center-Bramhall Campus",
+									"org_postal_code": "04102",
+									"org_coordinates": {
+											"lon": -70.3075,
+											"lat": 43.6598
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NY",
+									"org_city": "Commack",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Memorial Sloan Kettering Commack",
+									"org_postal_code": "11725",
+									"org_coordinates": {
+											"lon": -73.2805,
+											"lat": 40.8411
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NJ",
+									"org_city": "Middletown",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Memorial Sloan Kettering Monmouth",
+									"org_postal_code": "07748",
+									"org_coordinates": {
+											"lon": -74.1116,
+											"lat": 40.3908
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NY",
+									"org_city": "Uniondale",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Memorial Sloan Kettering Nassau",
+									"org_postal_code": "11553",
+									"org_coordinates": {
+											"lon": -73.591,
+											"lat": 40.7016
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NJ",
+									"org_city": "Montvale",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Memorial Sloan Kettering Bergen",
+									"org_postal_code": "07645",
+									"org_coordinates": {
+											"lon": -74.0497,
+											"lat": 41.053
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NY",
+									"org_city": "West Harrison",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Memorial Sloan Kettering Westchester",
+									"org_postal_code": "10604",
+									"org_coordinates": {
+											"lon": -73.7433,
+											"lat": 41.0555
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NY",
+									"org_city": "New York",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Memorial Sloan Kettering Cancer Center",
+									"org_postal_code": "10065",
+									"org_coordinates": {
+											"lon": -73.9624,
+											"lat": 40.7656
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NJ",
+									"org_city": "Basking Ridge",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Memorial Sloan Kettering Basking Ridge",
+									"org_postal_code": "07920",
+									"org_coordinates": {
+											"lon": -74.5643,
+											"lat": 40.6763
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MI",
+									"org_city": "Troy",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Corewell Health Beaumont Troy Hospital",
+									"org_postal_code": "48085",
+									"org_coordinates": {
+											"lon": -83.1187,
+											"lat": 42.5998
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MI",
+									"org_city": "Dearborn",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Corewell Health Dearborn Hospital",
+									"org_postal_code": "48124",
+									"org_coordinates": {
+											"lon": -83.2481,
+											"lat": 42.2982
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MI",
+									"org_city": "Farmington Hills",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Corewell Health Farmington Hills Hospital",
+									"org_postal_code": "48336",
+									"org_coordinates": {
+											"lon": -83.3468,
+											"lat": 42.4631
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MI",
+									"org_city": "Royal Oak",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Corewell Health William Beaumont University Hospital",
+									"org_postal_code": "48073",
+									"org_coordinates": {
+											"lon": -83.1647,
+											"lat": 42.5191
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "British Columbia",
+									"org_city": "Kelowna",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "BCCA-Cancer Centre for the Southern Interior",
+									"org_postal_code": "V1Y 5L3",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Menomonee Falls",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Froedtert Menomonee Falls Hospital",
+									"org_postal_code": "53051",
+									"org_coordinates": {
+											"lon": -88.1221,
+											"lat": 43.149
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Oconomowoc",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "ProHealth Oconomowoc Memorial Hospital",
+									"org_postal_code": "53066",
+									"org_coordinates": {
+											"lon": -88.4931,
+											"lat": 43.114
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "TX",
+									"org_city": "Sugar Land",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Houston Methodist Sugar Land Hospital",
+									"org_postal_code": "77479",
+									"org_coordinates": {
+											"lon": -95.6214,
+											"lat": 29.5665
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "FL",
+									"org_city": "Coral Gables",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UM Sylvester Comprehensive Cancer Center at Coral Gables",
+									"org_postal_code": "33146",
+									"org_coordinates": {
+											"lon": -80.2732,
+											"lat": 25.7207
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "FL",
+									"org_city": "Deerfield Beach",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UM Sylvester Comprehensive Cancer Center at Deerfield Beach",
+									"org_postal_code": "33442",
+									"org_coordinates": {
+											"lon": -80.1394,
+											"lat": 26.3141
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "FL",
+									"org_city": "Miami",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "University of Miami Miller School of Medicine-Sylvester Cancer Center",
+									"org_postal_code": "33136",
+									"org_coordinates": {
+											"lon": -80.2039,
+											"lat": 25.7869
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "Saskatchewan",
+									"org_city": "Saskatoon",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "Saskatoon Cancer Centre",
+									"org_postal_code": "S7N 4H4",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "Saskatchewan",
+									"org_city": "Regina",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "Allan Blair Cancer Centre",
+									"org_postal_code": "S4T 7T1",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CA",
+									"org_city": "Santa Monica",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Saint John's Cancer Institute",
+									"org_postal_code": "90404",
+									"org_coordinates": {
+											"lon": -118.4736,
+											"lat": 34.0268
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IL",
+									"org_city": "Chicago",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "University of Illinois",
+									"org_postal_code": "60612",
+									"org_coordinates": {
+											"lon": -87.6877,
+											"lat": 41.8804
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "MO",
+									"org_city": "Saint Louis",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Missouri Baptist Medical Center",
+									"org_postal_code": "63131",
+									"org_coordinates": {
+											"lon": -90.4443,
+											"lat": 38.6172
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NY",
+									"org_city": "Syracuse",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "State University of New York Upstate Medical University",
+									"org_postal_code": "13210",
+									"org_coordinates": {
+											"lon": -76.1267,
+											"lat": 43.0355
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IN",
+									"org_city": "Fishers",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "IU Health Central Indiana Cancer Centers-Fishers",
+									"org_postal_code": "46037",
+									"org_coordinates": {
+											"lon": -85.975,
+											"lat": 39.9479
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CA",
+									"org_city": "Los Angeles",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "USC / Norris Comprehensive Cancer Center",
+									"org_postal_code": "90033",
+									"org_coordinates": {
+											"lon": -118.211,
+											"lat": 34.0504
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "RI",
+									"org_city": "Providence",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Women and Infants Hospital",
+									"org_postal_code": "02905",
+									"org_coordinates": {
+											"lon": -71.4008,
+											"lat": 41.7871
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "RI",
+									"org_city": "Warwick",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Kent Hospital",
+									"org_postal_code": "02886",
+									"org_coordinates": {
+											"lon": -71.4528,
+											"lat": 41.7055
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "Alberta",
+									"org_city": "Calgary",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "Tom Baker Cancer Centre",
+									"org_postal_code": "T2N 4N2",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MT",
+									"org_city": "Butte",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Saint James Community Hospital and Cancer Treatment Center",
+									"org_postal_code": "59701",
+									"org_coordinates": {
+											"lon": -112.5042,
+											"lat": 45.9274
+									},
+									"recruitment_status": "TEMPORARILY_CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "MD",
+									"org_city": "Baltimore",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Saint Agnes Hospital",
+									"org_postal_code": "21229",
+									"org_coordinates": {
+											"lon": -76.6905,
+											"lat": 39.2853
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MD",
+									"org_city": "Glen Burnie",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UM Baltimore Washington Medical Center/Tate Cancer Center",
+									"org_postal_code": "21061",
+									"org_coordinates": {
+											"lon": -76.6418,
+											"lat": 39.1648
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Pittsburgh",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UPMC-Passavant Hospital",
+									"org_postal_code": "15237",
+									"org_coordinates": {
+											"lon": -80.0492,
+											"lat": 40.5502
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Pittsburgh",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UPMC-Saint Clair Hospital Cancer Center",
+									"org_postal_code": "15243",
+									"org_coordinates": {
+											"lon": -80.0732,
+											"lat": 40.3742
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Pittsburgh",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "West Penn Hospital",
+									"org_postal_code": "15224",
+									"org_coordinates": {
+											"lon": -79.9446,
+											"lat": 40.464
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Pittsburgh",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UPMC-Shadyside Hospital",
+									"org_postal_code": "15232",
+									"org_coordinates": {
+											"lon": -79.9323,
+											"lat": 40.4529
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Pittsburgh",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UPMC-Magee Womens Hospital",
+									"org_postal_code": "15213",
+									"org_coordinates": {
+											"lon": -79.9532,
+											"lat": 40.4428
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Pittsburgh",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UPMC-Saint Margaret",
+									"org_postal_code": "15215",
+									"org_coordinates": {
+											"lon": -79.9132,
+											"lat": 40.5049
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Monroeville",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Forbes Hospital",
+									"org_postal_code": "15146",
+									"org_coordinates": {
+											"lon": -79.7596,
+											"lat": 40.4264
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Oak Creek",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Drexel Town Square Health Center",
+									"org_postal_code": "53154",
+									"org_coordinates": {
+											"lon": -87.9005,
+											"lat": 42.8802
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "West Bend",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Froedtert West Bend Hospital/Kraemer Cancer Center",
+									"org_postal_code": "53095",
+									"org_coordinates": {
+											"lon": -88.1677,
+											"lat": 43.419
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Milwaukee",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Medical College of Wisconsin",
+									"org_postal_code": "53226",
+									"org_coordinates": {
+											"lon": -88.0423,
+											"lat": 43.0503
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "Ontario",
+									"org_city": "Toronto",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "Odette Cancer Centre- Sunnybrook Health Sciences Centre",
+									"org_postal_code": "M4N 3M5",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MD",
+									"org_city": "Baltimore",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "MedStar Franklin Square Medical Center/Weinberg Cancer Institute",
+									"org_postal_code": "21237",
+									"org_coordinates": {
+											"lon": -76.4939,
+											"lat": 39.339
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MD",
+									"org_city": "Baltimore",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Greater Baltimore Medical Center",
+									"org_postal_code": "21204",
+									"org_coordinates": {
+											"lon": -76.6344,
+											"lat": 39.4025
+									},
+									"recruitment_status": "TEMPORARILY_CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "Quebec",
+									"org_city": "Greenfield Park",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "CSSS Champlain-Charles Le Moyne",
+									"org_postal_code": "J4V 2H1",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "Quebec",
+									"org_city": "Laval",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "Hopital de la Cite-de-la-Sante",
+									"org_postal_code": "H7M 3L9",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "AR",
+									"org_city": "Little Rock",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "University of Arkansas for Medical Sciences",
+									"org_postal_code": "72205",
+									"org_coordinates": {
+											"lon": -92.3533,
+											"lat": 34.7495
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "KY",
+									"org_city": "Louisville",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "The James Graham Brown Cancer Center at University of Louisville",
+									"org_postal_code": "40202",
+									"org_coordinates": {
+											"lon": -85.7498,
+											"lat": 38.2536
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "New Brunswick",
+									"org_city": "Saint John",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "Atlantic Health Sciences Corporation-Saint John Regional Hospital",
+									"org_postal_code": "E2L 4L2",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "Quebec",
+									"org_city": "Montreal",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "CIUSSSEMTL-Hopital Maisonneuve-Rosemont",
+									"org_postal_code": "H1T 2M4",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "Quebec",
+									"org_city": "Montreal",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "Jewish General Hospital",
+									"org_postal_code": "H3T 1E2",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IA",
+									"org_city": "Des Moines",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Iowa Methodist Medical Center",
+									"org_postal_code": "50309",
+									"org_coordinates": {
+											"lon": -93.6292,
+											"lat": 41.5836
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "Ontario",
+									"org_city": "London",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "London Regional Cancer Program",
+									"org_postal_code": "N6A 4L6",
+									"org_coordinates": null,
+									"recruitment_status": "TEMPORARILY_CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "Ontario",
+									"org_city": "Kitchener",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "Grand River Regional Cancer Centre at Grand River Hospital",
+									"org_postal_code": "N2G 1G3",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "AZ",
+									"org_city": "Tucson",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "University of Arizona Cancer Center-Orange Grove Campus",
+									"org_postal_code": "85704",
+									"org_coordinates": {
+											"lon": -110.9863,
+											"lat": 32.3315
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "VA",
+									"org_city": "Fishersville",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Augusta Health Center for Cancer and Blood Disorders",
+									"org_postal_code": "22939",
+									"org_coordinates": {
+											"lon": -78.969,
+											"lat": 38.0988
+									},
+									"recruitment_status": "ADMINISTRATIVELY_COMPLETE"
+							},
+							{
+									"org_state_or_province": "FL",
+									"org_city": "Boca Raton",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Boca Raton Regional Hospital",
+									"org_postal_code": "33486",
+									"org_coordinates": {
+											"lon": -80.1129,
+											"lat": 26.3478
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MO",
+									"org_city": "Columbia",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "MU Health - University Hospital/Ellis Fischel Cancer Center",
+									"org_postal_code": "65212",
+									"org_coordinates": {
+											"lon": -92.2469,
+											"lat": 38.9095
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NY",
+									"org_city": "Rochester",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "University of Rochester",
+									"org_postal_code": "14642",
+									"org_coordinates": {
+											"lon": -77.6251,
+											"lat": 43.1218
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NY",
+									"org_city": "Rochester",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Highland Hospital",
+									"org_postal_code": "14620",
+									"org_coordinates": {
+											"lon": -77.6071,
+											"lat": 43.1291
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NY",
+									"org_city": "Canandiaqua",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Sands Cancer Center",
+									"org_postal_code": "14424",
+									"org_coordinates": {
+											"lon": -77.3077,
+											"lat": 42.8488
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NY",
+									"org_city": "Rochester",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Wilmot Cancer Institute Radiation Oncology at Greece",
+									"org_postal_code": "14606",
+									"org_coordinates": {
+											"lon": -77.716,
+											"lat": 43.171
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NH",
+									"org_city": "Concord",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "New Hampshire Oncology Hematology PA-Concord",
+									"org_postal_code": "03301",
+									"org_coordinates": {
+											"lon": -71.5112,
+											"lat": 43.248
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NH",
+									"org_city": "Dover",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Wentworth-Douglass Hospital",
+									"org_postal_code": "03820",
+									"org_coordinates": {
+											"lon": -70.8909,
+											"lat": 43.2027
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "British Columbia",
+									"org_city": "Abbotsford",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "BCCA-Abbotsford Cancer Centre",
+									"org_postal_code": "V2S 1K2",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "British Columbia",
+									"org_city": "Victoria",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "BCCA-Vancouver Island Cancer Centre",
+									"org_postal_code": "V8R 6V5",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "British Columbia",
+									"org_city": "Surrey",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "BCCA-Fraser Valley Cancer Centre",
+									"org_postal_code": "V3V 1Z2",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NJ",
+									"org_city": "Hamilton",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "The Cancer Institute of New Jersey Hamilton",
+									"org_postal_code": "08690",
+									"org_coordinates": {
+											"lon": -74.6526,
+											"lat": 40.2318
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "West Reading",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Reading Hospital",
+									"org_postal_code": "19611",
+									"org_coordinates": {
+											"lon": -75.9411,
+											"lat": 40.3248
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "Ontario",
+									"org_city": "Ottawa",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "Ottawa Hospital and Cancer Center-General Campus",
+									"org_postal_code": "K1H 8L6",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MA",
+									"org_city": "Boston",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Beth Israel Deaconess Medical Center",
+									"org_postal_code": "02215",
+									"org_coordinates": {
+											"lon": -71.1025,
+											"lat": 42.3469
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "ND",
+									"org_city": "Grand Forks",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Altru Cancer Center",
+									"org_postal_code": "58201",
+									"org_coordinates": {
+											"lon": -97.0607,
+											"lat": 47.881
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "Ontario",
+									"org_city": "Barrie",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "Royal Victoria Regional Health Centre",
+									"org_postal_code": "L4M 6M2",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "Ontario",
+									"org_city": "Sault Ste Marie",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "Algoma District Cancer Program Sault Area Hospital",
+									"org_postal_code": "P6B 0A8",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CA",
+									"org_city": "Napa",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Providence Queen of The Valley",
+									"org_postal_code": "94558",
+									"org_coordinates": {
+											"lon": -122.2917,
+											"lat": 38.3929
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CA",
+									"org_city": "Saint Helena",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Saint Helena Hospital",
+									"org_postal_code": "94574",
+									"org_coordinates": {
+											"lon": -122.4585,
+											"lat": 38.5095
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IL",
+									"org_city": "Maywood",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Loyola University Medical Center",
+									"org_postal_code": "60153",
+									"org_coordinates": {
+											"lon": -87.8451,
+											"lat": 41.8685
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "Newfoundland",
+									"org_city": "St. John's",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "Doctor H. Bliss Murphy Cancer Centre",
+									"org_postal_code": "A1B 3V6",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "TX",
+									"org_city": "Houston",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Houston Methodist Hospital",
+									"org_postal_code": "77030",
+									"org_coordinates": {
+											"lon": -95.4026,
+											"lat": 29.7059
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "TX",
+									"org_city": "Houston",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Ben Taub General Hospital",
+									"org_postal_code": "77030",
+									"org_coordinates": {
+											"lon": -95.4026,
+											"lat": 29.7059
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CA",
+									"org_city": "Orange",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Saint Joseph Hospital - Orange",
+									"org_postal_code": "92868",
+									"org_coordinates": {
+											"lon": -117.8683,
+											"lat": 33.7886
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Wisconsin Rapids",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Aspirus Cancer Care - Wisconsin Rapids",
+									"org_postal_code": "54494",
+									"org_coordinates": {
+											"lon": -89.7334,
+											"lat": 44.3431
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Ephrata",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Ephrata Cancer Center",
+									"org_postal_code": "17522",
+									"org_coordinates": {
+											"lon": -76.176,
+											"lat": 40.1811
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "York",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UPMC Memorial",
+									"org_postal_code": "17408",
+									"org_coordinates": {
+											"lon": -76.5976,
+											"lat": 40.0153
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NY",
+									"org_city": "Brooklyn",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Maimonides Medical Center",
+									"org_postal_code": "11219",
+									"org_coordinates": {
+											"lon": -73.9967,
+											"lat": 40.6327
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CO",
+									"org_city": "Colorado Springs",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Memorial Hospital North",
+									"org_postal_code": "80920",
+									"org_coordinates": {
+											"lon": -104.7571,
+											"lat": 38.9585
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CO",
+									"org_city": "Colorado Springs",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UCHealth Memorial Hospital Central",
+									"org_postal_code": "80909",
+									"org_coordinates": {
+											"lon": -104.7754,
+											"lat": 38.852
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CO",
+									"org_city": "Aurora",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UCHealth University of Colorado Hospital",
+									"org_postal_code": "80045",
+									"org_coordinates": {
+											"lon": -104.837,
+											"lat": 39.7462
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CO",
+									"org_city": "Highlands Ranch",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UCHealth Highlands Ranch Hospital",
+									"org_postal_code": "80129",
+									"org_coordinates": {
+											"lon": -105.0117,
+											"lat": 39.5423
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Greensburg",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UPMC Cancer Centers - Arnold Palmer Pavilion",
+									"org_postal_code": "15601",
+									"org_coordinates": {
+											"lon": -79.5195,
+											"lat": 40.3408
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NJ",
+									"org_city": "New Brunswick",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Rutgers Cancer Institute of New Jersey",
+									"org_postal_code": "08903",
+									"org_coordinates": {
+											"lon": -74.447,
+											"lat": 40.5102
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "NJ",
+									"org_city": "Freehold",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "CentraState Medical Center",
+									"org_postal_code": "07728",
+									"org_coordinates": {
+											"lon": -74.3007,
+											"lat": 40.2229
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "VA",
+									"org_city": "Portsmouth",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Naval Medical Center - Portsmouth",
+									"org_postal_code": "23708-2197",
+									"org_coordinates": {
+											"lon": -76.3062,
+											"lat": 36.8482
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CA",
+									"org_city": "Palm Springs",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Desert Regional Medical Center",
+									"org_postal_code": "92262",
+									"org_coordinates": {
+											"lon": -116.5712,
+											"lat": 33.8563
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IN",
+									"org_city": "Muncie",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "IU Health Ball Memorial Hospital",
+									"org_postal_code": "47303",
+									"org_coordinates": {
+											"lon": -85.3769,
+											"lat": 40.2763
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IL",
+									"org_city": "Chicago",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Advocate Illinois Masonic Medical Center",
+									"org_postal_code": "60657",
+									"org_coordinates": {
+											"lon": -87.6568,
+											"lat": 41.9396
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "IL",
+									"org_city": "Chicago",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Swedish Covenant Hospital",
+									"org_postal_code": "60625",
+									"org_coordinates": {
+											"lon": -87.7018,
+											"lat": 41.9735
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "Alberta",
+									"org_city": "Edmonton",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "Cross Cancer Institute",
+									"org_postal_code": "T6G 1Z2",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "KS",
+									"org_city": "Topeka",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "University of Kansas Health System Saint Francis Campus",
+									"org_postal_code": "66606",
+									"org_coordinates": {
+											"lon": -95.7187,
+											"lat": 39.0613
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "FL",
+									"org_city": "Miami",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Miami Cancer Institute",
+									"org_postal_code": "33176",
+									"org_coordinates": {
+											"lon": -80.359,
+											"lat": 25.6574
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NH",
+									"org_city": "Manchester",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Solinsky Center for Cancer Care",
+									"org_postal_code": "03103",
+									"org_coordinates": {
+											"lon": -71.449,
+											"lat": 42.9238
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NH",
+									"org_city": "Exeter",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Exeter Hospital",
+									"org_postal_code": "03833",
+									"org_coordinates": {
+											"lon": -70.9915,
+											"lat": 42.9832
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "OH",
+									"org_city": "Avon",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "UH Seidman Cancer Center at UH Avon Health Center",
+									"org_postal_code": "44011",
+									"org_coordinates": {
+											"lon": -82.019,
+											"lat": 41.4484
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NY",
+									"org_city": "Stony Brook",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Stony Brook University Medical Center",
+									"org_postal_code": "11794",
+									"org_coordinates": {
+											"lon": -73.1225,
+											"lat": 40.9145
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MD",
+									"org_city": "Baltimore",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "University of Maryland/Greenebaum Cancer Center",
+									"org_postal_code": "21201",
+									"org_coordinates": {
+											"lon": -76.6226,
+											"lat": 39.294
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "ME",
+									"org_city": "Brewer",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Lafayette Family Cancer Center-EMMC",
+									"org_postal_code": "04412",
+									"org_coordinates": {
+											"lon": -68.725,
+											"lat": 44.7782
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "VT",
+									"org_city": "Berlin",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Central Vermont Medical Center/National Life Cancer Treatment",
+									"org_postal_code": "05602",
+									"org_coordinates": {
+											"lon": -72.6004,
+											"lat": 44.2861
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "VA",
+									"org_city": "Richmond",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "CJW Medical Center - Johnston-Willis Campus",
+									"org_postal_code": "23235",
+									"org_coordinates": {
+											"lon": -77.5643,
+											"lat": 37.5131
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Erie",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Saint Vincent Hospital",
+									"org_postal_code": "16544",
+									"org_coordinates": {
+											"lon": -80.0829,
+											"lat": 42.1206
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "TX",
+									"org_city": "Houston",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Houston Methodist West Hospital",
+									"org_postal_code": "77094",
+									"org_coordinates": {
+											"lon": -95.6843,
+											"lat": 29.7528
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "SC",
+									"org_city": "Okatie",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Beaufort Memorial/New River Cancer Center",
+									"org_postal_code": "29909",
+									"org_coordinates": {
+											"lon": -80.8483,
+											"lat": 32.3283
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "NY",
+									"org_city": "Nyack",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Nyack Hospital",
+									"org_postal_code": "10960",
+									"org_coordinates": {
+											"lon": -73.9254,
+											"lat": 41.0938
+									},
+									"recruitment_status": "TEMPORARILY_CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "IL",
+									"org_city": "Park Ridge",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Advocate Lutheran General Hospital",
+									"org_postal_code": "60068",
+									"org_coordinates": {
+											"lon": -87.8435,
+											"lat": 42.0122
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IL",
+									"org_city": "Evanston",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "NorthShore University HealthSystem-Evanston Hospital",
+									"org_postal_code": "60201",
+									"org_coordinates": {
+											"lon": -87.6974,
+											"lat": 42.0566
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IL",
+									"org_city": "Glenview",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "NorthShore University HealthSystem-Glenbrook Hospital",
+									"org_postal_code": "60026",
+									"org_coordinates": {
+											"lon": -87.8398,
+											"lat": 42.0926
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "IL",
+									"org_city": "Highland Park",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "NorthShore University HealthSystem-Highland Park Hospital",
+									"org_postal_code": "60035",
+									"org_coordinates": {
+											"lon": -87.8101,
+											"lat": 42.1809
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "FL",
+									"org_city": "Clearwater",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Morton Plant Hospital",
+									"org_postal_code": "33756",
+									"org_coordinates": {
+											"lon": -82.7883,
+											"lat": 27.9445
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "British Columbia",
+									"org_city": "Prince George",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "BCCA-Cancer Centre for the North",
+									"org_postal_code": "V2M 7E9",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "FL",
+									"org_city": "Jacksonville",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Mayo Clinic in Florida",
+									"org_postal_code": "32224-9980",
+									"org_coordinates": {
+											"lon": -81.4996,
+											"lat": 30.2696
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "KY",
+									"org_city": "Lexington",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "University of Kentucky/Markey Cancer Center",
+									"org_postal_code": "40536",
+									"org_coordinates": {
+											"lon": -84.5089,
+											"lat": 38.0316
+									},
+									"recruitment_status": "ADMINISTRATIVELY_COMPLETE"
+							},
+							{
+									"org_state_or_province": "SC",
+									"org_city": "Greer",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Prisma Health Cancer Institute - Greer",
+									"org_postal_code": "29650",
+									"org_coordinates": {
+											"lon": -82.2584,
+											"lat": 34.8978
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "SC",
+									"org_city": "Seneca",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Prisma Health Cancer Institute - Seneca",
+									"org_postal_code": "29672",
+									"org_coordinates": {
+											"lon": -82.9753,
+											"lat": 34.7097
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "SC",
+									"org_city": "Boiling Springs",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Prisma Health Cancer Institute - Spartanburg",
+									"org_postal_code": "29316",
+									"org_coordinates": {
+											"lon": -81.9647,
+											"lat": 35.0564
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "SC",
+									"org_city": "Greenville",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Prisma Health Cancer Institute - Eastside",
+									"org_postal_code": "29615",
+									"org_coordinates": {
+											"lon": -82.2952,
+											"lat": 34.8562
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "SC",
+									"org_city": "Greenville",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Prisma Health Cancer Institute - Faris",
+									"org_postal_code": "29605",
+									"org_coordinates": {
+											"lon": -82.3803,
+											"lat": 34.7768
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Pittsburgh",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Allegheny General Hospital",
+									"org_postal_code": "15212",
+									"org_coordinates": {
+											"lon": -80.0082,
+											"lat": 40.4725
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Wausau",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Aspirus Regional Cancer Center",
+									"org_postal_code": "54401",
+									"org_coordinates": {
+											"lon": -89.714,
+											"lat": 44.9569
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "York",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "WellSpan Health-York Cancer Center",
+									"org_postal_code": "17403",
+									"org_coordinates": {
+											"lon": -76.7105,
+											"lat": 39.9503
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "PA",
+									"org_city": "Gettysburg",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Adams Cancer Center",
+									"org_postal_code": "17325",
+									"org_coordinates": {
+											"lon": -77.2253,
+											"lat": 39.8288
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CA",
+									"org_city": "Irvine",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "City of Hope at Irvine Lennar",
+									"org_postal_code": "92618",
+									"org_coordinates": {
+											"lon": -117.7254,
+											"lat": 33.6828
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CA",
+									"org_city": "Torrance",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "City of Hope South Bay",
+									"org_postal_code": "90503",
+									"org_coordinates": {
+											"lon": -118.3537,
+											"lat": 33.8408
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "CA",
+									"org_city": "Dublin",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Kaiser Permanente Dublin",
+									"org_postal_code": "94568",
+									"org_coordinates": {
+											"lon": -121.9289,
+											"lat": 37.7172
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "MA",
+									"org_city": "Boston",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Massachusetts General Hospital Cancer Center",
+									"org_postal_code": "02114",
+									"org_coordinates": {
+											"lon": -71.068,
+											"lat": 42.3621
+									},
+									"recruitment_status": "CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "NC",
+									"org_city": "Durham",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Duke University Medical Center",
+									"org_postal_code": "27710",
+									"org_coordinates": {
+											"lon": -78.94,
+											"lat": 35.9995
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "OH",
+									"org_city": "Canton",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Cleveland Clinic Mercy Hospital",
+									"org_postal_code": "44708",
+									"org_coordinates": {
+											"lon": -81.4331,
+											"lat": 40.8156
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "British Columbia",
+									"org_city": "Vancouver",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "BCCA-Vancouver Cancer Centre",
+									"org_postal_code": "V5Z 4E6",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "Nova Scotia",
+									"org_city": "Halifax",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "QEII Health Sciences Centre/Nova Scotia Health Authority",
+									"org_postal_code": "B3H 2Y9",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "Ontario",
+									"org_city": "Hamilton",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "Juravinski Cancer Centre at Hamilton Health Sciences",
+									"org_postal_code": "L8V 5C2",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "Ontario",
+									"org_city": "Saint Catharines",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "Niagara Health System-Saint Catharines General",
+									"org_postal_code": "L2S 0A9",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "Ontario",
+									"org_city": "Mississauga",
+									"org_va": false,
+									"org_country": "Canada",
+									"org_name": "Trillium Health Partners - Credit Valley Hospital",
+									"org_postal_code": "L5M 2N1",
+									"org_coordinates": null,
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "WI",
+									"org_city": "Green Bay",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Bellin Memorial Hospital",
+									"org_postal_code": "54301",
+									"org_coordinates": {
+											"lon": -88.0196,
+											"lat": 44.4814
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "FL",
+									"org_city": "Pembroke Pines",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Memorial Hospital West",
+									"org_postal_code": "33028",
+									"org_coordinates": {
+											"lon": -80.3122,
+											"lat": 26.0154
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "FL",
+									"org_city": "Plantation",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Miami Cancer Institute at Plantation",
+									"org_postal_code": "33324",
+									"org_coordinates": {
+											"lon": -80.2745,
+											"lat": 26.1126
+									},
+									"recruitment_status": "ACTIVE"
+							},
+							{
+									"org_state_or_province": "TX",
+									"org_city": "Laredo",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Doctor's Hospital of Laredo",
+									"org_postal_code": "78041",
+									"org_coordinates": {
+											"lon": -99.4431,
+											"lat": 27.9045
+									},
+									"recruitment_status": "TEMPORARILY_CLOSED_TO_ACCRUAL"
+							},
+							{
+									"org_state_or_province": "CO",
+									"org_city": "Fort Collins",
+									"org_va": false,
+									"org_country": "United States",
+									"org_name": "Poudre Valley Hospital",
+									"org_postal_code": "80524",
+									"org_coordinates": {
+											"lon": -105.0476,
+											"lat": 40.6475
+									},
+									"recruitment_status": "ACTIVE"
+							}
+					],
+					"nci_id": "NCI-2017-02047"
+			}
+	]
+}

@@ -12,7 +12,7 @@
                     "min_age_unit": "Years",
                     "max_age_unit": "Years",
                     "max_age_in_years": 999,
-                    "gender": "FEMALE",
+                    "sex": "FEMALE",
                     "min_age": "50 Years",
                     "min_age_number": 50,
                     "min_age_in_years": 50
