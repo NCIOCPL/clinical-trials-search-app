@@ -137,7 +137,7 @@
             "min_age_unit": "Years",
             "max_age_unit": "Years",
             "max_age_in_years": 999,
-            "gender": "MALE",
+            "sex": "MALE",
             "min_age": "14 Years",
             "accepts_healthy_volunteers": false,
             "min_age_number": 14,

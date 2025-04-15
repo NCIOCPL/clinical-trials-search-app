@@ -94,7 +94,7 @@
             "min_age_unit": "Years",
             "max_age_unit": "Years",
             "max_age_in_years": 99,
-            "gender": "BOTH",
+            "sex": "ALL",
             "min_age": "18 Years",
             "accepts_healthy_volunteers": false,
             "min_age_number": 18,

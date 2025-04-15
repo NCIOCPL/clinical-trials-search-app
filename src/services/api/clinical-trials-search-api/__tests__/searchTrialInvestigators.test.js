@@ -51,7 +51,7 @@ describe('searchTrialInvestigators', () => {
 							min_age_unit: 'Years',
 							max_age_unit: 'Years',
 							max_age_in_years: 999,
-							gender: 'BOTH',
+							sex: 'ALL',
 							min_age: '18 Years',
 							min_age_number: 18,
 							min_age_in_years: 18,

@@ -12,7 +12,7 @@
                "min_age_unit": "Years",
                "max_age_unit": "Years",
                "max_age_in_years": 999,
-               "gender": "MALE",
+               "sex": "MALE",
                "min_age": "18 Years",
                "min_age_number": 18,
                "min_age_in_years": 18
@@ -5181,7 +5181,7 @@
                "min_age_unit": "Years",
                "max_age_unit": "Years",
                "max_age_in_years": 999,
-               "gender": "BOTH",
+               "sex": "ALL",
                "min_age": "18 Years",
                "min_age_number": 18,
                "min_age_in_years": 18
@@ -10196,7 +10196,7 @@
                "min_age_unit": "Months",
                "max_age_unit": "Years",
                "max_age_in_years": 999,
-               "gender": "BOTH",
+               "sex": "ALL",
                "min_age": "12 Months",
                "min_age_number": 12,
                "min_age_in_years": 1
@@ -14844,7 +14844,7 @@
                "min_age_unit": "Years",
                "max_age_unit": "Years",
                "max_age_in_years": 999,
-               "gender": "BOTH",
+               "sex": "ALL",
                "min_age": "18 Years",
                "min_age_number": 18,
                "min_age_in_years": 18
@@ -18496,7 +18496,7 @@
                "min_age_unit": "Years",
                "max_age_unit": "Years",
                "max_age_in_years": 999,
-               "gender": "BOTH",
+               "sex": "ALL",
                "min_age": "18 Years",
                "min_age_number": 18,
                "min_age_in_years": 18
@@ -24207,7 +24207,7 @@
                "min_age_unit": "Days",
                "max_age_unit": "Years",
                "max_age_in_years": 31,
-               "gender": "BOTH",
+               "sex": "ALL",
                "min_age": "365 Days",
                "min_age_number": 365,
                "min_age_in_years": 1
@@ -28020,7 +28020,7 @@
                "min_age_unit": "Years",
                "max_age_unit": "Years",
                "max_age_in_years": 24,
-               "gender": "BOTH",
+               "sex": "ALL",
                "min_age": "1 Years",
                "min_age_number": 1,
                "min_age_in_years": 1
@@ -32273,7 +32273,7 @@
                "min_age_unit": "Years",
                "max_age_unit": "Years",
                "max_age_in_years": 999,
-               "gender": "MALE",
+               "sex": "MALE",
                "min_age": "18 Years",
                "min_age_number": 18,
                "min_age_in_years": 18
@@ -36076,7 +36076,7 @@
                "min_age_unit": "Months",
                "max_age_unit": "Months",
                "max_age_in_years": 1.5,
-               "gender": "BOTH",
+               "sex": "ALL",
                "min_age": "0 Months",
                "min_age_number": 0,
                "min_age_in_years": 0
@@ -39766,7 +39766,7 @@
                "min_age_unit": "Years",
                "max_age_unit": "Years",
                "max_age_in_years": 999,
-               "gender": "BOTH",
+               "sex": "ALL",
                "min_age": "18 Years",
                "min_age_number": 18,
                "min_age_in_years": 18

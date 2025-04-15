@@ -8055,7 +8055,6 @@ describe('getClinicalTrialDescription', () => {
 			minimum_target_accrual_number: 33000,
 			eligibility: {
 				structured: {
-					gender: 'BOTH',
 					max_age: '25 Years',
 					max_age_number: 25,
 					max_age_unit: 'Years',
@@ -8064,6 +8063,7 @@ describe('getClinicalTrialDescription', () => {
 					min_age_unit: 'Years',
 					max_age_in_years: 25,
 					min_age_in_years: 0,
+					sex: 'ALL',
 				},
 				unstructured: [
 					{

@@ -2426,7 +2426,7 @@
 	"brief_title": "Flotetuzumab for the Treatment of Relapsed or Refractory Advanced CD123-Positive Hematological Malignancies",
 	"eligibility": {
 		"structured": {
-			"gender": "BOTH",
+			"sex": "ALL",
 			"max_age": "999 Years",
 			"min_age": "12 Years",
 			"max_age_unit": "Years",
