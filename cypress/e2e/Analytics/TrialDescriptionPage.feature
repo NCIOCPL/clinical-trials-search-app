@@ -3,7 +3,7 @@ Feature: Clinical Trial Description Page
 	############Analytics################
 
 	Scenario: Page Load event fires when user navigates to trial description page
-		Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
+		Given "ctsTitle" is set to "Find Clinical Trials"
 		And "baseHost" is set to "http://localhost:3000"
 		And "canonicalHost" is set to "https://www.cancer.gov"
 		And "siteName" is set to "NCI"
@@ -29,7 +29,7 @@ Feature: Clinical Trial Description Page
 			| page.additionalDetails.nctId         | NCT02750826                                                                                                      |
 
 	Scenario: Click event fires when user clicks on Print link on trial description page
-		Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
+		Given "ctsTitle" is set to "Find Clinical Trials"
 		And "baseHost" is set to "http://localhost:3000"
 		And "canonicalHost" is set to "https://www.cancer.gov"
 		And "siteName" is set to "NCI"
@@ -51,7 +51,7 @@ Feature: Clinical Trial Description Page
 
 ## below scenario is timing out due to Cypress waiting on page load
 # Scenario: Click event fires when user clicks on Email link on trial description page
-#   Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
+#   Given "ctsTitle" is set to "Find Clinical Trials"
 #   And "baseHost" is set to "http://localhost:3000"
 #   And "canonicalHost" is set to "https://www.cancer.gov"
 #   And "siteName" is set to "NCI"

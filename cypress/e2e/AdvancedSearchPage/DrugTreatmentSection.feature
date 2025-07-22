@@ -2,7 +2,7 @@ Feature: Advanced Clinical Trials Search Drug Treatment Section
 
 	Scenario: User has an option to narrow down search criteria by Drug or treatment
 		Given the user navigates to "/advanced"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Clinical Trials"
 		And "Drug/Treatment" form section is displayed
 		And help icon is displayed in "Drug/Treatment" section with href "/research/participate/clinical-trials-search/help#drugtreatment"
 		And info text "Search for a specific drug or intervention." is displayed in the section body
@@ -13,7 +13,7 @@ Feature: Advanced Clinical Trials Search Drug Treatment Section
 
 	Scenario: User has an option to search by Drug and treatment using autosuggest and refine search
 		Given the user navigates to "/advanced"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Clinical Trials"
 		And "Drug/Treatment" form section is displayed
 		When user clicks on "Drug" field
 		Then autocomplete dropdown is displayed with "Please enter 3 or more characters" text
@@ -54,7 +54,7 @@ Feature: Advanced Clinical Trials Search Drug Treatment Section
 
 	Scenario: User has an option to search for multiple Drug and treatment using autosuggest and then refine search
 		Given the user navigates to "/advanced"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Clinical Trials"
 		And "Drug/Treatment" form section is displayed
 		When user clicks on "Drug" field
 		Then autocomplete dropdown is displayed with "Please enter 3 or more characters" text
@@ -104,7 +104,7 @@ Feature: Advanced Clinical Trials Search Drug Treatment Section
 
 	Scenario: User enters keyword that does not return a match for drug and intervention
 		Given the user navigates to "/advanced"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Clinical Trials"
 		And "Drug/Treatment" form section is displayed
 		When user clicks on "Drug" field
 		Then autocomplete dropdown is displayed with "Please enter 3 or more characters" text
@@ -117,7 +117,7 @@ Feature: Advanced Clinical Trials Search Drug Treatment Section
 
 	Scenario: User is searching for a drug by it's preferred name
 		Given the user navigates to "/advanced"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Clinical Trials"
 		And "Drug/Treatment" form section is displayed
 		When user clicks on "Drug" field
 		Then autocomplete dropdown is displayed with "Please enter 3 or more characters" text
@@ -137,7 +137,7 @@ Feature: Advanced Clinical Trials Search Drug Treatment Section
 
 	Scenario: User searches for drug/intervention via autosuggest on advanced form
 		Given the user navigates to "/advanced"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Clinical Trials"
 		And "Drug/Treatment" form section is displayed
     Then "Drug" input field has a placeholder "Start typing to select drugs and/or drug families"
     When user clicks on "Drug" field

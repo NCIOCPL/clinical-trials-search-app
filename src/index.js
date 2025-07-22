@@ -44,7 +44,7 @@ const initialize = ({
 	basePath = '/',
 	canonicalHost = 'https://www.cancer.gov',
 	ctsApiEndpointV2,
-	ctsTitle = 'Find NCI-Supported Clinical Trials',
+	ctsTitle = 'Find Clinical Trials',
 	initErrorsList = [],
 	language = 'en',
 	printApiBase = 'https://www.cancer.gov/CTS.Print',
@@ -57,6 +57,17 @@ const initialize = ({
 	siteName = 'NCI',
 	useSessionStorage = true,
 	zipConversionEndpoint = '/cts_api/zip_code_lookup',
+	// Page content configuration
+	pageTitle = 'Find Clinical Trials',
+	browserTitle = 'Find Clinical Trials',
+	basicSearchPageTitle = 'Find Clinical Trials',
+	advancedSearchPageTitle = 'Find Clinical Trials - Advanced Search',
+	basicSearchMetaDescription = 'Find NCI-funded clinical trials that are taking place across the United States and internationally, as well as those conducted at NCI-Designated Cancer Centers supported by other organizations.',
+	advancedSearchMetaDescription = 'Find NCI-funded clinical trials that are taking place across the United States and internationally, as well as those conducted at NCI-Designated Cancer Centers supported by other organizations.',
+	basicSearchIntroText = 'Find NCI-funded clinical trials that are taking place across the United States and internationally, as well as those conducted at NCI-Designated Cancer Centers supported by other organizations.',
+	advancedSearchIntroText = 'Find NCI-funded clinical trials that are taking place across the United States and internationally, as well as those conducted at NCI-Designated Cancer Centers supported by other organizations.',
+	resultsPageTitle = 'Clinical Trials Search Results',
+	resultsPageMetaDescription = 'Find Clinical Trials - Search Results',
 	// These have been added in to support integration testing.
 	// This should default to being the hardcoded default.
 	// (Which should not be the proxy...)
@@ -97,6 +108,16 @@ const initialize = ({
 		siteName,
 		useSessionStorage,
 		zipConversionEndpoint,
+		pageTitle,
+		browserTitle,
+		basicSearchPageTitle,
+		advancedSearchPageTitle,
+		basicSearchMetaDescription,
+		advancedSearchMetaDescription,
+		basicSearchIntroText,
+		advancedSearchIntroText,
+		resultsPageTitle,
+		resultsPageMetaDescription,
 	};
 
 	if (process.env.NODE_ENV !== 'development' && useSessionStorage === true) {

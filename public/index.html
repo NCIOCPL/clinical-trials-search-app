@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="%PUBLIC_URL%/index.css" />
     <link rel="stylesheet" href="%PUBLIC_URL%/__nci-dev__common.css" />
     <title>
-      Find NCI-Supported Clinical Trials - NCI
+      Find Clinical Trials - NCI
     </title>
     <script type="text/javascript">
       // Only setup the handler if this is not running under cypress.
@@ -76,7 +76,18 @@
           services: {},
           siteName: 'NCI',
           useSessionStorage: true,
-          zipConversionEndpoint: '/cts_api/zip_code_lookup'
+          zipConversionEndpoint: '/cts_api/zip_code_lookup',
+          pageTitle: 'Find Clinical Trials',
+          browserTitle: 'Find Clinical Trials',
+          basicSearchPageTitle: 'Find Clinical Trials',
+          advancedSearchPageTitle: 'Find Clinical Trials - Advanced Search',
+          basicSearchMetaDescription: 'Find NCI-funded clinical trials that are taking place across the United States and internationally, as well as those conducted at NCI-Designated Cancer Centers supported by other organizations.',
+          advancedSearchMetaDescription: 'Find NCI-funded clinical trials that are taking place across the United States and internationally, as well as those conducted at NCI-Designated Cancer Centers supported by other organizations.',
+          basicSearchIntroText: 'Find NCI-funded clinical trials that are taking place across the United States and internationally, as well as those conducted at NCI-Designated Cancer Centers supported by other organizations.',
+          advancedSearchIntroText: 'Find NCI-funded clinical trials that are taking place across the United States and internationally, as well as those conducted at NCI-Designated Cancer Centers supported by other organizations.',
+          resultsPageTitle: 'Clinical Trials Search Results',
+          resultsPageMetaDescription: 'Find Clinical Trials - Search Results',
+          breadcrumbText: 'Find Clinical Trials'
         },
       ];
 

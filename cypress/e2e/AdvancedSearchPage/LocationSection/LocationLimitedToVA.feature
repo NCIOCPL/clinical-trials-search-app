@@ -2,7 +2,7 @@ Feature: As a user, I want to be able to narrow down my search by locations limi
 
 Scenario: User has an option to limit results to VA facilities and all locations and refines search
         Given the user navigates to "/advanced"
-        Then the page title is "Find NCI-Supported Clinical Trials"
+        Then the page title is "Find Clinical Trials"
         And "Location" form section is displayed
         When user selects "At NIH (only show trials at the NIH Clinical Center in Bethesda, MD)" radio button
         When user toggles "Limit results to Veterans Affairs facilities"
@@ -39,7 +39,7 @@ Scenario: User has an option to limit results to VA facilities and all locations
 
     Scenario: User has an option to limit results to VA facilities and Zip code and to refine search
         Given the user navigates to "/advanced"
-        Then the page title is "Find NCI-Supported Clinical Trials"
+        Then the page title is "Find Clinical Trials"
         And "Location" form section is displayed
         When user toggles "Limit results to Veterans Affairs facilities"
         Then "Limit results to Veterans Affairs facilities" toggle is switched to "Yes"
@@ -99,7 +99,7 @@ Scenario: User has an option to limit results to VA facilities and all locations
 
     Scenario: User has an option to limit results to VA facilities and country, state and city
         Given the user navigates to "/advanced"
-        Then the page title is "Find NCI-Supported Clinical Trials"
+        Then the page title is "Find Clinical Trials"
         And "Location" form section is displayed
         When user toggles "Limit results to Veterans Affairs facilities"
         Then "Limit results to Veterans Affairs facilities" toggle is switched to "Yes"

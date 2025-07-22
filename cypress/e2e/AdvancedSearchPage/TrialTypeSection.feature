@@ -2,7 +2,7 @@ Feature: Advanced Clinical Trials Search Trial Type Section
 
     Scenario: User has an option to narrow down search criteria by selecting all trial types
         Given the user navigates to "/advanced"
-        Then the page title is "Find NCI-Supported Clinical Trials"
+        Then the page title is "Find Clinical Trials"
         And "Trial Type" form section is displayed
         And help icon is displayed in "Trial Type" section with href "/research/participate/clinical-trials-search/help#trialtype"
         And info text "Select the type of trial for your search. You may check more than one box or select \"All\". You may choose to limit results to trials accepting healthy volunteers." is displayed in the "Trial Type" section body
@@ -38,7 +38,7 @@ Feature: Advanced Clinical Trials Search Trial Type Section
 
     Scenario: User has an option to narrow down search criteria by healthy volunteers and selected trial types and then refine search
         Given the user navigates to "/advanced"
-        Then the page title is "Find NCI-Supported Clinical Trials"
+        Then the page title is "Find Clinical Trials"
         When user toggles "Healthy Volunteers"
         And "Healthy Volunteers" toggle is switched to "Yes"
         And user selects "Treatment" checkbox
@@ -78,7 +78,7 @@ Feature: Advanced Clinical Trials Search Trial Type Section
 
     Scenario: User has an option to search by healthy volunteers and all trial types and refine search
         Given the user navigates to "/advanced"
-        Then the page title is "Find NCI-Supported Clinical Trials"
+        Then the page title is "Find Clinical Trials"
         When user toggles "Healthy Volunteers"
         Then "Healthy Volunteers" toggle is switched to "Yes"
         And "All" checkbox is checked

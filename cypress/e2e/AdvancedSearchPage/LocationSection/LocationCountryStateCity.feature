@@ -3,7 +3,7 @@ Feature: As a user, I want to be able to narrow down my search by specifying cou
 
     Scenario: User has an option to limit results to Country, State and City and refine search
         Given the user navigates to "/advanced"
-        Then the page title is "Find NCI-Supported Clinical Trials"
+        Then the page title is "Find Clinical Trials"
         And "Limit results to Veterans Affairs facilities" toggle is switched to "No"
         When user selects "Country, State, City" radio button
         And user selects "United Kingdom" from "Country" dropdown
@@ -47,7 +47,7 @@ Feature: As a user, I want to be able to narrow down my search by specifying cou
 
     Scenario: User has an option to limit results to a foreign Country and city
         Given the user navigates to "/advanced"
-        Then the page title is "Find NCI-Supported Clinical Trials"
+        Then the page title is "Find Clinical Trials"
         And "Limit results to Veterans Affairs facilities" toggle is switched to "No"
         When user selects "Country, State, City" radio button
         And user selects "United Kingdom" from "Country" dropdown
@@ -76,7 +76,7 @@ Feature: As a user, I want to be able to narrow down my search by specifying cou
 
     Scenario: User has an option to limit results to the US and city and refines search
         Given the user navigates to "/advanced"
-        Then the page title is "Find NCI-Supported Clinical Trials"
+        Then the page title is "Find Clinical Trials"
         And "Limit results to Veterans Affairs facilities" toggle is switched to "No"
         When user selects "Country, State, City" radio button
         When user types "Miami" in "City" field
@@ -119,7 +119,7 @@ Feature: As a user, I want to be able to narrow down my search by specifying cou
 
     Scenario: User has an option to search for multiple states and refine search
         Given the user navigates to "/advanced"
-        Then the page title is "Find NCI-Supported Clinical Trials"
+        Then the page title is "Find Clinical Trials"
         And "Limit results to Veterans Affairs facilities" toggle is switched to "No"
         When user selects "Country, State, City" radio button
         And user types "vir" in "State" field

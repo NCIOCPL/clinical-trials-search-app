@@ -2,7 +2,7 @@ Feature: Advanced Clinical Trials Search Trial Phase Section
 
     Scenario: User has an option to narrow down search criteria by trial phase
         Given the user navigates to "/advanced"
-        Then the page title is "Find NCI-Supported Clinical Trials"
+        Then the page title is "Find Clinical Trials"
         And "Trial Phase" form section is displayed
         And help icon is displayed in "Trial Phase" section with href "/research/participate/clinical-trials-search/help#trialphase"
         And info text "Select the trial phases for your search. You may check more than one box or select \"All\"." is displayed in the section body
@@ -16,7 +16,7 @@ Feature: Advanced Clinical Trials Search Trial Phase Section
 
     Scenario: User has an option to narrow down search criteria by selecting trial phase
         Given the user navigates to "/advanced"
-        Then the page title is "Find NCI-Supported Clinical Trials"
+        Then the page title is "Find Clinical Trials"
         And "Trial Phase" form section is displayed
         And user checks "Phase I" checkbox
         Then the checkbox "Phase I" is checked

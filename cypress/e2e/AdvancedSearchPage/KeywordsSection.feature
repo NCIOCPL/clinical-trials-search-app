@@ -3,7 +3,7 @@ Feature: Clinical Trials Advanced Search Page
     Scenario Outline: User has an option to narrow down search criteria by keywords or phrases
         Given screen breakpoint is set to "screenBreakpoint"
         Given the user navigates to "/advanced"
-        Then the page title is "Find NCI-Supported Clinical Trials"
+        Then the page title is "Find Clinical Trials"
         And "Keywords/Phrases" form section is displayed
         And help icon is displayed in "Keywords" section with href "/research/participate/clinical-trials-search/help#keywords"
         And "KeywordsPhrases" input field has a placeholder "Examples: PSA, 'Paget disease'"
@@ -16,7 +16,7 @@ Feature: Clinical Trials Advanced Search Page
 
     Scenario: User has an option to search by keywords and then modify search
         Given the user navigates to "/advanced"
-        Then the page title is "Find NCI-Supported Clinical Trials"
+        Then the page title is "Find Clinical Trials"
         And "Keywords/Phrases" form section is displayed
         When user types "psa" in "KeywordsPhrases" field
         When user clicks on "Find Trials" button
@@ -48,7 +48,7 @@ Feature: Clinical Trials Advanced Search Page
 
     Scenario: Negative : User searches by keyword that does not exist
         Given the user navigates to "/advanced"
-        Then the page title is "Find NCI-Supported Clinical Trials"
+        Then the page title is "Find Clinical Trials"
         And "Keywords/Phrases" form section is displayed
         When user types "penguin" in "KeywordsPhrases" field
         When user clicks on "Find Trials" button

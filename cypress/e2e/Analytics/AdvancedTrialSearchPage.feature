@@ -1,7 +1,7 @@
 Feature: Clinical Trials Search Page - Advanced
 
 	Scenario: Page Load Analytics fires when a user views an Advanced Search form
-		Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
+		Given "ctsTitle" is set to "Find Clinical Trials"
 		And "baseHost" is set to "http://localhost:3000"
 		And "canonicalHost" is set to "https://www.cancer.gov"
 		And "siteName" is set to "NCI"
@@ -9,15 +9,15 @@ Feature: Clinical Trials Search Page - Advanced
 		And "analyticsPublishedDate" is set to "02/02/2011"
 		And "analyticsName" is set to "Clinical Trials"
 		When the user navigates to "/advanced"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Clinical Trials"
 		And browser waits
 		Then there should be an analytics event with the following details
 			| key                                  | value                                                      |
 			| type                                 | PageLoad                                                   |
 			| event                                | ClinicalTrialsSearchApp:Load:AdvancedSearch                |
 			| page.name                            | www.cancer.gov/advanced                                    |
-			| page.title                           | Find NCI-Supported Clinical Trials - Advanced Search       |
-			| page.metaTitle                       | Find NCI-Supported Clinical Trials - Advanced Search - NCI |
+			| page.title                           | Find Clinical Trials - Advanced Search       |
+			| page.metaTitle                       | Find Clinical Trials - Advanced Search - NCI |
 			| page.language                        | english                                                    |
 			| page.type                            | nciAppModulePage                                           |
 			| page.channel                         | About Cancer                                               |
@@ -27,7 +27,7 @@ Feature: Clinical Trials Search Page - Advanced
 			| page.additionalDetails.formType      | advanced                                                   |
 
 	Scenario: Click event fires when user starts typing in Primary Cancer Type/Condition field
-		Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
+		Given "ctsTitle" is set to "Find Clinical Trials"
 		And "baseHost" is set to "http://localhost:3000"
 		And "canonicalHost" is set to "https://www.cancer.gov"
 		And "siteName" is set to "NCI"
@@ -35,7 +35,7 @@ Feature: Clinical Trials Search Page - Advanced
 		And "analyticsPublishedDate" is set to "02/02/2011"
 		And "analyticsName" is set to "Clinical Trials"
 		When the user navigates to "/advanced"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Clinical Trials"
 		And browser waits
 		When user clicks on "All" button
 		And user types "c" in "CancerTypeCondition" field
@@ -51,7 +51,7 @@ Feature: Clinical Trials Search Page - Advanced
 
 
 	Scenario: Click event fires when user clicks on search result item from Advanced Search results page
-		Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
+		Given "ctsTitle" is set to "Find Clinical Trials"
 		And "baseHost" is set to "http://localhost:3000"
 		And "canonicalHost" is set to "https://www.cancer.gov"
 		And "siteName" is set to "NCI"
@@ -73,7 +73,7 @@ Feature: Clinical Trials Search Page - Advanced
 			| data.resultsPosition | (int)1                                        |
 
 	Scenario: Page Load event fires when user fills out Cancer Type Condition fields on Advanced Form
-		Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
+		Given "ctsTitle" is set to "Find Clinical Trials"
 		And "baseHost" is set to "http://localhost:3000"
 		And "canonicalHost" is set to "https://www.cancer.gov"
 		And "siteName" is set to "NCI"
@@ -109,7 +109,7 @@ Feature: Clinical Trials Search Page - Advanced
 			| page.additionalDetails.helperFormData.ttDrugTreat     | all\|none\|none                      |
 
 	Scenario: Page Load event fires when user fills out Age, Keyword phrases and location at NIH only
-		Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
+		Given "ctsTitle" is set to "Find Clinical Trials"
 		And "baseHost" is set to "http://localhost:3000"
 		And "canonicalHost" is set to "https://www.cancer.gov"
 		And "siteName" is set to "NCI"
@@ -145,7 +145,7 @@ Feature: Clinical Trials Search Page - Advanced
 			| page.additionalDetails.helperFormData.ttDrugTreat     | all\|none\|none                      |
 
 	Scenario: Page Load event fires when user fills out Location fields with VaOnly toggled and specified state
-		Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
+		Given "ctsTitle" is set to "Find Clinical Trials"
 		And "baseHost" is set to "http://localhost:3000"
 		And "canonicalHost" is set to "https://www.cancer.gov"
 		And "siteName" is set to "NCI"
@@ -182,7 +182,7 @@ Feature: Clinical Trials Search Page - Advanced
 			| page.additionalDetails.helperFormData.ttDrugTreat     | all\|none\|none                       |
 
 	Scenario: Page Load event fires when user fills out Location hospital field and searches
-		Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
+		Given "ctsTitle" is set to "Find Clinical Trials"
 		And "baseHost" is set to "http://localhost:3000"
 		And "canonicalHost" is set to "https://www.cancer.gov"
 		And "siteName" is set to "NCI"
@@ -217,7 +217,7 @@ Feature: Clinical Trials Search Page - Advanced
 			| page.additionalDetails.helperFormData.ttDrugTreat     | all\|none\|none                                                 |
 
 	Scenario: Page Load event fires when user fills out Trial Type field and searches
-		Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
+		Given "ctsTitle" is set to "Find Clinical Trials"
 		And "baseHost" is set to "http://localhost:3000"
 		And "canonicalHost" is set to "https://www.cancer.gov"
 		And "siteName" is set to "NCI"
@@ -253,7 +253,7 @@ Feature: Clinical Trials Search Page - Advanced
 			| page.additionalDetails.helperFormData.ttDrugTreat     | tre,sup,dia,bas,pre,hea,scr,oth\|none\|none\|hv                                                             |
 
 	Scenario: Page Load event fires when user fills out Drug Treatment and Trial Phase fields and searches
-		Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
+		Given "ctsTitle" is set to "Find Clinical Trials"
 		And "baseHost" is set to "http://localhost:3000"
 		And "canonicalHost" is set to "https://www.cancer.gov"
 		And "siteName" is set to "NCI"
@@ -291,7 +291,7 @@ Feature: Clinical Trials Search Page - Advanced
 
 
 	Scenario: Page Load event fires when user fills out Trial Id, Lead organization and investigator fields and searches
-		Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
+		Given "ctsTitle" is set to "Find Clinical Trials"
 		And "baseHost" is set to "http://localhost:3000"
 		And "canonicalHost" is set to "https://www.cancer.gov"
 		And "siteName" is set to "NCI"
@@ -329,7 +329,7 @@ Feature: Clinical Trials Search Page - Advanced
 
 
 	Scenario: Click event fires when user clicks on Modify Search criteria button
-		Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
+		Given "ctsTitle" is set to "Find Clinical Trials"
 		And "baseHost" is set to "http://localhost:3000"
 		And "canonicalHost" is set to "https://www.cancer.gov"
 		And "siteName" is set to "NCI"
@@ -352,7 +352,7 @@ Feature: Clinical Trials Search Page - Advanced
 
 
 	Scenario: Click event fires when user selects all on page and click print
-		Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
+		Given "ctsTitle" is set to "Find Clinical Trials"
 		And "baseHost" is set to "http://localhost:3000"
 		And "canonicalHost" is set to "https://www.cancer.gov"
 		And "siteName" is set to "NCI"
@@ -379,7 +379,7 @@ Feature: Clinical Trials Search Page - Advanced
 	#### Needs scroll to be implemented
 
 	# Scenario: Click event fires when user clicks on Find Trials button from Advanced Search form
-	#   Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
+	#   Given "ctsTitle" is set to "Find Clinical Trials"
 	#   And "baseHost" is set to "http://localhost:3000"
 	#   And "canonicalHost" is set to "https://www.cancer.gov"
 	#   And "siteName" is set to "NCI"
@@ -387,7 +387,7 @@ Feature: Clinical Trials Search Page - Advanced
 	#   And "analyticsPublishedDate" is set to "02/02/2011"
 	#   And "analyticsName" is set to "Clinical Trials"
 	#   When the user navigates to "/advanced"
-	#   Then the page title is "Find NCI-Supported Clinical Trials"
+	#   Then the page title is "Find Clinical Trials"
 	#   And browser waits
 	#   When user scrolls to middle of screen
 	#   And user clicks on "Find Trials" button
@@ -402,7 +402,7 @@ Feature: Clinical Trials Search Page - Advanced
 
 
 	Scenario: Click event fires when user clicks on Clear Form button
-		Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
+		Given "ctsTitle" is set to "Find Clinical Trials"
 		And "baseHost" is set to "http://localhost:3000"
 		And "canonicalHost" is set to "https://www.cancer.gov"
 		And "siteName" is set to "NCI"
@@ -410,7 +410,7 @@ Feature: Clinical Trials Search Page - Advanced
 		And "analyticsPublishedDate" is set to "02/02/2011"
 		And "analyticsName" is set to "Clinical Trials"
 		When the user navigates to "/advanced"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Clinical Trials"
 		And browser waits
 		When user clears form
 		Then there should be preserved analytics event with the following details
@@ -422,7 +422,7 @@ Feature: Clinical Trials Search Page - Advanced
 			| data.formType      | advanced                                |
 
 	Scenario: Click event fires when user tries to print without selecting any trial
-		Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
+		Given "ctsTitle" is set to "Find Clinical Trials"
 		And "baseHost" is set to "http://localhost:3000"
 		And "canonicalHost" is set to "https://www.cancer.gov"
 		And "siteName" is set to "NCI"
@@ -444,7 +444,7 @@ Feature: Clinical Trials Search Page - Advanced
 			| data.errorReason   | noneselected                                     |
 
 	Scenario: Click event fires when user reaches max number of selected trials
-		Given "ctsTitle" is set to "Find NCI-Supported Clinical Trials"
+		Given "ctsTitle" is set to "Find Clinical Trials"
 		And "baseHost" is set to "http://localhost:3000"
 		And "canonicalHost" is set to "https://www.cancer.gov"
 		And "siteName" is set to "NCI"
