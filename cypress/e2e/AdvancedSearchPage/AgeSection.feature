@@ -1,14 +1,14 @@
 Feature: Clinical Trials Advanced Search Page age section
     Scenario: User has an option to narrow down search criteria by age
         Given the user navigates to "/advanced"
-        Then the page title is "Find NCI-Supported Clinical Trials"
+        Then the page title is "Find Cancer Clinical Trials"
         And "Age" form section is displayed
         And help icon is displayed in "Age" section with href "/research/participate/clinical-trials-search/help#age"
         And helper text "Enter the age of the participant." is displayed
 
     Scenario: User is able to search for a specific age
         Given the user navigates to "/advanced"
-        Then the page title is "Find NCI-Supported Clinical Trials"
+        Then the page title is "Find Cancer Clinical Trials"
         And "Age" form section is displayed
         When user types "40" in "Age" field
         And user clicks on "Find Trials" button
@@ -25,7 +25,7 @@ Feature: Clinical Trials Advanced Search Page age section
 
     Scenario: User is able to search for a specific age from basic search and refine search
         Given the user navigates to "/"
-        Then the page title is "Find NCI-Supported Clinical Trials"
+        Then the page title is "Find Cancer Clinical Trials"
         And "Age" form section is displayed
         When user types "40" in "Age" field
         And user clicks on "Find Trials" button
@@ -58,7 +58,7 @@ Feature: Clinical Trials Advanced Search Page age section
 
     Scenario: Negative: User is not able to search for age out of boundaries
         Given the user navigates to "/advanced"
-        Then the page title is "Find NCI-Supported Clinical Trials"
+        Then the page title is "Find Cancer Clinical Trials"
         And "Age" form section is displayed
         When user types "0" in "Age" field
         Then alert "Please enter a number between 1 and 120." is displayed
@@ -78,7 +78,7 @@ Feature: Clinical Trials Advanced Search Page age section
 
 	Scenario: User is able to view trial results which have varying age criteria
 		Given the user navigates to "/advanced"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Cancer Clinical Trials"
 		And "Age" form section is displayed
 		When user types "NCI-2019-02289, NCI-2019-06216, NCI-2019-08622, NCI-2019-00399, NCI-2021-06711, NCI-2014-00677, NCI-2016-01734" in "TrialID" field
 		And user clicks on "Find Trials" button

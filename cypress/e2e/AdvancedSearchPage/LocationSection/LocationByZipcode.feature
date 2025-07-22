@@ -3,7 +3,7 @@ Feature: As a user, I want to be able to narrow down my search by specifying a z
 
 		Scenario: User has an option to limit results to zipcode and radius and refine search
         Given the user navigates to "/advanced"
-        Then the page title is "Find NCI-Supported Clinical Trials"
+        Then the page title is "Find Cancer Clinical Trials"
         And "Limit results to Veterans Affairs facilities" toggle is switched to "No"
         When user selects "ZIP Code" radio button
         And user types "22182" in "U.S. ZIP Code" field
@@ -43,7 +43,7 @@ Feature: As a user, I want to be able to narrow down my search by specifying a z
 
 		Scenario: Negative: User is not able to search for an incorrect zip code AND is NOT able to search for empty zip
 			Given the user navigates to "/advanced"
-			Then the page title is "Find NCI-Supported Clinical Trials"
+			Then the page title is "Find Cancer Clinical Trials"
 			When user selects "ZIP Code" radio button
 			When user types "999g9" in "U.S. ZIP Code" field
 			Then alert "Please enter a valid 5 digit U.S. ZIP code" is displayed
@@ -61,7 +61,7 @@ Feature: As a user, I want to be able to narrow down my search by specifying a z
 
     Scenario: Negative: User is not able to search for an incorrect zip code
         Given the user navigates to "/advanced"
-        Then the page title is "Find NCI-Supported Clinical Trials"
+        Then the page title is "Find Cancer Clinical Trials"
         When user selects "ZIP Code" radio button
         When user types "2016" in "U.S. ZIP Code" field
          And user clicks on "Find Trials" button

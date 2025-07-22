@@ -244,7 +244,7 @@ Feature: Clinical Trials Search Results Page Components
 
 	Scenario: As a user, I expect meta data to update accordingly when I search for criteria and modify my search
 		Given the user navigates to "/advanced"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Cancer Clinical Trials"
 		And "Age" form section is displayed
 		When user types "40" in "Age" field
 		And user clicks on "Find Trials" button
@@ -253,39 +253,39 @@ Feature: Clinical Trials Search Results Page Components
 		And the title tag should be "Clinical Trials Search Results - NCI"
 		And the page contains meta tags with the following names
 			| name        | content                                               |
-			| description | Find an NCI-supported clinical trial - Search results |
+			| description | Find Cancer Clinical Trials - Search Results |
 		And the page contains meta tags with the following properties
 			| property       | content                                                                                |
 			| og:title       | Clinical Trials Search Results                                                         |
-			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=40&loc=0&rl=2 |
-			| og:description | Find an NCI-supported clinical trial - Search results                                  |
-		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=40&loc=0&rl=2"
+			| og:url         | https://www.cancer.gov/research/participate/clinical-trials-search/r?a=40&loc=0&rl=2 |
+			| og:description | Find Cancer Clinical Trials - Search Results                                  |
+		And there is a canonical link with the href "https://www.cancer.gov/research/participate/clinical-trials-search/r?a=40&loc=0&rl=2"
 		When user clicks on Modify Search Criteria button
 		When user clears "Age" input field
 		And user types "39" in "Age" field
-		And the title tag should be "Find NCI-Supported Clinical Trials - Advanced Search - NCI"
+		And the title tag should be "Find Cancer Clinical Trials - Advanced Search - NCI"
 		And the page contains meta tags with the following names
 			| name        | content                                                                                                                                                  |
-			| description | Use our advanced search to find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one. |
+			| description | Find cancer clinical trials—and learn how to locate other research studies—that may be right for you or a loved one.|
 		And the page contains meta tags with the following properties
 			| property       | content                                                                                                                                                  |
-			| og:title       | Find NCI-Supported Clinical Trials - Advanced Search                                                                                                     |
-			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/advanced                                                                            |
-			| og:description | Use our advanced search to find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one. |
-		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/advanced"
+			| og:title       | Find Cancer Clinical Trials - Advanced Search                                                                                                     |
+			| og:url         | https://www.cancer.gov/research/participate/clinical-trials-search/advanced                                                                            |
+			| og:description | Find cancer clinical trials—and learn how to locate other research studies—that may be right for you or a loved one. |
+		And there is a canonical link with the href "https://www.cancer.gov/research/participate/clinical-trials-search/advanced"
 		And user clicks on "Find Trials" button
 		Then the search is executed and results page is displayed
 		And trial info displayes "Results 1-10  of 6731 for your search "
 		And the title tag should be "Clinical Trials Search Results - NCI"
 		And the page contains meta tags with the following names
 			| name        | content                                               |
-			| description | Find an NCI-supported clinical trial - Search results |
+			| description | Find Cancer Clinical Trials - Search Results |
 		And the page contains meta tags with the following properties
 			| property       | content                                                                                |
 			| og:title       | Clinical Trials Search Results                                                         |
-			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=39&loc=0&rl=2 |
-			| og:description | Find an NCI-supported clinical trial - Search results                                  |
-		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=39&loc=0&rl=2"
+			| og:url         | https://www.cancer.gov/research/participate/clinical-trials-search/r?a=39&loc=0&rl=2 |
+			| og:description | Find Cancer Clinical Trials - Search Results                                  |
+		And there is a canonical link with the href "https://www.cancer.gov/research/participate/clinical-trials-search/r?a=39&loc=0&rl=2"
 
 
 	Scenario: As a user, I expect meta data to update accordingly when I navigate to search results directly and modify my search
@@ -294,39 +294,39 @@ Feature: Clinical Trials Search Results Page Components
 		And the title tag should be "Clinical Trials Search Results - NCI"
 		And the page contains meta tags with the following names
 			| name        | content                                               |
-			| description | Find an NCI-supported clinical trial - Search results |
+			| description | Find Cancer Clinical Trials - Search Results |
 		And the page contains meta tags with the following properties
 			| property       | content                                                                                                                                                                                                                                                                                        |
 			| og:title       | Clinical Trials Search Results                                                                                                                                                                                                                                                                 |
-			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=50&d=C798&i=C15313&in=Benjamin%20David%20Smith&lcnty=United%20States&lcty=Atlanta&lo=M%20D%20Anderson%20Cancer%20Center&loc=2&lst=GA&q=Breast&rl=2&st=C2924&stg=C94774&t=C4872&tid=NCI-2017-00476&tp=iii&tt=treatment |
-			| og:description | Find an NCI-supported clinical trial - Search results                                                                                                                                                                                                                                          |
-		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=50&d=C798&i=C15313&in=Benjamin%20David%20Smith&lcnty=United%20States&lcty=Atlanta&lo=M%20D%20Anderson%20Cancer%20Center&loc=2&lst=GA&q=Breast&rl=2&st=C2924&stg=C94774&t=C4872&tid=NCI-2017-00476&tp=iii&tt=treatment"
+			| og:url         | https://www.cancer.gov/research/participate/clinical-trials-search/r?a=50&d=C798&i=C15313&in=Benjamin%20David%20Smith&lcnty=United%20States&lcty=Atlanta&lo=M%20D%20Anderson%20Cancer%20Center&loc=2&lst=GA&q=Breast&rl=2&st=C2924&stg=C94774&t=C4872&tid=NCI-2017-00476&tp=iii&tt=treatment |
+			| og:description | Find Cancer Clinical Trials - Search Results                                                                                                                                                                                                                                          |
+		And there is a canonical link with the href "https://www.cancer.gov/research/participate/clinical-trials-search/r?a=50&d=C798&i=C15313&in=Benjamin%20David%20Smith&lcnty=United%20States&lcty=Atlanta&lo=M%20D%20Anderson%20Cancer%20Center&loc=2&lst=GA&q=Breast&rl=2&st=C2924&stg=C94774&t=C4872&tid=NCI-2017-00476&tp=iii&tt=treatment"
 		When user clicks on Modify Search Criteria button
 		And user selects "Zip" radio button
 		And user types "30309" in "Zipcode" field
-		And the title tag should be "Find NCI-Supported Clinical Trials - Advanced Search - NCI"
+		And the title tag should be "Find Cancer Clinical Trials - Advanced Search - NCI"
 		And the page contains meta tags with the following names
-			| name        | content                                                                                                                                                  |
-			| description | Use our advanced search to find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one. |
+			| name        | content                                                                                                                       |
+			| description | Find cancer clinical trials—and learn how to locate other research studies—that may be right for you or a loved one. |
 		And the page contains meta tags with the following properties
 			| property       | content                                                                                                                                                  |
-			| og:title       | Find NCI-Supported Clinical Trials - Advanced Search                                                                                                     |
-			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/advanced                                                                            |
-			| og:description | Use our advanced search to find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one. |
-		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/advanced"
+			| og:title       | Find Cancer Clinical Trials - Advanced Search                                                                                                     |
+			| og:url         | https://www.cancer.gov/research/participate/clinical-trials-search/advanced                                                                            |
+			| og:description | Find cancer clinical trials—and learn how to locate other research studies—that may be right for you or a loved one. |
+		And there is a canonical link with the href "https://www.cancer.gov/research/participate/clinical-trials-search/advanced"
 		And user clicks on "Find Trials" button
 		Then the search is executed and results page is displayed
 		And trial info displayes "Results 1-1  of 1 for your search "
 		And the title tag should be "Clinical Trials Search Results - NCI"
 		And the page contains meta tags with the following names
 			| name        | content                                               |
-			| description | Find an NCI-supported clinical trial - Search results |
+			| description | Find Cancer Clinical Trials - Search Results |
 		And the page contains meta tags with the following properties
 			| property       | content                                                                                                                                                                                                                                                             |
 			| og:title       | Clinical Trials Search Results                                                                                                                                                                                                                                      |
-			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=50&d=C798&i=C15313&in=Benjamin%20David%20Smith&lo=M%20D%20Anderson%20Cancer%20Center&loc=1&q=Breast&rl=2&st=C2924&stg=C94774&t=C4872&tid=NCI-2017-00476&tp=iii&tt=treatment&z=30309&zp=100 |
-			| og:description | Find an NCI-supported clinical trial - Search results                                                                                                                                                                                                               |
-		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=50&d=C798&i=C15313&in=Benjamin%20David%20Smith&lo=M%20D%20Anderson%20Cancer%20Center&loc=1&q=Breast&rl=2&st=C2924&stg=C94774&t=C4872&tid=NCI-2017-00476&tp=iii&tt=treatment&z=30309&zp=100"
+			| og:url         | https://www.cancer.gov/research/participate/clinical-trials-search/r?a=50&d=C798&i=C15313&in=Benjamin%20David%20Smith&lo=M%20D%20Anderson%20Cancer%20Center&loc=1&q=Breast&rl=2&st=C2924&stg=C94774&t=C4872&tid=NCI-2017-00476&tp=iii&tt=treatment&z=30309&zp=100 |
+			| og:description | Find Cancer Clinical Trials - Search Results                                                                                                                                                                                                               |
+		And there is a canonical link with the href "https://www.cancer.gov/research/participate/clinical-trials-search/r?a=50&d=C798&i=C15313&in=Benjamin%20David%20Smith&lo=M%20D%20Anderson%20Cancer%20Center&loc=1&q=Breast&rl=2&st=C2924&stg=C94774&t=C4872&tid=NCI-2017-00476&tp=iii&tt=treatment&z=30309&zp=100"
 
 
 	Scenario Outline: As a user, I expect the sex-based eligibility display to function regardless of the API's data structure.
