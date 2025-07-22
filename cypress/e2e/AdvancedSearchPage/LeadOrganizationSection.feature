@@ -3,7 +3,7 @@ Feature: Advanced Clinical Trials Search Lead Organization Section
 
 	Scenario: User has an option to narrow down search criteria by lead org
 		Given the user navigates to "/advanced"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Cancer Clinical Trials"
 		And "Lead Organization" form section is displayed
 		And help icon is displayed in "Lead Organization" section with href "/research/participate/clinical-trials-search/help#leadorganization"
 		And "Lead organization" input field has a placeholder "Organization name"
@@ -11,7 +11,7 @@ Feature: Advanced Clinical Trials Search Lead Organization Section
 
 	Scenario: User has an option to search by lead org using autosuggest and refine search
 		Given the user navigates to "/advanced"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Cancer Clinical Trials"
 		And "Lead Organization" form section is displayed
 		When user clicks on "Lead organization" field
 		Then autocomplete dropdown is displayed with "Please enter 3 or more characters" text
@@ -48,7 +48,7 @@ Feature: Advanced Clinical Trials Search Lead Organization Section
 
 	Scenario: User searches for investigators that does not exist
 		Given the user navigates to "/advanced"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Cancer Clinical Trials"
 		And "Lead Organization" form section is displayed
 		When user clicks on "Lead organization" field
 		Then autocomplete dropdown is displayed
@@ -66,7 +66,7 @@ Feature: Advanced Clinical Trials Search Lead Organization Section
 
 	Scenario: User has an option to search for lead organization without using autosuggest
 		Given the user navigates to "/advanced"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Cancer Clinical Trials"
 		And "Lead Organization" form section is displayed
 		When user clicks on "Lead organization" field
 		Then autocomplete dropdown is displayed with "Please enter 3 or more characters" text

@@ -85,6 +85,15 @@ const SearchPage = ({ formInit = 'basic' }) => {
 			siteName,
 			whatAreTrialsUrl,
 			whichTrialsUrl,
+			searchUrl,
+			advancedSearchUrl,
+			pageTitle,
+			basicSearchPageTitle,
+			advancedSearchPageTitle,
+			basicSearchMetaDescription,
+			advancedSearchMetaDescription,
+			basicSearchIntroText,
+			advancedSearchIntroText,
 		},
 	] = useAppSettings();
 	//this is SCO passed in from search results page
@@ -172,12 +181,15 @@ const SearchPage = ({ formInit = 'basic' }) => {
 				name:
 					canonicalHost.replace(/https:\/\/|http:\/\//, '') +
 					window.location.pathname,
-				title: `Find NCI-Supported Clinical Trials${
-					pageType === 'advanced' ? ' - Advanced Search' : ''
-				}`,
-				metaTitle: `Find NCI-Supported Clinical Trials - ${
-					pageType === 'advanced' ? 'Advanced Search - ' : ''
-				}${siteName}`,
+				title:
+					pageType === 'advanced'
+						? advancedSearchPageTitle
+						: basicSearchPageTitle,
+				metaTitle: `${
+					pageType === 'advanced'
+						? advancedSearchPageTitle
+						: basicSearchPageTitle
+				} - ${siteName}`,
 				// Any additional properties fall into the "page.additionalDetails" bucket
 				// for the event.
 			});
@@ -313,6 +325,13 @@ const SearchPage = ({ formInit = 'basic' }) => {
 		dispatch(clearForm());
 	};
 
+	// Helper function to process intro text template
+	const processIntroText = (template) => {
+		return template
+			.replace('{canonicalHost}', canonicalHost)
+			.replace('{whichTrialsUrl}', whichTrialsUrl);
+	};
+
 	const renderSearchTip = () => (
 		<div className="cts-search-tip">
 			<div className="cts-search-tip__icon">
@@ -342,58 +361,60 @@ const SearchPage = ({ formInit = 'basic' }) => {
 	return (
 		<article className="search-page">
 			<Helmet>
-				<title>
-					{`Find NCI-Supported Clinical Trials - ${
-						pageType === 'advanced' ? 'Advanced Search - ' : ''
-					}${siteName}`}
-				</title>
+				<title>{`${
+					pageType === 'advanced'
+						? advancedSearchPageTitle
+						: basicSearchPageTitle
+				} - ${siteName}`}</title>
 				<link
 					rel="canonical"
-					href={`https://www.cancer.gov/about-cancer/treatment/clinical-trials/search${
-						pageType === 'basic'
-							? BasicSearchPagePath()
-							: AdvancedSearchPagePath()
+					href={`${canonicalHost}${
+						pageType === 'basic' ? searchUrl + '/' : advancedSearchUrl
 					}`}
 				/>
 				<meta
 					name="description"
-					content={`${
-						pageType === 'basic' ? 'F' : 'Use our advanced search to f'
-					}ind an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one.`}
+					content={
+						pageType === 'advanced'
+							? advancedSearchMetaDescription
+							: basicSearchMetaDescription
+					}
 				/>
 				<meta
 					property="og:title"
-					content={`Find NCI-Supported Clinical Trials${
-						pageType === 'advanced' ? ' - Advanced Search' : ''
-					}`}
+					content={
+						pageType === 'advanced'
+							? advancedSearchPageTitle
+							: basicSearchPageTitle
+					}
 				/>
 				<meta
 					property="og:url"
-					content={`https://www.cancer.gov/about-cancer/treatment/clinical-trials/search${
-						pageType === 'basic'
-							? BasicSearchPagePath()
-							: AdvancedSearchPagePath()
+					content={`${canonicalHost}${
+						pageType === 'basic' ? searchUrl + '/' : advancedSearchUrl
 					}`}
 				/>
 				<meta
 					property="og:description"
-					content={`${
-						pageType === 'basic' ? 'F' : 'Use our advanced search to f'
-					}ind an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one.`}
+					content={
+						pageType === 'advanced'
+							? advancedSearchMetaDescription
+							: basicSearchMetaDescription
+					}
 				/>
 			</Helmet>
 			<div ref={sentinelRef} className="search-page__sentinel"></div>
-			<h1>Find NCI-Supported Clinical Trials</h1>
+			<h1>{pageTitle}</h1>
 			<div className="search-page__header">
-				<p>
-					NCI-supported clinical trials are those sponsored or otherwise
-					financially supported by NCI. See our guide,{' '}
-					<a href={canonicalHost + whichTrialsUrl}>
-						Steps to Find a Clinical Trial
-					</a>
-					, to learn about options for finding trials not included in NCI&apos;s
-					collection.
-				</p>
+				<p
+					dangerouslySetInnerHTML={{
+						__html: processIntroText(
+							pageType === 'advanced'
+								? advancedSearchIntroText
+								: basicSearchIntroText
+						),
+					}}
+				/>
 				{renderSearchTip()}
 			</div>
 

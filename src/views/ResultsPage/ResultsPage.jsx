@@ -42,8 +42,11 @@ const ResultsPage = () => {
 			analyticsName,
 			canonicalHost,
 			siteName,
+			searchUrl,
 			whichTrialsUrl,
 			zipConversionEndpoint,
+			resultsPageTitle,
+			resultsPageMetaDescription,
 			apiClients: { clinicalTrialsSearchClientV2 },
 		},
 	] = useAppSettings();
@@ -227,8 +230,8 @@ const ResultsPage = () => {
 					window.location.pathname,
 				// Any additional properties fall into the "page.additionalDetails" bucket
 				// for the event.
-				metaTitle: `Clinical Trials Search Results - ${siteName}`,
-				title: `Clinical Trials Search Results`,
+				metaTitle: `${resultsPageTitle} - ${siteName}`,
+				title: resultsPageTitle,
 				status: 'success',
 				formType: searchCriteriaObject.formType,
 				numResults: trialResults.total,
@@ -610,24 +613,17 @@ const ResultsPage = () => {
 	return (
 		<>
 			<Helmet>
-				<title>Clinical Trials Search Results - {siteName}</title>
-				<meta property="og:title" content="Clinical Trials Search Results" />
-				<link
-					rel="canonical"
-					href={`https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?${qs}`}
-				/>
+				<title>
+					{resultsPageTitle} - {siteName}
+				</title>
+				<meta property="og:title" content={resultsPageTitle} />
+				<link rel="canonical" href={`${canonicalHost}${searchUrl}/r?${qs}`} />
 				<meta
 					property="og:url"
-					content={`https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?${qs}`}
+					content={`${canonicalHost}${searchUrl}/r?${qs}`}
 				/>
-				<meta
-					name="description"
-					content="Find an NCI-supported clinical trial - Search results"
-				/>
-				<meta
-					property="og:description"
-					content="Find an NCI-supported clinical trial - Search results"
-				/>
+				<meta name="description" content={resultsPageMetaDescription} />
+				<meta property="og:description" content={resultsPageMetaDescription} />
 			</Helmet>
 
 			{error.length && error.filter((err) => err.fieldName === 'zip') ? (
@@ -640,7 +636,7 @@ const ResultsPage = () => {
 						<div className="loader__pageheader"></div>
 					) : (
 						<>
-							<h1>Clinical Trials Search Results</h1>
+							<h1>{resultsPageTitle}</h1>
 
 							<ResultsPageHeader
 								resultsCount={trialResults.total}
