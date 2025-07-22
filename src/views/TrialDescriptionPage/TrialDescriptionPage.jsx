@@ -641,28 +641,42 @@ const TrialDescriptionPage = () => {
 												{renderEligibilityCriteria()}
 											</AccordionItem>
 											<AccordionItem titleCollapsed="Locations &amp; Contacts">
-												{activeRecruitmentSites &&
-												activeRecruitmentSites.length > 0 ? (
-													<SitesList
-														searchCriteria={searchCriteriaObject}
-														sites={activeRecruitmentSites}
-													/>
-												) : noLocInfo.includes(
-														trialDescription.current_trial_status.toLowerCase()
-												  ) ? (
-													<p>Location information is not yet available.</p>
-												) : (
+												`{' '}
+												<>
 													<p>
-														See trial information on{' '}
+														Additional locations may be listed on
+														ClinicalTrials.gov for{' '}
 														<a
 															href={`https://www.clinicaltrials.gov/study/${trialDescription.nct_id}`}
 															target="_blank"
 															rel="noopener noreferrer">
-															ClinicalTrials.gov
-														</a>{' '}
-														for a list of participating sites.
+															{trialDescription.nct_id}
+														</a>
+														.
 													</p>
-												)}
+													{activeRecruitmentSites &&
+													activeRecruitmentSites.length > 0 ? (
+														<SitesList
+															searchCriteria={searchCriteriaObject}
+															sites={activeRecruitmentSites}
+														/>
+													) : noLocInfo.includes(
+															trialDescription.current_trial_status.toLowerCase()
+													  ) ? (
+														<p>Location information is not yet available.</p>
+													) : (
+														<p>
+															See trial information on{' '}
+															<a
+																href={`https://www.clinicaltrials.gov/study/${trialDescription.nct_id}`}
+																target="_blank"
+																rel="noopener noreferrer">
+																ClinicalTrials.gov
+															</a>{' '}
+															for a list of participating sites.
+														</p>
+													)}
+												</>
 											</AccordionItem>
 											<AccordionItem titleCollapsed="Trial Objectives and Outline">
 												{trialDescription.detail_description && (
