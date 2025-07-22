@@ -641,6 +641,17 @@ const TrialDescriptionPage = () => {
 												{renderEligibilityCriteria()}
 											</AccordionItem>
 											<AccordionItem titleCollapsed="Locations &amp; Contacts">
+												<p>
+													Additional locations may be listed on
+													ClinicalTrials.gov for{' '}
+													<a
+														href={`https://www.clinicaltrials.gov/study/${trialDescription.nct_id}`}
+														target="_blank"
+														rel="noopener noreferrer">
+														{trialDescription.nct_id}
+													</a>
+													.
+												</p>
 												{activeRecruitmentSites &&
 												activeRecruitmentSites.length > 0 ? (
 													<SitesList
