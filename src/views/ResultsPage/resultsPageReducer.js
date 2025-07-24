@@ -30,10 +30,7 @@ const handleSuccessfulFetch = (state, action) => {
 	const newResponseHash = convertObjectToBase64(action.payload.fetchResponse);
 	const oldResponseHash = convertObjectToBase64(state.trialResults);
 
-	if (
-		newResponseHash === oldResponseHash &&
-		action.payload.fetchActionsHash === state.actionsHash
-	) {
+	if (newResponseHash === oldResponseHash && action.payload.fetchActionsHash === state.actionsHash) {
 		return state;
 	}
 

@@ -223,11 +223,7 @@ const ResultsListItem = ({ id, item, isChecked, onCheckChange, searchCriteria, i
 				</div>
 				<div className="results-list-item__category">
 					<span>Sex:</span>
-					{item.eligibility &&
-						getGenderDisplay(
-							item.eligibility.structured.sex ||
-								item.eligibility.structured.gender
-						)}
+					{item.eligibility && getGenderDisplay(item.eligibility.structured.sex || item.eligibility.structured.gender)}
 				</div>
 				<div className="results-list-item__category">
 					<span>Location:</span>

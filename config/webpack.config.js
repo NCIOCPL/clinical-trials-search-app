@@ -11,9 +11,10 @@ const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+//const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const safePostCssParser = require('postcss-safe-parser');
-const ManifestPlugin = require('webpack-manifest-plugin');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
@@ -23,6 +24,8 @@ const modules = require('./modules');
 const getClientEnvironment = require('./env');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
+const ESLintWebpackPlugin = require('eslint-webpack-plugin');
+// const Buffer = require('buffer');
 
 const postcssNormalize = require('postcss-normalize');
 
@@ -86,20 +89,22 @@ module.exports = function (webpackEnv) {
 				options: {
 					// Necessary for external CSS imports to work
 					// https://github.com/facebook/create-react-app/issues/2677
-					ident: 'postcss',
-					plugins: () => [
-						require('postcss-flexbugs-fixes'),
-						require('postcss-preset-env')({
-							autoprefixer: {
-								flexbox: 'no-2009',
-							},
-							stage: 3,
-						}),
-						// Adds PostCSS Normalize as the reset css with default options,
-						// so that it honors browserslist config in package.json
-						// which in turn let's users customize the target behavior as per their needs.
-						postcssNormalize(),
-					],
+					postcssOptions: {
+						ident: 'postcss',
+						plugins: () => [
+							require('postcss-flexbugs-fixes'),
+							require('postcss-preset-env')({
+								autoprefixer: {
+									flexbox: 'no-2009',
+								},
+								stage: 3,
+							}),
+							// Adds PostCSS Normalize as the reset css with default options,
+							// so that it honors browserslist config in package.json
+							// which in turn let's users customize the target behavior as per their needs.
+							postcssNormalize(),
+						],
+					},
 					sourceMap: isEnvProduction && shouldUseSourceMap,
 				},
 			},
@@ -228,10 +233,11 @@ module.exports = function (webpackEnv) {
 					parallel: !isWsl,
 				}),
 				// This is only used in production mode
-				new OptimizeCSSAssetsPlugin({
-					cssProcessorOptions: {
-						parser: safePostCssParser,
-						map: shouldUseSourceMap
+				new CssMinimizerPlugin({
+					minimizerOptions: {
+						processorOptions: {
+							parser: safePostCssParser,
+							map: shouldUseSourceMap
 							? {
 									// `inline: false` forces the sourcemap to be output into a
 									// separate file
@@ -241,8 +247,24 @@ module.exports = function (webpackEnv) {
 									annotation: true,
 							  }
 							: false,
+						},
 					},
 				}),
+				// new OptimizeCSSAssetsPlugin({
+				// 	cssProcessorOptions: {
+				// 		parser: safePostCssParser,
+				// 		map: shouldUseSourceMap
+				// 			? {
+				// 					// `inline: false` forces the sourcemap to be output into a
+				// 					// separate file
+				// 					inline: false,
+				// 					// `annotation: true` appends the sourceMappingURL to the end of
+				// 					// the css file, helping the browser find the sourcemap
+				// 					annotation: true,
+				// 			  }
+				// 			: false,
+				// 	},
+				// }),
 			],
 			// Automatically split vendor and commons
 			// https://twitter.com/wSokra/status/969633336732905474
@@ -256,6 +278,12 @@ module.exports = function (webpackEnv) {
 			// runtimeChunk: true,
 		},
 		resolve: {
+			fallback: {
+				"http": require.resolve("stream-http"),
+				"https": require.resolve('https-browserify'),
+				"buffer": require.resolve('buffer'),
+				"url": require.resolve("url"),
+			},
 			// This allows you to set a fallback for where Webpack should look for modules.
 			// We placed these paths second because we want `node_modules` to "win"
 			// if there are any conflicts. This matches Node resolution mechanism.
@@ -302,25 +330,35 @@ module.exports = function (webpackEnv) {
 				// Disable require.ensure as it's not a standard language feature.
 				{ parser: { requireEnsure: false } },
 
+				{
+					test: /\.m?js/,
+					type: "javascript/auto",
+				},
+				{
+					test: /\.m?js/,
+					resolve: {
+					  fullySpecified: false,
+					},
+				},
 				// First, run the linter.
 				// It's important to do this before Babel processes the JS.
-				{
-					test: /\.(js|cjs|mjs|jsx|ts|tsx)$/,
-					enforce: 'pre',
-					use: [
-						{
-							options: {
-								cache: true,
-								formatter: require.resolve('react-dev-utils/eslintFormatter'),
-								eslintPath: require.resolve('eslint'),
-								resolvePluginsRelativeTo: __dirname,
-							},
-							loader: require.resolve('eslint-loader'),
-						},
-					],
-					include: paths.appSrc,
-					exclude: paths.appExcludeFromBuild,
-				},
+				// {
+				// 	test: /\.(js|cjs|mjs|jsx|ts|tsx)$/,
+				// 	enforce: 'pre',
+				// 	use: [
+				// 		{
+				// 			options: {
+				// 				cache: true,
+				// 				formatter: require.resolve('react-dev-utils/eslintFormatter'),
+				// 				eslintPath: require.resolve('eslint'),
+				// 				resolvePluginsRelativeTo: __dirname,
+				// 			},
+				// 			loader: require.resolve('eslint-loader'),
+				// 		},
+				// 	],
+				// 	include: paths.appSrc,
+				// 	exclude: paths.appExcludeFromBuild,
+				// },
 				{
 					// "oneOf" will traverse all following loaders until one will
 					// match the requirements. When no loader matches it will fall
@@ -497,6 +535,15 @@ module.exports = function (webpackEnv) {
 			],
 		},
 		plugins: [
+			new ESLintWebpackPlugin( {
+				extensions: ['js', 'jsx', 'cjs', 'mjs', 'ts', 'tsx'],
+				exclude: ['/node_modules/', paths.appExcludeFromBuild.toString()],
+				cache: true,
+				formatter: require.resolve('react-dev-utils/eslintFormatter'),
+				eslintPath: require.resolve('eslint'),
+				resolvePluginsRelativeTo: __dirname,
+				ignore: true,
+				useEslintrc: true, }),
 			// Generates an `index.html` file with the <script> injected.
 			new HtmlWebpackPlugin(
 				Object.assign(
@@ -560,7 +607,7 @@ module.exports = function (webpackEnv) {
 			// Generate a manifest file which contains a mapping of all asset filenames
 			// to their corresponding output file so that tools can pick it up without
 			// having to parse `index.html`.
-			new ManifestPlugin({
+			new WebpackManifestPlugin({
 				fileName: 'asset-manifest.json',
 				publicPath: publicPath,
 				generate: (seed, files) => {
@@ -591,7 +638,7 @@ module.exports = function (webpackEnv) {
 					exclude: [/\.map$/, /asset-manifest\.json$/],
 					importWorkboxFrom: 'cdn',
 					navigateFallback: publicUrl + '/index.html',
-					navigateFallbackBlacklist: [
+					navigateFallbackDenylist: [
 						// Exclude URLs starting with /_, as they're likely an API call
 						new RegExp('^/_'),
 						// Exclude URLs containing a dot, as they're likely a resource in

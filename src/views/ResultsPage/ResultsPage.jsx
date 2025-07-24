@@ -6,12 +6,7 @@ import { useTracking } from 'react-tracking';
 import { updateFormSearchCriteria } from '../../store/actions';
 import { ChatOpener, Delighter, Modal, Pager } from '../../components/atomic';
 import { TRY_NEW_SEARCH_LINK } from '../../constants';
-import {
-	formDataConverter,
-	formToTrackingData,
-	queryStringToSearchCriteria,
-	runQueryFetchers,
-} from '../../utilities';
+import { formDataConverter, formToTrackingData, queryStringToSearchCriteria, runQueryFetchers } from '../../utilities';
 import { convertObjectToBase64 } from '../../utilities/objects';
 import { useModal } from '../../hooks';
 import ResultsPageHeader from './ResultsPageHeader';
@@ -21,12 +16,7 @@ import { useAppSettings } from '../../store/store.js';
 import { usePrintContext } from '../../store/printContext';
 import { useAppPaths } from '../../hooks/routing';
 
-import {
-	setSuccessfulFetch,
-	setSelectAll,
-	setFetchActions,
-	setSearchCriteriaObject,
-} from './resultsPageActions';
+import { setSuccessfulFetch, setSelectAll, setFetchActions, setSearchCriteriaObject } from './resultsPageActions';
 
 import resultsPageReducer from './resultsPageReducer';
 import { useCtsApi } from '../../hooks/ctsApiSupport';

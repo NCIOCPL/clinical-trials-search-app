@@ -13,12 +13,7 @@ import SitesList from './SitesList';
 import './TrialDescriptionPage.scss';
 import { useAppSettings } from '../../store/store.js';
 import { useAppPaths } from '../../hooks/routing';
-import {
-	filterSitesByActiveRecruitment,
-	hasSCOBeenUpdated,
-	queryStringToSearchCriteria,
-	runQueryFetchers,
-} from '../../utilities';
+import { filterSitesByActiveRecruitment, hasSCOBeenUpdated, queryStringToSearchCriteria, runQueryFetchers } from '../../utilities';
 import { useErrorBoundary } from 'react-error-boundary';
 import InvalidCriteriaPage from '../InvalidCriteriaPage';
 import { NotFoundError, ApiServerError } from '../ErrorBoundary/NCIError';
@@ -45,13 +40,7 @@ const TrialDescriptionPage = () => {
 
 	const [localState, ls_dispatch] = useReducer(stateReducer, initialState);
 
-	const {
-		fetchActions,
-		isTrialLoading,
-		searchCriteriaObject,
-		trialDescription,
-		localErrors,
-	} = localState;
+	const { fetchActions, isTrialLoading, searchCriteriaObject, trialDescription, localErrors } = localState;
 
 	const { showBoundary } = useErrorBoundary();
 	const { error: apiError, loading, payload } = useCtsApi(fetchActions);
@@ -135,17 +124,8 @@ const TrialDescriptionPage = () => {
 
 	const fetchSearchCriteria = async () => {
 		try {
-			const { diseaseFetcher, interventionFetcher, zipFetcher } =
-				await runQueryFetchers(
-					clinicalTrialsSearchClientV2,
-					zipConversionEndpoint
-				);
-			const res = await queryStringToSearchCriteria(
-				qs,
-				diseaseFetcher,
-				interventionFetcher,
-				zipFetcher
-			);
+			const { diseaseFetcher, interventionFetcher, zipFetcher } = await runQueryFetchers(clinicalTrialsSearchClientV2, zipConversionEndpoint);
+			const res = await queryStringToSearchCriteria(qs, diseaseFetcher, interventionFetcher, zipFetcher);
 
 			setSearchCriteriaObject(res.searchCriteria);
 
