@@ -10,9 +10,7 @@ export const getClinicalTrialDescription = async (client, query) => {
 		const res = await client.get(`/trials/${query}`);
 		if (res.status !== 200) {
 			// ie. Either a non-200 2xx status code or 3xx redirect
-			throw new Error(
-				`Unexpected status ${res.status} for fetching clinical trial description`
-			);
+			throw new Error(`Unexpected status ${res.status} for fetching clinical trial description`);
 		}
 		return res.data;
 	} catch (error) {

@@ -42,8 +42,6 @@ export const stopLoading = () => ({
 	type: STOP_LOADING,
 });
 
-export const setFetchActions = (fetchAction) =>
-	setProp('fetchActions', [fetchAction]);
-export const setSearchCriteriaObject = (searchCriteria) =>
-	setProp('searchCriteriaObject', searchCriteria);
+export const setFetchActions = (fetchAction) => setProp('fetchActions', [fetchAction]);
+export const setSearchCriteriaObject = (searchCriteria) => setProp('searchCriteriaObject', searchCriteria);
 export const setSelectAll = (value) => setProp('selectAll', value);
