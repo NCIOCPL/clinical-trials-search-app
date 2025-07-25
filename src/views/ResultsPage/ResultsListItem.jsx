@@ -287,7 +287,7 @@ const ResultsListItem = ({
 				</div>
 				<div className="results-list-item__category">
 					<span>Status:</span>
-					{item.current_trial_status ? 'Active' : 'Active'}
+					{item.current_trial_status}
 				</div>
 				<div className="results-list-item__category">
 					<span>Age:</span>
