@@ -225,7 +225,7 @@ const TEST_CASES = [
 		},
 	],
 
-	//https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?t=C3167&st=C8644%7CC9143%7CC9140&stg=C7883%7CC7784&fin=C3586&a=35&q=cancer&va=1&loc=0&hv=1&tt=treatment&tt=supportive_care&d=C1647&i=C65008&tp=I&tp=II&tid=nci&in=smith&lo=mayo&rl=2
+	//https://www.cancer.gov/research/participate/clinical-trials-search/r?t=C3167&st=C8644%7CC9143%7CC9140&stg=C7883%7CC7784&fin=C3586&a=35&q=cancer&va=1&loc=0&hv=1&tt=treatment&tt=supportive_care&d=C1647&i=C65008&tp=I&tp=II&tid=nci&in=smith&lo=mayo&rl=2
 	[
 		'adv - minimum all non-location fields used',
 		{
@@ -258,7 +258,7 @@ const TEST_CASES = [
 			tpTidInvLo: 'i,ii|single:nci|smith|mayo',
 		},
 	],
-	//https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?t=C4872&st=C40367&st=C162648&st=C66719&st=C161830&st=C53558&st=C8287&st=C5214&st=C4017&st=C2924&st=C2918&st=C53556&st=C9245&stg=C139556%7CC139535%7CC88375&stg=C7768%7CC139538%7CC139569&stg=C139582%7CC139541%7CC88376%7CC7769&stg=C139542%7CC139583%7CC7770&stg=C139584%7CC139543%7CC7782&stg=C139545%7CC139587%7CC3995&fin=C150629&fin=C150630&fin=C68749&fin=C68748&fin=C118311&fin=C162184&fin=C162183&a=&q=&loc=0&tt=treatment&tt=supportive_care&tt=diagnostic&tt=basic_science&tt=prevention&tt=health_services_research&tt=screening&d=C855&d=C2039&d=C308%7CC15262&d=C1687&d=C307&d=C143250&i=C15722&i=C15329&i=C94626&i=C15751&i=C15358&i=C15313&tp=I&tp=II&tp=III&tp=IV&tid=nci%2Cnct%2Ccct%2Cdcp%2Cswog%2Cctep&in=&lo=&rl=2
+	//https://www.cancer.gov/research/participate/clinical-trials-search/r?t=C4872&st=C40367&st=C162648&st=C66719&st=C161830&st=C53558&st=C8287&st=C5214&st=C4017&st=C2924&st=C2918&st=C53556&st=C9245&stg=C139556%7CC139535%7CC88375&stg=C7768%7CC139538%7CC139569&stg=C139582%7CC139541%7CC88376%7CC7769&stg=C139542%7CC139583%7CC7770&stg=C139584%7CC139543%7CC7782&stg=C139545%7CC139587%7CC3995&fin=C150629&fin=C150630&fin=C68749&fin=C68748&fin=C118311&fin=C162184&fin=C162183&a=&q=&loc=0&tt=treatment&tt=supportive_care&tt=diagnostic&tt=basic_science&tt=prevention&tt=health_services_research&tt=screening&d=C855&d=C2039&d=C308%7CC15262&d=C1687&d=C307&d=C143250&i=C15722&i=C15329&i=C94626&i=C15751&i=C15358&i=C15313&tp=I&tp=II&tp=III&tp=IV&tid=nci%2Cnct%2Ccct%2Cdcp%2Cswog%2Cctep&in=&lo=&rl=2
 	[
 		'adv - Overload a bunch of fields',
 		{

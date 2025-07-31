@@ -30,9 +30,9 @@ Feature:  As a user, I want to be able to view trial description page with all i
 		And the page contains meta tags with the following properties
 			| property       | content                                                                                                                        |
 			| og:title       | Weight Loss Interventions in Treating Overweight and Obese Women with a Higher Risk for Breast Cancer Recurrence               |
-			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/v?id=NCI-2015-01918                                       |
+			| og:url         | https://www.cancer.gov/research/participate/clinical-trials-search/v?id=NCI-2015-01918                                       |
 			| og:description | Weight Loss Interventions in Treating Overweight and Obese Women with a Higher Risk for Breast Cancer Recurrence - NCT02750826 |
-		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/v?id=NCI-2015-01918"
+		And there is a canonical link with the href "https://www.cancer.gov/research/participate/clinical-trials-search/v?id=NCI-2015-01918"
 
 
 	Scenario Outline: User is able to see the trial description on mobile and tablet by directly navigating to trial url
@@ -66,9 +66,9 @@ Feature:  As a user, I want to be able to view trial description page with all i
 		And the page contains meta tags with the following properties
 			| property       | content                                                                                                                                                                              |
 			| og:title       | Crizotinib in Treating Patients with Stage IB-IIIA Non-small Cell Lung Cancer That Has Been Removed by Surgery and ALK Fusion Mutations (An ALCHEMIST Treatment Trial)               |
-			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/v?id=NCI-2014-01507                                                                                             |
+			| og:url         | https://www.cancer.gov/research/participate/clinical-trials-search/v?id=NCI-2014-01507                                                                                             |
 			| og:description | Crizotinib in Treating Patients with Stage IB-IIIA Non-small Cell Lung Cancer That Has Been Removed by Surgery and ALK Fusion Mutations (An ALCHEMIST Treatment Trial) - NCT02201992 |
-		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/v?id=NCI-2014-01507"
+		And there is a canonical link with the href "https://www.cancer.gov/research/participate/clinical-trials-search/v?id=NCI-2014-01507"
 		Examples:
 			| breakpoint |
 			| mobile     |
@@ -101,9 +101,9 @@ Feature:  As a user, I want to be able to view trial description page with all i
 		And the page contains meta tags with the following properties
 			| property       | content                                                                                                                                                                              |
 			| og:title       | Crizotinib in Treating Patients with Stage IB-IIIA Non-small Cell Lung Cancer That Has Been Removed by Surgery and ALK Fusion Mutations (An ALCHEMIST Treatment Trial)               |
-			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/v?id=NCI-2014-01507                                                                                             |
+			| og:url         | https://www.cancer.gov/research/participate/clinical-trials-search/v?id=NCI-2014-01507                                                                                             |
 			| og:description | Crizotinib in Treating Patients with Stage IB-IIIA Non-small Cell Lung Cancer That Has Been Removed by Surgery and ALK Fusion Mutations (An ALCHEMIST Treatment Trial) - NCT02201992 |
-		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/v?id=NCI-2014-01507"
+		And there is a canonical link with the href "https://www.cancer.gov/research/participate/clinical-trials-search/v?id=NCI-2014-01507"
 
 	Scenario: User is able to navigate to trial description page directly without being on a search using NCT id
 		Given screen breakpoint is set to "mobile"
@@ -132,9 +132,9 @@ Feature:  As a user, I want to be able to view trial description page with all i
 		And the page contains meta tags with the following properties
 			| property       | content                                                                                                                                                                              |
 			| og:title       | Crizotinib in Treating Patients with Stage IB-IIIA Non-small Cell Lung Cancer That Has Been Removed by Surgery and ALK Fusion Mutations (An ALCHEMIST Treatment Trial)               |
-			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/v?id=NCT02201992                                                                                                |
+			| og:url         | https://www.cancer.gov/research/participate/clinical-trials-search/v?id=NCT02201992                                                                                                |
 			| og:description | Crizotinib in Treating Patients with Stage IB-IIIA Non-small Cell Lung Cancer That Has Been Removed by Surgery and ALK Fusion Mutations (An ALCHEMIST Treatment Trial) - NCT02201992 |
-		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/v?id=NCT02201992"
+		And there is a canonical link with the href "https://www.cancer.gov/research/participate/clinical-trials-search/v?id=NCT02201992"
 
 
 	Scenario: User is able to navigate back to the search results page
@@ -144,13 +144,13 @@ Feature:  As a user, I want to be able to view trial description page with all i
 		And the title tag should be "Clinical Trials Search Results - NCI"
 		And the page contains meta tags with the following names
 			| name        | content                                               |
-			| description | Find an NCI-supported clinical trial - Search results |
+			| description | Find Cancer Clinical Trials - Search Results |
 		And the page contains meta tags with the following properties
 			| property       | content                                                                           |
 			| og:title       | Clinical Trials Search Results                                                    |
-			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?loc=0&rl=2 |
-			| og:description | Find an NCI-supported clinical trial - Search results                             |
-		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?loc=0&rl=2"
+			| og:url         | https://www.cancer.gov/research/participate/clinical-trials-search/r?loc=0&rl=2 |
+			| og:description | Find Cancer Clinical Trials - Search Results                             |
+		And there is a canonical link with the href "https://www.cancer.gov/research/participate/clinical-trials-search/r?loc=0&rl=2"
 		When user clicks on 1 trial result
 		Then the page title is "Weight Loss Interventions in Treating Overweight and Obese Women with a Higher Risk for Breast Cancer Recurrence"
 		And the url query has the following corresponding code
@@ -169,13 +169,13 @@ Feature:  As a user, I want to be able to view trial description page with all i
 		And the title tag should be "Clinical Trials Search Results - NCI"
 		And the page contains meta tags with the following names
 			| name        | content                                               |
-			| description | Find an NCI-supported clinical trial - Search results |
+			| description | Find Cancer Clinical Trials - Search Results |
 		And the page contains meta tags with the following properties
 			| property       | content                                                                           |
 			| og:title       | Clinical Trials Search Results                                                    |
-			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?loc=0&rl=2 |
-			| og:description | Find an NCI-supported clinical trial - Search results                             |
-		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?loc=0&rl=2"
+			| og:url         | https://www.cancer.gov/research/participate/clinical-trials-search/r?loc=0&rl=2 |
+			| og:description | Find Cancer Clinical Trials - Search Results                             |
+		And there is a canonical link with the href "https://www.cancer.gov/research/participate/clinical-trials-search/r?loc=0&rl=2"
 
 	Scenario: User is able to start over his/her search on an advanced search form page
 		Given the user navigates to "/v?a=40&id=NCI-2014-01507&loc=0&rl=2"
@@ -186,18 +186,18 @@ Feature:  As a user, I want to be able to view trial description page with all i
 			| Age      | 40        |
 		And "Start Over" link has a href "/advanced"
 		When user clicks on "Start Over" link
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Cancer Clinical Trials"
 		And the url is "/advanced"
-		And the title tag should be "Find NCI-Supported Clinical Trials - Advanced Search - NCI"
+		And the title tag should be "Find Cancer Clinical Trials - Advanced Search - NCI"
 		And the page contains meta tags with the following names
 			| name        | content                                                                                                                                                  |
-			| description | Use our advanced search to find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one. |
+			| description | Find cancer clinical trials—and learn how to locate other research studies—that may be right for you or a loved one.                                                |
 		And the page contains meta tags with the following properties
 			| property       | content                                                                                                                                                  |
-			| og:title       | Find NCI-Supported Clinical Trials - Advanced Search                                                                                                     |
-			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/advanced                                                                            |
-			| og:description | Use our advanced search to find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one. |
-		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/advanced"
+			| og:title       | Find Cancer Clinical Trials - Advanced Search                                                                                                     |
+			| og:url         | https://www.cancer.gov/research/participate/clinical-trials-search/advanced                                                                            |
+			| og:description | Find cancer clinical trials—and learn how to locate other research studies—that may be right for you or a loved one.                                                |
+		And there is a canonical link with the href "https://www.cancer.gov/research/participate/clinical-trials-search/advanced"
 
 	Scenario: User is able to start over his/her search on basic search form page
 		Given the user navigates to "//v?a=40&id=NCI-2014-01507&loc=0&rl=1"
@@ -208,18 +208,18 @@ Feature:  As a user, I want to be able to view trial description page with all i
 			| Age      | 40        |
 		And "Start Over" link has a href "/"
 		When user clicks on "Start Over" link
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Cancer Clinical Trials"
 		And the url is "/"
-		And the title tag should be "Find NCI-Supported Clinical Trials - NCI"
+		And the title tag should be "Find Cancer Clinical Trials - NCI"
 		And the page contains meta tags with the following names
 			| name        | content                                                                                                                       |
-			| description | Find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one. |
+			| description | Find cancer clinical trials—and learn how to locate other research studies—that may be right for you or a loved one.                                                |
 		And the page contains meta tags with the following properties
 			| property       | content                                                                                                                       |
-			| og:title       | Find NCI-Supported Clinical Trials                                                                                            |
-			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/                                                         |
-			| og:description | Find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one. |
-		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/"
+			| og:title       | Find Cancer Clinical Trials                                                                                            |
+			| og:url         | https://www.cancer.gov/research/participate/clinical-trials-search/                                                         |
+			| og:description | Find cancer clinical trials—and learn how to locate other research studies—that may be right for you or a loved one.                                                |
+		And there is a canonical link with the href "https://www.cancer.gov/research/participate/clinical-trials-search/"
 
 	Scenario: User is able to to print trial info
 		Given screen breakpoint is set to "desktop"
@@ -234,7 +234,7 @@ Feature:  As a user, I want to be able to view trial description page with all i
 
 		Scenario: User clicks on modify search, and is presented search criteria
 		Given the user navigates to "/advanced"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Cancer Clinical Trials"
 		And "Drug/Treatment" form section is displayed
 		When user clicks on "Drug" field
 		And user types "ibup" in "Drug" field
@@ -254,7 +254,7 @@ Feature:  As a user, I want to be able to view trial description page with all i
 	#this should be enabled by https://github.com/NCIOCPL/clinical-trials-search-app/issues/297
 	# Scenario: User is able to to email trial info
 	# Given screen breakpoint is set to "desktop"
-	# Given the user navigates to "/about-cancer/treatment/clinical-trials/search/v?a=40&id=NCI-2014-01507&loc=0&rl=1"
+	# Given the user navigates to "/research/participate/clinical-trials-search/v?a=40&id=NCI-2014-01507&loc=0&rl=1"
 	# Then the page title is "Crizotinib in Treating Patients with Stage IB-IIIA Non-small Cell Lung Cancer That Has Been Removed by Surgery and ALK Fusion Mutations (An ALCHEMIST Treatment Trial)"
 	# And "This clinical trial matches:" appears below the title
 	# And the criteria table displays the following

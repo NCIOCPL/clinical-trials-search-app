@@ -2,14 +2,14 @@ Feature: Advanced Clinical Trials Search Trial ID Section
 
 	Scenario: User has an option to narrow down search criteria by trial id
 		Given the user navigates to "/advanced"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Cancer Clinical Trials"
 		And "Trial ID" form section is displayed
 		And help icon is displayed in "TrialID" section with href "/research/participate/clinical-trials-search/help#trialid"
 		And helper text "Separate multiple IDs with commas." is displayed
 
 	Scenario: User enters trial id and searches
 		Given the user navigates to "/advanced"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Cancer Clinical Trials"
 		And "Trial ID" form section is displayed
 		When user types "NCI-2018-02825" in "TrialID" field
 		When user clicks on "Find Trials" button
@@ -26,7 +26,7 @@ Feature: Advanced Clinical Trials Search Trial ID Section
 
 	Scenario: User is able to search for multiple IDs and is able to modify search afterwards
 		Given the user navigates to "/advanced"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Cancer Clinical Trials"
 		And "Trial ID" form section is displayed
 		When user types "NCI-2018-02825,NCI-2015-00054,NCI-2014-01507" in "TrialID" field
 		When user clicks on "Find Trials" button
@@ -81,7 +81,7 @@ Feature: Advanced Clinical Trials Search Trial ID Section
 
 	Scenario: User is searching for a trial id that does not exist will see no results found and is able to modify search
 		Given the user navigates to "/advanced"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Cancer Clinical Trials"
 		And "Trial ID" form section is displayed
 		When user types "NCI-2018-1234" in "TrialID" field
 		When user clicks on "Find Trials" button
@@ -107,7 +107,7 @@ Feature: Advanced Clinical Trials Search Trial ID Section
 
 	Scenario: User enters partial trial id and searches
 		Given the user navigates to "/advanced"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Cancer Clinical Trials"
 		And "Trial ID" form section is displayed
 		When user types "ecog" in "TrialID" field
 		When user clicks on "Find Trials" button

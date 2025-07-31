@@ -69,6 +69,7 @@ const TrialDescriptionPage = () => {
 			analyticsName,
 			canonicalHost,
 			siteName,
+			searchUrl,
 			whichTrialsUrl,
 			zipConversionEndpoint,
 			apiClients: { clinicalTrialsSearchClientV2 },
@@ -558,11 +559,11 @@ const TrialDescriptionPage = () => {
 							/>
 							<link
 								rel="canonical"
-								href={`https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/v?id=${currId}`}
+								href={`${canonicalHost}${searchUrl}/v?id=${currId}`}
 							/>
 							<meta
 								property="og:url"
-								content={`https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/v?id=${currId}`}
+								content={`${canonicalHost}${searchUrl}/v?id=${currId}`}
 							/>
 							<meta name="description" content={trialDescription.brief_title} />
 							<meta
@@ -641,28 +642,41 @@ const TrialDescriptionPage = () => {
 												{renderEligibilityCriteria()}
 											</AccordionItem>
 											<AccordionItem titleCollapsed="Locations &amp; Contacts">
-												{activeRecruitmentSites &&
-												activeRecruitmentSites.length > 0 ? (
-													<SitesList
-														searchCriteria={searchCriteriaObject}
-														sites={activeRecruitmentSites}
-													/>
-												) : noLocInfo.includes(
-														trialDescription.current_trial_status.toLowerCase()
-												  ) ? (
-													<p>Location information is not yet available.</p>
-												) : (
+												<>
 													<p>
-														See trial information on{' '}
+														Additional locations may be listed on
+														ClinicalTrials.gov for{' '}
 														<a
 															href={`https://www.clinicaltrials.gov/study/${trialDescription.nct_id}`}
 															target="_blank"
 															rel="noopener noreferrer">
-															ClinicalTrials.gov
-														</a>{' '}
-														for a list of participating sites.
+															{trialDescription.nct_id}
+														</a>
+														.
 													</p>
-												)}
+													{activeRecruitmentSites &&
+													activeRecruitmentSites.length > 0 ? (
+														<SitesList
+															searchCriteria={searchCriteriaObject}
+															sites={activeRecruitmentSites}
+														/>
+													) : noLocInfo.includes(
+															trialDescription.current_trial_status.toLowerCase()
+													  ) ? (
+														<p>Location information is not yet available.</p>
+													) : (
+														<p>
+															See trial information on{' '}
+															<a
+																href={`https://www.clinicaltrials.gov/study/${trialDescription.nct_id}`}
+																target="_blank"
+																rel="noopener noreferrer">
+																ClinicalTrials.gov
+															</a>{' '}
+															for a list of participating sites.
+														</p>
+													)}
+												</>
 											</AccordionItem>
 											<AccordionItem titleCollapsed="Trial Objectives and Outline">
 												{trialDescription.detail_description && (
@@ -735,7 +749,7 @@ const TrialDescriptionPage = () => {
 															ClinicalTrials.gov ID
 														</strong>
 														<a
-															href={`http://clinicaltrials.gov/study/${trialDescription.nct_id}`}
+															href={`https://www.clinicaltrials.gov/study/${trialDescription.nct_id}`}
 															target="_blank"
 															rel="noopener noreferrer">
 															{trialDescription.nct_id}

@@ -53,7 +53,7 @@ Feature: As a user, I want to be able to get even more details about the trial v
       | Primary ID            |
       | Secondary IDs         |
       | ClinicalTrials.gov ID |
-    And "NCT02201992" link has a href "http://clinicaltrials.gov/study/NCT02201992"
+    And "NCT02201992" link has a href "https://www.clinicaltrials.gov/study/NCT02201992"
 
   Scenario: user is able to see trial's location that is near searched zipcode
     Given the user navigates to "/v?id=NCI-2014-01507&loc=1&rl=1&z=22182"
@@ -233,4 +233,3 @@ Feature: As a user, I want to be able to get even more details about the trial v
     And trial description accordion is displayed
     When user clicks on "Locations & Contacts" section of accordion
     Then the location section is empty
-
