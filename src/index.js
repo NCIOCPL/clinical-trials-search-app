@@ -4,6 +4,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 
+// Process config text to convert Unicode escape sequences and fix double-escaped HTML entities
+const processConfigText = (config) => {
+	const processed = { ...config };
+	// Process any string values that might contain Unicode escapes or double-escaped entities
+	Object.keys(processed).forEach((key) => {
+		if (typeof processed[key] === 'string') {
+			// Convert Unicode escape sequences back to actual characters
+			processed[key] = processed[key].replace(/\\u2014/g, '—');
+			// Fix double-escaped HTML entities (e.g., &amp;mdash; -> &mdash;)
+			processed[key] = processed[key].replace(/&amp;mdash;/g, '&mdash;');
+		}
+	});
+	return processed;
+};
+
 // Redux
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
@@ -44,7 +59,7 @@ const initialize = ({
 	basePath = '/',
 	canonicalHost = 'https://www.cancer.gov',
 	ctsApiEndpointV2,
-	ctsTitle = 'Find NCI-Supported Clinical Trials',
+	ctsTitle = 'Find Cancer Clinical Trials',
 	initErrorsList = [],
 	language = 'en',
 	printApiBase = 'https://www.cancer.gov/CTS.Print',
@@ -57,9 +72,16 @@ const initialize = ({
 	siteName = 'NCI',
 	useSessionStorage = true,
 	zipConversionEndpoint = '/cts_api/zip_code_lookup',
-	// These have been added in to support integration testing.
-	// This should default to being the hardcoded default.
-	// (Which should not be the proxy...)
+	pageTitle = 'Find Cancer Clinical Trials',
+	browserTitle = 'Find Cancer Clinical Trials',
+	basicSearchPageTitle = 'Find Cancer Clinical Trials',
+	advancedSearchPageTitle = 'Find Cancer Clinical Trials - Advanced Search',
+	basicSearchMetaDescription = 'Find cancer clinical trials—and learn how to locate other research studies—that may be right for you or a loved one.',
+	advancedSearchMetaDescription = 'Find cancer clinical trials—and learn how to locate other research studies—that may be right for you or a loved one.',
+	basicSearchIntroText = 'Search for NCI-funded clinical trials near you, across the United States, and internationally, in addition to trials at NCI-Designated Cancer Centers supported by other organizations. See our guide, <a href="/steps">Steps to Find a Clinical Trial</a>, to learn about options for finding trials not included in NCI\'s collection.',
+	advancedSearchIntroText = 'Search for NCI-funded clinical trials near you, across the United States, and internationally, in addition to trials at NCI-Designated Cancer Centers supported by other organizations. See our guide, <a href="/steps">Steps to Find a Clinical Trial</a>, to learn about options for finding trials not included in NCI\'s collection.',
+	resultsPageTitle = 'Clinical Trials Search Results',
+	resultsPageMetaDescription = 'Find Cancer Clinical Trials - Search Results',
 } = {}) => {
 	const appRootDOMNode = document.getElementById(rootId);
 	const isRehydrating = appRootDOMNode.getAttribute('data-isRehydrating');
@@ -97,6 +119,16 @@ const initialize = ({
 		siteName,
 		useSessionStorage,
 		zipConversionEndpoint,
+		pageTitle,
+		browserTitle,
+		basicSearchPageTitle,
+		advancedSearchPageTitle,
+		basicSearchMetaDescription,
+		advancedSearchMetaDescription,
+		basicSearchIntroText,
+		advancedSearchIntroText,
+		resultsPageTitle,
+		resultsPageMetaDescription,
 	};
 
 	if (process.env.NODE_ENV !== 'development' && useSessionStorage === true) {
@@ -181,7 +213,8 @@ export default initialize;
 window.CTSApp = initialize;
 
 // The following lets us run the app in dev not in situ as would normally be the case.
-const appParams = window.APP_PARAMS || {};
+const rawAppParams = window.APP_PARAMS || {};
+const appParams = processConfigText(rawAppParams);
 const integrationTestOverrides = window.INT_TEST_APP_PARAMS || {};
 if (process.env.NODE_ENV !== 'production') {
 	// This is LOCAL DEV

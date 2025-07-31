@@ -23,7 +23,7 @@ describe('Basic - queryStringToSearchCriteria maps query to form', () => {
 
 	it('R=1 param works for details', async () => {
 		global.jsdom.reconfigure({
-			url: 'https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/v?id=NCI1234&r=1',
+			url: 'https://www.cancer.gov/research/participate/clinical-trials-search/v?id=NCI1234&r=1',
 		});
 
 		const expected = {
@@ -46,7 +46,7 @@ describe('Basic - queryStringToSearchCriteria maps query to form', () => {
 
 	it('R=1 param fails for results', async () => {
 		global.jsdom.reconfigure({
-			url: 'https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?r=1',
+			url: 'https://www.cancer.gov/research/participate/clinical-trials-search/r?r=1',
 		});
 
 		const expected = {
@@ -70,7 +70,7 @@ describe('Basic - queryStringToSearchCriteria maps query to form', () => {
 
 	it('No rl fails for results', async () => {
 		global.jsdom.reconfigure({
-			url: 'https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r',
+			url: 'https://www.cancer.gov/research/participate/clinical-trials-search/r',
 		});
 
 		const expected = {

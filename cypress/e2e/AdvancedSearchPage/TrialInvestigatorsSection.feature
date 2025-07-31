@@ -2,7 +2,7 @@ Feature: Advanced Clinical Trials Search Trial Investigators Section
 
 	Scenario: User has an option to narrow down search criteria by Trial Investigators
 		Given the user navigates to "/advanced"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Cancer Clinical Trials"
 		And "Trial Investigators" form section is displayed
 		And help icon is displayed in "TrialInvestigators" section with href "/research/participate/clinical-trials-search/help#trialinvestigators"
 		And "TrialInvestigator" input field has a placeholder "Investigator name"
@@ -10,7 +10,7 @@ Feature: Advanced Clinical Trials Search Trial Investigators Section
 
 	Scenario: User has an option to search by Trial Investigators using autosuggest
 		Given the user navigates to "/advanced"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Cancer Clinical Trials"
 		And "Trial Investigators" form section is displayed
 		When user clicks on "TrialInvestigator" field
 		Then autocomplete dropdown is displayed
@@ -31,7 +31,7 @@ Feature: Advanced Clinical Trials Search Trial Investigators Section
 
 	Scenario: User searches for investigators that does not exist
 		Given the user navigates to "/advanced"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Cancer Clinical Trials"
 		And "Trial Investigators" form section is displayed
 		When user clicks on "TrialInvestigator" field
 		Then autocomplete dropdown is displayed with "Please enter 3 or more characters" text
@@ -63,7 +63,7 @@ Feature: Advanced Clinical Trials Search Trial Investigators Section
 
 	Scenario: User is able to search for a specific investigators and refine search
 		Given the user navigates to "/advanced"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Cancer Clinical Trials"
 		And "Trial Investigators" form section is displayed
 		And user types "grace sm" in "TrialInvestigator" field
 		And user selects "Grace Smith" from dropdown

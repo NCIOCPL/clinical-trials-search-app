@@ -3,9 +3,8 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 	Scenario Outline: When user visits Basic Search page, all page items are present in different breakpoints
 		Given screen breakpoint is set to "<breakpoint>"
 		Given the user navigates to "/"
-		Then the page title is "Find NCI-Supported Clinical Trials"
-		And the text "NCI-supported clinical trials are those sponsored or otherwise financially supported by NCI. See our guide, Steps to Find a Clinical Trial, to learn about options for finding trials not included in NCI's collection." appears below the title
-		And "Steps to Find a Clinical Trial" link has a href "https://www.cancer.gov/research/participate/clinical-trials-search/steps"
+		Then the page title is "Find Cancer Clinical Trials"
+		And the text "Search for NCI-funded clinical trials near you, across the United States, and internationally, in addition to trials at NCI-Designated Cancer Centers supported by other organizations. See our guide, Steps to Find a Clinical Trial, to learn about options for finding trials not included in NCI's collection." appears below the title
 		And Search tip icon is displayed and text "Search Tip: For more search options, use our advanced search." appears
 		And "advanced search" link has a href "/advanced"
 		And the following delighters are displayed
@@ -23,7 +22,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 	Scenario Outline: all form fields are displayed with its components
 		Given screen breakpoint is set to "<breakpoint>"
 		Given the user navigates to "/"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Cancer Clinical Trials"
 		And "Cancer Type/Keyword" form section is displayed
 		And help icon is displayed in "Cancer Type/Keyword" section with href "/research/participate/clinical-trials-search/help#how-to-find-clinical-trials-using-the-basic-search-form"
 		And "Cancer Type/Keyword" input field has a placeholder "Start typing to select a cancer type or keyword"
@@ -47,7 +46,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 	Scenario: User is able to search for and use autosuggested items for cancer type/keyword
 		Given screen breakpoint is set to "desktop"
 		Given the user navigates to "/"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Cancer Clinical Trials"
 		And "Cancer Type/Keyword" input field has a placeholder "Start typing to select a cancer type or keyword"
 		When user clicks on "Cancer Type/Keyword" field
 		Then autocomplete dropdown is displayed
@@ -87,7 +86,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 	Scenario: Negative: user is searching for a keyword that does not exist
 		Given screen breakpoint is set to "tablet"
 		Given the user navigates to "/"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Cancer Clinical Trials"
 		And "Cancer Type/Keyword" input field has a placeholder "Start typing to select a cancer type or keyword"
 		When user clicks on "Cancer Type/Keyword" field
 		Then autocomplete dropdown is displayed
@@ -104,7 +103,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 	Scenario: User is able to search for a specific age
 		Given screen breakpoint is set to "mobile"
 		Given the user navigates to "/"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Cancer Clinical Trials"
 		And "Age" form section is displayed
 		When user types "40" in "Age" field
 		And user clicks on "Find Trials" button
@@ -137,7 +136,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 
 	Scenario: Negative: User is not able to search for age out of boundaries
 		Given the user navigates to "/"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Cancer Clinical Trials"
 		And "Age" form section is displayed
 		When user types "0" in "Age" field
 		Then alert "Please enter a number between 1 and 120." is displayed in "Age" section
@@ -151,7 +150,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 	Scenario: User is able to search for a specific zip code
 		Given screen breakpoint is set to "tablet"
 		Given the user navigates to "/"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Cancer Clinical Trials"
 		And "U.S. ZIP Code" form section is displayed
 		When user types "22182" in "U.S. ZIP Code" field
 		And user clicks on "Find Trials" button
@@ -184,7 +183,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 
 	Scenario: Negative: User is not able to search for an incorrect zip code
 		Given the user navigates to "/"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Cancer Clinical Trials"
 		And "U.S. ZIP Code" form section is displayed
 		When user types "999g9" in "U.S. ZIP Code" field
 		Then alert "Please enter a valid 5 digit U.S. ZIP code" is displayed in "U.S. ZIP Code" section
@@ -197,7 +196,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 	Scenario: User is able to search for a trials using age and keyword and then refine search
 		Given screen breakpoint is set to "desktop"
 		Given the user navigates to "/"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Cancer Clinical Trials"
 		When user types "breast cancer" in "Cancer Type/Keyword" field
 		And user selects "Breast Cancer" from dropdown
 		And user types "40" in "Age" field
@@ -235,7 +234,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 
 	Scenario: User is able to search for all trials without specifying any criteria
 		Given the user navigates to "/"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Cancer Clinical Trials"
 		And user clicks on "Find Trials" button
 	  And browser waits
 		Then the search is executed and results page is displayed
@@ -281,7 +280,7 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 
 	Scenario: User is able to search for everything and modify search
 		Given the user navigates to "/"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Cancer Clinical Trials"
 		When user types "30" in "Age" field
 		When user types "22182" in "U.S. ZIP Code" field
 		When user types "aids" in "Cancer Type/Keyword" field
@@ -325,22 +324,22 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 
 	Scenario: As a search engine I want to have access to the meta data on a basic search page
 		Given the user navigates to "/"
-		Then the page title is "Find NCI-Supported Clinical Trials"
-		And the title tag should be "Find NCI-Supported Clinical Trials - NCI"
+		Then the page title is "Find Cancer Clinical Trials"
+		And the title tag should be "Find Cancer Clinical Trials - NCI"
 		And the page contains meta tags with the following names
 			| name        | content                                                                                                                       |
-			| description | Find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one. |
+			| description | Find cancer clinical trials—and learn how to locate other research studies—that may be right for you or a loved one. |
 		And the page contains meta tags with the following properties
 			| property       | content                                                                                                                       |
-			| og:title       | Find NCI-Supported Clinical Trials                                                                                            |
-			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/                                                         |
-			| og:description | Find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one. |
-		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/"
+			| og:title       | Find Cancer Clinical Trials                                                                                            |
+			| og:url         | https://www.cancer.gov/research/participate/clinical-trials-search/                                                         |
+			| og:description | Find cancer clinical trials—and learn how to locate other research studies—that may be right for you or a loved one.                                                |
+		And there is a canonical link with the href "https://www.cancer.gov/research/participate/clinical-trials-search/"
 
 
 	Scenario: As a user, I expect meta data to update accordingly when I search for criteria and modify my search
 		Given the user navigates to "/"
-		Then the page title is "Find NCI-Supported Clinical Trials"
+		Then the page title is "Find Cancer Clinical Trials"
 		When user types "30" in "Age" field
 		When user types "22182" in "U.S. ZIP Code" field
 		When user types "aids" in "Cancer Type/Keyword" field
@@ -350,26 +349,26 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 		And the title tag should be "Clinical Trials Search Results - NCI"
 		And the page contains meta tags with the following names
 			| name        | content                                               |
-			| description | Find an NCI-supported clinical trial - Search results |
+			| description | Find Cancer Clinical Trials - Search Results |
 		And the page contains meta tags with the following properties
 			| property       | content                                                                                               |
 			| og:title       | Clinical Trials Search Results                                                                        |
-			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=30&loc=1&q=aids&rl=1&z=22182 |
-			| og:description | Find an NCI-supported clinical trial - Search results                                                 |
-		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=30&loc=1&q=aids&rl=1&z=22182"
+			| og:url         | https://www.cancer.gov/research/participate/clinical-trials-search/r?a=30&loc=1&q=aids&rl=1&z=22182 |
+			| og:description | Find Cancer Clinical Trials - Search Results                                                 |
+		And there is a canonical link with the href "https://www.cancer.gov/research/participate/clinical-trials-search/r?a=30&loc=1&q=aids&rl=1&z=22182"
 		When user clicks on Modify Search Criteria button
 		When user clears "Age" input field
 		And user types "40" in "Age" field
-		And the title tag should be "Find NCI-Supported Clinical Trials - Advanced Search - NCI"
+		And the title tag should be "Find Cancer Clinical Trials - Advanced Search - NCI"
 		And the page contains meta tags with the following names
 			| name        | content                                                                                                                                                  |
-			| description | Use our advanced search to find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one. |
+			| description | Find cancer clinical trials—and learn how to locate other research studies—that may be right for you or a loved one.|
 		And the page contains meta tags with the following properties
 			| property       | content                                                                                                                                                  |
-			| og:title       | Find NCI-Supported Clinical Trials - Advanced Search                                                                                                     |
-			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/advanced                                                                            |
-			| og:description | Use our advanced search to find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one. |
-		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/advanced"
+			| og:title       | Find Cancer Clinical Trials - Advanced Search                                                                                                     |
+			| og:url         | https://www.cancer.gov/research/participate/clinical-trials-search/advanced                                                                            |
+			| og:description | Find cancer clinical trials—and learn how to locate other research studies—that may be right for you or a loved one.|
+		And there is a canonical link with the href "https://www.cancer.gov/research/participate/clinical-trials-search/advanced"
 		And user clicks on "Find Trials" button
 		And browser waits
 		Then the search is executed and results page is displayed
@@ -377,13 +376,13 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 		And the title tag should be "Clinical Trials Search Results - NCI"
 		And the page contains meta tags with the following names
 			| name        | content                                               |
-			| description | Find an NCI-supported clinical trial - Search results |
+			| description | Find Cancer Clinical Trials - Search Results |
 		And the page contains meta tags with the following properties
 			| property       | content                                                                                                      |
 			| og:title       | Clinical Trials Search Results                                                                               |
-			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=40&loc=1&q=aids&rl=2&z=22182&zp=100 |
-			| og:description | Find an NCI-supported clinical trial - Search results                                                        |
-		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=40&loc=1&q=aids&rl=2&z=22182&zp=100"
+			| og:url         | https://www.cancer.gov/research/participate/clinical-trials-search/r?a=40&loc=1&q=aids&rl=2&z=22182&zp=100 |
+			| og:description | Find Cancer Clinical Trials - Search Results                                                        |
+		And there is a canonical link with the href "https://www.cancer.gov/research/participate/clinical-trials-search/r?a=40&loc=1&q=aids&rl=2&z=22182&zp=100"
 
 
 	Scenario: As a user, I expect meta data to update accordingly when I navigate to search results directly and modify my search
@@ -391,39 +390,39 @@ Feature: As a user, I want to be able to use Basic Search form fields to find cl
 		Then trial info displays "Results 1-10  of 17 for your search "
 		And the page contains meta tags with the following names
 			| name        | content                                               |
-			| description | Find an NCI-supported clinical trial - Search results |
+			| description | Find Cancer Clinical Trials - Search Results |
 		And the page contains meta tags with the following properties
 			| property       | content                                                                                               |
 			| og:title       | Clinical Trials Search Results                                                                        |
-			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=30&loc=1&q=aids&rl=1&z=22182 |
-			| og:description | Find an NCI-supported clinical trial - Search results                                                 |
-		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=30&loc=1&q=aids&rl=1&z=22182"
+			| og:url         | https://www.cancer.gov/research/participate/clinical-trials-search/r?a=30&loc=1&q=aids&rl=1&z=22182 |
+			| og:description | Find Cancer Clinical Trials - Search Results                                                 |
+		And there is a canonical link with the href "https://www.cancer.gov/research/participate/clinical-trials-search/r?a=30&loc=1&q=aids&rl=1&z=22182"
 		And the title tag should be "Clinical Trials Search Results - NCI"
 		When user clicks on Modify Search Criteria button
 		When user clears "Age" input field
 		And user types "40" in "Age" field
 		And browser waits
-		And the title tag should be "Find NCI-Supported Clinical Trials - Advanced Search - NCI"
+		And the title tag should be "Find Cancer Clinical Trials - Advanced Search - NCI"
 		And the page contains meta tags with the following names
 			| name        | content                                                                                                                                                  |
-			| description | Use our advanced search to find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one. |
+			| description | Find cancer clinical trials—and learn how to locate other research studies—that may be right for you or a loved one.|
 		And the page contains meta tags with the following properties
 			| property       | content                                                                                                                                                  |
-			| og:title       | Find NCI-Supported Clinical Trials - Advanced Search                                                                                                     |
-			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/advanced                                                                            |
-			| og:description | Use our advanced search to find an NCI-supported clinical trial—and learn how to locate other research studies—that may be right for you or a loved one. |
-		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/advanced"
+			| og:title       | Find Cancer Clinical Trials - Advanced Search                                                                                                     |
+			| og:url         | https://www.cancer.gov/research/participate/clinical-trials-search/advanced                                                                            |
+			| og:description | Find cancer clinical trials—and learn how to locate other research studies—that may be right for you or a loved one.                                                |
+		And there is a canonical link with the href "https://www.cancer.gov/research/participate/clinical-trials-search/advanced"
 		And user clicks on "Find Trials" button
 		Then the search is executed and results page is displayed
 		And trial info displays "Results 1-10  of 18 for your search "
 		And the page contains meta tags with the following names
 			| name        | content                                               |
-			| description | Find an NCI-supported clinical trial - Search results |
+			| description | Find Cancer Clinical Trials - Search Results |
 		And the page contains meta tags with the following properties
 			| property       | content                                                                                                      |
 			| og:title       | Clinical Trials Search Results                                                                               |
-			| og:url         | https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=40&loc=1&q=aids&rl=2&z=22182&zp=100 |
-			| og:description | Find an NCI-supported clinical trial - Search results                                                        |
-		And there is a canonical link with the href "https://www.cancer.gov/about-cancer/treatment/clinical-trials/search/r?a=40&loc=1&q=aids&rl=2&z=22182&zp=100"
+			| og:url         | https://www.cancer.gov/research/participate/clinical-trials-search/r?a=40&loc=1&q=aids&rl=2&z=22182&zp=100 |
+			| og:description | Find Cancer Clinical Trials - Search Results                                                        |
+		And there is a canonical link with the href "https://www.cancer.gov/research/participate/clinical-trials-search/r?a=40&loc=1&q=aids&rl=2&z=22182&zp=100"
 		And browser waits
 		And the title tag should be "Clinical Trials Search Results - NCI"

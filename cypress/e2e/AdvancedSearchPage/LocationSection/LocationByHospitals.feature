@@ -3,7 +3,7 @@ Feature: As a user, I want to be able to narrow down my search by specifying a h
 
       Scenario: User has an option to limit results to Hospitals and refine search
         Given the user navigates to "/advanced"
-        Then the page title is "Find NCI-Supported Clinical Trials"
+        Then the page title is "Find Cancer Clinical Trials"
         And "Limit results to Veterans Affairs facilities" toggle is switched to "No"
         When user selects "Hospitals/Institutions" radio button
         And user types "um b" in "Hospitals/Institutions" autosuggest field
@@ -68,7 +68,7 @@ Feature: As a user, I want to be able to narrow down my search by specifying a h
 
     Scenario: User has an option to search for a Hospital without using autosuggest
         Given the user navigates to "/advanced"
-        Then the page title is "Find NCI-Supported Clinical Trials"
+        Then the page title is "Find Cancer Clinical Trials"
         And "Limit results to Veterans Affairs facilities" toggle is switched to "No"
         When user selects "Hospitals/Institutions" radio button
         And user types "mayo" in "Hospitals/Institutions" autosuggest field
