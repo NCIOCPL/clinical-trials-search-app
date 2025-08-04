@@ -1,0 +1,582 @@
+{
+    "total": 1,
+    "data": [
+        {
+            "current_trial_status": "Temporarily Closed to Accrual",
+            "nct_id": "NCT05642195",
+            "brief_title": "Evaluation of a Cancer Lysate Vaccine and Montanide (Registered Trademark) ISA-51 VG With or Without the IL-15 Super-Agonist N-803 as Adjuvant Therapy for PD-L1 Negative Non-Small Cell Lung Cancer",
+            "eligibility": {
+                "structured": {
+                    "max_age": "999 Years",
+                    "max_age_number": 999,
+                    "min_age_unit": "Years",
+                    "max_age_unit": "Years",
+                    "max_age_in_years": 999,
+                    "sex": "ALL",
+                    "accepts_healthy_volunteers": false,
+                    "min_age": "18 Years",
+                    "min_age_number": 18,
+                    "min_age_in_years": 18
+                }
+            },
+            "diseases": [
+                {
+                    "inclusion_indicator": "TRIAL",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Stage IB",
+                        "Stage IB Lung Cancer AJCC v8"
+                    ],
+                    "nci_thesaurus_concept_id": "C136474",
+                    "name": "Stage IB Lung Cancer",
+                    "type": [
+                        "stage"
+                    ],
+                    "parents": [
+                        "C136470"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TRIAL",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Stage II",
+                        "Stage II Lung Cancer AJCC v8"
+                    ],
+                    "nci_thesaurus_concept_id": "C136475",
+                    "name": "Stage II Lung Cancer",
+                    "type": [
+                        "stage"
+                    ],
+                    "parents": [
+                        "C136467"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TRIAL",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Stage IIA",
+                        "Stage IIA Lung Cancer AJCC v8"
+                    ],
+                    "nci_thesaurus_concept_id": "C136476",
+                    "name": "Stage IIA Lung Cancer",
+                    "type": [
+                        "stage"
+                    ],
+                    "parents": [
+                        "C136475"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TRIAL",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Stage IIB",
+                        "Stage IIB Lung Cancer AJCC v8"
+                    ],
+                    "nci_thesaurus_concept_id": "C136477",
+                    "name": "Stage IIB Lung Cancer",
+                    "type": [
+                        "stage"
+                    ],
+                    "parents": [
+                        "C136475"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TRIAL",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Stage IIIA",
+                        "Stage IIIA Lung Cancer AJCC v8"
+                    ],
+                    "nci_thesaurus_concept_id": "C136479",
+                    "name": "Stage IIIA Lung Cancer",
+                    "type": [
+                        "stage"
+                    ],
+                    "parents": [
+                        "C136478"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TRIAL",
+                    "is_lead_disease": true,
+                    "synonyms": [
+                        "Lung Non-Small Cell Carcinoma",
+                        "Non Small Cell Lung Cancer NOS",
+                        "Non-Small Cell Cancer of Lung",
+                        "Non-Small Cell Cancer of the Lung",
+                        "Non-Small Cell Carcinoma of Lung",
+                        "Non-Small Cell Carcinoma of the Lung",
+                        "Non-small cell lung cancer, NOS",
+                        "Non-Small Cell Lung Carcinoma",
+                        "NSCLC",
+                        "NSCLC - Non-Small Cell Lung Cancer"
+                    ],
+                    "nci_thesaurus_concept_id": "C2926",
+                    "name": "Non-Small Cell Lung Cancer",
+                    "type": [
+                        "maintype",
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C65151",
+                        "C4878"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Respiratory Tract Neoplasm"
+                    ],
+                    "nci_thesaurus_concept_id": "C3355",
+                    "name": "Respiratory System Neoplasm",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C26871",
+                        "C3263"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Tumor Stage (Pathological)"
+                    ],
+                    "nci_thesaurus_concept_id": "C136467",
+                    "name": "Lung Cancer by AJCC v8 Stage",
+                    "type": [
+                        "stage"
+                    ],
+                    "parents": [
+                        "C4878"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Neoplasm of the Thorax",
+                        "Neoplasm of Thorax",
+                        "Thoracic Tumor",
+                        "Tumor of the Thorax",
+                        "Tumor of Thorax"
+                    ],
+                    "nci_thesaurus_concept_id": "C3406",
+                    "name": "Thoracic Neoplasm",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C35742",
+                        "C3263"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Respiratory and Thoracic Disease",
+                        "Respiratory, Thoracic, and Mediastinal Disease",
+                        "Respiratory, Thoracic, and Mediastinal Disorder"
+                    ],
+                    "nci_thesaurus_concept_id": "C27669",
+                    "name": "Respiratory and Thoracic Disorder",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C27551"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [],
+                    "nci_thesaurus_concept_id": "C7057",
+                    "name": "Disease, Disorder or Finding",
+                    "type": [
+                        "finding"
+                    ],
+                    "parents": []
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Epithelial Neoplasms, NOS",
+                        "Epithelioma",
+                        "Epithelioma, malignant"
+                    ],
+                    "nci_thesaurus_concept_id": "C3709",
+                    "name": "Epithelial Neoplasm",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C4741"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Stage III",
+                        "Stage III Lung Cancer AJCC v8"
+                    ],
+                    "nci_thesaurus_concept_id": "C136478",
+                    "name": "Stage III Lung Cancer",
+                    "type": [
+                        "stage"
+                    ],
+                    "parents": [
+                        "C136467"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Tumor Morphology",
+                        "Tumor_Morphology"
+                    ],
+                    "nci_thesaurus_concept_id": "C4741",
+                    "name": "Neoplasm by Morphology",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C3262"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Neoplasia",
+                        "Neoplasm",
+                        "Neoplasm, NOS",
+                        "Neoplasms, NOS",
+                        "Neoplastic Disease",
+                        "Neoplastic Growth",
+                        "tumor",
+                        "Tumor, NOS"
+                    ],
+                    "nci_thesaurus_concept_id": "C3262",
+                    "name": "Other Neoplasm",
+                    "type": [
+                        "maintype"
+                    ],
+                    "parents": [
+                        "C2991"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Thoracic Disease"
+                    ],
+                    "nci_thesaurus_concept_id": "C35742",
+                    "name": "Thoracic Disorder",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C27669"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [],
+                    "nci_thesaurus_concept_id": "C7062",
+                    "name": "Neoplasm by Special Category",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C3262"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Malignant neoplasm of unspecified part of unspecified bronchus or lung",
+                        "Malignant Respiratory Tract Neoplasm"
+                    ],
+                    "nci_thesaurus_concept_id": "C4571",
+                    "name": "Malignant Respiratory System Neoplasm",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C3355",
+                        "C9305"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Disorder of Lung",
+                        "Lung Disorders",
+                        "Pulmonary Disease",
+                        "Pulmonary Diseases",
+                        "Pulmonary Disorder",
+                        "Pulmonary Disorders"
+                    ],
+                    "nci_thesaurus_concept_id": "C3198",
+                    "name": "Lung Disorder",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C26871",
+                        "C35742"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Condition",
+                        "Diagnosis",
+                        "Disease",
+                        "Disease or Disorder",
+                        "Disease or Disorder, Non-Neoplastic",
+                        "disease term",
+                        "disease type",
+                        "disease_term",
+                        "disease_type",
+                        "Diseases",
+                        "Diseases and Disorders",
+                        "Disorder",
+                        "Disorders"
+                    ],
+                    "nci_thesaurus_concept_id": "C2991",
+                    "name": "Other Disease",
+                    "type": [
+                        "maintype"
+                    ],
+                    "parents": []
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Stage I",
+                        "Stage I Lung Cancer AJCC v8"
+                    ],
+                    "nci_thesaurus_concept_id": "C136470",
+                    "name": "Stage I Lung Cancer",
+                    "type": [
+                        "stage"
+                    ],
+                    "parents": [
+                        "C136467"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Lung Neoplasms",
+                        "Lung Tumor",
+                        "Neoplasm of Lung",
+                        "Neoplasm of the Lung",
+                        "Tumor of Lung",
+                        "Tumor of the Lung"
+                    ],
+                    "nci_thesaurus_concept_id": "C3200",
+                    "name": "Lung Neoplasm",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C3355",
+                        "C3406",
+                        "C3198"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Malignant Lung Tumor",
+                        "Malignant Neoplasm of Lung",
+                        "Malignant Neoplasm of the Lung",
+                        "Malignant Tumor of Lung",
+                        "Malignant Tumor of the Lung"
+                    ],
+                    "nci_thesaurus_concept_id": "C7377",
+                    "name": "Malignant Lung Neoplasm",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C3200",
+                        "C4571",
+                        "C3576"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "CA",
+                        "Cancer",
+                        "Malignancy",
+                        "Malignant Growth",
+                        "Malignant Neoplastic Disease",
+                        "Malignant Tumor",
+                        "Neoplasm, malignant",
+                        "Tumor, malignant, NOS",
+                        "Unclassified tumor, malignant"
+                    ],
+                    "nci_thesaurus_concept_id": "C9305",
+                    "name": "Malignant Neoplasm",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C7062"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Cancer of Lung",
+                        "Cancer of the Lung",
+                        "Carcinoma of Lung",
+                        "Carcinoma of the Lung",
+                        "Lung Cancer (all types)",
+                        "Lung cancer, NOS",
+                        "Lung Carcinoma"
+                    ],
+                    "nci_thesaurus_concept_id": "C4878",
+                    "name": "Lung Cancer",
+                    "type": [
+                        "maintype"
+                    ],
+                    "parents": [
+                        "C7377",
+                        "C2916"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Disorder of Respiratory System",
+                        "Respiratory Disorder",
+                        "Unspecified Respiratory Problem"
+                    ],
+                    "nci_thesaurus_concept_id": "C26871",
+                    "name": "Respiratory System Disorder",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C27669"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Disease by Site"
+                    ],
+                    "nci_thesaurus_concept_id": "C27551",
+                    "name": "Disorder by Site",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C2991"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [],
+                    "nci_thesaurus_concept_id": "C3263",
+                    "name": "Neoplasm by Site",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C3262"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Malignant Neoplasm of the Thorax",
+                        "Malignant Neoplasm of Thorax",
+                        "Malignant Thoracic Tumor",
+                        "Malignant Tumor of the Thorax",
+                        "Malignant Tumor of Thorax"
+                    ],
+                    "nci_thesaurus_concept_id": "C3576",
+                    "name": "Malignant Thoracic Neoplasm",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C3406",
+                        "C9305"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Carcinoma",
+                        "CARCINOMA, MALIGNANT",
+                        "Carcinoma, NOS",
+                        "Epithelial Carcinoma",
+                        "Epithelial tumor, malignant",
+                        "Epithelioma Malignant",
+                        "Malignant Epithelial Neoplasm",
+                        "Malignant Epithelial Tumor",
+                        "Malignant Epithelioma"
+                    ],
+                    "nci_thesaurus_concept_id": "C2916",
+                    "name": "Other Carcinoma",
+                    "type": [
+                        "maintype"
+                    ],
+                    "parents": [
+                        "C3709",
+                        "C9305"
+                    ]
+                }
+            ],
+            "sites": [
+                {
+                    "org_state_or_province": "MD",
+                    "org_city": "Bethesda",
+                    "org_va": false,
+                    "org_country": "United States",
+                    "org_name": "National Institutes of Health Clinical Center",
+                    "org_postal_code": "20892",
+                    "org_coordinates": {
+                        "lon": -77.1056,
+                        "lat": 39.0003
+                    },
+                    "recruitment_status": "TEMPORARILY_CLOSED_TO_ACCRUAL"
+                }
+            ],
+            "nci_id": "NCI-2022-10532"
+        }
+    ]
+}

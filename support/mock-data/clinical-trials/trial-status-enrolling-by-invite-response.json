@@ -1,0 +1,541 @@
+{
+    "total": 1,
+    "data": [
+        {
+            "current_trial_status": "Enrolling by Invitation",
+            "nct_id": "NCT04266093",
+            "brief_title": "Gene Therapy Follow up Protocol for Subjects Previously Enrolled in NCI Center for Immuno-Oncology Studies",
+            "eligibility": {
+                "structured": {
+                    "max_age": "120 Years",
+                    "max_age_number": 120,
+                    "min_age_unit": "Years",
+                    "max_age_unit": "Years",
+                    "max_age_in_years": 120,
+                    "sex": "ALL",
+                    "accepts_healthy_volunteers": false,
+                    "min_age": "18 Years",
+                    "min_age_number": 18,
+                    "min_age_in_years": 18
+                }
+            },
+            "diseases": [
+                {
+                    "inclusion_indicator": "TRIAL",
+                    "is_lead_disease": true,
+                    "synonyms": [
+                        "Hematologic Cancer",
+                        "Hematologic Neoplasm",
+                        "Hematological Neoplasm",
+                        "Hematopoietic and Lymphoid Neoplasm",
+                        "Hematopoietic malignancy, NOS",
+                        "Hematopoietic Neoplasm",
+                        "Hematopoietic Neoplasms Including Lymphomas",
+                        "HEMOLYMPHORETICULAR TUMOR, MALIGNANT",
+                        "Malignant Hematologic Neoplasm",
+                        "Malignant Hematopoietic Neoplasm",
+                        "Malignant neoplasm of lymphoid, hematopoietic and related tissue, unspecified"
+                    ],
+                    "nci_thesaurus_concept_id": "C27134",
+                    "name": "Hematopoietic and Lymphoid Cell Neoplasm",
+                    "type": [
+                        "maintype"
+                    ],
+                    "parents": [
+                        "C4741",
+                        "C35813",
+                        "C26323"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TRIAL",
+                    "is_lead_disease": true,
+                    "synonyms": [
+                        "Cervical Tumor",
+                        "Cervix Neoplasm",
+                        "Cervix Tumor",
+                        "Cervix Uteri Neoplasm",
+                        "Cervix Uteri Tumor",
+                        "Neoplasm of Cervix",
+                        "Neoplasm of Cervix Uteri",
+                        "Neoplasm of the Cervix",
+                        "Neoplasm of the Cervix Uteri",
+                        "Neoplasm of the Uterine Cervix",
+                        "Neoplasm of Uterine Cervix",
+                        "Tumor of Cervix",
+                        "Tumor of Cervix Uteri",
+                        "Tumor of the Cervix",
+                        "Tumor of the Cervix Uteri",
+                        "Tumor of the Uterine Cervix",
+                        "Tumor of Uterine Cervix",
+                        "Uterine Cervix Neoplasm",
+                        "Uterine Cervix Tumor"
+                    ],
+                    "nci_thesaurus_concept_id": "C2940",
+                    "name": "Cervical Neoplasm",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C3435",
+                        "C40241"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TRIAL",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Neoplasm of Oropharynx",
+                        "Neoplasm of the Oropharynx",
+                        "Oropharyngeal Neoplasms",
+                        "Oropharyngeal Tumor",
+                        "Tumor of Oropharynx",
+                        "Tumor of the Oropharynx"
+                    ],
+                    "nci_thesaurus_concept_id": "C3291",
+                    "name": "Oropharyngeal Neoplasm",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C214900",
+                        "C3325"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TRIAL",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Cervical Dysplasia",
+                        "Cervical intraepith. neoplasia",
+                        "Cervical intraepithelial neoplasia (CIN)",
+                        "Cervix Intraepithelial Neoplasia",
+                        "Cervix Uteri Intraepithelial Neoplasia",
+                        "CIN",
+                        "Intraepithelial Neoplasia of Cervix",
+                        "Intraepithelial Neoplasia of Cervix Uteri",
+                        "Intraepithelial Neoplasia of the Cervix",
+                        "Intraepithelial Neoplasia of the Cervix Uteri",
+                        "Intraepithelial Neoplasia of the Uterine Cervix",
+                        "Intraepithelial Neoplasia of Uterine Cervix",
+                        "Uterine Cervix Intraepithelial Neoplasia"
+                    ],
+                    "nci_thesaurus_concept_id": "C3782",
+                    "name": "Cervical Intraepithelial Neoplasia",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C2940",
+                        "C27788",
+                        "C8366"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TRIAL",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Cervical SIL",
+                        "Cervical Squamous Intraepithelial Lesion",
+                        "Cervix Squamous Intraepithelial Lesion",
+                        "Cervix Uteri SIL",
+                        "Cervix Uteri Squamous Intraepithelial Lesion",
+                        "CIN",
+                        "Squamous Intraepithelial Lesion of Cervix",
+                        "Squamous Intraepithelial Lesion of Cervix Uteri",
+                        "Squamous Intraepithelial Lesion of the Cervix",
+                        "Squamous Intraepithelial Lesion of the Cervix Uteri",
+                        "Squamous Intraepithelial Lesion of the Uterine Cervix",
+                        "Squamous Intraepithelial Lesion of Uterine Cervix",
+                        "Uterine Cervix SIL",
+                        "Uterine Cervix Squamous Intraepithelial Lesion"
+                    ],
+                    "nci_thesaurus_concept_id": "C7346",
+                    "name": "Cervical Squamous Intraepithelial Neoplasia",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C3782",
+                        "C40195",
+                        "C8334"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Neoplasia",
+                        "Neoplasm",
+                        "Neoplasm, NOS",
+                        "Neoplasms, NOS",
+                        "Neoplastic Disease",
+                        "Neoplastic Growth",
+                        "tumor",
+                        "Tumor, NOS"
+                    ],
+                    "nci_thesaurus_concept_id": "C3262",
+                    "name": "Other Neoplasm",
+                    "type": [
+                        "maintype"
+                    ],
+                    "parents": [
+                        "C2991"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Premalignant Condition by Site"
+                    ],
+                    "nci_thesaurus_concept_id": "C7422",
+                    "name": "Precancerous Condition by Site",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C3341"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Epithelial Dysplasia",
+                        "Intraepithelial Neoplasm"
+                    ],
+                    "nci_thesaurus_concept_id": "C8366",
+                    "name": "Intraepithelial Neoplasia",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C3709",
+                        "C3341"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Tumor Morphology",
+                        "Tumor_Morphology"
+                    ],
+                    "nci_thesaurus_concept_id": "C4741",
+                    "name": "Neoplasm by Morphology",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C3262"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Disorder of Reproductive System",
+                        "Genital Disorders",
+                        "Reproductive System Disease"
+                    ],
+                    "nci_thesaurus_concept_id": "C4875",
+                    "name": "Reproductive System Disorder",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C156660"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Condition",
+                        "Diagnosis",
+                        "Disease",
+                        "Disease or Disorder",
+                        "Disease or Disorder, Non-Neoplastic",
+                        "disease term",
+                        "disease type",
+                        "disease_term",
+                        "disease_type",
+                        "Diseases",
+                        "Diseases and Disorders",
+                        "Disorder",
+                        "Disorders"
+                    ],
+                    "nci_thesaurus_concept_id": "C2991",
+                    "name": "Other Disease",
+                    "type": [
+                        "maintype"
+                    ],
+                    "parents": []
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [],
+                    "nci_thesaurus_concept_id": "C27788",
+                    "name": "Female Reproductive System Precancerous Condition",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C27020",
+                        "C7422"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Epithelial Neoplasms, NOS",
+                        "Epithelioma",
+                        "Epithelioma, malignant"
+                    ],
+                    "nci_thesaurus_concept_id": "C3709",
+                    "name": "Epithelial Neoplasm",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C4741"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Precancerous State",
+                        "Premalignant Condition",
+                        "Premalignant State"
+                    ],
+                    "nci_thesaurus_concept_id": "C3341",
+                    "name": "Precancerous Condition",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C8278"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [],
+                    "nci_thesaurus_concept_id": "C156482",
+                    "name": "Genitourinary System Neoplasm",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C3263",
+                        "C156660"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Cancer Related Condition",
+                        "cancer related problem/condition",
+                        "Cancer-Related Problem or Condition",
+                        "Oncologic Complications",
+                        "problem/condition, cancer related",
+                        "problem/condition, cancer-related"
+                    ],
+                    "nci_thesaurus_concept_id": "C8278",
+                    "name": "Cancer-Related Condition",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C2991"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Genitourinary Disorder",
+                        "Urogenital Disease"
+                    ],
+                    "nci_thesaurus_concept_id": "C156660",
+                    "name": "Genitourinary System Disorder",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C27551"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Female Reproductive System Tumor",
+                        "Gynecologic Neoplasm",
+                        "Gynecologic Tumor",
+                        "Neoplasm of Female Reproductive System",
+                        "Neoplasm of the Female Reproductive System",
+                        "Tumor of Female Reproductive System",
+                        "Tumor of the Female Reproductive System"
+                    ],
+                    "nci_thesaurus_concept_id": "C3053",
+                    "name": "Female Reproductive System Neoplasm",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C27020",
+                        "C3674"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Disease by Site"
+                    ],
+                    "nci_thesaurus_concept_id": "C27551",
+                    "name": "Disorder by Site",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C2991"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Neoplasm of Reproductive System",
+                        "Neoplasm of the Reproductive System",
+                        "Reproductive Neoplasm",
+                        "Reproductive System Tumor",
+                        "Reproductive Tumor",
+                        "Tumor of Reproductive System",
+                        "Tumor of the Reproductive System"
+                    ],
+                    "nci_thesaurus_concept_id": "C3674",
+                    "name": "Reproductive System Neoplasm",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C4875",
+                        "C156482"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [],
+                    "nci_thesaurus_concept_id": "C40241",
+                    "name": "Cervical Disorder",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C26907"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Female Reproductive System Disease",
+                        "Gynecological Disorder"
+                    ],
+                    "nci_thesaurus_concept_id": "C27020",
+                    "name": "Female Reproductive System Disorder",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C4875"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Uterine Disease"
+                    ],
+                    "nci_thesaurus_concept_id": "C26907",
+                    "name": "Uterine Disorder",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C27020"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [],
+                    "nci_thesaurus_concept_id": "C7057",
+                    "name": "Disease, Disorder or Finding",
+                    "type": [
+                        "finding"
+                    ],
+                    "parents": []
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Neoplasm of the Uterus",
+                        "Neoplasm of Uterus",
+                        "Tumor of the Uterus",
+                        "Tumor of Uterus",
+                        "Uterine Neoplasms",
+                        "Uterine Tumor"
+                    ],
+                    "nci_thesaurus_concept_id": "C3435",
+                    "name": "Uterine Neoplasm",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C3053",
+                        "C26907"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [],
+                    "nci_thesaurus_concept_id": "C3263",
+                    "name": "Neoplasm by Site",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C3262"
+                    ]
+                }
+            ],
+            "sites": [
+                {
+                    "org_state_or_province": "MD",
+                    "org_city": "Bethesda",
+                    "org_va": false,
+                    "org_country": "United States",
+                    "org_name": "National Institutes of Health Clinical Center",
+                    "org_postal_code": "20892",
+                    "org_coordinates": {
+                        "lon": -77.1056,
+                        "lat": 39.0003
+                    },
+                    "recruitment_status": "ENROLLING_BY_INVITATION"
+                }
+            ],
+            "nci_id": "NCI-2020-01400"
+        }
+    ]
+}

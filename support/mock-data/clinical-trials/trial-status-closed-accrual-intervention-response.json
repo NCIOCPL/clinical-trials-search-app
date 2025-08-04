@@ -1,0 +1,410 @@
+{
+    "total": 1,
+    "data": [
+        {
+            "current_trial_status": "Temporarily Closed to Accrual and Intervention",
+            "nct_id": "NCT02423057",
+            "brief_title": "TdCyd in Treating Patients with Advanced Solid Tumors",
+            "eligibility": {
+                "structured": {
+                    "max_age": "999 Years",
+                    "max_age_number": 999,
+                    "min_age_unit": "Years",
+                    "max_age_unit": "Years",
+                    "max_age_in_years": 999,
+                    "sex": "ALL",
+                    "accepts_healthy_volunteers": false,
+                    "min_age": "18 Years",
+                    "min_age_number": 18,
+                    "min_age_in_years": 18
+                }
+            },
+            "diseases": [
+                {
+                    "inclusion_indicator": "TRIAL",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Recurrent Malignant Solid Neoplasm",
+                        "Recurrent Solid Neoplasm",
+                        "Recurrent Solid Tumor",
+                        "Relapsed Malignant Solid Neoplasm",
+                        "Relapsed Solid Neoplasm",
+                        "Relapsed Solid Tumor"
+                    ],
+                    "nci_thesaurus_concept_id": "C127153",
+                    "name": "Recurrent Malignant Solid Tumor",
+                    "type": [
+                        "stage"
+                    ],
+                    "parents": [
+                        "C132146",
+                        "C4813"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TRIAL",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Advanced Malignant Solid Neoplasm",
+                        "Advanced Non-Hematologic Malignancy",
+                        "Advanced Solid Neoplasm",
+                        "Advanced Solid Tumor"
+                    ],
+                    "nci_thesaurus_concept_id": "C129707",
+                    "name": "Advanced Malignant Solid Tumor",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C9270",
+                        "C127155"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TRIAL",
+                    "is_lead_disease": true,
+                    "synonyms": [
+                        "Refractory Malignant Solid Neoplasm"
+                    ],
+                    "nci_thesaurus_concept_id": "C133737",
+                    "name": "Refractory Malignant Solid Tumor",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C132146",
+                        "C120186"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": true,
+                    "synonyms": [
+                        "Condition",
+                        "Diagnosis",
+                        "Disease",
+                        "Disease or Disorder",
+                        "Disease or Disorder, Non-Neoplastic",
+                        "disease term",
+                        "disease type",
+                        "disease_term",
+                        "disease_type",
+                        "Diseases",
+                        "Diseases and Disorders",
+                        "Disorder",
+                        "Disorders"
+                    ],
+                    "nci_thesaurus_concept_id": "C2991",
+                    "name": "Other Disease",
+                    "type": [
+                        "maintype"
+                    ],
+                    "parents": []
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": true,
+                    "synonyms": [
+                        "Refractory Tumor"
+                    ],
+                    "nci_thesaurus_concept_id": "C7628",
+                    "name": "Refractory Neoplasm",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C7062"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": true,
+                    "synonyms": [
+                        "CA",
+                        "Cancer",
+                        "Malignancy",
+                        "Malignant Growth",
+                        "Malignant Neoplastic Disease",
+                        "Malignant Tumor",
+                        "Neoplasm, malignant",
+                        "Tumor, malignant, NOS",
+                        "Unclassified tumor, malignant"
+                    ],
+                    "nci_thesaurus_concept_id": "C9305",
+                    "name": "Malignant Neoplasm",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C7062"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": true,
+                    "synonyms": [],
+                    "nci_thesaurus_concept_id": "C7062",
+                    "name": "Neoplasm by Special Category",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C3262"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": true,
+                    "synonyms": [],
+                    "nci_thesaurus_concept_id": "C7057",
+                    "name": "Disease, Disorder or Finding",
+                    "type": [
+                        "finding"
+                    ],
+                    "parents": []
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": true,
+                    "synonyms": [
+                        "Neoplasia",
+                        "Neoplasm",
+                        "Neoplasm, NOS",
+                        "Neoplasms, NOS",
+                        "Neoplastic Disease",
+                        "Neoplastic Growth",
+                        "tumor",
+                        "Tumor, NOS"
+                    ],
+                    "nci_thesaurus_concept_id": "C3262",
+                    "name": "Other Neoplasm",
+                    "type": [
+                        "maintype"
+                    ],
+                    "parents": [
+                        "C2991"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": true,
+                    "synonyms": [
+                        "Malignant Solid Neoplasm"
+                    ],
+                    "nci_thesaurus_concept_id": "C132146",
+                    "name": "Malignant Solid Tumor",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C9305",
+                        "C9292"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": true,
+                    "synonyms": [
+                        "clinical resistance",
+                        "Refractory Cancer",
+                        "resistant cancer"
+                    ],
+                    "nci_thesaurus_concept_id": "C120186",
+                    "name": "Refractory Malignant Neoplasm",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C7628",
+                        "C9305"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": true,
+                    "synonyms": [
+                        "Solid Neoplasm",
+                        "Solid tumor, NOS",
+                        "Solid Tumour"
+                    ],
+                    "nci_thesaurus_concept_id": "C9292",
+                    "name": "Solid Tumor",
+                    "type": [
+                        "maintype"
+                    ],
+                    "parents": [
+                        "C7062"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Metastatic Cancer"
+                    ],
+                    "nci_thesaurus_concept_id": "C36263",
+                    "name": "Metastatic Malignant Neoplasm",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C4968",
+                        "C3261"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Metastatic Malignant Solid Neoplasm",
+                        "Metastatic Solid Neoplasm",
+                        "Metastatic Solid Tumor"
+                    ],
+                    "nci_thesaurus_concept_id": "C127155",
+                    "name": "Metastatic Malignant Solid Tumor",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C132146",
+                        "C36263"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Recurrence",
+                        "Recurrent Cancer",
+                        "Recurrent Malignant Tumor"
+                    ],
+                    "nci_thesaurus_concept_id": "C4813",
+                    "name": "Recurrent Malignant Neoplasm",
+                    "type": [
+                        "stage"
+                    ],
+                    "parents": [
+                        "C9305",
+                        "C4798"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Neoplasm, secondary",
+                        "Secondary Tumor",
+                        "Tumor, secondary"
+                    ],
+                    "nci_thesaurus_concept_id": "C36255",
+                    "name": "Secondary Neoplasm",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C7062"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Advanced Cancer"
+                    ],
+                    "nci_thesaurus_concept_id": "C9270",
+                    "name": "Advanced Malignant Neoplasm",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C36263"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Secondary Cancer",
+                        "Secondary Malignancy",
+                        "Secondary malignant neoplasm of unspecified site",
+                        "SMN"
+                    ],
+                    "nci_thesaurus_concept_id": "C4968",
+                    "name": "Secondary Malignant Neoplasm",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C36255",
+                        "C9305"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Metastatic",
+                        "Metastatic Tumor",
+                        "Neoplasm, metastatic",
+                        "Tumor, metastatic"
+                    ],
+                    "nci_thesaurus_concept_id": "C3261",
+                    "name": "Metastatic Neoplasm",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C7062"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Neoplasm Recurrence",
+                        "Recurrence",
+                        "Recurrent",
+                        "Recurrent Tumor"
+                    ],
+                    "nci_thesaurus_concept_id": "C4798",
+                    "name": "Recurrent Neoplasm",
+                    "type": [
+                        "stage"
+                    ],
+                    "parents": [
+                        "C7062"
+                    ]
+                }
+            ],
+            "sites": [
+                {
+                    "org_state_or_province": "MD",
+                    "org_city": "Bethesda",
+                    "org_va": false,
+                    "org_country": "United States",
+                    "org_name": "National Cancer Institute Developmental Therapeutics Clinic",
+                    "org_postal_code": "20892",
+                    "org_coordinates": {
+                        "lon": -77.1056,
+                        "lat": 39.0003
+                    },
+                    "recruitment_status": "ACTIVE"
+                },
+                {
+                    "org_state_or_province": "MD",
+                    "org_city": "Bethesda",
+                    "org_va": false,
+                    "org_country": "United States",
+                    "org_name": "National Institutes of Health Clinical Center",
+                    "org_postal_code": "20892",
+                    "org_coordinates": {
+                        "lon": -77.1056,
+                        "lat": 39.0003
+                    },
+                    "recruitment_status": "ACTIVE"
+                }
+            ],
+            "nci_id": "NCI-2015-00695"
+        }
+    ]
+}

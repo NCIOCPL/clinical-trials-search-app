@@ -225,3 +225,14 @@ And("the trial's sex-based eligibility displays {string}", (sex) => {
 			expect($el.text()).to.include(sex);
 		});
 });
+
+And("the trial's current trial status displays {string}", (status) => {
+	// Look for the existence of a span containing the text "Status:",
+	// followed by current trial status.
+	cy.get('.results-list-item')
+		.find('.results-list-item__category')
+		.filter(':contains("Status:")')
+		.each(($el) => {
+			expect($el.text()).to.include(status);
+		});
+});
