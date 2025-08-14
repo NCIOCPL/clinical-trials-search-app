@@ -343,3 +343,17 @@ Feature: Clinical Trials Search Results Page Components
       | /r?loc=0&rl=2&tid=NCI-2014-02674  | Male or Female   |
       | /r?loc=0&rl=2&tid=NCI-2017-02047  | Female           |
       | /r?loc=0&rl=2&tid=NCI-2024-04336  | Male             |
+
+
+	Scenario Outline: As a user, I expect the trial's current trial status display to function regardless of the API's data structure.
+		Given the user navigates to "<path>"
+		Then trial info displayes "Results 1-1  of 1 for your search "
+		And the trial's current trial status displays "<status>"
+		Examples:
+			| path                              | status              |
+      # These three return eligibility.structured.gender
+      | /r?loc=0&rl=2&tid=NCI-2021-08397  | Active                                         |
+	  | /r?loc=0&rl=2&tid=NCI-2024-09778  | Approved                                       |
+	  | /r?loc=0&rl=2&tid=NCI-2020-01400  | Enrolling by Invitation                        |
+      | /r?loc=0&rl=2&tid=NCI-2022-10532  | Temporarily Closed to Accrual                  |
+      | /r?loc=0&rl=2&tid=NCI-2015-00695  | Temporarily Closed to Accrual and Intervention |

@@ -1,0 +1,332 @@
+{
+    "total": 1,
+    "data": [
+        {
+            "current_trial_status": "Approved",
+            "nct_id": "NCT06741072",
+            "brief_title": "BZLF1 Peptide Vaccine (OSU-2131) with QS-21 for the Prevention of Epstein-Barr Virus Related Cancer in Patients Awaiting Solid Organ Transplants",
+            "eligibility": {
+                "structured": {
+                    "max_age": "65 Years",
+                    "max_age_number": 65,
+                    "min_age_unit": "Years",
+                    "max_age_unit": "Years",
+                    "max_age_in_years": 65,
+                    "sex": "ALL",
+                    "accepts_healthy_volunteers": true,
+                    "min_age": "18 Years",
+                    "min_age_number": 18,
+                    "min_age_in_years": 18
+                }
+            },
+            "diseases": [
+                {
+                    "inclusion_indicator": "TRIAL",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "EBV Lymphoproliferation",
+                        "Epstein-Barr Virus-Associated Lymphoproliferative Disorder",
+                        "Epstein-Barr Virus-Related Lymphoproliferative Disorder"
+                    ],
+                    "nci_thesaurus_concept_id": "C159717",
+                    "name": "EBV-Related Lymphoproliferative Disorder",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C9308"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TRIAL",
+                    "is_lead_disease": true,
+                    "synonyms": [
+                        "EBV Related Malignancy",
+                        "EBV-Related Malignancy",
+                        "Epstein-Barr Virus Related Malignancy",
+                        "Epstein-Barr Virus-Related Malignancy",
+                        "Epstein-Barr Virus-Related Malignant Neoplasm"
+                    ],
+                    "nci_thesaurus_concept_id": "C27689",
+                    "name": "EBV-Related Malignant Neoplasm",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C27673"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TRIAL",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Post transplant lymphoproliferative disorder, NOS",
+                        "Post-transplant lymphoproliferative disorder (PTLD)",
+                        "PTLD",
+                        "PTLD, NOS"
+                    ],
+                    "nci_thesaurus_concept_id": "C4727",
+                    "name": "Post-Transplant Lymphoproliferative Disorder",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C150672",
+                        "C27233"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TRIAL",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Chronic kidney disease, stage 4 (severe)",
+                        "Severe Kidney Disease",
+                        "Severe Renal Disease"
+                    ],
+                    "nci_thesaurus_concept_id": "C80390",
+                    "name": "Chronic Kidney Disease, Stage 4",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C80078"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TRIAL",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "End Stage Kidney Disease",
+                        "End Stage Kidney Failure",
+                        "End Stage Renal Disease",
+                        "End Stage Renal Failure",
+                        "End-stage Renal Disease",
+                        "ESRD"
+                    ],
+                    "nci_thesaurus_concept_id": "C9439",
+                    "name": "Chronic Kidney Disease, Stage 5",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C80078"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [],
+                    "nci_thesaurus_concept_id": "C27599",
+                    "name": "Non-Neoplastic Urinary System Disorder",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C156664",
+                        "C3430"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Non-Neoplastic Disease by Site"
+                    ],
+                    "nci_thesaurus_concept_id": "C53531",
+                    "name": "Non-Neoplastic Disorder by Site",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C53529"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Chronic kidney disease, unspecified",
+                        "Chronic Renal Disease",
+                        "Chronic Renal Failure",
+                        "Chronic Renal Insufficiency",
+                        "CKD - Chronic Kidney Disease"
+                    ],
+                    "nci_thesaurus_concept_id": "C80078",
+                    "name": "Chronic Kidney Disease",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C27600"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Condition",
+                        "Diagnosis",
+                        "Disease",
+                        "Disease or Disorder",
+                        "Disease or Disorder, Non-Neoplastic",
+                        "disease term",
+                        "disease type",
+                        "disease_term",
+                        "disease_type",
+                        "Diseases",
+                        "Diseases and Disorders",
+                        "Disorder",
+                        "Disorders"
+                    ],
+                    "nci_thesaurus_concept_id": "C2991",
+                    "name": "Other Disease",
+                    "type": [
+                        "maintype"
+                    ],
+                    "parents": []
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Non-Neoplastic Renal Disorder"
+                    ],
+                    "nci_thesaurus_concept_id": "C27600",
+                    "name": "Non-Neoplastic Kidney Disorder",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C3149",
+                        "C27599"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "NON-NEOPLASTIC",
+                        "Non-neoplastic condition, NOS",
+                        "Non-Neoplastic Disease",
+                        "Non-neoplastic disorder, NOS"
+                    ],
+                    "nci_thesaurus_concept_id": "C53529",
+                    "name": "Non-Neoplastic Disorder",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C2991"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [],
+                    "nci_thesaurus_concept_id": "C156664",
+                    "name": "Non-Neoplastic Genitourinary System Disorder",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C156660",
+                        "C53531"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [],
+                    "nci_thesaurus_concept_id": "C7057",
+                    "name": "Disease, Disorder or Finding",
+                    "type": [
+                        "finding"
+                    ],
+                    "parents": []
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Kidney Disease",
+                        "Renal Disease",
+                        "Renal Disorder",
+                        "Renal Disorder, NOS"
+                    ],
+                    "nci_thesaurus_concept_id": "C3149",
+                    "name": "Kidney Disorder",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C3430"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Genitourinary Disorder",
+                        "Urogenital Disease"
+                    ],
+                    "nci_thesaurus_concept_id": "C156660",
+                    "name": "Genitourinary System Disorder",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C27551"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Disease by Site"
+                    ],
+                    "nci_thesaurus_concept_id": "C27551",
+                    "name": "Disorder by Site",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C2991"
+                    ]
+                },
+                {
+                    "inclusion_indicator": "TREE",
+                    "is_lead_disease": false,
+                    "synonyms": [
+                        "Disorder of Urinary System",
+                        "urinary tract disorder",
+                        "Urologic Disorder"
+                    ],
+                    "nci_thesaurus_concept_id": "C3430",
+                    "name": "Urinary System Disorder",
+                    "type": [
+                        "subtype"
+                    ],
+                    "parents": [
+                        "C156660"
+                    ]
+                }
+            ],
+            "sites": [
+                {
+                    "org_state_or_province": "OH",
+                    "org_city": "Columbus",
+                    "org_va": false,
+                    "org_country": "United States",
+                    "org_name": "Ohio State University Comprehensive Cancer Center",
+                    "org_postal_code": "43210",
+                    "org_coordinates": {
+                        "lon": -83.0218,
+                        "lat": 40.0051
+                    },
+                    "recruitment_status": "APPROVED"
+                }
+            ],
+            "nci_id": "NCI-2024-09778"
+        }
+    ]
+}

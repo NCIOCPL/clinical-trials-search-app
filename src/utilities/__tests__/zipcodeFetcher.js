@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import { zipcodeFetcher } from '../zipcodeFetcher';
 import nock from 'nock';
 

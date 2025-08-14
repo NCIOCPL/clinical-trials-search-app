@@ -11,7 +11,7 @@ const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
 const host = process.env.HOST || '0.0.0.0';
 
 module.exports = function (proxy, allowedHost) {
-	return {
+	const config = {
 		// This should be updated with a list of allowed hosts
 		allowedHosts: ['localhost', allowedHost],
 		// Enable gzip compression of generated files.
@@ -21,26 +21,32 @@ module.exports = function (proxy, allowedHost) {
 			overlay: false,
 		},
 		devMiddleware: {
-			publicPath: paths.publicUrl.slice(0, -1),
+			publicPath: (paths.publicUrl || '/').slice(0, -1) || '/',
 		},
 		static: {
 			directory: paths.appPublic,
-			publicPath: paths.publicUrl.slice(0, -1),
+			publicPath: (paths.publicUrl || '/').slice(0, -1) || '/',
 			watch: {
 				ignored: ignoredFiles(paths.appSrc),
 			},
 		},
 		// Enable HTTPS if the HTTPS environment variable is set to 'true'
-		https: protocol === 'https',
+		server: protocol === 'https' ? 'https' : 'http',
 		host,
 		historyApiFallback: {
 			// Paths with dots should still use the history fallback.
 			// See https://github.com/facebook/create-react-app/issues/387.
 			disableDotRule: true,
+			// Exclude static assets from history fallback
+			rewrites: [
+				{ from: /^\/static\//, to: function(context) {
+					return context.parsedUrl.pathname;
+				}}
+			]
 		},
 		proxy,
 		webSocketServer: 'ws',
-		onBeforeSetupMiddleware(devServer) {
+		setupMiddlewares: (middlewares, devServer) => {
 			if (fs.existsSync(paths.proxySetup)) {
 				// This registers user provided middleware for proxy reasons
 				require(paths.proxySetup)(devServer.app);
@@ -57,6 +63,25 @@ module.exports = function (proxy, allowedHost) {
 			// it used the same host and port.
 			// https://github.com/facebook/create-react-app/issues/2272#issuecomment-302832432
 			devServer.app.use(noopServiceWorkerMiddleware(paths.publicUrl));
+
+			return middlewares;
 		},
 	};
+
+	// Filter out any properties that might be added by react-dev-utils that are not valid for webpack-dev-server
+	const validKeys = [
+		'allowedHosts', 'bonjour', 'client', 'compress', 'devMiddleware', 'headers',
+		'historyApiFallback', 'host', 'hot', 'ipc', 'liveReload', 'onListening',
+		'open', 'port', 'proxy', 'server', 'app', 'setupExitSignals',
+		'setupMiddlewares', 'static', 'watchFiles', 'webSocketServer'
+	];
+
+	const filteredConfig = {};
+	validKeys.forEach(key => {
+		if (config[key] !== undefined) {
+			filteredConfig[key] = config[key];
+		}
+	});
+
+	return filteredConfig;
 };

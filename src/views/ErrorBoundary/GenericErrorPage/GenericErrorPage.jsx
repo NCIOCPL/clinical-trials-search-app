@@ -13,9 +13,7 @@ const GenericErrorPage = () => {
 		tracking.trackEvent({
 			event: 'ClinicalTrialsSearchApp:Load:Error',
 			metaTitle: pageTitle,
-			name: `${canonicalHost.replace(/^(http|https):\/\//g, '')}${
-				window.location.pathname
-			}`,
+			name: `${canonicalHost.replace(/^(http|https):\/\//g, '')}${window.location.pathname}`,
 			title: pageTitle,
 			type: 'PageLoad',
 		});

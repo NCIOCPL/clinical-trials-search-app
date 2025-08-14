@@ -103,12 +103,28 @@ checkBrowsers(paths.appPath, isInteractive)
 			proxyConfig,
 			urls.lanUrlForConfig
 		);
-		const devServer = new WebpackDevServer(serverConfig, compiler);
-		// Launch WebpackDevServer.
-		devServer.listen(port, HOST, (err) => {
-			if (err) {
-				return console.log(err);
+		// Filter out invalid properties that might be added by react-dev-utils
+		const validKeys = [
+			'allowedHosts', 'bonjour', 'client', 'compress', 'devMiddleware', 'headers',
+			'historyApiFallback', 'host', 'hot', 'ipc', 'liveReload', 'onListening',
+			'open', 'port', 'proxy', 'server', 'app', 'setupExitSignals',
+			'setupMiddlewares', 'static', 'watchFiles', 'webSocketServer'
+		];
+
+		const filteredServerConfig = {};
+		validKeys.forEach(key => {
+			if (serverConfig[key] !== undefined) {
+				filteredServerConfig[key] = serverConfig[key];
 			}
+		});
+
+		const devServer = new WebpackDevServer({
+			...filteredServerConfig,
+			port,
+			host: HOST,
+		}, compiler);
+		// Launch WebpackDevServer.
+		devServer.start().then(() => {
 			if (isInteractive) {
 				clearConsole();
 			}
@@ -127,11 +143,13 @@ checkBrowsers(paths.appPath, isInteractive)
 
 			console.log(chalk.cyan('Starting the development server...\n'));
 			openBrowser(urls.localUrlForBrowser);
+		}).catch((err) => {
+			console.log(err);
 		});
 
 		['SIGINT', 'SIGTERM'].forEach(function (sig) {
 			process.on(sig, function () {
-				devServer.close();
+				devServer.stop();
 				process.exit();
 			});
 		});
