@@ -59,7 +59,7 @@ const TrialDescriptionPage = () => {
 		},
 	] = useAppSettings();
 	// enum for empty location checks
-	const noLocInfo = ['not yet active', 'in review', 'approved'];
+	// const noLocInfo = ['not yet active', 'in review', 'approved'];
 
 	const setFetchActions = (fetchAction) => {
 		ls_dispatch({
@@ -517,25 +517,13 @@ const TrialDescriptionPage = () => {
 											<AccordionItem titleCollapsed="Locations &amp; Contacts">
 												<>
 													<p>
-														Additional locations may be listed on ClinicalTrials.gov for{' '}
+														Study sponsor and potential other locations can be found on ClinicalTrials.gov for{' '}
 														<a href={`https://www.clinicaltrials.gov/study/${trialDescription.nct_id}`} target="_blank" rel="noopener noreferrer">
 															{trialDescription.nct_id}
 														</a>
 														.
 													</p>
-													{activeRecruitmentSites && activeRecruitmentSites.length > 0 ? (
-														<SitesList searchCriteria={searchCriteriaObject} sites={activeRecruitmentSites} />
-													) : noLocInfo.includes(trialDescription.current_trial_status.toLowerCase()) ? (
-														<p>Location information is not yet available.</p>
-													) : (
-														<p>
-															See trial information on{' '}
-															<a href={`https://www.clinicaltrials.gov/study/${trialDescription.nct_id}`} target="_blank" rel="noopener noreferrer">
-																ClinicalTrials.gov
-															</a>{' '}
-															for a list of participating sites.
-														</p>
-													)}
+													{activeRecruitmentSites && activeRecruitmentSites.length > 0 && <SitesList searchCriteria={searchCriteriaObject} sites={activeRecruitmentSites} />}
 												</>
 											</AccordionItem>
 											<AccordionItem titleCollapsed="Trial Objectives and Outline">{trialDescription.detail_description && <div className="trial-objectives-outline" dangerouslySetInnerHTML={prettifyDescription()} />}</AccordionItem>
