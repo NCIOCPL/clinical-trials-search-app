@@ -522,6 +522,9 @@ const ResultsPage = () => {
 							<ResultsPageHeader resultsCount={trialResults.total} pageNum={currentPage} onModifySearchClick={handleRefineSearch} onStartOverClick={handleStartOver} searchCriteriaObject={searchCriteriaObject} isLoading={isLoading} trialResults={trialResults} pagerExists={pagerExists} />
 						</>
 					)}
+					<p className="results-page__disclaimer">
+						<strong>Disclaimer:</strong> For clinical trials not sponsored by NCI, the &quot;Locations &amp; Contacts&quot; and &quot;Status&quot; information is submitted by NCI-Designated Cancer Centers. These and certain other trial details may differ from what appears on ClinicalTrials.gov.
+					</p>
 					<div className="results-page__content">
 						{checkIfInvalidPage() ? <> </> : <>{renderControls()}</>}
 						<div className="results-page__list">
