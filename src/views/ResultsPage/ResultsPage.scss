@@ -93,6 +93,17 @@
 		}
 	}
 
+	&__disclaimer {
+		font-size: 1rem;
+		font-style: italic;
+		color: #000;
+		margin: 1em 0;
+
+		@media screen and (min-width: 1025px) {
+			margin: 1em 0 0;
+		}
+	}
+
 	&__list {
 		display: flex;
 	}
