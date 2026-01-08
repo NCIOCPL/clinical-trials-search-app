@@ -224,8 +224,8 @@ Feature: As a user, I want to be able to get even more details about the trial v
     Then the page title is "A Single-arm Safety Study of Transplantation Using Umbilical Cord Blood and Human Placental-derived Stem Cells From Partially Matched Related Donors in Persons With Certain Malignant Blood Diseases and Non-malignant Disorders"
     And trial description accordion is displayed
     When user clicks on "Locations & Contacts" section of accordion
-    Then text "See trial information on ClinicalTrials.gov for a list of participating sites." is displayed
-    And "ClinicalTrials.gov" link has a href "https://www.clinicaltrials.gov/study/NCT00596999"
+    Then text "Study sponsor and potential other locations can be found on ClinicalTrials.gov for NCT00596999." is displayed
+    And "NCT00596999" link has a href "https://www.clinicaltrials.gov/study/NCT00596999"
 
   Scenario: as a user I will not see locations if I searched for a trial in a country that does not exist/host that trial
     Given the user navigates to "/v?id=NCI-2018-01903&lcnty=zimbabue&loc=2&rl=2"
