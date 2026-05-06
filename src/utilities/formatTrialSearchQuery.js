@@ -29,6 +29,12 @@ export const formatTrialSearchQuery = (form) => {
 		filterCriteria['arms.interventions.nci_thesaurus_concept_id'] = [...new Set([...drugIds, ...otherIds])];
 	}
 
+	//Prior Therapies
+	if (form.priorTherapy.length > 0) {
+		const priorTherapyIds = collapseConcepts(form.priorTherapy);
+		filterCriteria['prior_therapy.nci_thesaurus_concept_id'] = [...new Set([...priorTherapyIds])];
+	}
+
 	//Add Age filter
 	if (form.age !== '') {
 		filterCriteria['eligibility.structured.max_age_in_years_gte'] = form.age;
