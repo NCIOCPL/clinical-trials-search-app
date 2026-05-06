@@ -489,6 +489,30 @@ const mappingTestCases = [
 			'arms.interventions.nci_thesaurus_concept_id': ['C308', 'C15262', 'C17173'],
 		},
 	],
+	/**************
+	 * Prior Therapy tests
+	 **************/
+	[
+		'one prior therapy',
+		{
+			priorTherapy: [{ name: 'Prior Therapy', codes: ['C1234'] }],
+		},
+		{
+			'prior_therapy.nci_thesaurus_concept_id': ['C1234'],
+		},
+	],
+	[
+		'two prior therapies',
+		{
+			priorTherapy: [
+				{ name: 'Prior Therapy 1', codes: ['C1234'] },
+				{ name: 'Prior Therapy 2', codes: ['C5678'] },
+			],
+		},
+		{
+			'prior_therapy.nci_thesaurus_concept_id': ['C1234', 'C5678'],
+		},
+	],
 ];
 
 describe('formatTrialSearchQuery maps form to query', () => {
