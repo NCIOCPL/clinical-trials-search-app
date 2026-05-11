@@ -33,6 +33,8 @@ export const formatTrialSearchQueryV2 = (form) => {
 	if (form.priorTherapy.length > 0) {
 		const priorTherapyIds = collapseConcepts(form.priorTherapy);
 		filterCriteria['prior_therapy.nci_thesaurus_concept_id'] = [...new Set([...priorTherapyIds])];
+		filterCriteria['prior_therapy.eligibility_criterion'] = 'exclusion';
+		filterCriteria['prior_therapy.inclusion_indicator'] = ['TRIAL', 'TREE', 'DESCENDANT'];
 	}
 
 	//Add Age filter

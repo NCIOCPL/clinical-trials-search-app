@@ -1,5 +1,4 @@
 {
-
   "current_trial_status": [
     "Active",
     "Approved",
@@ -22,11 +21,14 @@
     "sites.org_city",
     "sites.org_coordinates",
     "sites.recruitment_status",
-    "diseases"
+    "diseases",
+    "prior_therapy"
   ],
-	"maintype": ["C4872"],
-	"eligibility.structured.max_age_in_years_gte": 40,
-	"eligibility.structured.min_age_in_years_lte": 40,
-	"from":0,
-	"size":10
+  "maintype": [
+    "C4872"
+  ],
+  "eligibility.structured.max_age_in_years_gte": 40,
+  "eligibility.structured.min_age_in_years_lte": 40,
+  "from": 0,
+  "size": 10
 }

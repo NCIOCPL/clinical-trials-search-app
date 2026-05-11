@@ -20,5 +20,6 @@ export const fieldMap = {
     "TrialInvestigator": "inv",
     "LeadOrganization": "component-unique-id-20",
     "Keywords": "keywordPhrases",
-    "TrialPhase": "trialphase"
+    "TrialPhase": "trialphase",
+    "PriorTherapy": "pt"
 };

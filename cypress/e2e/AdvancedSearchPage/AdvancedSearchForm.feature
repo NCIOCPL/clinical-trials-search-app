@@ -49,6 +49,35 @@ Feature: As a user, I want to be able to search for a clinical trial using advan
 		When user clicks on "advanced search" with href "/advanced"
 		Then user is redirected to "/advanced"
 
+	# TODO(#672): Flesh out these stub scenarios for the Prior Therapy field once
+	# UI copy and fixtures are finalized. See spec section 8.
+	Scenario: Prior Therapy field is displayed on the advanced form
+		Given the user navigates to "/advanced"
+		Then the page title is "Find Cancer Clinical Trials"
+		And "Prior Therapy" form section is displayed
+
+	Scenario: User can select multiple prior therapies, submit, and rehydrate from the URL
+		Given the user navigates to "/advanced"
+		Then the page title is "Find Cancer Clinical Trials"
+		# TODO(#672): type into Prior Therapy field, select 2 suggestions, submit form,
+		# assert URL contains pt=<code1>|<code2>, reload and assert chips restored,
+		# remove a chip and assert URL/state updated.
+
+	# Demonstrates that the Prior Therapy autocomplete combines categories from
+	# Drug (agent, agent category) and Treatment / Other Intervention (other) in a
+	# single dropdown. Backed by support/mock-data/interventions/platinum_10_count_desc.json
+	# which intentionally contains one of each category.
+	Scenario: Prior Therapy autocomplete surfaces mixed Agent + Agent Category + Other results
+		Given the user navigates to "/advanced"
+		Then the page title is "Find Cancer Clinical Trials"
+		And "Prior Therapy" form section is displayed
+		When user types "platinum" in "PriorTherapy" field
+		# TODO(#672): the dropdown should contain "Cisplatin" (agent),
+		# "Platinum Compound (DRUG FAMILY)" (agent category), and
+		# "Platinum-Based Radiotherapy" (other).
+		# Add concrete dropdown-item assertions once the fieldMap entry and
+		# dropdown step definitions are in place.
+
 		### meta data
 		Scenario: As a search engine I want to have access to the meta data on a page
 		Given the user navigates to "/advanced"
