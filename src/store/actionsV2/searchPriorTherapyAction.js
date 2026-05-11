@@ -13,7 +13,7 @@ export const searchPriorTherapyAction = ({ searchText }) => {
 		current_trial_status: ACTIVE_TRIAL_STATUSES,
 		sort: 'count',
 		order: 'desc',
-		category: ['Agent', 'Agent Category'],
+		category: ['Agent', 'Agent Category', 'Other'],
 		name: searchText,
 		size: 10,
 	};

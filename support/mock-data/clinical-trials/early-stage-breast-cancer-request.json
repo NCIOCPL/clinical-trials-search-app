@@ -1,5 +1,4 @@
 {
-
   "current_trial_status": [
     "Active",
     "Approved",
@@ -22,10 +21,15 @@
     "sites.org_city",
     "sites.org_coordinates",
     "sites.recruitment_status",
-    "diseases"
+    "diseases",
+    "prior_therapy"
   ],
-	"maintype": ["C4872"],
-	"stage": ["C94774"],
-	"from":0,
-	"size":10
+  "maintype": [
+    "C4872"
+  ],
+  "stage": [
+    "C94774"
+  ],
+  "from": 0,
+  "size": 10
 }

@@ -21,6 +21,7 @@ const ALLOWED_ADVANCED_DISEASES = {
 const ALLOWED_ADVANCED_INTERVENTIONS = {
 	drugs: ['agent', 'agent category'],
 	treatments: ['other', 'none'],
+	priorTherapy: ['agent', 'agent category', 'other', 'none'],
 };
 
 // NOTE: Some state values are not passed into the url

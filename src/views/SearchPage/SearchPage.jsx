@@ -7,7 +7,7 @@ import { useTracking } from 'react-tracking';
 import { Delighter, StickySubmitBlock } from '../../components/atomic';
 import { convertObjectToBase64 } from '../../utilities/objects';
 
-import { Age, CancerTypeCondition, CancerTypeKeyword, DrugTreatment, KeywordsPhrases, LeadOrganization, Location, TrialId, TrialInvestigators, TrialPhase, TrialType, ZipCode } from '../../components/search-modules';
+import { Age, CancerTypeCondition, CancerTypeKeyword, DrugTreatment, KeywordsPhrases, LeadOrganization, Location, PriorTherapy, TrialId, TrialInvestigators, TrialPhase, TrialType, ZipCode } from '../../components/search-modules';
 import { updateForm, updateFormField, clearForm } from '../../store/actions';
 import { getMainTypeAction } from '../../store/actionsV2';
 import { getFieldInFocus, getFormInFocus, getHasDispatchedFormInteractionEvent, getHasUserInteractedWithForm } from '../../store/modules/analytics/tracking/tracking.selectors';
@@ -22,7 +22,7 @@ const queryString = require('query-string');
 
 // Module groups in arrays will be placed side-by-side in the form
 const basicFormModules = [CancerTypeKeyword, [Age, ZipCode]];
-const advancedFormModules = [CancerTypeCondition, [Age, KeywordsPhrases], Location, TrialType, DrugTreatment, TrialPhase, TrialId, TrialInvestigators, LeadOrganization];
+const advancedFormModules = [CancerTypeCondition, [Age, KeywordsPhrases], Location, TrialType, DrugTreatment, PriorTherapy, TrialPhase, TrialId, TrialInvestigators, LeadOrganization];
 
 const SearchPage = ({ formInit = 'basic' }) => {
 	const dispatch = useDispatch();

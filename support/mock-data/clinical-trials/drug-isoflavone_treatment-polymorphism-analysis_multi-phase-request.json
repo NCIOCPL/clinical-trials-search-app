@@ -1,5 +1,4 @@
 {
-
   "current_trial_status": [
     "Active",
     "Approved",
@@ -22,10 +21,21 @@
     "sites.org_city",
     "sites.org_coordinates",
     "sites.recruitment_status",
-    "diseases"
+    "diseases",
+    "prior_therapy"
   ],
-	"arms.interventions.nci_thesaurus_concept_id": ["C599", "C18309"],
-	"phase": ["i", "ii", "iii", "iv", "i_ii", "ii_iii"],
-	"from":0,
-	"size":10
+  "arms.interventions.nci_thesaurus_concept_id": [
+    "C599",
+    "C18309"
+  ],
+  "phase": [
+    "i",
+    "ii",
+    "iii",
+    "iv",
+    "i_ii",
+    "ii_iii"
+  ],
+  "from": 0,
+  "size": 10
 }
