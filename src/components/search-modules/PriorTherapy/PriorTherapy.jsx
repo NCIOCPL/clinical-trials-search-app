@@ -60,23 +60,17 @@ const PriorTherapy = ({ handleUpdate }) => {
 	};
 
 	return (
-		<Fieldset
-			id="prior-therapy"
-			legend={
-				<>
-					Prior Therapy <span className="prior-therapy__beta">BETA</span>
-				</>
-			}
-			helpUrl={helpUrl + '#priortherapy'}>
-			<p>Search for treatments you have already received. Trials that exclude these therapies will be filtered out.</p>
+		<Fieldset id="prior-therapy" legend="Prior Drugs or Other Treatments" helpUrl={helpUrl + '#priortherapy'}>
+			<p>Enter previously used drug(s) or intervention(s). These can help determine trial eligibility.</p>
 
 			<Autocomplete
 				id="pt"
-				label="Prior Therapy"
-				inputHelpText="More than one selection may be made."
+				label="Prior Drugs or Other Treatments"
+				labelHidden
+				inputHelpText="You can use the drug's generic or brand name. More than one selection may be made."
 				value={priorTherapyVal.value}
 				inputProps={{
-					placeholder: 'Start typing to select prior therapies',
+					placeholder: 'Start typing to select drugs and/or other treatments',
 				}}
 				items={filterSelectedItems(priorTherapyOptionsData, priorTherapy)}
 				getItemValue={(item) => item.name}
@@ -92,7 +86,7 @@ const PriorTherapy = ({ handleUpdate }) => {
 					const newChips = priorTherapy.filter((item) => item.name !== e.label);
 					handleUpdate('priorTherapy', [...newChips]);
 				}}
-				renderMenu={(children) => <div className="cts-autocomplete__menu --drugs">{priorTherapyVal.value.length > 2 ? filterSelectedItems(priorTherapyOptionsData, priorTherapy).length ? children : <div className="cts-autocomplete__menu-item">No results found</div> : <div className="cts-autocomplete__menu-item">{placeholderText}</div>}</div>}
+				renderMenu={(children) => <div className="cts-autocomplete__menu --prior-therapy">{priorTherapyVal.value.length > 2 ? filterSelectedItems(priorTherapyOptionsData, priorTherapy).length ? children : <div className="cts-autocomplete__menu-item">No results found</div> : <div className="cts-autocomplete__menu-item">{placeholderText}</div>}</div>}
 				renderItem={(item, isHighlighted) => applyOptionsFilterAndFormatting(priorTherapyVal, item, isHighlighted)}
 			/>
 		</Fieldset>
