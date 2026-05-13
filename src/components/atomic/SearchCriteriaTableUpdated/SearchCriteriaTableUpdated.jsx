@@ -6,7 +6,7 @@ import './SearchCriteriaTableUpdated.scss';
 import { Accordion, AccordionItem, Table } from '..';
 
 const SearchCriteriaTableUpdated = ({ searchCriteriaObject }) => {
-	const { age, cancerType, subtypes, stages, findings, keywordPhrases, leadOrg, zip, zipRadius, country, states, city, hospital, trialId, investigator, healthyVolunteers, trialTypes, trialPhases, vaOnly, drugs, treatments, location, formType } = searchCriteriaObject;
+	const { age, cancerType, subtypes, stages, findings, keywordPhrases, leadOrg, zip, zipRadius, country, states, city, hospital, trialId, investigator, healthyVolunteers, trialTypes, trialPhases, vaOnly, drugs, treatments, location, formType, priorTherapy } = searchCriteriaObject;
 
 	SearchCriteriaTableUpdated.propTypes = {
 		searchCriteriaObject: PropTypes.object,
@@ -197,6 +197,18 @@ const SearchCriteriaTableUpdated = ({ searchCriteriaObject }) => {
 			});
 			criteria.push({
 				category: 'Other Treatments',
+				selection: joinedVals.join(', '),
+			});
+		}
+
+		if (priorTherapy && priorTherapy.length > 0) {
+			let joinedVals = [];
+
+			priorTherapy.forEach(function (therapy) {
+				joinedVals.push(therapy.name);
+			});
+			criteria.push({
+				category: 'Prior Drug or Other Treatments',
 				selection: joinedVals.join(', '),
 			});
 		}

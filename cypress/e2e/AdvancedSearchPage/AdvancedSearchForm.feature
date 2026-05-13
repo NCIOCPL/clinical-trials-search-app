@@ -54,7 +54,7 @@ Feature: As a user, I want to be able to search for a clinical trial using advan
 	Scenario: Prior Therapy field is displayed on the advanced form
 		Given the user navigates to "/advanced"
 		Then the page title is "Find Cancer Clinical Trials"
-		And "Prior Therapy" form section is displayed
+		And "Prior Drugs or Other Treatments" form section is displayed
 
 	Scenario: User can select multiple prior therapies, submit, and rehydrate from the URL
 		Given the user navigates to "/advanced"
@@ -70,7 +70,7 @@ Feature: As a user, I want to be able to search for a clinical trial using advan
 	Scenario: Prior Therapy autocomplete surfaces mixed Agent + Agent Category + Other results
 		Given the user navigates to "/advanced"
 		Then the page title is "Find Cancer Clinical Trials"
-		And "Prior Therapy" form section is displayed
+		And "Prior Drugs or Other Treatments" form section is displayed
 		When user types "platinum" in "PriorTherapy" field
 		# TODO(#672): the dropdown should contain "Cisplatin" (agent),
 		# "Platinum Compound (DRUG FAMILY)" (agent category), and

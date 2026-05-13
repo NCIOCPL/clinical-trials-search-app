@@ -14,7 +14,7 @@ const SearchCriteriaTable = ({ placement = 'results', handleReset, handleRefine 
 	const dispatch = useDispatch();
 
 	//store vals
-	const { age, cancerType, subtypes, stages, findings, keywordPhrases, leadOrg, zip, zipRadius, country, states, city, hospital, trialId, investigator, healthyVolunteers, trialTypes, trialPhases, vaOnly, drugs, treatments, location, formType } = useSelector((store) => store.form);
+	const { age, cancerType, subtypes, stages, findings, keywordPhrases, leadOrg, zip, zipRadius, country, states, city, hospital, trialId, investigator, healthyVolunteers, trialTypes, trialPhases, vaOnly, drugs, treatments, location, formType, priorTherapy } = useSelector((store) => store.form);
 
 	const { BasicSearchPagePath, AdvancedSearchPagePath } = useAppPaths();
 
@@ -218,6 +218,18 @@ const SearchCriteriaTable = ({ placement = 'results', handleReset, handleRefine 
 			});
 			criteria.push({
 				category: 'Other Treatments',
+				selection: joinedVals.join(', '),
+			});
+		}
+
+		if (priorTherapy && priorTherapy.length > 0) {
+			let joinedVals = [];
+
+			priorTherapy.forEach(function (therapy) {
+				joinedVals.push(therapy.name);
+			});
+			criteria.push({
+				category: 'Prior Drugs or Other Treatments',
 				selection: joinedVals.join(', '),
 			});
 		}
