@@ -208,7 +208,7 @@ const SearchCriteriaTableUpdated = ({ searchCriteriaObject }) => {
 				joinedVals.push(therapy.name);
 			});
 			criteria.push({
-				category: 'Prior Drug or Other Treatments',
+				category: 'Prior Drugs or Other Treatments',
 				selection: joinedVals.join(', '),
 			});
 		}
