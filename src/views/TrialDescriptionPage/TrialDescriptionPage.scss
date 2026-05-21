@@ -321,3 +321,11 @@
 	font-weight: 700;
 	margin: 0 5px;
 }
+
+@media print {
+	.trial-description-page .cts-accordion__content[aria-hidden='true'] {
+		display: block;
+		max-height: none;
+		overflow: visible;
+	}
+}
