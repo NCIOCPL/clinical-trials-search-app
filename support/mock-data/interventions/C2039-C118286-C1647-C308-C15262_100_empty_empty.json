@@ -1,0 +1,114 @@
+{
+  "data": [
+    {
+      "name": "Bevacizumab",
+      "codes": [
+        "C2039"
+      ],
+      "category": [
+        "agent"
+      ],
+      "type": [
+        "biological/vaccine"
+      ],
+      "synonyms": [
+        "Alymsys",
+        "Avastin",
+        "Avzivi",
+        "Aybintio",
+        "Equidacent",
+        "Mvasi",
+        "Onbevzi",
+        "Oyavas",
+        "Vegzelma",
+        "Zirabev"
+      ],
+      "count": 127
+    },
+    {
+      "name": "Immunotherapy",
+      "codes": [
+        "C308",
+        "C15262"
+      ],
+      "category": [
+        "agent category",
+        "other",
+        "agent"
+      ],
+      "type": [
+        "biological/vaccine",
+        "drug",
+        "other",
+        "procedure/surgery",
+        "radiation",
+        "dietary supplement",
+        "device",
+        "genetic"
+      ],
+      "synonyms": [
+        "BRM",
+        "Biological Response Modifier",
+        "Biomodulators",
+        "Immune Mediators",
+        "Immune Modulators",
+        "Immune Regulators",
+        "Immunomodulating Agent",
+        "Immunomodulators",
+        "Immunomodulatory Agent",
+        "Immunopotentiators",
+        "Immunotherapeutic Agent",
+        "Immunotherapy Agent",
+        "Immunologically Directed Therapy"
+      ],
+      "count": 3473
+    },
+    {
+      "name": "Stereotactic Body Radiation Therapy",
+      "codes": [
+        "C118286"
+      ],
+      "category": [
+        "other"
+      ],
+      "type": [
+        "radiation",
+        "procedure/surgery"
+      ],
+      "synonyms": [
+        "SABR",
+        "SBRT",
+        "Stereotactic Ablative Body Radiation Therapy"
+      ],
+      "count": 131
+    },
+    {
+      "name": "Trastuzumab",
+      "codes": [
+        "C1647"
+      ],
+      "category": [
+        "agent"
+      ],
+      "type": [
+        "biological/vaccine"
+      ],
+      "synonyms": [
+        "Biceltis",
+        "CANMab",
+        "Herceptin",
+        "Hercessi",
+        "Herclon",
+        "Hertraz",
+        "Herwenda",
+        "Herzuma",
+        "Kanjinti",
+        "Ogivri",
+        "Ontruzant",
+        "Trazimera",
+        "Zercepac"
+      ],
+      "count": 49
+    }
+  ]
+}

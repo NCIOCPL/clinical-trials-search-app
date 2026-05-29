@@ -21,13 +21,14 @@ export const formDataConverter = (formType, formData) => {
 		trialTypes: 'tt',
 		drugs: 'd',
 		treatments: 'i',
+		priorTherapy: 'pt',
 		trialPhases: 'tp',
 		trialId: 'tid',
 		investigator: 'in',
 		leadOrg: 'lo',
 	};
 
-	const ADV_FIELD_ORDER = ['cancerType', 'subtypes', 'stages', 'findings', 'age', 'keywordPhrases', 'location', 'vaOnly', 'zip', 'zipRadius', 'country', 'states', 'city', 'hospital', 'trialTypes', 'drugs', 'treatments', 'healthyVolunteers', 'trialPhases', 'trialId', 'investigator', 'leadOrg'];
+	const ADV_FIELD_ORDER = ['cancerType', 'subtypes', 'stages', 'findings', 'age', 'keywordPhrases', 'location', 'vaOnly', 'zip', 'zipRadius', 'country', 'states', 'city', 'hospital', 'trialTypes', 'drugs', 'treatments', 'priorTherapy', 'healthyVolunteers', 'trialPhases', 'trialId', 'investigator', 'leadOrg'];
 
 	const BASIC_FIELD_ORDER = ['cancerType', 'age', 'keywordPhrases', 'location', 'zip'];
 
@@ -113,9 +114,11 @@ export const formDataConverter = (formType, formData) => {
 		const tt = mapTrialTypeCodes(formData['trialTypes']);
 		const drug = getMultiCodeField('drugs', formData, 'none');
 		const treat = getMultiCodeField('treatments', formData, 'none');
-		//all|none|none'
-		//all|none|none|hv'
-		const prop19 = formData['healthyVolunteers'] ? `${tt}|${drug}|${treat}|hv` : `${tt}|${drug}|${treat}`;
+		const pt = getMultiCodeField('priorTherapy', formData, 'none');
+		//all|none|none|none'
+		//all|none|none|none|hv'
+		const prop19base = `${tt}|${drug}|${treat}|${pt}`;
+		const prop19 = formData['healthyVolunteers'] ? `${prop19base}|hv` : prop19base;
 
 		/******
 		 * Prop 20: Other fields pt 2
@@ -131,7 +134,7 @@ export const formDataConverter = (formType, formData) => {
 		return {
 			fieldUsage: searchParamKeys !== '' ? searchParamKeys : 'none',
 			canTypeKwPhrAge: prop17,
-			ttDrugTreat: prop19,
+			ttDrugTreatPt: prop19,
 			tpTidInvLo: prop20,
 		};
 	};

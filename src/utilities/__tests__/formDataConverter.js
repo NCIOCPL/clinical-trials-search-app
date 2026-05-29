@@ -11,7 +11,7 @@ const DEFAULT_ADV_EVARS = {
 	fieldUsage: 'none',
 	canTypeKwPhrAge: 'all|all|all|all|none|none',
 	loc: 'all',
-	ttDrugTreat: 'all|none|none',
+	ttDrugTreatPt: 'all|none|none|none',
 	tpTidInvLo: 'all|none|none|none',
 };
 
@@ -254,7 +254,7 @@ const TEST_CASES = [
 			fieldUsage: 't:st:stg:fin:a:q:loc:va:tt:d:i:hv:tp:tid:in:lo',
 			canTypeKwPhrAge: 'c3167|c8644,c9140,c9143|c7784,c7883|c3586|35|cancer',
 			loc: 'all|va-only',
-			ttDrugTreat: 'tre,sup|c1647|c65008|hv',
+			ttDrugTreatPt: 'tre,sup|c1647|c65008|none|hv',
 			tpTidInvLo: 'i,ii|single:nci|smith|mayo',
 		},
 	],
@@ -281,8 +281,28 @@ const TEST_CASES = [
 			fieldUsage: 't:st:stg:fin:tt:d:i:tp:tid',
 			canTypeKwPhrAge: 'c4872|more than 5|more than 5|more than 5|none|none',
 			loc: 'all',
-			ttDrugTreat: 'tre,sup,dia,bas,pre,hea,scr,oth|more than 5|more than 5',
+			ttDrugTreatPt: 'tre,sup,dia,bas,pre,hea,scr,oth|more than 5|more than 5|none',
 			tpTidInvLo: 'i,ii,iii,iv|multiple:nci,nct,cct,dcp,swog,ctep|none|none',
+		},
+	],
+	//https://www.cancer.gov/research/participate/clinical-trials-search/r?d=C2039&i=C118286&loc=0&pt=C1647&pt=C308%7CC15262&tp=i&tp=ii&tp=iii&tp=iv&rl=2
+	[
+		'adv - drugs, treatments and prior therapy',
+		{
+			formType: 'advanced',
+			formData: {
+				drugs: [['C2039']],
+				treatments: [['C118286']],
+				priorTherapy: [['C1647', 'C308', 'C15262']],
+				trialPhases: ['i', 'ii', 'iii', 'iv'],
+				location: 'search-location-all',
+			},
+		},
+		{
+			...DEFAULT_ADV_EVARS,
+			fieldUsage: 'd:i:pt:tp',
+			ttDrugTreatPt: 'all|c2039|c118286|c1647,c308,c15262',
+			tpTidInvLo: 'i,ii,iii,iv|none|none|none',
 		},
 	],
 ];
