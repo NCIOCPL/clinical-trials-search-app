@@ -500,8 +500,7 @@ const mappingTestCases = [
 		{
 			'prior_therapy.nci_thesaurus_concept_id': ['C1234'],
 			'prior_therapy.eligibility_criterion': 'exclusion',
-			// inclusion_indicator (TRIAL/TREE/DESCENDANT) is intentionally disabled in the query builder
-			// 'prior_therapy.inclusion_indicator': ['TRIAL', 'TREE', 'DESCENDANT'],
+			'prior_therapy.inclusion_indicator': ['TRIAL', 'TREE', 'DESCENDANT'],
 		},
 	],
 	[
@@ -515,8 +514,7 @@ const mappingTestCases = [
 		{
 			'prior_therapy.nci_thesaurus_concept_id': ['C1234', 'C5678'],
 			'prior_therapy.eligibility_criterion': 'exclusion',
-			// inclusion_indicator (TRIAL/TREE/DESCENDANT) is intentionally disabled in the query builder
-			// 'prior_therapy.inclusion_indicator': ['TRIAL', 'TREE', 'DESCENDANT'],
+			'prior_therapy.inclusion_indicator': ['TRIAL', 'TREE', 'DESCENDANT'],
 		},
 	],
 ];

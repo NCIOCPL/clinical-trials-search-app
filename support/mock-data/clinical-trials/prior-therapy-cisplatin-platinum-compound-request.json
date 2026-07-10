@@ -29,6 +29,11 @@
     "C1909"
   ],
   "prior_therapy.eligibility_criterion": "exclusion",
+  "prior_therapy.inclusion_indicator": [
+    "TRIAL",
+    "TREE",
+    "DESCENDANT"
+  ],
   "from": 0,
   "size": 10
 }
