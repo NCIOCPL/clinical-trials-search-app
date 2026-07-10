@@ -34,9 +34,7 @@ export const formatTrialSearchQueryV2 = (form) => {
 		const priorTherapyIds = collapseConcepts(form.priorTherapy);
 		filterCriteria['prior_therapy.nci_thesaurus_concept_id'] = [...new Set([...priorTherapyIds])];
 		filterCriteria['prior_therapy.eligibility_criterion'] = 'exclusion';
-		// Disabled: do not constrain prior therapy matches to the trial/tree/descendant
-		// inclusion levels. Leaving this commented out widens the prior therapy match.
-		// filterCriteria['prior_therapy.inclusion_indicator'] = ['TRIAL', 'TREE', 'DESCENDANT'];
+		filterCriteria['prior_therapy.inclusion_indicator'] = ['TRIAL', 'TREE', 'DESCENDANT'];
 	}
 
 	//Add Age filter

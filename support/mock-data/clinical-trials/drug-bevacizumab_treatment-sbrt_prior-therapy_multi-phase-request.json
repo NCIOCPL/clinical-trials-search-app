@@ -34,6 +34,11 @@
     "C15262"
   ],
   "prior_therapy.eligibility_criterion": "exclusion",
+  "prior_therapy.inclusion_indicator": [
+    "TRIAL",
+    "TREE",
+    "DESCENDANT"
+  ],
   "phase": [
     "i",
     "ii",
