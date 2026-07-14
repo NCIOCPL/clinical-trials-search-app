@@ -61,7 +61,7 @@ const PriorTherapy = ({ handleUpdate }) => {
 
 	return (
 		<Fieldset id="prior-therapy" legend="Prior Drugs or Other Treatments" helpUrl={helpUrl + '#priortherapy'}>
-			<p>Enter previously used drug(s) or intervention(s). These can help determine trial eligibility.</p>
+			<p>Enter previously used drug(s) or intervention(s). These can help determine trial eligibility. Some trials may appear even if you are not eligible based on certain criteria. Talk with your doctor to review trials.</p>
 
 			<Autocomplete
 				id="pt"
