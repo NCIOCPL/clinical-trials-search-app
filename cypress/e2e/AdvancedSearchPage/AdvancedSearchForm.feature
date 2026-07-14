@@ -54,7 +54,7 @@ Feature: As a user, I want to be able to search for a clinical trial using advan
 		Then the page title is "Find Cancer Clinical Trials"
 		And "Prior Drugs or Other Treatments" form section is displayed
 		And help icon is displayed in "Prior Drugs or Other Treatments" section with href "/research/participate/clinical-trials-search/help#priortherapy"
-		And info text "Enter previously used drug(s) or intervention(s). These can help determine trial eligibility." is displayed in the prior therapy section body
+		And info text "Enter previously used drug(s) or intervention(s). These can help determine trial eligibility. Some trials may appear even if you are not eligible based on certain criteria. Talk with your doctor to review trials." is displayed in the prior therapy section body
 		And "PriorTherapy" input field has a placeholder "Start typing to select drugs and/or other treatments"
 		And helper text "You can use the drug's generic or brand name. More than one selection may be made." is displayed
 
