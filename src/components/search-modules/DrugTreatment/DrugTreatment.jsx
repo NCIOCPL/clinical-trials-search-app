@@ -80,7 +80,7 @@ const DrugTreatment = ({ handleUpdate }) => {
 
 	return (
 		<Fieldset id="drug-trtmt" legend="Drug/Treatment" helpUrl={helpUrl + '#drugtreatment'}>
-			<p>Search for a specific drug or intervention.</p>
+			<p>Search for a specific drug or intervention for which you want to find trials.</p>
 
 			<Autocomplete
 				id="dt"
