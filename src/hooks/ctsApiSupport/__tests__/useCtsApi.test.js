@@ -132,7 +132,7 @@ describe('tests for useCtsApi', () => {
 
 			const expected = {
 				current_trial_status: ['Active', 'Approved', 'Enrolling by Invitation', 'In Review', 'Temporarily Closed to Accrual', 'Temporarily Closed to Accrual and Intervention'],
-				include: ['brief_summary', 'brief_title', 'current_trial_status', 'eligibility', 'eligibility.structured.minAgeInt', 'eligibility.structured.maxAgeInt', 'nci_id', 'nct_id', 'sites.org_name', 'sites.org_country', 'sites.org_state_or_province', 'sites.org_city', 'sites.recruitment_status'],
+				include: ['brief_summary', 'brief_title', 'current_trial_status', 'eligibility', 'eligibility.structured.minAgeInt', 'eligibility.structured.maxAgeInt', 'nci_id', 'nct_id', 'sites.org_name', 'sites.org_country', 'sites.org_state_or_province', 'sites.org_city', 'sites.recruitment_status', 'prior_therapy'],
 				'arms.interventions.intervention_code': ['C1234'],
 				from: 0,
 				size: 1,
@@ -174,7 +174,7 @@ describe('tests for useCtsApi', () => {
 
 			const expected = {
 				current_trial_status: ['Active', 'Approved', 'Enrolling by Invitation', 'In Review', 'Temporarily Closed to Accrual', 'Temporarily Closed to Accrual and Intervention'],
-				include: ['brief_summary', 'brief_title', 'current_trial_status', 'eligibility', 'eligibility.structured.minAgeInt', 'eligibility.structured.maxAgeInt', 'nci_id', 'nct_id', 'sites.org_name', 'sites.org_country', 'sites.org_state_or_province', 'sites.org_city', 'sites.recruitment_status'],
+				include: ['brief_summary', 'brief_title', 'current_trial_status', 'eligibility', 'eligibility.structured.minAgeInt', 'eligibility.structured.maxAgeInt', 'nci_id', 'nct_id', 'sites.org_name', 'sites.org_country', 'sites.org_state_or_province', 'sites.org_city', 'sites.recruitment_status', 'prior_therapy'],
 				'arms.interventions.intervention_code': ['C1234'],
 				from: 0,
 				size: 1,
@@ -213,7 +213,7 @@ describe('tests for useCtsApi', () => {
 
 			const expected = {
 				current_trial_status: ['Active', 'Approved', 'Enrolling by Invitation', 'In Review', 'Temporarily Closed to Accrual', 'Temporarily Closed to Accrual and Intervention'],
-				include: ['brief_summary', 'brief_title', 'current_trial_status', 'eligibility', 'eligibility.structured.minAgeInt', 'eligibility.structured.maxAgeInt', 'nci_id', 'nct_id', 'sites.org_name', 'sites.org_country', 'sites.org_state_or_province', 'sites.org_city', 'sites.recruitment_status'],
+				include: ['brief_summary', 'brief_title', 'current_trial_status', 'eligibility', 'eligibility.structured.minAgeInt', 'eligibility.structured.maxAgeInt', 'nci_id', 'nct_id', 'sites.org_name', 'sites.org_country', 'sites.org_state_or_province', 'sites.org_city', 'sites.recruitment_status', 'prior_therapy'],
 				'arms.interventions.intervention_code': ['C1234'],
 				from: 0,
 				size: 1,

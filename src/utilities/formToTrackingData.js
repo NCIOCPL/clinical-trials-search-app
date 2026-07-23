@@ -31,6 +31,12 @@ export const formToTrackingData = (formStore) => {
 		}
 	}
 
+	// Prior Therapy collapses every selected concept's codes into a single
+	// comma-separated list (one array) rather than tracking each item separately.
+	if (formStore['priorTherapy'] && formStore['priorTherapy'].length > 0) {
+		rtnObj['priorTherapy'] = [formStore['priorTherapy'].reduce((codes, type) => [...codes, ...type.codes], [])];
+	}
+
 	/***********************
 	 * LOCATIONS
 	 ***********************/

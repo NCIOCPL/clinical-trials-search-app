@@ -1,0 +1,58 @@
+{
+	"data": [
+		{
+			"name": "Cisplatin",
+			"codes": [
+				"C376"
+			],
+			"category": [
+				"agent"
+			],
+			"type": [
+				"drug"
+			],
+			"synonyms": [
+				"Cisplatin",
+				"CDDP",
+				"cis-Platinum"
+			],
+			"count": 200
+		},
+		{
+			"name": "Platinum Compound",
+			"codes": [
+				"C1909"
+			],
+			"category": [
+				"agent category"
+			],
+			"type": [
+				"drug"
+			],
+			"synonyms": [
+				"Platinum Compound",
+				"Platinum Agent",
+				"Platinum-Based Therapy"
+			],
+			"count": 120
+		},
+		{
+			"name": "Platinum-Based Radiotherapy",
+			"codes": [
+				"C99999"
+			],
+			"category": [
+				"other"
+			],
+			"type": [
+				"radiation"
+			],
+			"synonyms": [
+				"Platinum-Based Radiotherapy",
+				"Platinum Radiation"
+			],
+			"count": 5
+		}
+	],
+	"total": 3
+}

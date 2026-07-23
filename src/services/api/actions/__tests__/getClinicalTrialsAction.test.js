@@ -10,7 +10,7 @@ describe('testing getClinicalTrials', () => {
 			type: 'getClinicalTrials',
 			payload: {
 				current_trial_status: ['Active', 'Approved', 'Enrolling by Invitation', 'In Review', 'Temporarily Closed to Accrual', 'Temporarily Closed to Accrual and Intervention'],
-				include: ['brief_summary', 'brief_title', 'current_trial_status', 'eligibility', 'eligibility.structured.minAgeInt', 'eligibility.structured.maxAgeInt', 'nci_id', 'nct_id', 'sites.org_name', 'sites.org_country', 'sites.org_state_or_province', 'sites.org_city', 'sites.recruitment_status'],
+				include: ['brief_summary', 'brief_title', 'current_trial_status', 'eligibility', 'eligibility.structured.minAgeInt', 'eligibility.structured.maxAgeInt', 'nci_id', 'nct_id', 'sites.org_name', 'sites.org_country', 'sites.org_state_or_province', 'sites.org_city', 'sites.recruitment_status', 'prior_therapy'],
 				'arms.interventions.nci_thesaurus_concept_id': ['C1234'],
 				primary_purpose: 'treatment',
 				from: 0,
@@ -35,7 +35,7 @@ describe('testing getClinicalTrials', () => {
 			type: 'getClinicalTrials',
 			payload: {
 				current_trial_status: ['Active', 'Approved', 'Enrolling by Invitation', 'In Review', 'Temporarily Closed to Accrual', 'Temporarily Closed to Accrual and Intervention'],
-				include: ['brief_summary', 'brief_title', 'current_trial_status', 'eligibility', 'eligibility.structured.minAgeInt', 'eligibility.structured.maxAgeInt', 'nci_id', 'nct_id', 'sites.org_name', 'sites.org_country', 'sites.org_state_or_province', 'sites.org_city', 'sites.recruitment_status'],
+				include: ['brief_summary', 'brief_title', 'current_trial_status', 'eligibility', 'eligibility.structured.minAgeInt', 'eligibility.structured.maxAgeInt', 'nci_id', 'nct_id', 'sites.org_name', 'sites.org_country', 'sites.org_state_or_province', 'sites.org_city', 'sites.recruitment_status', 'prior_therapy'],
 				from: 5,
 				size: 10,
 			},

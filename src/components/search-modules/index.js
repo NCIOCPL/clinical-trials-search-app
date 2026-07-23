@@ -5,6 +5,7 @@ export { default as DrugTreatment } from './DrugTreatment';
 export { default as KeywordsPhrases } from './KeywordsPhrases';
 export { default as LeadOrganization } from './LeadOrganization';
 export { default as Location } from './Location';
+export { default as PriorTherapy } from './PriorTherapy';
 export { default as TrialId } from './TrialId';
 export { default as TrialInvestigators } from './TrialInvestigators';
 export { default as TrialPhase } from './TrialPhase';

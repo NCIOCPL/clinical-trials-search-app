@@ -169,6 +169,34 @@ const testCases = [
 			location: 'search-location-all',
 		},
 	],
+	// Prior Therapy - unlike drugs/treatments, all selected codes are
+	// flattened into a single comma-separated list (one array).
+	[
+		'Prior Therapy - one code',
+		{ priorTherapy: [API_INTERVENTION_MOCKS['Drug A']] },
+		{
+			priorTherapy: [['C5555']],
+			location: 'search-location-all',
+		},
+	],
+	[
+		'Prior Therapy - two codes',
+		{ priorTherapy: [API_INTERVENTION_MOCKS['Drug B']] },
+		{
+			priorTherapy: [['C5556', 'C5557']],
+			location: 'search-location-all',
+		},
+	],
+	[
+		'Prior Therapy - two items',
+		{
+			priorTherapy: [API_INTERVENTION_MOCKS['Drug A'], API_INTERVENTION_MOCKS['Drug B']],
+		},
+		{
+			priorTherapy: [['C5555', 'C5556', 'C5557']],
+			location: 'search-location-all',
+		},
+	],
 
 	/***********************
 	 * LOCATIONS

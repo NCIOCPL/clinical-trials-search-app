@@ -1,5 +1,4 @@
 {
-
   "current_trial_status": [
     "Active",
     "Approved",
@@ -22,18 +21,20 @@
     "sites.org_city",
     "sites.org_coordinates",
     "sites.recruitment_status",
-    "diseases"
+    "diseases",
+    "prior_therapy"
   ],
-	"primary_purpose": [
-		"treatment",
-		"prevention",
-		"supportive_care",
-		"health_services_research",
-		"diagnostic",
-		"screening",
-		"basic_science",
-		"other"
-	],
-	"eligibility.structured.accepts_healthy_volunteers": true,	"from":0,
-	"size":10
+  "primary_purpose": [
+    "treatment",
+    "prevention",
+    "supportive_care",
+    "health_services_research",
+    "diagnostic",
+    "screening",
+    "basic_science",
+    "other"
+  ],
+  "eligibility.structured.accepts_healthy_volunteers": true,
+  "from": 0,
+  "size": 10
 }

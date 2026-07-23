@@ -86,7 +86,7 @@ const clinicalTrialsPost = async (req, res, next) => {
   } else {
     console.warn("No clinical-trials mock found for request.");
     res.status(404).end();
-  }  
+  }
 }
 
 /**

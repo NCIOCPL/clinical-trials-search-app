@@ -21,6 +21,7 @@ const ALLOWED_ADVANCED_DISEASES = {
 const ALLOWED_ADVANCED_INTERVENTIONS = {
 	drugs: ['agent', 'agent category'],
 	treatments: ['other', 'none'],
+	priorTherapy: ['agent', 'agent category', 'other', 'none'],
 };
 
 // NOTE: Some state values are not passed into the url
@@ -64,6 +65,7 @@ const defaultState = {
 	vaOnly: false, // (va) VA facilities only
 	drugs: [], // (dt) Drug/Drug family
 	treatments: [], // (ti) Treatment/Interventions
+	priorTherapy: [], // (pt) Prior Therapy
 	trialId: '', // (tid) Trial ID,
 	investigator: { term: '', termKey: '' }, // (in) Trial investigators ('in' is legacy but is a keyword and does not work well as a key name; be ready to handle both in query string)
 	leadOrg: { term: '', termKey: '' }, // (lo) Lead Organization
@@ -726,6 +728,10 @@ const processInterventionsPass1 = (query) => {
 	// Other treatment
 	if (query['i']) {
 		interventionsFieldHandler(query['i'], 'treatments');
+	}
+	// Prior Therapy
+	if (query['pt']) {
+		interventionsFieldHandler(query['pt'], 'priorTherapy');
 	}
 
 	return [queryInterventions, rtnErrorsList];

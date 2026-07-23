@@ -21,11 +21,14 @@
     "sites.org_city",
     "sites.org_coordinates",
     "sites.recruitment_status",
-    "diseases"
+    "diseases",
+    "prior_therapy"
   ],
-	"principal_investigator._fulltext": "Jarushka Naidoo",
-	"lead_org._fulltext": "ECOG-ACRIN Cancer Research Group",
-	"trial_ids": ["NCI-2018-02825"],
-	"from":0,
-	"size":10
+  "principal_investigator._fulltext": "Jarushka Naidoo",
+  "lead_org._fulltext": "ECOG-ACRIN Cancer Research Group",
+  "trial_ids": [
+    "NCI-2018-02825"
+  ],
+  "from": 0,
+  "size": 10
 }

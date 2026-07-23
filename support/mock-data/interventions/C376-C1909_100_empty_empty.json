@@ -1,0 +1,28 @@
+{
+	"data": [
+		{
+			"name": "Cisplatin",
+			"codes": [
+				"C376"
+			],
+			"synonyms": [
+				"CDDP",
+				"cis-Platinum"
+			],
+			"category": "agent",
+			"count": 200
+		},
+		{
+			"name": "Platinum Compound",
+			"codes": [
+				"C1909"
+			],
+			"synonyms": [
+				"Platinum Agent",
+				"Platinum-Based Therapy"
+			],
+			"category": "agent category",
+			"count": 120
+		}
+	]
+}

@@ -32,7 +32,7 @@ export const ACTIVE_RECRUITMENT_STATUSES = [
 ];
 
 // Specify which fields will be returned in the TrialsResults Object from clinicaltrialsapi
-export const SEARCH_RETURNS_FIELDS = ['nci_id', 'nct_id', 'brief_title', 'sites.org_name', 'sites.org_postal_code', 'eligibility.structured', 'current_trial_status', 'sites.org_va', 'sites.org_country', 'sites.org_state_or_province', 'sites.org_city', 'sites.org_coordinates', 'sites.recruitment_status', 'diseases'];
+export const SEARCH_RETURNS_FIELDS = ['nci_id', 'nct_id', 'brief_title', 'sites.org_name', 'sites.org_postal_code', 'eligibility.structured', 'current_trial_status', 'sites.org_va', 'sites.org_country', 'sites.org_state_or_province', 'sites.org_city', 'sites.org_coordinates', 'sites.recruitment_status', 'diseases', 'prior_therapy'];
 
 //These are the two catch all buckets that we must add to the bottom of the list.
 //ORDER will matter here.
@@ -86,6 +86,7 @@ export const defaultSCOState = {
 	vaOnly: false, // (va) VA facilities only
 	drugs: [], // (dt) Drug/Drug family
 	treatments: [], // (ti) Treatment/Interventions
+	priorTherapy: [], // (pt) Prior Therapy
 	trialId: '', // (tid) Trial ID,
 	investigator: { term: '', termKey: '' }, // (in) Trial investigators ('in' is legacy but is a keyword and does not work well as a key name; be ready to handle both in query string)
 	leadOrg: { term: '', termKey: '' }, // (lo) Lead Organization

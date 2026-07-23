@@ -1,5 +1,5 @@
 import { receiveData } from '../store/actions';
-import { getCountries, getDiseasesForTypeAhead, getFindings, getHospitals, getLeadOrg, getMainType, getOtherInterventions, getStages, getSubtypes, searchDrug, searchTrialInvestigators } from '../services/api/clinical-trials-search-api';
+import { getCountries, getDiseasesForTypeAhead, getFindings, getHospitals, getLeadOrg, getMainType, getOtherInterventions, getStages, getSubtypes, searchDrug, searchPriorTherapy, searchTrialInvestigators } from '../services/api/clinical-trials-search-api';
 
 /**
  * This middleware serves two purposes (and could perhaps be broken into two pieces).
@@ -54,6 +54,9 @@ const createCTSMiddlewareV2 =
 					}
 					case 'searchDrug': {
 						return searchDrug(client, requestParams);
+					}
+					case 'searchPriorTherapy': {
+						return searchPriorTherapy(client, requestParams);
 					}
 					case 'searchTrialInvestigators': {
 						return searchTrialInvestigators(client, requestParams);

@@ -49,6 +49,69 @@ Feature: As a user, I want to be able to search for a clinical trial using advan
 		When user clicks on "advanced search" with href "/advanced"
 		Then user is redirected to "/advanced"
 
+	Scenario: Prior Therapy field is displayed with the correct copy on the advanced form
+		Given the user navigates to "/advanced"
+		Then the page title is "Find Cancer Clinical Trials"
+		And "Prior Drugs or Other Treatments" form section is displayed
+		And help icon is displayed in "Prior Drugs or Other Treatments" section with href "/research/participate/clinical-trials-search/help#priortherapy"
+		And info text "Enter previously used drug(s) or intervention(s). These can help determine trial eligibility. Some trials may appear even if you are not eligible based on certain criteria. Talk with your doctor to review trials." is displayed in the prior therapy section body
+		And "PriorTherapy" input field has a placeholder "Start typing to select drugs and/or other treatments"
+		And helper text "You can use the drug's generic or brand name. More than one selection may be made." is displayed
+
+	Scenario: Prior Therapy autocomplete prompts the user and reports no matches
+		Given the user navigates to "/advanced"
+		Then the page title is "Find Cancer Clinical Trials"
+		And "Prior Drugs or Other Treatments" form section is displayed
+		When user clicks on "PriorTherapy" field
+		Then prior therapy autocomplete dropdown is displayed with "Please enter 3 or more characters" text
+		And user types "asdfg" in "PriorTherapy" field
+		Then prior therapy autocomplete dropdown is displayed with "No results found" text
+
+	# Demonstrates that the Prior Therapy autocomplete combines categories from
+	# Drug (agent, agent category) and Treatment / Other Intervention (other) in a
+	# single dropdown. Backed by support/mock-data/interventions/platinum_10_count_desc.json
+	# which intentionally contains one of each category.
+	Scenario: Prior Therapy autocomplete surfaces mixed Agent + Agent Category + Other results
+		Given the user navigates to "/advanced"
+		Then the page title is "Find Cancer Clinical Trials"
+		And "Prior Drugs or Other Treatments" form section is displayed
+		When user types "platinum" in "PriorTherapy" field
+		Then the prior therapy dropdown contains "Cisplatin"
+		And the prior therapy dropdown contains "Platinum Compound"
+		And the prior therapy dropdown contains "Platinum-Based Radiotherapy"
+
+	Scenario: User can select multiple prior therapies, submit, and rehydrate from the URL
+		Given the user navigates to "/advanced"
+		Then the page title is "Find Cancer Clinical Trials"
+		And "Prior Drugs or Other Treatments" form section is displayed
+		When user types "platinum" in "PriorTherapy" field
+		And user selects "Cisplatin" from the prior therapy dropdown
+		When user types "platinum" in "PriorTherapy" field
+		And user selects "Platinum Compound" from the prior therapy dropdown
+		When user clicks on "Find Trials" button
+		Then the search is executed and results page is displayed
+		And the criteria table displays the following
+			| Category                       | Selection                   |
+			| Prior Drugs or Other Treatments | Cisplatin, Platinum Compound |
+		And the url query has the following corresponding code with duplicated keys
+			| loc | 0     |
+			| pt  | C376  |
+			| pt  | C1909 |
+			| rl  | 2     |
+		When user clicks on Modify Search Criteria button
+		Then "PriorTherapy" input field has a value "Cisplatin"
+		When user removes "Cisplatin" from the "PriorTherapy" field
+		When user clicks on "Find Trials" button
+		Then the search is executed and results page is displayed
+		And the criteria table displays the following
+			| Category                       | Selection        |
+			| Prior Drugs or Other Treatments | Platinum Compound |
+		And the url query has the following corresponding code
+			| parameter | value |
+			| loc       | 0     |
+			| rl        | 2     |
+			| pt        | C1909 |
+
 		### meta data
 		Scenario: As a search engine I want to have access to the meta data on a page
 		Given the user navigates to "/advanced"

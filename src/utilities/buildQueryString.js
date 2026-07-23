@@ -1,5 +1,5 @@
 export const buildQueryString = (formStore) => {
-	const { formType, age, keywordPhrases, zip, zipRadius, cancerType, subtypes, stages, findings, country, location, city, states, hospital, healthyVolunteers, vaOnly, trialPhases, trialTypes, drugs, treatments, trialId, investigator, leadOrg, resultsPage } = formStore;
+	const { formType, age, keywordPhrases, zip, zipRadius, cancerType, subtypes, stages, findings, country, location, city, states, hospital, healthyVolunteers, vaOnly, trialPhases, trialTypes, drugs, treatments, trialId, investigator, leadOrg, resultsPage, priorTherapy } = formStore;
 
 	let searchValues = {};
 
@@ -101,6 +101,9 @@ export const buildQueryString = (formStore) => {
 		}
 		if (leadOrg.term !== '') {
 			searchValues.lo = leadOrg.term;
+		}
+		if (priorTherapy.length > 0) {
+			searchValues.pt = [...new Set(priorTherapy.map((item) => item.codes.join('|')))];
 		}
 
 		return searchValues;

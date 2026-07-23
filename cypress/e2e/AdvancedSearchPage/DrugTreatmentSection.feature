@@ -5,7 +5,7 @@ Feature: Advanced Clinical Trials Search Drug Treatment Section
 		Then the page title is "Find Cancer Clinical Trials"
 		And "Drug/Treatment" form section is displayed
 		And help icon is displayed in "Drug/Treatment" section with href "/research/participate/clinical-trials-search/help#drugtreatment"
-		And info text "Search for a specific drug or intervention." is displayed in the section body
+		And info text "Search for a specific drug or intervention for which you want to find trials." is displayed in the section body
 		And "Drug" input field has a placeholder "Start typing to select drugs and/or drug families"
 		And helper text "You can use the drug's generic or brand name. More than one selection may be made." is displayed
 		And "Treatment" input field has a placeholder "Start typing to select other treatments"

@@ -1,6 +1,7 @@
 .cts-autocomplete__menu {
     &.--drugs,
-    &.--trtmt {
+    &.--trtmt,
+    &.--prior-therapy {
 
         .cts-autocomplete__menu-item{
             padding: 10px 1em;

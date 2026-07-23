@@ -21,8 +21,9 @@
     "sites.org_city",
     "sites.org_coordinates",
     "sites.recruitment_status",
-    "diseases"
+    "diseases",
+    "prior_therapy"
   ],
-	"from":0,
-	"size":10
+  "from": 0,
+  "size": 10
 }

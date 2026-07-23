@@ -1,0 +1,16 @@
+{
+	"data": [
+		{
+			"name": "Platinum Compound",
+			"codes": [
+				"C1909"
+			],
+			"synonyms": [
+				"Platinum Agent",
+				"Platinum-Based Therapy"
+			],
+			"category": "agent category",
+			"count": 120
+		}
+	]
+}

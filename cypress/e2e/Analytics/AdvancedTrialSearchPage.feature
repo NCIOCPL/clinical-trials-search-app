@@ -106,7 +106,7 @@ Feature: Clinical Trials Search Page - Advanced
 			| page.additionalDetails.helperFormData.fieldUsage      | t:stg                                |
 			| page.additionalDetails.helperFormData.loc             | all                                  |
 			| page.additionalDetails.helperFormData.tpTidInvLo      | all\|none\|none\|none                |
-			| page.additionalDetails.helperFormData.ttDrugTreat     | all\|none\|none                      |
+			| page.additionalDetails.helperFormData.ttDrugTreatPt    | all\|none\|none\|none                      |
 
 	Scenario: Page Load event fires when user fills out Age, Keyword phrases and location at NIH only
 		Given "ctsTitle" is set to "Find Cancer Clinical Trials"
@@ -142,7 +142,7 @@ Feature: Clinical Trials Search Page - Advanced
 			| page.additionalDetails.helperFormData.fieldUsage      | a:q:loc                              |
 			| page.additionalDetails.helperFormData.loc             | at nih                               |
 			| page.additionalDetails.helperFormData.tpTidInvLo      | all\|none\|none\|none                |
-			| page.additionalDetails.helperFormData.ttDrugTreat     | all\|none\|none                      |
+			| page.additionalDetails.helperFormData.ttDrugTreatPt    | all\|none\|none\|none                      |
 
 	Scenario: Page Load event fires when user fills out Location fields with VaOnly toggled and specified state
 		Given "ctsTitle" is set to "Find Cancer Clinical Trials"
@@ -179,7 +179,7 @@ Feature: Clinical Trials Search Page - Advanced
 			| page.additionalDetails.helperFormData.fieldUsage      | loc:va:lcnty:lst                      |
 			| page.additionalDetails.helperFormData.loc             | csc\|united states\|wa\|none\|va-only |
 			| page.additionalDetails.helperFormData.tpTidInvLo      | all\|none\|none\|none                 |
-			| page.additionalDetails.helperFormData.ttDrugTreat     | all\|none\|none                       |
+			| page.additionalDetails.helperFormData.ttDrugTreatPt    | all\|none\|none\|none                       |
 
 	Scenario: Page Load event fires when user fills out Location hospital field and searches
 		Given "ctsTitle" is set to "Find Cancer Clinical Trials"
@@ -214,7 +214,7 @@ Feature: Clinical Trials Search Page - Advanced
 			| page.additionalDetails.helperFormData.fieldUsage      | loc:hos                                                         |
 			| page.additionalDetails.helperFormData.loc             | hi\|UM Baltimore Washington Medical Center/Tate Cancer Center   |
 			| page.additionalDetails.helperFormData.tpTidInvLo      | all\|none\|none\|none                                           |
-			| page.additionalDetails.helperFormData.ttDrugTreat     | all\|none\|none                                                 |
+			| page.additionalDetails.helperFormData.ttDrugTreatPt    | all\|none\|none\|none                                                 |
 
 	Scenario: Page Load event fires when user fills out Trial Type field and searches
 		Given "ctsTitle" is set to "Find Cancer Clinical Trials"
@@ -250,7 +250,7 @@ Feature: Clinical Trials Search Page - Advanced
 			| page.additionalDetails.helperFormData.fieldUsage      | tt:hv                                                                                                       |
 			| page.additionalDetails.helperFormData.loc             | all                                                                                                         |
 			| page.additionalDetails.helperFormData.tpTidInvLo      | all\|none\|none\|none                                                                                       |
-			| page.additionalDetails.helperFormData.ttDrugTreat     | tre,sup,dia,bas,pre,hea,scr,oth\|none\|none\|hv                                                             |
+			| page.additionalDetails.helperFormData.ttDrugTreatPt    | tre,sup,dia,bas,pre,hea,scr,oth\|none\|none\|none\|hv                                                             |
 
 	Scenario: Page Load event fires when user fills out Drug Treatment and Trial Phase fields and searches
 		Given "ctsTitle" is set to "Find Cancer Clinical Trials"
@@ -287,7 +287,7 @@ Feature: Clinical Trials Search Page - Advanced
 			| page.additionalDetails.helperFormData.fieldUsage      | d:i:tp                               |
 			| page.additionalDetails.helperFormData.loc             | all                                  |
 			| page.additionalDetails.helperFormData.tpTidInvLo      | i,ii,iii,iv\|none\|none\|none        |
-			| page.additionalDetails.helperFormData.ttDrugTreat     | all\|c599\|c18309                    |
+			| page.additionalDetails.helperFormData.ttDrugTreatPt    | all\|c599\|c18309\|none                    |
 
 
 	Scenario: Page Load event fires when user fills out Trial Id, Lead organization and investigator fields and searches
@@ -325,7 +325,46 @@ Feature: Clinical Trials Search Page - Advanced
 			| page.additionalDetails.helperFormData.fieldUsage      | tid:in:lo                                                                     |
 			| page.additionalDetails.helperFormData.loc             | all                                                                           |
 			| page.additionalDetails.helperFormData.tpTidInvLo      | all\|single:nci-2018-02825\|jarushka naidoo\|ecog-acrin cancer research group |
-			| page.additionalDetails.helperFormData.ttDrugTreat     | all\|none\|none                                                               |
+			| page.additionalDetails.helperFormData.ttDrugTreatPt    | all\|none\|none\|none                                                               |
+
+
+	Scenario: Page Load event fires when user fills out Drug, Other treatment and Prior therapy fields and searches
+		Given "ctsTitle" is set to "Find Cancer Clinical Trials"
+		And "baseHost" is set to "http://localhost:3000"
+		And "canonicalHost" is set to "https://www.cancer.gov"
+		And "siteName" is set to "NCI"
+		And "channel" is set to "About Cancer"
+		And "analyticsPublishedDate" is set to "02/02/2011"
+		And "analyticsName" is set to "Clinical Trials"
+		When the user navigates to "/r?d=C2039&i=C118286&loc=0&pt=C1647&pt=C308%7CC15262&rl=2&tp=i&tp=ii&tp=iii&tp=iv"
+		Then the page title is "Clinical Trials Search Results"
+		And browser waits
+		Then there should be an analytics event with the following details
+			| key                                                   | value                                  |
+			| type                                                  | PageLoad                               |
+			| event                                                 | ClinicalTrialsSearchApp:Load:Results   |
+			| page.name                                             | www.cancer.gov/r                       |
+			| page.title                                            | Clinical Trials Search Results         |
+			| page.metaTitle                                        | Clinical Trials Search Results - NCI   |
+			| page.language                                         | english                                |
+			| page.type                                             | nciAppModulePage                       |
+			| page.channel                                          | About Cancer                           |
+			| page.contentGroup                                     | Clinical Trials                        |
+			| page.publishedDate                                    | 02/02/2011                             |
+			| page.additionalDetails.analyticsName                  | Clinical Trials                        |
+			| page.additionalDetails.formType                       | advanced                               |
+			| page.additionalDetails.numResults                     | (int)182                               |
+			| page.additionalDetails.status                         | success                                |
+			| page.additionalDetails.formData.drugs.0               | (arr)C2039                             |
+			| page.additionalDetails.formData.location              | search-location-all                    |
+			| page.additionalDetails.formData.priorTherapy.0        | (arr)C1647,C308,C15262                 |
+			| page.additionalDetails.formData.treatments.0          | (arr)C118286                           |
+			| page.additionalDetails.formData.trialPhases           | (arr)i,ii,iii,iv                       |
+			| page.additionalDetails.helperFormData.canTypeKwPhrAge | all\|all\|all\|all\|none\|none         |
+			| page.additionalDetails.helperFormData.fieldUsage      | d:i:pt:tp                              |
+			| page.additionalDetails.helperFormData.loc             | all                                    |
+			| page.additionalDetails.helperFormData.tpTidInvLo      | i,ii,iii,iv\|none\|none\|none          |
+			| page.additionalDetails.helperFormData.ttDrugTreatPt   | all\|c2039\|c118286\|c1647,c308,c15262 |
 
 
 	Scenario: Click event fires when user clicks on Modify Search criteria button

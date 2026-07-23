@@ -653,6 +653,34 @@ const mappingTestCases = [
 			pn: 3,
 		},
 	],
+	/***************
+	 * Prior Therapy
+	 ***************/
+	[
+		'prior therapy / one id',
+		{
+			priorTherapy: [{ name: 'Trastuzumab', codes: ['C1674'] }],
+			formType: 'advanced',
+		},
+		{
+			...NO_LOC_ADVANCED,
+			pt: ['C1674'],
+		},
+	],
+	[
+		'prior therapy / two ids',
+		{
+			priorTherapy: [
+				{ name: 'Immunotherapy', codes: ['C15262'] },
+				{ name: 'Prior Therapy 2', codes: ['C5678'] },
+			],
+			formType: 'advanced',
+		},
+		{
+			...NO_LOC_ADVANCED,
+			pt: ['C15262', 'C5678'],
+		},
+	],
 ];
 
 describe('buildQueryString maps form state to url query', () => {
